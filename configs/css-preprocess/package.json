@@ -1,0 +1,17 @@
+{
+  "name": "@config/css-preprocess",
+  "version": "0.0.1",
+  "private": true,
+  "files": [
+    "postcss.js",
+    "tailwind.js",
+    "uno.config.ts"
+  ],
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "dependencies": {
+    "postcss": "^8.4.16",
+    "postcss-preset-env": "^7.7.2"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "@apps/antd-admin",
+  "version": "3.0.0-alpha.4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
+    "directory": "apps/ant-app"
+  },
+  "author": {
+    "name": "vben",
+    "email": "anncwb@126.com",
+    "url": "https://github.com/anncwb"
+  },
+  "scripts": {
+    "build": "pnpm cross-env NODE_ENV=production vite build",
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
+    "dev": "vite",
+    "preview": "npm run build && vite preview",
+    "preview:dist": "vite preview",
+    "report": "pnpm cross-env REPORT=true npm run build",
+    "server:br": "pnpx http-server dist --cors --brotli -c-1",
+    "server:gzip": "pnpx http-server dist --cors --gzip -c-1",
+    "type:check": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
+    "@components/antd-extend": "workspace:*",
+    "@components/common": "workspace:*",
+    "@vben/constants": "workspace:*",
+    "@vben/directives": "workspace:*",
+    "@vben/layouts": "workspace:*",
+    "@vben/locale": "workspace:*",
+    "@vben/request": "workspace:*",
+    "@vben/styles": "workspace:*",
+    "@vben/use": "workspace:*",
+    "@vben/utils": "workspace:*",
+    "@vben/vbencomponents": "workspace:*",
+    "ant-design-vue": "3.2.5",
+    "dayjs": "^1.11.4",
+    "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
+    "path-to-regexp": "^6.2.1",
+    "pinia": "2.0.14",
+    "vue": "3.2.36",
+    "vue-router": "^4.1.3"
+  },
+  "devDependencies": {
+    "@config/css-preprocess": "workspace:*",
+    "@config/vite": "workspace:*",
+    "@types/mockjs": "^1.0.6",
+    "@types/nprogress": "^0.2.0",
+    "@vben/types": "workspace:*",
+    "@vue/compiler-sfc": "3.2.36",
+    "@vue/test-utils": "^2.0.2",
+    "typescript": "^4.7.4",
+    "vite": "2.9.9",
+    "vue-tsc": "^0.35.2"
+  }
+}

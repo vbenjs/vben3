@@ -1,0 +1,63 @@
+{
+  "name": "vben-admin-monorepo",
+  "version": "3.0.0-alpha.4",
+  "private": true,
+  "homepage": "https://github.com/vbenjs/vue-vben-admin",
+  "bugs": {
+    "url": "https://github.com/vbenjs/vue-vben-admin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbenjs/vue-vben-admin.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "vben",
+    "email": "anncwb@126.com",
+    "url": "https://github.com/anncwb"
+  },
+  "scripts": {
+    "bootstrap": "pnpm install",
+    "build": "pnpm --filter scripts build",
+    "changeset": "changeset",
+    "clean": "pnpm turbo run clean && rimraf node_modules",
+    "dev": "pnpm --filter scripts dev",
+    "format": "pnpm run lint:eslint & pnpm run lint:stylelint & pnpm run lint:prettier",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "pnpm run stub",
+    "lint:eslint": "eslint . --cache --max-warnings 0 --fix",
+    "lint:prettier": "prettier --write  \"{packages,apps,configs,scripts}/**/*.{js,json,ts,tsx,css,less,scss,vue,html,md}\"",
+    "lint:stylelint": "stylelint --fix ",
+    "prepare": "pnpm husky install",
+    "reinstall": "pnpm turbo run clean && rimraf pnpm-lock.yaml && rimraf node_modules && npm run bootstrap",
+    "stub": "pnpm --filter @config/** prepack",
+    "test": "vitest",
+    "version": "pnpm run changeset version"
+  },
+  "resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.24.2",
+    "@config/lint": "workspace:*",
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^17.0.45",
+    "cross-env": "^7.0.3",
+    "esno": "^0.16.3",
+    "fs-extra": "^10.1.0",
+    "jsdom": "^19.0.0",
+    "pathe": "^0.3.4",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.77.3",
+    "ts-node": "^10.9.1",
+    "tsconfig": "workspace:*",
+    "turbo": "^1.4.3",
+    "typescript": "^4.7.4",
+    "unbuild": "^0.7.6",
+    "vitest": "^0.13.1"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "packageManager": "pnpm@7.1.0"
+}

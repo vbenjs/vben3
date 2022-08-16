@@ -1,0 +1,18 @@
+:root {
+  --primary-color: #0960bd;
+  --success-color: #55d187;
+  --error-color: #ed6f6f;
+  --warning-color: #efbd47;
+
+  /* component */
+  --component-background-color: #fff;
+
+  /* aside */
+  --aside-background-color: #001628;
+  --aside-submenu-background-color: #0c2135;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@vben/vbencomponents",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vben/utils": "workspace:*",
+    "vue": "3.2.36",
+    "vxe-table": "4.3.0-beta.3",
+    "xe-utils": "^3.5.6"
+  }
+}

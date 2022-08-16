@@ -1,0 +1,16 @@
+{
+  "name": "@vben/types",
+  "version": "3.0.0-alpha.4",
+  "main": "index.ts",
+  "module": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "dependencies": {
+    "@vben/constants": "workspace:*",
+    "pinia": "2.0.14",
+    "vue": "3.2.36",
+    "vue-router": "^4.1.3"
+  }
+}

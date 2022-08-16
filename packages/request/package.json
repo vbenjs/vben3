@@ -1,0 +1,20 @@
+{
+  "name": "@vben/request",
+  "version": "3.0.0-alpha.4",
+  "main": "index.ts",
+  "module": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "dependencies": {
+    "@vben/locale": "workspace:*",
+    "@vben/types": "workspace:*",
+    "@vben/utils": "workspace:*",
+    "axios": "^0.27.2",
+    "qs": "^6.11.0"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.7"
+  }
+}

@@ -6,8 +6,9 @@ import {
 } from './basic'
 // modules
 import dashboard from './dashboard'
+import demo from './demo'
 
-const routeModules: RouteRecordItem[] = [dashboard]
+const routeModules: RouteRecordItem[] = [dashboard, demo]
 
 export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModules]
 

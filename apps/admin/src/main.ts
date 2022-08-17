@@ -8,6 +8,7 @@ import { setupRouteGuard } from '@/router/guard'
 import { setupI18n } from '@vben/locale'
 import { pinia } from './pinia'
 import { initApplication } from './init-application'
+import { registerComponents } from '../init-components'
 import {
   Affix,
   Alert,
@@ -20,6 +21,7 @@ import {
   // Button,
   // Calendar,
   Card,
+
   // Carousel,
   Cascader,
   Checkbox,
@@ -71,53 +73,6 @@ import {
   Upload,
   Button,
 } from 'ant-design-vue'
-import zhCN from 'ant-design-vue/es/locale/zh_CN'
-import { initVbenComponent, locale } from '@vben/vbencomponents'
-async function registerComponents(app) {
-  initVbenComponent(app, {
-    Tag: Tag,
-    Card: Card,
-    // Divider: NDivider,
-    // Space: NSpace,
-    Popover: Popover,
-    // Button: NButton,
-    // ButtonGroup: NButtonGroup,
-    // Avatar: NAvatar,
-    // Statistic: NStatistic,
-    // Select: NSelect,
-    // Input: NInput,
-    // Thing: NThing,
-    // Popconfirm: NPopconfirm,
-    // Icon: NIcon,
-    // Checkbox: NCheckbox,
-    // CheckboxGroup: NCheckboxGroup,
-    // Modal: NModal,
-    // Empty: NEmpty,
-    // Upload: NUpload,
-    // UploadDragger: NUploadDragger,
-    // Tabs: NTabs,
-    // TabPane: NTabPane,
-    // Grid: NGrid,
-    // GridItem: NGridItem,
-    // Ellipsis: NEllipsis,
-    // Image: NImage,
-    // MessageProvider: NMessageProvider,
-    // Pagination: NPagination,
-    // Radio: NRadio,
-    // RadioButton: NRadioButton,
-    // RadioGroup: NRadioGroup,
-    // Text: NText,
-    // Config: NConfigProvider,
-    // DynamicTags: NDynamicTags,
-    // ColorPicker: NColorPicker,
-    // Descriptions: NDescriptions,
-    // DescriptionsItem: NDescriptionsItem,
-    // NotificationProvider: NNotificationProvider,
-    // Switch: NSwitch,
-  })
-  locale.locale = zhCN
-}
-
 ;(async () => {
   const app = createApp(App)
 
@@ -126,15 +81,12 @@ async function registerComponents(app) {
   await initApplication()
   // Register Global Components
   await registerComponents(app)
-  console.log(app)
   // Multilingual configuration
   // Asynchronous case: language files may be obtained from the server side
   await setupI18n(app)
-
   // Init Router
   app.use(router)
-  setupRouteGuard(router)
-
+  await setupRouteGuard(router)
   await router.isReady()
 
   app.mount('#app')

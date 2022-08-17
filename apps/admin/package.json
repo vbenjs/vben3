@@ -1,5 +1,5 @@
 {
-  "name": "@apps/antd-admin",
+  "name": "@apps/admin",
   "version": "3.0.0-alpha.4",
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "@vben/styles": "workspace:*",
     "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
+    "@vben/demo": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "ant-design-vue": "3.2.5",
     "dayjs": "^1.11.4",
@@ -42,6 +43,7 @@
     "path-to-regexp": "^6.2.1",
     "pinia": "2.0.14",
     "vue": "3.2.36",
+    "vue-demi": "^0.13.8",
     "vue-router": "^4.1.3"
   },
   "devDependencies": {
@@ -52,8 +54,9 @@
     "@vben/types": "workspace:*",
     "@vue/compiler-sfc": "3.2.36",
     "@vue/test-utils": "^2.0.2",
+    "naive-ui": "^2.32.1",
     "typescript": "^4.7.4",
-    "vite": "2.9.9",
+    "vite": "3.0.8",
     "vue-tsc": "^0.35.2"
   }
 }

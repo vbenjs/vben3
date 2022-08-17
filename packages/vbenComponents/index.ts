@@ -93,7 +93,16 @@ import { VbenForm, VbenFormItem, VbenFormItemGi } from './form'
 import { VbenCascader } from './cascader'
 import { VbenDropdown } from './dropdown'
 import { VbenSwitch } from './switch'
-import { isFunction } from 'xe-utils'
+import { VbenMenu } from './menu'
+import { VbenBreadcrumb, VbenBreadcrumbItem } from './breadcrumb'
+import {
+  VbenLayout,
+  VbenLayoutFooter,
+  VbenLayoutSider,
+  VbenLayoutHeader,
+  VbenLayoutContent,
+} from './layout'
+
 export { theme, locale } from './config'
 // 初始化组件
 // global 是否全局注册
@@ -107,7 +116,6 @@ export function initVbenComponent(
   })
   app.use(VXETable)
   if (!global) return
-  console.log(VbenCard)
   app
     .use(VbenCard)
     .use(VbenTable)
@@ -159,4 +167,12 @@ export function initVbenComponent(
     .use(VbenDropdown)
     .use(VbenInputGroup)
     .use(VbenSwitch)
+    .use(VbenMenu)
+    .use(VbenBreadcrumb)
+    .use(VbenBreadcrumbItem)
+    .use(VbenLayout)
+    .use(VbenLayoutFooter)
+    .use(VbenLayoutContent)
+    .use(VbenLayoutHeader)
+    .use(VbenLayoutSider)
 }

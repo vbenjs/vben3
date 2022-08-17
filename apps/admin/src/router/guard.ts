@@ -61,8 +61,11 @@ export function createAuthGuard(router: Router) {
     }
 
     const routes = await authStore.generatorRoutes()
-    console.log(111, routes)
-
+    // console.log(111, routes)
+    // console.log(router.getRoutes())
+    routes.forEach((route) => {
+      router.addRoute(route)
+    })
     return true
 
     // if (permissionStore.getIsDynamicAddedRoute) {

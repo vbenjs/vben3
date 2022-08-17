@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vben/locale": "workspace:*",
+    "@vben/constants": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vueuse/core": "^8.9.4",
     "vue": "3.2.36",

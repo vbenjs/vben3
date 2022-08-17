@@ -79,7 +79,7 @@ export async function createViteConfig(
       },
       optimizeDeps: {
         include: ['dayjs/locale/en', 'dayjs/locale/zh-cn'],
-        exclude: ['vue-demi'],
+        // exclude: ['vue-demi'],
       },
       plugins: await configVitePlugins(root, viteEnv, command === 'build'),
     }

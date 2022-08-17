@@ -10,9 +10,7 @@ const Config = maps.get('Config')
 // });
 </script>
 <template>
-  <Config v-bind="$attrs" :theme="theme" :locale="locale.locale" abstract>
-    <slot></slot
-  ></Config>
+  <Config v-bind="$attrs" abstract> <slot></slot></Config>
 </template>
 
 <style scoped></style>

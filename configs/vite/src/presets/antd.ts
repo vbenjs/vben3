@@ -11,7 +11,7 @@ export async function createAntdPreset(): Promise<UserConfig> {
         'dayjs',
         'dayjs/locale/eu',
         'dayjs/locale/zh-cn',
-        'lodash-es',
+        // 'lodash-es',
       ],
       exclude: ['vue-demi'],
     },

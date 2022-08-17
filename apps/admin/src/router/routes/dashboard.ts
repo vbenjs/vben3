@@ -1,6 +1,5 @@
 import { LAYOUT } from '@/router/routes/basic'
 import { t } from '@vben/locale'
-
 const dashboard: RouteRecordItem = {
   path: '/dashboard',
   name: 'Dashboard',
@@ -18,16 +17,26 @@ const dashboard: RouteRecordItem = {
       meta: {
         title: t('routes.dashboard.analysis'),
       },
+      children: [
+        {
+          path: 'child',
+          name: 'AnalysisChild',
+          component: () => import('@/pages/dashboard/analysis/index.vue'),
+          meta: {
+            title: t('routes.dashboard.analysis'),
+          },
+        },
+      ],
     },
-    {
-      path: 'analysi1s',
-      name: 'Analysis1',
-      component: () => import('@/pages/dashboard/analysis/index.vue'),
-      meta: {
-        title: t('routes.dashboard.analysis'),
-        allowRoles: ['user'],
-      },
-    },
+    // {
+    //   path: 'analysi1s',
+    //   name: 'Analysis1',
+    //   component: () => import('@/pages/dashboard/analysis/index.vue'),
+    //   meta: {
+    //     title: t('routes.dashboard.analysis'),
+    //     allowRoles: ['user'],
+    //   },
+    // },
   ],
 }
 

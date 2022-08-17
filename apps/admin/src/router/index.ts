@@ -1,9 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { routes } from './routes'
+import { asyncRoutes, routes } from './routes'
 
 // The whitelist should contain basic static routes
 const WHITE_NAME_LIST: string[] = []
-
 ;(() => {
   const getRouteNames = (routeRecords: RouteRecordItem[]) =>
     routeRecords.forEach((item) => {
@@ -31,5 +30,12 @@ export function resetRouter() {
     if (name && !WHITE_NAME_LIST.includes(name as string)) {
       router.hasRoute(name) && router.removeRoute(name)
     }
+  })
+}
+//从路由获取菜单
+export function getMenus(): RouteRecordItem[] {
+  return asyncRoutes.filter((route) => {
+    const { name } = route
+    return !WHITE_NAME_LIST.includes(name as string)
   })
 }

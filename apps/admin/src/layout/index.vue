@@ -1,20 +1,27 @@
 <script lang="ts" setup>
 import { Layout } from '@vben/layouts'
 import LayoutMenu from './components/menu/index.vue'
+import LayoutBreadcrumb from './components/breadcrumb/index.vue'
+import LayoutTabs from './components/tabs/index.vue'
 </script>
 
 <template>
   <layout>
-    <template #aside>
-      <layout-menu />
+    <template #sider>
+      <div class="h-full">
+        <LayoutMenu />
+      </div>
     </template>
 
     <template #header>
-      <div style="background: red; height: 100%">header</div>
+      <VbenSpace vertical>
+        <LayoutBreadcrumb />
+        <LayoutTabs />
+      </VbenSpace>
     </template>
 
     <template #main>
-      <div style="background: green; height: 100%">main12</div>
+      <RouterView />
     </template>
   </layout>
 </template>

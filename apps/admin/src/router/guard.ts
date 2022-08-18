@@ -1,7 +1,7 @@
 import type { Router } from 'vue-router'
 import nProgress from 'nprogress'
 import { config } from '@/config'
-import { BASIC_LOGIN_PATH } from '@vben/constants'
+import { BASIC_LOGIN_PATH, PageEnum } from '@vben/constants';
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import { useMultipleTabWithOut } from '@/store/multipleTab'
@@ -43,37 +43,50 @@ async function setupRouteGuard(router: Router) {
 export function createAuthGuard(router: Router) {
   const userStore = useUserStoreWithout()
   const authStore = useAuthStoreWithout()
-
+  
   router.beforeEach(async (to, from, next) => {
+  
+    const token = userStore.getAccessToken
+  
+    // 可以直接进入的白名单
+    if (whitePathList.includes(to.path as PageEnum)) {
+      next();
+      return;
+    }
+    
     // token does not exist
-    if (!userStore.getAccessToken) {
+    if (!token) {
       // You can access without permission. You need to set the routing meta.ignoreAuth to true
       // Whitelist can be directly entered
       if (to.meta.ignoreAuth || whitePathList.includes(to.path)) {
         return true
       }
-
-      // redirect login page
-      return {
+  
+      const redirectData = {
         path: LOGIN_PATH,
         replace: true,
         // After logging in, jump to the previous page. If you don't need it, just delete the `query`
         query: { redirect: encodeURIComponent(to.fullPath) },
       }
-    }
-
-    const routes = await authStore.generatorRoutes()
-    // console.log(111, routes)
-    // console.log(router.getRoutes())
-    routes.forEach((route) => {
-      router.addRoute(route)
-    })
-    if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
-      // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
-      next({ path: to.fullPath, replace: true, query: to.query })
+      next(redirectData);
+      // redirect login page
       return
     }
-    next()
+  
+  
+    // const routes = await authStore.generatorRoutes()
+    // // console.log(111, routes)
+    // // console.log(router.getRoutes())
+    // routes.forEach((route) => {
+    //   router.addRoute(route)
+    // })
+    // if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
+    //   // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
+    //   next({ path: to.fullPath, replace: true, query: to.query })
+    //   return
+    // }
+    //
+    // next()
 
     // if (permissionStore.getIsDynamicAddedRoute) {
     //   next()

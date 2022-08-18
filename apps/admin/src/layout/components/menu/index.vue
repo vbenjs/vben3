@@ -69,7 +69,7 @@ const menus = computed(() => getMenus().map((v) => routerToMenu(v)))
 const routerToMenu = (item: RouteRecordItem) => {
   const { path, name, children, meta, component } = item
   // console.log(component, item)
-  console.log(name)
+  // console.log(name)
   const title = t(meta.title)
   // console.log(title)
   return {

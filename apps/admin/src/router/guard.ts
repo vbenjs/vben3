@@ -4,6 +4,8 @@ import { config } from '@/config'
 import { BASIC_LOGIN_PATH } from '@vben/constants'
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
+import { useMultipleTabWithOut } from '@/store/multipleTab'
+import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic'
 
 const LOADED_PAGE_POOL = new Map<string, boolean>()
 const LOGIN_PATH = BASIC_LOGIN_PATH
@@ -35,14 +37,14 @@ async function setupRouteGuard(router: Router) {
   })
 
   createAuthGuard(router)
+  createTabsGuard(router)
 }
 
 export function createAuthGuard(router: Router) {
   const userStore = useUserStoreWithout()
   const authStore = useAuthStoreWithout()
 
-  //
-  router.beforeEach(async (to, from) => {
+  router.beforeEach(async (to, from, next) => {
     // token does not exist
     if (!userStore.getAccessToken) {
       // You can access without permission. You need to set the routing meta.ignoreAuth to true
@@ -66,7 +68,12 @@ export function createAuthGuard(router: Router) {
     routes.forEach((route) => {
       router.addRoute(route)
     })
-    return true
+    if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
+      // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
+      next({ path: to.fullPath, replace: true, query: to.query })
+      return
+    }
+    next()
 
     // if (permissionStore.getIsDynamicAddedRoute) {
     //   next()
@@ -93,6 +100,17 @@ export function createAuthGuard(router: Router) {
     //     to.path === redirect ? { ...to, replace: true } : { path: redirect }
     //   next(nextData)
     // }
+  })
+  // console.log(router.getRoutes(), 333)
+}
+
+// 路由守卫：进入路由，增加Tabs
+export function createTabsGuard(router: Router) {
+  const store = useMultipleTabWithOut()
+
+  router.afterEach(async (to, from) => {
+    if (whitePathList.includes(to.path)) return
+    await store.checkTab(to)
   })
 }
 

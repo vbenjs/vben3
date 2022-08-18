@@ -3,25 +3,27 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router'
-
+import { pinia } from '@/pinia'
 import { toRaw, unref } from 'vue'
 import { defineStore } from 'pinia'
 // import { store } from '/@/store';
 
-import { useGo, useRedo } from '@vben/use'
+import { useGo, useRedo, useLocalStorage, RemovableRef } from '@vben/use'
 // import { Persistent } from '/@/utils/cache/persistent';
-//
-import { PageEnum } from '@vben/constants'
+
+import { PageEnum, MULTIPLE_TABS_KEY } from '@vben/constants'
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '@/router/routes/basic'
-// import { getRawRoute } from '/@/utils';
-// import { MULTIPLE_TABS_KEY } from '/@/enums/cacheEnum';
+import { getRawRoute } from '@vben/utils'
+import { useUserStore } from '@/store/user'
+import { useRouter, useRoute } from 'vue-router'
+import { router } from '@/router'
 //
 // import projectSetting from '/@/settings/projectSetting';
-// import { useUserStore } from '/@/store/modules/user';
-
+// import { useUserStore } from '/@/store/user';
+// useUserStore
 export interface MultipleTabState {
   cacheTabList: Set<string>
-  tabList: RouteLocationNormalized[]
+  tabList: RouteLocationNormalized[] | RemovableRef<never[]>
   lastDragEndIndex: number
 }
 
@@ -38,7 +40,7 @@ const getToTarget = (tabItem: RouteLocationNormalized) => {
     query: query || {},
   }
 }
-
+const TabsStorage = useLocalStorage('MULTIPLE_TABS_KEY', [])
 const cacheTab = true
 // const cacheTab = projectSetting.multiTabsSetting.cache
 
@@ -48,7 +50,7 @@ export const useMultipleTabStore = defineStore({
     // Tabs that need to be cached
     cacheTabList: new Set(),
     // multiple tab list
-    tabList: cacheTab ? Persistent.getLocal(MULTIPLE_TABS_KEY) || [] : [],
+    tabList: cacheTab ? TabsStorage || [] : [],
     // Index of the last moved tab
     lastDragEndIndex: 0,
   }),
@@ -122,7 +124,30 @@ export const useMultipleTabStore = defineStore({
       // Jump to the current page and report an error
       path !== toPath && go(toPath as PageEnum, true)
     },
+    async checkTab(route: RouteLocationNormalized) {
+      await router.isReady()
 
+      const { path, name, fullPath, params, query, meta } = getRawRoute(route)
+      console.log(path, name, 1)
+      // 404  The page does not need to add a tab
+      if (
+        path === PageEnum.ERROR_PAGE ||
+        path === PageEnum.BASE_LOGIN ||
+        !name ||
+        [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(
+          name as string,
+        )
+      ) {
+        console.log(name, 3)
+        return
+      }
+
+      console.log(path, name, fullPath, params, query, meta)
+      console.log(this.tabList)
+      this.tabList.forEach((v) => {
+        console.log(v)
+      })
+    },
     async addTab(route: RouteLocationNormalized) {
       const { path, name, fullPath, params, query, meta } = getRawRoute(route)
       // 404  The page does not need to add a tab
@@ -178,7 +203,7 @@ export const useMultipleTabStore = defineStore({
         this.tabList.push(route)
       }
       this.updateCacheTab()
-      cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList)
+      // cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList)
     },
 
     async closeTab(tab: RouteLocationNormalized, router: Router) {
@@ -372,6 +397,6 @@ export const useMultipleTabStore = defineStore({
 })
 
 // Need to be used outside the setup
-export function useMultipleTabWithOutStore() {
-  return useMultipleTabStore(store)
+export function useMultipleTabWithOut() {
+  return useMultipleTabStore(pinia)
 }

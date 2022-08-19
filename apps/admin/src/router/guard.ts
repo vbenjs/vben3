@@ -74,35 +74,35 @@ export function createAuthGuard(router: Router) {
     }
   
   
-    // const routes = await authStore.generatorRoutes()
-    // // console.log(111, routes)
-    // // console.log(router.getRoutes())
-    // routes.forEach((route) => {
-    //   router.addRoute(route)
-    // })
-    // if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
-    //   // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
-    //   next({ path: to.fullPath, replace: true, query: to.query })
-    //   return
-    // }
-    //
-    // next()
+    const routes = await authStore.generatorRoutes()
+    // console.log(111, routes)
+    // console.log(router.getRoutes())
+    routes.forEach((route) => {
+      router.addRoute(route)
+    })
+    if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
+      // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
+      next({ path: to.fullPath, replace: true, query: to.query })
+      return
+    }
+
+    next()
 
     // if (permissionStore.getIsDynamicAddedRoute) {
     //   next()
     //   return
     // }
-
+    //
     // const routes = await permissionStore.buildRoutesAction()
-
+    //
     // routes.forEach((route) => {
     //   router.addRoute(route)
     // })
-
+    //
     // router.addRoute(PAGE_NOT_FOUND_ROUTE)
-
+    //
     // permissionStore.setDynamicAddedRoute(true)
-
+    //
     // if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
     //   // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
     //   next({ path: to.fullPath, replace: true, query: to.query })

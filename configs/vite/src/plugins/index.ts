@@ -28,7 +28,9 @@ export async function configVitePlugins(
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
-    vue(),
+    vue({
+      reactivityTransform: true
+    }),
     // have to
     vueJsx(),
   ]

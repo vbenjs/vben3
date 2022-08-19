@@ -23,7 +23,7 @@ import { router } from '@/router'
 // useUserStore
 export interface MultipleTabState {
   cacheTabList: Set<string>
-  tabList: RouteLocationNormalized[] | RemovableRef<never[]>
+  tabList: RouteLocationNormalized[] | RemovableRef<RouteLocationNormalized[]>
   lastDragEndIndex: number
 }
 
@@ -127,8 +127,7 @@ export const useMultipleTabStore = defineStore({
     async checkTab(route: RouteLocationNormalized) {
       await router.isReady()
 
-      const { path, name, fullPath, params, query, meta } = getRawRoute(route)
-      console.log(path, name, 1)
+      const { path, name } = getRawRoute(route)
       // 404  The page does not need to add a tab
       if (
         path === PageEnum.ERROR_PAGE ||
@@ -138,15 +137,15 @@ export const useMultipleTabStore = defineStore({
           name as string,
         )
       ) {
-        console.log(name, 3)
         return
       }
 
-      console.log(path, name, fullPath, params, query, meta)
-      console.log(this.tabList)
-      this.tabList.forEach((v) => {
-        console.log(v)
-      })
+      // console.log(path, name, fullPath, params, query, meta)
+      // console.log(this.tabList)
+      // this.tabList.forEach((v) => {
+      //   console.log(v)
+      // })
+      await this.addTab(route)
     },
     async addTab(route: RouteLocationNormalized) {
       const { path, name, fullPath, params, query, meta } = getRawRoute(route)
@@ -168,7 +167,6 @@ export const useMultipleTabStore = defineStore({
         updateIndex = index
         return (tab.fullPath || tab.path) === (fullPath || path)
       })
-
       // If the tab already exists, perform the update operation
       if (tabHasExits) {
         const curTab = toRaw(this.tabList)[updateIndex]
@@ -202,7 +200,7 @@ export const useMultipleTabStore = defineStore({
         }
         this.tabList.push(route)
       }
-      this.updateCacheTab()
+      await this.updateCacheTab()
       // cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList)
     },
 
@@ -237,7 +235,7 @@ export const useMultipleTabStore = defineStore({
         // There is only one tab, then jump to the homepage, otherwise jump to the right tab
         if (this.tabList.length === 1) {
           const userStore = useUserStore()
-          toTarget = userStore.getUserInfo.homePath || PageEnum.BASE_HOME
+          toTarget = userStore.getUserInfo?.homePath || PageEnum.BASE_HOME
         } else {
           //  Jump to the right tab
           const page = this.tabList[index + 1]

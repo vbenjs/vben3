@@ -6,6 +6,7 @@ import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import { useMultipleTabWithOut } from '@/store/multipleTab'
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic'
+import { setRouteChange } from "@/logics/mitt/routeChange";
 
 const LOADED_PAGE_POOL = new Map<string, boolean>()
 const LOGIN_PATH = BASIC_LOGIN_PATH
@@ -22,6 +23,8 @@ async function setupRouteGuard(router: Router) {
     if (enableProgress && !to.meta.loaded) {
       nProgress.start()
     }
+    // Notify routing changes
+    setRouteChange(to);
     return true
   })
 

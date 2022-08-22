@@ -53,7 +53,7 @@ function handleShowForm(show = false) {
 <template>
   <div
     :class="bem()"
-    class="fixed inset-0 flex items-center justify-center w-screen h-screen bg-black"
+    class="fixed inset-0 flex items-center justify-center w-screen h-screen"
   >
     <div
       :class="bem('unlock')"

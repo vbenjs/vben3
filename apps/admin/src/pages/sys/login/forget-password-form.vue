@@ -32,37 +32,37 @@ async function handleReset() {
 <template>
   <template v-if="show">
     <login-form-title class="enter-x" />
-    <a-form
+    <vben-form
       class="p-4 enter-x"
       :model="formData"
       :rules="getFormRules"
       ref="formRef"
     >
-      <a-form-item name="account" class="enter-x">
-        <a-input
+      <vben-form-item name="account" class="enter-x">
+        <vben-input
           size="large"
           v-model:value="formData.account"
           :placeholder="t('sys.login.userName')"
         />
-      </a-form-item>
+      </vben-form-item>
 
-      <a-form-item name="mobile" class="enter-x">
-        <a-input
+      <vben-form-item name="mobile" class="enter-x">
+        <vben-input
           size="large"
           v-model:value="formData.mobile"
           :placeholder="t('sys.login.mobile')"
         />
-      </a-form-item>
-      <a-form-item name="sms" class="enter-x">
+      </vben-form-item>
+      <vben-form-item name="sms" class="enter-x">
         <count-down-input
           size="large"
           v-model:value="formData.sms"
           :placeholder="t('sys.login.smsCode')"
         />
-      </a-form-item>
+      </vben-form-item>
 
-      <a-form-item class="enter-x">
-        <a-button
+      <vben-form-item class="enter-x">
+        <vben-button
           type="primary"
           size="large"
           block
@@ -70,11 +70,11 @@ async function handleReset() {
           :loading="loading"
         >
           {{ t('common.resetText') }}
-        </a-button>
-        <a-button size="large" block class="mt-4" @click="handleBackLogin">
+        </vben-button>
+        <vben-button size="large" block class="mt-4" @click="handleBackLogin">
           {{ t('sys.login.backSignIn') }}
-        </a-button>
-      </a-form-item>
-    </a-form>
+        </vben-button>
+      </vben-form-item>
+    </vben-form>
   </template>
 </template>

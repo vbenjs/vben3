@@ -1,76 +1,76 @@
 <script lang="ts" setup>
-import { reactive, ref, unref, computed } from 'vue'
+import { reactive, ref, unref, computed } from 'vue';
 import {
   GithubFilled,
   WechatFilled,
   AlipayCircleFilled,
   GoogleCircleFilled,
-  TwitterCircleFilled,
-} from '@ant-design/icons-vue'
-import { useI18n } from '@vben/locale'
-import { Modal, notification } from 'ant-design-vue'
-import { useUserStore } from '@/store/user'
+  TwitterCircleFilled
+} from '@ant-design/icons-vue';
+import { useI18n } from '@vben/locale';
+import { Modal, notification } from 'ant-design-vue';
+import { useUserStore } from '@/store/user';
 import {
   LoginStateEnum,
   useLoginState,
   useFormRules,
-  useFormValid,
-} from './use-login'
-import LoginFormTitle from './login-form-title.vue'
+  useFormValid
+} from './use-login';
+import LoginFormTitle from './login-form-title.vue';
 
-const formRef = ref()
-const loading = ref(false)
-const rememberMe = ref(false)
+const formRef = ref();
+const loading = ref(false);
+const rememberMe = ref(false);
 
-const { t } = useI18n()
-const userStore = useUserStore()
-const { setLoginState, getLoginState } = useLoginState()
-const { getFormRules } = useFormRules()
+const { t } = useI18n();
+const userStore = useUserStore();
+const { setLoginState, getLoginState } = useLoginState();
+const { getFormRules } = useFormRules();
 
 const formData = reactive({
   account: 'vben',
-  password: '123456',
-})
+  password: '123456'
+});
 
-const { validForm } = useFormValid(formRef)
+const { validForm } = useFormValid(formRef);
 
 //onKeyStroke('Enter', handleLogin);
 
-const show = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN)
+const show = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
 async function handleLogin() {
   // 暂时不做校验
   // const data = await validForm()
   // if (!data) return
   try {
-    loading.value = true
+    loading.value = true;
     const userInfo = await userStore.login({
       password: formData.password,
       username: formData.account,
-      mode: 'none', //不要默认的错误提示
-    })
+      mode: 'none' //不要默认的错误提示
+    });
     if (userInfo) {
       notification.success({
         message: t('sys.login.loginSuccessTitle'),
         description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realname}`,
-        duration: 3,
-      })
+        duration: 3
+      });
     }
   } catch (error) {
     Modal.error({
       title: t('sys.api.errorTip'),
       content:
-        (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
-    })
+        (error as unknown as Error).message || t('sys.api.networkExceptionMsg')
+    });
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>
 <template>
   <login-form-title v-show="show" class="enter-x" />
   <vben-form
-    class="p-4 enter-x bg-black"
+    class="p-4 enter-x"
     :model="formData"
     :rules="getFormRules"
     ref="formRef"
@@ -94,16 +94,16 @@ async function handleLogin() {
       />
     </vben-form-item>
 
-    <vben-row class="enter-x">
-      <vben-col :span="12">
+    <vben-grid class="enter-x">
+      <vben-grid-item :span="12">
         <vben-form-item>
           <!-- No logic, you need to deal with it yourself -->
           <vben-checkbox v-model:checked="rememberMe" size="small">
-            {{ t('sys.login.rememberMe') }}
+            {{t('sys.login.rememberMe')}}
           </vben-checkbox>
         </vben-form-item>
-      </vben-col>
-      <vben-col :span="12">
+      </vben-grid-item>
+      <vben-grid-item :span="12">
         <vben-form-item :style="{ 'text-align': 'right' }">
           <!-- No logic, you need to deal with it yourself -->
           <vben-button
@@ -111,11 +111,11 @@ async function handleLogin() {
             size="small"
             @click="setLoginState(LoginStateEnum.RESET_PASSWORD)"
           >
-            {{ t('sys.login.forgetPassword') }}
+            {{t('sys.login.forgetPassword')}}
           </vben-button>
         </vben-form-item>
-      </vben-col>
-    </vben-row>
+      </vben-grid-item>
+    </vben-grid>
 
     <vben-form-item class="enter-x">
       <vben-button
@@ -125,28 +125,29 @@ async function handleLogin() {
         @click="handleLogin"
         :loading="loading"
       >
-        {{ t('sys.login.loginButton') }}
+        {{t('sys.login.loginButton')}}
       </vben-button>
     </vben-form-item>
-    <vben-row class="enter-x">
-      <vben-col :md="8" :xs="24">
-        <vben-button block @click="setLoginState(LoginStateEnum.MOBILE)">
-          {{ t('sys.login.mobileSignInFormTitle') }}
-        </vben-button>
-      </vben-col>
-      <vben-col :md="8" :xs="24" class="!my-2 md:!my-0 xs:mx-0 md:mx-2">
-        <vben-button block @click="setLoginState(LoginStateEnum.QR_CODE)">
-          {{ t('sys.login.qrSignInFormTitle') }}
-        </vben-button>
-      </vben-col>
-      <vben-col :md="7" :xs="24">
-        <vben-button block @click="setLoginState(LoginStateEnum.REGISTER)">
-          {{ t('sys.login.registerButton') }}
-        </vben-button>
-      </vben-col>
-    </vben-row>
 
-    <vben-divider class="enter-x">{{ t('sys.login.otherSignIn') }}</vben-divider>
+    <vben-grid class="enter-x" :cols="3">
+      <vben-grid-item :md="8" :xs="24">
+        <vben-button block @click="setLoginState(LoginStateEnum.MOBILE)">
+          {{t('sys.login.mobileSignInFormTitle')}}
+        </vben-button>
+      </vben-grid-item>
+      <vben-grid-item :md="8" :xs="24" class="!my-2 md:!my-0 xs:mx-0 md:mx-2">
+        <vben-button block @click="setLoginState(LoginStateEnum.QR_CODE)">
+          {{t('sys.login.qrSignInFormTitle')}}
+        </vben-button>
+      </vben-grid-item>
+      <vben-grid-item :md="7" :xs="24">
+        <vben-button block @click="setLoginState(LoginStateEnum.REGISTER)">
+          {{t('sys.login.registerButton')}}
+        </vben-button>
+      </vben-grid-item>
+    </vben-grid>
+
+    <vben-divider class="enter-x">{{t('sys.login.otherSignIn')}}</vben-divider>
 
     <div class="flex justify-evenly enter-x" :class="`sign-in-way`">
       <github-filled />

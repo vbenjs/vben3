@@ -61,7 +61,7 @@ async function handleReset() {
         />
       </vben-form-item>
 
-      <vben-form-item class="enter-x">
+      <div class="enter-x">
         <vben-button
           type="primary"
           size="large"
@@ -74,7 +74,7 @@ async function handleReset() {
         <vben-button size="large" block class="mt-4" @click="handleBackLogin">
           {{ t('sys.login.backSignIn') }}
         </vben-button>
-      </vben-form-item>
+      </div>
     </vben-form>
   </template>
 </template>

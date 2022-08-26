@@ -1,5 +1,5 @@
 {
-  "name": "@components/common",
+  "name": "@vben/hooks",
   "version": "3.0.0-alpha.4",
   "main": "index.ts",
   "module": "index.ts",
@@ -8,18 +8,14 @@
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
   },
   "dependencies": {
-    "@iconify/iconify": "^2.2.1",
     "@vben/constants": "workspace:*",
-    "@vben/locale": "workspace:*",
-    "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
-    "qrcode": "^1.5.1",
-    "vue": "3.2.36",
-    "vue-router": "^4.1.3"
+    "@vueuse/core": "^8.9.4",
+    "lodash-es": "^4.17.21",
+    "vue": "3.2.36"
   },
   "devDependencies": {
-    "@iconify/json": "^2.1.98",
-    "@purge-icons/generated": "^0.9.0",
-    "@types/qrcode": "^1.4.2"
+    "@types/lodash-es": "^4.17.6",
+    "@vben/types": "workspace:*"
   }
 }

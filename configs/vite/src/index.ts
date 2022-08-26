@@ -43,6 +43,7 @@ export async function createViteConfig(
       resolve: {
         alias: {
           '@': `${resolve(root, 'src')}`,
+          '#': `${resolve(root, 'types')}`,
           'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
           vue: 'vue/dist/vue.esm-bundler.js',
         },
@@ -78,7 +79,7 @@ export async function createViteConfig(
         },
       },
       optimizeDeps: {
-        include: ['dayjs/locale/en', 'dayjs/locale/zh-cn'],
+        include: ['dayjs/locale/en', 'dayjs/locale/zh-cn', '@iconify/iconify'],
         // exclude: ['vue-demi'],
       },
       plugins: await configVitePlugins(root, viteEnv, command === 'build'),

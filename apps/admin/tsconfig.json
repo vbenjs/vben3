@@ -10,6 +10,7 @@
     "lib": ["dom", "esnext"],
     "types": [
       "vite/client",
+      "@vben/enums",
       "@vben/types/shims/pinia",
       "@vben/types/shims/vue-router",
       "ant-design-vue/typings/global"

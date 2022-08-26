@@ -4,7 +4,7 @@ const dashboard: RouteRecordItem = {
   path: '/dashboard',
   name: 'Dashboard',
   component: LAYOUT,
-  redirect: '/dashboard/analysis',
+  redirect: '/dashboard/analysis/child',
   meta: {
     icon: 'ion:grid-outline',
     title: t('routes.dashboard.dashboard'),
@@ -13,7 +13,7 @@ const dashboard: RouteRecordItem = {
     {
       path: 'analysis',
       name: 'Analysis',
-      component: () => import('@/pages/dashboard/analysis/index.vue'),
+      // component: () => import('@/pages/dashboard/analysis/index.vue'),
       meta: {
         title: t('routes.dashboard.analysis'),
       },
@@ -24,6 +24,14 @@ const dashboard: RouteRecordItem = {
           component: () => import('@/pages/dashboard/analysis/index.vue'),
           meta: {
             title: t('routes.dashboard.analysis'),
+          },
+        },
+        {
+          path: 'workbench',
+          name: 'Workbench',
+          component: () => import('@/pages/dashboard/workbench/index.vue'),
+          meta: {
+            title: t('routes.dashboard.workbench'),
           },
         },
       ],

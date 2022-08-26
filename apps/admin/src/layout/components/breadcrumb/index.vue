@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from '@vben/locale'
 const router = useRouter()
 const { t } = useI18n()
@@ -10,15 +10,15 @@ const { t } = useI18n()
 //     console.log(router.currentRoute.value)
 //   },
 // )
-const b = computed(() => {
-  return router.currentRoute.value.matched
+const breadcrumbList = computed(() => {
+  return router.currentRoute.value.matched.filter((it) => !it.meta?.hideBreadcrumb)
 })
 </script>
 
 <template>
   <VbenSpace class="h-10 items-center" justify="space-between">
     <VbenBreadcrumb>
-      <VbenBreadcrumbItem v-for="(i, k) in b" :key="k"
+      <VbenBreadcrumbItem v-for="(i, k) in breadcrumbList" :key="k"
         >{{ t(i.meta.title) }}
         {{ i.children.length }}
       </VbenBreadcrumbItem>

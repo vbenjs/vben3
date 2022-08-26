@@ -4,10 +4,11 @@ import { useRouter} from 'vue-router'
 import {computed, ref, unref, watch} from 'vue'
 import { useI18n } from '@vben/locale'
 import { useMultipleTabStore } from '@/store/multipleTab'
-import { listenerRouteChange } from "@/logics/mitt/routeChange";
+import { listenerRouteChange } from "@/logics/mitt/routeChange"
 import { REDIRECT_NAME } from '@vben/constants'
-import { useUserStore } from "@/store/user";
+import { useUserStore } from "@/store/user"
 import { useGo } from '@vben/use'
+import TabRedo from './components/TabRedo.vue'
 
 const { t } = useI18n()
 const tabStore = useMultipleTabStore()
@@ -45,9 +46,9 @@ listenerRouteChange((route) => {
       .getRoutes()
       .find((item) => item.path === currentActiveMenu);
 
-    findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized);
+    findParentRoute && tabStore.checkTab(findParentRoute as unknown as RouteLocationNormalized);
   } else {
-    tabStore.addTab(unref(route));
+    tabStore.checkTab(unref(route));
   }
 });
 
@@ -70,6 +71,8 @@ watch(activeTabRef, (path) => {
       :name="tab.fullPath"
       :closable="!(tab && tab.meta && tab.meta.affix) && !unClose"
     />
-    <template #suffix> Suffix </template>
+    <template #suffix>
+      <TabRedo></TabRedo>
+    </template>
   </VbenTabs>
 </template>

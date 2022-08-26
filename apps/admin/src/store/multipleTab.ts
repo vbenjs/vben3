@@ -17,6 +17,7 @@ import { getRawRoute } from '@vben/utils'
 import { useUserStore } from '@/store/user'
 import { useRouter, useRoute } from 'vue-router'
 import { router } from '@/router'
+import {debug} from "util";
 //
 // import projectSetting from '/@/settings/projectSetting';
 // import { useUserStore } from '/@/store/user';
@@ -125,7 +126,7 @@ export const useMultipleTabStore = defineStore({
       path !== toPath && go(toPath as PageEnum, true)
     },
     async checkTab(route: RouteLocationNormalized) {
-      await router.isReady()
+      // await router.isReady()
 
       const { path, name } = getRawRoute(route)
       // 404  The page does not need to add a tab
@@ -139,27 +140,10 @@ export const useMultipleTabStore = defineStore({
       ) {
         return
       }
-
-      // console.log(path, name, fullPath, params, query, meta)
-      // console.log(this.tabList)
-      // this.tabList.forEach((v) => {
-      //   console.log(v)
-      // })
       await this.addTab(route)
     },
     async addTab(route: RouteLocationNormalized) {
-      const { path, name, fullPath, params, query, meta } = getRawRoute(route)
-      // 404  The page does not need to add a tab
-      if (
-        path === PageEnum.ERROR_PAGE ||
-        path === PageEnum.BASE_LOGIN ||
-        !name ||
-        [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(
-          name as string,
-        )
-      ) {
-        return
-      }
+      const { path, fullPath, params, query, meta } = getRawRoute(route)
 
       let updateIndex = -1
       // Existing pages, do not add tabs repeatedly

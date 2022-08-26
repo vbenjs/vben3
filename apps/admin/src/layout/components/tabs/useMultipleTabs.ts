@@ -29,7 +29,7 @@ export function initAffixTabs(): string[] {
     const affixTabs = filterAffixTabs(router.getRoutes() as unknown as RouteLocationNormalized[]);
     affixList.value = affixTabs;
     for (const tab of affixTabs) {
-      await tabStore.addTab({
+      await tabStore.checkTab({
         meta: tab.meta,
         name: tab.name,
         path: tab.path,

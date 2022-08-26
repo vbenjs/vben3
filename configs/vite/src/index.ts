@@ -67,7 +67,7 @@ export async function createViteConfig(
       },
       build: {
         outDir: OUTPUT_DIR,
-        brotliSize: false,
+        reportCompressedSize: false,
         chunkSizeWarningLimit: 2048,
         rollupOptions: {
           output: {

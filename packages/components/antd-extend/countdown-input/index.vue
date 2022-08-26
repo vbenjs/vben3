@@ -37,7 +37,7 @@ const slotKeys = computed(() => {
 </script>
 
 <template>
-  <a-input v-bind="attrs" :class="bem()" :size="size" :value="state">
+  <vben-input v-bind="attrs" :class="bem()" :size="size" :value="state">
     <template #addonAfter>
       <CountButton
         :size="size"
@@ -49,7 +49,7 @@ const slotKeys = computed(() => {
     <template #[item]="data" v-for="item in slotKeys">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
-  </a-input>
+  </vben-input>
 </template>
 
 <style lang="less">

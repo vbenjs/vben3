@@ -9,7 +9,7 @@ const { getLocale } = useLocale()
 // Listening to page changes and dynamically changing site titles
 const { title } = getGlobalConfig(import.meta.env)
 useWebTitle(title, (route) => route.name !== REDIRECT_NAME)
-import { darkTheme } from 'naive-ui'
+// import { darkTheme } from 'naive-ui'
 // Dynamic switch component library language
 const dateLocale = computedAsync(async () => {
   const message = {
@@ -43,7 +43,7 @@ const locale = computedAsync(async () => {
 </script>
 
 <template>
-  <VbenConfig :theme="darkTheme" :locale="locale" :date-locale="dateLocale">
+  <VbenConfig :theme="{}" :locale="locale" :date-locale="dateLocale">
     <VbenNotificationProvider>
       <VbenMessageProvider>
         <router-view />

@@ -21,15 +21,15 @@ const show = computed(() => unref(getLoginState) === LoginStateEnum.QR_CODE)
         class="flex flex-col justify-center items-center enter-x xl:justify-start"
         :width="280"
       />
-      <a-divider class="enter-x">{{ t('sys.login.scanSign') }}</a-divider>
-      <a-button
+      <vben-divider class="enter-x">{{ t('sys.login.scanSign') }}</vben-divider>
+      <vben-button
         size="large"
         block
         class="mt-4 enter-x"
         @click="handleBackLogin"
       >
         {{ t('sys.login.backSignIn') }}
-      </a-button>
+      </vben-button>
     </div>
   </template>
 </template>

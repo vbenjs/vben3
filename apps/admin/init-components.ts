@@ -52,6 +52,8 @@ import {
   NLayoutFooter,
   NLayoutContent,
   NLayoutHeader,
+  NForm,
+  NFormItem,
 } from 'naive-ui'
 
 import {
@@ -76,6 +78,8 @@ export async function registerComponents(app) {
     Statistic: NStatistic,
     Select: NSelect,
     Input: NInput,
+    Form: NForm,
+    FormItem: NFormItem,
     Thing: NThing,
     Popconfirm: NPopconfirm,
     Icon: NIcon,

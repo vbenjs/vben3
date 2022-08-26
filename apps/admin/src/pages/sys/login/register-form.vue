@@ -40,61 +40,62 @@ async function handleRegister() {
 <template>
   <template v-if="getShow">
     <login-form-title class="enter-x" />
-    <a-form
+    <vben-form
       class="p-4 enter-x"
       :model="formData"
       :rules="getFormRules"
       ref="formRef"
     >
-      <a-form-item name="account" class="enter-x">
-        <a-input
+      <vben-form-item name="account" class="enter-x">
+        <vben-input
           class="fix-auto-fill"
           size="large"
           v-model:value="formData.account"
           :placeholder="t('sys.login.userName')"
         />
-      </a-form-item>
-      <a-form-item name="mobile" class="enter-x">
-        <a-input
+      </vben-form-item>
+      <vben-form-item name="mobile" class="enter-x">
+        <vben-input
           size="large"
           v-model:value="formData.mobile"
           :placeholder="t('sys.login.mobile')"
           class="fix-auto-fill"
         />
-      </a-form-item>
-      <a-form-item name="sms" class="enter-x">
+      </vben-form-item>
+      <vben-form-item name="sms" class="enter-x">
         <count-down-input
           size="large"
           class="fix-auto-fill"
           v-model:value="formData.sms"
           :placeholder="t('sys.login.smsCode')"
         />
-      </a-form-item>
-      <a-form-item name="password" class="enter-x">
-        <a-input-password
+      </vben-form-item>
+      <vben-form-item name="password" class="enter-x">
+        <vben-input
           size="large"
           visibilityToggle
           v-model:value="formData.password"
           :placeholder="t('sys.login.password')"
         />
-      </a-form-item>
-      <a-form-item name="confirmPassword" class="enter-x">
-        <a-input-password
+      </vben-form-item>
+      <vben-form-item name="confirmPassword" class="enter-x">
+        <vben-input
           size="large"
+          type="password"
           visibilityToggle
           v-model:value="formData.confirmPassword"
           :placeholder="t('sys.login.confirmPassword')"
         />
-      </a-form-item>
+      </vben-form-item>
 
-      <a-form-item class="enter-x" name="policy">
+      <vben-form-item class="enter-x" name="policy">
         <!-- No logic, you need to deal with it yourself -->
-        <a-checkbox v-model:checked="formData.policy" size="small">
+        <vben-checkbox v-model:checked="formData.policy" size="small">
           {{ t('sys.login.policy') }}
-        </a-checkbox>
-      </a-form-item>
+        </vben-checkbox>
+      </vben-form-item>
 
-      <a-button
+      <vben-button
         type="primary"
         class="enter-x"
         size="large"
@@ -103,15 +104,15 @@ async function handleRegister() {
         :loading="loading"
       >
         {{ t('sys.login.registerButton') }}
-      </a-button>
-      <a-button
+      </vben-button>
+      <vben-button
         size="large"
         block
         class="mt-4 enter-x"
         @click="handleBackLogin"
       >
         {{ t('sys.login.backSignIn') }}
-      </a-button>
-    </a-form>
+      </vben-button>
+    </vben-form>
   </template>
 </template>

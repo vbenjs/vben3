@@ -11,11 +11,11 @@ import { defineStore } from 'pinia'
 import { useGo, useRedo, useLocalStorage, RemovableRef } from '@vben/use'
 // import { Persistent } from '/@/utils/cache/persistent';
 
-import { PageEnum, MULTIPLE_TABS_KEY } from '@vben/constants'
+import { PageEnum } from '@vben/constants'
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '@/router/routes/basic'
 import { getRawRoute } from '@vben/utils'
 import { useUserStore } from '@/store/user'
-import { useRouter, useRoute } from 'vue-router'
+// import { useRouter, useRoute } from 'vue-router'
 import { router } from '@/router'
 //
 // import projectSetting from '/@/settings/projectSetting';
@@ -237,7 +237,7 @@ export const useMultipleTabStore = defineStore({
         // There is only one tab, then jump to the homepage, otherwise jump to the right tab
         if (this.tabList.length === 1) {
           const userStore = useUserStore()
-          toTarget = userStore.getUserInfo.homePath || PageEnum.BASE_HOME
+          toTarget = userStore.getUserInfo?.homePath || PageEnum.BASE_HOME
         } else {
           //  Jump to the right tab
           const page = this.tabList[index + 1]

@@ -31,7 +31,7 @@ export const setNotice = (func = () => {}) => {
   registerNotice = func
   console.log('useNotice已注册')
 }
-export let useNotice = () => {
+export const useNotice = () => {
   notice = registerNotice()
   if (!notice) {
     console.log('注册失败')
@@ -42,7 +42,7 @@ export let useNotice = () => {
 //Message 相关
 let registerMsg = () => {}
 export let msg = undefined
-export let useMsg = () => {
+export const useMsg = () => {
   msg = registerMsg()
   if (!msg) {
     console.log('注册失败')
@@ -106,11 +106,7 @@ import {
 export { theme, locale } from './config'
 // 初始化组件
 // global 是否全局注册
-export function initVbenComponent(
-  app: App,
-  comp: Object,
-  global: boolean = true,
-) {
+export function initVbenComponent(app: App, comp: Object, global = true) {
   Object.keys(comp).forEach((k) => {
     maps.set(k, comp[k])
   })

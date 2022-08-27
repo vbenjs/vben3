@@ -1,15 +1,17 @@
 import type { Router } from 'vue-router'
 import nProgress from 'nprogress'
 import { config } from '@/config'
-import { BASIC_LOGIN_PATH, PageEnum } from '@vben/constants';
+import { BASIC_LOGIN_PATH, PageEnum } from '@vben/constants'
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import { useMultipleTabWithOut } from '@/store/multipleTab'
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic'
+import { ROOT_ROUTE } from './routes'
 
 const LOADED_PAGE_POOL = new Map<string, boolean>()
 const LOGIN_PATH = BASIC_LOGIN_PATH
 const whitePathList: string[] = [LOGIN_PATH]
+const ROOT_PATH = ROOT_ROUTE.path
 
 async function setupRouteGuard(router: Router) {
   const { enableProgress } = config
@@ -42,86 +44,117 @@ async function setupRouteGuard(router: Router) {
 
 export function createAuthGuard(router: Router) {
   const userStore = useUserStoreWithout()
-  const authStore = useAuthStoreWithout()
-  
+  const permissionStore = useAuthStoreWithout()
+
   router.beforeEach(async (to, from, next) => {
-  
+    if (
+      from.path === ROOT_PATH &&
+      to.path === PageEnum.BASE_HOME &&
+      userStore.getUserInfo?.homePath &&
+      userStore.getUserInfo?.homePath !== PageEnum.BASE_HOME
+    ) {
+      next(userStore.getUserInfo?.homePath)
+      return
+    }
+
     const token = userStore.getAccessToken
-  
-    // 可以直接进入的白名单
-    if (whitePathList.includes(to.path as PageEnum)) {
-      next();
-      return;
-    }
-    
-    // token does not exist
-    if (!token) {
-      // You can access without permission. You need to set the routing meta.ignoreAuth to true
-      // Whitelist can be directly entered
-      if (to.meta.ignoreAuth || whitePathList.includes(to.path)) {
-        return true
-      }
-  
-      const redirectData = {
-        path: LOGIN_PATH,
-        replace: true,
-        // After logging in, jump to the previous page. If you don't need it, just delete the `query`
-        query: { redirect: encodeURIComponent(to.fullPath) },
-      }
-      next(redirectData);
-      // redirect login page
-      return
-    }
-  
-  
-    const routes = await authStore.generatorRoutes()
-    // console.log(111, routes)
-    // console.log(router.getRoutes())
-    routes.forEach((route) => {
-      router.addRoute(route)
-    })
-    if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
-      // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
-      next({ path: to.fullPath, replace: true, query: to.query })
-      return
-    }
 
-    next()
-
-    // if (permissionStore.getIsDynamicAddedRoute) {
+    // TODO Whitelist can be directly entered
+    // if (whitePathList.includes(to.path as PageEnum)) {
+    //   if (to.path === LOGIN_PATH && token) {
+    //     const isSessionTimeout = userStore.getSessionTimeout
+    //     try {
+    //       await userStore.afterLoginAction()
+    //       if (!isSessionTimeout) {
+    //         next((to.query?.redirect as string) || '/')
+    //         return
+    //       }
+    //     } catch {}
+    //   }
     //   next()
     //   return
     // }
-    //
-    // const routes = await permissionStore.buildRoutesAction()
-    //
-    // routes.forEach((route) => {
-    //   router.addRoute(route)
-    // })
-    //
-    // router.addRoute(PAGE_NOT_FOUND_ROUTE)
-    //
-    // permissionStore.setDynamicAddedRoute(true)
-    //
-    // if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
-    //   // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
-    //   next({ path: to.fullPath, replace: true, query: to.query })
-    // } else {
-    //   const redirectPath = (from.query.redirect || to.path) as string
-    //   const redirect = decodeURIComponent(redirectPath)
-    //   const nextData =
-    //     to.path === redirect ? { ...to, replace: true } : { path: redirect }
-    //   next(nextData)
+
+    // token does not exist
+    if (!token) {
+      // You can access without permission. You need to set the routing meta.ignoreAuth to true
+      if (to.meta.ignoreAuth) {
+        next()
+        return
+      }
+
+      // redirect login page
+      const redirectData: {
+        path: string
+        replace: boolean
+        query?: Recordable<string>
+      } = {
+        path: LOGIN_PATH,
+        replace: true,
+      }
+      if (to.path) {
+        redirectData.query = {
+          ...redirectData.query,
+          redirect: to.path,
+        }
+      }
+      next(redirectData)
+      return
+    }
+
+    // Jump to the 404 page after processing the login
+    if (
+      from.path === LOGIN_PATH &&
+      to.name === PAGE_NOT_FOUND_ROUTE.name &&
+      to.fullPath !== (userStore.getUserInfo?.homePath || PageEnum.BASE_HOME)
+    ) {
+      next(userStore.getUserInfo?.homePath || PageEnum.BASE_HOME)
+      return
+    }
+
+    // TODO get userinfo while last fetch time is empty
+    // if (userStore.getLastUpdateTime === 0) {
+    //   try {
+    //     await userStore.getUserInfoAction()
+    //   } catch (err) {
+    //     next()
+    //     return
+    //   }
     // }
+
+    if (permissionStore.getIsDynamicAddedRoute) {
+      next()
+      return
+    }
+
+    const routes = await permissionStore.buildRoutesAction()
+
+    routes.forEach((route) => {
+      router.addRoute(route)
+    })
+
+    router.addRoute(PAGE_NOT_FOUND_ROUTE)
+
+    permissionStore.setDynamicAddedRoute(true)
+
+    if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
+      // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
+      next({ path: to.fullPath, replace: true, query: to.query })
+    } else {
+      const redirectPath = (from.query.redirect || to.path) as string
+      const redirect = decodeURIComponent(redirectPath)
+      const nextData =
+        to.path === redirect ? { ...to, replace: true } : { path: redirect }
+      next(nextData)
+    }
   })
-  // console.log(router.getRoutes(), 333)
 }
 
 // 路由守卫：进入路由，增加Tabs
 export function createTabsGuard(router: Router) {
   const store = useMultipleTabWithOut()
 
-  router.afterEach(async (to, from) => {
+  router.afterEach(async (to) => {
     if (whitePathList.includes(to.path)) return
     await store.checkTab(to)
   })

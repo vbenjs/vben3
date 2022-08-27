@@ -3,22 +3,23 @@ import {
   PAGE_NOT_FOUND_NAME,
   BASIC_HOME_PATH,
 } from '@vben/constants'
-import LAYOUT from '@/layout/index.vue'
 import { Redirect } from '@components/common'
 import { t } from '@vben/locale'
+
+const LAYOUT = () => import('@/layout/index.vue')
 
 const PARENT_LAYOUT = () => () =>
   new Promise((resolve) => {
     resolve({ name: 'ParentLayout' })
   })
 
-// 404 on a page
 const PAGE_NOT_FOUND_ROUTE: RouteRecordItem = {
   path: '/:path(.*)*',
   name: PAGE_NOT_FOUND_NAME,
   component: LAYOUT,
   meta: {
     title: 'ErrorPage',
+    key: 333,
   },
   children: [
     {
@@ -27,11 +28,13 @@ const PAGE_NOT_FOUND_ROUTE: RouteRecordItem = {
       component: () => import('@/pages/sys/exception/index.vue'),
       meta: {
         title: 'ErrorPage',
+        key: 3333,
       },
     },
   ],
 }
 
+// 404 on a page
 const REDIRECT_ROUTE: RouteRecordItem = {
   path: '/redirect',
   component: LAYOUT,

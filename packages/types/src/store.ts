@@ -18,4 +18,5 @@ export interface UserInfo {
   avatar: string
   desc?: string
   roles: RoleInfo[]
+  homePath?: string
 }

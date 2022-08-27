@@ -1,18 +1,25 @@
 import {
+  LOGIN_ROUTE,
   PAGE_NOT_FOUND_ROUTE,
   REDIRECT_ROUTE,
-  LOGIN_ROUTE,
   ROOT_ROUTE,
 } from './basic'
-// modules
-import dashboard from './dashboard'
-import demo from './demo'
 
-const routeModules: RouteRecordItem[] = [dashboard, demo]
+export * from './basic'
 
-export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModules]
+const routeModuleRecord = import.meta.globEager('./modules/**/*.ts') as any
 
-// Basic routing without permission
+const routeModules: RouteRecordItem[] = []
+
+Object.keys(routeModuleRecord).forEach((key) => {
+  const routeModule = routeModuleRecord[key].default || {}
+  routeModules.push(
+    ...(Array.isArray(routeModule) ? [...routeModule] : [routeModule]),
+  )
+})
+
+export const asyncRoutes = [...routeModules]
+
 export const routes = [
   LOGIN_ROUTE,
   ROOT_ROUTE,

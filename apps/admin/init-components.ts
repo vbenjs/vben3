@@ -1,7 +1,7 @@
 // 按需导入组件
 import {
   NTag,
-  NCard,
+  // NCard,
   NDivider,
   NSpace,
   NPopover,
@@ -42,9 +42,9 @@ import {
   NNotificationProvider,
   NSwitch,
   NMenu,
-  dateZhCN,
+  // dateZhCN,
   zhCN,
-  darkTheme,
+  // darkTheme,
   NBreadcrumb,
   NBreadcrumbItem,
   NLayout,
@@ -54,6 +54,7 @@ import {
   NLayoutHeader,
   NForm,
   NFormItem,
+  NDropdown,
 } from 'naive-ui'
 
 import {
@@ -115,6 +116,7 @@ export async function registerComponents(app) {
     LayoutFooter: NLayoutFooter,
     LayoutSider: NLayoutSider,
     LayoutContent: NLayoutContent,
+    Dropdown: NDropdown,
   })
   setMessage(useMessage)
   setNotice(useNotification)

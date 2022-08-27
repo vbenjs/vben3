@@ -19,7 +19,7 @@ export const useUserStore = defineStore({
   },
   state: (): UserState => ({
     userInfo: undefined,
-    accessToken: undefined,
+    accessToken: 'undefined',
     roles: [],
   }),
   getters: {

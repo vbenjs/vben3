@@ -47,7 +47,6 @@ export const useAuthStore = defineStore({
       let routes: RouteRecordItem[] = []
       const userStore = useUserStoreWithout()
       const { authType } = config
-      console.log(asyncRoutes)
 
       switch (authType) {
         // that permissions are controlled by the front end

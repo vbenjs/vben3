@@ -38,6 +38,8 @@ const REDIRECT_ROUTE: RouteRecordItem = {
   name: 'RedirectTo',
   meta: {
     title: REDIRECT_NAME,
+    hideBreadcrumb: true,
+    hideMenu: true,
   },
   children: [
     {
@@ -46,6 +48,7 @@ const REDIRECT_ROUTE: RouteRecordItem = {
       component: Redirect,
       meta: {
         title: REDIRECT_NAME,
+        hideBreadcrumb: true,
       },
     },
   ],

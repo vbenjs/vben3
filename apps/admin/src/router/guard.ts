@@ -4,8 +4,8 @@ import { config } from '@/config'
 import { BASIC_LOGIN_PATH, PageEnum } from '@vben/constants';
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
-import { useMultipleTabWithOut } from '@/store/multipleTab'
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic'
+import {setRouteChange} from "@/logics/mitt/routeChange";
 
 const LOADED_PAGE_POOL = new Map<string, boolean>()
 const LOGIN_PATH = BASIC_LOGIN_PATH
@@ -119,11 +119,11 @@ export function createAuthGuard(router: Router) {
 
 // 路由守卫：进入路由，增加Tabs
 export function createTabsGuard(router: Router) {
-  const store = useMultipleTabWithOut()
 
-  router.afterEach(async (to, from) => {
+  router.beforeEach(async (to) => {
     if (whitePathList.includes(to.path)) return
-    await store.checkTab(to)
+    // Notify routing changes
+    setRouteChange(to);
   })
 }
 

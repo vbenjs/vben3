@@ -3,6 +3,7 @@ node_modules
 dist
 *-dist
 .cache
+pnpm-lock.yaml
 
 .turbo
 .local

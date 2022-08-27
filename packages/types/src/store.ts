@@ -1,4 +1,6 @@
 // Lock screen information
+import {MenuModeEnum, MenuTypeEnum} from "../../enums/menuEnum";
+
 export interface LockInfo {
   // Password required
   pwd?: string | undefined
@@ -17,5 +19,13 @@ export interface UserInfo {
   realname: string
   avatar: string
   desc?: string
+  homePath?: string
   roles: RoleInfo[]
+}
+
+export interface BeforeMiniState {
+  menuCollapsed?: boolean;
+  menuSplit?: boolean;
+  menuMode?: MenuModeEnum;
+  menuType?: MenuTypeEnum;
 }

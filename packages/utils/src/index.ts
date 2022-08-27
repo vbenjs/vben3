@@ -8,5 +8,6 @@ export * from './dom'
 export * from './download'
 export * from './tree'
 export * from './router'
+export * from './mitt'
 
 export * from 'lodash-es'

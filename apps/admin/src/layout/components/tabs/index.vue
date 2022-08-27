@@ -72,7 +72,7 @@ watch(activeTabRef, (path) => {
       :closable="!(tab && tab.meta && tab.meta.affix) && !unClose"
     />
     <template #suffix>
-      <TabRedo></TabRedo>
+      <TabRedo />
     </template>
   </VbenTabs>
 </template>

@@ -15,20 +15,20 @@ const props = defineProps({
   /**
    * Click to jump to which path
    */
-  homepath: { type: String, default: BASIC_HOME_PATH },
+  homePath: { type: String, default: BASIC_HOME_PATH },
 })
 
 const { push } = useRouter()
 const { title } = getGlobalConfig(import.meta.env)
 
 function goHome() {
-  push(props.homepath)
+  push(props.homePath)
 }
 </script>
 
 <template>
   <div :class="bem()" @click="goHome">
-    <img :src="logo" />
+    <img :src="logo" alt="logo" />
     <div
       class="ml-2 truncate md:opacity-100"
       :class="bem('title')"
@@ -50,7 +50,6 @@ function goHome() {
   background: transparent;
 
   &__title {
-    color: #fff;
     font-size: 16px;
     font-weight: 700;
     transition: all 0.5s;

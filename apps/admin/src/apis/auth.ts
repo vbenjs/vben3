@@ -21,7 +21,7 @@ export interface UserInfoModel {
   roles: RoleInfo[]
   userId: string | number
   username: string
-  realname: string
+  realName?: string
   avatar: string
   desc?: string
 }

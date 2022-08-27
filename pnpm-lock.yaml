@@ -50,11 +50,14 @@ importers:
       '@components/common': workspace:*
       '@config/css-preprocess': workspace:*
       '@config/vite': workspace:*
+      '@iconify/iconify': ^2.2.1
       '@types/mockjs': ^1.0.6
       '@types/nprogress': ^0.2.0
       '@vben/constants': workspace:*
       '@vben/demo': workspace:*
       '@vben/directives': workspace:*
+      '@vben/enums': workspace:*
+      '@vben/hooks': workspace:*
       '@vben/layouts': workspace:*
       '@vben/locale': workspace:*
       '@vben/request': workspace:*
@@ -82,9 +85,12 @@ importers:
       '@ant-design/icons-vue': 6.1.0_vue@3.2.36
       '@components/antd-extend': link:../../packages/components/antd-extend
       '@components/common': link:../../packages/components/common
+      '@iconify/iconify': 2.2.1
       '@vben/constants': link:../../packages/constants
       '@vben/demo': link:../../packages/demo
       '@vben/directives': link:../../packages/directives
+      '@vben/enums': link:../../packages/enums
+      '@vben/hooks': link:../../packages/hooks
       '@vben/layouts': link:../../packages/layouts
       '@vben/locale': link:../../packages/locale
       '@vben/request': link:../../packages/request
@@ -338,6 +344,9 @@ importers:
 
   packages/components/common:
     specifiers:
+      '@iconify/iconify': ^2.2.1
+      '@iconify/json': ^2.1.98
+      '@purge-icons/generated': ^0.9.0
       '@types/qrcode': ^1.4.2
       '@vben/constants': workspace:*
       '@vben/locale': workspace:*
@@ -347,6 +356,7 @@ importers:
       vue: 3.2.36
       vue-router: ^4.1.3
     dependencies:
+      '@iconify/iconify': 2.2.1
       '@vben/constants': link:../../constants
       '@vben/locale': link:../../locale
       '@vben/use': link:../../use
@@ -355,6 +365,8 @@ importers:
       vue: 3.2.36
       vue-router: 4.1.3_vue@3.2.36
     devDependencies:
+      '@iconify/json': 2.1.99
+      '@purge-icons/generated': 0.9.0
       '@types/qrcode': 1.4.3
 
   packages/constants:
@@ -370,6 +382,41 @@ importers:
     dependencies:
       '@vben/utils': link:../utils
       vue: 3.2.36
+
+  packages/enums:
+    specifiers:
+      '@vben/constants': workspace:*
+      '@vben/types': workspace:*
+      '@vben/utils': workspace:*
+      '@vueuse/core': ^8.9.4
+      vue: 3.2.36
+      vue-i18n: ^9.2.2
+    dependencies:
+      '@vben/constants': link:../constants
+      '@vben/types': link:../types
+      '@vben/utils': link:../utils
+      '@vueuse/core': 8.9.4_vue@3.2.36
+      vue: 3.2.36
+      vue-i18n: 9.2.2_vue@3.2.36
+
+  packages/hooks:
+    specifiers:
+      '@types/lodash-es': ^4.17.6
+      '@vben/constants': workspace:*
+      '@vben/types': workspace:*
+      '@vben/utils': workspace:*
+      '@vueuse/core': ^8.9.4
+      lodash-es: ^4.17.21
+      vue: 3.2.36
+    dependencies:
+      '@vben/constants': link:../constants
+      '@vben/utils': link:../utils
+      '@vueuse/core': 8.9.4_vue@3.2.36
+      lodash-es: 4.17.21
+      vue: 3.2.36
+    devDependencies:
+      '@types/lodash-es': 4.17.6
+      '@vben/types': link:../types
 
   packages/layouts:
     specifiers:
@@ -1582,11 +1629,16 @@ packages:
 
   /@iconify/iconify/2.2.1:
     resolution: {integrity: sha512-WJzw+3iicrF/tbjbxxRinSgy5FHdJoz/egTqwi3xCDkNRJPq482RX1iyaWrjNuY2vMNSPkQMuqHvZDXgA+WnwQ==}
-    dev: false
+
+  /@iconify/json/2.1.99:
+    resolution: {integrity: sha512-A3kvTZmF5cy3xVF3HhItNFwHN7vY27kzcqBXy53bZwuXmXUstevddoqOQi4/01/OGVFFe9sPowclSWUXX+dErg==}
+    dependencies:
+      '@iconify/types': 1.1.0
+      pathe: 0.3.4
+    dev: true
 
   /@iconify/types/1.1.0:
     resolution: {integrity: sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==}
-    dev: false
 
   /@iconify/utils/1.0.33:
     resolution: {integrity: sha512-vGeAqo7aGPxOQmGdVoXFUOuyN+0V7Lcrx2EvaiRjxUD1x6Om0Tvq2bdm7E24l2Pz++4S0mWMCVFXe/17EtKImQ==}
@@ -2030,6 +2082,12 @@ packages:
     dependencies:
       '@iconify/iconify': 2.2.1
     dev: false
+
+  /@purge-icons/generated/0.9.0:
+    resolution: {integrity: sha512-s2t+1oVtGDV6KtqfCXtUOhxfeYvOdDF90IVm+nMs/6bUP0HeGZLslguuL/AibpwtfL4FA/oCsIu/RhwapgAdJw==}
+    dependencies:
+      '@iconify/iconify': 2.2.1
+    dev: true
 
   /@rollup/plugin-alias/3.1.9_rollup@2.78.0:
     resolution: {integrity: sha512-QI5fsEvm9bDzt32k39wpOwZhVzRcL5ydcffUHMyLVaVaLeC70I8TJZ17F1z1eMoLu4E/UOcH9BWVkKpIKdrfiw==}
@@ -7588,7 +7646,7 @@ packages:
     hasBin: true
 
   /json-buffer/3.0.0:
-    resolution: {integrity: sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=}
+    resolution: {integrity: sha512-CuUqjv0FUZIdXkHPI8MezCnFCdaTAacej1TZYulLoAg1h/PhwkdXFN4V/gzY4g+fMBCOV2xF+rp7t2XD2ns/NQ==}
     dev: false
 
   /json-parse-even-better-errors/2.3.1:

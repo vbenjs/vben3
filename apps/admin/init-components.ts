@@ -54,6 +54,7 @@ import {
   NLayoutHeader,
   NForm,
   NFormItem,
+  NDropdown,
 } from 'naive-ui'
 
 import {
@@ -115,6 +116,7 @@ export async function registerComponents(app) {
     LayoutFooter: NLayoutFooter,
     LayoutSider: NLayoutSider,
     LayoutContent: NLayoutContent,
+    Dropdown: NDropdown,
   })
   setMessage(useMessage)
   setNotice(useNotification)

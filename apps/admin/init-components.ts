@@ -1,7 +1,7 @@
 // 按需导入组件
 import {
   NTag,
-  NCard,
+  // NCard,
   NDivider,
   NSpace,
   NPopover,
@@ -42,9 +42,9 @@ import {
   NNotificationProvider,
   NSwitch,
   NMenu,
-  dateZhCN,
+  // dateZhCN,
   zhCN,
-  darkTheme,
+  // darkTheme,
   NBreadcrumb,
   NBreadcrumbItem,
   NLayout,

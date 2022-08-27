@@ -1,5 +1,5 @@
 // Lock screen information
-import {MenuModeEnum, MenuTypeEnum} from "../../enums/menuEnum";
+import { MenuModeEnum, MenuTypeEnum } from '../../enums/menuEnum'
 
 export interface LockInfo {
   // Password required
@@ -21,11 +21,12 @@ export interface UserInfo {
   desc?: string
   homePath?: string
   roles: RoleInfo[]
+  homePath?: string
 }
 
 export interface BeforeMiniState {
-  menuCollapsed?: boolean;
-  menuSplit?: boolean;
-  menuMode?: MenuModeEnum;
-  menuType?: MenuTypeEnum;
+  menuCollapsed?: boolean
+  menuSplit?: boolean
+  menuMode?: MenuModeEnum
+  menuType?: MenuTypeEnum
 }

@@ -10,9 +10,10 @@ import { useAuthStoreWithout } from './auth'
 import { GetUserInfoModel } from '@/apis/sys/user'
 import { UserInfo, RoleInfo } from '@/types/store'
 import { ErrorMessageMode } from '@vben/types'
+import { isArray } from '@vben/utils'
 
 interface UserState {
-  userInfo?: UserInfo
+  userInfo: Nullable<UserInfo>
   accessToken?: string
   roles: RoleInfo[]
   sessionTimeout?: boolean
@@ -25,7 +26,7 @@ export const useUserStore = defineStore({
     strategies: [{ paths: ['userInfo', 'accessToken', 'roles'] }],
   },
   state: (): UserState => ({
-    userInfo: undefined,
+    userInfo: null,
     accessToken: undefined,
     roles: [],
     // Whether the login expired
@@ -34,7 +35,7 @@ export const useUserStore = defineStore({
     lastUpdateTime: 0,
   }),
   getters: {
-    getUserInfo(): UserInfo | undefined {
+    getUserInfo(): UserInfo | null {
       return this.userInfo
     },
     getAccessToken(): string | undefined {
@@ -57,11 +58,15 @@ export const useUserStore = defineStore({
     setRoles(roles: RoleInfo[]) {
       this.roles = roles
     },
+    setUserInfo(info: UserInfo | null) {
+      this.userInfo = info
+      this.lastUpdateTime = new Date().getTime()
+    },
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag
     },
     resetState() {
-      this.userInfo = undefined
+      this.userInfo = null
       this.accessToken = undefined
       this.roles = []
       this.sessionTimeout = false
@@ -124,7 +129,16 @@ export const useUserStore = defineStore({
 
       const userInfo = (await getUserInfoApi()) as unknown as UserInfo
       const { roles = [] } = userInfo
-      this.setRoles(roles)
+      if (isArray(roles)) {
+        const roleList = roles.map(
+          (item) => item.value,
+        ) as unknown as RoleInfo[]
+        this.setRoles(roleList)
+      } else {
+        userInfo.roles = []
+        this.setRoles([])
+      }
+      this.setUserInfo(userInfo)
 
       return userInfo
     },
@@ -138,6 +152,8 @@ export const useUserStore = defineStore({
         }
       }
       this.setAccessToken(undefined)
+      this.setSessionTimeout(false)
+      this.setUserInfo(null)
       if (goLogin) {
         router.push(BASIC_LOGIN_PATH)
       }

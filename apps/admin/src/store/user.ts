@@ -1,15 +1,22 @@
-import type { UserInfo, ErrorMessageMode, RoleInfo } from '@vben/types'
-import type { UserInfoModel, LoginParams } from '@/apis/auth'
+import type { LoginParams } from '@/apis/auth'
 import { defineStore } from 'pinia'
 import { BASIC_HOME_PATH, BASIC_LOGIN_PATH } from '@vben/constants'
 import { pinia } from '@/pinia'
 import { router } from '@/router'
 import { doLogoutApi, getUserInfoApi, doLoginApi } from '@/apis/auth'
+import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
+import { PageEnum } from '@/constants'
+import { useAuthStoreWithout } from './auth'
+import { GetUserInfoModel } from '@/apis/sys/user'
+import { UserInfo, RoleInfo } from '@/types/store'
+import { ErrorMessageMode } from '@vben/types'
 
 interface UserState {
   userInfo?: UserInfo
   accessToken?: string
   roles: RoleInfo[]
+  sessionTimeout?: boolean
+  lastUpdateTime: number
 }
 
 export const useUserStore = defineStore({
@@ -19,8 +26,12 @@ export const useUserStore = defineStore({
   },
   state: (): UserState => ({
     userInfo: undefined,
-    accessToken: 'undefined',
+    accessToken: undefined,
     roles: [],
+    // Whether the login expired
+    sessionTimeout: false,
+    // Last fetch time
+    lastUpdateTime: 0,
   }),
   getters: {
     getUserInfo(): UserInfo | undefined {
@@ -32,6 +43,12 @@ export const useUserStore = defineStore({
     getRoles(): RoleInfo[] {
       return this.roles.length > 0 ? this.roles : []
     },
+    getSessionTimeout(): boolean {
+      return !!this.sessionTimeout
+    },
+    getLastUpdateTime(): number {
+      return this.lastUpdateTime
+    },
   },
   actions: {
     setAccessToken(info: string | undefined) {
@@ -40,10 +57,14 @@ export const useUserStore = defineStore({
     setRoles(roles: RoleInfo[]) {
       this.roles = roles
     },
+    setSessionTimeout(flag: boolean) {
+      this.sessionTimeout = flag
+    },
     resetState() {
       this.userInfo = undefined
       this.accessToken = undefined
       this.roles = []
+      this.sessionTimeout = false
     },
 
     async login(
@@ -51,7 +72,7 @@ export const useUserStore = defineStore({
         goHome?: boolean
         mode?: ErrorMessageMode
       },
-    ): Promise<UserInfoModel | null> {
+    ): Promise<UserInfo | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params
         const { accessToken } = await doLoginApi(loginParams, mode)
@@ -70,13 +91,38 @@ export const useUserStore = defineStore({
         return Promise.reject(error)
       }
     },
+    async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
+      if (!this.getAccessToken) {
+        return null
+      }
+      // get user info
+      const userInfo = await this.getUserInfoAction()
+
+      const sessionTimeout = this.sessionTimeout
+      if (sessionTimeout) {
+        this.setSessionTimeout(false)
+      } else {
+        const permissionStore = useAuthStoreWithout()
+        if (!permissionStore.isDynamicAddedRoute) {
+          const routes = await permissionStore.buildRoutesAction()
+          routes.forEach((route) => {
+            router.addRoute(route)
+          })
+          router.addRoute(PAGE_NOT_FOUND_ROUTE)
+          permissionStore.setDynamicAddedRoute(true)
+        }
+        goHome &&
+          (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME))
+      }
+      return userInfo
+    },
 
     async getUserInfoAction(): Promise<UserInfo | null> {
       if (!this.getAccessToken) {
         return null
       }
 
-      const userInfo = await getUserInfoApi()
+      const userInfo = (await getUserInfoApi()) as unknown as UserInfo
       const { roles = [] } = userInfo
       this.setRoles(roles)
 

@@ -60,20 +60,20 @@ export function createAuthGuard(router: Router) {
     const token = userStore.getAccessToken
 
     // TODO Whitelist can be directly entered
-    // if (whitePathList.includes(to.path as PageEnum)) {
-    //   if (to.path === LOGIN_PATH && token) {
-    //     const isSessionTimeout = userStore.getSessionTimeout
-    //     try {
-    //       await userStore.afterLoginAction()
-    //       if (!isSessionTimeout) {
-    //         next((to.query?.redirect as string) || '/')
-    //         return
-    //       }
-    //     } catch {}
-    //   }
-    //   next()
-    //   return
-    // }
+    if (whitePathList.includes(to.path as PageEnum)) {
+      if (to.path === LOGIN_PATH && token) {
+        const isSessionTimeout = userStore.getSessionTimeout
+        try {
+          await userStore.afterLoginAction()
+          if (!isSessionTimeout) {
+            next((to.query?.redirect as string) || '/')
+            return
+          }
+        } catch {}
+      }
+      next()
+      return
+    }
 
     // token does not exist
     if (!token) {
@@ -98,6 +98,9 @@ export function createAuthGuard(router: Router) {
           redirect: to.path,
         }
       }
+
+      console.log(redirectData)
+
       next(redirectData)
       return
     }
@@ -113,14 +116,14 @@ export function createAuthGuard(router: Router) {
     }
 
     // TODO get userinfo while last fetch time is empty
-    // if (userStore.getLastUpdateTime === 0) {
-    //   try {
-    //     await userStore.getUserInfoAction()
-    //   } catch (err) {
-    //     next()
-    //     return
-    //   }
-    // }
+    if (userStore.getLastUpdateTime === 0) {
+      try {
+        await userStore.getUserInfoAction()
+      } catch (err) {
+        next()
+        return
+      }
+    }
 
     if (permissionStore.getIsDynamicAddedRoute) {
       next()

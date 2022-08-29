@@ -34,6 +34,8 @@
     "mockjs": "^1.1.0",
     "rollup": "^2.77.3",
     "typescript": "^4.7.4",
+    "vite-plugin-http2-proxy": "^0.3.2",
+    "vite-plugin-mkcert": "^1.9.0",
     "vue": "3.2.36"
   }
 }

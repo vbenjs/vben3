@@ -12,6 +12,7 @@ import { configImageminPlugin } from './imagemin'
 import { configSvgIconsPlugin } from './svg-icons'
 import { configUnocssPlugin } from './unocss'
 import { createConfigPlugin } from './config'
+import { configHttpsPlugin } from './https'
 
 export async function configVitePlugins(
   root: string,
@@ -29,7 +30,7 @@ export async function configVitePlugins(
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
     vue({
-      reactivityTransform: true
+      reactivityTransform: true,
     }),
     // have to
     vueJsx(),
@@ -57,6 +58,9 @@ export async function configVitePlugins(
 
   // rollup-plugin-visualizer
   vitePlugins.push(configVisualizerConfig())
+
+  // http2
+  vitePlugins.push(configHttpsPlugin(viteEnv))
 
   // The following plugins only work in the production environment
   if (isBuild) {

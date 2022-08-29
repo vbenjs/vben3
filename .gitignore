@@ -4,6 +4,7 @@ dist
 *-dist
 .cache
 pnpm-lock.yaml
+.history
 
 .turbo
 .local

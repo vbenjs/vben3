@@ -32,9 +32,13 @@ export async function createViteConfig(
 
     // The boolean type read by loadEnv is a string. This function can be converted to boolean type
     const viteEnv = wrapperEnv(env)
-
-    const { VITE_PUBLIC_PATH, VITE_PROXY, VITE_USE_MOCK, VITE_DROP_CONSOLE } =
-      viteEnv
+    const {
+      VITE_PUBLIC_PATH,
+      VITE_PROXY,
+      VITE_USE_MOCK,
+      VITE_DROP_CONSOLE,
+      VITE_USE_HTTPS,
+    } = viteEnv
 
     const commonConfig: UserConfig = {
       root,
@@ -58,9 +62,10 @@ export async function createViteConfig(
         }),
       },
       server: {
+        https: VITE_USE_HTTPS,
         port: 3000,
         host: true,
-        proxy: resolveProxy(VITE_PROXY),
+        proxy: !VITE_USE_HTTPS ? resolveProxy(VITE_PROXY) : undefined,
       },
       esbuild: {
         pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],

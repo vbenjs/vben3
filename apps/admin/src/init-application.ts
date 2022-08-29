@@ -2,7 +2,9 @@ import { initRequest } from '@vben/request'
 import { message, Modal } from 'ant-design-vue'
 import { useUserStoreWithout } from '@/store/user'
 import { useI18n } from '@vben/locale'
-import { getGlobalConfig } from '@vben/utils'
+import { deepMerge, getGlobalConfig } from '@vben/utils'
+import { useAppStoreWithOut } from '@/store/config'
+import { projectSetting } from './settng'
 
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
@@ -50,7 +52,13 @@ async function initPackages() {
 }
 
 // Initial project configuration
-function initAppConfigStore() {}
+function initAppConfigStore() {
+  const appStore = useAppStoreWithOut()
+  const projectConfig = appStore.getProjectConfig
+  const projCfg = deepMerge(projectSetting, projectConfig || {})
+
+  appStore.setProjectConfig(projCfg)
+}
 
 export async function initApplication() {
   // ! Need to pay attention to the timing of execution

@@ -1,5 +1,6 @@
 export * from './breakpoint'
 export * from './menu'
+export * from './sidebar'
 
 export enum ContentLayoutEnum {
   // auto width

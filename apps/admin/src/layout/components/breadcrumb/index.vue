@@ -9,6 +9,10 @@ import { REDIRECT_NAME } from '@vben/constants'
 import { Menu } from '@/types'
 import { useRootSetting } from '@/hooks/useRootSetting'
 
+withDefaults(defineProps<{ theme: 'dark' | 'light' }>(), {
+  theme: 'light',
+})
+
 const { currentRoute } = useRouter()
 const { t } = useI18n()
 const go = useGo()
@@ -115,6 +119,5 @@ const handleClick = (path: string, route: Recordable<any>) => {
         </VbenDropdown>
       </VbenBreadcrumbItem>
     </VbenBreadcrumb>
-    <div>123</div>
   </VbenSpace>
 </template>

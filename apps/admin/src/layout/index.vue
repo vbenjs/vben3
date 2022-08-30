@@ -6,8 +6,13 @@ import LayoutTabs from './components/tabs/index.vue'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import FullScreen from './components/FullScreen.vue'
 
-const { getHeaderTheme, getShowContent, getShowBread, getShowFullScreen } =
-  useHeaderSetting()
+const {
+  getHeaderTheme,
+  getShowContent,
+  getShowBread,
+  getShowFullScreen,
+  getShowLocalePicker,
+} = useHeaderSetting()
 </script>
 
 <template>
@@ -27,8 +32,13 @@ const { getHeaderTheme, getShowContent, getShowBread, getShowFullScreen } =
               :theme="getHeaderTheme"
             />
           </div>
-          <div>
+          <div class="flex">
             <FullScreen v-if="getShowFullScreen" />
+            <VbenLocalePicker
+              v-if="getShowLocalePicker"
+              :reload="true"
+              :showText="false"
+            />
           </div>
         </div>
         <LayoutTabs />

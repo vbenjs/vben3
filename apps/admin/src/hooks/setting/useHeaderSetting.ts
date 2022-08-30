@@ -67,6 +67,9 @@ export function useHeaderSetting() {
   const getShowFullScreen = computed(
     () => appStore.getHeaderSetting.showFullScreen,
   )
+  const getShowLocalePicker = computed(
+    () => appStore.getHeaderSetting.showLocalePicker,
+  )
 
   const getShowNotice = computed(() => appStore.getHeaderSetting.showNotice)
 
@@ -111,5 +114,6 @@ export function useHeaderSetting() {
     getShowInsetHeaderRef,
     getUnFixedAndFull,
     getHeaderBgColor,
+    getShowLocalePicker,
   }
 }

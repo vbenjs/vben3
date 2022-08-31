@@ -1,4 +1,5 @@
 import type { Component, App } from 'vue'
+export { initComp } from './bridge'
 import VXETable from 'vxe-table'
 const projectName = 'Vben3'
 
@@ -102,6 +103,8 @@ import {
   VbenLayoutHeader,
   VbenLayoutContent,
 } from './layout'
+import { VbenIconify } from './iconify'
+import { VbenLocalePicker } from './localePicker'
 
 export { theme, locale } from './config'
 // 初始化组件
@@ -171,4 +174,6 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
     .use(VbenLayoutContent)
     .use(VbenLayoutHeader)
     .use(VbenLayoutSider)
+    .use(VbenIconify)
+    .use(VbenLocalePicker)
 }

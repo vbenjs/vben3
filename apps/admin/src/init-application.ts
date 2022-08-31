@@ -1,10 +1,12 @@
 import { initRequest } from '@vben/request'
 import { message, Modal } from 'ant-design-vue'
 import { useUserStoreWithout } from '@/store/user'
-import { useI18n } from '@vben/locale'
+import { useI18n, useLocale } from '@vben/locale'
 import { deepMerge, getGlobalConfig } from '@vben/utils'
 import { useAppStoreWithOut } from '@/store/config'
 import { projectSetting } from './settng'
+import { initComp } from '@vben/vbencomponents'
+import { localeList } from '@vben/locale/src/config'
 
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
@@ -48,7 +50,17 @@ async function initPackages() {
     })
   }
 
-  await Promise.all([_initRequest()])
+  const _initComp = async () => {
+    const locale = useLocale()
+    await initComp(() => {
+      return {
+        locale: locale,
+        localeList: localeList,
+      }
+    })
+  }
+
+  await Promise.all([_initRequest(), _initComp()])
 }
 
 // Initial project configuration

@@ -79,6 +79,7 @@ export const projectSetting: ProjectConfig = {
     showNotice: true,
     // Whether to display the menu search
     showSearch: true,
+    showLocalePicker: true,
   },
 
   // Menu configuration

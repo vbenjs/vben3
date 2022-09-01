@@ -6,12 +6,12 @@ export type LocaleReturn = {
 }
 
 export interface ContextOptions {
-  locale: LocaleReturn
+  useLocale: () => LocaleReturn
   localeList: Array<any>
 }
 
 export let context: ContextOptions = {
-  locale: {} as LocaleReturn,
+  useLocale: () => ({} as LocaleReturn),
   localeList: [],
 }
 

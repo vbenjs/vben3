@@ -1,6 +1,5 @@
 <script lang="ts" setup name="VbenTable">
 import 'xe-utils'
-
 import 'vxe-table/lib/style.css'
 import type { VbenTableProps } from './type'
 import { computed, PropType, ref, unref, useSlots, watch } from 'vue'
@@ -55,7 +54,6 @@ const reload = () => {
   g.commitProxy('query')
 }
 
-defineExpose({ reload })
 const getProxyConfig = (options: VbenTableProps) => {
   const { api, proxyConfig, data, afterFetch } = options
   if (proxyConfig || data) return
@@ -100,6 +98,7 @@ const getPageConfig = (options: VbenTableProps) => {
 const setProps = (prop: Partial<VbenTableProps>) => {
   innerProps.value = { ...unref(innerProps), ...prop }
 }
+defineExpose({ reload })
 emit('register', { reload, setProps })
 </script>
 <template>

@@ -8,5 +8,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^3.2.38",
+    "@vben/vbencomponents": "workspace:*",
+    "@vben/request": "workspace:*",
+    "@vben/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@vben/types": "workspace:*"
+  }
 }

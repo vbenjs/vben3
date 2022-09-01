@@ -8,4 +8,10 @@ export default {
     workbench: 'Workbench',
     analysis: 'Analysis',
   },
+  demo: {
+    demo: 'Demo',
+    card: 'Card',
+    form: 'Form',
+    table: 'Table',
+  },
 }

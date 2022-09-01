@@ -1,7 +1,7 @@
 // 按需导入组件
 import {
   NTag,
-  // NCard,
+  NCard,
   NDivider,
   NSpace,
   NPopover,
@@ -67,8 +67,8 @@ import { Card } from 'ant-design-vue'
 export async function registerComponents(app) {
   initVbenComponent(app, {
     Tag: NTag,
-    // Card: NCard,
-    Card: Card,
+    Card: NCard,
+    // Card: Card,
     Menu: NMenu,
     Divider: NDivider,
     Space: NSpace,

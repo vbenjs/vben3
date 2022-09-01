@@ -1,7 +1,9 @@
 <script lang="ts" setup name="VbenForm">
 import { maps } from '../../index'
-import { useAttrs } from 'vue'
+import { computed, ref, unref, useAttrs } from 'vue'
+import { VbenFormProps } from './type'
 const emit = defineEmits(['register'])
+const innerProps = ref<Partial<VbenFormProps>>()
 const Form = maps.get('Form')
 const props = defineProps({
   schemas: [],
@@ -14,13 +16,37 @@ console.log(attrs)
 // defineExpose({
 //   domRef
 // });
-emit('register', {})
+const getProps = computed(() => {
+  const options = innerProps.value || props
+
+  return {
+    ...options,
+  }
+})
+// const getSchema=computed(().schemas)
+const setProps = (prop: Partial<VbenFormProps>) => {
+  innerProps.value = { ...unref(innerProps), ...prop }
+}
+emit('register', { setProps })
 </script>
 <template>
   <Form ref="domRef" v-bind="$attrs">
     <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
+    <VbenFormItem
+      :label="schema.label"
+      v-for="(schema, key) in innerProps.schemas"
+      :key="key"
+      ><VbenInput
+        v-if="schema.component === 'Input'"
+        v-bind="schema.componentProps"
+      ></VbenInput>
+      <VbenSelect
+        v-if="schema.component === 'Select'"
+        v-bind="schema.componentProps"
+      ></VbenSelect>
+    </VbenFormItem>
   </Form>
 </template>
 

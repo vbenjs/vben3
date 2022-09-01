@@ -4,26 +4,26 @@ import { error } from '../../../index'
 
 export interface formMethod {
   // reload: () => void
-  // setProps: (props: VbenTableProps) => void
+  setProps: (props: VbenFormProps) => void
 }
 
 export function useForm(props: VbenFormProps) {
-  const tableRef = ref<Nullable<formMethod>>(null)
+  const formRef = ref<Nullable<formMethod>>(null)
 
   function register(instance) {
-    tableRef.value = instance
-    props && instance.setProps(props)
+    formRef.value = instance
+    instance.setProps(props)
   }
   function getInstance(): formMethod {
-    const table = unref(tableRef)
-    if (!table) {
-      error('表格实例不存在')
+    const form = unref(formRef)
+    if (!form) {
+      error('表单实例不存在')
     }
-    return table as formMethod
+    return form as formMethod
   }
   const methods: formMethod = {
     // reload: () => getInstance().reload,
-    // setProps: () => getInstance().setProps,
+    setProps: () => getInstance().setProps,
   }
   return [register, methods]
 }

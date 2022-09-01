@@ -3,6 +3,7 @@ import { useLocale } from '@vben/locale'
 import { useWebTitle, computedAsync } from '@vben/use'
 import { REDIRECT_NAME } from '@vben/constants'
 import { getGlobalConfig } from '@vben/utils'
+import AppProvider from '@/layout/components/app/AppProvider'
 // Support Multi-language
 const { getLocale } = useLocale()
 
@@ -44,10 +45,12 @@ const locale = computedAsync(async () => {
 
 <template>
   <VbenConfig :theme="{}" :locale="locale" :date-locale="dateLocale">
-    <VbenNotificationProvider>
-      <VbenMessageProvider>
-        <router-view />
-      </VbenMessageProvider>
-    </VbenNotificationProvider>
+    <AppProvider>
+      <VbenNotificationProvider>
+        <VbenMessageProvider>
+          <router-view />
+        </VbenMessageProvider>
+      </VbenNotificationProvider>
+    </AppProvider>
   </VbenConfig>
 </template>

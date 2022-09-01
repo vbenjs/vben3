@@ -1,5 +1,6 @@
 import { pinia } from '@/pinia'
 import {
+  BeforeMiniState,
   HeaderSetting,
   MenuSetting,
   MultiTabsSetting,
@@ -16,6 +17,8 @@ export interface ConfigStoreState {
   pageLoading: boolean
   // project config
   projectConfig: ProjectConfig | null
+  // When the window shrinks, remember some states, and restore these states when the window is restored
+  beforeMiniInfo: BeforeMiniState
 }
 
 export const useConfigStore = defineStore({
@@ -31,10 +34,14 @@ export const useConfigStore = defineStore({
     darkMode: undefined,
     pageLoading: false,
     projectConfig: {} as any,
+    beforeMiniInfo: {},
   }),
   getters: {
     getDarkMode(): 'light' | 'dark' | string {
       return this.darkMode || darkMode
+    },
+    getBeforeMiniInfo(): BeforeMiniState {
+      return this.beforeMiniInfo
     },
     getProjectConfig(): ProjectConfig {
       return this.projectConfig || ({} as ProjectConfig)
@@ -53,6 +60,9 @@ export const useConfigStore = defineStore({
     },
   },
   actions: {
+    setBeforeMiniInfo(state: BeforeMiniState): void {
+      this.beforeMiniInfo = state
+    },
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config)
     },

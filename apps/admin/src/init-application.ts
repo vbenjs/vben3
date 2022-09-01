@@ -51,11 +51,10 @@ async function initPackages() {
   }
 
   const _initComp = async () => {
-    const locale = useLocale()
     await initComp(() => {
       return {
-        locale: locale,
-        localeList: localeList,
+        useLocale,
+        localeList,
       }
     })
   }

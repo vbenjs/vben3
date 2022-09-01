@@ -5,6 +5,11 @@ import LayoutBreadcrumb from './components/breadcrumb/index.vue'
 import LayoutTabs from './components/tabs/index.vue'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import FullScreen from './components/FullScreen.vue'
+import AppSearch from './components/appSearch/AppSearch.vue'
+import { computed, unref } from 'vue'
+import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { SettingButtonPositionEnum } from '@/constants'
+import SettingDrawer from './components/setting/index.vue'
 
 const {
   getHeaderTheme,
@@ -12,7 +17,24 @@ const {
   getShowBread,
   getShowFullScreen,
   getShowLocalePicker,
+  getShowSearch,
+  getShowHeader,
 } = useHeaderSetting()
+
+const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
+
+const getShowSetting = computed(() => {
+  if (!unref(getShowSettingButton)) {
+    return false
+  }
+  const settingButtonPosition = unref(getSettingButtonPosition)
+
+  if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
+    console.log(getShowHeader.value, '////////////')
+    return unref(getShowHeader)
+  }
+  return settingButtonPosition === SettingButtonPositionEnum.HEADER
+})
 </script>
 
 <template>
@@ -32,13 +54,15 @@ const {
               :theme="getHeaderTheme"
             />
           </div>
-          <div class="flex">
+          <div class="flex items-center">
+            <AppSearch v-if="getShowSearch" />
             <FullScreen v-if="getShowFullScreen" />
             <VbenLocalePicker
               v-if="getShowLocalePicker"
               :reload="true"
               :showText="false"
             />
+            <SettingDrawer v-if="getShowSetting" />
           </div>
         </div>
         <LayoutTabs />

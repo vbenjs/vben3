@@ -16,9 +16,9 @@ const props = defineProps({
 
 const selectedKeys = ref<string[]>([])
 
-const { locale, localeList } = context
+const { useLocale, localeList } = context
 
-const { changeLocale, getLocale } = locale
+const { changeLocale, getLocale } = useLocale()
 
 const getLocaleText = computed(() => {
   const key = selectedKeys.value[0]

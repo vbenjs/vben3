@@ -39,6 +39,7 @@
     "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
+    "@vueuse/core": "^8.9.4",
     "ant-design-vue": "3.2.5",
     "dayjs": "^1.11.4",
     "mockjs": "^1.1.0",

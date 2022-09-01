@@ -1,8 +1,8 @@
 <script lang="ts" setup name="VbenSelect">
 import { maps } from '../../index'
 import { Props } from './type'
-import { nextTick, onMounted, watch, ref, watchEffect } from 'vue'
-import { isFunction, isEqual } from '@vben/utils'
+import { onMounted, watch, ref, watchEffect } from 'vue'
+import { isFunction } from '@vben/utils'
 const Select = maps.get('Select')
 const props: Props = defineProps({
   api: {

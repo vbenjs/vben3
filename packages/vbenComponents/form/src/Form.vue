@@ -41,10 +41,12 @@ emit('register', { setProps })
       ><VbenInput
         v-if="schema.component === 'Input'"
         v-bind="schema.componentProps"
+        v-model:value="$attrs.model[schema.field]"
       ></VbenInput>
       <VbenSelect
         v-if="schema.component === 'Select'"
         v-bind="schema.componentProps"
+        v-model:value="$attrs.model[schema.field]"
       ></VbenSelect>
     </VbenFormItem>
   </Form>

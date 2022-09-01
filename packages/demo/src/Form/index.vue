@@ -30,10 +30,12 @@ const [register] = useForm({
 const changeSelectParams = () => {
   selectParams.value = { id: 2 }
 }
+const model = ref({})
 </script>
 <template>
   <div class="p-2">
+    {{ model }}
     <VbenButton @click="changeSelectParams">改变选择框参数</VbenButton>
-    <VbenForm @register="register" ref="Ref" />
+    <VbenForm @register="register" ref="Ref" v-model:model="model" />
   </div>
 </template>

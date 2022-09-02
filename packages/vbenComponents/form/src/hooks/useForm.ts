@@ -1,10 +1,11 @@
-import { ref, unref } from 'vue'
+import { nextTick, Ref, ref, unref } from 'vue'
 import { VbenFormProps } from '../type'
 import { error } from '../../../index'
 
 export interface formMethod {
   // reload: () => void
   setProps: (props: VbenFormProps) => void
+  getFieldValue: () => Ref
 }
 
 export function useForm(props: VbenFormProps) {
@@ -24,6 +25,9 @@ export function useForm(props: VbenFormProps) {
   const methods: formMethod = {
     // reload: () => getInstance().reload,
     setProps: () => getInstance().setProps,
+    getFieldValue: () => {
+      return unref(formRef)?.getFieldValue() as Ref
+    },
   }
   return [register, methods]
 }

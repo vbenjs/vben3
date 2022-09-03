@@ -55,6 +55,9 @@ import {
   NForm,
   NFormItem,
   NDropdown,
+  NBadge,
+  NListItem,
+  NList,
 } from 'naive-ui'
 
 import {
@@ -63,7 +66,6 @@ import {
   setNotice,
   setMessage,
 } from '@vben/vbencomponents'
-import { Card } from 'ant-design-vue'
 export async function registerComponents(app) {
   initVbenComponent(app, {
     Tag: NTag,
@@ -117,6 +119,9 @@ export async function registerComponents(app) {
     LayoutSider: NLayoutSider,
     LayoutContent: NLayoutContent,
     Dropdown: NDropdown,
+    Badge: NBadge,
+    ListItem: NListItem,
+    List: NList,
   })
   setMessage(useMessage)
   setNotice(useNotification)

@@ -10,6 +10,7 @@ import { computed, unref } from 'vue'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
 import { SettingButtonPositionEnum } from '@/constants'
 import SettingDrawer from './components/setting/index.vue'
+import Notify from './components/notify/index.vue'
 
 const {
   getHeaderTheme,
@@ -19,6 +20,7 @@ const {
   getShowLocalePicker,
   getShowSearch,
   getShowHeader,
+  getShowNotice,
 } = useHeaderSetting()
 
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
@@ -30,7 +32,6 @@ const getShowSetting = computed(() => {
   const settingButtonPosition = unref(getSettingButtonPosition)
 
   if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
-    console.log(getShowHeader.value, '////////////')
     return unref(getShowHeader)
   }
   return settingButtonPosition === SettingButtonPositionEnum.HEADER
@@ -56,6 +57,7 @@ const getShowSetting = computed(() => {
           </div>
           <div class="flex items-center">
             <AppSearch v-if="getShowSearch" />
+            <Notify v-if="getShowNotice" />
             <FullScreen v-if="getShowFullScreen" />
             <VbenLocalePicker
               v-if="getShowLocalePicker"

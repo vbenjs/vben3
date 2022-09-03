@@ -105,6 +105,8 @@ import {
 } from './layout'
 import { VbenIconify } from './iconify'
 import { VbenLocalePicker } from './localePicker'
+import { VbenBadge } from './badge'
+import { VbenList, VbenListItem } from './list'
 
 export { theme, locale } from './config'
 // 初始化组件
@@ -176,4 +178,7 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
     .use(VbenLayoutSider)
     .use(VbenIconify)
     .use(VbenLocalePicker)
+    .use(VbenBadge)
+    .use(VbenList)
+    .use(VbenListItem)
 }

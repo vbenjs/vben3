@@ -5,6 +5,22 @@ export interface VbenFormProps {
   title?: string
   // afterFetch?: Function
   schemas: VbenFormSchema[]
+  gridProps?: GridProps
+}
+export interface GridProps {
+  // 单行栅格数量
+  cols?: number
+  // 表单项 占用栅格数
+  span?: number
+  // 横向间距
+  xGap?: number
+  // 纵向间距
+  yGap?: number
+}
+export interface GridItemProps {
+  span?: number
+  offset?: number
+  suffix?: boolean
 }
 
 export interface VbenFormSchema {
@@ -18,6 +34,8 @@ export interface VbenFormSchema {
   label: string | VNode
   // Auxiliary text
   subLabel?: string
+  // 栅格属性
+  gridItemProps?: GridItemProps
   // Help text on the right side of the text
   // helpMessage?:
   //   | string
@@ -117,9 +135,9 @@ export type ComponentType =
   // | 'ApiCascader'
   | 'Cascader'
   | 'DatePicker'
-  | 'MonthPicker'
-  | 'RangePicker'
-  | 'WeekPicker'
+  // | 'MonthPicker'
+  // | 'RangePicker'
+  // | 'WeekPicker'
   | 'TimePicker'
   | 'Switch'
   | 'StrengthMeter'
@@ -129,3 +147,7 @@ export type ComponentType =
   | 'Slider'
   | 'Rate'
   | 'Divider'
+  | 'ColorPicker'
+  | 'DynamicTags'
+  | 'Transfer'
+  | 'Mention'

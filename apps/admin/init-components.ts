@@ -62,6 +62,13 @@ import naive, {
   NList,
   NAutoComplete,
   NCascader,
+  NDatePicker,
+  NTimePicker,
+  NRate,
+  NSlider,
+  NTransfer,
+  NMention,
+  NFormItemGi,
 } from 'naive-ui'
 
 import {
@@ -131,6 +138,13 @@ export async function registerComponents(app) {
     List: NList,
     AutoComplete: NAutoComplete,
     Cascader: NCascader,
+    DatePicker: NDatePicker,
+    TimePicker: NTimePicker,
+    Rate: NRate,
+    Slider: NSlider,
+    Transfer: NTransfer,
+    Mention: NMention,
+    FormItemGi: NFormItemGi,
   })
   setMessage(useMessage)
   setNotice(useNotification)

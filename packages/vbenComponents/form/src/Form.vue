@@ -1,7 +1,7 @@
 <script lang="ts" setup name="VbenForm">
 import { maps } from '../../index'
 import { computed, Ref, ref, unref, useAttrs, watch, watchEffect } from 'vue'
-import { VbenFormProps } from './type'
+import { GridItemProps, VbenFormProps } from './type'
 import { set, get, isEqual } from '@vben/utils'
 const emit = defineEmits(['register', 'update:model'])
 const innerProps = ref<Partial<VbenFormProps>>()
@@ -18,7 +18,10 @@ const getProps = computed(() => {
   }
 })
 const setProps = (prop: Partial<VbenFormProps>) => {
-  innerProps.value = { ...unref(innerProps), ...prop }
+  innerProps.value = {
+    ...prop,
+    ...unref(innerProps),
+  }
 }
 const fieldValue = ref({})
 watch(
@@ -57,6 +60,21 @@ function getFieldValue() {
   })
   return m
 }
+// 默认gridItem参数
+const getGridItemProps = (p) => {
+  return { span: getGridProps.value.span, ...p }
+}
+// 默认grid参数
+
+const getGridProps = computed(() => {
+  return {
+    cols: 24,
+    span: 8,
+    xGap: 12,
+    yGap: 0,
+    ...innerProps.value.gridProps,
+  }
+})
 
 emit('register', { setProps, getFieldValue })
 </script>
@@ -67,65 +85,38 @@ emit('register', { setProps, getFieldValue })
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
-      <VbenFormItem
-        :label="schema.label"
-        v-for="(schema, key) in innerProps.schemas"
-        :key="key"
-        :path="schema.field"
-        ><VbenInput
-          v-if="schema.component === 'Input'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenInput
-          type="number"
-          v-if="schema.component === 'InputPassword'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenInput
-          type="textarea"
-          v-if="schema.component === 'InputTextArea'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-
-        <VbenInputNumber
-          v-if="schema.component === 'InputNumber'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenSelect
-          v-if="schema.component === 'Select'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenTreeSelect
-          v-if="schema.component === 'TreeSelect'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenRadioGroup
-          v-if="schema.component === 'RadioGroup'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenCheckboxGroup
-          v-if="schema.component === 'CheckboxGroup'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenAutoComplete
-          v-if="schema.component === 'AutoComplete'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-        <VbenCascader
-          v-if="schema.component === 'Cascader'"
-          v-bind="schema.componentProps"
-          v-model:value="fieldValue[schema.field]"
-        />
-      </VbenFormItem>
+      <VbenGrid v-bind="getGridProps">
+        <VbenGridItem
+          v-bind="getGridItemProps(schema.gridItemProps)"
+          v-for="(schema, key) in innerProps.schemas"
+          :key="key"
+          :path="schema.field"
+        >
+          <VbenFormItem :label="schema.label" :path="schema.field">
+            <component
+              v-if="
+                schema.componentProps !== 'InputPassword' ||
+                schema.component !== 'InputTextArea'
+              "
+              :is="`Vben${schema.component}`"
+              v-bind="schema.componentProps"
+              v-model:value="fieldValue[schema.field]"
+            />
+            <VbenInput
+              type="password"
+              v-if="schema.component === 'InputPassword'"
+              v-bind="schema.componentProps"
+              v-model:value="fieldValue[schema.field]"
+            />
+            <VbenInput
+              type="textarea"
+              v-if="schema.component === 'InputTextArea'"
+              v-bind="schema.componentProps"
+              v-model:value="fieldValue[schema.field]"
+            />
+          </VbenFormItem>
+        </VbenGridItem>
+      </VbenGrid>
     </Form>
   </div>
 </template>

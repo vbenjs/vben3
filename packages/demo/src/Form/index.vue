@@ -11,6 +11,7 @@ import {
 const Ref = ref(null)
 const selectParams = ref({ id: 1 })
 const [register, { getFieldValue }] = useForm({
+  // xGap: 30,
   schemas: [
     {
       field: 'name',
@@ -21,6 +22,9 @@ const [register, { getFieldValue }] = useForm({
       },
     },
     {
+      gridItemProps: {
+        span: 20,
+      },
       field: 'user.name',
       label: '表单嵌套',
       component: 'Input',
@@ -117,6 +121,72 @@ const [register, { getFieldValue }] = useForm({
         // options: ['11'],
       },
     },
+    {
+      field: 'datePicker',
+      label: 'DatePicker',
+      component: 'DatePicker',
+      componentProps: {},
+    },
+    {
+      field: 'timePicker',
+      label: 'TimePicker',
+      component: 'TimePicker',
+      componentProps: {},
+    },
+    {
+      field: 'divider',
+      label: 'Divider',
+      component: 'Divider',
+      componentProps: {},
+    },
+    {
+      field: 'switch',
+      label: 'Switch',
+      component: 'Switch',
+      componentProps: {},
+    },
+    {
+      field: 'rate',
+      label: 'Rate',
+      component: 'Rate',
+      componentProps: {},
+    },
+    {
+      field: 'slider',
+      label: 'Slider',
+      component: 'Slider',
+      componentProps: {},
+    },
+    {
+      field: 'colorPicker',
+      label: 'ColorPicker',
+      component: 'ColorPicker',
+      componentProps: {},
+    },
+    {
+      field: 'dynamicTags',
+      label: 'DynamicTags',
+      component: 'DynamicTags',
+      componentProps: {},
+    },
+    {
+      field: 'transfer',
+      label: 'Transfer',
+      component: 'Transfer',
+      componentProps: {},
+    },
+    {
+      field: 'upload',
+      label: 'Upload',
+      component: 'Upload',
+      componentProps: {},
+    },
+    {
+      field: 'mention',
+      label: 'Mention',
+      component: 'Mention',
+      componentProps: {},
+    },
   ],
   title: '表单演示',
 })
@@ -127,7 +197,7 @@ const model = ref({
   haha: '11',
   user: {
     age: '22',
-    name: '44',
+    name: '',
   },
 })
 const value = ref()

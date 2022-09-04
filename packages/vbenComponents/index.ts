@@ -27,7 +27,7 @@ export const maps = new Map<String, Component>()
 
 //Notification 相关
 let registerNotice = () => {}
-export let notice = undefined
+export declare let notice
 export const setNotice = (func = () => {}) => {
   registerNotice = func
   console.log('useNotice已注册')
@@ -42,7 +42,7 @@ export const useNotice = () => {
 
 //Message 相关
 let registerMsg = () => {}
-export let msg = undefined
+export declare let msg
 export const useMsg = () => {
   msg = registerMsg()
   if (!msg) {
@@ -109,6 +109,10 @@ import { VbenTreeSelect } from './treeSelect'
 import { VbenBadge } from './badge'
 import { VbenList, VbenListItem } from './list'
 import { VbenAutoComplete } from './autoComplete'
+import { VbenRate } from './rate'
+import { VbenSlider } from './slider'
+import { VbenTransfer } from './transfer'
+import { VbenMention } from './mention'
 
 export { theme, locale } from './config'
 // 初始化组件
@@ -185,4 +189,8 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
     .use(VbenList)
     .use(VbenListItem)
     .use(VbenAutoComplete)
+    .use(VbenRate)
+    .use(VbenSlider)
+    .use(VbenTransfer)
+    .use(VbenMention)
 }

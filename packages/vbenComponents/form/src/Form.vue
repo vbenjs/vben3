@@ -62,7 +62,7 @@ emit('register', { setProps, getFieldValue })
 </script>
 <template>
   <div>
-    {{ fieldValue }}
+    <!--    {{ fieldValue }}-->
     <Form ref="domRef" v-bind="$attrs">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
@@ -76,12 +76,45 @@ emit('register', { setProps, getFieldValue })
           v-if="schema.component === 'Input'"
           v-bind="schema.componentProps"
           v-model:value="fieldValue[schema.field]"
-        ></VbenInput>
+        />
+        <VbenInput
+          type="number"
+          v-if="schema.component === 'InputPassword'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
+        <VbenInput
+          type="textarea"
+          v-if="schema.component === 'InputTextArea'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
+
+        <VbenInputNumber
+          v-if="schema.component === 'InputNumber'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
         <VbenSelect
           v-if="schema.component === 'Select'"
           v-bind="schema.componentProps"
           v-model:value="fieldValue[schema.field]"
-        ></VbenSelect>
+        />
+        <VbenTreeSelect
+          v-if="schema.component === 'TreeSelect'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
+        <VbenRadioGroup
+          v-if="schema.component === 'RadioGroup'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
+        <VbenCheckboxGroup
+          v-if="schema.component === 'CheckboxGroup'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
       </VbenFormItem>
     </Form>
   </div>

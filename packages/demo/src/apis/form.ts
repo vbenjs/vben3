@@ -6,3 +6,16 @@ export function getSelectData(params?) {
     { joinParamsToUrl: true },
   )
 }
+
+export function getTreeSelectData(params?) {
+  return request.post(
+    { url: '/demo/form/treeSelect', params },
+    { joinParamsToUrl: true },
+  )
+}
+export function getRadioData(params?) {
+  return request.post(
+    { url: '/demo/form/radio', params },
+    { joinParamsToUrl: true },
+  )
+}

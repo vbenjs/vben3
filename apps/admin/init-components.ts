@@ -55,6 +55,8 @@ import {
   NForm,
   NFormItem,
   NDropdown,
+  NInputNumber,
+  NTreeSelect,
   NBadge,
   NListItem,
   NList,
@@ -66,6 +68,7 @@ import {
   setNotice,
   setMessage,
 } from '@vben/vbencomponents'
+import { Card } from 'ant-design-vue'
 export async function registerComponents(app) {
   initVbenComponent(app, {
     Tag: NTag,
@@ -81,6 +84,7 @@ export async function registerComponents(app) {
     Statistic: NStatistic,
     Select: NSelect,
     Input: NInput,
+    InputNumber: NInputNumber,
     Form: NForm,
     FormItem: NFormItem,
     Thing: NThing,
@@ -119,6 +123,7 @@ export async function registerComponents(app) {
     LayoutSider: NLayoutSider,
     LayoutContent: NLayoutContent,
     Dropdown: NDropdown,
+    TreeSelect: NTreeSelect,
     Badge: NBadge,
     ListItem: NListItem,
     List: NList,

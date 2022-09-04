@@ -6,7 +6,10 @@ const projectName = 'Vben3'
 export function withInstall<T>(component: T, alias?: string) {
   const comp = component as any
   comp.install = (app: App) => {
-    app.component(`Vben${comp.name}` || comp.displayName, component)
+    app.component(
+      `Vben${comp.__name}` || `Vben${comp.name}` || comp.displayName,
+      component,
+    )
     if (alias) {
       app.config.globalProperties[alias] = component
     }

@@ -2,8 +2,9 @@
 import { maps } from '../../index'
 import Checkbox from './Checkbox.vue'
 import { fetchProps, fetch } from '../../fetch'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed, ref, useAttrs, watch, watchEffect } from 'vue'
 import { VbenButton, VbenButtonGroup } from '../../button'
+
 const CheckboxGroup = maps.get('CheckboxGroup')
 const props = defineProps({
   labelField: {
@@ -22,11 +23,27 @@ const props = defineProps({
     type: String,
     default: 'default',
   },
-  ...fetchProps,
+  api: {
+    type: Function,
+    default: null,
+  },
+  params: {
+    type: Object,
+    default: () => ({}),
+  },
+  immediate: {
+    type: Boolean,
+    default: true,
+  },
+  options: {
+    type: Array,
+    default: undefined,
+  },
 })
 const options = ref([])
 const value = ref([])
 const emit = defineEmits(['update:value'])
+
 const option = computed(() => {
   const { options } = props
 
@@ -41,7 +58,7 @@ const option = computed(() => {
     : []
 })
 const select = (v) => {
-  const i = value.value.findIndex((a) => a == v)
+  const i = value.value?.findIndex((a) => a == v)
   if (i === -1) {
     value.value.push(v)
   } else {
@@ -66,24 +83,26 @@ watch(
   },
   { deep: true },
 )
+const update = (v) => {
+  value.value = v
+  emit('update:value', v)
+}
 </script>
 <template>
-  <div>
-    <CheckboxGroup v-bind="$attrs" v-model:value="value">
-      <template v-for="item in options" :key="`${item.value}`">
-        <VbenButtonGroup v-if="type === 'button'"
-          ><VbenButton
-            :value="item.value"
-            @click="select(item.value)"
-            :type="getType(item.value)"
-            :disabled="item.disabled"
-            >{{ item.label }}</VbenButton
-          ></VbenButtonGroup
-        >
-        <Checkbox v-bind="item" v-else />
-      </template>
-    </CheckboxGroup>
-  </div>
+  <CheckboxGroup v-bind="$attrs" @update:value="update">
+    <template v-for="item in options" :key="`${item.value}`">
+      <VbenButtonGroup v-if="type === 'button'"
+        ><VbenButton
+          :value="item.value"
+          @click="select(item.value)"
+          :type="getType(item.value)"
+          :disabled="item.disabled"
+          >{{ item.label }}</VbenButton
+        ></VbenButtonGroup
+      >
+      <Checkbox v-bind="item" v-else />
+    </template>
+  </CheckboxGroup>
 </template>
 
 <style scoped></style>

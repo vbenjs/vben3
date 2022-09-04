@@ -10,15 +10,15 @@ const { getLocale } = useLocale()
 // Listening to page changes and dynamically changing site titles
 const { title } = getGlobalConfig(import.meta.env)
 useWebTitle(title, (route) => route.name !== REDIRECT_NAME)
-// import { darkTheme } from 'naive-ui'
+import { zhCN, dateZhCN, enUS, dateEnUS } from 'naive-ui'
 // Dynamic switch component library language
 const dateLocale = computedAsync(async () => {
   const message = {
     zh_CN: () => {
-      return import('naive-ui/lib/locales/date/zhCN')
+      return dateZhCN
     },
     en_US: () => {
-      return import('naive-ui/lib/locales/date/enUS')
+      return dateEnUS
     },
   }
   const mod = await message[getLocale.value]()
@@ -30,11 +30,11 @@ const locale = computedAsync(async () => {
   const message = {
     zh_CN: () => {
       import('dayjs/locale/zh-cn')
-      return import('naive-ui/lib/locales/common/zhCN')
+      return zhCN
     },
     en_US: () => {
       import('dayjs/locale/en')
-      return import('naive-ui/lib/locales/common/enUS')
+      return enUS
     },
   }
   const mod = await message[getLocale.value]()

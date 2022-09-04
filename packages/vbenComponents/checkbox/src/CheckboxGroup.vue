@@ -1,15 +1,11 @@
 <script lang="ts" setup name="VbenCheckboxGroup">
 import { maps } from '../../index'
 import Checkbox from './Checkbox.vue'
-import { computed, onMounted, ref, watch, watchEffect } from 'vue'
+import { fetchProps, fetch } from '../../fetch'
+import { computed, ref, watch, watchEffect } from 'vue'
 import { VbenButton, VbenButtonGroup } from '../../button'
-import { isFunction } from '@vben/utils'
 const CheckboxGroup = maps.get('CheckboxGroup')
 const props = defineProps({
-  options: {
-    type: Array,
-    default: [],
-  },
   labelField: {
     type: String,
     default: 'label',
@@ -26,19 +22,9 @@ const props = defineProps({
     type: String,
     default: 'default',
   },
-  api: {
-    type: Function,
-    default: null,
-  },
-  params: {
-    type: Object,
-    default: () => ({}),
-  },
-  immediate: {
-    type: Boolean,
-    default: true,
-  },
+  ...fetchProps,
 })
+const options = ref([])
 const value = ref([])
 const emit = defineEmits(['update:value'])
 const option = computed(() => {
@@ -70,24 +56,16 @@ const getType = (v) => {
   return value.value.find((a) => a == v) ? 'primary' : ''
 }
 const isFirstLoad = ref(true)
-onMounted(() => {})
 watchEffect(() => {
-  props.immediate && fetch()
+  props.immediate && fetch(props, options)
 })
 watch(
   () => props.params,
   () => {
-    !isFirstLoad.value && fetch()
+    !isFirstLoad.value && fetch(props, options)
   },
   { deep: true },
 )
-async function fetch() {
-  const { api, params } = props
-  if (!api || !isFunction(api)) return
-  const res = await api(params)
-  options.value = res.options
-}
-const options = ref(props.options || [])
 </script>
 <template>
   <div>

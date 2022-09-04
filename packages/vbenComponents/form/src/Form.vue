@@ -115,6 +115,16 @@ emit('register', { setProps, getFieldValue })
           v-bind="schema.componentProps"
           v-model:value="fieldValue[schema.field]"
         />
+        <VbenAutoComplete
+          v-if="schema.component === 'AutoComplete'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
+        <VbenCascader
+          v-if="schema.component === 'Cascader'"
+          v-bind="schema.componentProps"
+          v-model:value="fieldValue[schema.field]"
+        />
       </VbenFormItem>
     </Form>
   </div>

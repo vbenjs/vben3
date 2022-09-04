@@ -1,7 +1,13 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useForm } from '@vben/vbencomponents/form'
-import { getRadioData, getSelectData, getTreeSelectData } from '../apis/form'
+import {
+  getCascaderData,
+  getRadioData,
+  getSelectData,
+  getTreeSelectData,
+} from '../apis/form'
+
 const Ref = ref(null)
 const selectParams = ref({ id: 1 })
 const [register, { getFieldValue }] = useForm({
@@ -82,12 +88,33 @@ const [register, { getFieldValue }] = useForm({
       component: 'CheckboxGroup',
       componentProps: {
         type: 'button',
-        options: [
-          { label: '选项1', checked: true, value: 1 },
-          { label: '选项2', checked: false, value: 2 },
-        ],
+        // options: [
+        //   { label: '选项1', checked: true, value: 1 },
+        //   { label: '选项2', checked: false, value: 2 },
+        // ],
         api: getRadioData,
         params: selectParams,
+      },
+    },
+    {
+      field: 'autoComplete',
+      label: 'AutoComplete',
+      component: 'AutoComplete',
+      componentProps: {
+        options: ['@qq.com', '@gmail.com', '@163.com'],
+        split: '@',
+        // api: getRadioData,
+        // params: selectParams,
+      },
+    },
+    {
+      field: 'cascader',
+      label: 'Cascader',
+      component: 'Cascader',
+      componentProps: {
+        api: getCascaderData,
+        params: selectParams,
+        // options: ['11'],
       },
     },
   ],
@@ -103,6 +130,7 @@ const model = ref({
     name: '44',
   },
 })
+const value = ref()
 
 function getValue() {
   console.log(getFieldValue())
@@ -111,6 +139,7 @@ function getValue() {
 <template>
   <div class="p-2">
     表单数据：{{ model }}
+
     <VbenButton @click="changeSelectParams">改变选择框参数</VbenButton>
     <VbenButton @click="getValue">获取</VbenButton>
     <VbenForm @register="register" ref="Ref" v-model:model="model" />

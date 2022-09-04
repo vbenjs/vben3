@@ -108,6 +108,7 @@ import { VbenLocalePicker } from './localePicker'
 import { VbenTreeSelect } from './treeSelect'
 import { VbenBadge } from './badge'
 import { VbenList, VbenListItem } from './list'
+import { VbenAutoComplete } from './autoComplete'
 
 export { theme, locale } from './config'
 // 初始化组件
@@ -183,4 +184,5 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
     .use(VbenBadge)
     .use(VbenList)
     .use(VbenListItem)
+    .use(VbenAutoComplete)
 }

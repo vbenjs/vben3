@@ -1,5 +1,5 @@
 // 按需导入组件
-import {
+import naive, {
   NTag,
   NCard,
   NDivider,
@@ -60,6 +60,8 @@ import {
   NBadge,
   NListItem,
   NList,
+  NAutoComplete,
+  NCascader,
 } from 'naive-ui'
 
 import {
@@ -127,9 +129,12 @@ export async function registerComponents(app) {
     Badge: NBadge,
     ListItem: NListItem,
     List: NList,
+    AutoComplete: NAutoComplete,
+    Cascader: NCascader,
   })
   setMessage(useMessage)
   setNotice(useNotification)
   // @ts-ignore
+  // app.use(naive)
   locale.locale = zhCN
 }

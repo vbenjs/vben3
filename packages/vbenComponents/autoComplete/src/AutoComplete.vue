@@ -1,12 +1,15 @@
-<script lang="ts" setup name="VbenCascader">
+<script lang="ts" setup name="VbenAutoComplete">
 import { maps } from '../../index'
 import { fetchProps, fetch } from '../../fetch'
-import { ref, watch, watchEffect } from 'vue'
-const Cascader = maps.get('Cascader')
+import { computed, ref, watch, watchEffect } from 'vue'
+const AutoComplete = maps.get('AutoComplete')
 const props = defineProps({
+  split: {
+    type: String,
+    default: '',
+  },
   ...fetchProps,
 })
-
 const options = ref([])
 const isFirstLoad = ref(true)
 watchEffect(() => {
@@ -19,12 +22,22 @@ watch(
   },
   { deep: true },
 )
+
+const option = computed(() => {
+  return options.value.map((suffix) => {
+    const prefix = props.value.split(props.split)[0]
+    return {
+      label: prefix + suffix,
+      value: prefix + suffix,
+    }
+  })
+})
 </script>
 <template>
-  <Cascader v-bind="$attrs" :options="options">
+  <AutoComplete v-bind="$attrs" :options="option">
     <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
       <slot :name="item" v-bind="data || {}"></slot> </template
-  ></Cascader>
+  ></AutoComplete>
 </template>
 
 <style scoped></style>

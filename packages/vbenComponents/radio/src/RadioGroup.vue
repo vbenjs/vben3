@@ -1,47 +1,23 @@
 <script lang="ts" setup name="VbenRadioGroup">
 import { maps } from '../../index'
-import { Props } from '../../treeSelect/src/type'
-import { computed, onMounted, ref, watch, watchEffect } from 'vue'
-import { isFunction } from '@vben/utils'
+import { fetchProps, fetch } from '../../fetch'
+import { ref, watch, watchEffect } from 'vue'
 const RadioGroup = maps.get('RadioGroup')
-const props: Props = defineProps({
-  api: {
-    type: Function,
-    default: null,
-  },
-  params: {
-    type: Object,
-    default: () => ({}),
-  },
-  options: {
-    type: Array,
-    default: [],
-  },
-  immediate: {
-    type: Boolean,
-    default: true,
-  },
+const props = defineProps({
+  ...fetchProps,
 })
-
+const options = ref([])
 const isFirstLoad = ref(true)
-onMounted(() => {})
 watchEffect(() => {
-  props.immediate && fetch()
+  props.immediate && fetch(props, options)
 })
 watch(
   () => props.params,
   () => {
-    !isFirstLoad.value && fetch()
+    !isFirstLoad.value && fetch(props, options)
   },
   { deep: true },
 )
-async function fetch() {
-  const { api, params } = props
-  if (!api || !isFunction(api)) return
-  const res = await api(params)
-  options.value = res.options
-}
-const options = ref(props.options || [])
 </script>
 <template>
   <!--  {{ $attrs }}-->

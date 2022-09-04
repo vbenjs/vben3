@@ -19,3 +19,9 @@ export function getRadioData(params?) {
     { joinParamsToUrl: true },
   )
 }
+export function getCascaderData(params?) {
+  return request.post(
+    { url: '/demo/form/cascader', params },
+    { joinParamsToUrl: true },
+  )
+}

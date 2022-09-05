@@ -10,13 +10,23 @@ import {
 
 const Ref = ref(null)
 const selectParams = ref({ id: 1 })
-const [register, { getFieldValue }] = useForm({
+const [register, { getFieldValue, validate }] = useForm({
   // xGap: 30,
+  rules: {
+    number: [
+      {
+        required: true,
+        trigger: ['input', 'blur'],
+      },
+    ],
+  },
   schemas: [
     {
       field: 'name',
       label: 'Input',
       component: 'Input',
+      defaultValue: '111',
+      required: true,
       componentProps: {
         placeholder: '基本的 Input',
       },
@@ -45,7 +55,11 @@ const [register, { getFieldValue }] = useForm({
       label: 'InputPassword',
       component: 'InputPassword',
       componentProps: {
-        placeholder: '基本的 Input',
+        placeholder: '基本的 InputPassword',
+      },
+      rule: {
+        required: true,
+        trigger: ['input', 'blur'],
       },
     },
     {
@@ -70,6 +84,7 @@ const [register, { getFieldValue }] = useForm({
       field: 'treeSelect',
       label: 'TreeSelect',
       component: 'TreeSelect',
+
       componentProps: {
         placeholder: '基本的 TreeSelect',
         api: getTreeSelectData,
@@ -203,6 +218,7 @@ const model = ref({
 const value = ref()
 
 function getValue() {
+  validate()
   console.log(getFieldValue())
 }
 </script>

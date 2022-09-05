@@ -39,6 +39,10 @@ const props = defineProps({
     type: Array,
     default: undefined,
   },
+  value: {
+    type: Array,
+    default: undefined,
+  },
 })
 const options = ref([])
 const value = ref([])
@@ -64,7 +68,8 @@ const select = (v) => {
   } else {
     value.value.splice(i, 1)
   }
-  emit('update:value', value.value)
+
+  emit('update:value', value)
 }
 const getType = (v) => {
   if (value.value.length == 0) {

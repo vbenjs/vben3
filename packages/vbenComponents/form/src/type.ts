@@ -6,6 +6,8 @@ export interface VbenFormProps {
   // afterFetch?: Function
   schemas: VbenFormSchema[]
   gridProps?: GridProps
+  // 表单规则
+  rules?: object
 }
 export interface GridProps {
   // 单行栅格数量
@@ -36,6 +38,8 @@ export interface VbenFormSchema {
   subLabel?: string
   // 栅格属性
   gridItemProps?: GridItemProps
+  // 表单项规则
+  rule?: object
   // Help text on the right side of the text
   // helpMessage?:
   //   | string
@@ -59,6 +63,8 @@ export interface VbenFormSchema {
   //   }) => Recordable)
   // | object
   // Required
+
+  required?: boolean
   // required?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean)
   //
   // suffix?: string | number | ((values: RenderCallbackParams) => string | number)
@@ -74,8 +80,8 @@ export interface VbenFormSchema {
   // // col configuration outside formModelItem
   // colProps?: Partial<ColEx>
   //
-  // // 默认值
-  // defaultValue?: any
+  // 默认值
+  defaultValue?: any
   // isAdvanced?: boolean
   //
   // // Matching details components

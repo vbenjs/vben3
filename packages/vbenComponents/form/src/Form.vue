@@ -1,23 +1,23 @@
 <script lang="ts" setup name="VbenForm">
 import { maps } from '../../index'
-import { computed, Ref, ref, unref, useAttrs, watch, watchEffect } from 'vue'
+import { computed, onMounted, ref, unref, useAttrs, watch } from 'vue'
 import { GridItemProps, VbenFormProps } from './type'
-import { set, get, isEqual } from '@vben/utils'
+import { set } from '@vben/utils'
 const emit = defineEmits(['register', 'update:model'])
 const innerProps = ref<Partial<VbenFormProps>>()
 const Form = maps.get('Form')
+const formRef = ref(null)
 const props = defineProps({
   schemas: [],
 })
 const attrs = useAttrs()
-const getProps = computed(() => {
-  const options = innerProps.value || props
 
-  return {
-    ...options,
-  }
-})
 const setProps = (prop: Partial<VbenFormProps>) => {
+  prop.schemas.forEach((v) => {
+    if (v.defaultValue) {
+      fieldValue.value[v.field] = v.defaultValue
+    }
+  })
   innerProps.value = {
     ...prop,
     ...unref(innerProps),
@@ -65,34 +65,45 @@ const getGridItemProps = (p) => {
   return { span: getGridProps.value.span, ...p }
 }
 // 默认grid参数
-
 const getGridProps = computed(() => {
   return {
     cols: 24,
     span: 8,
     xGap: 12,
     yGap: 0,
-    ...innerProps.value.gridProps,
+    ...innerProps.value?.gridProps,
   }
 })
 
-emit('register', { setProps, getFieldValue })
+onMounted(() => {
+  emit('register', {
+    setProps,
+    getFieldValue,
+    validate: formRef.value.validate,
+    restoreValidation: formRef.value.validate,
+  })
+})
 </script>
 <template>
   <div>
     <!--    {{ fieldValue }}-->
-    <Form ref="domRef" v-bind="$attrs">
+    <Form ref="formRef" v-bind="$attrs" :rules="innerProps?.rules">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
       <VbenGrid v-bind="getGridProps">
         <VbenGridItem
           v-bind="getGridItemProps(schema.gridItemProps)"
-          v-for="(schema, key) in innerProps.schemas"
+          v-for="(schema, key) in innerProps?.schemas"
           :key="key"
           :path="schema.field"
         >
-          <VbenFormItem :label="schema.label" :path="schema.field">
+          <VbenFormItem
+            :label="schema.label"
+            :path="schema.field"
+            :showRequireMark="schema.required"
+            :rule="schema.rule"
+          >
             <component
               v-if="
                 schema.componentProps !== 'InputPassword' ||

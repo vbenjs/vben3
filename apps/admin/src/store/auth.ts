@@ -8,7 +8,7 @@ import { useAppStoreWithOut } from './config'
 import { useUserStore } from './user'
 import { getPermCode } from '@/apis/auth'
 import { toRaw } from 'vue'
-import { projectSetting } from '@/settng'
+import { projectSetting } from '@/setting'
 import { PermissionModeEnum } from '@/constants'
 import {
   flatMultiLevelRoutes,

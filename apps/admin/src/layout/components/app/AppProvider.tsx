@@ -1,5 +1,5 @@
 import { createBreakpointListen } from '@/hooks/event/use-breakpoint'
-import { namespace } from '@/settng'
+import { namespace } from '@/setting'
 import { defineComponent, toRefs, ref, unref } from 'vue'
 import { createAppProviderContext } from '@/hooks/web/useAppContext'
 import { useAppStoreWithOut } from '@/store/config'

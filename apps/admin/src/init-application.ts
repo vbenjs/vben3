@@ -4,7 +4,7 @@ import { useUserStoreWithout } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
 import { deepMerge, getGlobalConfig } from '@vben/utils'
 import { useAppStoreWithOut } from '@/store/config'
-import { projectSetting } from './settng'
+import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { localeList } from '@vben/locale/src/config'
 

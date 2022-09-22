@@ -9,7 +9,7 @@ import {
 import { defineStore } from 'pinia'
 import { deepMerge } from '@vben/utils'
 import { ThemeEnum } from '@/constants'
-import { darkMode } from '@/settng'
+import { darkMode } from '@/setting'
 
 export interface ConfigStoreState {
   darkMode?: ThemeEnum

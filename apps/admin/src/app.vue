@@ -45,12 +45,12 @@ const locale = computedAsync(async () => {
 
 <template>
   <VbenConfig :theme="{}" :locale="locale" :date-locale="dateLocale">
-    <AppProvider>
-      <VbenNotificationProvider>
-        <VbenMessageProvider>
+    <VbenNotificationProvider>
+      <VbenMessageProvider>
+        <AppProvider>
           <router-view />
-        </VbenMessageProvider>
-      </VbenNotificationProvider>
-    </AppProvider>
+        </AppProvider>
+      </VbenMessageProvider>
+    </VbenNotificationProvider>
   </VbenConfig>
 </template>

@@ -4,7 +4,7 @@ import { defineComponent, toRefs, ref, unref } from 'vue'
 import { createAppProviderContext } from '@/hooks/web/useAppContext'
 import { useAppStoreWithOut } from '@/store/config'
 import { MenuModeEnum, MenuTypeEnum } from '@/constants'
-
+import { useMsg, useNotice } from '@vben/vbencomponents'
 const props = {
   /**
    * class style prefix
@@ -21,7 +21,9 @@ export default defineComponent({
     const isSetState = ref(false)
 
     const appStore = useAppStoreWithOut()
-
+    //注册msg以及notice，方便全局使用
+    useMsg()
+    useNotice()
     // Monitor screen breakpoint information changes
     createBreakpointListen(({ screenMap, sizeEnum, width }) => {
       const lgWidth = screenMap.get(sizeEnum.LG)

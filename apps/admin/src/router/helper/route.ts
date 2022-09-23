@@ -20,7 +20,8 @@ let dynamicViewsModules: Record<string, () => Promise<Recordable<any>>>
 // Dynamic introduction
 function asyncImportRoute(routes: RouteRecordItem[] | undefined) {
   dynamicViewsModules =
-    dynamicViewsModules || import.meta.glob('../../views/**/*.{vue,tsx}')
+    dynamicViewsModules || import.meta.glob('../../pages/**/*.{vue,tsx}')
+
   if (!routes) return
   routes.forEach((item: any) => {
     if (!item.component && item.meta?.frameSrc) {
@@ -48,7 +49,7 @@ function dynamicImport(
 ) {
   const keys = Object.keys(dynamicViewsModules)
   const matchKeys = keys.filter((key) => {
-    const k = key.replace('../../views', '')
+    const k = key.replace('../../pages', '')
     const startFlag = component.startsWith('/')
     const endFlag = component.endsWith('.vue') || component.endsWith('.tsx')
     const startIndex = startFlag ? 0 : 1
@@ -83,6 +84,7 @@ export function transformObjToRoute<T = RouteRecordItem>(
     const _route: any = route
     const component = _route.component as string
     if (component) {
+      console.log(component)
       if (component.toUpperCase() === 'LAYOUT') {
         route.component = LayoutMap.get(component.toUpperCase())
       } else {

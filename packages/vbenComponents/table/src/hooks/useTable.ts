@@ -22,8 +22,8 @@ export function useTable(props: VbenTableProps) {
     return table as tableMethod
   }
   const methods: tableMethod = {
-    reload: () => getInstance().reload,
-    setProps: () => getInstance().setProps,
+    reload: () => getInstance().reload(),
+    setProps: (props) => getInstance().setProps(props),
   }
   return [register, methods]
 }

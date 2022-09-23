@@ -2,7 +2,7 @@
 import 'xe-utils'
 import 'vxe-table/lib/style.css'
 import type { VbenTableProps } from './type'
-import { computed, PropType, ref, unref, useSlots, watch } from 'vue'
+import { computed, PropType, ref, unref, useAttrs, useSlots, watch } from 'vue'
 import { isBoolean, isFunction } from '@vben/utils'
 import { VxeTableInstance } from 'vxe-table'
 import { theme, ThemeEnum } from '../../config/src/data'
@@ -20,6 +20,7 @@ watch(
     }
   },
 )
+const attrs = useAttrs()
 const emit = defineEmits(['register'])
 const titleClass = computed(() => {
   return {
@@ -45,6 +46,7 @@ const getProps = computed(() => {
   // console.log(options);
   return {
     ...options,
+    ...attrs,
   }
 })
 const xGrid = ref(null) as VxeTableInstance
@@ -98,6 +100,7 @@ const getPageConfig = (options: VbenTableProps) => {
     options.pagerConfig = pagination
   }
 }
+
 const setProps = (prop: Partial<VbenTableProps>) => {
   innerProps.value = { ...unref(innerProps), ...prop }
 }

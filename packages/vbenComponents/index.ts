@@ -83,7 +83,15 @@ import { VbenImage } from './image'
 import { VbenMessageProvider } from './message'
 import { VbenPagination } from './pagination'
 import { VbenRadio, VbenRadioButton, VbenRadioGroup } from './radio'
-import { VbenText } from './typography'
+import {
+  VbenH1,
+  VbenH2,
+  VbenH3,
+  VbenH4,
+  VbenH5,
+  VbenH6,
+  VbenText,
+} from './typography'
 import { VbenConfig } from './config'
 import { VbenColorPicker } from './colorPicker'
 import { VbenDesc, VbenDescItem } from './descriptions'
@@ -198,4 +206,10 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
     .use(VbenTransfer)
     .use(VbenMention)
     .use(VbenTree)
+    .use(VbenH1)
+    .use(VbenH2)
+    .use(VbenH3)
+    .use(VbenH4)
+    .use(VbenH5)
+    .use(VbenH6)
 }

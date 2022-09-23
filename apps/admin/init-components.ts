@@ -70,6 +70,12 @@ import naive, {
   NMention,
   NFormItemGi,
   NTree,
+  NH1,
+  NH2,
+  NH3,
+  NH4,
+  NH5,
+  NH6,
 } from 'naive-ui'
 
 import {
@@ -146,6 +152,12 @@ export async function registerComponents(app) {
     Mention: NMention,
     FormItemGi: NFormItemGi,
     Tree: NTree,
+    H1: NH1,
+    H2: NH2,
+    H3: NH3,
+    H4: NH4,
+    H5: NH5,
+    H6: NH6,
   })
   setMessage(useMessage)
   setNotice(useNotification)

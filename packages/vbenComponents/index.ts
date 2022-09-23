@@ -2,13 +2,15 @@ import type { Component, App } from 'vue'
 export { initComp } from './bridge'
 import VXETable from 'vxe-table'
 const projectName = 'Vben3'
+//VC组件map
+export const maps = new Map<String, Component>()
 
 export function withInstall<T>(component: T, alias?: string) {
   const comp = component as any
   comp.install = (app: App) => {
     app.component(
       `Vben${comp.__name}` || `Vben${comp.name}` || comp.displayName,
-      component,
+      comp,
     )
     if (alias) {
       app.config.globalProperties[alias] = component
@@ -25,12 +27,9 @@ export function error(message: string) {
   throw new Error(`[${projectName} error]:${message}`)
 }
 
-//VC组件map
-export const maps = new Map<String, Component>()
-
 //Notification 相关
 let registerNotice = () => {}
-export declare let notice
+export let notice
 export const setNotice = (func = () => {}) => {
   registerNotice = func
   console.log('useNotice已注册')
@@ -45,7 +44,7 @@ export const useNotice = () => {
 
 //Message 相关
 let registerMsg = () => {}
-export declare let msg
+export let msg
 export const useMsg = () => {
   msg = registerMsg()
   if (!msg) {

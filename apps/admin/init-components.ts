@@ -69,6 +69,7 @@ import naive, {
   NTransfer,
   NMention,
   NFormItemGi,
+  NTree,
 } from 'naive-ui'
 
 import {
@@ -82,7 +83,6 @@ export async function registerComponents(app) {
   initVbenComponent(app, {
     Tag: NTag,
     Card: NCard,
-    // Card: Card,
     Menu: NMenu,
     Divider: NDivider,
     Space: NSpace,
@@ -145,6 +145,7 @@ export async function registerComponents(app) {
     Transfer: NTransfer,
     Mention: NMention,
     FormItemGi: NFormItemGi,
+    Tree: NTree,
   })
   setMessage(useMessage)
   setNotice(useNotification)

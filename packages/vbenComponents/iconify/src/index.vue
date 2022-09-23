@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" name="VbenIconify">
 import type { PropType, CSSProperties } from 'vue'
 import { unref, computed, useAttrs, ref, nextTick, watch, onMounted } from 'vue'
 import { createNamespace, isString } from '@vben/utils'

@@ -115,6 +115,7 @@ import { VbenRate } from './rate'
 import { VbenSlider } from './slider'
 import { VbenTransfer } from './transfer'
 import { VbenMention } from './mention'
+import { VbenTree } from './tree'
 
 export { theme, locale } from './config'
 // 初始化组件
@@ -123,6 +124,7 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
   Object.keys(comp).forEach((k) => {
     maps.set(k, comp[k])
   })
+
   app.use(VXETable)
   if (!global) return
   app
@@ -195,4 +197,5 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
     .use(VbenSlider)
     .use(VbenTransfer)
     .use(VbenMention)
+    .use(VbenTree)
 }

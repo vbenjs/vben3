@@ -68,7 +68,7 @@ import { VbenButton, VbenButtonGroup } from './button'
 import { VbenAvatar } from './avatar'
 import { VbenStatistic } from './statistic'
 import { VbenSelect } from './select'
-import { VbenInput, VbenInputGroup } from './input'
+import { VbenInput, VbenInputGroup, VbenInputGroupLabel } from './input'
 import { VbenThing } from './thing'
 import { VbenPopconfirm } from './popconfirm'
 import { VbenIcon } from './icon'
@@ -148,6 +148,7 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
     .use(VbenStatistic)
     .use(VbenSelect)
     .use(VbenInput)
+    .use(VbenInputGroupLabel)
     .use(VbenThing)
     .use(VbenPopconfirm)
     .use(VbenIcon)

@@ -76,6 +76,8 @@ import naive, {
   NH4,
   NH5,
   NH6,
+  NInputGroupLabel,
+  NInputGroup,
 } from 'naive-ui'
 
 import {
@@ -99,6 +101,8 @@ export async function registerComponents(app) {
     Statistic: NStatistic,
     Select: NSelect,
     Input: NInput,
+    InputGroup: NInputGroup,
+    InputGroupLable: NInputGroupLabel,
     InputNumber: NInputNumber,
     Form: NForm,
     FormItem: NFormItem,

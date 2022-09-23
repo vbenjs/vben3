@@ -77,10 +77,10 @@ import { registerComponents } from '../init-components'
   const app = createApp(App)
 
   app.use(pinia)
-
+  await registerComponents(app)
   await initApplication()
   // Register Global Components
-  await registerComponents(app)
+
   // Multilingual configuration
   // Asynchronous case: language files may be obtained from the server side
   await setupI18n(app)

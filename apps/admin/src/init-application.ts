@@ -1,5 +1,4 @@
 import { initRequest } from '@vben/request'
-import { message, Modal } from 'ant-design-vue'
 import { useUserStoreWithout } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
 import { deepMerge, getGlobalConfig } from '@vben/utils'
@@ -26,8 +25,9 @@ async function initPackages() {
           const userStore = useUserStoreWithout()
           return userStore.getAccessToken
         },
-        errorFunction: message.error,
-        errorModalFunction: Modal.error,
+        errorFunction: null,
+        noticeFunction: null,
+        errorModalFunction: null,
         timeoutFunction: () => {
           const userStore = useUserStoreWithout()
           userStore.setAccessToken(undefined)

@@ -55,10 +55,19 @@ const transform: AxiosTransform = {
     // 这里逻辑可以根据项目进行修改
     const hasSuccess =
       data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS
-    if (hasSuccess) {
-      return result
-    }
 
+    if (!hasSuccess) {
+      context.msgFunction.error(message)
+      throw new Error(message)
+    }
+    context.noticeFunction &&
+      context.noticeFunction.success({
+        content: '成功',
+        meta: message,
+        duration: 2500,
+        keepAliveOnHover: true,
+      })
+    return result
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
     // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
     let timeoutMsg = ''
@@ -81,7 +90,7 @@ const transform: AxiosTransform = {
         content: timeoutMsg,
       })
     } else if (options.errorMessageMode === 'message') {
-      context.errorFunction(timeoutMsg)
+      context.msgFunction.error(timeoutMsg)
     }
 
     throw new Error(timeoutMsg || t('sys.api.apiRequestFailed'))

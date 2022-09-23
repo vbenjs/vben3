@@ -21,8 +21,8 @@
     "rollup-plugin-visualizer": "^5.7.1",
     "terser": "^5.14.2",
     "tsconfig": "workspace:*",
-    "unocss": "^0.45.7",
-    "vite": "3.0.8",
+    "unocss": "^0.45.22",
+    "vite": "3.0.9",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-imagemin": "^0.6.1",
@@ -32,10 +32,10 @@
   },
   "devDependencies": {
     "mockjs": "^1.1.0",
-    "rollup": "^2.77.3",
-    "typescript": "^4.7.4",
+    "rollup": "^2.79.0",
+    "typescript": "^4.8.3",
     "vite-plugin-http2-proxy": "^0.3.2",
     "vite-plugin-mkcert": "^1.9.0",
-    "vue": "3.2.36"
+    "vue": "3.2.39"
   }
 }

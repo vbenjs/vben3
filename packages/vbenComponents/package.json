@@ -9,14 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@iconify/iconify": "^3.0.0",
     "@vben/utils": "workspace:*",
-    "vue": "3.2.36",
-    "vxe-table": "4.3.0-beta.3",
-    "xe-utils": "^3.5.6",
-    "@iconify/iconify": "^2.2.1"
+    "sass": "^1.55.0",
+    "vue": "3.2.39",
+    "vxe-table": "^4.3.5",
+    "xe-utils": "^3.5.6"
   },
   "devDependencies": {
-    "@iconify/json": "^2.1.98",
+    "@iconify/json": "^2.1.111",
     "@purge-icons/generated": "^0.9.0"
   }
 }

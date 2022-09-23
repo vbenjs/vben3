@@ -6,9 +6,12 @@ import { computed, PropType, ref, unref, useSlots, watch } from 'vue'
 import { isBoolean, isFunction } from '@vben/utils'
 import { VxeTableInstance } from 'vxe-table'
 import { theme, ThemeEnum } from '../../config/src/data'
+import { useInterceptor } from './hooks/eventInterception'
 if (theme.value == ThemeEnum.Dark) {
   import('./scss/dark.scss')
 }
+useInterceptor()
+
 watch(
   () => theme.value,
   () => {
@@ -44,7 +47,7 @@ const getProps = computed(() => {
     ...options,
   }
 })
-const xGrid = ref({} as VxeTableInstance)
+const xGrid = ref(null) as VxeTableInstance
 
 const reload = () => {
   const g = unref(xGrid)
@@ -106,11 +109,12 @@ emit('register', { reload, setProps })
     <div v-if="title" class="flex m-2">
       <div class="ml-2 text-xl">{{ title }}</div>
     </div>
-    <vxeGrid v-bind="getProps" ref="xGrid">
+
+    <VxeGrid v-bind="getProps" ref="xGrid">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
-    </vxeGrid>
+    </VxeGrid>
   </div>
 </template>
 <style lang="scss"></style>

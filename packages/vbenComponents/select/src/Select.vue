@@ -22,7 +22,7 @@ watch(
 <template>
   <Select v-bind="$attrs" :options="options">
     <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
-      <slot :name="item" v-bind="data || {}"></slot> </template
+      <slot :name="item" v-bind="data || {}"></slot></template
   ></Select>
 </template>
 

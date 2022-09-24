@@ -4,7 +4,7 @@ import { VbenIconify } from '../../../iconify'
 import { VbenPopconfirm } from '../../../popconfirm'
 </script>
 <template>
-  <VbenSpace
+  <VbenSpace align="center"
     ><VbenIconify icon="ep:edit" @click="onEdit" />
     <VbenPopconfirm @PositiveClick="onDelete">
       <slot></slot>

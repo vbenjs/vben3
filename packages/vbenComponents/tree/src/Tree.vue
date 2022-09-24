@@ -26,6 +26,7 @@ const props = defineProps({
     type: Function,
     default: undefined,
   },
+  // 编辑模式开关
   edit: {
     type: Boolean,
     default: false,
@@ -71,8 +72,8 @@ const option = computed(() => {
         h(
           NodeButtonGroup,
           {
-            onDelete: () => props.onDelete && props.onDelete(v.key),
-            onEdit: () => props.onEdit && props.onEdit(v.key),
+            onDelete: () => props.onDelete && props.onDelete(v),
+            onEdit: () => props.onEdit && props.onEdit(v),
             key: v.key,
           },
           {

@@ -6,7 +6,7 @@ import { computed, PropType, ref, unref, useAttrs, useSlots, watch } from 'vue'
 import { isBoolean, isFunction } from '@vben/utils'
 import { VxeTableInstance } from 'vxe-table'
 import { theme, ThemeEnum } from '../../config/src/data'
-import { useInterceptor } from './hooks/eventInterception'
+import { useInterceptor } from './hooks'
 if (theme.value == ThemeEnum.Dark) {
   import('./scss/dark.scss')
 }
@@ -79,6 +79,7 @@ const getProxyConfig = (options: VbenTableProps) => {
           if (afterFetch && isFunction(afterFetch)) {
             res = afterFetch(res)
           }
+
           return res || []
         },
       },

@@ -2,8 +2,10 @@
 import { maps } from '../../index'
 import { fetchProps, fetch } from '../../fetch'
 import { watch, ref, watchEffect } from 'vue'
+import { omit } from '@vben/utils'
 const Select = maps.get('Select')
-const props = defineProps({ ...fetchProps })
+
+const props = defineProps(omit(fetchProps, ['value']))
 const isFirstLoad = ref(true)
 const options = ref([])
 watchEffect(() => {

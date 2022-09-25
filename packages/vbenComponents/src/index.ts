@@ -1,4 +1,5 @@
 import type { Component, App } from 'vue'
+import TabPane from '#/tabs/src/TabPane.vue'
 const projectName = 'Vben3'
 export const components = {
   install: (app: App) => {
@@ -8,7 +9,23 @@ export const components = {
     Object.keys(comp).forEach((k) => {
       const c = comp[k].default
       // console.log(`Vben${c.__name}` || `Vben${c.name}`, c)
-      console.log(c)
+      switch (c.__name) {
+        case 'index':
+          c.__name = 'Iconify'
+          break
+        case 'TabPane':
+          c.__TAB_PANE__ = true
+          break
+        case 'DescriptionsItem':
+          c.DESCRIPTION_ITEM_FLAG = true
+          break
+        case 'FormItemGi':
+          c.__GRID_ITEM__ = true
+          break
+        case 'GridItem':
+          c.__GRID_ITEM__ = true
+          break
+      }
       app.component(`Vben${c.__name}` || `Vben${c.name}`, c)
     })
   },

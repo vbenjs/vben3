@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 const props = defineProps(['onDelete', 'onEdit', 'key'])
-import { VbenIconify } from '../../../iconify'
-import { VbenPopconfirm } from '../../../popconfirm'
 </script>
 <template>
   <VbenSpace align="center"

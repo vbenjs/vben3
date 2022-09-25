@@ -1,7 +1,6 @@
 <script lang="ts" setup name="VbenDescItem">
 import { maps } from '#/index'
 const DescriptionsItem = maps.get('DescriptionsItem')
-console.log(DescriptionsItem, 111)
 </script>
 <template>
   <DescriptionsItem v-bind="$attrs">

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref, watchEffect, unref, computed } from 'vue'
 import { context } from '../../../bridge'
-import { VbenIconify } from '../../iconify'
 
 const props = defineProps({
   /**

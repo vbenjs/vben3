@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenSpace">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Space = maps.get('Space')
 </script>
 <template>

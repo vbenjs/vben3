@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenStatistic">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Statistic = maps.get('Statistic')
 </script>
 <template>

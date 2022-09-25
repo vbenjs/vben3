@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTreeSelect">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 import { onMounted, watch, ref, watchEffect } from 'vue'
 import { fetchProps, fetch } from '#/fetch'
 const TreeSelect = maps.get('TreeSelect')

@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenSelect">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 import { fetchProps, fetch } from '#/fetch'
 import { watch, ref, watchEffect } from 'vue'
 import { omit } from '@vben/utils'

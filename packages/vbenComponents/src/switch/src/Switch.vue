@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenSwitch">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Switch = maps.get('Switch')
 </script>
 <template>

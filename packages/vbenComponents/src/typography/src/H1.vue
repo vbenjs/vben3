@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenH1">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const H1 = maps.get('H1')
 </script>
 <template>

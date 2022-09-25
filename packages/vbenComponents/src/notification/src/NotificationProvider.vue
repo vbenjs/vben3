@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenNotificationProvider">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const NotificationProvider = maps.get('NotificationProvider')
 </script>
 <template>

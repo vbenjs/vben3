@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenPopover">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Popover = maps.get('Popover')
 </script>
 <template>

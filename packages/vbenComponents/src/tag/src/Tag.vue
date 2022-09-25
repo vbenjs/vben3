@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTag">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Tag = maps.get('Tag')
 </script>
 <template>

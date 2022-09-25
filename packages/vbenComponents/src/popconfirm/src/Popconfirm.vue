@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenPopconfirm">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Popconfirm = maps.get('Popconfirm')
 </script>
 <template>

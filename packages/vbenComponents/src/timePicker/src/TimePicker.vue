@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTimePicker">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 import { computed } from 'vue'
 const TimePicker = maps.get('TimePicker')
 </script>

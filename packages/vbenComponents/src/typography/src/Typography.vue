@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTypography">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Typography = maps.get('Typography')
 </script>
 <template>

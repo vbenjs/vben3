@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTree">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 import { fetchProps, fetch } from '#/fetch'
 import { computed, h, ref, watch, watchEffect } from 'vue'
 import { NodeButtonGroup } from '../index'

@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenRadio">
-import { maps } from '../../../index'
+import { maps } from '#/index'
 const Radio = maps.get('Radio')
 </script>
 <template>

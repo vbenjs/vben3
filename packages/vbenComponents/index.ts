@@ -1,4 +1,4 @@
-import type { Component, App } from 'vue'
+import type { App } from 'vue'
 export { initComp } from './bridge'
 import VXETable from 'vxe-table'
 
@@ -7,24 +7,13 @@ import VXETable from 'vxe-table'
 export { theme, locale } from './src/config'
 // 初始化组件
 // global 是否全局注册
-import {
-  components,
-  maps,
-  setNotice,
-  setMessage,
-  notice,
-  msg,
-  useNotice,
-  useMsg,
-} from './src'
-export { maps, setNotice, setMessage, notice, msg, useNotice, useMsg }
+import { maps, components } from './src'
+export { setNotice, setMessage, notice, msg, useNotice, useMsg } from './src'
 export function initVbenComponent(app: App, comp: Object, global = true) {
   Object.keys(comp).forEach((k) => {
     maps.set(k, comp[k])
   })
-
   app.use(VXETable)
   app.use(components)
-  console.log(app)
   if (!global) return
 }

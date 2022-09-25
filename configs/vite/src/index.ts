@@ -39,7 +39,6 @@ export async function createViteConfig(
       VITE_DROP_CONSOLE,
       VITE_USE_HTTPS,
     } = viteEnv
-
     const commonConfig: UserConfig = {
       root,
       base: VITE_PUBLIC_PATH,
@@ -47,7 +46,7 @@ export async function createViteConfig(
       resolve: {
         alias: {
           '@': `${resolve(root, 'src')}`,
-          '#': `${resolve(root, 'types')}`,
+          '#': `${resolve(root, '../../packages/vbenComponents/src')}`,
           'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
           vue: 'vue/dist/vue.esm-bundler.js',
         },

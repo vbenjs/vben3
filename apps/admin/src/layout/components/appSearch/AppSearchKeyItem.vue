@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VbenIconify } from '@vben/vbencomponents/iconify'
+import { VbenIconify } from '../../../../../../packages/vbenComponents/src/iconify'
 defineProps({
   icon: String,
 })

@@ -1,0 +1,135 @@
+<script lang="ts" setup name="VbenForm">
+import { maps } from '#/index'
+import { computed, onMounted, ref, unref, useAttrs, watch } from 'vue'
+import { GridItemProps, VbenFormProps } from './type'
+import { set } from '@vben/utils'
+const emit = defineEmits(['register', 'update:model'])
+const innerProps = ref<Partial<VbenFormProps>>()
+const Form = maps.get('Form')
+const formRef = ref(null)
+const props = defineProps({
+  schemas: [],
+})
+const attrs = useAttrs()
+
+const setProps = (prop: Partial<VbenFormProps>) => {
+  prop.schemas.forEach((v) => {
+    if (v.defaultValue) {
+      fieldValue.value[v.field] = v.defaultValue
+    }
+  })
+  innerProps.value = {
+    ...prop,
+    ...unref(innerProps),
+  }
+}
+const fieldValue = ref({})
+watch(
+  () => attrs.model,
+  () => {
+    const m = JSON.parse(JSON.stringify(attrs.model))
+    sObject(m)
+  },
+  { deep: true, immediate: true },
+)
+watch(
+  () => fieldValue,
+  () => {
+    emit('update:model', getFieldValue())
+  },
+  { deep: true },
+)
+function sObject(m, key?) {
+  Object.keys(m).forEach((k) => {
+    const tempKey = key ? key + '.' + k : k
+    if (typeof m[k] == 'object') {
+      sObject(m[k], tempKey)
+      return
+    }
+    fieldValue.value[tempKey] = m[k]
+  })
+}
+function getFieldValue() {
+  const m = JSON.parse(JSON.stringify(fieldValue.value))
+  Object.keys(m).forEach((k) => {
+    if (k.indexOf('.') != -1) {
+      const v = m[k]
+      delete m[k]
+      set(m, k, v)
+    }
+  })
+  return m
+}
+// 默认gridItem参数
+const getGridItemProps = (p) => {
+  return { span: getGridProps.value.span, ...p }
+}
+// 默认grid参数
+const getGridProps = computed(() => {
+  return {
+    cols: 24,
+    span: 8,
+    xGap: 12,
+    yGap: 0,
+    ...innerProps.value?.gridProps,
+  }
+})
+
+onMounted(() => {
+  emit('register', {
+    setProps,
+    getFieldValue,
+    validate: formRef.value.validate,
+    restoreValidation: formRef.value.validate,
+  })
+})
+</script>
+<template>
+  <div>
+    <!--    {{ fieldValue }}-->
+    <Form ref="formRef" v-bind="$attrs" :rules="innerProps?.rules">
+      <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+        <slot :name="item" v-bind="data || {}"></slot>
+      </template>
+      <VbenGrid v-bind="getGridProps">
+        <VbenGridItem
+          v-bind="getGridItemProps(schema.gridItemProps)"
+          v-for="(schema, key) in innerProps?.schemas"
+          :key="key"
+          :path="schema.field"
+        >
+          <VbenFormItem
+            :label="schema.label"
+            :path="schema.field"
+            :showRequireMark="schema.required"
+            :rule="schema.rule"
+          >
+            <component
+              v-if="
+                schema.componentProps !== 'InputPassword' ||
+                schema.component !== 'InputTextArea'
+              "
+              :is="`Vben${schema.component}`"
+              v-bind="schema.componentProps"
+              v-model:value="fieldValue[schema.field]"
+            />
+            <VbenInput
+              type="password"
+              v-if="schema.component === 'InputPassword'"
+              v-bind="schema.componentProps"
+              v-model:value="fieldValue[schema.field]"
+            />
+            <VbenInput
+              type="textarea"
+              v-if="schema.component === 'InputTextArea'"
+              v-bind="schema.componentProps"
+              v-model:value="fieldValue[schema.field]"
+            />
+          </VbenFormItem>
+        </VbenGridItem>
+      </VbenGrid>
+    </Form>
+  </div>
+</template>
+
+<style scoped></style>

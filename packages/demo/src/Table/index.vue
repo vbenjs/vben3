@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { VbenColumns, useTable } from '@vben/vbencomponents/table'
+import { VbenColumns, useTable } from '../../../vbenComponents/src/table'
 import { getTableData } from '../apis/table'
 const columns: VbenColumns = [
   { field: 'userId', title: 'id', width: 100 },

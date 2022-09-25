@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { useForm } from '@vben/vbencomponents/form'
+import { useForm } from '../../../vbenComponents/src/form'
 import {
   getCascaderData,
   getRadioData,

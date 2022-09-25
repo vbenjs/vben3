@@ -7,7 +7,7 @@ import { computed, unref, ref } from 'vue'
 import AppSearchFooter from './AppSearchFooter.vue'
 import { useMenuSearch } from './useMenuSearch'
 import { clickOutside as vClickOutside } from '@vben/directives'
-import { VbenIconify } from '@vben/vbencomponents/iconify'
+import { VbenIconify } from '../../../../../../packages/vbenComponents/src/iconify'
 
 defineProps({
   visible: { type: Boolean },

@@ -22,7 +22,7 @@ onMounted(() => {
     ></VbenLayoutSider>
     <VbenLayout>
       <VbenLayoutHeader ref="header"
-        ><slot name="header"></slot
+        ><slot name="header"> </slot
       ></VbenLayoutHeader>
       <VbenLayoutContent id="layout_main"
         ><slot name="main"></slot

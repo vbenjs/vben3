@@ -14,7 +14,7 @@
 import { useI18n } from '@vben/locale'
 import { ref } from 'vue'
 import AppSearchModal from './AppSearchModal.vue'
-import { VbenIconify } from '@vben/vbencomponents/iconify'
+import { VbenIconify } from '../../../../../../packages/vbenComponents/src/iconify'
 
 const { t } = useI18n()
 const showModal = ref(false)

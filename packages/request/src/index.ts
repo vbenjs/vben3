@@ -56,21 +56,22 @@ const transform: AxiosTransform = {
     const hasSuccess =
       data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS
 
-    if (!hasSuccess) {
-      context.msgFunction.error(message)
-      throw new Error(message)
-    }
-    if (message) {
-      context.noticeFunction &&
-        context.noticeFunction.success({
-          content: '成功',
-          meta: message,
-          duration: 2500,
-          keepAliveOnHover: true,
-        })
+    if (hasSuccess) {
+      if (message) {
+        context.noticeFunction &&
+          context.noticeFunction.success({
+            content: '成功',
+            meta: message,
+            duration: 2500,
+            keepAliveOnHover: true,
+          })
+      }
+
+      return result
     }
 
-    return result
+    context.msgFunction.error(message)
+    throw new Error(message)
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
     // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
     let timeoutMsg = ''

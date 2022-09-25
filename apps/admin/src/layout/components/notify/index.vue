@@ -34,10 +34,6 @@ import { ref } from 'vue'
 import { tabListData, ListItem } from './data'
 import NoticeList from './NoticeList.vue'
 import { useDesign } from '@/hooks/web/useDesign'
-import { VbenPopover } from '@vben/vbencomponents/popover'
-import { VbenBadge } from '@vben/vbencomponents/badge'
-import { VbenTabs, VbenTabPane } from '@vben/vbencomponents/tabs'
-import { VbenIconify } from '@vben/vbencomponents/iconify'
 
 const { prefixCls } = useDesign('header-notify')
 

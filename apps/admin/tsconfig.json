@@ -5,7 +5,8 @@
     "module": "esnext",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "#/*": ["src/*"]
     },
     "lib": ["dom", "esnext"],
     "types": [

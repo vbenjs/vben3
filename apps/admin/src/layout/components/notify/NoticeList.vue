@@ -40,11 +40,6 @@ import { computed, ref, watch, unref } from 'vue'
 import { ListItem } from './data'
 import { useDesign } from '@/hooks/web/useDesign'
 import { isNumber } from '@vben/utils'
-import { VbenAvatar } from '@vben/vbencomponents/avatar'
-import { VbenTag } from '@vben/vbencomponents/tag'
-import { VbenList, VbenListItem } from '@vben/vbencomponents/list'
-import { VbenThing } from '@vben/vbencomponents/thing'
-import { VbenEllipsis } from '@vben/vbencomponents/ellipsis'
 
 const props = withDefaults(
   defineProps<{

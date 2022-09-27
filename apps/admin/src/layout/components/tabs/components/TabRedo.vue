@@ -1,26 +1,30 @@
 <script setup lang="ts">
-import { useTabs } from "@/hooks/useTabs";
+import { useTabs } from '@/hooks/useTabs'
 import Icon from '@components/common/icon/index.vue'
-import { usePromise } from "@vben/hooks";
+import { usePromise } from '@vben/hooks'
 
-const { refreshPage } = useTabs();
+const { refreshPage } = useTabs()
 
-function reload () {
+function reload() {
   return new Promise(async (resolve) => {
-    await refreshPage();
+    await refreshPage()
     setTimeout(() => {
       resolve({})
     }, 1200)
   })
 }
 
-const { loading, handleFn: handleRedo } = usePromise(reload, { immediate: false })
+const { loading, handleFn: handleRedo } = usePromise(reload, {
+  immediate: false,
+})
 </script>
 
 <template>
-  <Icon icon="ant-design:redo-outlined" :infinite="loading" @click="handleRedo" />
+  <Icon
+    icon="ant-design:redo-outlined"
+    :infinite="loading"
+    @click="handleRedo"
+  />
 </template>
 
-<style scoped lang="css">
-
-</style>
+<style scoped lang="css"></style>

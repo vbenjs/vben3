@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@vben/utils": "workspace:*",
-    "vue": "3.2.36"
+    "@vben/locale": "workspace:*",
+    "vue": "3.2.39",
+    "vue-router": "^4.1.5"
   }
 }

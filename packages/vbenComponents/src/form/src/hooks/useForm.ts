@@ -1,5 +1,5 @@
 import { nextTick, Ref, ref, unref } from 'vue'
-import { VbenFormProps } from '#/form'
+import { VbenFormProps, VbenFormSchema } from '#/form'
 import { error } from '#/index'
 
 export interface formMethod {
@@ -11,6 +11,7 @@ export interface formMethod {
   ) => Promise<void>
   getFieldValue: () => Ref
   restoreValidation: () => void
+  updateSchemas: (schemas: VbenFormSchema) => void
 }
 
 export function useForm(props: VbenFormProps) {
@@ -45,6 +46,10 @@ export function useForm(props: VbenFormProps) {
     restoreValidation: async () => {
       const form = await getInstance()
       return form.restoreValidation()
+    },
+    updateSchemas: async (schemas) => {
+      const form = await getInstance()
+      return form.updateSchemas(schemas)
     },
   }
   return [register, methods]

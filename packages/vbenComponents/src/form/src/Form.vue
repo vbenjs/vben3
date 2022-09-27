@@ -18,6 +18,7 @@ const setProps = (prop: Partial<VbenFormProps>) => {
       fieldValue.value[v.field] = v.defaultValue
     }
   })
+
   innerProps.value = {
     ...prop,
     ...unref(innerProps),
@@ -81,12 +82,15 @@ onMounted(() => {
     getFieldValue,
     validate: formRef.value.validate,
     restoreValidation: formRef.value.validate,
+    updateSchemas: (schemas) => {
+      innerProps.value.schemas = schemas
+    },
   })
 })
 </script>
 <template>
   <div>
-    <!--    {{ fieldValue }}-->
+    <!--    {{ $attrs }}-->
     <Form ref="formRef" v-bind="$attrs" :rules="innerProps?.rules">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
@@ -104,10 +108,16 @@ onMounted(() => {
             :showRequireMark="schema.required"
             :rule="schema.rule"
           >
+            <slot
+              :name="schema.slot"
+              v-if="schema.slot"
+              v-bind="{ m: fieldValue, field: schema.field }"
+            ></slot>
             <component
               v-if="
-                schema.componentProps !== 'InputPassword' ||
-                schema.component !== 'InputTextArea'
+                (schema.componentProps !== 'InputPassword' ||
+                  schema.component !== 'InputTextArea') &&
+                !schema.slot
               "
               :is="`Vben${schema.component}`"
               v-bind="schema.componentProps"

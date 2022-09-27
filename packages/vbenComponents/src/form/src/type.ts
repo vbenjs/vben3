@@ -108,7 +108,7 @@ export interface VbenFormSchema {
   //   | string
   //
   // // Custom slot, in from-item
-  // slot?: string
+  slot?: string
   //
   // // Custom slot, similar to renderColContent
   // colSlot?: string
@@ -157,3 +157,4 @@ export type ComponentType =
   | 'DynamicTags'
   | 'Transfer'
   | 'Mention'
+  | 'DynamicInput'

@@ -18,7 +18,7 @@ export const fetchProps = {
   },
   params: {
     type: Object,
-    default: () => ({}),
+    default: {},
   },
   immediate: {
     type: Boolean,

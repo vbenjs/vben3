@@ -14,7 +14,8 @@ watchEffect(() => {
 watch(
   () => props.params,
   () => {
-    !isFirstLoad.value && fetch(props, options)
+    options.value = []
+    fetch(props, options)
   },
   { deep: true },
 )

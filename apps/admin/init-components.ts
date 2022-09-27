@@ -80,6 +80,7 @@ import naive, {
   NInputGroup,
   NDrawer,
   NDrawerContent,
+  NDynamicInput,
 } from 'naive-ui'
 
 import {
@@ -166,6 +167,7 @@ export async function registerComponents(app) {
     H4: NH4,
     H5: NH5,
     H6: NH6,
+    DynamicInput: NDynamicInput,
   })
   setMessage(useMessage)
   setNotice(useNotification)

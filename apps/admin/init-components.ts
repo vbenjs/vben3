@@ -81,6 +81,8 @@ import naive, {
   NDrawer,
   NDrawerContent,
   NDynamicInput,
+  NPopselect,
+  NTime,
 } from 'naive-ui'
 
 import {
@@ -168,6 +170,8 @@ export async function registerComponents(app) {
     H5: NH5,
     H6: NH6,
     DynamicInput: NDynamicInput,
+    Popselect: NPopselect,
+    Time: NTime,
   })
   setMessage(useMessage)
   setNotice(useNotification)

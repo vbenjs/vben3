@@ -1,12 +1,12 @@
-<script lang="ts" setup name="VbenDrawerContent">
+<script lang="ts" setup name="VbenDrawer">
 import { maps } from '#/index'
-const DrawerContent = maps.get('DrawerContent')
+const Drawer = maps.get('Drawer')
 </script>
 <template>
-  <DrawerContent v-bind="$attrs">
+  <Drawer v-bind="$attrs">
     <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
       <slot :name="item" v-bind="data || {}"></slot> </template
-  ></DrawerContent>
+  ></Drawer>
 </template>
 
 <style scoped></style>

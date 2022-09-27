@@ -34,20 +34,6 @@ export const components = {
 //VC组件map
 export const maps = new Map<String, Component>()
 
-export function withInstall<T>(component: T, alias?: string) {
-  const comp = component as any
-  comp.install = (app: App) => {
-    app.component(
-      `Vben${comp.__name}` || `Vben${comp.name}` || comp.displayName,
-      comp,
-    )
-    if (alias) {
-      app.config.globalProperties[alias] = component
-    }
-  }
-  return component as T & Plugin
-}
-
 export function warn(message: string) {
   console.warn(`[${projectName} warn]:${message}`)
 }

@@ -7,7 +7,9 @@ export interface FetchProps {
   immediate?: boolean
   value?: object
   options?: Array<any>
+  resultField?: String
 }
+
 // 请求props定义
 export const fetchProps = {
   api: {
@@ -30,10 +32,18 @@ export const fetchProps = {
     type: String,
     default: '',
   },
+  afterFetch: {
+    type: Function,
+    default: null,
+  },
+  resultField: {
+    type: String,
+    default: '',
+  },
 }
 // 请求获取数据
 export async function fetch(props, o) {
-  const { api, params, options } = props
+  const { api, params, options, afterFetch, resultField } = props
   // 有options 不请求 直接使用options
   if (options) {
     o.value = options
@@ -46,6 +56,12 @@ export async function fetch(props, o) {
     error('api不是函数')
     return
   }
-  const res = await api(params)
-  o.value = res.options
+  let res = await api(params)
+  if (afterFetch && isFunction(afterFetch)) {
+    res = afterFetch(res)
+  }
+  if (resultField) {
+    res = res[resultField]
+  }
+  o.value = res
 }

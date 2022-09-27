@@ -2,10 +2,10 @@
 import { maps } from '#/index'
 import { onMounted, watch, ref, watchEffect } from 'vue'
 import { fetchProps, fetch } from '#/fetch'
+import { omit } from '@vben/utils'
+
 const TreeSelect = maps.get('TreeSelect')
-const props = defineProps({
-  ...fetchProps,
-})
+const props = defineProps(omit(fetchProps, 'value'))
 const isFirstLoad = ref(true)
 const options = ref([])
 onMounted(() => {})

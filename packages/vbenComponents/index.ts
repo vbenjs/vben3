@@ -17,3 +17,6 @@ export function initVbenComponent(app: App, comp: Object, global = true) {
   app.use(components)
   if (!global) return
 }
+
+export { useTable } from '#/table'
+export { useForm } from '#/form'

@@ -78,6 +78,8 @@ import naive, {
   NH6,
   NInputGroupLabel,
   NInputGroup,
+  NDrawer,
+  NDrawerContent,
 } from 'naive-ui'
 
 import {
@@ -89,6 +91,8 @@ import {
 import { Card } from 'ant-design-vue'
 export async function registerComponents(app) {
   initVbenComponent(app, {
+    Drawer: NDrawer,
+    DrawerContent: NDrawerContent,
     Tag: NTag,
     Card: NCard,
     Menu: NMenu,

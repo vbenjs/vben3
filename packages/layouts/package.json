@@ -10,6 +10,7 @@
   "dependencies": {
     "@vben/utils": "workspace:*",
     "@vben/locale": "workspace:*",
+    "@vben/types": "workspace:*",
     "vue": "3.2.39",
     "vue-router": "^4.1.5"
   }

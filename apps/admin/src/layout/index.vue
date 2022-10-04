@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { Layout } from '@vben/layouts'
 import LayoutMenu from './components/menu/index.vue'
-import LayoutBreadcrumb from './components/breadcrumb/index.vue'
 import LayoutTabs from './components/tabs/index.vue'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import FullScreen from './components/FullScreen.vue'
@@ -45,30 +44,21 @@ const getShowSetting = computed(() => {
         <LayoutMenu />
       </div>
     </template>
-
-    <template #header>
-      <VbenSpace vertical>
-        <div class="flex justify-between items-center">
-          <div>
-            <LayoutBreadcrumb
-              v-if="getShowContent && getShowBread"
-              :theme="getHeaderTheme"
-            />
-          </div>
-          <div class="flex items-center">
-            <AppSearch v-if="getShowSearch" />
-            <Notify v-if="getShowNotice" />
-            <FullScreen v-if="getShowFullScreen" />
-            <VbenLocalePicker
-              v-if="getShowLocalePicker"
-              :reload="true"
-              :showText="false"
-            />
-            <SettingDrawer v-if="getShowSetting" />
-          </div>
-        </div>
-        <LayoutTabs />
-      </VbenSpace>
+    <template #buttons>
+      <div class="flex items-center">
+        <AppSearch v-if="getShowSearch" />
+        <Notify v-if="getShowNotice" />
+        <FullScreen v-if="getShowFullScreen" />
+        <VbenLocalePicker
+          v-if="getShowLocalePicker"
+          :reload="true"
+          :showText="false"
+        />
+        <SettingDrawer v-if="getShowSetting" />
+      </div>
+    </template>
+    <template #tabs>
+      <LayoutTabs />
     </template>
     <template #main>
       <RouterView />

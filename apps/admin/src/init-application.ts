@@ -5,8 +5,11 @@ import { deepMerge, getGlobalConfig } from '@vben/utils'
 import { useAppStoreWithOut } from '@/store/config'
 import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
+import { initLayout } from '@vben/layouts'
 import { localeList } from '@vben/locale/src/config'
-
+import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
+import { getAllParentPath, getMenus } from '@/router'
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -58,8 +61,18 @@ async function initPackages() {
       }
     })
   }
+  const _initLayout = async () => {
+    await initLayout(() => {
+      return {
+        useRootSetting,
+        getMenus,
+        getAllParentPath,
+        useHeaderSetting,
+      }
+    })
+  }
 
-  await Promise.all([_initRequest(), _initComp()])
+  await Promise.all([_initRequest(), _initComp(), _initLayout()])
 }
 
 // Initial project configuration

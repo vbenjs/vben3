@@ -47,6 +47,7 @@ export async function createViteConfig(
         alias: {
           '@': `${resolve(root, 'src')}`,
           '#': `${resolve(root, '../../packages/vbenComponents/src')}`,
+          // layouts: `${resolve(root, '../../packages/layouts/src')}`,
           'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
           vue: 'vue/dist/vue.esm-bundler.js',
         },

@@ -1,20 +1,17 @@
 <script lang="ts" setup>
-import { useAppInject } from '@/hooks/web/use-app-inject'
-import { useDesign } from '@/hooks/web/useDesign'
 import { useI18n } from '@vben/locale'
 import { useRefs } from '@vben/use'
 import { computed, unref, ref } from 'vue'
 import AppSearchFooter from './AppSearchFooter.vue'
 import { useMenuSearch } from './useMenuSearch'
 import { clickOutside as vClickOutside } from '@vben/directives'
-
+import { context } from '../../../bridge'
+const { useDesign, useAppInject } = context
 defineProps({
   visible: { type: Boolean },
 })
 
 const emit = defineEmits(['close'])
-
-// const { useI18n, useDesign, useRefs, useAppInject, vClickOutside } = context
 
 const scrollWrap = ref(null)
 

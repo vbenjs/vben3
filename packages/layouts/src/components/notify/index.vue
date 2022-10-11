@@ -1,5 +1,22 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+import { tabListData, ListItem } from './data'
+import NoticeList from './NoticeList.vue'
+import { context } from '../../../bridge'
+const { useDesign } = context
+const { prefixCls } = useDesign('header-notify')
+
+const listData = ref(tabListData)
+
+function onNoticeClick(record: ListItem) {
+  console.log('你点击了通知，ID=' + record.id)
+
+  record.titleDelete = !record.titleDelete
+}
+</script>
+
 <template>
-  <div :class="prefixCls">
+  <div>
     <VbenPopover title="" trigger="click">
       <template #trigger>
         <VbenBadge dot>
@@ -29,22 +46,7 @@
     </VbenPopover>
   </div>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { tabListData, ListItem } from './data'
-import NoticeList from './NoticeList.vue'
-import { useDesign } from '@/hooks/web/useDesign'
 
-const { prefixCls } = useDesign('header-notify')
-
-const listData = ref(tabListData)
-
-function onNoticeClick(record: ListItem) {
-  console.log('你点击了通知，ID=' + record.id)
-
-  record.titleDelete = !record.titleDelete
-}
-</script>
 <style lang="less">
 .vben-header-notify {
   padding: 0 10px;

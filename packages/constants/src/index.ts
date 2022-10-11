@@ -4,3 +4,9 @@ export const BASIC_ERROR_PATH = '/exception'
 
 export * from './cache'
 export * from './router'
+
+export enum SettingButtonPositionEnum {
+  AUTO = 'auto',
+  HEADER = 'header',
+  FIXED = 'fixed',
+}

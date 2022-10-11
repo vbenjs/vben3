@@ -10,6 +10,8 @@ import { localeList } from '@vben/locale/src/config'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import { getAllParentPath, getMenus } from '@/router'
+import { useDesign } from '@/hooks/web/useDesign'
+import { useAppInject } from '@/hooks/web/use-app-inject'
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -68,6 +70,8 @@ async function initPackages() {
         getMenus,
         getAllParentPath,
         useHeaderSetting,
+        useDesign,
+        useAppInject,
       }
     })
   }

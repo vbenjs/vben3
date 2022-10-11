@@ -58,7 +58,7 @@ function handleMenuEvent(menu) {
     :options="getLocaleList"
     @select="handleMenuEvent"
   >
-    <span class="flex items-center cursor-pointer mx-2">
+    <span class="flex items-center cursor-pointer">
       <VbenIconify icon="ion:language" />
       <span v-if="showText" class="ml-1">{{ getLocaleText }}</span>
     </span>

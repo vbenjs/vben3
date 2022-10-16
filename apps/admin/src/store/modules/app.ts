@@ -4,28 +4,28 @@ import type {
   // MenuSetting,
   // TransitionSetting,
   MultiTabsSetting,
-} from '@vben/types';
+} from '@vben/types'
 // import type { BeforeMiniState } from '#/store';
 
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
-import { ThemeEnum, APP_DARK_MODE_KEY_ } from '@vben/enums';
+import { ThemeEnum, APP_DARK_MODE_KEY_ } from '@vben/enums'
 // import { Persistent } from '@/utils/cache/persistent';
 // import { darkMode } from '/@/settings/designSetting';
-// import { resetRouter } from '/@/router';
+// import { resetRouter } from '/@/router'
 // import { deepMerge } from '/@/utils';
-import {pinia} from "@/pinia";
-
+import { pinia } from '@/pinia'
+import { resetRouter } from '@/router'
 interface AppState {
-  darkMode?: ThemeEnum;
+  darkMode?: ThemeEnum
   // Page loading status
-  pageLoading: boolean;
+  pageLoading: boolean
   // project config
   // projectConfig: ProjectConfig | null;
   // When the window shrinks, remember some states, and restore these states when the window is restored
   // beforeMiniInfo: BeforeMiniState;
 }
-let timeId: TimeoutHandle;
+let timeId: TimeoutHandle
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
@@ -36,11 +36,11 @@ export const useAppStore = defineStore({
   }),
   getters: {
     getPageLoading(): boolean {
-      return this.pageLoading;
+      return this.pageLoading
     },
     getDarkMode(): 'light' | 'dark' | string {
       // return this.darkMode || localStorage.getItem(APP_DARK_MODE_KEY_) || darkMode;
-      return "dark"
+      return 'dark'
     },
 
     // getBeforeMiniInfo(): BeforeMiniState {
@@ -67,12 +67,12 @@ export const useAppStore = defineStore({
   },
   actions: {
     setPageLoading(loading: boolean): void {
-      this.pageLoading = loading;
+      this.pageLoading = loading
     },
 
     setDarkMode(mode: ThemeEnum): void {
-      this.darkMode = mode;
-      localStorage.setItem(APP_DARK_MODE_KEY_, mode);
+      this.darkMode = mode
+      localStorage.setItem(APP_DARK_MODE_KEY_, mode)
     },
 
     // setBeforeMiniInfo(state: BeforeMiniState): void {
@@ -84,26 +84,26 @@ export const useAppStore = defineStore({
     //   Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     // },
 
-    // async resetAllState() {
-    //   resetRouter();
-    //   Persistent.clearAll();
-    // },
+    async resetAllState() {
+      resetRouter()
+      // Persistent.clearAll()
+    },
     async setPageLoadingAction(loading: boolean): Promise<void> {
       if (loading) {
-        clearTimeout(timeId);
+        clearTimeout(timeId)
         // Prevent flicker
         timeId = setTimeout(() => {
-          this.setPageLoading(loading);
-        }, 50);
+          this.setPageLoading(loading)
+        }, 50)
       } else {
-        this.setPageLoading(loading);
-        clearTimeout(timeId);
+        this.setPageLoading(loading)
+        clearTimeout(timeId)
       }
     },
   },
-});
+})
 
 // Need to be used outside the setup
 export function useAppStoreWithOut() {
-  return useAppStore(pinia);
+  return useAppStore(pinia)
 }

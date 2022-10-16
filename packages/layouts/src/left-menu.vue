@@ -3,6 +3,7 @@ import { onMounted, ref, nextTick, computed, unref } from 'vue'
 import { layoutHeader } from './data'
 const header = ref(null)
 import LayoutBreadcrumb from './components/breadcrumb/index.vue'
+import LayoutTabs from './components/tabs/index.vue'
 import AppSearch from './components/search/AppSearch.vue'
 import AppNotify from './components/notify/index.vue'
 import AppFullScreen from './components/FullScreen.vue'
@@ -72,7 +73,9 @@ onMounted(() => {
               </slot></div
           ></VbenSpace>
           <div>
-            <slot name="tabs"></slot>
+            <slot name="tabs">
+              <LayoutTabs />
+            </slot>
           </div>
         </VbenSpace>
       </VbenLayoutHeader>

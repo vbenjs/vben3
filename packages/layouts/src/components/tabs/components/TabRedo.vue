@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useTabs } from '@/hooks/useTabs'
-import Icon from '@components/common/icon/index.vue'
-import { usePromise } from '@vben/hooks'
-
+import { context } from '../../../../bridge'
+const { usePromise, useTabs } = context
 const { refreshPage } = useTabs()
 
 function reload() {
@@ -20,7 +18,7 @@ const { loading, handleFn: handleRedo } = usePromise(reload, {
 </script>
 
 <template>
-  <Icon
+  <VbenIconify
     icon="ant-design:redo-outlined"
     :infinite="loading"
     @click="handleRedo"

@@ -1,5 +1,5 @@
 import { initRequest } from '@vben/request'
-import { useUserStoreWithout } from '@/store/user'
+import { useUserStoreWithout, useUserStore } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
 import { deepMerge, getGlobalConfig } from '@vben/utils'
 import { useAppStoreWithOut } from '@/store/config'
@@ -12,6 +12,12 @@ import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import { getAllParentPath, getMenus } from '@/router'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useAppInject } from '@/hooks/web/use-app-inject'
+import { useTabs } from '@/hooks/useTabs'
+import { usePromise } from '@vben/hooks'
+import { useMultipleTabStore } from '@/store/multipleTab'
+import { listenerRouteChange } from '@/logics/mitt/routeChange'
+import { useAppStore } from '@/store/modules/app'
+
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -72,6 +78,12 @@ async function initPackages() {
         useHeaderSetting,
         useDesign,
         useAppInject,
+        useTabs,
+        usePromise,
+        useMultipleTabStore,
+        listenerRouteChange,
+        useUserStore,
+        useAppStore,
       }
     })
   }

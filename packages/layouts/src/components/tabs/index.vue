@@ -21,7 +21,6 @@ const getTabsState = computed(() => {
     (item) => !item.meta?.hideTab && router.hasRoute(item.name),
   )
 })
-const unClose = computed(() => unref(getTabsState).length === 1)
 
 function handleClose(path: string) {
   tabStore.closeTabByKey(path, router)
@@ -65,10 +64,10 @@ watch(activeTabRef, (path) => {
       :key="tab.query ? tab.fullPath : tab.path"
       :tab="t(tab.meta.title)"
       :name="tab.fullPath"
-      :closable="!(tab && tab.meta && tab.meta.affix) && !unClose"
+      :closable="tab.meta && !tab.meta.affix"
     />
     <template #suffix>
-      <TabRedo v-if="getTabsState" />
+      <div class="mr-2"><TabRedo v-if="getTabsState" /></div>
     </template>
   </VbenTabs>
 </template>

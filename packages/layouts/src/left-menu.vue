@@ -4,6 +4,7 @@ import { layoutHeader } from './data'
 const header = ref(null)
 import LayoutBreadcrumb from './components/breadcrumb/index.vue'
 import LayoutTabs from './components/tabs/index.vue'
+import LayoutMenu from './components/menu/index.vue'
 import AppSearch from './components/search/AppSearch.vue'
 import AppNotify from './components/notify/index.vue'
 import AppFullScreen from './components/FullScreen.vue'
@@ -45,7 +46,7 @@ onMounted(() => {
 <template>
   <VbenLayout has-sider class="h-full">
     <VbenLayoutSider show-trigger :collapsed-width="40" :width="160"
-      ><slot name="sider"> </slot
+      ><slot name="sider"><LayoutMenu /></slot
     ></VbenLayoutSider>
     <VbenLayout>
       <VbenLayoutHeader ref="header">

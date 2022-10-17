@@ -1,3 +1,5 @@
+import { VNode } from 'vue'
+
 export interface ContextOptions {
   useRootSetting: () => unknown
   useAppStore: () => unknown
@@ -5,6 +7,7 @@ export interface ContextOptions {
   useTabs: () => unknown
   useUserStore: () => unknown
   useAppInject: () => unknown
+  useMenuSetting: () => unknown
   useMultipleTabStore: () => unknown
   listenerRouteChange: (
     listenerRouteChange: () => undefined,
@@ -14,6 +17,7 @@ export interface ContextOptions {
   useDesign: (scope: string) => unknown
   getMenus: () => Promise<any>
   getAllParentPath: (menu, path) => string[]
+  Logo: VNode
 }
 
 export let context: ContextOptions = {
@@ -21,8 +25,8 @@ export let context: ContextOptions = {
   useAppStore: () => undefined,
   useUserStore: () => undefined,
   useHeaderSetting: () => undefined,
+  useMenuSetting: () => undefined,
   useAppInject: () => undefined,
-  useUserStore: () => undefined,
   useMultipleTabStore: () => undefined,
   listenerRouteChange: () => undefined,
   usePromise: (fn: Function, config) => undefined,
@@ -30,6 +34,7 @@ export let context: ContextOptions = {
   useDesign: (scope: string) => undefined,
   getMenus: async () => ({}),
   getAllParentPath: (menu, path) => [],
+  Logo: null,
 }
 
 export const initLayout = async (func: AnyFunction<any>) => {

@@ -83,6 +83,7 @@ import naive, {
   NDynamicInput,
   NPopselect,
   NTime,
+  NScrollbar,
 } from 'naive-ui'
 
 import {
@@ -172,6 +173,7 @@ export async function registerComponents(app) {
     DynamicInput: NDynamicInput,
     Popselect: NPopselect,
     Time: NTime,
+    Scrollbar: NScrollbar,
   })
   setMessage(useMessage)
   setNotice(useNotification)

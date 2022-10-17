@@ -5,11 +5,6 @@ import LayoutMenu from './components/menu/index.vue'
 
 <template>
   <layout>
-    <template #sider>
-      <div class="h-full">
-        <LayoutMenu />
-      </div>
-    </template>
     <template #main>
       <RouterView />
     </template>

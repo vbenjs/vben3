@@ -9,16 +9,20 @@ const Form = maps.get('Form')
 const formRef = ref(null)
 const props = defineProps({
   schemas: [],
+  rules: {
+    type: Object,
+    Array,
+    default: {},
+  },
 })
 const attrs = useAttrs()
-
+const getRules = computed(() => innerProps?.rules || props.rules)
 const setProps = (prop: Partial<VbenFormProps>) => {
   prop.schemas.forEach((v) => {
     if (v.defaultValue) {
       fieldValue.value[v.field] = v.defaultValue
     }
   })
-
   innerProps.value = {
     ...prop,
     ...unref(innerProps),
@@ -91,7 +95,7 @@ onMounted(() => {
 <template>
   <div>
     <!--    {{ $attrs }}-->
-    <Form ref="formRef" v-bind="$attrs" :rules="innerProps?.rules">
+    <Form ref="formRef" v-bind="$attrs" :rules="getRules">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>

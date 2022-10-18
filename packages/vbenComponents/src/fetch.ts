@@ -38,7 +38,7 @@ export const fetchProps = {
   },
   resultField: {
     type: String,
-    default: '',
+    default: 'options',
   },
 }
 // 请求获取数据

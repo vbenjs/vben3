@@ -1,7 +1,7 @@
 import { isUrl, cloneDeep, findParentPath, mapTree } from '@vben/utils'
 import { RouteParams } from 'vue-router'
 import { toRaw } from 'vue'
-import { Menu, MenuModule } from '@/types'
+import { Menu, MenuModule } from '@vben/types'
 
 export function getAllParentPath<T = Recordable<any>>(
   treeData: T[],

@@ -1,4 +1,4 @@
-import type { MenuSetting } from '@/types'
+import type { MenuSetting } from '@vben/types'
 
 import { computed, unref, ref } from 'vue'
 

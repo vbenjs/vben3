@@ -7,7 +7,7 @@ import { router } from '@/router'
 import { PermissionModeEnum } from '@/constants'
 import { pathToRegexp } from 'path-to-regexp'
 import { useAppStoreWithOut } from '@/store/config'
-import { Menu } from '@/types'
+import { Menu } from '@vben/types'
 
 // ===========================
 // ==========Helper===========

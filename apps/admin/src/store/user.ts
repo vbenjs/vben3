@@ -8,7 +8,7 @@ import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
 import { PageEnum } from '@/constants'
 import { useAuthStoreWithout } from './auth'
 import { GetUserInfoModel } from '@/apis/sys/user'
-import { UserInfo, RoleInfo } from '@/types/store'
+import { UserInfo, RoleInfo } from '@vben/types'
 import { ErrorMessageMode } from '@vben/types'
 import { isArray } from '@vben/utils'
 

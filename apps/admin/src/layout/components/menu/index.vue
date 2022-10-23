@@ -10,7 +10,7 @@ import {
 } from 'vue-router'
 import { useI18n } from '@vben/locale'
 import { getMenus } from '@/router'
-import type { Menu } from '@/types'
+import type { Menu } from '@vben/types'
 import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { REDIRECT_NAME } from '@vben/constants'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'

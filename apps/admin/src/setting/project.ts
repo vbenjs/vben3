@@ -1,4 +1,4 @@
-import { ProjectConfig } from '@/types'
+import { ProjectConfig } from '@vben/types'
 import {
   CacheTypeEnum,
   ContentLayoutEnum,
@@ -10,7 +10,7 @@ import {
   SettingButtonPositionEnum,
   ThemeEnum,
   TriggerEnum,
-} from '../constants'
+} from '@vben/constants'
 
 import {
   SIDE_BAR_BG_COLOR_LIST,
@@ -151,7 +151,7 @@ export const projectSetting: ProjectConfig = {
   showBreadCrumb: true,
 
   // Whether to show the breadcrumb icon
-  showBreadCrumbIcon: false,
+  showBreadCrumbIcon: true,
 
   // Whether to open back to top
   useOpenBackTop: true,

@@ -9,9 +9,9 @@ import {
   SettingButtonPositionEnum,
   ThemeEnum,
   TriggerEnum,
-} from '../constants'
-
-export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko'
+} from '@vben/constants'
+import { LocaleType } from './config'
+// export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko'
 
 export interface MenuSetting {
   bgColor: string

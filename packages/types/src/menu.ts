@@ -1,4 +1,4 @@
-import { MenuModeEnum, MenuTypeEnum, RoleEnum } from '@/constants'
+import { MenuModeEnum, MenuTypeEnum, RoleEnum } from '@vben/constants'
 import type { RouteMeta } from 'vue-router'
 
 export interface MenuTag {

@@ -42,13 +42,3 @@ export interface GlobEnvConfig {
   // Project abbreviation
   VITE_GLOB_APP_SHORT_NAME: string
 }
-
-
-export interface MultiTabsSetting {
-  cache: boolean;
-  show: boolean;
-  showQuick: boolean;
-  canDrag: boolean;
-  showRedo: boolean;
-  showFold: boolean;
-}

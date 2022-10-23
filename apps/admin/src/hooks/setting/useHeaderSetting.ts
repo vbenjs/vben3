@@ -1,4 +1,4 @@
-import type { HeaderSetting } from '@/types'
+import type { HeaderSetting } from '@vben/types'
 
 import { computed, unref } from 'vue'
 
@@ -7,7 +7,7 @@ import { useAppStoreWithOut } from '@/store/config'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
 import { useFullContent } from '@/hooks/web/useFullContent'
-import { MenuModeEnum } from '@/constants'
+import { MenuModeEnum } from '@vben/constants'
 
 export function useHeaderSetting() {
   const { getFullContent } = useFullContent()

@@ -99,7 +99,6 @@ function initAppConfigStore() {
   const appStore = useAppStoreWithOut()
   const projectConfig = appStore.getProjectConfig
   const projCfg = deepMerge(projectSetting, projectConfig || {})
-
   appStore.setProjectConfig(projCfg)
 }
 
@@ -107,7 +106,6 @@ export async function initApplication() {
   // ! Need to pay attention to the timing of execution
   // ! 需要注意调用时机
   await initPackages()
-
   // Initialize internal system configuration
   initAppConfigStore()
 }

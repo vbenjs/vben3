@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { Layout } from '@vben/layouts'
-import LayoutMenu from './components/menu/index.vue'
 </script>
 
 <template>

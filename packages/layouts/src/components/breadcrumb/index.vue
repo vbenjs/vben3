@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import { RouteLocationMatched, useRouter } from 'vue-router'
-import { ref, watchEffect } from 'vue'
+import { h, ref, watchEffect } from 'vue'
 import { useI18n } from '@vben/locale'
 import { useGo } from '@vben/use'
 import { filterTree, isString } from '@vben/utils'
 import { REDIRECT_NAME } from '@vben/constants'
-// import { Menu } from '@/types'
+import { VbenIconify } from '@vben/vbencomponents'
+import { omit } from '@vben/utils'
+import { Menu } from '@vben/types'
 import { context } from '../../../bridge'
 const { useRootSetting, getAllParentPath, getMenus } = context
 // withDefaults(defineProps<{ theme: 'dark' | 'light' }>(), {
@@ -34,7 +36,6 @@ watchEffect(async () => {
   const parent = getAllParentPath(menus, path)
   const filterMenus = menus.filter((item) => item.path === parent[0])
   const matched = getMatched(filterMenus, parent) as any
-
   if (!matched || matched.length === 0) return
 
   const breadcrumbList = filterItem(matched)
@@ -45,20 +46,23 @@ watchEffect(async () => {
       name: currentRoute.value.name,
     } as unknown as RouteLocationMatched)
   }
+
   routes.value = breadcrumbList
 })
 
 function getMatched(menus: Menu[], parent: string[]) {
-  const metched: Menu[] = []
+  const matched: Menu[] = []
+
   menus.forEach((item) => {
     if (parent.includes(item.path)) {
-      metched.push(item)
+      matched.push(item)
     }
+
     if (item.children?.length) {
-      metched.push(...getMatched(item.children, parent))
+      matched.push(...getMatched(item.children, parent))
     }
   })
-  return metched
+  return matched
 }
 
 function filterItem(list: RouteLocationMatched[]) {
@@ -79,8 +83,8 @@ const renderDropdownLabel = (route: any) => {
   return t(route.title)
 }
 
-const renderDropdownIcon = () => {
-  return getShowBreadCrumbIcon ? '' : null
+const renderDropdownIcon = (option) => {
+  return getShowBreadCrumbIcon ? h(VbenIconify, { icon: option.icon }) : null
 }
 
 const handleClick = (path: string, route: Recordable<any>) => {
@@ -105,17 +109,25 @@ const handleClick = (path: string, route: Recordable<any>) => {
 <template>
   <VbenSpace class="h-10 items-center" justify="space-between">
     <VbenBreadcrumb>
-      <VbenBreadcrumbItem v-for="(route, index) in routes" :key="index"
-        ><VbenDropdown
-          key-field="path"
-          size="small"
-          :options="route.children"
-          :render-label="renderDropdownLabel"
-          :render-icon="renderDropdownIcon"
-          @select="handleClick"
-        >
-          {{ t(route.meta.title as string) }}
-        </VbenDropdown>
+      <VbenBreadcrumbItem v-for="(route, index) in routes" :key="index">
+        <VbenSpace>
+          <VbenIconify
+            :icon="route.icon"
+            v-if="route.icon && getShowBreadCrumbIcon" />
+          <VbenDropdown
+            key-field="path"
+            size="small"
+            :options="route.children"
+            :render-label="renderDropdownLabel"
+            :render-icon="renderDropdownIcon"
+            @select="handleClick"
+          >
+            <VbenSpace>
+              {{ t(route.meta.title) }}
+              <VbenIconify
+                icon="gridicons:dropdown"
+                v-if="route.children" /></VbenSpace></VbenDropdown
+        ></VbenSpace>
       </VbenBreadcrumbItem>
     </VbenBreadcrumb>
   </VbenSpace>

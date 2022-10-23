@@ -28,7 +28,8 @@ export let context: ContextOptions = {
   useMenuSetting: () => undefined,
   useAppInject: () => undefined,
   useMultipleTabStore: () => undefined,
-  listenerRouteChange: () => undefined,
+  listenerRouteChange: (listenerRouteChange: () => undefined, immediate?) =>
+    undefined,
   usePromise: (fn: Function, config) => undefined,
   useTabs: () => undefined,
   useDesign: (scope: string) => undefined,

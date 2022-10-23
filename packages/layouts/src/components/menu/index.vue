@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { createNamespace, mapTree } from '@vben/utils'
+import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 const { Logo, getMenus, listenerRouteChange, useMenuSetting } = context
 import { ref, h, onMounted, unref } from 'vue'
@@ -45,9 +46,8 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
 
 // 路由格式化
 const routerToMenu = (item: RouteRecordItem) => {
-  const { name, children, meta } = item
+  const { name, children, meta, icon } = item
   const title = t(meta.title as string)
-
   return {
     label: () => {
       if (children) {
@@ -64,8 +64,11 @@ const routerToMenu = (item: RouteRecordItem) => {
       )
     },
     key: name,
-    // icon: renderIcon(HomeIcon)
+    icon: renderIcon(icon),
   }
+}
+function renderIcon(icon: string) {
+  return () => h(VbenIconify, { icon })
 }
 </script>
 

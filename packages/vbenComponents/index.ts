@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 export { initComp } from './bridge'
 import VXETable from 'vxe-table'
-
+export { VbenIconify } from './src/iconify'
 //VC组件map
 
 export { theme, locale } from './src/config'

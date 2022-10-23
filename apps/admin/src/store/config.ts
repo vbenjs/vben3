@@ -5,10 +5,10 @@ import {
   MenuSetting,
   MultiTabsSetting,
   ProjectConfig,
-} from '@/types'
+} from '@vben/types'
 import { defineStore } from 'pinia'
 import { deepMerge } from '@vben/utils'
-import { ThemeEnum } from '@/constants'
+import { ThemeEnum } from '@vben/constants'
 import { darkMode } from '@/setting'
 
 export interface ConfigStoreState {

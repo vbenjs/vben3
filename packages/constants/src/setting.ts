@@ -1,7 +1,3 @@
-export * from './breakpoint'
-export * from './menu'
-export * from './sidebar'
-
 export enum ContentLayoutEnum {
   // auto width
   FULL = 'full',
@@ -44,17 +40,6 @@ export enum RoleEnum {
 
   // tester
   TEST = 'test',
-}
-
-export enum PageEnum {
-  // basic login path
-  BASE_LOGIN = '/login',
-  // basic home path
-  BASE_HOME = '/dashboard',
-  // error page path
-  ERROR_PAGE = '/exception',
-  // error log page path
-  ERROR_LOG_PAGE = '/error-log/list',
 }
 
 export enum ComponentSizeEnum {

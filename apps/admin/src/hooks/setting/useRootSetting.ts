@@ -1,7 +1,7 @@
 // import type { ProjectConfig } from '@/types'
 import { computed } from 'vue'
 import { useAppStoreWithOut } from '@/store/config'
-import { ContentLayoutEnum } from '@/constants'
+import { ContentLayoutEnum } from '@vben/constants'
 
 // type RootSetting = Omit<
 //   ProjectConfig,

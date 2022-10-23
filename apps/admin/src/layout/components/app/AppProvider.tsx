@@ -3,7 +3,7 @@ import { namespace } from '@/setting'
 import { defineComponent, toRefs, ref, unref } from 'vue'
 import { createAppProviderContext } from '@/hooks/web/useAppContext'
 import { useAppStoreWithOut } from '@/store/config'
-import { MenuModeEnum, MenuTypeEnum } from '@/constants'
+import { MenuModeEnum, MenuTypeEnum } from '@vben/constants'
 import { useMsg, useNotice } from '@vben/vbencomponents'
 import { setMsg, setNoice } from '@vben/request'
 

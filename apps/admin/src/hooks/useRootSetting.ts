@@ -1,12 +1,12 @@
-// import type { ProjectConfig } from '@/types'
+import type { ProjectConfig } from '@vben/types'
 import { computed } from 'vue'
 import { useAppStoreWithOut } from '@/store/config'
-import { ContentLayoutEnum } from '@/constants'
+import { ContentLayoutEnum } from '@vben/constants'
 
-// type RootSetting = Omit<
-//   ProjectConfig,
-//   'locale' | 'headerSetting' | 'menuSetting' | 'multiTabsSetting'
-// >
+type RootSetting = Omit<
+  ProjectConfig,
+  'locale' | 'headerSetting' | 'menuSetting' | 'multiTabsSetting'
+>
 
 export function useRootSetting() {
   const appStore = useAppStoreWithOut()

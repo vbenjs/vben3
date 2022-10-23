@@ -9,7 +9,7 @@ import { useUserStore } from './user'
 import { getPermCode } from '@/apis/auth'
 import { toRaw } from 'vue'
 import { projectSetting } from '@/setting'
-import { PermissionModeEnum } from '@/constants'
+import { PermissionModeEnum } from '@vben/constants'
 import {
   flatMultiLevelRoutes,
   transformObjToRoute,

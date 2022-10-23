@@ -10,7 +10,7 @@ import {
   MenuModeEnum,
   MenuTypeEnum,
   TriggerEnum,
-} from '@/constants'
+} from '@vben/constants'
 import { useFullContent } from '@/hooks/web/useFullContent'
 
 const mixSideHasChildren = ref(false)

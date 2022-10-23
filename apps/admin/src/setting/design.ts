@@ -1,4 +1,4 @@
-import { ThemeEnum } from '@/constants'
+import { ThemeEnum } from '@vben/constants'
 
 export const namespace = 'vben'
 

@@ -7,7 +7,7 @@ export interface tableMethod {
   setProps: (props: VbenTableProps) => void
 }
 
-export function useTable(props: VbenTableProps) {
+export function useTable(props: VbenTableProps):[Function,tableMethod] {
   const tableRef = ref<Nullable<tableMethod>>(null)
 
   function register(instance) {

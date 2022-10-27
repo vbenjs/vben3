@@ -40,7 +40,6 @@ export function useForm(props: VbenFormProps) {
       shouldRuleBeApplied?: boolean,
     ): Promise<any> => {
       const form = await getInstance()
-      console.log(form)
       return form.validate(validateCallback, shouldRuleBeApplied)
     },
     restoreValidation: async () => {

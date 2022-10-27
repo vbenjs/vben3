@@ -22,6 +22,11 @@ const setProps = (prop: Partial<VbenFormProps>) => {
     if (v.defaultValue) {
       fieldValue.value[v.field] = v.defaultValue
     }
+    if (v.required || !v.rule) {
+      v.rule = {
+        required: true,
+      }
+    }
   })
   innerProps.value = {
     ...prop,
@@ -84,8 +89,8 @@ onMounted(() => {
   emit('register', {
     setProps,
     getFieldValue,
-    validate: formRef.value.validate,
-    restoreValidation: formRef.value.validate,
+    validate: formRef.value?.validate,
+    restoreValidation: formRef.value?.restoreValidation,
     updateSchemas: (schemas) => {
       innerProps.value.schemas = schemas
     },

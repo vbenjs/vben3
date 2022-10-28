@@ -17,7 +17,7 @@ export interface ContextOptions {
   useDesign: (scope: string) => unknown
   getMenus: () => Promise<any>
   getAllParentPath: (menu, path) => string[]
-  Logo: VNode
+  Logo: VNode | null
 }
 
 export let context: ContextOptions = {

@@ -9,6 +9,7 @@ import AppSearch from './components/search/AppSearch.vue'
 import AppNotify from './components/notify/index.vue'
 import AppFullScreen from './components/FullScreen.vue'
 import AppSetting from './components/setting/index.vue'
+import userDropdown from './components/user-dropdown/index.vue'
 import { context } from '../bridge'
 const { useHeaderSetting, useRootSetting } = context
 import { SettingButtonPositionEnum } from '@vben/constants'
@@ -69,6 +70,7 @@ onMounted(() => {
                     :reload="true"
                     :showText="false"
                   />
+                  <userDropdown />
                   <AppSetting v-if="getShowSetting" />
                 </VbenSpace>
               </slot></div

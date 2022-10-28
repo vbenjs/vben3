@@ -2,7 +2,7 @@ import type { MultiTabsSetting } from '@vben/types'
 // import type { BeforeMiniState } from '#/store';
 import { defineStore } from 'pinia'
 
-import { APP_DARK_MODE_KEY_, ThemeEnum } from '@vben/enums'
+import { APP_DARK_MODE_KEY_, ThemeEnum } from '@vben/constants'
 // import { Persistent } from '@/utils/cache/persistent';
 // import { resetRouter } from '/@/router'
 // import { deepMerge } from '/@/utils';

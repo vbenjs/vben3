@@ -67,7 +67,6 @@ const handleSelect = () => {}
         v-for="tab in getTabsState"
         :key="tab.query ? tab.fullPath : tab.path"
         :name="tab.fullPath"
-        :closable="tab.meta && !tab.meta.affix"
       >
         <template #tab>
           <div @contextmenu="dropdown.openDropdown($event, tab)">

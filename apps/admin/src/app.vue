@@ -6,8 +6,6 @@ import { getGlobalConfig } from '@vben/utils'
 import AppProvider from '@/layout/components/app/AppProvider'
 import { dateEnUS, dateZhCN, enUS, zhCN } from 'naive-ui'
 import { useAppStore } from '@/store/modules/app'
-import { computed } from 'vue'
-import { ThemeEnum } from '@vben/enums'
 // Support Multi-language
 const { getLocale } = useLocale()
 // Listening to page changes and dynamically changing site titles

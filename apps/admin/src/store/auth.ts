@@ -3,13 +3,12 @@ import { pinia } from '@/pinia'
 import { asyncRoutes, PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
 import { filterTree } from '@vben/utils'
 import { Menu } from '@vben/types'
-import { PageEnum } from '@vben/constants'
 import { useAppStoreWithOut } from './config'
 import { useUserStore } from './user'
 import { getPermCode } from '@/apis/auth'
 import { toRaw } from 'vue'
 import { projectSetting } from '@/setting'
-import { PermissionModeEnum } from '@vben/constants'
+import { PermissionModeEnum, PageEnum } from '@vben/constants'
 import {
   flatMultiLevelRoutes,
   transformObjToRoute,

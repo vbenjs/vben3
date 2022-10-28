@@ -1,7 +1,4 @@
-export const SIDE_BAR_MINI_WIDTH = 48;
-export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80;
-
-export enum ContentEnum {
+export enum ContentLayoutEnum {
   // auto width
   FULL = 'full',
   // fixed width
@@ -49,4 +46,24 @@ export enum RouterTransitionEnum {
   FADE = 'fade',
   FADE_BOTTOM = 'fade-bottom',
   FADE_SCALE = 'fade-scale',
+}
+
+export enum ComponentSizeEnum {
+  DEFAULT = 'default',
+  SMALL = 'small',
+  LARGE = 'large',
+}
+
+export enum ComponentSizeValueEnum {
+  DEFAULT = 48,
+  SMALL = 16,
+  LARGE = 64,
+}
+
+export enum ErrorTypeEnum {
+  VUE = 'vue',
+  SCRIPT = 'script',
+  RESOURCE = 'resource',
+  AJAX = 'ajax',
+  PROMISE = 'promise',
 }

@@ -30,7 +30,6 @@
     "@vben/constants": "workspace:*",
     "@vben/demo": "workspace:*",
     "@vben/directives": "workspace:*",
-    "@vben/enums": "workspace:*",
     "@vben/hooks": "workspace:*",
     "@vben/layouts": "workspace:*",
     "@vben/locale": "workspace:*",

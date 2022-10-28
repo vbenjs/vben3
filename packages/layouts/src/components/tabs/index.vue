@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
 import { useRouter } from 'vue-router'
-import { computed, ref, unref, watch } from 'vue'
+import { computed, nextTick, ref, unref, watch } from 'vue'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 import { useGo } from '@vben/use'
 import TabRedo from './components/TabRedo.vue'
+import TabDropdown from './components/TabDropdown.vue'
 import { context } from '../../../bridge'
 const { useMultipleTabStore, listenerRouteChange, useUserStore } = context
 const { t } = useI18n()
@@ -51,23 +52,33 @@ listenerRouteChange((route) => {
     tabStore.checkTab(unref(route))
   }
 })
-
 watch(activeTabRef, (path) => {
   go(path, false)
 })
+const dropdown = ref(null)
+
+const handleSelect = () => {}
 </script>
 
 <template>
-  <VbenTabs v-model:value="activeTabRef" type="card" @close="handleClose">
-    <VbenTabPane
-      v-for="tab in getTabsState"
-      :key="tab.query ? tab.fullPath : tab.path"
-      :tab="t(tab.meta.title)"
-      :name="tab.fullPath"
-      :closable="tab.meta && !tab.meta.affix"
-    />
-    <template #suffix>
-      <div class="mr-2"><TabRedo v-if="getTabsState" /></div>
-    </template>
-  </VbenTabs>
+  <div>
+    <VbenTabs v-model:value="activeTabRef" type="card" @close="handleClose">
+      <VbenTabPane
+        v-for="tab in getTabsState"
+        :key="tab.query ? tab.fullPath : tab.path"
+        :name="tab.fullPath"
+        :closable="tab.meta && !tab.meta.affix"
+      >
+        <template #tab>
+          <div @contextmenu="dropdown.openDropdown($event, tab)">
+            {{ t(tab.meta.title) }}
+          </div>
+        </template>
+      </VbenTabPane>
+      <template #suffix>
+        <div class="mr-2"><TabRedo v-if="getTabsState" /></div>
+      </template>
+    </VbenTabs>
+    <TabDropdown ref="dropdown" @select="handleSelect" />
+  </div>
 </template>

@@ -93,6 +93,11 @@ export function useTabs(_router?: Router) {
         break
     }
   }
+  function getTabIndex(tab): number {
+    console.log(tab)
+    console.log(tabStore.getTabList.findIndex((v) => v == tab))
+    return tabStore.getTabList.findIndex((v) => v == tab)
+  }
 
   return {
     refreshPage: () => handleTabAction(TableActionEnum.REFRESH),
@@ -107,5 +112,6 @@ export function useTabs(_router?: Router) {
       updateTabTitle(title, tab),
     updatePath: (fullPath: string, tab?: RouteLocationNormalized) =>
       updateTabPath(fullPath, tab),
+    getTabIndex: (tab: RouteLocationNormalized): number => getTabIndex(tab),
   }
 }

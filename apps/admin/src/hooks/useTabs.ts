@@ -94,8 +94,6 @@ export function useTabs(_router?: Router) {
     }
   }
   function getTabIndex(tab): number {
-    console.log(tab)
-    console.log(tabStore.getTabList.findIndex((v) => v == tab))
     return tabStore.getTabList.findIndex((v) => v == tab)
   }
 

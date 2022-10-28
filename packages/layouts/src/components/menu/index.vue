@@ -80,8 +80,10 @@ function renderIcon(icon: string) {
         v-model:value="activeKey"
         :options="menusRef"
         :collapsed="getCollapsed"
-        :collapsed-width="64"
+        :collapsed-width="48"
         :collapsed-icon-size="22"
+        :indent="18"
+        :root-indent="18"
       />
     </VbenScrollbar>
   </div>

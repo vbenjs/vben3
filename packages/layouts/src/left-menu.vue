@@ -12,7 +12,7 @@ import AppSetting from './components/setting/index.vue'
 import AppDarkMode from './components/darkMode/index.vue'
 import userDropdown from './components/user-dropdown/index.vue'
 import { context } from '../bridge'
-const { useHeaderSetting, useRootSetting } = context
+const { useHeaderSetting, useRootSetting, useMenuSetting } = context
 import { SettingButtonPositionEnum } from '@vben/constants'
 const {
   getHeaderTheme,
@@ -25,6 +25,7 @@ const {
   getShowNotice,
 } = useHeaderSetting()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
+const { toggleCollapsed, getCollapsed } = useMenuSetting()
 
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
@@ -47,7 +48,13 @@ onMounted(() => {
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
-    <VbenLayoutSider show-trigger :collapsed-width="40" :width="160"
+    <VbenLayoutSider
+      show-trigger
+      :collapsed-width="48"
+      :width="160"
+      collapse-mode="width"
+      :collapsed="getCollapsed"
+      @update:collapsed="toggleCollapsed"
       ><slot name="sider"><LayoutMenu /></slot
     ></VbenLayoutSider>
     <VbenLayout>

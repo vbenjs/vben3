@@ -67,6 +67,7 @@ async function initPackages() {
       return {
         useLocale,
         localeList,
+        useAppStore,
       }
     })
   }

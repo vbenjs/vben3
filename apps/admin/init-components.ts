@@ -1,5 +1,6 @@
 // 按需导入组件
 import naive, {
+  darkTheme,
   NTag,
   NCard,
   NDivider,
@@ -174,6 +175,7 @@ export async function registerComponents(app) {
     Popselect: NPopselect,
     Time: NTime,
     Scrollbar: NScrollbar,
+    DarkTheme: darkTheme,
   })
   setMessage(useMessage)
   setNotice(useNotification)

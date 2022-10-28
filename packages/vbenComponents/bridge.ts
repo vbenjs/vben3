@@ -8,10 +8,12 @@ export type LocaleReturn = {
 export interface ContextOptions {
   useLocale: () => LocaleReturn
   localeList: Array<any>
+  useAppStore: () => unknown
 }
 
 export let context: ContextOptions = {
   useLocale: () => ({} as LocaleReturn),
+  useAppStore: () => undefined,
   localeList: [],
 }
 

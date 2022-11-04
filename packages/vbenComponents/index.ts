@@ -4,7 +4,6 @@ import VXETable from 'vxe-table'
 export { VbenIconify } from './src/iconify'
 //VC组件map
 
-export { theme, locale } from './src/config'
 // 初始化组件
 // global 是否全局注册
 import { maps, components } from './src'

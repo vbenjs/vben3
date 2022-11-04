@@ -87,12 +87,7 @@ import naive, {
   NScrollbar,
 } from 'naive-ui'
 
-import {
-  initVbenComponent,
-  locale,
-  setNotice,
-  setMessage,
-} from '@vben/vbencomponents'
+import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
 
 export async function registerComponents(app) {
   initVbenComponent(app, {
@@ -172,7 +167,7 @@ export async function registerComponents(app) {
     H5: NH5,
     H6: NH6,
     DynamicInput: NDynamicInput,
-    Popselect: NPopselect,
+    PopSelect: NPopselect,
     Time: NTime,
     Scrollbar: NScrollbar,
     DarkTheme: darkTheme,
@@ -181,5 +176,4 @@ export async function registerComponents(app) {
   setNotice(useNotification)
   // @ts-ignore
   // app.use(naive)
-  locale.locale = zhCN
 }

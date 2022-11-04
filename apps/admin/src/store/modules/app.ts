@@ -32,9 +32,8 @@ export const useAppStore = defineStore({
       return this.pageLoading
     },
     getDarkMode(): ThemeEnum {
-      console.log(localStorage.getItem(APP_DARK_MODE_KEY_))
       return (
-        (localStorage.getItem(APP_DARK_MODE_KEY_) as ThemeEnum) || this.darkMode
+        this.darkMode || (localStorage.getItem(APP_DARK_MODE_KEY_) as ThemeEnum)
       )
       // return 'dark'
     },

@@ -5,17 +5,21 @@ import type { VbenTableProps } from './type'
 import { computed, PropType, ref, unref, useAttrs, useSlots, watch } from 'vue'
 import { isBoolean, isFunction } from '@vben/utils'
 import { VxeTableInstance } from 'vxe-table'
-import { theme, ThemeEnum } from '../../config/src/data'
+import { ThemeEnum } from '@vben/constants'
+import { context } from '../../../bridge'
+const { useAppStore } = context
+const appStore = useAppStore()
 import { useInterceptor } from './hooks'
-if (theme.value == ThemeEnum.Dark) {
-  import('./scss/dark.scss')
-}
+
 useInterceptor()
 
 watch(
-  () => theme.value,
+  () => appStore.getDarkMode,
   () => {
-    if (theme.value === ThemeEnum.Light) {
+    if (appStore.getDarkMode == ThemeEnum.DARK) {
+      import('./scss/dark.scss')
+    }
+    if (appStore.getDarkMode === ThemeEnum.LIGHT) {
       window.location.reload()
     }
   },
@@ -24,7 +28,8 @@ const attrs = useAttrs()
 const emit = defineEmits(['register'])
 const titleClass = computed(() => {
   return {
-    backgroundColor: theme.value === ThemeEnum.Dark ? '#262626' : '#FFF',
+    backgroundColor:
+      appStore.getDarkMode === ThemeEnum.DARK ? '#262626' : '#FFF',
   }
 })
 const props = defineProps({

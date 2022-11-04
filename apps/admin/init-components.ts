@@ -93,7 +93,7 @@ import {
   setNotice,
   setMessage,
 } from '@vben/vbencomponents'
-import { Card } from 'ant-design-vue'
+
 export async function registerComponents(app) {
   initVbenComponent(app, {
     Drawer: NDrawer,

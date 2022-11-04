@@ -8,7 +8,7 @@ import {
   TwitterCircleFilled
 } from '@ant-design/icons-vue';
 import { useI18n } from '@vben/locale';
-import { Modal, notification } from 'ant-design-vue';
+import { notice } from '@vben/vbencomponents'
 import { useUserStore } from '@/store/user';
 import {
   LoginStateEnum,
@@ -33,7 +33,6 @@ const formData = reactive({
 });
 
 const { validForm } = useFormValid(formRef);
-
 //onKeyStroke('Enter', handleLogin);
 
 const show = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
@@ -49,19 +48,20 @@ async function handleLogin() {
       username: formData.account,
       mode: 'none' //不要默认的错误提示
     });
+
     if (userInfo) {
-      notification.success({
-        message: t('sys.login.loginSuccessTitle'),
-        description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realname}`,
-        duration: 3
+      notice.success({
+        content: t('sys.login.loginSuccessTitle'),
+        meta: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realname}`,
+        duration: 3000
       });
     }
   } catch (error) {
-    Modal.error({
-      title: t('sys.api.errorTip'),
-      content:
-        (error as unknown as Error).message || t('sys.api.networkExceptionMsg')
-    });
+    // dialog.error({
+    //   title: t('sys.api.errorTip'),
+    //   content:
+    //     (error as unknown as Error).message || t('sys.api.networkExceptionMsg')
+    // });
   } finally {
     loading.value = false;
   }

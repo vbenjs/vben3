@@ -36,12 +36,12 @@ async function handleLogin() {
   <template v-if="show">
     <login-form-title class="enter-x" />
     <vben-form
-      class="p-4 enter-x rd-2"
+      class="rd-2"
       :model="formData"
       :rules="getFormRules"
       ref="formRef"
     >
-      <vben-form-item name="mobile" class="enter-x">
+      <vben-form-item name="mobile" class="enter-x" inline :show-label="false">
         <vben-input
           size="large"
           v-model:value="formData.mobile"
@@ -49,7 +49,7 @@ async function handleLogin() {
           class="fix-auto-fill"
         />
       </vben-form-item>
-      <vben-form-item name="sms" class="enter-x">
+      <vben-form-item name="sms" class="enter-x" inline :show-label="false">
         <count-down-input
           size="large"
           class="fix-auto-fill"

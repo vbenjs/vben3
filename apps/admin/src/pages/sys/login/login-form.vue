@@ -70,14 +70,13 @@ async function handleLogin() {
 <template>
   <login-form-title v-show="show" class="enter-x" />
   <vben-form
-    class="p-4 enter-x"
     :model="formData"
     :rules="getFormRules"
     ref="formRef"
     v-show="show"
     @keypress.enter="handleLogin"
   >
-    <vben-form-item :label="t('sys.login.userName')" class="enter-x">
+    <vben-form-item class="enter-x" inline :show-label="false" >
       <vben-input
         size="large"
         v-model:value="formData.account"
@@ -85,9 +84,10 @@ async function handleLogin() {
         class="fix-auto-fill"
       />
     </vben-form-item>
-    <vben-form-item :label="t('sys.login.password')" class="enter-x">
+    <vben-form-item class="enter-x" inline :show-label="false">
       <vben-input
         type="password"
+        show-password-on="click"
         size="large"
         v-model:value="formData.password"
         :placeholder="t('sys.login.password')"
@@ -96,18 +96,20 @@ async function handleLogin() {
 
     <vben-grid class="enter-x">
       <vben-grid-item :span="12">
-        <vben-form-item>
+        <vben-form-item inline :show-label="false">
           <!-- No logic, you need to deal with it yourself -->
           <vben-checkbox v-model:checked="rememberMe" size="small">
             {{t('sys.login.rememberMe')}}
           </vben-checkbox>
         </vben-form-item>
       </vben-grid-item>
-      <vben-grid-item :span="12">
-        <vben-form-item :style="{ 'text-align': 'right' }">
+      <vben-grid-item :span="12" >
+        <vben-form-item inline :show-label="false" class="justify-items-end" >
           <!-- No logic, you need to deal with it yourself -->
           <vben-button
-            type="link"
+            text
+            tag="a"
+            type="primary"
             size="small"
             @click="setLoginState(LoginStateEnum.RESET_PASSWORD)"
           >
@@ -117,7 +119,7 @@ async function handleLogin() {
       </vben-grid-item>
     </vben-grid>
 
-    <vben-form-item class="enter-x">
+    <vben-form-item class="enter-x" inline :show-label="false" >
       <vben-button
         type="primary"
         size="large"

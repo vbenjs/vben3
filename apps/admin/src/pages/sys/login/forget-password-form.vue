@@ -33,12 +33,11 @@ async function handleReset() {
   <template v-if="show">
     <login-form-title class="enter-x" />
     <vben-form
-      class="p-4 enter-x"
       :model="formData"
       :rules="getFormRules"
       ref="formRef"
     >
-      <vben-form-item name="account" class="enter-x">
+      <vben-form-item name="account" class="enter-x" inline :show-label="false">
         <vben-input
           size="large"
           v-model:value="formData.account"
@@ -46,14 +45,14 @@ async function handleReset() {
         />
       </vben-form-item>
 
-      <vben-form-item name="mobile" class="enter-x">
+      <vben-form-item name="mobile" class="enter-x" inline :show-label="false">
         <vben-input
           size="large"
           v-model:value="formData.mobile"
           :placeholder="t('sys.login.mobile')"
         />
       </vben-form-item>
-      <vben-form-item name="sms" class="enter-x">
+      <vben-form-item name="sms" class="enter-x" inline :show-label="false">
         <count-down-input
           size="large"
           v-model:value="formData.sms"

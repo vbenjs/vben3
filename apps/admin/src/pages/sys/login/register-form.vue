@@ -41,12 +41,11 @@ async function handleRegister() {
   <template v-if="getShow">
     <login-form-title class="enter-x" />
     <vben-form
-      class="p-4 enter-x"
       :model="formData"
       :rules="getFormRules"
       ref="formRef"
     >
-      <vben-form-item name="account" class="enter-x">
+      <vben-form-item name="account" class="enter-x" inline :show-label="false">
         <vben-input
           class="fix-auto-fill"
           size="large"
@@ -54,7 +53,7 @@ async function handleRegister() {
           :placeholder="t('sys.login.userName')"
         />
       </vben-form-item>
-      <vben-form-item name="mobile" class="enter-x">
+      <vben-form-item name="mobile" class="enter-x" inline :show-label="false">
         <vben-input
           size="large"
           v-model:value="formData.mobile"
@@ -62,7 +61,7 @@ async function handleRegister() {
           class="fix-auto-fill"
         />
       </vben-form-item>
-      <vben-form-item name="sms" class="enter-x">
+      <vben-form-item name="sms" class="enter-x" inline :show-label="false">
         <count-down-input
           size="large"
           class="fix-auto-fill"
@@ -70,7 +69,7 @@ async function handleRegister() {
           :placeholder="t('sys.login.smsCode')"
         />
       </vben-form-item>
-      <vben-form-item name="password" class="enter-x">
+      <vben-form-item name="password" class="enter-x" inline :show-label="false">
         <vben-input
           size="large"
           visibilityToggle
@@ -78,7 +77,7 @@ async function handleRegister() {
           :placeholder="t('sys.login.password')"
         />
       </vben-form-item>
-      <vben-form-item name="confirmPassword" class="enter-x">
+      <vben-form-item name="confirmPassword" class="enter-x" inline :show-label="false">
         <vben-input
           size="large"
           type="password"
@@ -88,7 +87,7 @@ async function handleRegister() {
         />
       </vben-form-item>
 
-      <vben-form-item class="enter-x" name="policy">
+      <vben-form-item class="enter-x" name="policy" inline :show-label="false">
         <!-- No logic, you need to deal with it yourself -->
         <vben-checkbox v-model:checked="formData.policy" size="small">
           {{ t('sys.login.policy') }}

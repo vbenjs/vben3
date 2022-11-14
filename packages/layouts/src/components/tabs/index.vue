@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Sortable from 'sortablejs'
 import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { computed, nextTick, ref, unref, watch } from 'vue'
@@ -57,20 +58,32 @@ watch(activeTabRef, (path) => {
 })
 const dropdown = ref(null)
 
+// 获取tabs内dom 设置拖拽
+nextTick(() => {
+  const selection = document.querySelector(
+    '#drag > div > div > div > div > div.n-tabs-wrapper',
+  )
+  Sortable.create(selection)
+})
 const handleSelect = () => {}
 </script>
 
 <template>
   <div>
-    <VbenTabs v-model:value="activeTabRef" type="card" @close="handleClose">
+    <VbenTabs
+      v-model:value="activeTabRef"
+      type="card"
+      @close="handleClose"
+      id="drag"
+    >
       <VbenTabPane
-        v-for="tab in getTabsState"
-        :key="tab.query ? tab.fullPath : tab.path"
-        :name="tab.fullPath"
+        v-for="item in getTabsState"
+        :key="item.query ? item.fullPath : item.path"
+        :name="item.fullPath"
       >
         <template #tab>
-          <div @contextmenu="dropdown.openDropdown($event, tab)">
-            {{ t(tab.meta.title) }}
+          <div @contextmenu="dropdown.openDropdown($event, item)">
+            {{ t(item.meta.title) }}
           </div>
         </template>
       </VbenTabPane>

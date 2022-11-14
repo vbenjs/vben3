@@ -22,7 +22,7 @@ let timeId: TimeoutHandle
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
-    darkMode: ThemeEnum.LIGHT,
+    darkMode: undefined,
     pageLoading: false,
     // projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
     // beforeMiniInfo: {},
@@ -33,8 +33,13 @@ export const useAppStore = defineStore({
     },
     getDarkMode(): ThemeEnum {
       return (
-        this.darkMode || (localStorage.getItem(APP_DARK_MODE_KEY_) as ThemeEnum)
+        this.darkMode ||
+        (localStorage.getItem(APP_DARK_MODE_KEY_) as ThemeEnum) ||
+        ThemeEnum.LIGHT
       )
+      // return this.darkMode
+      //   ? this.darkMode
+      //   : (localStorage.getItem(APP_DARK_MODE_KEY_) as ThemeEnum)
       // return 'dark'
     },
 

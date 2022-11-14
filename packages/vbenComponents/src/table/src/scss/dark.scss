@@ -1,4 +1,6 @@
 // 修改样式变量
+//@import 'vxe-table/styles/variable.scss';
+
 $vxe-font-color: #fff;
 
 $vxe-table-header-background-color: #262626;
@@ -20,4 +22,5 @@ $vxe-table-menu-background-color: #262626;
 $vxe-input-background-color: #151515;
 $vxe-select-panel-background-color: #151515;
 $vxe-select-option-hover-background-color: #262626;
-@import '../../../../node_modules/vxe-table/styles/index';
+
+@import 'vxe-table/styles/index';

@@ -2,7 +2,7 @@
 import 'xe-utils'
 import 'vxe-table/styles/index.scss'
 import type { VbenTableProps } from './type'
-import { computed, PropType, ref, unref, useAttrs, useSlots, watch } from 'vue'
+import { computed, PropType, ref, unref, useAttrs, watch } from 'vue'
 import { isBoolean, isFunction } from '@vben/utils'
 import { VxeTableInstance } from 'vxe-table'
 import { ThemeEnum } from '@vben/constants'
@@ -113,7 +113,7 @@ const getPageConfig = (options: VbenTableProps) => {
 const setProps = (prop: Partial<VbenTableProps>) => {
   innerProps.value = { ...unref(innerProps), ...prop }
 }
-defineExpose({ reload })
+defineExpose({ reload, Ref: xGrid })
 emit('register', { reload, setProps })
 </script>
 <template>

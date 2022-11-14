@@ -3,7 +3,7 @@ import { createNamespace, mapTree } from '@vben/utils'
 import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 const { Logo, getMenus, listenerRouteChange, useMenuSetting } = context
-import { ref, h, onMounted, unref } from 'vue'
+import { ref, h, onMounted, unref, nextTick } from 'vue'
 import {
   RouteLocationNormalizedLoaded,
   RouterLink,
@@ -17,14 +17,21 @@ const { bem } = createNamespace('layout-menu')
 const { t } = useI18n()
 const { currentRoute } = useRouter()
 const { getCollapsed } = useMenuSetting()
-
-const menusRef = ref([])
+const menuRef = ref(null)
+const menuList = ref([])
 const activeKey = ref()
-
+// 定位菜单选择 与 当前路由匹配
+const showOption = () => {
+  nextTick(() => {
+    if (!menuRef.value) return
+    menuRef.value.Ref.showOption()
+  })
+}
 // TODO 静态路由 待实现
 onMounted(async () => {
   const menus = await getMenus()
-  menusRef.value = mapTree(menus, { conversion: (menu) => routerToMenu(menu) })
+  menuList.value = mapTree(menus, { conversion: (menu) => routerToMenu(menu) })
+  showOption()
 })
 
 listenerRouteChange((route) => {
@@ -36,11 +43,11 @@ listenerRouteChange((route) => {
   if (currentActiveMenu) {
     activeKey.value = currentActiveMenu
   }
+  showOption()
 })
 
 async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
   const menu = route || unref(currentRoute)
-
   activeKey.value = menu.name
 }
 
@@ -78,12 +85,13 @@ function renderIcon(icon: string) {
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
         v-model:value="activeKey"
-        :options="menusRef"
+        :options="menuList"
         :collapsed="getCollapsed"
         :collapsed-width="48"
         :collapsed-icon-size="22"
         :indent="18"
         :root-indent="18"
+        ref="menuRef"
       />
     </VbenScrollbar>
   </div>

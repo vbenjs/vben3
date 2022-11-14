@@ -1,4 +1,5 @@
 import { VNode } from 'vue'
+import { RouteLocationNormalized } from 'vue-router'
 
 export interface ContextOptions {
   useRootSetting: () => unknown
@@ -10,8 +11,8 @@ export interface ContextOptions {
   useMenuSetting: () => unknown
   useMultipleTabStore: () => unknown
   listenerRouteChange: (
-    listenerRouteChange: () => undefined,
-    immediate,
+    callback: (route: RouteLocationNormalized) => void,
+    immediate?: boolean,
   ) => unknown
   usePromise: (fn: Function, config?: unknown) => unknown
   useDesign: (scope: string) => unknown
@@ -28,8 +29,8 @@ export let context: ContextOptions = {
   useMenuSetting: () => undefined,
   useAppInject: () => undefined,
   useMultipleTabStore: () => undefined,
-  listenerRouteChange: (listenerRouteChange: () => undefined, immediate?) =>
-    undefined,
+  listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>
+    true,
   usePromise: (fn: Function, config) => undefined,
   useTabs: () => undefined,
   useDesign: (scope: string) => undefined,

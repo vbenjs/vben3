@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "vue": "^3.2.38",
-    "@vben/vbencomponents": "workspace:*",
     "@vben/request": "workspace:*",
-    "@vben/utils": "workspace:*"
+    "@vben/utils": "workspace:*",
+    "@vben/vbencomponents": "workspace:*",
+    "vue": "^3.2.38"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

@@ -10,9 +10,9 @@
   "dependencies": {
     "@vben/constants": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vueuse/core": "^8.9.4",
+    "@vueuse/core": "^9.5.0",
     "lodash-es": "^4.17.21",
-    "vue": "3.2.36"
+    "vue": "^3.2.45"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",

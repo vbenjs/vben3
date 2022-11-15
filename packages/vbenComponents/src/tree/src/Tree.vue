@@ -111,7 +111,7 @@ const emit = defineEmits(['update:pattern'])
         ><VbenInputGroup
           ><VbenInput
             size="tiny"
-            v-model:value="pattern"
+            :value="pattern"
             @update:value="emit('update:pattern', pattern)"
           >
           </VbenInput>

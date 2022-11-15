@@ -11,8 +11,8 @@
     "@vben/constants": "workspace:*",
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vueuse/core": "^8.9.4",
-    "vue": "3.2.36",
+    "@vueuse/core": "^9.5.0",
+    "vue": "3.2.45",
     "vue-i18n": "^9.2.2"
   }
 }

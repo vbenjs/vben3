@@ -9,13 +9,13 @@
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
   },
   "dependencies": {
-    "@vue/runtime-core": "3.2.36",
-    "@vueuse/core": "^8.9.4",
-    "@vueuse/shared": "^8.9.4",
-    "dayjs": "^1.11.4",
+    "@vue/runtime-core": "3.2.45",
+    "@vueuse/core": "^9.5.0",
+    "@vueuse/shared": "^9.5.0",
+    "dayjs": "^1.11.6",
     "lodash-es": "^4.17.21",
-    "pinia": "2.0.14",
-    "vue": "3.2.36",
+    "pinia": "2.0.23",
+    "vue": "3.2.45",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

@@ -107,27 +107,27 @@ const handleClick = (path: string, route: Recordable<any>) => {
 </script>
 
 <template>
-  <VbenSpace class="h-10 items-center" justify="space-between">
+  <VbenSpace align="center" justify="space-between">
     <VbenBreadcrumb>
       <VbenBreadcrumbItem v-for="(route, index) in routes" :key="index">
-        <VbenSpace>
-          <VbenIconify
-            :icon="route.icon"
-            v-if="route.icon && getShowBreadCrumbIcon" />
-          <VbenDropdown
-            key-field="path"
-            size="small"
-            :options="route.children"
-            :render-label="renderDropdownLabel"
-            :render-icon="renderDropdownIcon"
-            @select="handleClick"
-          >
-            <VbenSpace>
-              {{ t(route.meta.title) }}
-              <VbenIconify
-                icon="gridicons:dropdown"
-                v-if="route.children" /></VbenSpace></VbenDropdown
-        ></VbenSpace>
+        <VbenDropdown
+          key-field="path"
+          size="small"
+          :options="route.children"
+          :render-label="renderDropdownLabel"
+          :render-icon="renderDropdownIcon"
+          @select="handleClick"
+        >
+          <div class="flex items-center">
+            <VbenIconify
+              :icon="route.icon"
+              v-if="route.icon && getShowBreadCrumbIcon" />
+            <span class="mr-1.2 ml-1.2">{{ t(route.meta.title) }}</span>
+            <VbenIconify
+              icon="gridicons:dropdown"
+              v-if="route.children" />
+          </div>
+        </VbenDropdown>
       </VbenBreadcrumbItem>
     </VbenBreadcrumb>
   </VbenSpace>

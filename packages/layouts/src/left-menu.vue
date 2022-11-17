@@ -61,16 +61,16 @@ onMounted(() => {
       <VbenLayoutHeader ref="header">
         <slot name="header"></slot>
         <VbenSpace vertical>
-          <VbenSpace justify="space-between">
+          <VbenSpace class="h-48px shadow" justify="space-between" align="center">
             <div>
-              <slot name="breadcrumb"
-                ><LayoutBreadcrumb v-if="getShowContent && getShowBread"
-              /></slot>
+              <slot name="breadcrumb">
+                <LayoutBreadcrumb v-if="getShowContent && getShowBread"/>
+              </slot>
             </div>
             <div>
               <slot name="buttons">
-                <VbenSpace class="p-1" align="center"
-                  ><AppSearch v-if="getShowSearch" />
+                <VbenSpace class="p-1" align="center">
+                  <AppSearch v-if="getShowSearch" />
                   <AppNotify v-if="getShowNotice" />
                   <AppFullScreen v-if="getShowFullScreen" />
                   <VbenLocalePicker
@@ -82,8 +82,9 @@ onMounted(() => {
                   <AppDarkMode />
                   <AppSetting v-if="getShowSetting" />
                 </VbenSpace>
-              </slot></div
-          ></VbenSpace>
+              </slot>
+            </div>
+          </VbenSpace>
           <div>
             <slot name="tabs">
               <LayoutTabs />

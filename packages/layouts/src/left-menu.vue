@@ -12,8 +12,8 @@ import AppSetting from './components/setting/index.vue'
 import AppDarkMode from './components/darkMode/index.vue'
 import userDropdown from './components/user-dropdown/index.vue'
 import { context } from '../bridge'
-const { useHeaderSetting, useRootSetting, useMenuSetting } = context
-import { SettingButtonPositionEnum } from '@vben/constants'
+const { useHeaderSetting, useRootSetting, useMenuSetting, useAppStore } = context
+import {SettingButtonPositionEnum, ThemeEnum} from '@vben/constants'
 const {
   getHeaderTheme,
   getShowContent,
@@ -39,6 +39,14 @@ const getShowSetting = computed(() => {
   return settingButtonPosition === SettingButtonPositionEnum.HEADER
 })
 
+const appStore = useAppStore()
+const isDark = computed(() => appStore.getDarkMode == ThemeEnum.DARK)
+const changeTheme = (v) => {
+  appStore.setDarkMode(v ? ThemeEnum.DARK : ThemeEnum.LIGHT)
+}
+const shadowColor = computed(() => (isDark.value ? 'rgb(255, 255, 255, 0.09)' : 'rgb(239, 239, 245)'))
+
+
 onMounted(() => {
   nextTick(() => {
     // 暴露header实例
@@ -50,6 +58,7 @@ onMounted(() => {
   <VbenLayout has-sider class="h-full">
     <VbenLayoutSider
       show-trigger
+      bordered
       :collapsed-width="48"
       :width="160"
       collapse-mode="width"
@@ -61,17 +70,17 @@ onMounted(() => {
       <VbenLayoutHeader ref="header">
         <slot name="header"></slot>
         <VbenSpace vertical>
-          <VbenSpace class="h-48px shadow" justify="space-between" align="center">
-            <div>
+          <VbenSpace class="h-48px shadow" :style="{'--un-shadow-color': shadowColor}" justify="space-between" align="center">
+            <div class="pl-8px pr-8px">
               <slot name="breadcrumb">
                 <LayoutBreadcrumb v-if="getShowContent && getShowBread"/>
               </slot>
             </div>
-            <div>
+            <div class="pl-8px pr-8px">
               <slot name="buttons">
                 <VbenSpace class="p-1" align="center">
                   <AppSearch v-if="getShowSearch" />
-                  <AppNotify v-if="getShowNotice" />
+                  <AppNotify :is-dark="isDark" v-if="getShowNotice" />
                   <AppFullScreen v-if="getShowFullScreen" />
                   <VbenLocalePicker
                     v-if="getShowLocalePicker"
@@ -79,7 +88,7 @@ onMounted(() => {
                     :showText="false"
                   />
                   <userDropdown />
-                  <AppDarkMode />
+                  <AppDarkMode :is-dark="isDark" @change="changeTheme" />
                   <AppSetting v-if="getShowSetting" />
                 </VbenSpace>
               </slot>
@@ -98,3 +107,7 @@ onMounted(() => {
     </VbenLayout>
   </VbenLayout>
 </template>
+
+<style scoped>
+
+</style>

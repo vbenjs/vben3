@@ -21,6 +21,7 @@ const getTitle = computed(() => {
       <span @click="toggle" class="flex items-center">
         <VbenIconify
           icon="ant-design:fullscreen-outlined"
+          hoverPointer
           v-if="!isFullscreen"
         />
         <VbenIconify icon="ant-design:fullscreen-exit-outlined" v-else />

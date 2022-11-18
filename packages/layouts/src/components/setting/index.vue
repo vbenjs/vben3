@@ -22,6 +22,7 @@ const handleClearAndRedo = () => {
   <div class="flex items-center">
     <VbenIconify
       icon="ion:settings-outline"
+      hoverPointer
       @click="settingDrawerShow = true"
     />
     <VbenDrawer v-model:show="settingDrawerShow">

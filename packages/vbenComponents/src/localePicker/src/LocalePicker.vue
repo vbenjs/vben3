@@ -59,7 +59,7 @@ function handleMenuEvent(menu) {
     @select="handleMenuEvent"
   >
     <span class="flex items-center cursor-pointer">
-      <VbenIconify icon="ion:language" />
+      <VbenIconify icon="ion:language" hoverPointer />
       <span v-if="showText" class="ml-1">{{ getLocaleText }}</span>
     </span>
   </VbenDropdown>

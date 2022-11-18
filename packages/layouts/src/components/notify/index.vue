@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import {computed, defineProps, ref} from 'vue'
 import { tabListData, ListItem } from './data'
 import NoticeList from './NoticeList.vue'
-import { context } from '../../../bridge'
-const { useDesign } = context
-const { prefixCls } = useDesign('header-notify')
+// const { prefixCls } = useDesign('header-notify')
 
 const listData = ref(tabListData)
 
@@ -13,6 +11,12 @@ function onNoticeClick(record: ListItem) {
 
   record.titleDelete = !record.titleDelete
 }
+
+const props = defineProps({
+  isDark: { type: Boolean, default: false }
+})
+
+const iconColor = computed(() => (props.isDark ? 'rgb(213,213,214)' : 'rgb(51, 54, 57)'))
 </script>
 
 <template>
@@ -20,7 +24,7 @@ function onNoticeClick(record: ListItem) {
     <VbenPopover title="" trigger="click">
       <template #trigger>
         <VbenBadge dot>
-          <VbenIconify icon="mdi:bell-outline" color="rgb(51, 54, 57)" />
+          <VbenIconify icon="mdi:bell-outline" hoverPointer hoverColor="rgb(208,58,82)" :color="iconColor" />
         </VbenBadge>
       </template>
       <VbenTabs

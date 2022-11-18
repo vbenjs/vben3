@@ -13,6 +13,8 @@ const props = defineProps({
   infinite: { type: Boolean },
   icon: { type: String },
   prefix: { type: String, default: '' },
+  hoverPointer: { type: Boolean },
+  hoverColor: { type: String },
 })
 
 const iconRefEl = ref<HTMLElement | null>(null)
@@ -26,7 +28,7 @@ const { bem } = createNamespace('iconify')
 const attrs = useAttrs()
 
 const styles = computed((): CSSProperties => {
-  const { size, color } = props
+  const { size, color} = props
   let _size = size
   if (isString(size)) {
     _size = parseInt(size, 10)
@@ -38,6 +40,9 @@ const styles = computed((): CSSProperties => {
     display: 'inline-flex',
   }
 })
+
+const hoverPointer = computed(()=>(props.hoverPointer ? 'pointer' : 'default'))
+const hoverColor = computed(()=>(props.hoverColor ? props.hoverColor : 'inherit'))
 
 const classes = computed(() => {
   const cls = [bem(), unref(attrs).class]
@@ -80,9 +85,16 @@ onMounted(update)
 <style scoped>
 .iconify {
   display: inline-block;
+  transition: color .5s;
 }
 
 .iconify__infinite {
   animation: loadingCircle 1s infinite linear;
 }
+
+.iconify:hover{
+  cursor: v-bind(hoverPointer);
+  color: v-bind(hoverColor) !important;
+}
+
 </style>

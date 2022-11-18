@@ -15,7 +15,7 @@ function changeModal(show: boolean) {
   <div class="flex items-center" @click="changeModal(true)">
     <VbenPopover placement="bottom">
       <template #trigger>
-        <VbenIconify icon="ant-design:search-outlined" />
+        <VbenIconify icon="ant-design:search-outlined" hoverPointer />
       </template>
       {{ t('common.searchText') }}
     </VbenPopover>

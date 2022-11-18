@@ -75,6 +75,8 @@ const handleSelect = () => {}
       type="card"
       @close="handleClose"
       id="drag"
+      :tabs-padding="8"
+      animated
     >
       <VbenTabPane
         v-for="item in getTabsState"

@@ -14,6 +14,7 @@ import naive, {
   NThing,
   NPopconfirm,
   NIcon,
+  NIconWrapper,
   NCheckbox,
   NCheckboxGroup,
   NButtonGroup,
@@ -85,6 +86,7 @@ import naive, {
   NPopselect,
   NTime,
   NScrollbar,
+  NEl,
 } from 'naive-ui'
 
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
@@ -113,6 +115,7 @@ export async function registerComponents(app) {
     Thing: NThing,
     Popconfirm: NPopconfirm,
     Icon: NIcon,
+    IconWrapper: NIconWrapper,
     Checkbox: NCheckbox,
     CheckboxGroup: NCheckboxGroup,
     Breadcrumb: NBreadcrumb,
@@ -171,6 +174,7 @@ export async function registerComponents(app) {
     Time: NTime,
     Scrollbar: NScrollbar,
     DarkTheme: darkTheme,
+    El: NEl,
   })
   setMessage(useMessage)
   setNotice(useNotification)

@@ -28,7 +28,6 @@
     "lint:eslint": "eslint . --cache --max-warnings 0 --fix",
     "lint:prettier": "prettier --write  \"{packages,apps,configs,scripts}/**/*.{js,json,ts,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --fix ",
-    "prepare": "pnpm husky install",
     "reinstall": "pnpm turbo run clean && rimraf pnpm-lock.yaml && rimraf node_modules && npm run bootstrap",
     "stub": "pnpm --filter @config/** prepack",
     "test": "vitest",

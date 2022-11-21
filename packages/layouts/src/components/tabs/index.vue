@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import Sortable from 'sortablejs'
 import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
+import { Sortable } from '@vben/utils'
 import { useRouter } from 'vue-router'
 import { computed, nextTick, ref, unref, watch } from 'vue'
 import { useI18n } from '@vben/locale'

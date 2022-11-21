@@ -16,7 +16,6 @@
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "vue": "3.2.45",
-    "vue-router": "^4.1.6",
-    "sortablejs": "^1.15.0"
+    "vue-router": "^4.1.6"
   }
 }

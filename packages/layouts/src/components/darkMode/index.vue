@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue'
 // import { ThemeEnum } from '@vben/constants'
 // import { context } from '../../../bridge'
 // const { useAppStore } = context
@@ -10,12 +9,12 @@ import { defineProps, defineEmits } from 'vue'
 // }
 
 const props = defineProps({
-  isDark: { type: Boolean, default: false }
+  isDark: { type: Boolean, default: false },
 })
-const emit = defineEmits(['change']);
+const emit = defineEmits(['change'])
 
-const onChange = (v)=>{
-  emit('change',v)
+const onChange = (v) => {
+  emit('change', v)
 }
 </script>
 

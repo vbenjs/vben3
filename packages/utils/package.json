@@ -16,7 +16,8 @@
     "lodash-es": "^4.17.21",
     "pinia": "2.0.23",
     "vue": "3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "sortablejs": "^1.15.0"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",

@@ -1,3 +1,8 @@
+<script lang="ts">
+export default {
+  name: 'LocalePicker',
+}
+</script>
 <script lang="ts" setup>
 import { ref, watchEffect, unref, computed } from 'vue'
 import { context } from '../../../bridge'

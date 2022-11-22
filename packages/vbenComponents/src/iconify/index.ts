@@ -1,3 +1,3 @@
-import VbenIconify from './src/index.vue'
+import VbenIconify from './src/Iconify.vue'
 
 export { VbenIconify }

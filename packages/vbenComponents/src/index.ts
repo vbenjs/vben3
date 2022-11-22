@@ -8,7 +8,6 @@ export const components = {
 
     Object.keys(comp).forEach((k) => {
       const c = comp[k].default
-      // console.log(`Vben${c.__name}` || `Vben${c.name}`, c)
       switch (c.__name) {
         case 'index':
           c.__name = 'Iconify'
@@ -26,13 +25,17 @@ export const components = {
           c.__GRID_ITEM__ = true
           break
       }
-      app.component(`Vben${c.__name}` || `Vben${c.name}`, c)
+      // 检测未注册组件
+      if (!maps.get(c.__name) && !c.name) {
+        return
+      }
+      app.component(`Vben${c.name || c.__name}`, c)
     })
   },
 }
 
 //VC组件map
-export const maps = new Map<String, Component>()
+export const maps = new Map<String, Component | String>()
 
 export function warn(message: string) {
   console.warn(`[${projectName} warn]:${message}`)

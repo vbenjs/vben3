@@ -1,3 +1,8 @@
+<script lang="ts">
+export default {
+  name: 'Table',
+}
+</script>
 <script lang="ts" setup name="VbenTable">
 import 'xe-utils'
 import 'vxe-table/styles/index.scss'

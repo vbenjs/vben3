@@ -1,3 +1,8 @@
+<script lang="ts">
+export default {
+  name: 'NodeButtonGroup',
+}
+</script>
 <script lang="ts" setup>
 const props = defineProps(['onDelete', 'onEdit', 'key'])
 </script>

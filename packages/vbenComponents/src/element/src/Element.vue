@@ -1,6 +1,6 @@
-<script lang="ts" setup name="VbenEl">
+<script lang="ts" setup name="VbenElement">
 import { maps } from '#/index'
-const Icon = maps.get('El')
+const Icon = maps.get('Element')
 </script>
 <template>
   <Icon v-bind="$attrs">

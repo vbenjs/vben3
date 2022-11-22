@@ -4,7 +4,7 @@
 export enum MenuTypeEnum {
   // left menu
   SIDEBAR = 'sidebar',
-
+  // mix-sidebar
   MIX_SIDEBAR = 'mix-sidebar',
   // mixin menu
   MIX = 'mix',

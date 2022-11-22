@@ -9,7 +9,7 @@ import {
   SessionTimeoutProcessingEnum,
   SettingButtonPositionEnum,
   ThemeEnum,
-  TriggerEnum,
+  TriggerEnum
 } from '@vben/constants'
 
 import {

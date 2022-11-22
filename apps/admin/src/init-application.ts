@@ -19,6 +19,7 @@ import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { useAppStore } from '@/store/modules/app'
 import Logo from '@/layout/components/logo.vue'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
+import {unref} from "vue";
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -97,9 +98,14 @@ async function initPackages() {
 
 // Initial project configuration
 function initAppConfigStore() {
+
+  // console.log('projectSetting',projectSetting)
   const appStore = useAppStoreWithOut()
-  const projectConfig = appStore.getProjectConfig
+  const projectConfig = unref(appStore.getProjectConfig)
+  // console.log('projectConfig',projectConfig)
+  // console.log('type',projectConfig.menuSetting.type)
   const projCfg = deepMerge(projectSetting, projectConfig || {})
+  // console.log('projCfg',projCfg)
   appStore.setProjectConfig(projCfg)
 }
 

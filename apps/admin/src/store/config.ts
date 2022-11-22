@@ -44,6 +44,7 @@ export const useConfigStore = defineStore({
       return this.beforeMiniInfo
     },
     getProjectConfig(): ProjectConfig {
+      console.log('useConfigStore',this.projectConfig);
       return this.projectConfig || ({} as ProjectConfig)
     },
     getHeaderSetting(): HeaderSetting {

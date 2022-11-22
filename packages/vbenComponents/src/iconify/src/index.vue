@@ -14,7 +14,7 @@ const props = defineProps({
   icon: { type: String },
   prefix: { type: String, default: '' },
   hoverPointer: { type: Boolean },
-  hoverColor: { type: String },
+  hoverColor: { type: String, default: 'inherit' },
 })
 
 const iconRefEl = ref<HTMLElement | null>(null)
@@ -40,9 +40,6 @@ const styles = computed((): CSSProperties => {
     display: 'inline-flex',
   }
 })
-
-const hoverPointer = computed(()=>(props.hoverPointer ? 'pointer' : 'default'))
-const hoverColor = computed(()=>(props.hoverColor ? props.hoverColor : 'inherit'))
 
 const classes = computed(() => {
   const cls = [bem(), unref(attrs).class]
@@ -79,22 +76,20 @@ onMounted(update)
 </script>
 
 <template>
-  <span :class="classes" :style="styles" ref="iconRefEl"></span>
+  <span :class="[classes,{'hover:cursor-pointer': hoverPointer}]" :style="styles" ref="iconRefEl"></span>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
 .iconify {
   display: inline-block;
   transition: color .5s;
+  &:hover{
+    color: v-bind(hoverColor) !important;
+  }
 }
 
 .iconify__infinite {
   animation: loadingCircle 1s infinite linear;
-}
-
-.iconify:hover{
-  cursor: v-bind(hoverPointer);
-  color: v-bind(hoverColor) !important;
 }
 
 </style>

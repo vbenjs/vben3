@@ -87,6 +87,7 @@ import naive, {
   NTime,
   NScrollbar,
   NEl,
+  NTooltip
 } from 'naive-ui'
 
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
@@ -175,6 +176,7 @@ export async function registerComponents(app) {
     Scrollbar: NScrollbar,
     DarkTheme: darkTheme,
     El: NEl,
+    Tooltip: NTooltip,
   })
   setMessage(useMessage)
   setNotice(useNotification)

@@ -1,22 +1,22 @@
 <script lang="ts" setup>
-import {computed, defineProps, ref} from 'vue'
+import { computed, defineProps, ref } from 'vue'
 import { tabListData, ListItem } from './data'
 import NoticeList from './NoticeList.vue'
-// const { prefixCls } = useDesign('header-notify')
 
 const listData = ref(tabListData)
 
 function onNoticeClick(record: ListItem) {
   console.log('你点击了通知，ID=' + record.id)
-
   record.titleDelete = !record.titleDelete
 }
 
 const props = defineProps({
-  isDark: { type: Boolean, default: false }
+  isDark: { type: Boolean, default: false },
 })
 
-const iconColor = computed(() => (props.isDark ? 'rgb(213,213,214)' : 'rgb(51, 54, 57)'))
+const iconColor = computed(() =>
+  props.isDark ? 'rgb(213,213,214)' : 'rgb(51, 54, 57)',
+)
 </script>
 
 <template>
@@ -24,7 +24,12 @@ const iconColor = computed(() => (props.isDark ? 'rgb(213,213,214)' : 'rgb(51, 5
     <VbenPopover title="" trigger="click">
       <template #trigger>
         <VbenBadge dot>
-          <VbenIconify icon="mdi:bell-outline" hoverPointer hoverColor="rgb(208,58,82)" :color="iconColor" />
+          <VbenIconify
+            icon="mdi:bell-outline"
+            hoverPointer
+            hoverColor="rgb(208,58,82)"
+            :color="iconColor"
+          />
         </VbenBadge>
       </template>
       <VbenTabs
@@ -39,12 +44,7 @@ const iconColor = computed(() => (props.isDark ? 'rgb(213,213,214)' : 'rgb(51, 5
           :name="item.key"
           :tab="`${item.name}(${item.list.length})`"
         >
-          <NoticeList
-            :list="item.list"
-            v-if="item.key === '1'"
-            @title-click="onNoticeClick"
-          />
-          <NoticeList :list="item.list" v-else />
+          <NoticeList :list="item.list" @title-click="onNoticeClick" />
         </VbenTabPane>
       </VbenTabs>
     </VbenPopover>

@@ -86,7 +86,8 @@ import naive, {
   NPopselect,
   NTime,
   NScrollbar,
-  NEl,
+  NElement,
+  NSkeleton,
   NTooltip
 } from 'naive-ui'
 
@@ -109,7 +110,7 @@ export async function registerComponents(app) {
     Select: NSelect,
     Input: NInput,
     InputGroup: NInputGroup,
-    InputGroupLable: NInputGroupLabel,
+    InputGroupLabel: NInputGroupLabel,
     InputNumber: NInputNumber,
     Form: NForm,
     FormItem: NFormItem,
@@ -175,7 +176,8 @@ export async function registerComponents(app) {
     Time: NTime,
     Scrollbar: NScrollbar,
     DarkTheme: darkTheme,
-    El: NEl,
+    Element: NElement,
+    Skeleton: NSkeleton,
     Tooltip: NTooltip,
   })
   setMessage(useMessage)

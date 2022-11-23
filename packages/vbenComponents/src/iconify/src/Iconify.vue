@@ -1,3 +1,8 @@
+<script lang="ts">
+export default {
+  name: 'Iconify',
+}
+</script>
 <script setup lang="ts" name="VbenIconify">
 import type { PropType, CSSProperties } from 'vue'
 import { unref, computed, useAttrs, ref, nextTick, watch, onMounted } from 'vue'
@@ -28,7 +33,7 @@ const { bem } = createNamespace('iconify')
 const attrs = useAttrs()
 
 const styles = computed((): CSSProperties => {
-  const { size, color} = props
+  const { size, color } = props
   let _size = size
   if (isString(size)) {
     _size = parseInt(size, 10)
@@ -82,7 +87,7 @@ onMounted(update)
 <style lang="less" scoped>
 .iconify {
   display: inline-block;
-  transition: color .5s;
+  transition: color 0.5s;
   &:hover{
     color: v-bind(hoverColor) !important;
   }

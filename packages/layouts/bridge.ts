@@ -10,6 +10,7 @@ export interface ContextOptions {
   useAppInject: () => unknown
   useMenuSetting: () => unknown
   useMultipleTabStore: () => unknown
+  useTransitionSetting: () => unknown
   listenerRouteChange: (
     callback: (route: RouteLocationNormalized) => void,
     immediate?: boolean,
@@ -27,6 +28,7 @@ export let context: ContextOptions = {
   useUserStore: () => undefined,
   useHeaderSetting: () => undefined,
   useMenuSetting: () => undefined,
+  useTransitionSetting: () => undefined,
   useAppInject: () => undefined,
   useMultipleTabStore: () => undefined,
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>

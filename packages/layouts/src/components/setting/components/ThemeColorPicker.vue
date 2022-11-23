@@ -4,7 +4,7 @@ import {defineEmits, defineProps, PropType} from 'vue'
 defineProps({
   colorList: {
     type: Array as PropType<string[]>,
-    defualt: [],
+    default: () => [],
   },
   def: {
     type: String,

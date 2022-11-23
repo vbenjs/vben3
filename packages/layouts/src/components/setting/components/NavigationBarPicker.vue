@@ -1,7 +1,7 @@
 <script lang="ts" setup name="NavigationBarPicker">
 import { defineProps, defineEmits, PropType } from 'vue';
 
-const props = defineProps({
+defineProps({
   typeList: {
     type: Array as PropType<object[]>,
     default: ()=> []
@@ -18,13 +18,10 @@ const handlerPicker = (data)=>{
   emits('handler', data)
 }
 
-console.log('NavigationBarPicker',props.def[0])
-
 </script>
 <template>
   <div class="setting-navigation-bar-picker">
     <VbenSpace justify="space-between">
-      {{ def }}
       <template v-for="(item, index) in typeList" :key="index">
         <VbenTooltip
           placement="bottom"

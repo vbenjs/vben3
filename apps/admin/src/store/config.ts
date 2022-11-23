@@ -5,6 +5,7 @@ import {
   MenuSetting,
   MultiTabsSetting,
   ProjectConfig,
+  TransitionSetting
 } from '@vben/types'
 import { defineStore } from 'pinia'
 import { deepMerge } from '@vben/utils'
@@ -44,7 +45,6 @@ export const useConfigStore = defineStore({
       return this.beforeMiniInfo
     },
     getProjectConfig(): ProjectConfig {
-      console.log('useConfigStore',this.projectConfig);
       return this.projectConfig || ({} as ProjectConfig)
     },
     getHeaderSetting(): HeaderSetting {
@@ -59,6 +59,9 @@ export const useConfigStore = defineStore({
     getPageLoading(): boolean {
       return this.pageLoading
     },
+    getTransitionSetting(): TransitionSetting {
+      return  this.getProjectConfig.transitionSetting
+    }
   },
   actions: {
     setBeforeMiniInfo(state: BeforeMiniState): void {

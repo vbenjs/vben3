@@ -8,6 +8,7 @@ import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
 import { localeList } from '@vben/locale/src/config'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { useTransitionSetting } from '@/hooks/setting/useTransitionSetting'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import { getAllParentPath, getMenus } from '@/router'
 import { useDesign } from '@/hooks/web/useDesign'
@@ -89,6 +90,7 @@ async function initPackages() {
         useAppStore,
         Logo,
         useMenuSetting,
+        useTransitionSetting
       }
     })
   }
@@ -98,14 +100,9 @@ async function initPackages() {
 
 // Initial project configuration
 function initAppConfigStore() {
-
-  // console.log('projectSetting',projectSetting)
   const appStore = useAppStoreWithOut()
   const projectConfig = unref(appStore.getProjectConfig)
-  // console.log('projectConfig',projectConfig)
-  // console.log('type',projectConfig.menuSetting.type)
   const projCfg = deepMerge(projectSetting, projectConfig || {})
-  // console.log('projCfg',projCfg)
   appStore.setProjectConfig(projCfg)
 }
 

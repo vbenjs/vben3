@@ -10,7 +10,6 @@ import AppSearch from './components/search/AppSearch.vue'
 import AppNotify from './components/notify/index.vue'
 import AppFullScreen from './components/FullScreen.vue'
 import AppSetting from './components/setting/index.vue'
-import AppDarkMode from './components/darkMode/index.vue'
 import userDropdown from './components/user-dropdown/index.vue'
 import {context} from '../bridge'
 
@@ -18,7 +17,6 @@ const {useHeaderSetting, useRootSetting, useMenuSetting, useAppStore} = context
 import {SettingButtonPositionEnum, ThemeEnum} from '@vben/constants'
 
 const {
-  getHeaderTheme,
   getShowContent,
   getShowBread,
   getShowFullScreen,
@@ -44,9 +42,7 @@ const getShowSetting = computed(() => {
 
 const appStore = useAppStore()
 const isDark = computed(() => appStore.getDarkMode == ThemeEnum.DARK)
-const changeTheme = (v) => {
-  appStore.setDarkMode(v ? ThemeEnum.DARK : ThemeEnum.LIGHT)
-}
+
 const shadowColor = computed(() => (isDark.value ? 'rgb(255, 255, 255, 0.09)' : 'rgb(239, 239, 245)'))
 
 const headerHeight = ref(0)
@@ -87,7 +83,7 @@ onMounted(() => {
                 </div>
                 <div class="pl-8px pr-8px">
                   <slot name="buttons">
-                    <VbenSpace class="p-1" align="center">
+                    <VbenSpace class="p-1" :size="12" align="center">
                       <AppSearch v-if="getShowSearch"/>
                       <AppNotify :is-dark="isDark" v-if="getShowNotice"/>
                       <AppFullScreen v-if="getShowFullScreen"/>
@@ -97,7 +93,6 @@ onMounted(() => {
                         :showText="false"
                       />
                       <userDropdown/>
-                      <AppDarkMode :is-dark="isDark" @change="changeTheme"/>
                       <AppSetting v-if="getShowSetting"/>
                     </VbenSpace>
                   </slot>

@@ -1,10 +1,10 @@
 <script lang="ts" setup name="SwitchItem">
 import { PropType, defineProps, defineEmits } from 'vue'
-import { HandlerEnum } from "../setting/constant";
+import { HandlerEnum } from "../constant";
 
 defineProps({
   title: {type: String, default: ''},
-  value: {
+  def: {
     type: [String, Number, Boolean] as PropType<string | number>,
   },
   event: {
@@ -23,12 +23,12 @@ const onChange = (value)=>{
   <div class="switch-item">
     <VbenSpace justify="space-between" align="center">
       <span>{{ title }}</span>
-      <VbenSwitch :value="value" :disabled="disabled" @update:value="onChange">
+      <VbenSwitch :value="def" :disabled="disabled" @update:value="onChange">
         <template #checked-icon>
           <VbenIconify icon="ant-design:check-outlined" color="#18A058" />
         </template>
         <template #unchecked-icon>
-          <VbenIconify icon="ant-design:close-outlined" color="#DBDBDB" />
+          <VbenIconify icon="ant-design:close-outlined" color="#BEBEBE" />
         </template>
       </VbenSwitch>
     </VbenSpace>

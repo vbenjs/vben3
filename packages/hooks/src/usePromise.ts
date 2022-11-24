@@ -1,7 +1,7 @@
 import type {Ref, ShallowRef, UnwrapRef} from "vue";
 import { effectScope, ref, shallowRef, unref, watch } from "vue";
 import { containsProp, tryOnBeforeUnmount, useDebounceFn } from "@vueuse/core";
-import { isEqual } from "lodash-es";
+import { isEqual } from "@vben/utils";
 
 export interface UsePromiseConfig {
   /**

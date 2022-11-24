@@ -11,7 +11,6 @@
     "@vben/constants": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vueuse/core": "^9.5.0",
-    "lodash-es": "^4.17.21",
     "vue": "^3.2.45"
   },
   "devDependencies": {

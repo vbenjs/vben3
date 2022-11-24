@@ -10,7 +10,7 @@ import {
 import {defineStore} from 'pinia'
 import {deepMerge} from '@vben/utils'
 import {APP_DARK_MODE_KEY_, ThemeEnum} from '@vben/constants'
-import {darkMode} from '@/setting'
+import {darkMode, projectSetting} from '@/setting'
 
 export interface ConfigStoreState {
   darkMode?: ThemeEnum
@@ -65,7 +65,7 @@ export const useConfigStore = defineStore({
     },
     getTransitionSetting(): TransitionSetting {
       return this.getProjectConfig.transitionSetting
-    }
+    },
   },
   actions: {
     setBeforeMiniInfo(state: BeforeMiniState): void {
@@ -81,6 +81,9 @@ export const useConfigStore = defineStore({
     async setPageLoadingAction(loading: boolean): Promise<void> {
       console.log(loading)
     },
+    resetProjectConfig(){
+      this.setProjectConfig(projectSetting)
+    }
   },
 })
 

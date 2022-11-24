@@ -2,12 +2,13 @@ import { initRequest } from '@vben/request'
 import { useUserStoreWithout, useUserStore } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
 import { deepMerge, getGlobalConfig } from '@vben/utils'
-import { useAppStoreWithOut } from '@/store/config'
+import { useConfigStoreWithOut, useConfigStore } from '@/store/config'
 import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
 import { localeList } from '@vben/locale/src/config'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { useTransitionSetting } from '@/hooks/setting/useTransitionSetting'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import { getAllParentPath, getMenus } from '@/router'
 import { useDesign } from '@/hooks/web/useDesign'
@@ -19,6 +20,7 @@ import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { useAppStore } from '@/store/modules/app'
 import Logo from '@/layout/components/logo.vue'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
+import {unref} from "vue";
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -68,6 +70,7 @@ async function initPackages() {
         useLocale,
         localeList,
         useAppStore,
+        useConfigStore,
       }
     })
   }
@@ -86,8 +89,10 @@ async function initPackages() {
         listenerRouteChange,
         useUserStore,
         useAppStore,
+        useConfigStore,
         Logo,
         useMenuSetting,
+        useTransitionSetting
       }
     })
   }
@@ -97,10 +102,10 @@ async function initPackages() {
 
 // Initial project configuration
 function initAppConfigStore() {
-  const appStore = useAppStoreWithOut()
-  const projectConfig = appStore.getProjectConfig
+  const configStore = useConfigStoreWithOut()
+  const projectConfig = unref(configStore.getProjectConfig)
   const projCfg = deepMerge(projectSetting, projectConfig || {})
-  appStore.setProjectConfig(projCfg)
+  configStore.setProjectConfig(projCfg)
 }
 
 export async function initApplication() {

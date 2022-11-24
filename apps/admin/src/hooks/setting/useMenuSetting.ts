@@ -2,7 +2,7 @@ import type { MenuSetting } from '@vben/types'
 
 import { computed, unref, ref } from 'vue'
 
-import { useAppStoreWithOut } from '@/store/config'
+import { useConfigStoreWithOut } from '@/store/config'
 
 import {
   SIDE_BAR_MINI_WIDTH,
@@ -17,7 +17,7 @@ const mixSideHasChildren = ref(false)
 
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent()
-  const appStore = useAppStoreWithOut()
+  const configStore = useConfigStoreWithOut()
 
   const getShowSidebar = computed(() => {
     return (
@@ -28,42 +28,42 @@ export function useMenuSetting() {
     )
   })
 
-  const getCollapsed = computed(() => appStore.getMenuSetting.collapsed)
+  const getCollapsed = computed(() => configStore.getMenuSetting.collapsed)
 
-  const getMenuType = computed(() => appStore.getMenuSetting.type)
+  const getMenuType = computed(() => configStore.getMenuSetting.type)
 
-  const getMenuMode = computed(() => appStore.getMenuSetting.mode)
+  const getMenuMode = computed(() => configStore.getMenuSetting.mode)
 
-  const getMenuFixed = computed(() => appStore.getMenuSetting.fixed)
+  const getMenuFixed = computed(() => configStore.getMenuSetting.fixed)
 
-  const getShowMenu = computed(() => appStore.getMenuSetting.show)
+  const getShowMenu = computed(() => configStore.getMenuSetting.show)
 
-  const getMenuHidden = computed(() => appStore.getMenuSetting.hidden)
+  const getMenuHidden = computed(() => configStore.getMenuSetting.hidden)
 
-  const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth)
+  const getMenuWidth = computed(() => configStore.getMenuSetting.menuWidth)
 
-  const getTrigger = computed(() => appStore.getMenuSetting.trigger)
+  const getTrigger = computed(() => configStore.getMenuSetting.trigger)
 
-  const getMenuTheme = computed(() => appStore.getMenuSetting.theme)
+  const getMenuTheme = computed(() => configStore.getMenuSetting.theme)
 
-  const getSplit = computed(() => appStore.getMenuSetting.split)
+  const getSplit = computed(() => configStore.getMenuSetting.split)
 
-  const getMenuBgColor = computed(() => appStore.getMenuSetting.bgColor)
+  const getMenuBgColor = computed(() => configStore.getMenuSetting.bgColor)
 
   const getMixSideTrigger = computed(
-    () => appStore.getMenuSetting.mixSideTrigger,
+    () => configStore.getMenuSetting.mixSideTrigger,
   )
 
-  const getCanDrag = computed(() => appStore.getMenuSetting.canDrag)
+  const getCanDrag = computed(() => configStore.getMenuSetting.canDrag)
 
-  const getAccordion = computed(() => appStore.getMenuSetting.accordion)
+  const getAccordion = computed(() => configStore.getMenuSetting.accordion)
 
-  const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed)
+  const getMixSideFixed = computed(() => configStore.getMenuSetting.mixSideFixed)
 
-  const getTopMenuAlign = computed(() => appStore.getMenuSetting.topMenuAlign)
+  const getTopMenuAlign = computed(() => configStore.getMenuSetting.topMenuAlign)
 
   const getCloseMixSidebarOnChange = computed(
-    () => appStore.getMenuSetting.closeMixSidebarOnChange,
+    () => configStore.getMenuSetting.closeMixSidebarOnChange,
   )
 
   const getIsSidebarType = computed(
@@ -75,7 +75,7 @@ export function useMenuSetting() {
   )
 
   const getCollapsedShowTitle = computed(
-    () => appStore.getMenuSetting.collapsedShowTitle,
+    () => configStore.getMenuSetting.collapsedShowTitle,
   )
 
   const getShowTopMenu = computed(() => {
@@ -119,7 +119,7 @@ export function useMenuSetting() {
   })
 
   const getMiniWidthNumber = computed(() => {
-    const { collapsedShowTitle } = appStore.getMenuSetting
+    const { collapsedShowTitle } = configStore.getMenuSetting
     return collapsedShowTitle
       ? SIDE_BAR_SHOW_TIT_MINI_WIDTH
       : SIDE_BAR_MINI_WIDTH
@@ -145,7 +145,7 @@ export function useMenuSetting() {
 
   // Set menu configuration
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
-    appStore.setProjectConfig({ menuSetting })
+    configStore.setProjectConfig({ menuSetting })
   }
 
   function toggleCollapsed() {

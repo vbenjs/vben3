@@ -3,7 +3,7 @@ import { pinia } from '@/pinia'
 import { asyncRoutes, PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
 import { filterTree } from '@vben/utils'
 import { Menu } from '@vben/types'
-import { useAppStoreWithOut } from './config'
+import { useConfigStoreWithOut } from './config'
 import { useUserStore } from './user'
 import { getPermCode } from '@/apis/auth'
 import { toRaw } from 'vue'
@@ -92,12 +92,12 @@ export const useAuthStore = defineStore({
     async buildRoutesAction(): Promise<RouteRecordItem[]> {
       // const { t } = useI18n()
       const userStore = useUserStore()
-      const appStore = useAppStoreWithOut()
+      const configStore = useConfigStoreWithOut()
 
       let routes: RouteRecordItem[] = []
       const roleList = toRaw(userStore.getRoles) || []
       const { permissionMode = projectSetting.permissionMode } =
-        appStore.getProjectConfig
+        configStore.getProjectConfig
 
       const routeFilter = (route: RouteRecordItem) => {
         const { meta } = route

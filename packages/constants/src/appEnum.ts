@@ -48,6 +48,14 @@ export enum RouterTransitionEnum {
   FADE_SCALE = 'fade-scale',
 }
 
+export enum RoleEnum {
+  // super admin
+  SUPER = 'super',
+
+  // tester
+  TEST = 'test',
+}
+
 export enum ComponentSizeEnum {
   DEFAULT = 'default',
   SMALL = 'small',

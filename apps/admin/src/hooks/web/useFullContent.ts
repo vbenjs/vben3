@@ -1,6 +1,6 @@
 import { computed, unref } from 'vue'
 
-import { useAppStoreWithOut } from '@/store/config'
+import { useConfigStoreWithOut } from '@/store/config'
 
 import { useRouter } from 'vue-router'
 
@@ -8,7 +8,7 @@ import { useRouter } from 'vue-router'
  * @description: Full screen display content
  */
 export const useFullContent = () => {
-  const appStore = useAppStoreWithOut()
+  const appStore = useConfigStoreWithOut()
   const router = useRouter()
   const { currentRoute } = router
 

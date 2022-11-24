@@ -1,6 +1,6 @@
 import type { ProjectConfig } from '@vben/types'
 import { computed } from 'vue'
-import { useAppStoreWithOut } from '@/store/config'
+import { useConfigStoreWithOut } from '@/store/config'
 import { ContentLayoutEnum } from '@vben/constants'
 
 type RootSetting = Omit<
@@ -9,7 +9,7 @@ type RootSetting = Omit<
 >
 
 export function useRootSetting() {
-  const appStore = useAppStoreWithOut()
+  const appStore = useConfigStoreWithOut()
 
   const getPageLoading = computed(() => appStore.getPageLoading)
 

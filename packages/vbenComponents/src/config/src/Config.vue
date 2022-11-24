@@ -5,10 +5,10 @@ import { ThemeEnum } from '@vben/constants'
 const Config = maps.get('Config')
 const darkTheme = maps.get('DarkTheme')
 import { context } from '../../../bridge'
-const { useAppStore } = context
-const appStore = useAppStore()
+const { useConfigStore } = context
+const configStore = useConfigStore()
 const theme = computed(() =>
-  appStore.getDarkMode == ThemeEnum.DARK ? darkTheme : null,
+  configStore.getDarkMode == ThemeEnum.DARK ? darkTheme : null,
 )
 </script>
 <template>

@@ -4,12 +4,14 @@ import { RouteLocationNormalized } from 'vue-router'
 export interface ContextOptions {
   useRootSetting: () => unknown
   useAppStore: () => unknown
+  useConfigStore: () => unknown
   useHeaderSetting: () => unknown
   useTabs: () => unknown
   useUserStore: () => unknown
   useAppInject: () => unknown
   useMenuSetting: () => unknown
   useMultipleTabStore: () => unknown
+  useTransitionSetting: () => unknown
   listenerRouteChange: (
     callback: (route: RouteLocationNormalized) => void,
     immediate?: boolean,
@@ -24,9 +26,11 @@ export interface ContextOptions {
 export let context: ContextOptions = {
   useRootSetting: () => undefined,
   useAppStore: () => undefined,
+  useConfigStore: () => undefined,
   useUserStore: () => undefined,
   useHeaderSetting: () => undefined,
   useMenuSetting: () => undefined,
+  useTransitionSetting: () => undefined,
   useAppInject: () => undefined,
   useMultipleTabStore: () => undefined,
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>

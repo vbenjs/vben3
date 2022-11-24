@@ -97,9 +97,12 @@ export default {
     colorWeak: '色弱模式',
 
     progress: '顶部进度条',
+    switchLoading: '切换loading',
+    switchAnimation: '切换动画',
+    animationType: '动画类型',
 
     autoScreenLock: '自动锁屏',
-    notAutoScreenLock: '不自动锁屏',
+    notAutoScreenLock: '不锁屏',
 
     fixedHeader: '固定header',
     fixedSideBar: '固定Sidebar',

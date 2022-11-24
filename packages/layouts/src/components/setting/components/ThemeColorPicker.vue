@@ -1,19 +1,23 @@
 <script lang="ts" setup name="ThemeColorPicker">
-import {defineEmits, defineProps, PropType} from 'vue'
+import { defineProps, PropType} from 'vue'
+import { HandlerSettingEnum } from "@vben/constants";
+import {baseHandler} from "../handler";
 
-defineProps({
+const props= defineProps({
   colorList: {
     type: Array as PropType<string[]>,
     default: () => [],
+  },
+  event: {
+    type: Number as PropType<HandlerSettingEnum>,
   },
   def: {
     type: String,
     default: '',
   },
 })
-const emits = defineEmits(['handler']);
 const handleClick = (color) => {
-  emits('handler', color)
+  baseHandler(props.event, color)
 }
 </script>
 <template>

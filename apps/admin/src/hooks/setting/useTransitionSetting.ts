@@ -2,23 +2,23 @@ import type { TransitionSetting } from '@vben/types';
 
 import { computed } from 'vue';
 
-import { useAppStoreWithOut } from '@/store/config'
+import { useConfigStoreWithOut } from '@/store/config'
 
 export function useTransitionSetting() {
-  const appStore = useAppStoreWithOut();
+  const configStore = useConfigStoreWithOut();
 
-  const getEnableTransition = computed(() => appStore.getTransitionSetting?.enable);
+  const getEnableTransition = computed(() => configStore.getTransitionSetting?.enable);
 
-  const getOpenNProgress = computed(() => appStore.getTransitionSetting?.openNProgress);
+  const getOpenNProgress = computed(() => configStore.getTransitionSetting?.openNProgress);
 
   const getOpenPageLoading = computed((): boolean => {
-    return !!appStore.getTransitionSetting?.openPageLoading;
+    return !!configStore.getTransitionSetting?.openPageLoading;
   });
 
-  const getBasicTransition = computed(() => appStore.getTransitionSetting?.basicTransition);
+  const getBasicTransition = computed(() => configStore.getTransitionSetting?.basicTransition);
 
   function setTransitionSetting(transitionSetting: Partial<TransitionSetting>) {
-    appStore.setProjectConfig({ transitionSetting });
+    configStore.setProjectConfig({ transitionSetting });
   }
   return {
     setTransitionSetting,

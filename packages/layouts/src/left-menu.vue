@@ -13,7 +13,7 @@ import AppSetting from './components/setting/index.vue'
 import userDropdown from './components/user-dropdown/index.vue'
 import {context} from '../bridge'
 
-const {useHeaderSetting, useRootSetting, useMenuSetting, useAppStore} = context
+const {useHeaderSetting, useRootSetting, useMenuSetting, useConfigStore} = context
 import {SettingButtonPositionEnum, ThemeEnum} from '@vben/constants'
 
 const {
@@ -40,8 +40,8 @@ const getShowSetting = computed(() => {
   return settingButtonPosition === SettingButtonPositionEnum.HEADER
 })
 
-const appStore = useAppStore()
-const isDark = computed(() => appStore.getDarkMode == ThemeEnum.DARK)
+const configStore = useConfigStore()
+const isDark = computed(() => configStore.getDarkMode == ThemeEnum.DARK)
 
 const shadowColor = computed(() => (isDark.value ? 'rgb(255, 255, 255, 0.09)' : 'rgb(239, 239, 245)'))
 

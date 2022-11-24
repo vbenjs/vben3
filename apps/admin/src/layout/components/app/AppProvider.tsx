@@ -2,8 +2,7 @@ import {createBreakpointListen} from '@/hooks/event/use-breakpoint'
 import {namespace} from '@/setting'
 import {defineComponent, toRefs, ref, unref} from 'vue'
 import {createAppProviderContext} from '@/hooks/web/useAppContext'
-import {useAppStoreWithOut} from '@/store/config'
-import {MenuModeEnum, MenuTypeEnum} from '@vben/constants'
+import {useConfigStoreWithOut} from '@/store/config'
 import {useMsg, useNotice} from '@vben/vbencomponents'
 import {setMsg, setNoice} from '@vben/request'
 
@@ -22,7 +21,7 @@ export default defineComponent({
     const isMobile = ref(false)
     const isSetState = ref(false)
 
-    const appStore = useAppStoreWithOut()
+    const configStore = useConfigStoreWithOut()
     //注册msg以及notice，方便全局使用
     const msg = useMsg()
     const notice = useNotice()
@@ -56,15 +55,15 @@ export default defineComponent({
               collapsed: menuCollapsed,
               split: menuSplit,
             },
-          } = appStore.getProjectConfig
-          appStore.setProjectConfig({
+          } = configStore.getProjectConfig
+          configStore.setProjectConfig({
             menuSetting: {
               type: menuType,
               mode: menuMode,
               split: false,
             },
           })
-          appStore.setBeforeMiniInfo({
+          configStore.setBeforeMiniInfo({
             menuMode,
             menuCollapsed,
             menuType,
@@ -74,8 +73,8 @@ export default defineComponent({
       } else {
         if (unref(isSetState)) {
           isSetState.value = false
-          const {menuMode, menuCollapsed, menuType, menuSplit} = appStore.getBeforeMiniInfo
-          appStore.setProjectConfig({
+          const {menuMode, menuCollapsed, menuType, menuSplit} = configStore.getBeforeMiniInfo
+          configStore.setProjectConfig({
             menuSetting: {
               type: menuType,
               mode: menuMode,

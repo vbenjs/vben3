@@ -9,11 +9,13 @@ export interface ContextOptions {
   useLocale: () => LocaleReturn
   localeList: Array<any>
   useAppStore: () => unknown
+  useConfigStore: () => unknown
 }
 
 export let context: ContextOptions = {
   useLocale: () => ({} as LocaleReturn),
   useAppStore: () => undefined,
+  useConfigStore: () => undefined,
   localeList: [],
 }
 

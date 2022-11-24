@@ -64,9 +64,9 @@ const getShowMenuRef = computed(() => {
 
 let triggerDef = getTrigger;
 const triggerOptions = getMenuTriggerOptions(unref(getSplit));
-const some = triggerOptions.some((item) => item.value === triggerDef);
+const some = triggerOptions.some((item) => item.value === unref(triggerDef));
 if (!some) {
-  triggerDef = TriggerEnum.FOOTER;
+  triggerDef.value = TriggerEnum.FOOTER;
 }
 
 </script>

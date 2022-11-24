@@ -1,8 +1,10 @@
 <script lang="ts" setup>
-import { useDesign } from '@/hooks/web/useDesign'
 import { useI18n } from '@vben/locale'
 import AppSearchKeyItem from './AppSearchKeyItem.vue'
+import {context} from "../../../bridge";
 
+
+const { useDesign } = context
 const { prefixCls } = useDesign('app-search-footer')
 const { t } = useI18n()
 </script>

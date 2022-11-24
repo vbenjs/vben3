@@ -1,6 +1,7 @@
 // import type { ProjectConfig } from '@/types'
 import { computed } from 'vue'
-import { useAppStoreWithOut } from '@/store/config'
+import { useConfigStoreWithOut } from '@/store/config'
+import { useAppStoreWithOut } from '@/store/modules/app'
 import { ContentLayoutEnum } from '@vben/constants'
 
 // type RootSetting = Omit<
@@ -9,77 +10,79 @@ import { ContentLayoutEnum } from '@vben/constants'
 // >
 
 export function useRootSetting() {
+
+  const configStore = useConfigStoreWithOut()
   const appStore = useAppStoreWithOut()
 
   const getPageLoading = computed(() => appStore.getPageLoading)
 
   const getOpenKeepAlive = computed(
-    () => appStore.getProjectConfig.openKeepAlive,
+    () => configStore.getProjectConfig.openKeepAlive,
   )
 
   const getSettingButtonPosition = computed(
-    () => appStore.getProjectConfig.settingButtonPosition,
+    () => configStore.getProjectConfig.settingButtonPosition,
   )
 
   const getCanEmbedIFramePage = computed(
-    () => appStore.getProjectConfig.canEmbedIFramePage,
+    () => configStore.getProjectConfig.canEmbedIFramePage,
   )
 
   const getPermissionMode = computed(
-    () => appStore.getProjectConfig.permissionMode,
+    () => configStore.getProjectConfig.permissionMode,
   )
 
-  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo)
+  const getShowLogo = computed(() => configStore.getProjectConfig.showLogo)
 
-  const getContentMode = computed(() => appStore.getProjectConfig.contentMode)
+  const getContentMode = computed(() => configStore.getProjectConfig.contentMode)
 
   const getUseOpenBackTop = computed(
-    () => appStore.getProjectConfig.useOpenBackTop,
+    () => configStore.getProjectConfig.useOpenBackTop,
   )
 
   const getShowSettingButton = computed(
-    () => appStore.getProjectConfig.showSettingButton,
+    () => configStore.getProjectConfig.showSettingButton,
   )
 
-  const getShowFooter = computed(() => appStore.getProjectConfig.showFooter)
+  const getShowFooter = computed(() => configStore.getProjectConfig.showFooter)
 
   const getShowBreadCrumb = computed(
-    () => appStore.getProjectConfig.showBreadCrumb,
+    () => configStore.getProjectConfig.showBreadCrumb,
   )
 
-  const getThemeColor = computed(() => appStore.getProjectConfig.themeColor)
+  const getThemeColor = computed(() => configStore.getProjectConfig.themeColor)
 
   const getShowBreadCrumbIcon = computed(
-    () => appStore.getProjectConfig.showBreadCrumbIcon,
+    () => configStore.getProjectConfig.showBreadCrumbIcon,
   )
 
-  const getFullContent = computed(() => appStore.getProjectConfig.fullContent)
+  const getFullContent = computed(() => configStore.getProjectConfig.fullContent)
 
-  const getColorWeak = computed(() => appStore.getProjectConfig.colorWeak)
+  const getColorWeak = computed(() => configStore.getProjectConfig.colorWeak)
 
-  const getGrayMode = computed(() => appStore.getProjectConfig.grayMode)
+  const getGrayMode = computed(() => configStore.getProjectConfig.grayMode)
 
-  const getLockTime = computed(() => appStore.getProjectConfig.lockTime)
+  const getLockTime = computed(() => configStore.getProjectConfig.lockTime)
 
   const getShowDarkModeToggle = computed(
-    () => appStore.getProjectConfig.showDarkModeToggle,
+    () => configStore.getProjectConfig.showDarkModeToggle,
   )
 
   const getLayoutContentMode = computed(() =>
-    appStore.getProjectConfig.contentMode === ContentLayoutEnum.FULL
+    configStore.getProjectConfig.contentMode === ContentLayoutEnum.FULL
       ? ContentLayoutEnum.FULL
       : ContentLayoutEnum.FIXED,
   )
   // TODO 待实现
-  // const getDarkMode = computed(() => appStore.getDarkMode)
+  // const getDarkMode = computed(() => configStore.getDarkMode)
 
   // TODO 待实现
   // function setRootSetting(setting: Partial<RootSetting>) {
-  //   appStore.setProjectConfig(setting)
+  //   configStore.setProjectConfig(setting)
   // }
   // TODO 待实现
   // function setDarkMode(mode: ThemeEnum) {
-  //   appStore.setDarkMode(mode)
+  //   configStore.setDarkMode(mode)
   // }
   return {
     // setRootSetting,

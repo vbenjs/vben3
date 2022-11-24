@@ -3,11 +3,11 @@ import { ThemeEnum } from '@vben/constants'
 import { context } from '../../../../bridge'
 import { computed } from "vue";
 
-const { useAppStore } = context
-const appStore = useAppStore()
-const isDark = computed(() => appStore.getDarkMode == ThemeEnum.DARK)
+const { useConfigStore } = context
+const configStore = useConfigStore()
+const isDark = computed(() => configStore.getDarkMode == ThemeEnum.DARK)
 const handlerDarkModeToggle = (v) => {
-  appStore.setDarkMode(v ? ThemeEnum.DARK : ThemeEnum.LIGHT)
+  configStore.setDarkMode(v ? ThemeEnum.DARK : ThemeEnum.LIGHT)
 }
 </script>
 

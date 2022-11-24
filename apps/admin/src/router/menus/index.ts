@@ -6,7 +6,7 @@ import { isUrl, filterTree } from '@vben/utils'
 import { router } from '@/router'
 import { PermissionModeEnum } from '@vben/constants'
 import { pathToRegexp } from 'path-to-regexp'
-import { useAppStoreWithOut } from '@/store/config'
+import { useConfigStoreWithOut } from '@/store/config'
 import { Menu } from '@vben/types'
 
 // ===========================
@@ -14,7 +14,7 @@ import { Menu } from '@vben/types'
 // ===========================
 
 const getPermissionMode = () => {
-  const appStore = useAppStoreWithOut()
+  const appStore = useConfigStoreWithOut()
   return appStore.getProjectConfig.permissionMode
 }
 const isBackMode = () => {

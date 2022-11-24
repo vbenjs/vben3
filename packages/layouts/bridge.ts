@@ -4,6 +4,7 @@ import { RouteLocationNormalized } from 'vue-router'
 export interface ContextOptions {
   useRootSetting: () => unknown
   useAppStore: () => unknown
+  useConfigStore: () => unknown
   useHeaderSetting: () => unknown
   useTabs: () => unknown
   useUserStore: () => unknown
@@ -25,6 +26,7 @@ export interface ContextOptions {
 export let context: ContextOptions = {
   useRootSetting: () => undefined,
   useAppStore: () => undefined,
+  useConfigStore: () => undefined,
   useUserStore: () => undefined,
   useHeaderSetting: () => undefined,
   useMenuSetting: () => undefined,

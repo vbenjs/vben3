@@ -1,22 +1,22 @@
 <script lang="ts" setup name="SwitchItem">
-import { PropType, defineProps, defineEmits } from 'vue'
-import { HandlerEnum } from "../constant";
+import { PropType, defineProps } from 'vue'
+import { HandlerSettingEnum } from "@vben/constants";
+import {baseHandler} from "../handler";
 
-defineProps({
+const props = defineProps({
   title: {type: String, default: ''},
   def: {
-    type: [String, Number, Boolean] as PropType<string | number>,
+    type: Boolean as PropType<boolean>,
   },
   event: {
-    type: Number as PropType<HandlerEnum>,
+    type: Number as PropType<HandlerSettingEnum>,
   },
   disabled: {
     type: Boolean,
   },
 })
-const emits = defineEmits(['update:value'])
 const onChange = (value)=>{
-  emits('update:value', value)
+  baseHandler(props.event, value)
 }
 </script>
 <template>
@@ -34,4 +34,3 @@ const onChange = (value)=>{
     </VbenSpace>
   </div>
 </template>
-<style lang="less" scoped></style>

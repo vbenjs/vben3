@@ -1,30 +1,30 @@
 <script lang="ts" setup name="InputNumberItem">
-import { PropType, defineProps, defineEmits } from 'vue'
-import { HandlerEnum } from "../constant";
+import { PropType, defineProps } from 'vue'
+import { HandlerSettingEnum } from "@vben/constants";
+import {baseHandler} from "../handler";
 
-defineProps({
+const props = defineProps({
   title: {type: String, default: ''},
   def: {
-    type: [String, Number, Boolean] as PropType<string | number>,
+    type: [String, Number] as PropType<string | number>,
   },
   event: {
-    type: Number as PropType<HandlerEnum>,
+    type: Number as PropType<HandlerSettingEnum>,
   },
   disabled: {
     type: Boolean,
   },
   suffix: {type: String, default: ''},
 })
-const emits = defineEmits(['update:value'])
 const onChange = (value)=>{
-  emits('update:value', value)
+  baseHandler(props.event, value)
 }
 </script>
 <template>
   <div class="switch-item">
     <VbenSpace justify="space-between" align="center">
       <span>{{ title }}</span>
-      <VbenInputNumber class="w-120px" v-bind="$attrs" :value="def" :disabled="disabled" @update:value="onChange">
+      <VbenInputNumber class="w-130px" size="small" v-bind="$attrs" :value="def" :disabled="disabled" @update:value="onChange">
         <template #suffix>
           {{ suffix }}
         </template>

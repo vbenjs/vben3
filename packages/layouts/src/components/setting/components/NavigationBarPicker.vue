@@ -1,6 +1,8 @@
 <script lang="ts" setup name="NavigationBarPicker">
-import { defineProps, defineEmits, PropType } from 'vue';
+import {defineProps, defineEmits, PropType} from 'vue';
+import {useI18n} from '@vben/locale'
 
+const {t} = useI18n();
 defineProps({
   typeList: {
     type: Array as PropType<object[]>,
@@ -17,6 +19,7 @@ const emits = defineEmits(['handler']);
 const handlerPicker = (data)=>{
   emits('handler', data)
 }
+
 
 </script>
 <template>
@@ -35,7 +38,7 @@ const handlerPicker = (data)=>{
               <div class="mix-sidebar"></div>
             </div>
           </template>
-          <span>{{ item.title }}</span>
+          <span>{{ t(item.title) }}</span>
         </VbenTooltip>
       </template>
 

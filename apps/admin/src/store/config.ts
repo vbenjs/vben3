@@ -1,4 +1,4 @@
-import { pinia } from '@/pinia'
+import {pinia} from '@/pinia'
 import {
   BeforeMiniState,
   HeaderSetting,
@@ -7,10 +7,10 @@ import {
   ProjectConfig,
   TransitionSetting
 } from '@vben/types'
-import { defineStore } from 'pinia'
-import { deepMerge } from '@vben/utils'
-import { ThemeEnum } from '@vben/constants'
-import { darkMode } from '@/setting'
+import {defineStore} from 'pinia'
+import {deepMerge} from '@vben/utils'
+import {APP_DARK_MODE_KEY_, ThemeEnum} from '@vben/constants'
+import {darkMode} from '@/setting'
 
 export interface ConfigStoreState {
   darkMode?: ThemeEnum
@@ -38,8 +38,12 @@ export const useConfigStore = defineStore({
     beforeMiniInfo: {},
   }),
   getters: {
-    getDarkMode(): 'light' | 'dark' | string {
-      return this.darkMode || darkMode
+    getDarkMode(): ThemeEnum {
+      return (
+        this.darkMode ||
+        (localStorage.getItem(APP_DARK_MODE_KEY_) as ThemeEnum) ||
+        darkMode
+      )
     },
     getBeforeMiniInfo(): BeforeMiniState {
       return this.beforeMiniInfo
@@ -60,7 +64,7 @@ export const useConfigStore = defineStore({
       return this.pageLoading
     },
     getTransitionSetting(): TransitionSetting {
-      return  this.getProjectConfig.transitionSetting
+      return this.getProjectConfig.transitionSetting
     }
   },
   actions: {
@@ -72,6 +76,7 @@ export const useConfigStore = defineStore({
     },
     setDarkMode(mode: ThemeEnum): void {
       this.darkMode = mode
+      localStorage.setItem(APP_DARK_MODE_KEY_, mode)
     },
     async setPageLoadingAction(loading: boolean): Promise<void> {
       console.log(loading)
@@ -79,6 +84,6 @@ export const useConfigStore = defineStore({
   },
 })
 
-export function useAppStoreWithOut() {
+export function useConfigStoreWithOut() {
   return useConfigStore(pinia)
 }

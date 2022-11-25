@@ -14,9 +14,9 @@ export interface SearchResult {
   icon?: string
 }
 
-interface ChangeEvent extends Event {
-  target: HTMLInputElement
-}
+// interface ChangeEvent extends Event {
+//   target: HTMLInputElement
+// }
 
 // Translate special characters
 function transform(c: string) {
@@ -69,7 +69,7 @@ export function useMenuSearch(
     })
   })
 
-  function search(e: ChangeEvent) {
+  function search(e: string) {
     const key = e
     keyword.value = key.trim()
     if (!key) {

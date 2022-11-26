@@ -12,6 +12,9 @@ export const components = {
         case 'TabPane':
           c.__TAB_PANE__ = true
           break
+        case 'Tab':
+          c.__TAB__ = true
+          break
         case 'DescriptionsItem':
           c.DESCRIPTION_ITEM_FLAG = true
           break
@@ -22,9 +25,14 @@ export const components = {
           c.__GRID_ITEM__ = true
           break
       }
+      // console.log(c)
       // 检测未注册组件
       if (!maps.get(c.__name) && !c.name) {
+        console.log(c)
         return
+      }
+      if (c.__name == 'Tab') {
+        console.log(c)
       }
       app.component(`Vben${c.name || c.__name}`, c)
     })

@@ -88,7 +88,8 @@ import naive, {
   NScrollbar,
   NElement,
   NSkeleton,
-  NTooltip
+  NTooltip,
+  NTab,
 } from 'naive-ui'
 
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
@@ -127,6 +128,7 @@ export async function registerComponents(app) {
     Upload: NUpload,
     UploadDragger: NUploadDragger,
     Tabs: NTabs,
+    Tab: NTab,
     TabPane: NTabPane,
     Grid: NGrid,
     GridItem: NGridItem,

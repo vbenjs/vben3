@@ -4,6 +4,7 @@ import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 const { useRootSetting, useMenuSetting } = context
+
 const { toggleCollapsed, getCollapsed } = useMenuSetting()
 </script>
 <template>

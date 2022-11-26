@@ -3,6 +3,7 @@ import { MenuTypeEnum } from '@vben/constants'
 import { computed } from 'vue'
 import LeftMenuLayout from './left-menu.vue'
 import TopMenuLayout from './top-menu.vue'
+import TopMenuMixLayout from './top-menu-mixed.vue'
 import { context } from '../bridge'
 const { useMenuSetting, useRootSetting } = context
 const { getMenuType } = useMenuSetting()
@@ -12,6 +13,8 @@ const layout = computed(() => {
   switch (getMenuType.value) {
     case MenuTypeEnum.SIDEBAR:
       return LeftMenuLayout
+    case MenuTypeEnum.MIX:
+      return TopMenuMixLayout
     case MenuTypeEnum.TOP_MENU:
       return TopMenuLayout
   }

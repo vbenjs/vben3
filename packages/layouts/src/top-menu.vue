@@ -3,10 +3,9 @@ import { computed, ref } from 'vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMenu from './components/menu/index.vue'
 import { headerRef, height } from './data'
-import { context } from '../bridge'
 </script>
 <template>
-  <VbenLayout>
+  <VbenLayout class="h-full">
     <VbenLayoutHeader ref="headerRef">
       <slot name="header">
         <LayoutHeader>

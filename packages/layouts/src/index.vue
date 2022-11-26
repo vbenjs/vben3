@@ -18,5 +18,9 @@ const layout = computed(() => {
 })
 </script>
 <template>
-  <component :is="layout"></component>
+  <component :is="layout">
+    <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+      <slot :name="item" v-bind="data || {}"></slot>
+    </template>
+  </component>
 </template>

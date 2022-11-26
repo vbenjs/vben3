@@ -16,6 +16,7 @@
     "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
+    "@vueuse/core": "^9.6.0",
     "vue": "3.2.45",
     "vue-router": "^4.1.6"
   }

@@ -66,6 +66,6 @@ const {getShowMultipleTab, getShowQuick, getShowRedo, getShowFold} = useMultiple
     <SwitchItem :title="t('layout.setting.grayMode')" :def="getGrayMode"
                 :event="HandlerSettingEnum.GRAY_MODE"/>
     <SwitchItem :title="t('layout.setting.colorWeak')" :def="getColorWeak"
-                :event="HandlerSettingEnum.GRAY_MODE"/>
+                :event="HandlerSettingEnum.COLOR_WEAK"/>
   </VbenSpace>
 </template>

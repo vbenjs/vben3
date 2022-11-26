@@ -1,16 +1,16 @@
-import {pinia} from '@/pinia'
+import { pinia } from '@/pinia'
 import {
   BeforeMiniState,
   HeaderSetting,
   MenuSetting,
   MultiTabsSetting,
   ProjectConfig,
-  TransitionSetting
+  TransitionSetting,
 } from '@vben/types'
-import {defineStore} from 'pinia'
-import {deepMerge} from '@vben/utils'
-import {APP_DARK_MODE_KEY_, ThemeEnum} from '@vben/constants'
-import {darkMode, projectSetting} from '@/setting'
+import { defineStore } from 'pinia'
+import { deepMerge } from '@vben/utils'
+import { APP_DARK_MODE_KEY_, ThemeEnum } from '@vben/constants'
+import { darkMode, projectSetting } from '@/setting'
 
 export interface ConfigStoreState {
   darkMode?: ThemeEnum
@@ -81,9 +81,9 @@ export const useConfigStore = defineStore({
     async setPageLoadingAction(loading: boolean): Promise<void> {
       console.log(loading)
     },
-    resetProjectConfig(){
+    resetProjectConfig() {
       this.setProjectConfig(projectSetting)
-    }
+    },
   },
 })
 

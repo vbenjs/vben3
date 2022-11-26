@@ -58,9 +58,13 @@ export function useMenuSetting() {
 
   const getAccordion = computed(() => configStore.getMenuSetting.accordion)
 
-  const getMixSideFixed = computed(() => configStore.getMenuSetting.mixSideFixed)
+  const getMixSideFixed = computed(
+    () => configStore.getMenuSetting.mixSideFixed,
+  )
 
-  const getTopMenuAlign = computed(() => configStore.getMenuSetting.topMenuAlign)
+  const getTopMenuAlign = computed(
+    () => configStore.getMenuSetting.topMenuAlign,
+  )
 
   const getCloseMixSidebarOnChange = computed(
     () => configStore.getMenuSetting.closeMixSidebarOnChange,
@@ -155,9 +159,7 @@ export function useMenuSetting() {
   }
   return {
     setMenuSetting,
-
     toggleCollapsed,
-
     getMenuFixed,
     getRealWidth,
     getMenuType,

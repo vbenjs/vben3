@@ -1,15 +1,22 @@
 <script lang="ts" setup>
-import Header from './components/header.vue'
-import Main from './components/main.vue'
-import Container from './components/container.vue'
+import { computed, ref } from 'vue'
+import LayoutHeader from './components/header.vue'
+import LayoutMenu from './components/menu/index.vue'
+import { headerRef, height } from './data'
+import { context } from '../bridge'
 </script>
 <template>
-  <Container>
-    <Header>
-      <slot name="header"></slot>
-    </Header>
-    <Main>
+  <VbenLayout>
+    <VbenLayoutHeader ref="headerRef">
+      <slot name="header">
+        <LayoutHeader>
+          <template #menu
+            ><LayoutMenu mode="horizontal"
+          /></template> </LayoutHeader
+      ></slot>
+    </VbenLayoutHeader>
+    <VbenLayoutContent :style="{ marginTop: height + 'px' }" id="layout_main">
       <slot name="main"></slot>
-    </Main>
-  </Container>
+    </VbenLayoutContent>
+  </VbenLayout>
 </template>

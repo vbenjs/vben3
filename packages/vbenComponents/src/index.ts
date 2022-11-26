@@ -9,9 +9,6 @@ export const components = {
     Object.keys(comp).forEach((k) => {
       const c = comp[k].default
       switch (c.__name) {
-        case 'index':
-          c.__name = 'Iconify'
-          break
         case 'TabPane':
           c.__TAB_PANE__ = true
           break

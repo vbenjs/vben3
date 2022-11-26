@@ -28,11 +28,8 @@ export const components = {
       // console.log(c)
       // 检测未注册组件
       if (!maps.get(c.__name) && !c.name) {
-        console.log(c)
+        console.warn(c)
         return
-      }
-      if (c.__name == 'Tab') {
-        console.log(c)
       }
       app.component(`Vben${c.name || c.__name}`, c)
     })

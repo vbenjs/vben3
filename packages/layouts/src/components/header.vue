@@ -70,7 +70,7 @@ const getShowSetting = computed(() => {
           />
         </slot>
       </div>
-      <div><slot name="menu">1</slot></div>
+      <div><slot name="menu"></slot></div>
       <div class="pl-8px pr-8px">
         <slot name="buttons">
           <VbenSpace class="p-1" :size="12" align="center">

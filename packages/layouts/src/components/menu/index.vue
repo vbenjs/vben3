@@ -11,7 +11,12 @@ import {
 } from 'vue-router'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
-
+const props = defineProps({
+  mode: {
+    type: String,
+    default: () => 'vertical',
+  },
+})
 const { bem } = createNamespace('layout-menu')
 // const collapsed = ref(false)
 const { t } = useI18n()
@@ -81,7 +86,7 @@ function renderIcon(icon: string) {
 
 <template>
   <div :class="bem()">
-    <logo :class="bem('logo')" />
+    <logo :class="bem('logo')" v-if="mode !== 'horizontal'" />
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
         v-model:value="activeKey"
@@ -92,6 +97,7 @@ function renderIcon(icon: string) {
         :indent="18"
         :root-indent="18"
         ref="menuRef"
+        :mode="props.mode"
       />
     </VbenScrollbar>
   </div>

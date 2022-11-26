@@ -10,7 +10,7 @@ import {
   SettingButtonPositionEnum,
   ThemeEnum,
   TriggerEnum,
-  RouterTransitionEnum
+  RouterTransitionEnum,
 } from '@vben/constants'
 
 import {

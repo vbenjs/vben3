@@ -1,30 +1,22 @@
-<script lang="tsx">
-import { defineComponent, useSlots } from 'vue'
+<script lang="ts" setup>
+import { MenuTypeEnum } from '@vben/constants'
+import { computed } from 'vue'
 import LeftMenuLayout from './left-menu.vue'
 import TopMenuLayout from './top-menu.vue'
-
-export default defineComponent({
-  props: {
-    type: {
-      type: String,
-      default: 'left-menu',
-    },
-  },
-  setup(props) {
-    const layouts = {
-      'left-menu': LeftMenuLayout,
-      'top-menu': TopMenuLayout,
-    }
-
-    const slots = useSlots()
-
-    return () => {
-      const Layout = layouts[props.type]
-      if (!Layout) {
-        return null
-      }
-      return <Layout>{slots}</Layout>
-    }
-  },
+import { context } from '../bridge'
+const { useMenuSetting, useRootSetting } = context
+const { getMenuType } = useMenuSetting()
+const layout = computed(() => {
+  console.log(getMenuType.value)
+  // return LeftMenuLayout
+  switch (getMenuType.value) {
+    case MenuTypeEnum.SIDEBAR:
+      return LeftMenuLayout
+    case MenuTypeEnum.TOP_MENU:
+      return TopMenuLayout
+  }
 })
 </script>
+<template>
+  <component :is="layout"></component>
+</template>

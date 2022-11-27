@@ -107,7 +107,7 @@ const handleClick = (path: string, route: Recordable<any>) => {
 </script>
 
 <template>
-  <VbenSpace align="center" justify="space-between">
+  <VbenSpace align="center" justify="space-between" class="pl-8px pr-8px">
     <VbenBreadcrumb>
       <VbenBreadcrumbItem v-for="(route, index) in routes" :key="index">
         <VbenDropdown
@@ -121,11 +121,10 @@ const handleClick = (path: string, route: Recordable<any>) => {
           <div class="flex items-center">
             <VbenIconify
               :icon="route.icon"
-              v-if="route.icon && getShowBreadCrumbIcon" />
+              v-if="route.icon && getShowBreadCrumbIcon"
+            />
             <span class="mr-1.2 ml-1.2">{{ t(route.meta.title) }}</span>
-            <VbenIconify
-              icon="gridicons:dropdown"
-              v-if="route.children" />
+            <VbenIconify icon="gridicons:dropdown" v-if="route.children" />
           </div>
         </VbenDropdown>
       </VbenBreadcrumbItem>

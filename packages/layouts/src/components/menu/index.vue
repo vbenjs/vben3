@@ -1,9 +1,12 @@
 <script lang="ts" setup>
+import { ref, h, onMounted, unref, nextTick } from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
 import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 const { Logo, getMenus, listenerRouteChange, useMenuSetting } = context
-import { ref, h, onMounted, unref, nextTick } from 'vue'
+import { MenuTypeEnum } from '@vben/constants'
+const { getMenuType } = useMenuSetting()
+
 import {
   RouteLocationNormalizedLoaded,
   RouterLink,
@@ -86,7 +89,7 @@ function renderIcon(icon: string) {
 
 <template>
   <div :class="bem()">
-    <logo :class="bem('logo')" v-if="mode !== 'horizontal'" />
+    <logo :class="bem('logo')" v-if="getMenuType === MenuTypeEnum.SIDEBAR" />
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
         v-model:value="activeKey"

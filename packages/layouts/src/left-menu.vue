@@ -4,6 +4,7 @@ import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 const { useRootSetting, useMenuSetting } = context
+
 const { toggleCollapsed, getCollapsed } = useMenuSetting()
 </script>
 <template>
@@ -21,9 +22,9 @@ const { toggleCollapsed, getCollapsed } = useMenuSetting()
         <LayoutMenu />
       </slot>
     </VbenLayoutSider>
-    <VbenLayout class="relative">
-      <VbenLayoutHeader ref="headerRef" class="absolute z-99">
-        <slot name="header"> <LayoutHeader /></slot>
+    <VbenLayout>
+      <VbenLayoutHeader ref="headerRef">
+        <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
       <VbenLayoutContent :style="{ marginTop: height + 'px' }" id="layout_main">
         <slot name="main"></slot>

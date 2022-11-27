@@ -78,17 +78,15 @@ const handleSelect = () => {}
       :tabs-padding="8"
       animated
     >
-      <VbenTabPane
+      <VbenTab
         v-for="item in getTabsState"
         :key="item.query ? item.fullPath : item.path"
         :name="item.fullPath"
       >
-        <template #tab>
-          <div @contextmenu="dropdown.openDropdown($event, item)">
-            {{ t(item.meta.title) }}
-          </div>
-        </template>
-      </VbenTabPane>
+        <div @contextmenu="dropdown.openDropdown($event, item)">
+          {{ t(item.meta.title) }}
+        </div>
+      </VbenTab>
       <template #suffix>
         <div class="mr-2"><TabRedo v-if="getTabsState" /></div>
       </template>

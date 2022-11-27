@@ -58,9 +58,14 @@ const getShowSetting = computed(() => {
       justify="space-between"
       align="center"
     >
-      <div class="pl-8px pr-8px">
+      <VbenSpace align="center">
+        <Logo
+          v-if="
+            getMenuType === MenuTypeEnum.TOP_MENU ||
+            getMenuType === MenuTypeEnum.MIX
+          "
+        />
         <slot name="breadcrumb">
-          <Logo v-if="getMenuType === MenuTypeEnum.TOP_MENU" />
           <LayoutBreadcrumb
             v-if="
               getShowContent &&
@@ -69,7 +74,7 @@ const getShowSetting = computed(() => {
             "
           />
         </slot>
-      </div>
+      </VbenSpace>
       <div><slot name="menu"></slot></div>
       <div class="pl-8px pr-8px">
         <slot name="buttons">
@@ -88,7 +93,7 @@ const getShowSetting = computed(() => {
         </slot>
       </div>
     </VbenSpace>
-    <div>
+    <div v-if="getMenuType !== MenuTypeEnum.MIX">
       <slot name="tabs">
         <LayoutTabs />
       </slot>

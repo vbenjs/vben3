@@ -6,7 +6,7 @@ import ForgetPasswordForm from './forget-password-form.vue'
 import RegisterForm from './register-form.vue'
 import MobileForm from './mobile-form.vue'
 import QrCodeForm from './qrcode-form.vue'
-
+import { DarkModeToggle } from '@vben/layouts'
 const { bem } = createNamespace('login')
 
 defineProps({
@@ -24,9 +24,7 @@ const { t } = useI18n()
     <div :class="bem('slogan')" class="hidden xl:flex">
       <div :class="bem('logo')">
         <img :title="title" :alt="title" src="@/assets/images/logo.png" />
-        <div :class="[bem('logo-title'), 'truncate']">
-          {{ title }}
-        </div>
+        <div :class="[bem('logo-title'), 'truncate']">{{ title }}</div>
       </div>
 
       <div class="my-auto">
@@ -46,7 +44,10 @@ const { t } = useI18n()
       </div>
     </div>
     <div :class="[bem('form'), 'enter-x']">
-      <div class="sm:w-4/6 xl:w-4/5 w-full mx-auto my-auto p-4 rounded-md shadow-md xl:shadow-none">
+      <!--      <div class="absolute mt-4 right-4"><DarkModeToggle /></div>-->
+      <div
+        class="sm:w-4/6 xl:w-4/5 w-full mx-auto my-auto p-4 rounded-md shadow-md xl:shadow-none"
+      >
         <vben-card>
           <login-form />
           <forget-password-form />
@@ -60,7 +61,7 @@ const { t } = useI18n()
 </template>
 
 <style lang="less">
-// @dark-bg: #293146;
+//@dark-bg: #293146;
 
 .login {
   height: 100%;

@@ -90,6 +90,7 @@ function renderIcon(icon: string) {
 <template>
   <div :class="bem()">
     <logo :class="bem('logo')" v-if="getMenuType === MenuTypeEnum.SIDEBAR" />
+
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
         v-model:value="activeKey"

@@ -5,7 +5,7 @@ import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 const { useRootSetting, useMenuSetting } = context
 
-const { toggleCollapsed, getCollapsed } = useMenuSetting()
+const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
@@ -13,7 +13,7 @@ const { toggleCollapsed, getCollapsed } = useMenuSetting()
       show-trigger
       bordered
       :collapsed-width="48"
-      :width="160"
+      :width="getMenuWidth"
       collapse-mode="width"
       :collapsed="getCollapsed"
       @update:collapsed="toggleCollapsed"

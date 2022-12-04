@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { h, ref } from 'vue'
+import {h, ref, unref} from 'vue'
 import { context } from '../../../bridge'
 const { useUserStore } = context
 import { useI18n } from '@vben/locale'
 import { openWindow } from '@vben/utils'
 import { VbenIconify } from '@vben/vbencomponents'
+import LockModal from '../lock/LockModal.vue'
 
 const userStore = useUserStore()
 
@@ -45,6 +46,8 @@ const options = ref([
   },
 ])
 
+const showLockModal = ref(false)
+
 const handleSelect = (key) => {
   switch (key) {
     case 'logout':
@@ -67,11 +70,14 @@ const openDoc = () => {
   // openWindow(DOC_URL)
 }
 
-const handleLock = () => {}
+const handleLock = () => {
+  showLockModal.value = !unref(showLockModal)
+}
 </script>
 
 <template>
   <VbenDropdown trigger="hover" :options="options" @select="handleSelect">
     <UserInfo />
   </VbenDropdown>
+  <LockModal v-model:show="showLockModal"/>
 </template>

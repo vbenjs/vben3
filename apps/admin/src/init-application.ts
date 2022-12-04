@@ -20,6 +20,7 @@ import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { useAppStore } from '@/store/modules/app'
 import Logo from '@/layout/components/logo.vue'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
+import { useLockStore } from '@/store/lock'
 import { unref } from 'vue'
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
@@ -93,6 +94,7 @@ async function initPackages() {
         Logo,
         useMenuSetting,
         useTransitionSetting,
+        useLockStore,
       }
     })
   }

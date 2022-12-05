@@ -75,6 +75,15 @@ const LOGIN_ROUTE: RouteRecordItem = {
   },
 }
 
+const LOCK_SCREEN_ROUTE: RouteRecordItem = {
+  path: '/lock',
+  name: 'Lock',
+  component: () => import('@/pages/sys/lock/index.vue'),
+  meta: {
+    title: t('routes.basic.lock'),
+  },
+}
+
 export {
   LAYOUT,
   PARENT_LAYOUT,
@@ -82,4 +91,5 @@ export {
   REDIRECT_ROUTE,
   ROOT_ROUTE,
   LOGIN_ROUTE,
+  LOCK_SCREEN_ROUTE
 }

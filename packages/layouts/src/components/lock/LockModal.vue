@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import {defineProps, computed, reactive, ref} from "vue";
-import { useI18n } from '@vben/locale'
-import { context } from '../../../bridge'
+import {defineProps, computed, ref} from "vue";
+import {useI18n} from '@vben/locale'
+import {useForm} from '@vben/vbencomponents'
+import {context} from '../../../bridge'
 import headerImg from '@/assets/images/header.jpg'
-const { t } = useI18n();
+
+const {t} = useI18n();
 
 const props = defineProps({
   show: {
@@ -11,79 +13,79 @@ const props = defineProps({
   }
 })
 
-const { useUserStore, useLockStore } = context
+const {useUserStore, useLockStore} = context
 const userStore = useUserStore()
 const lockStore = useLockStore()
 const getUserInfo = computed(() => {
-  const { realName = 'Vben Admin', avatar, desc } = userStore.getUserInfo || {}
+  const {realName = 'Vben Admin', avatar, desc} = userStore.getUserInfo || {}
 
-  return { realName, avatar: avatar || headerImg, desc }
+  return {realName, avatar: avatar || headerImg, desc}
 })
 const emits = defineEmits(['update:show'])
 
-const showModal =  computed({
+const showModal = computed({
   get: () => props.show,
   set: (val) => {
     emits('update:show', val)
   }
 })
 
-const formRef = ref<any>(null)
-const formModel = reactive({
+const formRef = ref(undefined)
+const [register, {getFieldValue, validate}] = useForm({
+  schemas: [
+    {
+      gridItemProps: {
+        span: 24,
+      },
+      field: 'password',
+      label: t('layout.header.lockScreenPassword'),
+      component: 'InputPassword',
+      componentProps: {
+        placeholder: t('layout.header.lockScreenPassword'),
+        showPasswordOn: 'mousedown'
+      },
+      rule: {
+        required: true,
+        message: t('layout.header.lockScreenPassword'),
+        trigger: ['input', 'blur']
+      }
+    }
+  ]
+})
+
+const formModel = ref({
   password: ''
 })
 
-const handleLock = (e: MouseEvent) =>{
-  e.preventDefault()
-  console.log(formRef)
-  formRef.value?.validate((errors) => {
+const handleLock = async () => {
+  await validate((errors) => {
     if (!errors) {
-      console.log('验证通过')
-    } else {
-      console.log(errors)
+      const {password} = getFieldValue();
+      lockStore.setLockInfo({
+        isLock: true,
+        pwd: password,
+      });
     }
   })
-  console.log(formModel)
 }
-
-// async function handleLock() {
-//   const values = (await validateFields()) as any;
-//   const password: string | undefined = values.password;
-//   closeModal();
-//
-//   lockStore.setLockInfo({
-//     isLock: true,
-//     pwd: password,
-//   });
-//   await resetFields();
-// }
-
 
 </script>
 
 <template>
-<VbenModal v-model:show="showModal"  :title="t('layout.header.lockScreen')" preset="card">
-  <VbenSpace vertical align="center" >
-    <VbenAvatar
-      round
-      :size="64"
-      :src="getUserInfo.avatar"
-    />
-    <VbenH5>{{ getUserInfo.realName }}</VbenH5>
-  </VbenSpace>
-  <VbenForm ref="formRef" :model="formModel" label-placement="left">
-    <VbenFormItem path="password" :label="t('layout.header.lockScreenPassword')"  :rule="{
-        required: true,
-        message: t('layout.header.lockScreenPassword'),
-        trigger: ['input', 'blur']
-      }">
-      <VbenInput type="password" v-model:value="formModel.password" show-password-on="mousedown"/>
-    </VbenFormItem>
-    <VbenFormItem>
-      <VbenButton type="info" attr-type="button" block @click="handleLock">{{ t('layout.header.lockScreenBtn') }}</VbenButton>
-    </VbenFormItem>
-  </VbenForm>
-</VbenModal>
+  <VbenModal v-model:show="showModal" :title="t('layout.header.lockScreen')" preset="card">
+    <VbenSpace vertical align="center">
+      <VbenAvatar
+        round
+        :size="64"
+        :src="getUserInfo.avatar"
+      />
+      <VbenH5>{{ getUserInfo.realName }}</VbenH5>
+    </VbenSpace>
+    <VbenForm @register="register" ref="formRef" v-model:model="formModel" label-placement="left"/>
+    <VbenButton type="info" block @click="handleLock">
+      {{ t('layout.header.lockScreenBtn')}}
+    </VbenButton>
+  </VbenModal>
 </template>
 
 <style lang="less" scoped>

@@ -1,6 +1,7 @@
 export default {
   basic: {
     login: '登录',
+    lock: '锁屏'
   },
   dashboard: {
     dashboard: '仪表板',

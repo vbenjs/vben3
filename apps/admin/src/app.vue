@@ -6,12 +6,19 @@ import { getGlobalConfig } from '@vben/utils'
 import AppProvider from '@/layout/components/app/AppProvider'
 import { dateEnUS, dateZhCN, enUS, zhCN } from 'naive-ui'
 import { useAppStore } from '@/store/modules/app'
+import {useLockScreen} from "@/hooks/web/useLockScreen";
+import {onMounted} from "vue-demi";
 // Support Multi-language
 const { getLocale } = useLocale()
 // Listening to page changes and dynamically changing site titles
 const { title } = getGlobalConfig(import.meta.env)
 useWebTitle(title, (route) => route.name !== REDIRECT_NAME)
 const appStore = useAppStore()
+
+onMounted(()=>{
+  // Lock screen
+  useLockScreen()
+})
 
 // Dynamic switch component library language
 const dateLocale = computedAsync(async () => {

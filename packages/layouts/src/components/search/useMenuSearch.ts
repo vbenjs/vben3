@@ -1,6 +1,6 @@
 import { ref, unref, Ref, nextTick, onMounted } from 'vue'
 import { cloneDeep, filterTree, forEachTree } from '@vben/utils'
-import { useDebounceFn, onKeyStroke } from '@vueuse/core'
+import { useDebounceFn, onKeyStroke } from '@vben/use'
 import { useI18n } from '@vben/locale'
 import { useGo } from '@vben/use'
 import { getMenus } from '@/router'

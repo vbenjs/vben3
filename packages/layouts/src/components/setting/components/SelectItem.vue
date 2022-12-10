@@ -1,5 +1,5 @@
 <script lang="ts" setup name="SelectItem">
-import {PropType, defineProps, h} from 'vue'
+import {PropType,  h} from 'vue'
 import {HandlerSettingEnum} from "@vben/constants";
 import {baseHandler} from "../handler";
 import {useI18n} from '@vben/locale'

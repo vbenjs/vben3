@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue'
 
 defineProps({
   isDark: { type: Boolean, default: false },

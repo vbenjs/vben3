@@ -1,7 +1,7 @@
-import type {Ref, ShallowRef, UnwrapRef} from "vue";
-import { effectScope, ref, shallowRef, unref, watch } from "vue";
-import { containsProp, tryOnBeforeUnmount, useDebounceFn } from "@vueuse/core";
-import { isEqual } from "@vben/utils";
+import type { Ref, ShallowRef, UnwrapRef } from 'vue'
+import { effectScope, ref, shallowRef, unref, watch } from 'vue'
+import { containsProp, tryOnBeforeUnmount, useDebounceFn } from '@vben/use'
+import { isEqual } from '@vben/utils'
 
 export interface UsePromiseConfig {
   /**
@@ -40,22 +40,29 @@ export interface UsePromiseReturnType<T> {
 }
 
 function isUsePromiseConfig(obj: object): obj is UsePromiseConfig {
-  return containsProp(obj, 'immediate', 'redo', 'debounce', 'ignoreLoading', 'throwOnFailed')
+  return containsProp(
+    obj,
+    'immediate',
+    'redo',
+    'debounce',
+    'ignoreLoading',
+    'throwOnFailed',
+  )
 }
 
 export function usePromise<T = any>(
-  fn: (...args: any[]) => Promise<T>
+  fn: (...args: any[]) => Promise<T>,
 ): UsePromiseReturnType<T>
 
 export function usePromise<T = any>(
   fn: (...args: any[]) => Promise<T>,
-  config: UsePromiseConfig
+  config: UsePromiseConfig,
 ): UsePromiseReturnType<T>
 
 export function usePromise<T = any>(
   fn: (...args: any[]) => Promise<T>,
   fnArgs: unknown,
-  config?: UsePromiseConfig
+  config?: UsePromiseConfig,
 ): UsePromiseReturnType<T>
 
 export function usePromise<T = any>(
@@ -76,7 +83,7 @@ export function usePromise<T = any>(
     redo: false,
     debounce: 0,
     ignoreLoading: false,
-    throwOnFailed: false
+    throwOnFailed: false,
   }
 
   function handleFn(): Promise<T | null> {
@@ -87,21 +94,24 @@ export function usePromise<T = any>(
       }
       loading.value = true
       finished.value = false
-      fn.call(undefined, unref(fnArgs)).then((res) => {
-        data.value = res
-        error.value = null
-        return resolve(res)
-      }).catch((e) => {
-        data.value = null
-        error.value = e
-        if (throwOnFailed) {
-          return reject(e)
-        }
-        return resolve(null)
-      }).finally(() => {
-        loading.value = false
-        finished.value = true
-      })
+      fn.call(undefined, unref(fnArgs))
+        .then((res) => {
+          data.value = res
+          error.value = null
+          return resolve(res)
+        })
+        .catch((e) => {
+          data.value = null
+          error.value = e
+          if (throwOnFailed) {
+            return reject(e)
+          }
+          return resolve(null)
+        })
+        .finally(() => {
+          loading.value = false
+          finished.value = true
+        })
     })
   }
 
@@ -110,32 +120,33 @@ export function usePromise<T = any>(
 
   scoped.run(() => {
     if (args.length > 0) {
-      if (isUsePromiseConfig(args[0]))
-        config = { ...config, ...args[0] }
-      else
-        fnArgs.value = args[0]
+      if (isUsePromiseConfig(args[0])) config = { ...config, ...args[0] }
+      else fnArgs.value = args[0]
     }
 
     if (args.length > 1) {
-      if (isUsePromiseConfig(args[1]))
-        config = { ...config, ...args[1] }
+      if (isUsePromiseConfig(args[1])) config = { ...config, ...args[1] }
     }
 
     const { debounce, immediate, redo } = config
     const debounceFn = useDebounceFn(() => {
-      return handleFn();
-    }, debounce);
+      return handleFn()
+    }, debounce)
 
     if (immediate) {
       debounceFn().then()
     }
 
     if (redo) {
-      watch(fnArgs, (newArgs, oldArgs) => {
-        if (!isEqual(newArgs, oldArgs)) {
-          debounceFn().then()
-        }
-      }, { deep: true })
+      watch(
+        fnArgs,
+        (newArgs, oldArgs) => {
+          if (!isEqual(newArgs, oldArgs)) {
+            debounceFn().then()
+          }
+        },
+        { deep: true },
+      )
     }
   })
 

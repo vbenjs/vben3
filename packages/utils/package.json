@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vue/runtime-core": "3.2.45",
-    "@vueuse/core": "^9.5.0",
+    "@vueuse/core": "^9.6.0",
     "@vueuse/shared": "^9.5.0",
     "dayjs": "^1.11.6",
     "lodash-es": "^4.17.21",

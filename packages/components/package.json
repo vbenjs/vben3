@@ -1,18 +1,25 @@
 {
-  "name": "@components/antd-extend",
+  "name": "@vben/components",
   "version": "3.0.0-alpha.4",
-  "license": "MIT",
   "main": "index.ts",
   "module": "index.ts",
+  "license": "MIT",
   "scripts": {
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
   },
   "dependencies": {
+    "@iconify/iconify": "^3.0.0",
+    "@vben/constants": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
-    "ant-design-vue": "3.2.5",
-    "vue": "3.2.36",
+    "qrcode": "^1.5.1",
+    "vue": "3.2.45",
     "vue-router": "^4.1.5"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.1.98",
+    "@purge-icons/generated": "^0.9.0",
+    "@types/qrcode": "^1.5.0"
   }
 }

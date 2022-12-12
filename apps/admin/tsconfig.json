@@ -14,7 +14,6 @@
       "@vben/constant",
       "@vben/types/shims/pinia",
       "@vben/types/shims/vue-router",
-      "ant-design-vue/typings/global"
     ]
   },
   "include": ["src", "mock", "vite.config.ts"]

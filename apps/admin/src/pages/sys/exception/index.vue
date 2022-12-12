@@ -1,6 +1,5 @@
 <script lang="tsx">
 import type { PropType } from 'vue'
-import { Result, Button } from 'ant-design-vue'
 import { defineComponent, ref, computed, unref } from 'vue'
 import { BASIC_LOGIN_PATH } from '@vben/constants'
 import { useRoute } from 'vue-router'
@@ -127,23 +126,26 @@ export default defineComponent({
     return () => {
       const { title, subTitle, btnText, icon, handler, status } =
         unref(getMapValue) || {}
+
+      // const img = () => (icon ? <img src={icon} /> : null)
+
       return (
-        <Result
-          class={bem()}
+        <VbenResult
+          class={bem() + ' m-4'}
           status={status as any}
           title={props.title || title}
-          sub-title={props.subTitle || subTitle}
+          description={props.subTitle || subTitle}
         >
           {{
-            extra: () =>
+            footer: () =>
               btnText && (
-                <Button type="primary" onClick={handler}>
+                <VbenButton type="primary" onClick={handler}>
                   {() => btnText}
-                </Button>
+                </VbenButton>
               ),
             icon: () => (icon ? <img src={icon} /> : null),
           }}
-        </Result>
+        </VbenResult>
       )
     }
   },

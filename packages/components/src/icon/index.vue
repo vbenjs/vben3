@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, CSSProperties } from 'vue'
-import {unref, computed, useAttrs, ref, nextTick, watch, onMounted} from 'vue'
+import { unref, computed, useAttrs, ref, nextTick, watch, onMounted } from 'vue'
 import { createNamespace, isString } from '@vben/utils'
 import Iconify from '@purge-icons/generated'
 
@@ -12,12 +12,14 @@ const props = defineProps({
   },
   infinite: { type: Boolean },
   icon: { type: String },
-  prefix: { type: String, default: '' }
+  prefix: { type: String, default: '' },
 })
 
 const iconRefEl = ref<HTMLElement | null>(null)
 
-const getIconRef = computed(() => `${props.prefix ? props.prefix + ':' : ''}${props.icon}`);
+const getIconRef = computed(
+  () => `${props.prefix ? props.prefix + ':' : ''}${props.icon}`,
+)
 
 const { bem } = createNamespace('iconify')
 
@@ -46,30 +48,29 @@ const classes = computed(() => {
 })
 
 const update = async () => {
-  const el = unref(iconRefEl);
-  if (!el) return;
+  const el = unref(iconRefEl)
+  if (!el) return
 
-  await nextTick();
-  const icon = unref(getIconRef);
-  if (!icon) return;
+  await nextTick()
+  const icon = unref(getIconRef)
+  if (!icon) return
 
-  const svg = Iconify.renderSVG(icon, {});
+  const svg = Iconify.renderSVG(icon, {})
   if (svg) {
-    el.textContent = '';
-    el.appendChild(svg);
+    el.textContent = ''
+    el.appendChild(svg)
   } else {
-    const span = document.createElement('span');
-    span.className = 'iconify';
-    span.dataset.icon = icon;
-    el.textContent = '';
-    el.appendChild(span);
+    const span = document.createElement('span')
+    span.className = 'iconify'
+    span.dataset.icon = icon
+    el.textContent = ''
+    el.appendChild(span)
   }
-};
+}
 
-watch(() => props.icon, update, { flush: 'post' });
+watch(() => props.icon, update, { flush: 'post' })
 
-onMounted(update);
-
+onMounted(update)
 </script>
 
 <template>

@@ -1,13 +1,3 @@
-<template>
-  <vben-button
-    v-bind="$attrs"
-    :disabled="isStart"
-    @click="handleStart"
-    :loading="loading"
-  >
-    {{ buttonText }}
-  </vben-button>
-</template>
 <script setup lang="ts">
 import { ref, watchEffect, computed, unref } from 'vue'
 import { useCountdown } from './use-countdown'
@@ -56,3 +46,13 @@ async function handleStart() {
   }
 }
 </script>
+<template>
+  <vben-button
+    v-bind="$attrs"
+    :disabled="isStart"
+    @click="handleStart"
+    :loading="loading"
+  >
+    {{ buttonText }}
+  </vben-button>
+</template>

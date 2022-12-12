@@ -1,4 +1,4 @@
-import { LAYOUT } from '../basic'
+import { LAYOUT } from '../../basic'
 
 const dashboard: RouteRecordItem = {
   path: '/demo',
@@ -35,6 +35,15 @@ const dashboard: RouteRecordItem = {
       component: () => import('@/pages/demo/Card.vue'),
       meta: {
         title: 'routes.demo.card',
+        icon: 'ion:grid-outline',
+      },
+    },
+    {
+      path: 'draggable',
+      name: 'Draggable',
+      component: () => import('@/pages/demo/Draggable.vue'),
+      meta: {
+        title: '拖拽',
         icon: 'ion:grid-outline',
       },
     },

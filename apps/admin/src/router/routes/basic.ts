@@ -7,7 +7,6 @@ import { Redirect } from '@vben/components'
 import { t } from '@vben/locale'
 
 const LAYOUT = () => import('@/layout/index.vue')
-const Page = () => import('@/layout/Page.vue')
 
 const PARENT_LAYOUT = () => () =>
   new Promise((resolve) => {
@@ -83,5 +82,4 @@ export {
   REDIRECT_ROUTE,
   ROOT_ROUTE,
   LOGIN_ROUTE,
-  Page,
 }

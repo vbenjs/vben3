@@ -37,7 +37,6 @@ async function setupRouteGuard(router: Router) {
       nProgress.done()
     }
   })
-
   createAuthGuard(router)
   createTabsGuard(router)
 }
@@ -131,7 +130,6 @@ export function createAuthGuard(router: Router) {
     }
 
     const routes = await permissionStore.buildRoutesAction()
-
     routes.forEach((route) => {
       router.addRoute(route)
     })

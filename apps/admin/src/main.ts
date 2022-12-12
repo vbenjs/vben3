@@ -9,7 +9,6 @@ import { setupI18n } from '@vben/locale'
 import { pinia } from './pinia'
 import { initApplication } from './init-application'
 import { registerComponents } from '../init-components'
-
 ;(async () => {
   const app = createApp(App)
 
@@ -25,9 +24,7 @@ import { registerComponents } from '../init-components'
   app.use(router)
   await setupRouteGuard(router)
   await router.isReady()
-
   app.mount('#app')
-
   // When Closing mock, Tree Shaking `mockjs` dep
   if (__VITE_USE_MOCK__) {
     import('../mock/_mock-server').then(({ setupProdMockServer }) =>

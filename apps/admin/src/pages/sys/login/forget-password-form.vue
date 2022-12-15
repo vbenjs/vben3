@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { reactive, ref, computed, unref } from 'vue'
 import { useLoginState, useFormRules, LoginStateEnum } from './use-login'
-import { CountDownInput } from '@components/antd-extend'
+import { CountDownInput } from '@vben/components'
 import { useI18n } from '@vben/locale'
 import LoginFormTitle from './login-form-title.vue'
 
@@ -32,11 +32,7 @@ async function handleReset() {
 <template>
   <template v-if="show">
     <login-form-title class="enter-x" />
-    <vben-form
-      :model="formData"
-      :rules="getFormRules"
-      ref="formRef"
-    >
+    <vben-form :model="formData" :rules="getFormRules" ref="formRef">
       <vben-form-item name="account" class="enter-x" inline :show-label="false">
         <vben-input
           size="large"

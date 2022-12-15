@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, unref } from 'vue'
-import { QrCode } from 'packages/components'
+import { QrCode } from '@vben/components'
 import { useI18n } from '@vben/locale'
 import { useLoginState, LoginStateEnum } from './use-login'
 import LoginFormTitle from './login-form-title.vue'

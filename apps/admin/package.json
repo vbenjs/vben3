@@ -37,7 +37,6 @@
     "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
-    "@vueuse/core": "^9.6.0",
     "dayjs": "^1.11.7",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",

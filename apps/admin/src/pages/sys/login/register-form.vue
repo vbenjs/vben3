@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive, ref, unref, computed } from 'vue'
-import { CountDownInput } from '@components/antd-extend'
+import { CountDownInput } from '@vben/components'
 import { useI18n } from '@vben/locale'
 import {
   useLoginState,
@@ -40,11 +40,7 @@ async function handleRegister() {
 <template>
   <template v-if="getShow">
     <login-form-title class="enter-x" />
-    <vben-form
-      :model="formData"
-      :rules="getFormRules"
-      ref="formRef"
-    >
+    <vben-form :model="formData" :rules="getFormRules" ref="formRef">
       <vben-form-item name="account" class="enter-x" inline :show-label="false">
         <vben-input
           class="fix-auto-fill"
@@ -69,7 +65,12 @@ async function handleRegister() {
           :placeholder="t('sys.login.smsCode')"
         />
       </vben-form-item>
-      <vben-form-item name="password" class="enter-x" inline :show-label="false">
+      <vben-form-item
+        name="password"
+        class="enter-x"
+        inline
+        :show-label="false"
+      >
         <vben-input
           size="large"
           visibilityToggle
@@ -77,7 +78,12 @@ async function handleRegister() {
           :placeholder="t('sys.login.password')"
         />
       </vben-form-item>
-      <vben-form-item name="confirmPassword" class="enter-x" inline :show-label="false">
+      <vben-form-item
+        name="confirmPassword"
+        class="enter-x"
+        inline
+        :show-label="false"
+      >
         <vben-input
           size="large"
           type="password"

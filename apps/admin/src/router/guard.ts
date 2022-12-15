@@ -130,6 +130,7 @@ export function createAuthGuard(router: Router) {
     }
 
     const routes = await permissionStore.buildRoutesAction()
+
     routes.forEach((route) => {
       router.addRoute(route)
     })

@@ -16,5 +16,10 @@
       "@vben/types/shims/vue-router",
     ]
   },
-  "include": ["src", "mock", "vite.config.ts"]
+  "include": [
+    "src",
+    "mock",
+    "vite.config.ts",
+    "../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/macros-global.d.ts"
+  ]
 }

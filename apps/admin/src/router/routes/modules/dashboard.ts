@@ -6,7 +6,7 @@ const dashboard: RouteRecordItem = {
   component: LAYOUT,
   redirect: '/dashboard/analysis',
   meta: {
-    orderNo: 10,
+    orderNo: 1,
     icon: 'ion:grid-outline',
     title: 'routes.dashboard.dashboard',
   },

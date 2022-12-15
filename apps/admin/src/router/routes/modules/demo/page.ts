@@ -3,8 +3,8 @@ const Page: RouteRecordItem = {
   name: 'PageTest',
   component: () => import('@/pages/demo/page/index.vue'),
   meta: {
-    title: 'pageTest',
-    ignoreAuth: false,
+    orderNo: 4,
+    title: '非框架页面',
   },
 }
 

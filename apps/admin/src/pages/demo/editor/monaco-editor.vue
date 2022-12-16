@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import * as monaco from 'monaco-editor'
 import { onMounted } from 'vue'
-const editor = $ref(null)
+let editor = $ref(null)
 onMounted(() => {
   initEditor()
 })

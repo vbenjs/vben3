@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import {ref, computed, unref} from 'vue'
 import { useUserStore } from '@/store/user'
 import { useLockStore } from '@/store/lock'
 import { useI18n } from '@vben/locale'
 import { useNow } from './use-now'
-import { LockOutlined } from '@ant-design/icons-vue'
 import { createNamespace } from '@vben/utils'
 import headerImg from '@/assets/images/header.jpg'
+import {router} from "@/router";
 
 const password = ref('')
 const loading = ref(false)
@@ -35,6 +35,10 @@ async function unLock() {
     loading.value = true
     const res = await lockStore.unLock(password.value)
     errMsg.value = !res
+    if (res) {
+      const redirect = unref(router.currentRoute).query?.redirect as string || '/';
+      await router.replace({ path: redirect })
+    }
   } finally {
     loading.value = false
   }

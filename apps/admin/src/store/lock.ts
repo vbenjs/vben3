@@ -32,7 +32,6 @@ export const useLockStore = defineStore({
         this.resetLockInfo()
         return true
       }
-      console.log('解锁')
       const tryLogin = async () => {
         try {
           const username = userStore.getUserInfo?.username ?? ''

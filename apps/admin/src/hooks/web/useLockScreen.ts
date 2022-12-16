@@ -1,13 +1,17 @@
-import {computed, onUnmounted, unref, watchEffect} from 'vue';
-import { useThrottleFn } from '@vueuse/core';
+import {computed, onUnmounted, unref, watch, watchEffect} from 'vue';
+import {useThrottleFn} from '@vben/use';
 
-import { useLockStore } from '@/store/lock';
-import { useConfigStore } from '@/store/config'
-import { useUserStore } from '@/store/user';
-import { useRootSetting } from '../setting/useRootSetting';
+import {useLockStore} from '@/store/lock';
+import {useConfigStore} from '@/store/config'
+import {useUserStore} from '@/store/user';
+import {useRootSetting} from '../setting/useRootSetting';
+import {BASIC_LOCK_PATH} from '@vben/constants'
+import {router} from "@/router";
+
+const LOCK_PATH = BASIC_LOCK_PATH;
 
 export function useLockScreen() {
-  const { getLockTime } = useRootSetting();
+  const {getLockTime} = useRootSetting();
   const lockStore = useLockStore();
   const userStore = useUserStore();
   const configStore = useConfigStore()
@@ -37,10 +41,9 @@ export function useLockScreen() {
   }
 
   function lockPage(): void {
-    console.log('锁屏', (new Date()).getTime())
     lockStore.setLockInfo({
       isLock: true,
-      pwd: undefined,
+      pwd: undefined
     });
   }
 
@@ -55,6 +58,16 @@ export function useLockScreen() {
     });
   });
 
+  watch(() => lockStore.getLockInfo?.isLock,
+    (newValue) => {
+      if (newValue) {
+        router.replace({
+          path: LOCK_PATH,
+          query: {redirect: unref(router.currentRoute).path}
+        })
+      }
+    }, {deep: true})
+
   onUnmounted(() => {
     clear();
   });
@@ -63,7 +76,7 @@ export function useLockScreen() {
 
   return computed(() => {
     if (unref(getLockTime)) {
-      return { onKeyup: keyupFn, onMousemove: keyupFn };
+      return {onKeyup: keyupFn, onMousemove: keyupFn};
     } else {
       clear();
       return {};

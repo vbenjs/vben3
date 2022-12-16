@@ -1,5 +1,5 @@
 <script lang="ts" setup name="ThemeColorPicker">
-import { defineProps, PropType} from 'vue'
+import {  PropType} from 'vue'
 import { HandlerSettingEnum } from "@vben/constants";
 import {baseHandler} from "../handler";
 

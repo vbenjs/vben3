@@ -10,7 +10,7 @@
   "dependencies": {
     "@vben/constants": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vueuse/core": "^9.5.0",
+    "@vben/use": "workspace:*",
     "vue": "^3.2.45"
   },
   "devDependencies": {

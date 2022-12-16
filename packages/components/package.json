@@ -1,5 +1,5 @@
 {
-  "name": "@vben/use",
+  "name": "@vben/components",
   "version": "3.0.0-alpha.4",
   "main": "index.ts",
   "module": "index.ts",
@@ -8,11 +8,18 @@
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
   },
   "dependencies": {
-    "@vben/locale": "workspace:*",
+    "@iconify/iconify": "^3.0.0",
     "@vben/constants": "workspace:*",
+    "@vben/locale": "workspace:*",
+    "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vueuse/core": "^9.6.0",
+    "qrcode": "^1.5.1",
     "vue": "3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.5"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.1.98",
+    "@purge-icons/generated": "^0.9.0",
+    "@types/qrcode": "^1.5.0"
   }
 }

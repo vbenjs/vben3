@@ -1,5 +1,4 @@
 <script lang="ts" setup name="NavigationBarPicker">
-import {defineProps, defineEmits, PropType} from 'vue';
 import {useI18n} from '@vben/locale'
 
 const {t} = useI18n();

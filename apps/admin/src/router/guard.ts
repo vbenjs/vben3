@@ -37,7 +37,6 @@ async function setupRouteGuard(router: Router) {
       nProgress.done()
     }
   })
-
   createAuthGuard(router)
   createTabsGuard(router)
 }

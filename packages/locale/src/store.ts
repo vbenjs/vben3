@@ -1,7 +1,7 @@
 import type { LocaleType } from '@vben/types'
 import { computed } from 'vue'
 import { LOCALE_KEY } from '@vben/constants'
-import { useLocalStorage } from '@vueuse/core'
+import { useLocalStorage } from '@vben/use'
 import { localeSetting } from './config'
 
 const store = useLocalStorage(LOCALE_KEY, localeSetting)

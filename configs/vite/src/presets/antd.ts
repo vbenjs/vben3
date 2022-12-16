@@ -6,8 +6,8 @@ export async function createAntdPreset(): Promise<UserConfig> {
     optimizeDeps: {
       include: [
         '@ant-design/icons-vue',
-        'ant-design-vue/es/locale/zh_CN',
-        'ant-design-vue/es/locale/en_US',
+        // 'ant-design-vue/es/locale/zh_CN',
+        // 'ant-design-vue/es/locale/en_US',
         'dayjs',
         'dayjs/locale/eu',
         'dayjs/locale/zh-cn',
@@ -19,7 +19,7 @@ export async function createAntdPreset(): Promise<UserConfig> {
       rollupOptions: {
         output: {
           manualChunks: {
-            antdv: ['ant-design-vue', '@ant-design/icons-vue'],
+            // antdv: ['ant-design-vue', '@ant-design/icons-vue'],
             dayjs: ['dayjs'],
           },
         },

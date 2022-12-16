@@ -3,7 +3,7 @@ import {
   PAGE_NOT_FOUND_NAME,
   BASIC_HOME_PATH,
 } from '@vben/constants'
-import { Redirect } from '@components/common'
+import { Redirect } from '@vben/components'
 import { t } from '@vben/locale'
 
 const LAYOUT = () => import('@/layout/index.vue')

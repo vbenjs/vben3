@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMenu from './components/menu/index.vue'
 import { headerRef, height } from './data'

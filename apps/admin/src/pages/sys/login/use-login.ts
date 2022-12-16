@@ -1,4 +1,3 @@
-import type { Rule } from 'ant-design-vue/es/form'
 import { ref, computed, unref, Ref } from 'vue'
 import { useI18n } from '@vben/locale'
 
@@ -53,14 +52,14 @@ export function useFormRules(formData?: Recordable<any>) {
     createRule(t('sys.login.mobilePlaceholder')),
   )
 
-  const validatePolicy = async (_: Rule, value: boolean) => {
+  const validatePolicy = async (_: any, value: boolean) => {
     return !value
       ? Promise.reject(t('sys.login.policyPlaceholder'))
       : Promise.resolve()
   }
 
   const validateConfirmPassword = (password: string) => {
-    return async (_: Rule, value: string) => {
+    return async (_: any, value: string) => {
       if (!value) {
         return Promise.reject(t('sys.login.passwordPlaceholder'))
       }
@@ -71,7 +70,7 @@ export function useFormRules(formData?: Recordable<any>) {
     }
   }
 
-  const getFormRules = computed((): { [k: string]: Rule | Rule[] } => {
+  const getFormRules = computed((): { [k: string]: any | any[] } => {
     const accountFormRule = unref(getAccountFormRule)
     const passwordFormRule = unref(getPasswordFormRule)
     const smsFormRule = unref(getSmsFormRule)
@@ -119,7 +118,7 @@ export function useFormRules(formData?: Recordable<any>) {
   return { getFormRules }
 }
 
-function createRule(message: string): Rule[] {
+function createRule(message: string): any[] {
   return [
     {
       required: true,

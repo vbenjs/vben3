@@ -1,35 +1,35 @@
 <script lang="ts" setup>
-import { reactive, ref, computed, unref } from 'vue';
-import { CountDownInput } from '@components/antd-extend';
-import { useI18n } from '@vben/locale';
+import { reactive, ref, computed, unref } from 'vue'
+import { CountDownInput } from '@vben/components'
+import { useI18n } from '@vben/locale'
 import {
   useLoginState,
   useFormRules,
   useFormValid,
-  LoginStateEnum
-} from './use-login';
-import LoginFormTitle from './login-form-title.vue';
+  LoginStateEnum,
+} from './use-login'
+import LoginFormTitle from './login-form-title.vue'
 
-const { t } = useI18n();
-const { handleBackLogin, getLoginState } = useLoginState();
-const { getFormRules } = useFormRules();
+const { t } = useI18n()
+const { handleBackLogin, getLoginState } = useLoginState()
+const { getFormRules } = useFormRules()
 
-const formRef = ref();
-const loading = ref(false);
+const formRef = ref()
+const loading = ref(false)
 
 const formData = reactive({
   mobile: '',
-  sms: ''
-});
+  sms: '',
+})
 
-const { validForm } = useFormValid(formRef);
+const { validForm } = useFormValid(formRef)
 
-const show = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE);
+const show = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE)
 
 async function handleLogin() {
-  const data = await validForm();
-  if (!data) return;
-  console.log(data);
+  const data = await validForm()
+  if (!data) return
+  console.log(data)
 }
 </script>
 <template>
@@ -66,10 +66,10 @@ async function handleLogin() {
           @click="handleLogin"
           :loading="loading"
         >
-          {{t('sys.login.loginButton')}}
+          {{ t('sys.login.loginButton') }}
         </vben-button>
         <vben-button block class="mt-4" @click="handleBackLogin">
-          {{t('sys.login.backSignIn')}}
+          {{ t('sys.login.backSignIn') }}
         </vben-button>
       </div>
     </vben-form>

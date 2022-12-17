@@ -12,6 +12,8 @@ export interface ContextOptions {
   useMenuSetting: () => unknown
   useMultipleTabStore: () => unknown
   useTransitionSetting: () => unknown
+  useLockStore: () => unknown
+  useLockScreen: () => unknown
   listenerRouteChange: (
     callback: (route: RouteLocationNormalized) => void,
     immediate?: boolean,
@@ -31,6 +33,8 @@ export let context: ContextOptions = {
   useHeaderSetting: () => undefined,
   useMenuSetting: () => undefined,
   useTransitionSetting: () => undefined,
+  useLockStore: () => undefined,
+  useLockScreen: () => undefined,
   useAppInject: () => undefined,
   useMultipleTabStore: () => undefined,
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>

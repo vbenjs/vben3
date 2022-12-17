@@ -1,16 +1,18 @@
 import type { Router } from 'vue-router'
 import nProgress from 'nprogress'
 import { config } from '@/config'
-import { BASIC_LOGIN_PATH, PageEnum } from '@vben/constants'
+import {BASIC_LOCK_PATH, BASIC_LOGIN_PATH, PageEnum} from '@vben/constants'
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic'
 import { setRouteChange } from '@/logics/mitt/routeChange'
 import { ROOT_ROUTE } from './routes'
+import { useLockStore } from '@/store/lock'
 
 const LOADED_PAGE_POOL = new Map<string, boolean>()
+const LOCK_PATH = BASIC_LOCK_PATH
 const LOGIN_PATH = BASIC_LOGIN_PATH
-const whitePathList: string[] = [LOGIN_PATH]
+const whitePathList: string[] = [LOGIN_PATH, LOCK_PATH]
 const ROOT_PATH = ROOT_ROUTE.path
 
 async function setupRouteGuard(router: Router) {
@@ -44,6 +46,7 @@ async function setupRouteGuard(router: Router) {
 export function createAuthGuard(router: Router) {
   const userStore = useUserStoreWithout()
   const permissionStore = useAuthStoreWithout()
+  const lockStore = useLockStore()
 
   router.beforeEach(async (to, from, next) => {
     if (
@@ -69,6 +72,10 @@ export function createAuthGuard(router: Router) {
             return
           }
         } catch {}
+      }
+      if (to.path === LOCK_PATH && !lockStore.getLockInfo?.isLock){
+        next({path: from.path})
+        return
       }
       next()
       return
@@ -98,8 +105,27 @@ export function createAuthGuard(router: Router) {
         }
       }
 
-      console.log(redirectData)
+      next(redirectData)
+      return
+    }
 
+
+    if (lockStore.getLockInfo?.isLock){
+      // redirect lock page
+      const redirectData: {
+        path: string
+        replace: boolean
+        query?: Recordable<string>
+      } = {
+        path: LOCK_PATH,
+        replace: true,
+      }
+      if (to.path) {
+        redirectData.query = {
+          ...redirectData.query,
+          redirect: to.path,
+        }
+      }
       next(redirectData)
       return
     }

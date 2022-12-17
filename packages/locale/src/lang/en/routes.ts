@@ -1,6 +1,7 @@
 export default {
   basic: {
     login: 'Login',
+    lock: 'LockScreen'
   },
   dashboard: {
     dashboard: 'Dashboard',

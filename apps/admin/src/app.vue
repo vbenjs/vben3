@@ -13,6 +13,7 @@ const { title } = getGlobalConfig(import.meta.env)
 useWebTitle(title, (route) => route.name !== REDIRECT_NAME)
 const appStore = useAppStore()
 
+
 // Dynamic switch component library language
 const dateLocale = computedAsync(async () => {
   const message = {

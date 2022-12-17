@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import {ref, computed, unref} from 'vue'
 import { useUserStore } from '@/store/user'
 import { useLockStore } from '@/store/lock'
 import { useI18n } from '@vben/locale'
 import { useNow } from './use-now'
-import { LockOutlined } from '@ant-design/icons-vue'
 import { createNamespace } from '@vben/utils'
 import headerImg from '@/assets/images/header.jpg'
+import {router} from "@/router";
 
 const password = ref('')
 const loading = ref(false)
@@ -35,6 +35,10 @@ async function unLock() {
     loading.value = true
     const res = await lockStore.unLock(password.value)
     errMsg.value = !res
+    if (res) {
+      const redirect = unref(router.currentRoute).query?.redirect as string || '/';
+      await router.replace({ path: redirect })
+    }
   } finally {
     loading.value = false
   }
@@ -53,7 +57,7 @@ function handleShowForm(show = false) {
 <template>
   <div
     :class="bem()"
-    class="fixed inset-0 flex items-center justify-center w-screen h-screen"
+    class="fixed inset-0 flex items-center justify-center w-screen h-screen bg-black"
   >
     <div
       :class="bem('unlock')"
@@ -61,7 +65,7 @@ function handleShowForm(show = false) {
       @click="handleShowForm(false)"
       v-show="showDate"
     >
-      <lock-outlined />
+      <VbenIconify icon="ant-design:lock-outlined" />
       <span>{{ t('sys.lock.unlock') }}</span>
     </div>
 
@@ -70,16 +74,16 @@ function handleShowForm(show = false) {
         :class="bem('hour')"
         class="relative w-2/5 mr-5 md:mr-20 h-2/5 md:h-4/5"
       >
-        <span>{{ hour }}</span>
+        <span class="text-44px sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px">{{ hour }}</span>
         <span
-          class="absolute meridiem left-5 top-5 text-md xl:text-xl"
+          class="absolute left-5 top-5 text-md"
           v-show="showDate"
         >
           {{ meridiem }}
         </span>
       </div>
       <div :class="`${bem('minute')} w-2/5 h-2/5 md:h-4/5 `">
-        <span> {{ minute }}</span>
+        <span class="text-44px sm:text-90px md:text-160px lg:text-220px xl:text-260px 2xl:text-320px"> {{ minute }}</span>
       </div>
     </div>
     <transition name="fade-slide">
@@ -94,7 +98,9 @@ function handleShowForm(show = false) {
               {{ userInfo.realName }}
             </p>
           </div>
-          <a-input-password
+          <VbenInput
+            type="password"
+            show-password-on="mousedown"
             :placeholder="t('sys.lock.placeholder')"
             class="enter-x"
             v-model:value="password"
@@ -103,33 +109,36 @@ function handleShowForm(show = false) {
             {{ t('sys.lock.alert') }}
           </span>
           <div :class="`${bem('footer')} enter-x`">
-            <a-button
-              type="link"
+            <VbenButton
+              quaternary
+              type="info"
               size="small"
-              class="mt-2 mr-2 enter-x"
+              class="mt-2 mr-2 enter-x text-gray-300"
               :disabled="loading"
               @click="handleShowForm(true)"
             >
               {{ t('common.back') }}
-            </a-button>
-            <a-button
-              type="link"
+            </VbenButton>
+            <VbenButton
+              quaternary
+              type="info"
               size="small"
-              class="mt-2 mr-2 enter-x"
+              class="mt-2 mr-2 enter-x text-gray-300"
               :disabled="loading"
               @click="goLogin"
             >
               {{ t('sys.lock.backToLogin') }}
-            </a-button>
-            <a-button
-              class="mt-2"
-              type="link"
+            </VbenButton>
+            <VbenButton
+              class="mt-2 text-gray-300"
+              quaternary
+              type="info"
               size="small"
               @click="unLock()"
               :loading="loading"
             >
               {{ t('sys.lock.entry') }}
-            </a-button>
+            </VbenButton>
           </div>
         </div>
       </div>
@@ -163,40 +172,6 @@ function handleShowForm(show = false) {
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-
-    // @media screen and (max-width: @screen-md) {
-    //   span:not(.meridiem) {
-    //     font-size: 160px;
-    //   }
-    // }
-
-    // @media screen and (min-width: @screen-md) {
-    //   span:not(.meridiem) {
-    //     font-size: 160px;
-    //   }
-    // }
-
-    // @media screen and (max-width: @screen-sm) {
-    //   span:not(.meridiem) {
-    //     font-size: 90px;
-    //   }
-    // }
-    // @media screen and (min-width: @screen-lg) {
-    //   span:not(.meridiem) {
-    //     font-size: 220px;
-    //   }
-    // }
-
-    // @media screen and (min-width: @screen-xl) {
-    //   span:not(.meridiem) {
-    //     font-size: 260px;
-    //   }
-    // }
-    // @media screen and (min-width: @screen-2xl) {
-    //   span:not(.meridiem) {
-    //     font-size: 320px;
-    //   }
-    // }
   }
 
   &__entry {

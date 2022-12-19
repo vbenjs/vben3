@@ -1,7 +1,12 @@
 import type { PiniaPluginContext } from 'pinia'
-import { set, get } from 'lodash-es'
+import { get, set } from 'lodash-es'
+import 'pinia'
 
-interface PersistStrategy {
+interface PersistIM {
+  strategies: StrategyIM[]
+}
+
+interface StrategyIM {
   key?: string
   storage?: Storage
   paths?: string[]
@@ -17,14 +22,11 @@ type PartialState = Partial<Store['$state']>
 
 const STORAGE_NAMESPACE = '__STORE__'
 
-export const createPersistPlugin = ({
-  defaultStorage = localStorage,
-  namespace = STORAGE_NAMESPACE,
-}: CreateOptions = {}) => {
-  const getDefaultStorage = (strategy: PersistStrategy) =>
+export const createPersistPlugin = ({defaultStorage = localStorage, namespace = STORAGE_NAMESPACE}: CreateOptions = {}) => {
+  const getDefaultStorage = (strategy: StrategyIM) =>
     strategy.storage || defaultStorage
 
-  const getRootStore = (strategy: PersistStrategy) => {
+  const getRootStore = (strategy: StrategyIM) => {
     if (!namespace) {
       return
     }
@@ -33,7 +35,7 @@ export const createPersistPlugin = ({
     return storage.getItem(namespace) || '{}'
   }
 
-  const updateStorage = (strategy: PersistStrategy, store: Store) => {
+  const updateStorage = (strategy: StrategyIM, store: Store) => {
     const storage = getDefaultStorage(strategy)
     const storeKey = strategy.key || store.$id
     const rootStore = getRootStore(strategy)
@@ -65,7 +67,7 @@ export const createPersistPlugin = ({
       return
     }
 
-    const defaultState: PersistStrategy[] = [
+    const defaultState: StrategyIM[] = [
       {
         key: store.$id,
         storage: localStorage,
@@ -106,4 +108,11 @@ export const createPersistPlugin = ({
   }
 
   return plugin
+}
+
+declare module 'pinia' {
+  // @ts-ignore
+  export interface DefineStoreOptionsBase {
+    persist?: PersistIM
+  }
 }

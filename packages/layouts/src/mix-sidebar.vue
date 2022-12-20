@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { headerRef, height } from './data'
-import LayoutMenu from './components/menu/index.vue'
+import LayoutMixMenu from './components/menu//mix-menu.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 const { useMenuSetting } = context
@@ -10,16 +10,14 @@ const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 <template>
   <VbenLayout has-sider class="h-full">
     <VbenLayoutSider
-      show-trigger
       bordered
       :collapsed-width="48"
       :width="getMenuWidth"
       collapse-mode="width"
-      :collapsed="getCollapsed"
-      @update:collapsed="toggleCollapsed"
+      :collapsed="true"
     >
       <slot name="sider">
-        <LayoutMenu />
+        <LayoutMixMenu />
       </slot>
     </VbenLayoutSider>
     <VbenLayout>
@@ -32,5 +30,4 @@ const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
     </VbenLayout>
   </VbenLayout>
 </template>
-
-<style scoped></style>
+<style lang="scss" scoped></style>

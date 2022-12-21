@@ -2,7 +2,7 @@
 import { RouteLocationMatched, useRouter } from 'vue-router'
 import { h, ref, watchEffect } from 'vue'
 import { useI18n } from '@vben/locale'
-import { useGo } from '@vben/use'
+import { useGo } from '@vben/hooks'
 import { filterTree, isString } from '@vben/utils'
 import { REDIRECT_NAME } from '@vben/constants'
 import { VbenIconify } from '@vben/vbencomponents'

@@ -13,10 +13,7 @@ function generatorBEM(name: string, mods?: Mods): string {
   }
 
   if (Array.isArray(mods)) {
-    return mods.reduce<string>(
-      (ret, item) => ret + generatorBEM(name, item),
-      '',
-    )
+    return mods.reduce((ret, item) => ret + generatorBEM(name, item), '')
   }
 
   return Object.keys(mods).reduce(

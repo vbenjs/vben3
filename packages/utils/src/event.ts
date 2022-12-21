@@ -1,4 +1,4 @@
-import { isClient } from './util'
+import { isClient } from '@vueuse/core'
 
 const resizeHandler = (entries: ResizeObserverEntry[]) => {
   for (const entry of entries) {

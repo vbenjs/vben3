@@ -2,7 +2,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 
 import { watch, unref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useTitle as _useTitle } from '@vueuse/core'
+import { useTitle as _useTitle } from '@vben/utils'
 import { useI18n, useLocale } from '@vben/locale'
 
 /**

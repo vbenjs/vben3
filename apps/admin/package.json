@@ -34,7 +34,6 @@
     "@vben/locale": "workspace:*",
     "@vben/request": "workspace:*",
     "@vben/styles": "workspace:*",
-    "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "dayjs": "^1.11.7",

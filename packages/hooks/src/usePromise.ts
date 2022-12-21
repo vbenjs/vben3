@@ -1,7 +1,11 @@
 import type { Ref, ShallowRef, UnwrapRef } from 'vue'
 import { effectScope, ref, shallowRef, unref, watch } from 'vue'
-import { containsProp, tryOnBeforeUnmount, useDebounceFn } from '@vben/use'
-import { isEqual } from '@vben/utils'
+import {
+  isEqual,
+  containsProp,
+  tryOnBeforeUnmount,
+  useDebounceFn,
+} from '@vben/utils'
 
 export interface UsePromiseConfig {
   /**

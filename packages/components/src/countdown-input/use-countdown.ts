@@ -1,5 +1,5 @@
 import { ref, unref } from 'vue'
-import { tryOnUnmounted } from '@vben/use'
+import { tryOnUnmounted } from '@vben/utils'
 
 export function useCountdown(count: number) {
   const currentCount = ref(count)

@@ -1,5 +1,4 @@
 import { isObject } from 'lodash-es'
-import { isClient, isWindow } from '@vueuse/core'
 
 // @ts-ignore
 function NOOP() {}
@@ -59,12 +58,4 @@ function isUrl(path: string): boolean {
   return reg.test(path)
 }
 
-export {
-  isUrl,
-  deepMerge,
-  appendUrlParams,
-  openWindow,
-  NOOP,
-  isClient,
-  isWindow,
-}
+export { isUrl, deepMerge, appendUrlParams, openWindow, NOOP }

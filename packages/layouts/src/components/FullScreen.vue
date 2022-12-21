@@ -2,7 +2,7 @@
 import { computed, unref } from 'vue'
 import { useI18n } from '@vben/locale'
 
-import { useFullscreen } from '@vben/use'
+import { useFullscreen } from '@vben/utils'
 const { t } = useI18n()
 const { toggle, isFullscreen } = useFullscreen()
 

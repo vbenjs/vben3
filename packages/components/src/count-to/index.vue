@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, unref, onMounted, watch } from 'vue'
-import { useTransition, TransitionPresets } from '@vben/use'
-import { isNumber } from '@vben/utils'
+import { isNumber, useTransition, TransitionPresets } from '@vben/utils'
 
 const props = defineProps({
   startVal: { type: Number, default: 0 },

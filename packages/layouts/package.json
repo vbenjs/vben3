@@ -13,7 +13,6 @@
     "@vben/hooks": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/types": "workspace:*",
-    "@vben/use": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "vue": "3.2.45",

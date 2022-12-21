@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useI18n } from '@vben/locale'
-import { useIntervalFn } from '@vben/use'
 import {
   formatToDateTime,
   formatToDate,
@@ -9,6 +8,7 @@ import {
   isNumber,
   isObject,
   isString,
+  useIntervalFn,
 } from '@vben/utils'
 
 const ONE_SECONDS = 1000

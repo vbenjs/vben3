@@ -1,5 +1,5 @@
 import { dateUtil } from '@vben/utils'
-import { tryOnMounted, tryOnUnmounted } from '@vben/use'
+import { tryOnMounted, tryOnUnmounted } from '@vben/utils'
 import { reactive, toRefs } from 'vue'
 
 export function useNow(immediate = true) {

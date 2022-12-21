@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from '@vben/locale'
-import { useRefs } from '@vben/use'
+import { useRefs } from '@vben/hooks'
 import { computed, unref, ref } from 'vue'
 import AppSearchFooter from './AppSearchFooter.vue'
 import { useMenuSearch } from './useMenuSearch'

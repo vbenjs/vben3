@@ -1,4 +1,4 @@
-import { createContext, useContext } from '@vben/use'
+import { createContext, useContext } from '@vben/hooks'
 import { InjectionKey, Ref } from 'vue'
 
 export interface AppProviderContextProps {

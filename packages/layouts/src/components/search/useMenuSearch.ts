@@ -1,8 +1,13 @@
 import { ref, unref, Ref, nextTick, onMounted } from 'vue'
-import { cloneDeep, filterTree, forEachTree } from '@vben/utils'
-import { useDebounceFn, onKeyStroke } from '@vben/use'
+import {
+  cloneDeep,
+  filterTree,
+  forEachTree,
+  useDebounceFn,
+  onKeyStroke,
+} from '@vben/utils'
 import { useI18n } from '@vben/locale'
-import { useGo } from '@vben/use'
+import { useGo } from '@vben/hooks'
 import { getMenus } from '@/router'
 import { useScrollTo } from '@/hooks/event/use-scroll-to'
 

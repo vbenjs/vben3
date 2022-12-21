@@ -1,5 +1,5 @@
 import { computed, onUnmounted, watchEffect } from 'vue'
-import { useThrottleFn } from '@vben/use'
+import { useThrottleFn } from '@vben/utils'
 import { useLockStore } from '@/store/lock'
 import { useUserStore } from '@/store/user'
 

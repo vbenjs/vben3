@@ -10,7 +10,13 @@ import { localeList } from '@vben/locale/src/config'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
 import { useTransitionSetting } from '@/hooks/setting/useTransitionSetting'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
-import { getAllParentPath, getMenus } from '@/router'
+import {
+  getAllParentPath,
+  getChildrenMenus,
+  getCurrentParentPath,
+  getMenus,
+  getShallowMenus
+} from '@/router'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useAppInject } from '@/hooks/web/use-app-inject'
 import { useTabs } from '@/hooks/useTabs'
@@ -81,6 +87,9 @@ async function initPackages() {
       return {
         useRootSetting,
         getMenus,
+        getCurrentParentPath,
+        getShallowMenus,
+        getChildrenMenus,
         getAllParentPath,
         useHeaderSetting,
         useDesign,

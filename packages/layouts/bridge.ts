@@ -21,6 +21,9 @@ export interface ContextOptions {
   usePromise: (fn: Function, config?: unknown) => unknown
   useDesign: (scope: string) => unknown
   getMenus: () => Promise<any>
+  getCurrentParentPath: (currentPath: string) => Promise<any>
+  getShallowMenus: () => Promise<any>
+  getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
   Logo: VNode | null
 }
@@ -43,6 +46,9 @@ export let context: ContextOptions = {
   useTabs: () => undefined,
   useDesign: (scope: string) => undefined,
   getMenus: async () => ({}),
+  getCurrentParentPath: async (currentPath: string) => ({}),
+  getShallowMenus: async () => ({}),
+  getChildrenMenus: async (parentPath: string) => ({}),
   getAllParentPath: (menu, path) => [],
   Logo: null,
 }

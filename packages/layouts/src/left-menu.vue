@@ -3,7 +3,7 @@ import { headerRef, height } from './data'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
-const { useRootSetting, useMenuSetting } = context
+const { useMenuSetting } = context
 
 const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 </script>

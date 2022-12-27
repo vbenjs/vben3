@@ -5,7 +5,7 @@ import LayoutTabs from './components/tabs/index.vue'
 import { context } from '../bridge'
 import { headerRef, height } from './data'
 import { computed } from 'vue'
-const { useRootSetting, useMenuSetting } = context
+const { useMenuSetting } = context
 const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 const menuHeight = computed(() => window.document.body.clientHeight)
 </script>

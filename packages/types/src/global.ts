@@ -1,7 +1,7 @@
 import type { VNodeChild, PropType as VuePropType } from 'vue'
 import type { RouteRecordItem as IRouteRecordItem } from './router'
 
-declare global {
+declare  global {
   // define global
   const __VITE_USE_MOCK__: boolean
   const __APP_INFO__: {
@@ -33,6 +33,35 @@ declare global {
   type DeepPartial<T> = {
     [P in keyof T]?: DeepPartial<T[P]>
   }
+
+  interface Fn<T = any, R = T> {
+    (...arg: T[]): R;
+  }
+
+  interface PromiseFn<T = any, R = T> {
+    (...arg: T[]): Promise<R>;
+  }
+
+  type RefType<T> = T | null;
+
+  type LabelValueOptions = {
+    label: string;
+    value: any;
+    [key: string]: string | number | boolean;
+  }[];
+
+  type EmitType = (event: string, ...args: any[]) => void;
+
+  type TargetContext = '_self' | '_blank';
+
+  interface ComponentElRef<T extends HTMLElement = HTMLDivElement> {
+    $el: T;
+  }
+
+  type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElRef<T> | null;
+
+  type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
+
 
   // import.meta
   interface ImportMetaEnv extends ViteEnv {

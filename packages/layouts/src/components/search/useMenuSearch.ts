@@ -11,8 +11,6 @@ import { useGo } from '@vben/hooks'
 import { getMenus } from '@/router'
 import { useScrollTo } from '@/hooks/event/use-scroll-to'
 
-type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>
-
 export interface SearchResult {
   name: string
   path: string

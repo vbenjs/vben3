@@ -48,6 +48,7 @@ function goHome() {
   transition: all 0.2s ease;
   height: 48px;
   background: transparent;
+  box-sizing: border-box;
 
   &__title {
     font-size: 16px;

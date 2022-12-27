@@ -30,7 +30,7 @@ const {
   getShowNotice,
 } = useHeaderSetting()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
-const { getMenuType } = useMenuSetting()
+const { getMenuType, getMenuWidth } = useMenuSetting()
 const shadowColor = computed(() =>
   isDark.value ? 'rgb(255, 255, 255, 0.09)' : 'rgb(239, 239, 245)',
 )
@@ -64,6 +64,7 @@ const getShowSetting = computed(() => {
             getMenuType === MenuTypeEnum.TOP_MENU ||
             getMenuType === MenuTypeEnum.MIX
           "
+          :style="{width: getMenuWidth + 'px', maxWidth: getMenuWidth + 'px'}"
         />
         <slot name="breadcrumb">
           <LayoutBreadcrumb

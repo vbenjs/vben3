@@ -1,6 +1,6 @@
 {
   "name": "@vben/styles",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-bata.1",
   "license": "MIT",
   "scripts": {
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"

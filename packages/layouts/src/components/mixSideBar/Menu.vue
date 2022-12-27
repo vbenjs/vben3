@@ -1,37 +1,61 @@
 <script lang="ts" setup>
-import {ref, onMounted, unref} from 'vue'
-import { createNamespace } from '@vben/utils'
+import {ref, onMounted, unref, computed, CSSProperties} from 'vue'
+import {createNamespace, getGlobalConfig} from '@vben/utils'
 import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import { MenuTypeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
 import SiderTrigger from "./SiderTrigger.vue"
+import MixMenu from "../menu/mix-menu.vue";
 import {
   useRouter,
 } from 'vue-router'
 import {Menu} from "@vben/types";
 
-const { Logo, useMenuSetting, getShallowMenus, getChildrenMenus, getCurrentParentPath } = context
-const { getCollapsed, getMixSideTrigger, getMenuType } = useMenuSetting()
+const { Logo, useMenuSetting, getShallowMenus, getChildrenMenus, getCurrentParentPath, } = context
+const { getCollapsed, getMixSideTrigger, getMenuType, getIsMixSidebar, getMixSideFixed, setMenuSetting,mixSideHasChildren, getMenuWidth } = useMenuSetting()
+const { title } = getGlobalConfig(import.meta.env)
 
 const { bem } = createNamespace('layout-mix-menu')
 // const collapsed = ref(false)
 const { t } = useI18n()
 const { currentRoute, go } = useRouter()
+const props = defineProps({
+  mixSidebarWidth: {
+    type: Number,
+    default: 48
+  }
+})
+
+
 let menuModules = ref<Menu[]>([]);
 const activePath = ref('');
 const childrenMenus = ref<Menu[]>([]);
 const openMenu = ref(false);
+// const dragBarRef = ref<ElRef>(null);
+const sideRef = ref<ElRef>(null);
+const childrenTitle= ref('');
 
 onMounted(async () => {
   menuModules.value = await getShallowMenus();
-  console.log(menuModules.value)
 });
 
+const getIsFixed = computed(() => {
+  /* eslint-disable-next-line */
+  mixSideHasChildren.value = unref(childrenMenus).length > 0;
+  const isFixed = unref(getMixSideFixed) && unref(mixSideHasChildren);
+  if (isFixed) {
+    /* eslint-disable-next-line */
+    openMenu.value = true;
+  }
+  return isFixed;
+});
+
+
 // Process module menu click
-const handleModuleClick = async (path: string, hover = false) => {
-  console.log('是发送到发', path)
+const handleModuleClick = async (path: string, hover = false, title = '') => {
   const children = await getChildrenMenus(path);
+  childrenTitle.value = t(title);
   if (unref(activePath) === path) {
     if (!hover) {
       if (!unref(openMenu)) {
@@ -61,10 +85,28 @@ const handleModuleClick = async (path: string, hover = false) => {
   childrenMenus.value = children;
 }
 
+const getMenuStyle = computed((): CSSProperties => {
+  return {
+    width: unref(openMenu) ? `${unref(getMenuWidth)}px` : 0,
+    left: `${props.mixSidebarWidth}px`,
+  };
+});
+
+// const getDomStyle = computed((): CSSProperties => {
+//   const fixedWidth = unref(getIsFixed) ? unref(getRealWidth) : 0;
+//   const width = `${unref(getMixSideWidth) + fixedWidth}px`;
+//   return getWrapCommonStyle(width);
+// });
+//
+// const getWrapStyle = computed((): CSSProperties => {
+//   const width = `${unref(getMixSideWidth)}px`;
+//   return getWrapCommonStyle(width);
+// });
+
 const getItemEvents = (item) => {
   if (unref(getMixSideTrigger) === 'hover') {
     return {
-      onMouseenter: () => handleModuleClick(item.path, true),
+      onMouseenter: () => handleModuleClick(item.path, true, item.meta.title),
       onClick: async () => {
         const children = await getChildrenMenus(item.path);
         if (item.path && (!children || children.length === 0)) go(item.path);
@@ -72,15 +114,15 @@ const getItemEvents = (item) => {
     };
   }
   return {
-    onClick: () => handleModuleClick(item.path),
+    onClick: () => handleModuleClick(item.path,false, item.meta.title),
   };
 }
 
 // Close menu
 function closeMenu() {
-  // if (!unref(getIsFixed)) {
+  if (!unref(getIsFixed)) {
     openMenu.value = false;
-  // }
+  }
 }
 // Set the currently active menu and submenu
 async function setActive(setChildren = false) {
@@ -88,30 +130,47 @@ async function setActive(setChildren = false) {
   if (!path) return;
   activePath.value = await getCurrentParentPath(path);
   // hanldeModuleClick(parentPath);
-  // if (unref(getIsMixSidebar)) {
-  //   const activeMenu = unref(menuModules).find((item) => item.path === unref(activePath));
-  //   const p = activeMenu?.path;
-  //   if (p) {
-  //     const children = await getChildrenMenus(p);
-  //     if (setChildren) {
-  //       childrenMenus.value = children;
-  //
-  //       if (unref(getMixSideFixed)) {
-  //         openMenu.value = children.length > 0;
-  //       }
-  //     }
-  //     if (children.length === 0) {
-  //       childrenMenus.value = [];
-  //     }
-  //   }
-  // }
+  if (unref(getIsMixSidebar)) {
+    const activeMenu = unref(menuModules).find((item) => item.path === unref(activePath));
+    const p = activeMenu?.path;
+    if (p) {
+      const children = await getChildrenMenus(p);
+      if (setChildren) {
+        childrenMenus.value = children;
+
+        if (unref(getMixSideFixed)) {
+          openMenu.value = children.length > 0;
+        }
+      }
+      if (children.length === 0) {
+        childrenMenus.value = [];
+      }
+    }
+  }
+}
+
+const getMenuEvents = computed(() => {
+  return !unref(getMixSideFixed)
+    ? {
+      onMouseleave: () => {
+        // setActive(true);
+        closeMenu();
+      },
+    }
+    : {};
+});
+
+const handleFixedMenu = ()=> {
+  setMenuSetting({
+    mixSideFixed: !unref(getIsFixed),
+  });
 }
 </script>
 
 <template>
-  <div :class="bem()">
+  <div :class="bem()" v-bind="getMenuEvents">
     <logo
-      :class="bem('logo')"
+      :class="[bem('logo'), 'shadow']"
       v-if="getMenuType === MenuTypeEnum.MIX_SIDEBAR"
       :showTitle="false"
     />
@@ -137,6 +196,29 @@ async function setActive(setChildren = false) {
       </ul>
     </VbenScrollbar>
     <SiderTrigger />
+    <div :class="['shadow', bem('menu-list')]" :style="getMenuStyle" ref="sideRef">
+      <div
+        v-show="openMenu"
+        :class="[
+          bem('menu-list__title'),
+          'shadow',
+          {
+            show: openMenu,
+          },
+        ]"
+      >
+        <span class="text"> {{ title }}</span>
+        <VbenIconify
+          :size="16"
+          :icon="getMixSideFixed ? 'ri:pushpin-2-fill' : 'ri:pushpin-2-line'"
+          class="pushpin"
+          @click="handleFixedMenu"
+        />
+      </div>
+      <VbenH5 v-if="openMenu" :class="bem('menu-list__children-title')">{{ childrenTitle }}</VbenH5>
+      <MixMenu :list="childrenMenus" />
+    </div>
+
   </div>
 </template>
 
@@ -162,7 +244,6 @@ async function setActive(setChildren = false) {
     &__item{
       position: relative;
       padding: 12px 0;
-      //color: rgb(255 255 255 / 65%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -170,35 +251,63 @@ async function setActive(setChildren = false) {
       cursor: pointer;
       transition: all 0.3s ease;
 
-      &:hover {
-        //color: @white;
-      }
-      // &:hover,
+      &:hover,
       &--active {
         font-weight: 700;
-        //color: @white;
-        //background-color: @sider-dark-darken-bg-color;
 
+        color: #18a058;
         &::before {
           position: absolute;
           top: 0;
           left: 0;
           width: 3px;
           height: 100%;
-          //background-color: @primary-color;
+          background-color: #18a058;
           content: '';
         }
       }
     }
     &__icon {
-      transition: all 0.2s;
+      transition: all 0.3s;
     }
 
     &__name {
       margin-bottom: 0;
       margin-top: 5px;
       font-size: 12px;
-      transition: all 0.2s;
+      transition: all 0.3s;
+    }
+  }
+  &__menu-list{
+    position: fixed;
+    top: 0;
+    width: 0px;
+    height: calc(100%);
+    background-color: var(--n-color);
+    transition: all 0.3s;
+    &__title {
+      display: flex;
+      height: 48px;
+      font-size: 18px;
+      opacity: 0%;
+      transition: unset;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding-left: 20px;
+
+      &.show {
+        min-width: 130px;
+        opacity: 100%;
+        transition: all 0.5s ease;
+      }
+      .pushpin{
+        margin-right: 8px;
+      }
+    }
+    &__children-title{
+      padding: 6px 20px;
+      margin: 0;
     }
   }
 }

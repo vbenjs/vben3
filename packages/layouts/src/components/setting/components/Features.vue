@@ -103,7 +103,7 @@ if (!some) {
                 :disabled="!getShowMenuRef || getIsMixSidebar"/>
     <SelectItem :title="t('layout.setting.mixSidebarTrigger')" :options="mixSidebarTriggerOptions"
                 :def="getMixSideTrigger" :event="HandlerSettingEnum.MENU_TRIGGER_MIX_SIDEBAR"
-                :disabled="getIsMixSidebar"/>
+                :disabled="!getIsMixSidebar"/>
     <SelectItem :title="t('layout.setting.topMenuLayout')" :options="topMenuAlignOptions"
                 :def="getTopMenuAlign"
                 :event="HandlerSettingEnum.MENU_TOP_ALIGN"

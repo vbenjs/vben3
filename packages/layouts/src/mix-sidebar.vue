@@ -7,10 +7,13 @@ import {computed, unref} from 'vue';
 import {SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH} from '@vben/constants'
 const { useMenuSetting } = context
 
-const { getCollapsed, getMenuWidth } = useMenuSetting()
+const { getCollapsed, getMenuWidth, getMixSideFixed } = useMenuSetting()
 
 const getMixSidebarWidth = computed(()=>{
   return unref(getCollapsed) ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH
+})
+const getContainerStyle = computed(()=>{
+  return {paddingLeft: (unref(getMixSideFixed) ? unref(getMenuWidth) : 0) + 'px'}
 })
 </script>
 <template>
@@ -18,7 +21,6 @@ const getMixSidebarWidth = computed(()=>{
     <VbenLayoutSider
       bordered
       :collapsed-width="getMixSidebarWidth"
-      :width="getMenuWidth"
       collapse-mode="width"
       :collapsed="true"
     >
@@ -26,7 +28,7 @@ const getMixSidebarWidth = computed(()=>{
         <LayoutMixMenu :mix-sidebar-width="getMixSidebarWidth" />
       </slot>
     </VbenLayoutSider>
-    <VbenLayout>
+    <VbenLayout :style="getContainerStyle" class="transition-all">
       <VbenLayoutHeader ref="headerRef">
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>

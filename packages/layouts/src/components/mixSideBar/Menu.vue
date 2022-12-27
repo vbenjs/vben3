@@ -38,6 +38,7 @@ const childrenTitle= ref('');
 
 onMounted(async () => {
   menuModules.value = await getShallowMenus();
+  openMenu.value = unref(getMixSideFixed)
 });
 
 const getIsFixed = computed(() => {
@@ -92,17 +93,6 @@ const getMenuStyle = computed((): CSSProperties => {
   };
 });
 
-// const getDomStyle = computed((): CSSProperties => {
-//   const fixedWidth = unref(getIsFixed) ? unref(getRealWidth) : 0;
-//   const width = `${unref(getMixSideWidth) + fixedWidth}px`;
-//   return getWrapCommonStyle(width);
-// });
-//
-// const getWrapStyle = computed((): CSSProperties => {
-//   const width = `${unref(getMixSideWidth)}px`;
-//   return getWrapCommonStyle(width);
-// });
-
 const getItemEvents = (item) => {
   if (unref(getMixSideTrigger) === 'hover') {
     return {
@@ -153,7 +143,7 @@ const getMenuEvents = computed(() => {
   return !unref(getMixSideFixed)
     ? {
       onMouseleave: () => {
-        // setActive(true);
+        setActive(true);
         closeMenu();
       },
     }
@@ -213,6 +203,7 @@ const handleFixedMenu = ()=> {
           :icon="getMixSideFixed ? 'ri:pushpin-2-fill' : 'ri:pushpin-2-line'"
           class="pushpin"
           @click="handleFixedMenu"
+          hoverPointer
         />
       </div>
       <VbenH5 v-if="openMenu" :class="bem('menu-list__children-title')">{{ childrenTitle }}</VbenH5>

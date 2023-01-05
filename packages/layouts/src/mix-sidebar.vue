@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { headerRef, height } from './data'
-import LayoutMixMenu from './components/mixSideBar/menu.vue'
+import LayoutMixMenu from './components/mixSideBar/Menu.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 import {computed, unref} from 'vue';

@@ -31,15 +31,14 @@ const {
   getShowHeader,
   getShowNotice,
 } = useHeaderSetting()
+const { getDarkMode } = useConfigStore()
 const {getSettingButtonPosition, getShowSettingButton} = useRootSetting()
 const {getMenuType, getMenuWidth} = useMenuSetting()
 const {getIsMobile} = useAppInject()
+const isDark = computed(() => getDarkMode == ThemeEnum.DARK)
 const shadowColor = computed(() =>
   isDark.value ? 'rgb(255, 255, 255, 0.09)' : 'rgb(239, 239, 245)',
 )
-
-const configStore = useConfigStore()
-const isDark = computed(() => configStore.getDarkMode == ThemeEnum.DARK)
 
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
@@ -61,7 +60,7 @@ const getShowLogo = computed(()=>{
 <template>
   <VbenSpace vertical>
     <VbenSpace
-      class="h-48px shadow"
+      :class="['h-48px', 'shadow', {'mb-8px': getMenuType === MenuTypeEnum.MIX && !getIsMobile}]"
       :style="{ '--un-shadow-color': shadowColor }"
       justify="space-between"
       align="center"

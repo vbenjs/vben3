@@ -6,8 +6,6 @@ import { useFullscreen } from '@vben/utils'
 const { t } = useI18n()
 const { toggle, isFullscreen } = useFullscreen()
 
-console.log(t('layout.header.tooltipExitFull'), '------')
-
 const getTitle = computed(() => {
   return unref(isFullscreen)
     ? t('layout.header.tooltipExitFull')

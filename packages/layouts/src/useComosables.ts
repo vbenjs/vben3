@@ -4,28 +4,18 @@ import { useElementSize } from '@vben/utils'
 export const useComosables = ()=>{
   const headerRef = ref<HTMLElement | null>(null)
   const tabRef = ref<HTMLElement | null>(null)
-  const headerHeight = ref(0)
-  const headerWidth = ref(0)
-  const tabHeight = ref(0)
-  const tabWidth = ref(0)
-  onMounted(()=>{
-    const headerRefElement = useElementSize(headerRef)
-    const tabRefElement = useElementSize(tabRef)
-    headerHeight.value = unref(headerRefElement.height)
-    headerWidth.value = unref(headerRefElement.width)
-    tabHeight.value = unref(tabRefElement.height)
-    tabWidth.value = unref(tabRefElement.width)
-
-    console.log(unref(headerRefElement.height), tabHeight.value)
-  })
+  const { height: headerHeight, width: headerWidth } = useElementSize(headerRef)
+  const { height: tabHeight, width: tabWidth } = useElementSize(tabRef)
   const omitContentHeight = computed(()=>{
     return unref(headerHeight) + unref(tabHeight)
   })
+  const contentHeight = computed(()=>{
+    return `calc(100vh - ${unref(omitContentHeight)}px)`
+  })
   const contentStyle = computed(()=>{
     return {
-      padding: `12px`,
-      height: `calc(100vh - ${unref(omitContentHeight)}px)`,
-      minHeight: `calc(100vh - ${unref(omitContentHeight)}px)`
+      height: unref(contentHeight),
+      minHeight: unref(contentHeight)
     }
   })
   return {
@@ -36,6 +26,7 @@ export const useComosables = ()=>{
     tabHeight,
     tabWidth,
     omitContentHeight,
+    contentHeight,
     contentStyle
   }
 }

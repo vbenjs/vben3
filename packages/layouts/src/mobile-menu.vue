@@ -1,12 +1,14 @@
 <script lang="ts" setup>
-import { headerRef, height } from './data'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 import {onMounted, ref, unref} from "vue";
+import { useComosables} from './useComosables'
 const { useMenuSetting, Logo } = context
 
-const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
+const { getMenuWidth } = useMenuSetting()
+
+const {headerRef, contentStyle} = useComosables()
 
 const active = ref(false);
 onMounted(()=>{
@@ -35,7 +37,7 @@ const activeTrigger = ()=>{
         </LayoutHeader>
       </slot>
     </VbenLayoutHeader>
-    <VbenLayoutContent :style="{ marginTop: height + 'px' }" id="layout_main">
+    <VbenLayoutContent :content-style="contentStyle">
       <slot name="main"></slot>
     </VbenLayoutContent>
   </VbenLayout>

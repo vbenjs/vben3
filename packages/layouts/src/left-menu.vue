@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { headerRef, height } from './data'
+import {useComosables} from './useComosables'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 const { useMenuSetting } = context
+const {headerRef, contentStyle} = useComosables()
 
 const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 </script>
@@ -26,7 +27,7 @@ const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
       <VbenLayoutHeader ref="headerRef">
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
-      <VbenLayoutContent :style="{ marginTop: height + 'px' }" id="layout_main">
+      <VbenLayoutContent :content-style="contentStyle">
         <slot name="main"></slot>
       </VbenLayoutContent>
     </VbenLayout>

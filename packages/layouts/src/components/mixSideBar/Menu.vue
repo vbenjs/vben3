@@ -18,7 +18,6 @@ const { getCollapsed, getMixSideTrigger, getMenuType, getIsMixSidebar, getMixSid
 const { title } = getGlobalConfig(import.meta.env)
 
 const { bem } = createNamespace('layout-mix-menu')
-// const collapsed = ref(false)
 const { t } = useI18n()
 const go = useGo();
 const currentRoute = ref<Nullable<RouteLocationNormalized>>(null);
@@ -34,7 +33,6 @@ let menuModules = ref<Menu[]>([]);
 const activePath = ref('');
 const childrenMenus = ref<Menu[]>([]);
 const openMenu = ref(false);
-// const dragBarRef = ref<ElRef>(null);
 const sideRef = ref<ElRef>(null);
 const childrenTitle= ref('');
 
@@ -129,7 +127,6 @@ async function setActive(setChildren = false) {
   const path = currentRoute.value?.path;
   if (!path) return;
   activePath.value = await getCurrentParentPath(path);
-  // hanldeModuleClick(parentPath);
   if (unref(getIsMixSidebar)) {
     const activeMenu = unref(menuModules).find((item) => item.path === unref(activePath));
     const p = activeMenu?.path;
@@ -187,7 +184,6 @@ const handleFixedMenu = ()=> {
           v-for="item in menuModules"
           :key="item.path"
         >
-<!--          <SimpleMenuTag :item="item" collapseParent dot />-->
           <VbenIconify :class="bem('module__icon')" :size="getCollapsed ? 16 : 20" :icon="item.icon || (item.meta && item.meta.icon)" />
           <p v-show="!getCollapsed" :class="bem('module__name')">
             {{ t(item.meta.title) }}

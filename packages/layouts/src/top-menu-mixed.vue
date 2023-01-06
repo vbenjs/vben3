@@ -3,11 +3,16 @@ import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutTabs from './components/tabs/index.vue'
 import { context } from '../bridge'
-import { headerRef, height } from './data'
-import { computed } from 'vue'
+import { useComosables } from './useComosables'
+import {computed} from 'vue'
 const { useMenuSetting } = context
 const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 const menuHeight = computed(() => window.document.body.clientHeight)
+
+const {headerRef, tabRef, headerHeight, contentStyle} = useComosables()
+
+// console.log(contentStyle)
+
 </script>
 <template>
   <VbenLayout class="h-full">
@@ -16,7 +21,7 @@ const menuHeight = computed(() => window.document.body.clientHeight)
         <LayoutHeader />
       </slot>
     </VbenLayoutHeader>
-    <VbenLayout has-sider :style="{ height: menuHeight - height + 'px' }">
+    <VbenLayout has-sider :style="{ height: menuHeight - headerHeight + 'px' }">
       <VbenLayoutSider
         show-trigger
         bordered
@@ -30,8 +35,8 @@ const menuHeight = computed(() => window.document.body.clientHeight)
           <LayoutMenu />
         </slot>
       </VbenLayoutSider>
-      <VbenLayoutContent id="layout_main">
-        <slot name="tabs"><LayoutTabs /></slot>
+      <VbenLayoutContent :content-style="contentStyle">
+        <slot name="tabs"><LayoutTabs ref="tabRef" /></slot>
         <slot name="main"></slot>
       </VbenLayoutContent>
     </VbenLayout>

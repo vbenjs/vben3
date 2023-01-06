@@ -1,18 +1,21 @@
 <script lang="ts" setup>
 import { MenuTypeEnum } from '@vben/constants'
-import {computed, defineComponent} from 'vue'
+import {computed, defineComponent, unref} from 'vue'
 import LeftMenuLayout from './left-menu.vue'
 import TopMenuLayout from './top-menu.vue'
 import TopMenuMixLayout from './top-menu-mixed.vue'
 import MixSidebar from './mix-sidebar.vue'
+import Mobile from './mobile-menu.vue'
 import { context } from '../bridge'
-const { useMenuSetting, useLockScreen } = context
+const { useMenuSetting, useLockScreen, useAppInject } = context
 // Create a lock screen monitor
 const lockEvents = useLockScreen();
 
+const { getIsMobile } = useAppInject()
+
 const { getMenuType } = useMenuSetting()
 const layout = computed<ReturnType<typeof defineComponent>>(() => {
-  // return LeftMenuLayout
+  if (unref(getIsMobile)) return Mobile
   switch (getMenuType.value) {
     case MenuTypeEnum.SIDEBAR:
       return LeftMenuLayout

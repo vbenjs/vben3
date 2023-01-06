@@ -38,4 +38,3 @@ const getContainerStyle = computed(()=>{
     </VbenLayout>
   </VbenLayout>
 </template>
-<style lang="scss" scoped></style>

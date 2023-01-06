@@ -8,10 +8,11 @@ import { headerRef, height } from './data'
     <VbenLayoutHeader ref="headerRef">
       <slot name="header">
         <LayoutHeader>
-          <template #menu
-            ><LayoutMenu mode="horizontal"
-          /></template> </LayoutHeader
-      ></slot>
+          <template #menu>
+            <LayoutMenu mode="horizontal"/>
+          </template>
+        </LayoutHeader>
+      </slot>
     </VbenLayoutHeader>
     <VbenLayoutContent :style="{ marginTop: height + 'px' }" id="layout_main">
       <slot name="main"></slot>

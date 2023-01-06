@@ -1,19 +1,21 @@
 <script lang="ts" setup>
 import LayoutHeader from './components/header.vue'
 import LayoutMenu from './components/menu/index.vue'
-import { headerRef, height } from './data'
+import { useComosables} from './useComosables'
+const {headerRef, contentStyle} = useComosables()
 </script>
 <template>
   <VbenLayout class="h-full">
     <VbenLayoutHeader ref="headerRef">
       <slot name="header">
-        <LayoutHeader>
-          <template #menu
-            ><LayoutMenu mode="horizontal"
-          /></template> </LayoutHeader
-      ></slot>
+        <LayoutHeader ref="headerRef">
+          <template #menu>
+            <LayoutMenu mode="horizontal"/>
+          </template>
+        </LayoutHeader>
+      </slot>
     </VbenLayoutHeader>
-    <VbenLayoutContent :style="{ marginTop: height + 'px' }" id="layout_main">
+    <VbenLayoutContent :content-style="contentStyle">
       <slot name="main"></slot>
     </VbenLayoutContent>
   </VbenLayout>

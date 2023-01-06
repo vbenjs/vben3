@@ -8,18 +8,19 @@ import { useI18n } from '@vben/locale'
 import SiderTrigger from "./SiderTrigger.vue"
 import MixMenu from "../menu/mix-menu.vue";
 import {
-  useRouter,
+  RouteLocationNormalized
 } from 'vue-router'
 import {Menu} from "@vben/types";
+import {useGo} from "@vben/hooks";
 
-const { Logo, useMenuSetting, getShallowMenus, getChildrenMenus, getCurrentParentPath, } = context
-const { getCollapsed, getMixSideTrigger, getMenuType, getIsMixSidebar, getMixSideFixed, setMenuSetting,mixSideHasChildren, getMenuWidth } = useMenuSetting()
+const { Logo, useMenuSetting, getShallowMenus, getChildrenMenus, getCurrentParentPath, listenerRouteChange } = context
+const { getCollapsed, getMixSideTrigger, getMenuType, getIsMixSidebar, getMixSideFixed, setMenuSetting,mixSideHasChildren, getMenuWidth, getCloseMixSidebarOnChange} = useMenuSetting()
 const { title } = getGlobalConfig(import.meta.env)
 
 const { bem } = createNamespace('layout-mix-menu')
-// const collapsed = ref(false)
 const { t } = useI18n()
-const { currentRoute, go } = useRouter()
+const go = useGo();
+const currentRoute = ref<Nullable<RouteLocationNormalized>>(null);
 const props = defineProps({
   mixSidebarWidth: {
     type: Number,
@@ -32,13 +33,20 @@ let menuModules = ref<Menu[]>([]);
 const activePath = ref('');
 const childrenMenus = ref<Menu[]>([]);
 const openMenu = ref(false);
-// const dragBarRef = ref<ElRef>(null);
 const sideRef = ref<ElRef>(null);
 const childrenTitle= ref('');
 
 onMounted(async () => {
   menuModules.value = await getShallowMenus();
   openMenu.value = unref(getMixSideFixed)
+});
+
+listenerRouteChange((route) => {
+  currentRoute.value = route;
+  setActive(true);
+  if (unref(getCloseMixSidebarOnChange)) {
+    closeMenu();
+  }
 });
 
 const getIsFixed = computed(() => {
@@ -119,7 +127,6 @@ async function setActive(setChildren = false) {
   const path = currentRoute.value?.path;
   if (!path) return;
   activePath.value = await getCurrentParentPath(path);
-  // hanldeModuleClick(parentPath);
   if (unref(getIsMixSidebar)) {
     const activeMenu = unref(menuModules).find((item) => item.path === unref(activePath));
     const p = activeMenu?.path;
@@ -177,7 +184,6 @@ const handleFixedMenu = ()=> {
           v-for="item in menuModules"
           :key="item.path"
         >
-<!--          <SimpleMenuTag :item="item" collapseParent dot />-->
           <VbenIconify :class="bem('module__icon')" :size="getCollapsed ? 16 : 20" :icon="item.icon || (item.meta && item.meta.icon)" />
           <p v-show="!getCollapsed" :class="bem('module__name')">
             {{ t(item.meta.title) }}

@@ -58,13 +58,13 @@ const transform: AxiosTransform = {
 
     if (hasSuccess) {
       if (message) {
-        context.noticeFunction &&
+        context.noticeFunction /*&&
           context.noticeFunction.success({
             content: '成功',
             meta: message,
             duration: 2500,
             keepAliveOnHover: true,
-          })
+          })*/
       }
 
       return result

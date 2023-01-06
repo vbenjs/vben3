@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { headerRef, height } from './data'
-import LayoutMixMenu from './components/mixSideBar/menu.vue'
+import {useComosables} from './useComosables'
+import LayoutMixMenu from './components/mixSideBar/Menu.vue'
 import LayoutHeader from './components/header.vue'
 import { context } from '../bridge'
 import {computed, unref} from 'vue';
 import {SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH} from '@vben/constants'
 const { useMenuSetting } = context
+const {headerRef, contentStyle} = useComosables()
 
 const { getCollapsed, getMenuWidth, getMixSideFixed } = useMenuSetting()
 
@@ -32,10 +33,9 @@ const getContainerStyle = computed(()=>{
       <VbenLayoutHeader ref="headerRef">
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
-      <VbenLayoutContent :style="{ marginTop: height + 'px' }" id="layout_main">
+      <VbenLayoutContent :content-style="contentStyle">
         <slot name="main"></slot>
       </VbenLayoutContent>
     </VbenLayout>
   </VbenLayout>
 </template>
-<style lang="scss" scoped></style>

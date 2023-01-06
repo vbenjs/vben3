@@ -3,8 +3,6 @@ import {ref, h, unref, nextTick, computed} from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
 import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
-const { listenerRouteChange } = context
-
 import {
   RouteLocationNormalizedLoaded,
   RouterLink,
@@ -12,6 +10,8 @@ import {
 } from 'vue-router'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
+
+const { listenerRouteChange } = context
 const props = defineProps({
   list: {
     type: Array,

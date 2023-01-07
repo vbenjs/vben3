@@ -13,7 +13,7 @@ import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 const { Logo, getMenus, listenerRouteChange, useMenuSetting, useAppInject } = context
 
-const { getMenuType } = useMenuSetting()
+const { getMenuType, getAccordion } = useMenuSetting()
 const { getIsMobile } = useAppInject()
 
 const props = defineProps({
@@ -107,6 +107,7 @@ function renderIcon(icon: string) {
         :root-indent="18"
         ref="menuRef"
         :mode="props.mode"
+        :accordion="getAccordion"
       />
     </VbenScrollbar>
   </div>

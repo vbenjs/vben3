@@ -11,7 +11,8 @@ import {
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 
-const { listenerRouteChange } = context
+const { listenerRouteChange, useMenuSetting } = context
+const { getAccordion } = useMenuSetting()
 const props = defineProps({
   list: {
     type: Array,
@@ -93,6 +94,7 @@ function renderIcon(icon: string) {
         :indent="18"
         :root-indent="18"
         ref="menuRef"
+        :accordion="getAccordion"
       />
     </VbenScrollbar>
   </div>

@@ -43,6 +43,13 @@ const {getHeaderBgColor} = useHeaderSetting();
       hoverPointer
       @click="settingDrawerShow = true"
     />
+<!--    <VbenAffix class="z-999 p-10px flex-center text-white border-rd-l bg-[#0960bd]" :trigger-top="200" listen-to="body">
+      <VbenIconify
+        icon="ion:settings-outline"
+        hoverPointer
+        @click="settingDrawerShow = true"
+      />
+    </VbenAffix>-->
     <VbenDrawer v-model:show="settingDrawerShow" :width="330">
       <VbenDrawerContent closable>
         <template #header>{{ t('layout.setting.drawerTitle') }}</template>

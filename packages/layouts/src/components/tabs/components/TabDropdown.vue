@@ -6,7 +6,7 @@ const { refreshPage, close, closeAll, getTabIndex } = useTabs()
 
 const x = ref(0)
 const y = ref(0)
-const tab = ref(null)
+const tab = $ref(null)
 const showDropdown = ref(false)
 
 const options = computed(() => {
@@ -18,7 +18,7 @@ const options = computed(() => {
     {
       label: '关闭标签',
       key: 'close',
-      disabled: !(getTabIndex(tab.value) > 0),
+      disabled: !(getTabIndex(tab) > 0) || tab.meta.affix,
     },
     {
       label: '关闭所有标签',
@@ -28,7 +28,7 @@ const options = computed(() => {
 })
 
 const openDropdown = (e, t) => {
-  tab.value = t
+  tab = t
   e.preventDefault()
   showDropdown.value = false
   nextTick().then(() => {
@@ -52,14 +52,14 @@ const { loading, handleFn: handleRedo } = usePromise(reload, {
 })
 const handleSelect = (k) => {
   console.log(k)
-  const i = getTabIndex(tab.value)
+  const i = getTabIndex(tab)
   console.log(i)
   switch (k) {
     case 'reload':
       reload()
       return
     case 'close':
-      close(tab.value)
+      close(tab)
       return
     case 'closeAll':
       closeAll()

@@ -3,13 +3,14 @@ import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutTabs from './components/tabs/index.vue'
 import LayoutMain from './components/main.vue'
+import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import { useComosables } from './useComosables'
 import {computed, unref} from 'vue'
 const { useMenuSetting } = context
 const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 
-const {headerRef, tabRef, headerHeight, contentStyle} = useComosables()
+const {headerRef, tabRef, headerHeight, contentStyle, contentRef} = useComosables()
 
 const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
 
@@ -37,10 +38,13 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
       </VbenLayoutSider>
       <VbenLayoutContent>
         <slot name="tabs"><LayoutTabs ref="tabRef" /></slot>
-        <VbenScrollbar :style="contentStyle">
+        <VbenScrollbar ref="contentRef" :style="contentStyle">
           <LayoutMain>
             <slot name="main"></slot>
           </LayoutMain>
+          <slot name="footer">
+            <LayoutFooter/>
+          </slot>
         </VbenScrollbar>
       </VbenLayoutContent>
     </VbenLayout>

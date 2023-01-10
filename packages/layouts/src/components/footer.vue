@@ -2,42 +2,33 @@
 export default {name: 'LayoutFooter'}
 </script>
 <script lang="ts" setup>
-import type {CSSProperties} from 'vue'
-import {computed} from 'vue'
 import {createNamespace, openWindow} from '@vben/utils'
 import {context} from '../../bridge'
 import { useI18n} from '@vben/locale'
+import {useComosables} from "../useComosables";
 
 const { t } = useI18n()
 const { siteSetting } = context
 
 const { DOC_URL, GITHUB_URL, SITE_URL } = siteSetting
+const {contentRef, footerRef, contentRefHeight} = useComosables()
 
-const props = defineProps({
-  height: {
-    type: String,
-    default: null,
-  },
-})
-const {bem, cssVarBlock} = createNamespace('footer')
-const style = computed(
-  () =>
-    (props.height
-      ? cssVarBlock({height: props.height})
-      : {}) as CSSProperties,
-)
+const {bem} = createNamespace('footer')
 </script>
 <template>
-  <footer :class="bem()" :style="style">
-    <slot>
-      <div :class="bem('links')">
-        <a @click="openWindow(SITE_URL)">{{ t('layout.footer.onlinePreview') }}</a>
-        <VbenIconify @click="openWindow(GITHUB_URL)" :class="bem('github')" icon="ant-design:github-outlined" hover-pointer />
-        <a @click="openWindow(DOC_URL)">{{ t('layout.footer.onlineDocument') }}</a>
-      </div>
-      <div :class="bem('trademark')">Copyright &copy;2020 Vben Admin</div>
-    </slot>
-  </footer>
+  <VbenAffix class="w-full"  :trigger-bottom="60" position="absolute" :listen-to="contentRef">
+    {{ contentRefHeight }}
+    <VbenLayoutFooter ref="footerRef">
+      <footer :class="bem()">
+        <div :class="bem('links')">
+          <a @click="openWindow(SITE_URL)">{{ t('layout.footer.onlinePreview') }}</a>
+          <VbenIconify @click="openWindow(GITHUB_URL)" :class="bem('github')" icon="ant-design:github-outlined" hover-pointer />
+          <a @click="openWindow(DOC_URL)">{{ t('layout.footer.onlineDocument') }}</a>
+        </div>
+        <div :class="bem('trademark')">Copyright &copy;2020 Vben Admin</div>
+      </footer>
+    </VbenLayoutFooter>
+  </VbenAffix>
 </template>
 
 <style lang="less" scoped>

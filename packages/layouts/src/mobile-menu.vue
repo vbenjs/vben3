@@ -2,6 +2,7 @@
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
+import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import {onMounted, ref, unref} from "vue";
 import { useComosables} from './useComosables'
@@ -9,7 +10,7 @@ const { useMenuSetting, Logo } = context
 
 const { getMenuWidth } = useMenuSetting()
 
-const {headerRef, contentStyle} = useComosables()
+const {headerRef, contentStyle, contentRef} = useComosables()
 
 const active = ref(false);
 onMounted(()=>{
@@ -38,10 +39,13 @@ const activeTrigger = ()=>{
         </LayoutHeader>
       </slot>
     </VbenLayoutHeader>
-    <VbenLayoutContent :content-style="contentStyle">
+    <VbenLayoutContent ref="contentRef" :content-style="contentStyle">
       <LayoutMain>
         <slot name="main"></slot>
       </LayoutMain>
+      <slot name="footer">
+        <LayoutFooter/>
+      </slot>
     </VbenLayoutContent>
   </VbenLayout>
 </template>

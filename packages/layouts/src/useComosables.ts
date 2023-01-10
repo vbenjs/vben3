@@ -8,8 +8,12 @@ export const useComosables = () => {
   const {getFixed: getHeaderFixed} = useHeaderSetting();
   const headerRef = ref<HTMLElement | null>(null)
   const tabRef = ref<HTMLElement | null>(null)
+  const contentRef = ref<HTMLElement | null>(null)
+  const footerRef = ref<HTMLElement | null>(null)
   const {height: headerHeight, width: headerWidth} = useElementSize(headerRef)
   const {height: tabHeight, width: tabWidth} = useElementSize(tabRef)
+  const {height: contentRefHeight, width: contentRefWidth} = useElementSize(contentRef)
+  const {height: footerHeight, width: footerWidth} = useElementSize(footerRef)
   const omitContentHeight = computed(() => {
     return unref(headerHeight) + unref(tabHeight)
   })
@@ -29,8 +33,14 @@ export const useComosables = () => {
     headerWidth,
     tabHeight,
     tabWidth,
+    contentRefHeight,
+    contentRefWidth,
+    footerHeight,
+    footerWidth,
     omitContentHeight,
     contentHeight,
-    contentStyle
+    contentStyle,
+    contentRef,
+    footerRef
   }
 }

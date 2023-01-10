@@ -31,6 +31,7 @@ const {
   getShowHeader,
   getShowNotice,
   getShowFullHeaderRef,
+  getShowHeaderLogo
 } = useHeaderSetting()
 const { getDarkMode } = useConfigStore()
 const {getSettingButtonPosition, getShowSettingButton} = useRootSetting()
@@ -52,11 +53,6 @@ const getShowSetting = computed(() => {
   }
   return settingButtonPosition === SettingButtonPositionEnum.HEADER
 })
-
-const getShowLogo = computed(()=>{
-  return unref(getMenuType) === MenuTypeEnum.TOP_MENU ||
-    unref(getMenuType) === MenuTypeEnum.MIX
-})
 </script>
 <template>
   <VbenSpace vertical>
@@ -70,7 +66,7 @@ const getShowLogo = computed(()=>{
       <slot name="logo">
         <VbenSpace align="center">
           <Logo
-            v-if="getShowLogo"
+            v-if="getShowHeaderLogo"
             :style="{width: getMenuWidth + 'px', maxWidth: getMenuWidth + 'px'}"
           />
           <slot name="breadcrumb">

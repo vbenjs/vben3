@@ -25,6 +25,7 @@ export interface ContextOptions {
   getShallowMenus: () => Promise<any>
   getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
+  siteSetting: Record<string, string>
   Logo: VNode | null
 }
 
@@ -50,6 +51,7 @@ export let context: ContextOptions = {
   getShallowMenus: async () => ({}),
   getChildrenMenus: async (parentPath: string) => ({}),
   getAllParentPath: (menu, path) => [],
+  siteSetting: {},
   Logo: null,
 }
 

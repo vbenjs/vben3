@@ -22,3 +22,5 @@ const staticConfig: StaticConfig = {
 }
 
 export const config = { ...staticConfig, ...dynamicConfig }
+
+export const siteSetting = {GITHUB_URL, DOC_URL, SITE_URL}

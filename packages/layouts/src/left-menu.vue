@@ -3,6 +3,7 @@ import {useComosables} from './useComosables'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
+import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 const { useMenuSetting } = context
 const {headerRef, contentStyle} = useComosables()
@@ -32,6 +33,9 @@ const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
         <LayoutMain>
           <slot name="main"></slot>
         </LayoutMain>
+        <VbenLayoutFooter>
+          <LayoutFooter/>
+        </VbenLayoutFooter>
       </VbenLayoutContent>
     </VbenLayout>
   </VbenLayout>

@@ -29,6 +29,7 @@ import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import { useLockStore } from '@/store/lock'
 import { unref } from 'vue'
 import {useLockScreen} from "@/hooks/web/useLockScreen";
+import {siteSetting} from "@/config";
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -105,7 +106,8 @@ async function initPackages() {
         useMenuSetting,
         useTransitionSetting,
         useLockStore,
-        useLockScreen
+        useLockScreen,
+        siteSetting
       }
     })
   }

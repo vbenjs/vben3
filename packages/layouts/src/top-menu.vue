@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import LayoutHeader from './components/header.vue'
 import LayoutMenu from './components/menu/index.vue'
+import LayoutMain from './components/main.vue'
 import { useComosables} from './useComosables'
 const {headerRef, contentStyle} = useComosables()
 </script>
@@ -16,7 +17,9 @@ const {headerRef, contentStyle} = useComosables()
       </slot>
     </VbenLayoutHeader>
     <VbenLayoutContent :content-style="contentStyle">
-      <slot name="main"></slot>
+      <LayoutMain>
+        <slot name="main"></slot>
+      </LayoutMain>
     </VbenLayoutContent>
   </VbenLayout>
 </template>

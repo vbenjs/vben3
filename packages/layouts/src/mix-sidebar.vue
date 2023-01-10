@@ -2,6 +2,7 @@
 import {useComosables} from './useComosables'
 import LayoutMixMenu from './components/mixSideBar/Menu.vue'
 import LayoutHeader from './components/header.vue'
+import LayoutMain from './components/main.vue'
 import { context } from '../bridge'
 import {computed, unref} from 'vue';
 import {SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH} from '@vben/constants'
@@ -34,7 +35,9 @@ const getContainerStyle = computed(()=>{
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
       <VbenLayoutContent :content-style="contentStyle">
-        <slot name="main"></slot>
+        <LayoutMain>
+          <slot name="main"></slot>
+        </LayoutMain>
       </VbenLayoutContent>
     </VbenLayout>
   </VbenLayout>

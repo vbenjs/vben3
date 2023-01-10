@@ -2,6 +2,7 @@
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutTabs from './components/tabs/index.vue'
+import LayoutMain from './components/main.vue'
 import { context } from '../bridge'
 import { useComosables } from './useComosables'
 import {computed, unref} from 'vue'
@@ -37,7 +38,9 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
       <VbenLayoutContent>
         <slot name="tabs"><LayoutTabs ref="tabRef" /></slot>
         <VbenScrollbar :style="contentStyle">
-          <slot name="main"></slot>
+          <LayoutMain>
+            <slot name="main"></slot>
+          </LayoutMain>
         </VbenScrollbar>
       </VbenLayoutContent>
     </VbenLayout>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
+import LayoutMain from './components/main.vue'
 import { context } from '../bridge'
 import {onMounted, ref, unref} from "vue";
 import { useComosables} from './useComosables'
@@ -38,7 +39,9 @@ const activeTrigger = ()=>{
       </slot>
     </VbenLayoutHeader>
     <VbenLayoutContent :content-style="contentStyle">
-      <slot name="main"></slot>
+      <LayoutMain>
+        <slot name="main"></slot>
+      </LayoutMain>
     </VbenLayoutContent>
   </VbenLayout>
 </template>

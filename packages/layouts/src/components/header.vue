@@ -4,7 +4,7 @@ import LayoutTabs from '../components/tabs/index.vue'
 import AppSearch from '../components/search/AppSearch.vue'
 import AppNotify from '../components/notify/index.vue'
 import AppFullScreen from '../components/FullScreen.vue'
-import AppSetting from '../components/setting/index.vue'
+import {SettingButton} from '../components/setting'
 import UserDropdown from '../components/user-dropdown/index.vue'
 import {context} from '../../bridge'
 import {computed, unref} from 'vue'
@@ -30,6 +30,7 @@ const {
   getShowSearch,
   getShowHeader,
   getShowNotice,
+  getShowFullHeaderRef,
 } = useHeaderSetting()
 const { getDarkMode } = useConfigStore()
 const {getSettingButtonPosition, getShowSettingButton} = useRootSetting()
@@ -60,6 +61,7 @@ const getShowLogo = computed(()=>{
 <template>
   <VbenSpace vertical>
     <VbenSpace
+      v-if="getShowFullHeaderRef"
       :class="['h-48px', 'shadow', {'mb-8px': getMenuType === MenuTypeEnum.MIX && !getIsMobile}]"
       :style="{ '--un-shadow-color': shadowColor }"
       justify="space-between"
@@ -95,7 +97,7 @@ const getShowLogo = computed(()=>{
               :showText="false"
             />
             <UserDropdown/>
-            <AppSetting v-if="getShowSetting"/>
+            <SettingButton v-if="getShowSetting"/>
           </VbenSpace>
         </slot>
       </div>

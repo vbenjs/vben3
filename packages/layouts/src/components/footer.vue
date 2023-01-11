@@ -29,22 +29,43 @@ const style = computed(
 </script>
 <template>
   <footer :class="bem()" :style="style">
-    <slot>
-      <div :class="bem('links')">
-        <a @click="openWindow(SITE_URL)">{{ t('layout.footer.onlinePreview') }}</a>
-        <VbenIconify @click="openWindow(GITHUB_URL)" :class="bem('github')" icon="ant-design:github-outlined" hover-pointer />
-        <a @click="openWindow(DOC_URL)">{{ t('layout.footer.onlineDocument') }}</a>
-      </div>
-      <div :class="bem('trademark')">Copyright &copy;2020 Vben Admin</div>
-    </slot>
+    <div class="lh-32px">
+      <VbenButton
+        text
+        tag="a"
+        :href="SITE_URL"
+        target="_blank"
+        type="info"
+      >
+        {{ t('layout.footer.onlinePreview') }}
+      </VbenButton>
+
+      <VbenButton
+        text
+        tag="a"
+        :href="GITHUB_URL"
+        target="_blank"
+        type="info"
+        class="mx-10"
+      >
+        <VbenIconify @click="openWindow(GITHUB_URL)" icon="ant-design:github-outlined" />
+      </VbenButton>
+
+      <VbenButton
+        text
+        tag="a"
+        :href="DOC_URL"
+        target="_blank"
+        type="info"
+      >
+        {{ t('layout.footer.onlineDocument') }}
+      </VbenButton>
+    </div>
+    <VbenGradientText type="info">Copyright &copy;2023 Vben Admin V3</VbenGradientText>
   </footer>
 </template>
 
 <style lang="less" scoped>
-@normal-color: rgba(0, 0, 0, 0.45);
-
-@hover-color: rgba(0, 0, 0, 0.85);
-
 .footer {
   --footer-padding: 0 20px;
   --footer-height: 60px;
@@ -53,28 +74,5 @@ const style = computed(
   flex-shrink: 0;
   height: var(--footer-height);
   text-align: center;
-  &__links {
-    line-height: 32px;
-    a {
-      color: @normal-color;
-
-      &:hover {
-        cursor: pointer;
-        color: @hover-color;
-      }
-    }
-  }
-
-  &__github {
-    margin: 0 30px;
-    color: @normal-color;
-
-    &:hover {
-      color: @hover-color;
-    }
-  }
-  &__trademark {
-    color: @normal-color;
-  }
 }
 </style>

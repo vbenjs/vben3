@@ -1,13 +1,13 @@
 import type { StaticConfig, DynamicConfig } from '@vben/types'
 
 // github repo url
-export const GITHUB_URL = 'https://github.com/anncwb/vue-vben-admin'
+export const GITHUB_URL = 'https://github.com/vbenjs/vben3'
 
 // vue-vben-admin-next-doc
-export const DOC_URL = 'https://vvbin.cn/doc-next/'
+export const DOC_URL = 'https://vbenjs.github.io/vben3-doc/'
 
 // site url
-export const SITE_URL = 'https://vvbin.cn/next/'
+export const SITE_URL = 'https://vbenjs.github.io/vben3-doc/'
 
 const dynamicConfig: DynamicConfig = {
   __: '',

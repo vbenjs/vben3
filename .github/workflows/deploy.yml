@@ -1,0 +1,47 @@
+name: Fighting Design Github Actions
+
+# 当 master 分支 push 代码的时候触发 workflow
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 下载仓库代码 / 校验
+      - name: Checkout
+        # actions/checkout@v3 是 github 官方的一个action，用于 clone 该仓库的源码到工作流中
+        uses: actions/checkout@v3
+
+      # 安装 pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      # 安装 node
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'pnpm'
+
+      # 安装依赖项
+      - name: Install
+        run: pnpm i
+
+      # 打包组件
+      - name: Build Docs
+        run: pnpm build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: 114.115.157.254
+          username: vben
+          password: ${{ secrets.ftp_password }}
+          local-dir: ./apps/admin/dist/
+          dangerous-clean-slate: true

@@ -1,13 +1,22 @@
 import type { Router } from 'vue-router'
 import nProgress from 'nprogress'
 import { config } from '@/config'
-import {BASIC_LOCK_PATH, BASIC_LOGIN_PATH, PageEnum} from '@vben/constants'
+import {
+  BASIC_LOCK_PATH,
+  BASIC_LOGIN_PATH,
+  PageEnum,
+  PermissionModeEnum,
+} from '@vben/constants'
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic'
 import { setRouteChange } from '@/logics/mitt/routeChange'
 import { ROOT_ROUTE } from './routes'
 import { useLockStore } from '@/store/lock'
+import type { Menu } from '@vben/types'
+import { useConfigStoreWithOut } from '@/store/config'
+import { projectSetting } from '@/setting'
+import { configureDynamicParamsMenu } from '@/router/helper'
 
 const LOADED_PAGE_POOL = new Map<string, boolean>()
 const LOCK_PATH = BASIC_LOCK_PATH
@@ -33,7 +42,7 @@ async function setupRouteGuard(router: Router) {
     // Indicates that the page has been loaded
     // When opening again, you can turn off some progress display interactions
     LOADED_PAGE_POOL.set(to.path, true)
-
+    // console.log(to)
     // Close the page loading progress bar
     if (enableProgress && !to.meta.loaded) {
       nProgress.done()
@@ -41,13 +50,14 @@ async function setupRouteGuard(router: Router) {
   })
   createAuthGuard(router)
   createTabsGuard(router)
+  createParamMenuGuard(router) // must after createPermissionGuard (menu has been built.)
 }
 
 export function createAuthGuard(router: Router) {
   const userStore = useUserStoreWithout()
   const permissionStore = useAuthStoreWithout()
   const lockStore = useLockStore()
-
+  const configStore = useConfigStoreWithOut()
   router.beforeEach(async (to, from, next) => {
     if (
       from.path === ROOT_PATH &&
@@ -73,14 +83,13 @@ export function createAuthGuard(router: Router) {
           }
         } catch {}
       }
-      if (to.path === LOCK_PATH && !lockStore.getLockInfo?.isLock){
-        next({path: from.path})
+      if (to.path === LOCK_PATH && !lockStore.getLockInfo?.isLock) {
+        next({ path: from.path })
         return
       }
       next()
       return
     }
-
     // token does not exist
     if (!token) {
       // You can access without permission. You need to set the routing meta.ignoreAuth to true
@@ -109,8 +118,7 @@ export function createAuthGuard(router: Router) {
       return
     }
 
-
-    if (lockStore.getLockInfo?.isLock){
+    if (lockStore.getLockInfo?.isLock) {
       // redirect lock page
       const redirectData: {
         path: string
@@ -139,9 +147,13 @@ export function createAuthGuard(router: Router) {
       next(userStore.getUserInfo?.homePath || PageEnum.BASE_HOME)
       return
     }
-
+    const { permissionMode = projectSetting.permissionMode } =
+      configStore.getProjectConfig
     // TODO get userinfo while last fetch time is empty
-    if (userStore.getLastUpdateTime === 0) {
+    if (
+      userStore.getLastUpdateTime === 0 &&
+      permissionMode == PermissionModeEnum.BACK
+    ) {
       try {
         await userStore.getUserInfoAction()
       } catch (err) {
@@ -149,12 +161,13 @@ export function createAuthGuard(router: Router) {
         return
       }
     }
-
+    // console.log(permissionStore.getIsDynamicAddedRoute, to)
     if (permissionStore.getIsDynamicAddedRoute) {
       next()
       return
     }
 
+    // console.log(to.params)
     const routes = await permissionStore.buildRoutesAction()
 
     routes.forEach((route) => {
@@ -185,6 +198,43 @@ export function createTabsGuard(router: Router) {
     // Notify routing changes
     setRouteChange(to)
   })
+}
+
+function createParamMenuGuard(router: Router) {
+  const authStore = useAuthStoreWithout()
+  router.beforeEach(async (to, _, next) => {
+    // filter no name route
+    if (!to.name) {
+      next()
+      return
+    }
+
+    // menu has been built.
+    if (!authStore.getIsDynamicAddedRoute) {
+      next()
+      return
+    }
+    let menus: Menu[] = []
+    if (isBackMode()) {
+      menus = authStore.getBackMenuList
+    } else if (isRouteMappingMode()) {
+      menus = authStore.getFrontMenuList
+    }
+    menus.forEach((item) => configureDynamicParamsMenu(item, to.params))
+    next()
+  })
+}
+const getPermissionMode = () => {
+  const configStore = useConfigStoreWithOut()
+  const { permissionMode = projectSetting.permissionMode } =
+    configStore.getProjectConfig
+  return permissionMode
+}
+const isBackMode = () => {
+  return getPermissionMode() === PermissionModeEnum.BACK
+}
+const isRouteMappingMode = () => {
+  return getPermissionMode() === PermissionModeEnum.ROUTE_MAPPING
 }
 
 export { setupRouteGuard }

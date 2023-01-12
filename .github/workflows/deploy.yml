@@ -40,7 +40,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ftp://114.115.157.254
+          server: 114.115.157.254
           username: vben
           password: ${{ secrets.ftp_password }}
           local-dir: ./apps/admin/dist/

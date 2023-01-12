@@ -43,5 +43,5 @@ jobs:
           server: ftp://114.115.157.254
           username: vben
           password: ${{ secrets.ftp_password }}
-          local-dir: ./apps/admin/dist
+          local-dir: ./apps/admin/dist/
 

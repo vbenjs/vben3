@@ -20,7 +20,8 @@ const {
   useMenuSetting,
   useConfigStore,
   Logo,
-  useAppInject
+  useAppInject,
+  useMultipleTabSetting
 } = context
 const {
   getShowContent,
@@ -35,8 +36,9 @@ const {
 } = useHeaderSetting()
 const { getDarkMode } = useConfigStore()
 const {getSettingButtonPosition, getShowSettingButton} = useRootSetting()
-const {getMenuType, getMenuWidth} = useMenuSetting()
+const {getMenuType, getMenuWidth, getIsMixMode} = useMenuSetting()
 const {getIsMobile} = useAppInject()
+const {getShowMultipleTab} = useMultipleTabSetting();
 const isDark = computed(() => getDarkMode == ThemeEnum.DARK)
 const shadowColor = computed(() =>
   isDark.value ? 'rgb(255, 255, 255, 0.09)' : 'rgb(239, 239, 245)',
@@ -53,12 +55,16 @@ const getShowSetting = computed(() => {
   }
   return settingButtonPosition === SettingButtonPositionEnum.HEADER
 })
+
+const getShowHeaderMultipleTab = computed(()=>{
+  return unref(getShowMultipleTab) && (unref(getMenuType) !== MenuTypeEnum.MIX || unref(getIsMobile))
+})
 </script>
 <template>
   <VbenSpace vertical>
     <VbenSpace
       v-if="getShowFullHeaderRef"
-      :class="['h-48px', 'shadow', {'mb-8px': getMenuType === MenuTypeEnum.MIX && !getIsMobile}]"
+      :class="['h-48px', 'shadow', {'mb-8px': !getShowHeaderMultipleTab}]"
       :style="{ '--un-shadow-color': shadowColor }"
       justify="space-between"
       align="center"
@@ -98,7 +104,7 @@ const getShowSetting = computed(() => {
         </slot>
       </div>
     </VbenSpace>
-    <template v-if="getMenuType !== MenuTypeEnum.MIX || getIsMobile">
+    <template v-if="getShowHeaderMultipleTab">
       <slot name="tabs">
         <LayoutTabs/>
       </slot>

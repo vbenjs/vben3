@@ -7,9 +7,10 @@ import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import { useComosables } from './useComosables'
 import {computed, unref} from 'vue'
-const { useMenuSetting,useRootSetting } = context
+const { useMenuSetting,useRootSetting, useMultipleTabSetting } = context
 const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
 const { getShowFooter } = useRootSetting();
+const { getShowMultipleTab } = useMultipleTabSetting();
 
 const {headerRef, tabRef, footerRef, headerHeight, contentStyle, mainStyle} = useComosables()
 
@@ -39,7 +40,7 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
       </VbenLayoutSider>
 
       <VbenLayout>
-        <VbenLayoutHeader>
+        <VbenLayoutHeader v-if="getShowMultipleTab">
           <slot name="tabs"><LayoutTabs ref="tabRef" /></slot>
         </VbenLayoutHeader>
         <VbenLayout :content-style="contentStyle">

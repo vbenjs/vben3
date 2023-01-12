@@ -7,7 +7,7 @@ import {useI18n} from '@vben/locale'
 const {t} = useI18n();
 
 const {
-  useMultipleTabStore,
+  useMultipleTabSetting,
   useMenuSetting,
   useHeaderSetting,
   useRootSetting,
@@ -32,7 +32,7 @@ const {
 
 const {getShowHeader} = useHeaderSetting();
 
-const {getShowMultipleTab, getShowQuick, getShowRedo, getShowFold} = useMultipleTabStore();
+const {getShowMultipleTab, getShowQuick, getShowRedo, getShowFold} = useMultipleTabSetting();
 
 </script>
 <template>

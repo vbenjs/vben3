@@ -10,6 +10,7 @@ export interface ContextOptions {
   useUserStore: () => unknown
   useAppInject: () => unknown
   useMenuSetting: () => unknown
+  useMultipleTabSetting: () => unknown
   useMultipleTabStore: () => unknown
   useTransitionSetting: () => unknown
   useLockStore: () => unknown
@@ -36,6 +37,7 @@ export let context: ContextOptions = {
   useUserStore: () => undefined,
   useHeaderSetting: () => undefined,
   useMenuSetting: () => undefined,
+  useMultipleTabSetting: () => undefined,
   useTransitionSetting: () => undefined,
   useLockStore: () => undefined,
   useLockScreen: () => undefined,

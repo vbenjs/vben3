@@ -7,7 +7,7 @@ export const GITHUB_URL = 'https://github.com/vbenjs/vben3'
 export const DOC_URL = 'https://vbenjs.github.io/vben3-doc/'
 
 // site url
-export const SITE_URL = 'https://vbenjs.github.io/vben3-doc/'
+export const SITE_URL = 'http://vben.mufei88.com/'
 
 const dynamicConfig: DynamicConfig = {
   __: '',

@@ -4,7 +4,7 @@ export default {name: 'LayoutFooter'}
 <script lang="ts" setup>
 import type {CSSProperties} from 'vue'
 import {computed} from 'vue'
-import {createNamespace, openWindow} from '@vben/utils'
+import {createNamespace} from '@vben/utils'
 import {context} from '../../bridge'
 import { useI18n} from '@vben/locale'
 
@@ -35,9 +35,8 @@ const style = computed(
         tag="a"
         :href="SITE_URL"
         target="_blank"
-        type="info"
       >
-        {{ t('layout.footer.onlinePreview') }}
+        <VbenText depth="3">{{ t('layout.footer.onlinePreview') }}</VbenText>
       </VbenButton>
 
       <VbenButton
@@ -45,10 +44,11 @@ const style = computed(
         tag="a"
         :href="GITHUB_URL"
         target="_blank"
-        type="info"
         class="mx-10"
       >
-        <VbenIconify @click="openWindow(GITHUB_URL)" icon="ant-design:github-outlined" />
+        <VbenText depth="3">
+          <VbenIconify icon="ant-design:github-outlined" />
+        </VbenText>
       </VbenButton>
 
       <VbenButton
@@ -56,12 +56,11 @@ const style = computed(
         tag="a"
         :href="DOC_URL"
         target="_blank"
-        type="info"
       >
-        {{ t('layout.footer.onlineDocument') }}
+        <VbenText depth="3" style="">{{ t('layout.footer.onlineDocument') }}</VbenText>
       </VbenButton>
     </div>
-    <VbenGradientText type="info">Copyright &copy;2023 Vben Admin V3</VbenGradientText>
+    <VbenText depth="3">Copyright &copy;2023 Vben Admin</VbenText>
   </footer>
 </template>
 

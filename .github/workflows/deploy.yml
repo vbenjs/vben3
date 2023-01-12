@@ -44,4 +44,4 @@ jobs:
           username: vben
           password: ${{ secrets.ftp_password }}
           local-dir: ./apps/admin/dist/
-
+          dangerous-clean-slate: true

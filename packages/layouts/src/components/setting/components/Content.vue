@@ -39,9 +39,9 @@ const {getShowMultipleTab, getShowQuick, getShowRedo, getShowFold} = useMultiple
   <VbenSpace vertical>
     <SwitchItem :title="t('layout.setting.breadcrumb')" :def="getShowBreadCrumb"
                 :event="HandlerSettingEnum.SHOW_BREADCRUMB"
-                :disabled="getShowHeader"/>
+                :disabled="!getShowHeader"/>
     <SwitchItem :title="t('layout.setting.breadcrumbIcon')" :def="getShowBreadCrumbIcon"
-                :event="HandlerSettingEnum.SHOW_BREADCRUMB_ICON" :disabled="getShowHeader"/>
+                :event="HandlerSettingEnum.SHOW_BREADCRUMB_ICON" :disabled="!getShowBreadCrumb"/>
     <SwitchItem :title="t('layout.setting.tabs')" :def="getShowMultipleTab"
                 :event="HandlerSettingEnum.TABS_SHOW"/>
     <SwitchItem :title="t('layout.setting.tabsRedoBtn')" :def="getShowRedo"

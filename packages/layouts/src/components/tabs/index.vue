@@ -9,6 +9,7 @@ import {useGo} from '@vben/hooks'
 import TabRedo from './components/TabRedo.vue'
 import TabDropdown from './components/TabDropdown.vue'
 import {context} from '../../../bridge'
+import TabQuick from "./components/TabQuick.vue";
 
 const {useMultipleTabStore, listenerRouteChange, useUserStore, useTabs, useMultipleTabSetting} = context
 const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting();
@@ -108,6 +109,7 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
       </VbenTab>
       <template #suffix>
         <TabRedo v-if="getShowRedo"/>
+        <TabQuick :tabItem="$route" v-if="getShowQuick" />
       </template>
     </VbenTabs>
     <TabDropdown ref="tabDropdownRef"/>

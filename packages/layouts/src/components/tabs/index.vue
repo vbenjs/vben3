@@ -10,6 +10,7 @@ import TabRedo from './components/TabRedo.vue'
 import TabDropdown from './components/TabDropdown.vue'
 import {context} from '../../../bridge'
 import TabQuick from "./components/TabQuick.vue";
+import FoldButton from "./components/FoldButton.vue";
 
 const {useMultipleTabStore, listenerRouteChange, useUserStore, useTabs, useMultipleTabSetting} = context
 const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting();
@@ -110,6 +111,7 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
       <template #suffix>
         <TabRedo v-if="getShowRedo"/>
         <TabQuick :tabItem="$route" v-if="getShowQuick" />
+        <FoldButton v-if="getShowFold" />
       </template>
     </VbenTabs>
     <TabDropdown ref="tabDropdownRef"/>

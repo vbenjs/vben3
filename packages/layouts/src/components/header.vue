@@ -36,12 +36,12 @@ const {
 } = useHeaderSetting()
 const { getDarkMode } = useConfigStore()
 const {getSettingButtonPosition, getShowSettingButton} = useRootSetting()
-const {getMenuType, getMenuWidth, getIsMixMode} = useMenuSetting()
+const {getMenuType, getMenuWidth} = useMenuSetting()
 const {getIsMobile} = useAppInject()
 const {getShowMultipleTab} = useMultipleTabSetting();
 const isDark = computed(() => getDarkMode == ThemeEnum.DARK)
 const shadowColor = computed(() =>
-  isDark.value ? 'rgb(255, 255, 255, 0.09)' : 'rgb(239, 239, 245)',
+  isDark.value ? 'rgba(255, 255, 255, 0.09)' : 'rgba(239, 239, 245,0.09)',
 )
 
 const getShowSetting = computed(() => {

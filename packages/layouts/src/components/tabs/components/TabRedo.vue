@@ -18,11 +18,13 @@ const { loading, handleFn: handleRedo } = usePromise(reload, {
 </script>
 
 <template>
-  <VbenIconify
-    icon="ant-design:redo-outlined"
-    :infinite="loading"
-    @click="handleRedo"
-  />
+  <div @click="handleRedo"
+    class="h-full w-32px border-l flex-center border-[var(--n-border-color)] cursor-pointer">
+    <VbenIconify
+      icon="ant-design:redo-outlined"
+      :infinite="loading"
+    />
+  </div>
 </template>
 
 <style scoped lang="css"></style>

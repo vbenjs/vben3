@@ -10,7 +10,8 @@ import TabRedo from './components/TabRedo.vue'
 import TabDropdown from './components/TabDropdown.vue'
 import {context} from '../../../bridge'
 
-const {useMultipleTabStore, listenerRouteChange, useUserStore, useTabs} = context
+const {useMultipleTabStore, listenerRouteChange, useUserStore, useTabs, useMultipleTabSetting} = context
+const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting();
 const { close } = useTabs()
 const {t} = useI18n()
 const tabStore = useMultipleTabStore()
@@ -106,19 +107,9 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
         </div>
       </VbenTab>
       <template #suffix>
-        <div class="mr-2">
-          <TabRedo v-if="getTabsState"/>
-        </div>
+        <TabRedo v-if="getShowRedo"/>
       </template>
     </VbenTabs>
     <TabDropdown ref="tabDropdownRef"/>
   </div>
-
 </template>
-<style lang="less">
-.ll{
-  position: absolute;
-  //scale: ;
-  display: none;
-}
-</style>

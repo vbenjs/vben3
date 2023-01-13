@@ -46,12 +46,13 @@ const {getShowMultipleTab, getShowQuick, getShowRedo, getShowFold} = useMultiple
                 :event="HandlerSettingEnum.TABS_SHOW"/>
     <SwitchItem :title="t('layout.setting.tabsRedoBtn')" :def="getShowRedo"
                 :event="HandlerSettingEnum.TABS_SHOW_REDO"
-                :disabled="getShowMultipleTab"/>
+                :disabled="!getShowMultipleTab"/>
     <SwitchItem :title="t('layout.setting.tabsQuickBtn')" :def="getShowQuick"
-                :event="HandlerSettingEnum.TABS_SHOW_QUICK" :disabled="getShowMultipleTab"/>
+                :event="HandlerSettingEnum.TABS_SHOW_QUICK"
+                :disabled="!getShowMultipleTab"/>
     <SwitchItem :title="t('layout.setting.tabsFoldBtn')" :def="getShowFold"
                 :event="HandlerSettingEnum.TABS_SHOW_FOLD"
-                :disabled="getShowMultipleTab"/>
+                :disabled="!getShowMultipleTab"/>
     <SwitchItem :title="t('layout.setting.sidebar')" :def="getShowMenu"
                 :event="HandlerSettingEnum.MENU_SHOW_SIDEBAR"
                 :disabled="getIsHorizontal"/>

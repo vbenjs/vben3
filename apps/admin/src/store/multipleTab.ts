@@ -133,6 +133,7 @@ export const useMultipleTabStore = defineStore({
       if (
         path === PageEnum.ERROR_PAGE ||
         path === PageEnum.BASE_LOGIN ||
+        path === PageEnum.BASE_LOCK ||
         !name ||
         [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(
           name as string,

@@ -1,37 +1,40 @@
 <script lang="ts" setup>
-import {computed, h, nextTick, ref, unref} from 'vue'
-import { context } from '../../../../bridge'
-import { useI18n } from '@vben/locale'
-import { VbenIconify } from '@vben/vbencomponents'
-import { TabActionEnum } from '@vben/constants'
+import {computed, h, ref, unref} from 'vue'
+import {context} from '../../../../bridge'
+import {useI18n} from '@vben/locale'
+import {VbenIconify} from '@vben/vbencomponents'
+import {TabActionEnum} from '@vben/constants'
 import {RouteLocationNormalized, useRouter} from "vue-router"
-const { useTabs, useMultipleTabStore } = context
-const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } = useTabs()
-const { t } = useI18n();
-const x = ref(0)
-const y = ref(0)
-const targetTab = ref<RouteLocationNormalized>(null)
-const showDropdown = ref(false)
+
+const {useTabs, useMultipleTabStore} = context
+const {refreshPage, close, closeAll, closeLeft, closeRight, closeOther} = useTabs()
+const {t} = useI18n();
 
 function renderIcon(icon: string) {
-  return () => h(VbenIconify, { icon })
+  return () => h(VbenIconify, {icon})
 }
 
 const tabStore = useMultipleTabStore();
-const { currentRoute } = useRouter();
+const {currentRoute} = useRouter();
+
+const props = defineProps({
+  tabItem: {
+    type: Object as PropType<RouteLocationNormalized>,
+    default: null,
+  },
+})
 
 const options = computed(() => {
-
-  if (!unref(targetTab)) {
+  if (!props.tabItem) {
     return;
   }
-  const { meta } = unref(targetTab);
-  const { path } = unref(currentRoute);
+  const {meta} = props.tabItem;
+  const {path} = unref(currentRoute);
 
-  const isCurItem = unref(targetTab) ? unref(targetTab).path === path : false;
+  const isCurItem = props.tabItem ? props.tabItem.path === path : false;
 
   // Refresh button
-  const index = tabStore.getTabList.findIndex((tab) => tab.path === unref(targetTab).path)
+  const index = tabStore.getTabList.findIndex((tab) => tab.path === props.tabItem.path)
   const refreshDisabled = !isCurItem;
   // Close left
   const closeLeftDisabled = index === 0 || !isCurItem;
@@ -88,23 +91,13 @@ const options = computed(() => {
     },
   ]
 })
-
-const openDropdown = (e:PointerEvent, tabItem: RouteLocationNormalized) => {
-  targetTab.value = tabItem
-  showDropdown.value = false
-  nextTick().then(() => {
-    showDropdown.value = true
-    x.value = e.clientX
-    y.value = e.clientY
-  })
-}
 const handleSelect = async (key) => {
   switch (key) {
     case TabActionEnum.REFRESH_PAGE:
       await refreshPage()
       break
     case TabActionEnum.CLOSE_CURRENT:
-      await close(unref(targetTab))
+      await close(props.tabItem)
       break
     case TabActionEnum.CLOSE_ALL:
       await closeAll()
@@ -120,18 +113,17 @@ const handleSelect = async (key) => {
       break
   }
 }
-defineExpose({ openDropdown })
 </script>
 <template>
   <VbenDropdown
     placement="bottom-start"
-    trigger="manual"
-    :show-arrow="true"
-    :x="x"
-    :y="y"
+    trigger="click"
     :options="options"
-    v-model:show="showDropdown"
-    @clickoutside="showDropdown = false"
+    :show-arrow="true"
     @select="handleSelect"
-  />
+  >
+    <div class="h-full w-32px border-l flex-center border-[var(--n-border-color)] cursor-pointer">
+      <VbenIconify icon="material-symbols:double-arrow-rounded" class="rotate-90" rotate="90deg"/>
+    </div>
+  </VbenDropdown>
 </template>

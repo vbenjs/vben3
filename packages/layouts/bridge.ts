@@ -10,6 +10,7 @@ export interface ContextOptions {
   useUserStore: () => unknown
   useAppInject: () => unknown
   useMenuSetting: () => unknown
+  useMultipleTabSetting: () => unknown
   useMultipleTabStore: () => unknown
   useTransitionSetting: () => unknown
   useLockStore: () => unknown
@@ -25,6 +26,7 @@ export interface ContextOptions {
   getShallowMenus: () => Promise<any>
   getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
+  siteSetting: Record<string, string>
   Logo: VNode | null
 }
 
@@ -35,6 +37,7 @@ export let context: ContextOptions = {
   useUserStore: () => undefined,
   useHeaderSetting: () => undefined,
   useMenuSetting: () => undefined,
+  useMultipleTabSetting: () => undefined,
   useTransitionSetting: () => undefined,
   useLockStore: () => undefined,
   useLockScreen: () => undefined,
@@ -50,6 +53,7 @@ export let context: ContextOptions = {
   getShallowMenus: async () => ({}),
   getChildrenMenus: async (parentPath: string) => ({}),
   getAllParentPath: (menu, path) => [],
+  siteSetting: {},
   Logo: null,
 }
 

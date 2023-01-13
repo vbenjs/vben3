@@ -1,14 +1,17 @@
 <script lang="ts" setup>
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
+import LayoutMain from './components/main.vue'
+import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import {onMounted, ref, unref} from "vue";
 import { useComosables} from './useComosables'
-const { useMenuSetting, Logo } = context
+const { useMenuSetting, Logo, useRootSetting } = context
 
 const { getMenuWidth } = useMenuSetting()
+const { getShowFooter } = useRootSetting();
 
-const {headerRef, contentStyle} = useComosables()
+const {headerRef, footerRef, contentStyle, mainStyle} = useComosables()
 
 const active = ref(false);
 onMounted(()=>{
@@ -37,9 +40,18 @@ const activeTrigger = ()=>{
         </LayoutHeader>
       </slot>
     </VbenLayoutHeader>
-    <VbenLayoutContent :content-style="contentStyle">
-      <slot name="main"></slot>
-    </VbenLayoutContent>
+    <VbenLayout :content-style="contentStyle">
+      <VbenLayoutContent :content-style="mainStyle">
+        <LayoutMain>
+          <slot name="main"></slot>
+        </LayoutMain>
+      </VbenLayoutContent>
+      <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
+        <slot name="footer">
+          <LayoutFooter/>
+        </slot>
+      </VbenLayoutFooter>
+    </VbenLayout>
   </VbenLayout>
 </template>
 

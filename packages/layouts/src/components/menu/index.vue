@@ -13,7 +13,7 @@ import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 const { Logo, getMenus, listenerRouteChange, useMenuSetting, useAppInject } = context
 
-const { getMenuType } = useMenuSetting()
+const { getMenuType, getAccordion } = useMenuSetting()
 const { getIsMobile } = useAppInject()
 
 const props = defineProps({
@@ -25,7 +25,7 @@ const props = defineProps({
 const { bem } = createNamespace('layout-menu')
 const { t } = useI18n()
 const { currentRoute } = useRouter()
-const { getCollapsed } = useMenuSetting()
+const { getCollapsed, getMenuShowLogo } = useMenuSetting()
 const menuRef = ref(null)
 const menuList = ref([])
 const activeKey = ref()
@@ -92,7 +92,7 @@ function renderIcon(icon: string) {
   <div :class="bem()">
     <logo
       :class="bem('logo')"
-      v-if="getMenuType === MenuTypeEnum.SIDEBAR || getIsMobile"
+      v-if="getMenuShowLogo || getIsMobile"
       :showTitle="!getCollapsed"
     />
 
@@ -107,6 +107,7 @@ function renderIcon(icon: string) {
         :root-indent="18"
         ref="menuRef"
         :mode="props.mode"
+        :accordion="getAccordion"
       />
     </VbenScrollbar>
   </div>

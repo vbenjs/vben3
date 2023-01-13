@@ -12,13 +12,14 @@ import {
   TriggerEnum,
 } from '@vben/constants'
 import { useFullContent } from '@/hooks/web/useFullContent'
+import {useRootSetting} from "@/hooks/setting/useRootSetting";
 
 const mixSideHasChildren = ref(false)
 
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent()
   const configStore = useConfigStoreWithOut()
-
+  const { getShowLogo } = useRootSetting()
   const getShowSidebar = computed(() => {
     return (
       unref(getSplit) ||
@@ -78,6 +79,10 @@ export function useMenuSetting() {
     () => unref(getMenuType) === MenuTypeEnum.TOP_MENU,
   )
 
+  const getMenuShowLogo = computed(
+    ()=> unref(getShowLogo) && unref(getIsSidebarType)
+  )
+
   const getCollapsedShowTitle = computed(
     () => configStore.getMenuSetting.collapsedShowTitle,
   )
@@ -85,6 +90,7 @@ export function useMenuSetting() {
   const getShowTopMenu = computed(() => {
     return unref(getMenuMode) === MenuModeEnum.HORIZONTAL || unref(getSplit)
   })
+
 
   const getShowHeaderTrigger = computed(() => {
     if (
@@ -190,5 +196,6 @@ export function useMenuSetting() {
     getMixSideTrigger,
     getMixSideFixed,
     mixSideHasChildren,
+    getMenuShowLogo
   }
 }

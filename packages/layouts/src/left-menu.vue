@@ -2,11 +2,14 @@
 import {useComosables} from './useComosables'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
+import LayoutMain from './components/main.vue'
+import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
-const { useMenuSetting } = context
-const {headerRef, contentStyle} = useComosables()
+const { useMenuSetting, useRootSetting } = context
+const {headerRef, contentStyle, mainStyle, footerRef} = useComosables()
 
 const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
+const { getShowFooter } = useRootSetting();
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
@@ -27,9 +30,18 @@ const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
       <VbenLayoutHeader ref="headerRef">
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
-      <VbenLayoutContent :content-style="contentStyle">
-        <slot name="main"></slot>
-      </VbenLayoutContent>
+      <VbenLayout :content-style="contentStyle">
+        <VbenLayoutContent :content-style="mainStyle">
+          <LayoutMain>
+            <slot name="main"></slot>
+          </LayoutMain>
+        </VbenLayoutContent>
+        <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
+          <slot name="footer">
+            <LayoutFooter/>
+          </slot>
+        </VbenLayoutFooter>
+      </VbenLayout>
     </VbenLayout>
   </VbenLayout>
 </template>

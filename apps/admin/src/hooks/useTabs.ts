@@ -4,16 +4,7 @@ import { useRouter } from 'vue-router'
 import { unref } from 'vue'
 import { useAppStore } from '@/store/modules/app'
 import { useMultipleTabStore } from '@/store/multipleTab'
-
-enum TableActionEnum {
-  REFRESH,
-  CLOSE_ALL,
-  CLOSE_LEFT,
-  CLOSE_RIGHT,
-  CLOSE_OTHER,
-  CLOSE_CURRENT,
-  CLOSE,
-}
+import { TabActionEnum } from '@vben/constants'
 
 export function useTabs(_router?: Router) {
   const appStore = useAppStore()
@@ -58,7 +49,7 @@ export function useTabs(_router?: Router) {
   }
 
   async function handleTabAction(
-    action: TableActionEnum,
+    action: TabActionEnum,
     tab?: RouteLocationNormalized,
   ) {
     const canIUse = canIUseTabs
@@ -67,49 +58,45 @@ export function useTabs(_router?: Router) {
     }
     const currentTab = getCurrentTab()
     switch (action) {
-      case TableActionEnum.REFRESH:
+      case TabActionEnum.REFRESH_PAGE:
         await tabStore.refreshPage(router)
         break
 
-      case TableActionEnum.CLOSE_ALL:
+      case TabActionEnum.CLOSE_ALL:
         await tabStore.closeAllTab(router)
         break
 
-      case TableActionEnum.CLOSE_LEFT:
+      case TabActionEnum.CLOSE_LEFT:
         await tabStore.closeLeftTabs(currentTab, router)
         break
 
-      case TableActionEnum.CLOSE_RIGHT:
+      case TabActionEnum.CLOSE_RIGHT:
         await tabStore.closeRightTabs(currentTab, router)
         break
 
-      case TableActionEnum.CLOSE_OTHER:
+      case TabActionEnum.CLOSE_OTHER:
         await tabStore.closeOtherTabs(currentTab, router)
         break
 
-      case TableActionEnum.CLOSE_CURRENT:
-      case TableActionEnum.CLOSE:
+      case TabActionEnum.CLOSE_CURRENT:
+      case TabActionEnum.CLOSE:
         await tabStore.closeTab(tab || currentTab, router)
         break
     }
   }
-  function getTabIndex(tab): number {
-    return tabStore.getTabList.findIndex((v) => v == tab)
-  }
 
   return {
-    refreshPage: () => handleTabAction(TableActionEnum.REFRESH),
-    closeAll: () => handleTabAction(TableActionEnum.CLOSE_ALL),
-    closeLeft: () => handleTabAction(TableActionEnum.CLOSE_LEFT),
-    closeRight: () => handleTabAction(TableActionEnum.CLOSE_RIGHT),
-    closeOther: () => handleTabAction(TableActionEnum.CLOSE_OTHER),
-    closeCurrent: () => handleTabAction(TableActionEnum.CLOSE_CURRENT),
+    refreshPage: () => handleTabAction(TabActionEnum.REFRESH_PAGE),
+    closeAll: () => handleTabAction(TabActionEnum.CLOSE_ALL),
+    closeLeft: () => handleTabAction(TabActionEnum.CLOSE_LEFT),
+    closeRight: () => handleTabAction(TabActionEnum.CLOSE_RIGHT),
+    closeOther: () => handleTabAction(TabActionEnum.CLOSE_OTHER),
+    closeCurrent: () => handleTabAction(TabActionEnum.CLOSE_CURRENT),
     close: (tab?: RouteLocationNormalized) =>
-      handleTabAction(TableActionEnum.CLOSE, tab),
+      handleTabAction(TabActionEnum.CLOSE, tab),
     setTitle: (title: string, tab?: RouteLocationNormalized) =>
       updateTabTitle(title, tab),
     updatePath: (fullPath: string, tab?: RouteLocationNormalized) =>
       updateTabPath(fullPath, tab),
-    getTabIndex: (tab: RouteLocationNormalized): number => getTabIndex(tab),
   }
 }

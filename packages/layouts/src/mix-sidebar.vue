@@ -2,13 +2,16 @@
 import {useComosables} from './useComosables'
 import LayoutMixMenu from './components/mixSideBar/Menu.vue'
 import LayoutHeader from './components/header.vue'
+import LayoutMain from './components/main.vue'
+import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import {computed, unref} from 'vue';
 import {SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH} from '@vben/constants'
-const { useMenuSetting } = context
-const {headerRef, contentStyle} = useComosables()
+const { useMenuSetting,useRootSetting } = context
+const {headerRef, contentStyle, mainStyle, footerRef} = useComosables()
 
 const { getCollapsed, getMenuWidth, getMixSideFixed } = useMenuSetting()
+const { getShowFooter } = useRootSetting();
 
 const getMixSidebarWidth = computed(()=>{
   return unref(getCollapsed) ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH
@@ -33,9 +36,18 @@ const getContainerStyle = computed(()=>{
       <VbenLayoutHeader ref="headerRef">
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
-      <VbenLayoutContent :content-style="contentStyle">
-        <slot name="main"></slot>
-      </VbenLayoutContent>
+      <VbenLayout :content-style="contentStyle">
+        <VbenLayoutContent :content-style="mainStyle">
+          <LayoutMain>
+            <slot name="main"></slot>
+          </LayoutMain>
+        </VbenLayoutContent>
+        <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
+          <slot name="footer">
+            <LayoutFooter/>
+          </slot>
+        </VbenLayoutFooter>
+      </VbenLayout>
     </VbenLayout>
   </VbenLayout>
 </template>

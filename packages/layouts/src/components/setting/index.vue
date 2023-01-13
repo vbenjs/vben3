@@ -30,6 +30,7 @@ const settingDrawerShow = ref(false)
 const {
   getShowDarkModeToggle,
   getThemeColor,
+  getSettingButtonPosition
 } = useRootSetting();
 const {getIsHorizontal,getMenuType, getMenuBgColor} = useMenuSetting();
 const {getHeaderBgColor} = useHeaderSetting();
@@ -43,6 +44,13 @@ const {getHeaderBgColor} = useHeaderSetting();
       hoverPointer
       @click="settingDrawerShow = true"
     />
+    <VbenAffix v-if="getSettingButtonPosition" class="z-999 p-10px flex-center text-white border-rd-l bg-[#0960bd] right-0 top-1/2" listen-to="body">
+      <VbenIconify
+        icon="ion:settings-outline"
+        hoverPointer
+        @click="settingDrawerShow = true"
+      />
+    </VbenAffix>
     <VbenDrawer v-model:show="settingDrawerShow" :width="330">
       <VbenDrawerContent closable>
         <template #header>{{ t('layout.setting.drawerTitle') }}</template>

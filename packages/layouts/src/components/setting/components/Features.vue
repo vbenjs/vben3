@@ -97,7 +97,7 @@ if (!some) {
                 :disabled="!getShowMenuRef || !getCollapsed || getIsMixSidebar"/>
     <SwitchItem :title="t('layout.setting.fixedHeader')" :def="getHeaderFixed"
                 :event="HandlerSettingEnum.HEADER_FIXED"
-                :disabled="getShowHeader"/>
+                :disabled="!getShowHeader"/>
     <SwitchItem :title="t('layout.setting.fixedSideBar')" :def="getMenuFixed"
                 :event="HandlerSettingEnum.MENU_FIXED"
                 :disabled="!getShowMenuRef || getIsMixSidebar"/>

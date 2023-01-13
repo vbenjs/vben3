@@ -94,7 +94,9 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
         :name="item.fullPath"
         style="--n-tab-padding: 0"
       >
-        <div class="group py-4px pl-12px pr-18px hover:text-[var(--n-tab-text-color-active)]" @contextmenu="handleContextMenu($event, item)">
+        <div class="group py-4px pl-12px hover:text-[var(--n-tab-text-color-active)]"
+             :class="[index == 0 ? 'pr-12px' : 'pr-18px']"
+             @contextmenu="handleContextMenu($event, item)">
           <span>{{ t(item.meta.title) }}</span>
           <VbenIconify v-if="index != 0"
             class="absolute !transition-all top-1/2 ml-2px mt--6px hover:!text-14px hover:nt--7px group-hover:!inline-flex"
@@ -109,7 +111,7 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
         </div>
       </template>
     </VbenTabs>
-    <TabDropdown ref="tabDropdownRef" :tab-list="getTabsState"/>
+    <TabDropdown ref="tabDropdownRef"/>
   </div>
 
 </template>

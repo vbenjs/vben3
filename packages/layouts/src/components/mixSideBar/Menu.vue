@@ -168,6 +168,7 @@ const handleFixedMenu = ()=> {
   <div :class="bem()" v-bind="getMenuEvents">
     <logo
       :class="[bem('logo'), 'shadow']"
+      :style="{ '--un-shadow-color': 'var(--n-border-color)' }"
       v-if="getMenuType === MenuTypeEnum.MIX_SIDEBAR"
       :showTitle="false"
     />

@@ -40,10 +40,6 @@ const {getMenuType, getMenuWidth} = useMenuSetting()
 const {getIsMobile} = useAppInject()
 const {getShowMultipleTab} = useMultipleTabSetting();
 const isDark = computed(() => getDarkMode == ThemeEnum.DARK)
-const shadowColor = computed(() =>
-  isDark.value ? 'rgba(255, 255, 255, 0.09)' : 'rgba(239, 239, 245,0.09)',
-)
-
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
     return false
@@ -65,7 +61,7 @@ const getShowHeaderMultipleTab = computed(()=>{
     <VbenSpace
       v-if="getShowFullHeaderRef"
       :class="['h-48px', 'shadow', {'mb-8px': !getShowHeaderMultipleTab}]"
-      :style="{ '--un-shadow-color': shadowColor }"
+      :style="{ '--un-shadow-color': 'var(--n-border-color)' }"
       justify="space-between"
       align="center"
     >

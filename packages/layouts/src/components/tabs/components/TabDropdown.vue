@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {computed, h, nextTick, reactive, ref, unref} from 'vue'
+import {computed, h, nextTick, ref, unref} from 'vue'
 import { context } from '../../../../bridge'
 import { useI18n } from '@vben/locale'
 import { VbenIconify } from '@vben/vbencomponents'
 import { TabActionEnum } from '@vben/constants'
-import {RouteLocationNormalized, useRouter} from "vue-router";
+import {RouteLocationNormalized, useRouter} from "vue-router"
 const { useTabs, useMultipleTabStore } = context
 const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } = useTabs()
 const { t } = useI18n();
@@ -17,11 +17,6 @@ function renderIcon(icon: string) {
   return () => h(VbenIconify, { icon })
 }
 
-const state = reactive({
-  current: null as Nullable<RouteLocationNormalized>,
-  currentIndex: 0,
-});
-
 const tabStore = useMultipleTabStore();
 const { currentRoute } = useRouter();
 
@@ -33,12 +28,10 @@ const options = computed(() => {
   const { meta } = unref(targetTab);
   const { path } = unref(currentRoute);
 
-  const curItem = state.current;
-
-  const isCurItem = curItem ? curItem.path === path : false;
+  const isCurItem = unref(targetTab) ? unref(targetTab).path === path : false;
 
   // Refresh button
-  const index = state.currentIndex;
+  const index = tabStore.getTabList.findIndex((tab) => tab.path === unref(targetTab).path)
   const refreshDisabled = !isCurItem;
   // Close left
   const closeLeftDisabled = index === 0 || !isCurItem;
@@ -97,9 +90,7 @@ const options = computed(() => {
 })
 
 const openDropdown = (e:PointerEvent, tabItem: RouteLocationNormalized) => {
-  const index = tabStore.getTabList.findIndex((tab) => tab.path === tabItem.path);
-  state.current = tabItem;
-  state.currentIndex = index;
+  targetTab.value = tabItem
   showDropdown.value = false
   nextTick().then(() => {
     showDropdown.value = true

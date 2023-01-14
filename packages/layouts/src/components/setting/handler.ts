@@ -9,6 +9,8 @@ import {ProjectConfig} from '@vben/types';
 // import { updateDarkTheme } from '/@/logics/theme/dark';
 // import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import {context} from "../../../bridge";
+import {updateColorWeak} from "../../logics/updateColorWeak";
+import {updateGrayMode} from "../../logics/updateGrayMode";
 
 export function baseHandler(event: HandlerSettingEnum, value: any) {
   const {useConfigStore} = context
@@ -138,14 +140,14 @@ export function handler(event: HandlerSettingEnum, value: any): DeepPartial<Proj
       return {showBreadCrumbIcon: value};
 
     case HandlerSettingEnum.GRAY_MODE:
-      // updateGrayMode(value);
+      updateGrayMode(value);
       return {grayMode: value};
 
     case HandlerSettingEnum.SHOW_FOOTER:
       return {showFooter: value};
 
     case HandlerSettingEnum.COLOR_WEAK:
-      // updateColorWeak(value);
+      updateColorWeak(value);
       return {colorWeak: value};
 
     case HandlerSettingEnum.SHOW_LOGO:

@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { context } from '../../../bridge'
-const { useUserStore } = context
+const { useUserStore, useAppInject } = context
 import headerImg from '@/assets/images/header.jpg'
 
 const userStore = useUserStore()
+
+const {getIsMobile} = useAppInject()
 
 const getUserInfo = computed(() => {
   const { realName = 'Vben Admin', avatar, desc } = userStore.getUserInfo || {}
@@ -15,7 +17,7 @@ const getUserInfo = computed(() => {
 <template>
   <div class="flex cursor-pointer">
     <img :src="getUserInfo.avatar" class="avatar w-6 h-6 mr-3" alt="avatar" />
-    <span>{{ getUserInfo.realName }}</span>
+    <span v-if="!getIsMobile">{{ getUserInfo.realName }}</span>
   </div>
 </template>
 <style scoped>

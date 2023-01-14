@@ -9,5 +9,6 @@ export * from './download'
 export * from './tree'
 export * from './router'
 export * from './mitt'
+export * from './theme'
 
 // export * from 'lodash-es'

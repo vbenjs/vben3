@@ -5,6 +5,8 @@ const Page: RouteRecordItem = {
   meta: {
     orderNo: 4,
     title: '非框架页面',
+    icon: 'tabler:frame-off',
+    hideTab: true
   },
 }
 

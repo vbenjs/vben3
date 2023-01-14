@@ -161,3 +161,12 @@
     transform: translateY(0);
   }
 }
+
+@keyframes loading-circle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

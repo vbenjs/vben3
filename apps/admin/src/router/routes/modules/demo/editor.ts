@@ -7,6 +7,7 @@ const Editor: RouteRecordItem = {
   meta: {
     orderNo: 3,
     title: '编辑器',
+    icon: 'openmoji:code-editor'
   },
   children: [
     {
@@ -15,7 +16,6 @@ const Editor: RouteRecordItem = {
       component: () => import('@/pages/demo/editor/monaco-editor.vue'),
       meta: {
         title: 'monaco-editor',
-        icon: 'ion:grid-outline',
       },
     },
   ],

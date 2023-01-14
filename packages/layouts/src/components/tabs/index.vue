@@ -2,7 +2,7 @@
 import type {RouteLocationNormalized, RouteMeta} from 'vue-router'
 import {Sortable} from '@vben/utils'
 import {useRouter} from 'vue-router'
-import {computed, nextTick, ref, unref, watch} from 'vue'
+import {computed, nextTick, ref, unref} from 'vue'
 import {useI18n} from '@vben/locale'
 import {REDIRECT_NAME} from '@vben/constants'
 import {useGo} from '@vben/hooks'

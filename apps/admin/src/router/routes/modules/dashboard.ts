@@ -7,7 +7,7 @@ const dashboard: RouteRecordItem = {
   redirect: '/dashboard/analysis',
   meta: {
     orderNo: 1,
-    icon: 'ion:grid-outline',
+    icon: 'mdi:monitor-dashboard',
     title: 'routes.dashboard.dashboard',
   },
   children: [
@@ -17,7 +17,6 @@ const dashboard: RouteRecordItem = {
       component: () => import('@/pages/dashboard/analysis/index.vue'),
       meta: {
         title: 'routes.dashboard.analysis',
-        icon: 'ion:grid-outline',
       },
     },
     {
@@ -26,7 +25,6 @@ const dashboard: RouteRecordItem = {
       component: () => import('@/pages/dashboard/workbench/index.vue'),
       meta: {
         title: 'routes.dashboard.workbench',
-        icon: 'ion:grid-outline',
       },
     },
   ],

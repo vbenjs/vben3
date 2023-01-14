@@ -1,4 +1,3 @@
-const docEle = document.documentElement;
 export function toggleClass(flag: boolean, clsName: string, target?: HTMLElement) {
   const targetEl = target || document.body;
   let { className } = targetEl;
@@ -6,6 +5,6 @@ export function toggleClass(flag: boolean, clsName: string, target?: HTMLElement
   targetEl.className = flag ? `${className} ${clsName} ` : className;
 }
 
-export function setCssVar(prop: string, val: any, dom = docEle) {
+export function setCssVar(prop: string, val: any, dom = document.documentElement) {
   dom.style.setProperty(prop, val);
 }

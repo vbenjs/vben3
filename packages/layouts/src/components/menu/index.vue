@@ -84,6 +84,7 @@ const routerToMenu = (item: RouteRecordItem) => {
   }
 }
 function renderIcon(icon: string) {
+  if (!icon) return undefined
   return () => h(VbenIconify, { icon })
 }
 </script>

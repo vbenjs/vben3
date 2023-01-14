@@ -7,7 +7,7 @@ const dashboard: RouteRecordItem = {
   redirect: '/dashboard/form',
   meta: {
     orderNo: 2,
-    icon: 'ion:grid-outline',
+    icon: 'line-md:clipboard-list-twotone',
     title: 'routes.demo.demo',
   },
   children: [
@@ -17,7 +17,6 @@ const dashboard: RouteRecordItem = {
       component: () => import('@/pages/demo/Table.vue'),
       meta: {
         title: 'routes.demo.table',
-        icon: 'ion:grid-outline',
       },
     },
     {
@@ -26,7 +25,6 @@ const dashboard: RouteRecordItem = {
       component: () => import('@/pages/demo/Form.vue'),
       meta: {
         title: 'routes.demo.form',
-        icon: 'ion:grid-outline',
       },
     },
     {
@@ -35,7 +33,6 @@ const dashboard: RouteRecordItem = {
       component: () => import('@/pages/demo/Card.vue'),
       meta: {
         title: 'routes.demo.card',
-        icon: 'ion:grid-outline',
       },
     },
     {
@@ -44,7 +41,6 @@ const dashboard: RouteRecordItem = {
       component: () => import('@/pages/demo/Draggable.vue'),
       meta: {
         title: '拖拽',
-        icon: 'ion:grid-outline',
       },
     },
   ],

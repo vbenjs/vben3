@@ -5,11 +5,13 @@ import {ref} from "vue";
 const settingDrawerVisible = ref(false)
 </script>
 <template>
-  <VbenIconify
-    icon="ion:settings-outline"
-    hoverPointer
-    @click="settingDrawerVisible = true"
-  />
-  <SettingDrawer v-model:visible="settingDrawerVisible" />
+  <div class="flex items-center">
+    <VbenIconify
+      icon="ion:settings-outline"
+      hoverPointer
+      @click="settingDrawerVisible = true"
+    />
+    <SettingDrawer v-model:visible="settingDrawerVisible"/>
+  </div>
 </template>
 <style lang="scss" scoped></style>

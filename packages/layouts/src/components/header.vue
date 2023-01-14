@@ -85,7 +85,7 @@ const getShowHeaderMultipleTab = computed(()=>{
       <slot name="menu"></slot>
       <div class="pl-8px pr-8px">
         <slot name="buttons">
-          <VbenSpace class="p-1" :size="12" align="center">
+          <VbenSpace class="p-1" :size="16" align="center">
             <AppSearch v-if="getShowSearch"/>
             <AppNotify :is-dark="isDark" v-if="getShowNotice"/>
             <AppFullScreen v-if="getShowFullScreen"/>

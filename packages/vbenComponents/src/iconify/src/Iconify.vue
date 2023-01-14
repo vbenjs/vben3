@@ -93,16 +93,8 @@ onMounted(update)
   }
 }
 
-@keyframes loadingCircle {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .iconify__infinite {
-  animation: loadingCircle 1s infinite linear;
+  animation: loading-circle 1s infinite linear;
 }
 
 </style>

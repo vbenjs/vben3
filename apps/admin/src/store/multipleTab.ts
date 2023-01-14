@@ -128,12 +128,10 @@ export const useMultipleTabStore = defineStore({
     async checkTab(route: RouteLocationNormalized) {
       // await router.isReady()
 
-      const { path, name } = getRawRoute(route)
+      const { path, name, meta } = getRawRoute(route)
       // 404  The page does not need to add a tab
-      if (
-        path === PageEnum.ERROR_PAGE ||
-        path === PageEnum.BASE_LOGIN ||
-        path === PageEnum.BASE_LOCK ||
+      if ( [PageEnum.ERROR_PAGE, PageEnum.BASE_LOGIN, PageEnum.BASE_LOCK].includes(path as PageEnum) ||
+        meta?.hideTab ||
         !name ||
         [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(
           name as string,

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import {ref, h, unref, nextTick, computed} from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
-import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import {
   RouteLocationNormalizedLoaded,
@@ -10,6 +9,7 @@ import {
 } from 'vue-router'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
+import {renderIcon} from "../index";
 
 const { listenerRouteChange, useMenuSetting } = context
 const { getAccordion } = useMenuSetting()
@@ -76,9 +76,6 @@ const routerToMenu = (item: RouteRecordItem) => {
     key: name,
     icon: renderIcon(icon),
   }
-}
-function renderIcon(icon: string) {
-  return () => h(VbenIconify, { icon })
 }
 </script>
 

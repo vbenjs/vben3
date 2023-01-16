@@ -6,9 +6,9 @@ import { useGo } from '@vben/hooks'
 import { filterTree, isString } from '@vben/utils'
 import { REDIRECT_NAME } from '@vben/constants'
 import { VbenIconify } from '@vben/vbencomponents'
-import { omit } from '@vben/utils'
 import { Menu } from '@vben/types'
 import { context } from '../../../bridge'
+import {renderIcon} from "../index";
 const { useRootSetting, getAllParentPath, getMenus } = context
 // withDefaults(defineProps<{ theme: 'dark' | 'light' }>(), {
 //   theme: 'light',
@@ -84,7 +84,7 @@ const renderDropdownLabel = (route: any) => {
 }
 
 const renderDropdownIcon = (option) => {
-  return getShowBreadCrumbIcon ? h(VbenIconify, { icon: option.icon }) : null
+  return getShowBreadCrumbIcon && option.icon ? renderIcon(option.icon)() : null
 }
 
 const handleClick = (path: string, route: Recordable<any>) => {
@@ -118,14 +118,15 @@ const handleClick = (path: string, route: Recordable<any>) => {
           :render-icon="renderDropdownIcon"
           @select="handleClick"
         >
-          <div class="flex items-center">
+          <VbenSpace align="center" :size="0">
             <VbenIconify
+              class="v-middle"
               :icon="route.icon"
               v-if="route.icon && getShowBreadCrumbIcon"
             />
             <span class="mr-1.2 ml-1.2">{{ t(route.meta.title) }}</span>
             <VbenIconify icon="gridicons:dropdown" v-if="route.children" />
-          </div>
+          </VbenSpace>
         </VbenDropdown>
       </VbenBreadcrumbItem>
     </VbenBreadcrumb>

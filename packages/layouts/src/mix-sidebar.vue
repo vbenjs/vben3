@@ -10,7 +10,7 @@ import {SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH} from '@vben/constants
 const { useMenuSetting,useRootSetting } = context
 const {headerRef, contentStyle, mainStyle, footerRef} = useComosables()
 
-const { getCollapsed, getMenuWidth, getMixSideFixed } = useMenuSetting()
+const { getCollapsed, getMenuWidth, getMixSideFixed,getShowSidebar } = useMenuSetting()
 const { getShowFooter } = useRootSetting();
 
 const getMixSidebarWidth = computed(()=>{
@@ -23,6 +23,7 @@ const getContainerStyle = computed(()=>{
 <template>
   <VbenLayout has-sider class="h-full">
     <VbenLayoutSider
+      v-if="getShowSidebar"
       bordered
       :collapsed-width="getMixSidebarWidth"
       collapse-mode="width"

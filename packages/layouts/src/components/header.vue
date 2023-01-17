@@ -66,7 +66,7 @@ const getShowHeaderMultipleTab = computed(()=>{
       align="center"
     >
       <slot name="logo">
-        <VbenSpace align="center">
+        <VbenSpace align="center" :size="0">
           <Logo
             v-if="getShowHeaderLogo"
             :style="{width: getMenuWidth + 'px', maxWidth: getMenuWidth + 'px'}"

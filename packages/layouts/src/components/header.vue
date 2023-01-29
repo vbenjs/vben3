@@ -24,7 +24,6 @@ const {
   useMultipleTabSetting
 } = context
 const {
-  getShowContent,
   getShowBread,
   getShowFullScreen,
   getShowLocalePicker,
@@ -36,7 +35,7 @@ const {
 } = useHeaderSetting()
 const { getDarkMode } = useConfigStore()
 const {getSettingButtonPosition, getShowSettingButton} = useRootSetting()
-const {getMenuType, getMenuWidth} = useMenuSetting()
+const {getMenuType, getMenuWidth, getIsTopMenu} = useMenuSetting()
 const {getIsMobile} = useAppInject()
 const {getShowMultipleTab} = useMultipleTabSetting();
 const isDark = computed(() => getDarkMode == ThemeEnum.DARK)
@@ -74,9 +73,7 @@ const getShowHeaderMultipleTab = computed(()=>{
           <slot name="breadcrumb">
             <LayoutBreadcrumb
               v-if="
-              getShowContent &&
-              getShowBread &&
-              getMenuType !== MenuTypeEnum.TOP_MENU
+              getShowBread && !getIsTopMenu
             "
             />
           </slot>

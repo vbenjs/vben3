@@ -6,7 +6,7 @@ import { context } from '../../../bridge'
 import { MenuTypeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
 import SiderTrigger from "./SiderTrigger.vue"
-import MixMenu from "../menu/mix-menu.vue";
+import MixMenu from "../menu/mix-sub-menu.vue";
 import {
   RouteLocationNormalized
 } from 'vue-router'

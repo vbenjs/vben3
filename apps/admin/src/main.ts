@@ -6,13 +6,15 @@ import { createApp } from 'vue'
 import { router } from '@/router'
 import { setupRouteGuard } from '@/router/guard'
 import { setupI18n } from '@vben/locale'
-import { pinia } from './pinia'
+// import { pinia } from './pinia'
+import { setupPinia } from '@vben/pinia'
 import { initApplication } from './init-application'
 import { registerComponents } from '../init-components'
 ;(async () => {
   const app = createApp(App)
 
-  app.use(pinia)
+  // app.use(pinia)
+  setupPinia(app)
   await registerComponents(app)
   await initApplication()
   // Register Global Components

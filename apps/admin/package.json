@@ -32,6 +32,7 @@
     "@vben/hooks": "workspace:*",
     "@vben/layouts": "workspace:*",
     "@vben/locale": "workspace:*",
+    "@vben/pinia": "workspace:*",
     "@vben/request": "workspace:*",
     "@vben/styles": "workspace:*",
     "@vben/utils": "workspace:*",

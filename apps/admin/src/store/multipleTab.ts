@@ -3,9 +3,9 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router'
-import { pinia } from '@/pinia'
+// import { pinia } from '@/pinia'
 import { toRaw, unref } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore } from '@vben/pinia'
 // import { store } from '/@/store';
 
 import { useGo, useRedo } from '@vben/hooks'
@@ -130,7 +130,10 @@ export const useMultipleTabStore = defineStore({
 
       const { path, name, meta } = getRawRoute(route)
       // 404  The page does not need to add a tab
-      if ( [PageEnum.ERROR_PAGE, PageEnum.BASE_LOGIN, PageEnum.BASE_LOCK].includes(path as PageEnum) ||
+      if (
+        [PageEnum.ERROR_PAGE, PageEnum.BASE_LOGIN, PageEnum.BASE_LOCK].includes(
+          path as PageEnum,
+        ) ||
         meta?.hideTab ||
         !name ||
         [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(
@@ -379,5 +382,5 @@ export const useMultipleTabStore = defineStore({
 
 // Need to be used outside the setup
 export function useMultipleTabWithOut() {
-  return useMultipleTabStore(pinia)
+  return useMultipleTabStore()
 }

@@ -4,7 +4,7 @@ export function persistGlobalConfig(
   keyPrefix: string,
 ): PersistedStateFactoryOptions {
   return {
-    storage: sessionStorage,
-    key: (id) => `${keyPrefix}_${id}`,
+    storage: localStorage,
+    key: (id) => `${keyPrefix}__sdgfkslrkgsuhk__${id}`,
   }
 }

@@ -22,7 +22,11 @@ type PartialState = Partial<Store['$state']>
 
 const STORAGE_NAMESPACE = '__STORE__'
 
-export const createPersistPlugin = ({defaultStorage = localStorage, namespace = STORAGE_NAMESPACE}: CreateOptions = {}) => {
+export const createPersistPlugin = ({
+  defaultStorage = localStorage,
+  namespace = STORAGE_NAMESPACE,
+}: CreateOptions = {}) => {
+  console.log('的翻个身京东方刻录机管理局来看待', namespace)
   const getDefaultStorage = (strategy: StrategyIM) =>
     strategy.storage || defaultStorage
 

@@ -1,3 +1,3 @@
-import { run } from './helper'
+import { run } from './base';
 
-run('dev')
+run('dev', true);

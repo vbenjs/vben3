@@ -47,7 +47,7 @@ async function baseScript(command: string, isFilterWorkspace: boolean) {
       title: item.name,
       value: item.name,
     }))
-    const answer = await prompts([
+    const { packages } = await prompts([
       {
         type: DEFAULT_SELECT_TYPE,
         message: `Choose the package to run ${command} script: `,
@@ -60,11 +60,11 @@ async function baseScript(command: string, isFilterWorkspace: boolean) {
       },
     ])
 
-    const scriptArgv = isArray(answer.packages)
-      ? answer.packages
+    const scriptArgv = isArray(packages)
+      ? packages
           .map((argvItem) => ['--filter', argvItem])
           .flatMap((argvItem) => argvItem)
-      : ['--filter', answer.packages || '']
+      : ['--filter', packages || '']
     await runScript(scriptArgv, command)
   } catch (e) {
     throw e

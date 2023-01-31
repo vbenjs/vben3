@@ -16,8 +16,7 @@ export function useHeaderSetting() {
   const getShowFullHeaderRef = computed(() => {
     return (
       (!unref(getFullContent) &&
-        unref(getShowHeader)) ||
-      unref(getIsTopMenu)
+        unref(getShowHeader))
     )
   })
 
@@ -95,7 +94,6 @@ export function useHeaderSetting() {
   }
   return {
     setHeaderSetting,
-
     getShowDoc,
     getShowSearch,
     getHeaderTheme,

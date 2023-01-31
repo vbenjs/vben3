@@ -8,12 +8,13 @@ import { context } from '../bridge'
 const { useMenuSetting, useRootSetting } = context
 const {headerRef, contentStyle, mainStyle, footerRef} = useComosables()
 
-const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
+const { toggleCollapsed, getCollapsed, getMenuWidth, getShowSidebar } = useMenuSetting()
 const { getShowFooter } = useRootSetting();
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
     <VbenLayoutSider
+      v-if="getShowSidebar"
       show-trigger
       bordered
       :collapsed-width="48"

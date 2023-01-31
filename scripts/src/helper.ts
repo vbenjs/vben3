@@ -1,76 +1,62 @@
+import { green, red } from 'picocolors'
+import { load as yamlLoad } from 'js-yaml'
+import { readFile } from 'fs-extra'
+import { IGNORE_WORKSPACE } from './constant'
+import minimist = require('minimist')
 import { execa } from 'execa'
-import prompts from 'prompts'
-import scriptPkg from '../package.json'
-import rootPkg from '../../package.json'
 
-type WorkspacePackage = { name: string; version?: string; path: string }
+export type WorkspacePackage = { name: string; version?: string; path: string }
 
-async function getPackages() {
-  const { stdout } = await execa('pnpm', [
-    'ls',
-    '-r',
-    '--depth',
-    '-1',
-    '--json',
-  ])
-
-  return (JSON.parse(stdout) as WorkspacePackage[]).filter(
-    (p) =>
-      p.name !== scriptPkg.name &&
-      p.name !== rootPkg.name &&
-      p.name.startsWith('@apps') &&
-      p.name !== '@apps/api-server',
-  )
+export function error(err: any) {
+  console.log(red(err))
 }
 
-async function runScript(pkg: WorkspacePackage, script: string) {
-  execa('pnpm', ['run', script, '--filter', `${pkg.name}...`, '--parallel'], {
-    stdio: 'inherit',
-    preferLocal: true,
-  })
+export function succeed(msg: any) {
+  console.log(green(msg))
 }
 
-async function runSingleScript(pkg: WorkspacePackage, script: string) {
-  execa('pnpm', ['--filter', `${pkg.name}`, script], {
-    stdio: 'inherit',
-    preferLocal: true,
-  })
+/**
+ * Get command line parameters
+ * @param argvName
+ */
+export function commandArgv(argvName: string | undefined = undefined) {
+  const argv = minimist(process.argv.slice(2))
+  return argvName ? argv[argvName] || undefined : argv
 }
 
-export async function run(command: string) {
-  const main = async () => {
-    const packages = await getPackages()
-    if (!packages.length) {
-      return
-    }
-
-    if (packages.length === 1) {
-      runSingleScript(packages[0], command)
-      return
-    }
-
-    const { name } = await prompts([
-      {
-        name: 'name',
-        message: `Choose the package to run ${command} script`,
-        type: 'select',
-        choices: packages.map((p) => {
-          return {
-            title: p.name,
-            value: p.name,
-          }
-        }),
-      },
-    ])
-
-    runScript(
-      packages.find((p) => p.name === name),
-      command,
-    )
+/**
+ * Read Workspace
+ */
+export async function readWorkspace() {
+  const path = '../pnpm-workspace.yaml'
+  try {
+    const workspace = yamlLoad(await readFile(path, { encoding: 'utf8' }), {
+      json: true,
+    }) as any
+    return workspace.packages as string[]
+  } catch (e) {
+    throw e
   }
+}
 
-  main().catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+export async function filterWorkspace() {
+  try {
+    const filterArgv = (await readWorkspace()).filter(
+      (wr) => !IGNORE_WORKSPACE.includes(wr),
+    )
+    return filterArgv
+      .map((argv) => ['--filter', '../' + argv])
+      .flatMap((argv) => argv)
+  } catch (e) {
+    throw e
+  }
+}
+
+export async function getWorkspacePackages(filterArgv = []) {
+  const { stdout } = await execa(
+    'pnpm',
+    ['ls', '-r', '--depth', '-1', '--json'].concat(filterArgv),
+  )
+  if (!stdout) return []
+  return JSON.parse(stdout) as WorkspacePackage[]
 }

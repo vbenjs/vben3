@@ -1,5 +1,5 @@
 import type { LockInfo } from '@vben/types'
-import { defineStore } from 'pinia'
+import { defineStore } from '@vben/pinia'
 import { useUserStore } from '@/store/user'
 
 interface LockState {
@@ -9,7 +9,7 @@ interface LockState {
 export const useLockStore = defineStore({
   id: 'app-lock',
   persist: {
-    strategies: [{ paths: ['lockInfo'] }],
+    paths: ['lockInfo'],
   },
   state: (): LockState => ({
     lockInfo: {},

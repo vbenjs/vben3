@@ -1,5 +1,4 @@
-import { defineStore } from 'pinia'
-import { pinia } from '@/pinia'
+import { defineStore } from '@vben/pinia'
 import { asyncRoutes, PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
 import { filterTree } from '@vben/utils'
 import { Menu } from '@vben/types'
@@ -207,5 +206,5 @@ export const useAuthStore = defineStore({
 
 // Need to be used outside the setup
 export function useAuthStoreWithout() {
-  return useAuthStore(pinia)
+  return useAuthStore()
 }

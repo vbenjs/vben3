@@ -1,7 +1,7 @@
 import type { LoginParams } from '@/apis/auth'
-import { defineStore } from 'pinia'
+import { defineStore } from '@vben/pinia'
 import { BASIC_HOME_PATH, BASIC_LOGIN_PATH, PageEnum } from '@vben/constants'
-import { pinia } from '@/pinia'
+// import { pinia } from '@/pinia'
 import { router } from '@/router'
 import { doLogoutApi, getUserInfoApi, doLoginApi } from '@/apis/auth'
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
@@ -22,7 +22,7 @@ interface UserState {
 export const useUserStore = defineStore({
   id: 'app-user-store',
   persist: {
-    strategies: [{ paths: ['userInfo', 'accessToken', 'roles'] }],
+    paths: ['userInfo', 'accessToken', 'roles'],
   },
   state: (): UserState => ({
     userInfo: null,
@@ -162,5 +162,5 @@ export const useUserStore = defineStore({
 
 // Need to be used outside the setup
 export function useUserStoreWithout() {
-  return useUserStore(pinia)
+  return useUserStore()
 }

@@ -1,3 +1,3 @@
 import { run } from './base';
 
-run('build', true);
+run('preview', true);

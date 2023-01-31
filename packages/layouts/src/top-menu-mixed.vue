@@ -8,7 +8,7 @@ import { context } from '../bridge'
 import { useComosables } from './useComosables'
 import {computed, unref} from 'vue'
 const { useMenuSetting,useRootSetting, useMultipleTabSetting } = context
-const { toggleCollapsed, getCollapsed, getMenuWidth } = useMenuSetting()
+const { toggleCollapsed, getCollapsed, getMenuWidth, getShowSidebar } = useMenuSetting()
 const { getShowFooter } = useRootSetting();
 const { getShowMultipleTab } = useMultipleTabSetting();
 
@@ -26,6 +26,7 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
     </VbenLayoutHeader>
     <VbenLayout has-sider :style="{ height: menuHeight }">
       <VbenLayoutSider
+        v-if="getShowSidebar"
         show-trigger
         bordered
         :collapsed-width="48"

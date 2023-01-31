@@ -1,4 +1,3 @@
-import { pinia } from '@/pinia'
 import {
   BeforeMiniState,
   HeaderSetting,
@@ -7,7 +6,7 @@ import {
   ProjectConfig,
   TransitionSetting,
 } from '@vben/types'
-import { defineStore } from 'pinia'
+import { defineStore } from '@vben/pinia'
 import { deepMerge } from '@vben/utils'
 import { APP_DARK_MODE_KEY_, ThemeEnum } from '@vben/constants'
 import { darkMode, projectSetting } from '@/setting'
@@ -25,11 +24,7 @@ export interface ConfigStoreState {
 export const useConfigStore = defineStore({
   id: 'app-config-store',
   persist: {
-    strategies: [
-      {
-        paths: ['darkMode', 'projectConfig'],
-      },
-    ],
+    paths: ['darkMode', 'projectConfig'],
   },
   state: (): ConfigStoreState => ({
     darkMode: undefined,
@@ -88,5 +83,5 @@ export const useConfigStore = defineStore({
 })
 
 export function useConfigStoreWithOut() {
-  return useConfigStore(pinia)
+  return useConfigStore()
 }

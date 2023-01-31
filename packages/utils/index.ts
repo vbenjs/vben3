@@ -7,6 +7,7 @@ export {
   isUndefined,
   clone,
   isArray,
+  isString,
 } from 'lodash-es'
 // @ts-ignore
 import Sortable from 'sortablejs'

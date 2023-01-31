@@ -4,12 +4,24 @@
   "bin": {},
   "scripts": {
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
+    "build": "pnpm esno ./src/build.ts",
     "dev": "pnpm esno ./src/dev.ts",
-    "build": "pnpm esno ./src/build.ts"
+    "preview": "esno src/preview.ts"
   },
   "devDependencies": {
+    "@types/inquirer": "^9.0.3",
+    "@types/fs-extra": "^9.0.13",
+    "@types/js-yaml": "^4.0.5",
+    "@types/minimist": "^1.2.2",
     "@types/prompts": "^2.4.1",
+    "@vben/utils": "workspace:*",
     "execa": "^6.1.0",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^9.1.4",
+    "js-yaml": "^4.1.0",
+    "minimist": "^1.2.7",
+    "ora": "^6.1.2",
+    "picocolors": "^1.0.0",
     "prompts": "^2.4.2"
   }
 }

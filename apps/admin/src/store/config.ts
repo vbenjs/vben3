@@ -1,4 +1,3 @@
-// import { pinia } from '@/pinia'
 import {
   BeforeMiniState,
   HeaderSetting,
@@ -25,11 +24,7 @@ export interface ConfigStoreState {
 export const useConfigStore = defineStore({
   id: 'app-config-store',
   persist: {
-    strategies: [
-      {
-        paths: ['darkMode', 'projectConfig'],
-      },
-    ],
+    paths: ['darkMode', 'projectConfig'],
   },
   state: (): ConfigStoreState => ({
     darkMode: undefined,

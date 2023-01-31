@@ -22,7 +22,7 @@ interface UserState {
 export const useUserStore = defineStore({
   id: 'app-user-store',
   persist: {
-    strategies: [{ paths: ['userInfo', 'accessToken', 'roles'] }],
+    paths: ['userInfo', 'accessToken', 'roles'],
   },
   state: (): UserState => ({
     userInfo: null,

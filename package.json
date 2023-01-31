@@ -30,6 +30,7 @@
     "lint:stylelint": "stylelint --fix ",
     "reinstall": "pnpm turbo run clean && rimraf pnpm-lock.yaml && rimraf node_modules && npm run bootstrap",
     "stub": "pnpm --filter @config/** prepack",
+    "turbo:build": "turbo run build",
     "test": "vitest",
     "version": "pnpm run changeset version"
   },

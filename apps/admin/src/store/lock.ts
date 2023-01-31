@@ -9,7 +9,7 @@ interface LockState {
 export const useLockStore = defineStore({
   id: 'app-lock',
   persist: {
-    strategies: [{ paths: ['lockInfo'] }],
+    paths: ['lockInfo'],
   },
   state: (): LockState => ({
     lockInfo: {},

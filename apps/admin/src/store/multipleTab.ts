@@ -3,17 +3,15 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router'
-// import { pinia } from '@/pinia'
 import { toRaw, unref } from 'vue'
 import { defineStore } from '@vben/pinia'
-// import { store } from '/@/store';
 
 import { useGo, useRedo } from '@vben/hooks'
 // import { Persistent } from '/@/utils/cache/persistent';
 
 import { PageEnum } from '@vben/constants'
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '@/router/routes/basic'
-import { getRawRoute, useLocalStorage, RemovableRef } from '@vben/utils'
+import { getRawRoute, RemovableRef } from '@vben/utils'
 import { useUserStore } from '@/store/user'
 // import { useRouter, useRoute } from 'vue-router'
 // import { router } from '@/router'
@@ -41,17 +39,20 @@ const getToTarget = (tabItem: RouteLocationNormalized) => {
     query: query || {},
   }
 }
-const TabsStorage = useLocalStorage('MULTIPLE_TABS_KEY', [])
-const cacheTab = true
+// const TabsStorage = useLocalStorage('MULTIPLE_TABS_KEY', [])
+// const cacheTab = true
 // const cacheTab = projectSetting.multiTabsSetting.cache
 
 export const useMultipleTabStore = defineStore({
   id: 'app-multiple-tab',
+  persist: {
+    paths: ['tabList'],
+  },
   state: (): MultipleTabState => ({
     // Tabs that need to be cached
     cacheTabList: new Set(),
     // multiple tab list
-    tabList: cacheTab ? TabsStorage || [] : [],
+    tabList: [],
     // Index of the last moved tab
     lastDragEndIndex: 0,
   }),

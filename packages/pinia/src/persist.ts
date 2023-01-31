@@ -1,3 +1,7 @@
+/**
+ * @link https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/
+ */
+
 import { PersistedStateFactoryOptions } from 'pinia-plugin-persistedstate'
 
 export function persistGlobalConfig(
@@ -5,6 +9,6 @@ export function persistGlobalConfig(
 ): PersistedStateFactoryOptions {
   return {
     storage: localStorage,
-    key: (id) => `${keyPrefix}__sdgfkslrkgsuhk__${id}`,
+    key: (id) => `${keyPrefix}__${id}`,
   }
 }

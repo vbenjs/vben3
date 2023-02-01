@@ -52,7 +52,15 @@ export const useMenuSettingStore = defineStore({
     mixSideFixed: false,
   }),
   getters: {
-    // getIsSidebarType(){},
+    isSidebarType: (state) => {
+      return state.type === MenuTypeEnum.SIDEBAR
+    },
+    isTopMenu: (state) => {
+      return state.type === MenuTypeEnum.SIDEBAR
+    },
+    menuShowLogo: (state) => {
+      return state.type === MenuTypeEnum.SIDEBAR
+    },
   },
   actions: {
     setBgColor(value: string) {

@@ -9,7 +9,7 @@ import {
   SettingButtonPositionEnum,
   ThemeEnum,
   TriggerEnum,
-  RouterTransitionEnum
+  RouterTransitionEnum,
 } from '@vben/constants'
 import { LocaleType } from './config'
 // export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko'
@@ -73,16 +73,34 @@ export interface LocaleSetting {
 
 export interface TransitionSetting {
   //  Whether to open the page switching animation
-  enable: boolean;
+  enable: boolean
   // Route basic switching animation
-  basicTransition: RouterTransitionEnum;
+  basicTransition: RouterTransitionEnum
   // Whether to open page switching loading
-  openPageLoading: boolean;
+  openPageLoading: boolean
   // Whether to open the top progress bar
-  openNProgress: boolean;
+  openNProgress: boolean
 }
 
-export interface ProjectConfig {
+export interface SporadicSetting {
+  // Whether to open the top progress bar
+  openNProgress: boolean
+  // pageLayout whether to enable keep-alive
+  openKeepAlive: boolean
+  // Lock screen time
+  lockTime: number
+  // Show breadcrumbs
+  showBreadCrumb: boolean
+  // Show breadcrumb icon
+  showBreadCrumbIcon: boolean
+  // Whether to open back to top
+  useOpenBackTop: boolean
+  // Is it possible to embed iframe pages
+  canEmbedIFramePage: boolean
+  // Whether to delete unclosed messages and notify when switching the interface
+  closeMessageOnSwitch: boolean
+  // Whether to cancel the http request that has been sent but not responded when switching the interface.
+  removeAllHttpPending: boolean
   // Storage location of permission related information
   permissionCacheType: CacheTypeEnum
   // Whether to show the configuration button
@@ -110,6 +128,9 @@ export interface ProjectConfig {
   showLogo: boolean
   // Whether to show the global footer
   showFooter: boolean
+}
+
+export interface ProjectConfig extends SporadicSetting {
   // menuType: MenuTypeEnum;
   headerSetting: HeaderSetting
   // menuSetting
@@ -117,23 +138,5 @@ export interface ProjectConfig {
   // Multi-tab settings
   multiTabsSetting: MultiTabsSetting
   // Animation configuration
-  transitionSetting: TransitionSetting;
-  // Whether to open the top progress bar
-  openNProgress: false
-  // pageLayout whether to enable keep-alive
-  openKeepAlive: boolean
-  // Lock screen time
-  lockTime: number
-  // Show breadcrumbs
-  showBreadCrumb: boolean
-  // Show breadcrumb icon
-  showBreadCrumbIcon: boolean
-  // Whether to open back to top
-  useOpenBackTop: boolean
-  // Is it possible to embed iframe pages
-  canEmbedIFramePage: boolean
-  // Whether to delete unclosed messages and notify when switching the interface
-  closeMessageOnSwitch: boolean
-  // Whether to cancel the http request that has been sent but not responded when switching the interface.
-  removeAllHttpPending: boolean
+  transitionSetting: TransitionSetting
 }

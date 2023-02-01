@@ -1,6 +1,5 @@
 import type { PluginOption } from 'vite'
 import type { ViteEnv } from '../utils'
-import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import purgeIcons from 'vite-plugin-purge-icons'
@@ -28,10 +27,6 @@ export async function configVitePlugins(
   } = viteEnv
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
-    // have to
-    vue({
-      reactivityTransform: true,
-    }),
     // have to
     vueJsx(),
   ]

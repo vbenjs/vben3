@@ -10,5 +10,5 @@ export const useLayoutTest = defineStore({
       this.test = value
     },
   },
-  persist: true,
+  // persist: true,
 })

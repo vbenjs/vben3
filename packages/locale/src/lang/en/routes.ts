@@ -13,6 +13,10 @@ export default {
     demo: 'Demo',
     card: 'Card',
     form: 'Form',
-    table: 'Table',
+    table: {
+      table: 'table',
+      basic: 'Basic',
+    },
+
   },
 }

@@ -6,7 +6,6 @@ import ForgetPasswordForm from './forget-password-form.vue'
 import RegisterForm from './register-form.vue'
 import MobileForm from './mobile-form.vue'
 import QrCodeForm from './qrcode-form.vue'
-import { DarkModeToggle } from '@vben/layouts'
 const { bem } = createNamespace('login')
 
 defineProps({

@@ -52,14 +52,40 @@ export const useMenuSettingStore = defineStore({
     mixSideFixed: false,
   }),
   getters: {
-    isSidebarType: (state) => {
-      return state.type === MenuTypeEnum.SIDEBAR
+    isSidebarType: (state) => state.type === MenuTypeEnum.SIDEBAR,
+    isTopMenu: (state) => state.type === MenuTypeEnum.SIDEBAR,
+    isMixSidebar: (state) => state.type === MenuTypeEnum.MIX_SIDEBAR,
+    isMixMode: (state) =>
+      state.mode === MenuModeEnum.INLINE && state.type === MenuTypeEnum.MIX,
+    showMenuLogo: (state) => state.type === MenuTypeEnum.SIDEBAR,
+    showTopMenu: (state) => {
+      return state.mode === MenuModeEnum.HORIZONTAL || state.split
     },
-    isTopMenu: (state) => {
-      return state.type === MenuTypeEnum.SIDEBAR
+    showHeaderTrigger: (state) => {
+      if (state.type === MenuTypeEnum.TOP_MENU || !state.show || state.hidden)
+        return false
+      return state.trigger === TriggerEnum.HEADER
     },
-    menuShowLogo: (state) => {
-      return state.type === MenuTypeEnum.SIDEBAR
+    isHorizontal: (state) => state.mode === MenuModeEnum.HORIZONTAL,
+    // TODO
+    ShowSidebar: (state) => {
+      const fullContent = false
+      return (
+        state.split ||
+        (state.show && state.mode !== MenuModeEnum.HORIZONTAL && !fullContent)
+      )
+    },
+    // TODO
+    getRealWidth: (state) => {
+      return 0
+    },
+    // TODO
+    getMiniWidthNumber: (state) => {
+      return 0
+    },
+    // TODO
+    getCalcContentWidth: (state) => {
+      return 0
     },
   },
   actions: {
@@ -116,6 +142,9 @@ export const useMenuSettingStore = defineStore({
     },
     setMixSideFixed(value: boolean) {
       this.mixSideFixed = value
+    },
+    toggleCollapsed() {
+      this.setCollapsed(!this.collapsed)
     },
   },
 })

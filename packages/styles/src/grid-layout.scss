@@ -1,0 +1,32 @@
+.vben-grid-layout-container{
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "vben-sidebar vben-header"
+    "vben-sidebar vben-content";
+}
+
+.vben-grid-layout-header{
+  grid-area: vben-header;
+  background: #666666;
+}
+
+.vben-grid-layout-sidebar{
+  grid-area: vben-sidebar;
+  background: #18a058;
+}
+
+.vben-grid-layout-tab{
+  grid-area: vben-tab;
+  background: #0960bd;
+}
+
+.vben-grid-layout-content{
+  grid-area: vben-content;
+  background: #ed6f6f;
+}
+
+.vben-grid-layout-footer{
+  grid-area: vben-footer;
+}

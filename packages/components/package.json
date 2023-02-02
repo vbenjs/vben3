@@ -13,11 +13,11 @@
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
     "qrcode": "^1.5.1",
-    "vue": "3.2.45",
-    "vue-router": "^4.1.5"
+    "vue": "3.2.47",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@iconify/json": "^2.1.98",
+    "@iconify/json": "^2.2.15",
     "@purge-icons/generated": "^0.9.0",
     "@types/qrcode": "^1.5.0"
   }

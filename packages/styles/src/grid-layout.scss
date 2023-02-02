@@ -1,32 +1,67 @@
-.vben-grid-layout-container{
+.vben-grid-layout-container {
   display: grid;
-  grid-template-columns: 50vw 50vw;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "vben-sidebar vben-header"
-    "vben-sidebar vben-content";
-}
+  grid-template-columns: var(--aside-width) 1fr;
+  grid-template-rows: var(--header-height) var(--tab-height) 1fr;
 
-.vben-grid-layout-header{
-  grid-area: vben-header;
-  background: #666666;
-}
+  &.layout-sidebar, &.layout-mix-sidebar {
+    grid-template-areas:
+      'vben-sidebar vben-header'
+      'vben-sidebar vben-tab'
+      'vben-sidebar vben-content';
+  }
 
-.vben-grid-layout-sidebar{
-  grid-area: vben-sidebar;
-  background: #18a058;
-}
+  &.layout-mix-sidebar {
+    --aside-width: 80px;
+  }
 
-.vben-grid-layout-tab{
-  grid-area: vben-tab;
-  background: #0960bd;
-}
+  &.layout-mix, &.layout-top-menu {
+    grid-template-areas:
+      'vben-header vben-header'
+      'vben-sidebar vben-tab'
+      'vben-sidebar vben-content';
+  }
 
-.vben-grid-layout-content{
-  grid-area: vben-content;
-  background: #ed6f6f;
-}
+  &.layout-top-menu {
+    --aside-width: 0;
+  }
 
-.vben-grid-layout-footer{
-  grid-area: vben-footer;
+  .vben-grid-layout-header, .vben-grid-layout-sidebar,
+  .vben-grid-layout-tab, .vben-grid-layout-content,
+  .vben-grid-layout-main, .vben-grid-layout-footer{
+    transition:  grid-template-rows 3s, grid-template-columns 3s, grid-template-areas 3s;
+    //-webkit-transition: all 30s;
+  }
+
+  .vben-grid-layout-header {
+    grid-area: vben-header;
+    background: #666666;
+  }
+
+  .vben-grid-layout-sidebar {
+    grid-area: vben-sidebar;
+    background: #18a058;
+  }
+
+  .vben-grid-layout-tab {
+    grid-area: vben-tab;
+    background: #0960bd;
+  }
+
+  .vben-grid-layout-content {
+    grid-area: vben-content;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr minmax(0, var(--footer-height));
+
+    background: #ed6f6f;
+  }
+
+  .vben-grid-layout-main {
+    background-color: aqua;
+  }
+
+  .vben-grid-layout-footer {
+    background-color: blueviolet;
+  }
 }

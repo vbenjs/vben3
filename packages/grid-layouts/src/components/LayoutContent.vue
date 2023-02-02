@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import LayoutFooter from "./LayoutFooter.vue";
+import LayoutFooter from './LayoutFooter.vue'
+import Main from './Main.vue'
 </script>
 <template>
   <div class="vben-grid-layout-content">
-    <slot name="main" :class="['vben-grid-layout-main']"></slot>
+    <Main />
     <LayoutFooter />
   </div>
 </template>

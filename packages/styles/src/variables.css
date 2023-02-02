@@ -7,9 +7,27 @@
   /* component */
   --component-background-color: #fff;
 
+  /* header */
+  --header-height: 48px;
+  --header-width: calc(100% - var(--aside-width));
+
+  /* tab */
+  --tab-height: 36px;
+  --tab-width: calc(100% - var(--aside-width));
+  
   /* aside */
+  --aside-height: calc(100% - var(--header-height));
+  --aside-width: 210px;
   --aside-background-color: #001628;
   --aside-submenu-background-color: #0c2135;
+
+  /* main */
+  --main-height: calc(100% - var(--footer-height));
+  --main-width: 100%;
+
+  /* footer */
+  --footer-height: 60px;
+  --footer-width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {

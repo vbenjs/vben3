@@ -1,6 +1,5 @@
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 <template>
-  <div class="vben-grid-layout-sidebar"></div>
+  <div class="vben-grid-layout-sidebar">sidebar</div>
 </template>
 <style lang="scss" scoped></style>

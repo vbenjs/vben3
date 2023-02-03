@@ -41,7 +41,7 @@ export const useMenuSettingStore = defineStore({
     // Top menu layout
     topMenuAlign: 'center',
     // Fold trigger position
-    trigger: TriggerEnum.HEADER,
+    trigger: TriggerEnum.CENTER,
     // Turn on accordion mode, only show a menu
     accordion: true,
     // Switch page to close menu
@@ -50,8 +50,6 @@ export const useMenuSettingStore = defineStore({
     mixSideTrigger: MixSidebarTriggerEnum.CLICK,
     // Fixed expanded menu
     mixSideFixed: false,
-    // Whether to visible dom
-    visible: true,
     width: 210,
     mixSidebarWidth: 80,
     collapsedWidth: 48,
@@ -71,6 +69,7 @@ export const useMenuSettingStore = defineStore({
         return false
       return state.trigger === TriggerEnum.HEADER
     },
+    showFooterTrigger: (state) => state.trigger === TriggerEnum.FOOTER,
     isHorizontal: (state) => state.mode === MenuModeEnum.HORIZONTAL,
     // TODO
     ShowSidebar: (state) => {
@@ -122,7 +121,7 @@ export const useMenuSettingStore = defineStore({
       this.mode = value
     },
     setType(value: MenuTypeEnum) {
-      this.setVisible(value !== MenuTypeEnum.TOP_MENU)
+      this.setHidden(value === MenuTypeEnum.TOP_MENU)
       this.type = value
     },
     setTheme(value: ThemeEnum) {
@@ -148,9 +147,6 @@ export const useMenuSettingStore = defineStore({
     },
     setMixSideFixed(value: boolean) {
       this.mixSideFixed = value
-    },
-    setVisible(value: boolean) {
-      this.visible = value
     },
     toggleCollapsed() {
       this.setCollapsed(!this.collapsed)

@@ -11,6 +11,7 @@ export function configUnocssPlugin() {
     presets: [presetIcons(), presetMini({ dark: 'class' })],
     shortcuts: {
       'flex-center': 'flex justify-center items-center',
+      'grid-center': 'grid place-content-center',
     },
     theme: {
       colors: {

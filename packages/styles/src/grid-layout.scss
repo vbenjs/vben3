@@ -5,10 +5,7 @@
   grid-gap: 3px;
   transition: grid-template-columns .3s, grid-template-rows .3s;
   transition-timing-function: var(--transition-bezier);
-  &,
-  * {
-    box-sizing: border-box;
-  }
+
   &.layout-sidebar,
   &.layout-mix-sidebar {
     grid-template-areas:

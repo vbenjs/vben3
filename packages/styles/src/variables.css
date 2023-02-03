@@ -35,10 +35,10 @@
   --aside-submenu-background-color: #0c2135;
 
 
-  --layout-toggle-button-color: #FFF;
-  --layout-toggle-button-border: 1px solid rgb(239, 239, 245);
-  --layout-toggle-bar-color: rgba(191, 191, 191, 1);
-  --layout-toggle-bar-color-hover: rgba(153, 153, 153, 1);
+  --trigger-color: #FFF;
+  --trigger-border: 1px solid rgb(239, 239, 245);
+--trigger-border-color: rgb(239, 239, 245);
+  --trigger-icon-color: rgb(51, 54, 57);
 
   /* main */
   --main-height: calc(100% - var(--footer-height));

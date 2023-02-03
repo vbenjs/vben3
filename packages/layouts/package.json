@@ -16,7 +16,7 @@
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
-    "vue": "3.2.45",
+    "vue": "3.2.47",
     "vue-router": "^4.1.6"
   }
 }

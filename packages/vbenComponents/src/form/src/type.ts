@@ -1,13 +1,24 @@
-import type { VNode } from 'vue'
+import type { CSSProperties, VNode } from 'vue'
 export interface VbenFormProps {
   // api?: Function
   // params?: Object
   title?: string
   // afterFetch?: Function
   schemas: VbenFormSchema[]
+  //栅格参数
   gridProps?: GridProps
+  // label布局参数
+  labelProps?: Omit<LabelProps, 'labelStyle'>
   // 表单规则
   rules?: object
+}
+
+// 标签参数
+export interface LabelProps {
+  labelPlacement?: 'left' | 'top'
+  labelAlign?: 'left' | 'right'
+  labelStyle?: CSSProperties | String
+  labelWidth?: number | string | 'auto'
 }
 export interface GridProps {
   // 单行栅格数量
@@ -34,10 +45,12 @@ export interface VbenFormSchema {
   valueField?: string
   // Label name
   label: string | VNode
+  labelProps?: LabelProps
   // Auxiliary text
   subLabel?: string
   // 栅格属性
   gridItemProps?: GridItemProps
+
   // 表单项规则
   rule?: object
   // Help text on the right side of the text

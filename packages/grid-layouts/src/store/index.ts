@@ -8,4 +8,5 @@ export {
   useLayoutFooter,
   useLayoutSidebar,
   useLayoutTab,
+  useLayoutContent,
 } from './modules/layoutComposables'

@@ -39,6 +39,19 @@ export const useLayoutTab = defineStore('LAYOUT_TAB', () => {
   }
 })
 
+export const useLayoutContent = defineStore('LAYOUT_FOOTER', () => {
+  const contentRef = ref<HTMLElement>()
+
+  const { height: contentHeight, width: contentWidth } =
+    useElementSize(contentRef)
+
+  return {
+    contentRef,
+    contentHeight,
+    contentWidth,
+  }
+})
+
 export const useLayoutFooter = defineStore('LAYOUT_FOOTER', () => {
   const footerRef = ref<HTMLElement>()
 

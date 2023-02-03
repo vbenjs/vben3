@@ -7,6 +7,18 @@
   /* component */
   --component-background-color: #fff;
 
+  /* transition */
+  --transition-bezier:cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-all: all 0.3s var(--transition-bezier);
+
+  /* layout start */
+
+  --layout-border-color: rgb(239, 239, 245);
+  --layout-color: #fff;
+  --layout-text-color: rgb(51, 54, 57);
+  --layout-border-color: rgb(239, 239, 245);
+  --layout-toggle-button-icon-color: rgb(51, 54, 57);
+
   /* header */
   --header-height: 48px;
   --header-width: calc(100% - var(--aside-width));
@@ -18,8 +30,15 @@
   /* aside */
   --aside-height: calc(100% - var(--header-height));
   --aside-width: 210px;
+  --aside-visible: visible;
   --aside-background-color: #001628;
   --aside-submenu-background-color: #0c2135;
+
+
+  --layout-toggle-button-color: #FFF;
+  --layout-toggle-button-border: 1px solid rgb(239, 239, 245);
+  --layout-toggle-bar-color: rgba(191, 191, 191, 1);
+  --layout-toggle-bar-color-hover: rgba(153, 153, 153, 1);
 
   /* main */
   --main-height: calc(100% - var(--footer-height));
@@ -28,6 +47,8 @@
   /* footer */
   --footer-height: 60px;
   --footer-width: 100%;
+
+  /* layout end */
 }
 
 @media (prefers-color-scheme: dark) {

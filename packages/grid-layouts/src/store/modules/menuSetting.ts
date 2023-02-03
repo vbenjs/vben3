@@ -1,12 +1,12 @@
 import { defineStore } from '@vben/pinia'
 import { MenuSetting } from '@vben/types'
 import {
-  ThemeEnum,
-  SIDE_BAR_BG_COLOR_LIST,
   MenuModeEnum,
   MenuTypeEnum,
-  TriggerEnum,
   MixSidebarTriggerEnum,
+  SIDE_BAR_BG_COLOR_LIST,
+  ThemeEnum,
+  TriggerEnum,
 } from '@vben/constants'
 
 export const useMenuSettingStore = defineStore({
@@ -50,10 +50,15 @@ export const useMenuSettingStore = defineStore({
     mixSideTrigger: MixSidebarTriggerEnum.CLICK,
     // Fixed expanded menu
     mixSideFixed: false,
+    // Whether to visible dom
+    visible: true,
+    width: 210,
+    mixSidebarWidth: 80,
+    collapsedWidth: 48,
   }),
   getters: {
-    isSidebarType: (state) => state.type === MenuTypeEnum.SIDEBAR,
-    isTopMenu: (state) => state.type === MenuTypeEnum.SIDEBAR,
+    isSidebar: (state) => state.type === MenuTypeEnum.SIDEBAR,
+    isTopMenu: (state) => state.type === MenuTypeEnum.TOP_MENU,
     isMixSidebar: (state) => state.type === MenuTypeEnum.MIX_SIDEBAR,
     isMixMode: (state) =>
       state.mode === MenuModeEnum.INLINE && state.type === MenuTypeEnum.MIX,
@@ -117,6 +122,7 @@ export const useMenuSettingStore = defineStore({
       this.mode = value
     },
     setType(value: MenuTypeEnum) {
+      this.setVisible(value !== MenuTypeEnum.TOP_MENU)
       this.type = value
     },
     setTheme(value: ThemeEnum) {
@@ -142,6 +148,9 @@ export const useMenuSettingStore = defineStore({
     },
     setMixSideFixed(value: boolean) {
       this.mixSideFixed = value
+    },
+    setVisible(value: boolean) {
+      this.visible = value
     },
     toggleCollapsed() {
       this.setCollapsed(!this.collapsed)

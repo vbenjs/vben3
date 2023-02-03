@@ -3,6 +3,7 @@ import { maps } from '#/index'
 import { computed, onMounted, ref, unref, useAttrs, watch } from 'vue'
 import { GridItemProps, VbenFormProps } from './type'
 import { set } from '@vben/utils'
+import { Schema } from 'inspector'
 const emit = defineEmits(['register', 'update:model'])
 const innerProps = ref<Partial<VbenFormProps>>()
 const Form = maps.get('Form')
@@ -16,9 +17,9 @@ const props = defineProps({
   },
 })
 const attrs = useAttrs()
-const getRules = computed(() => innerProps?.rules || props.rules)
+const getRules = computed(() => innerProps.value?.rules || props.rules)
 const setProps = (prop: Partial<VbenFormProps>) => {
-  prop.schemas.forEach((v) => {
+  prop.schemas?.forEach((v) => {
     if (v.defaultValue) {
       fieldValue.value[v.field] = v.defaultValue
     }
@@ -74,6 +75,12 @@ function getFieldValue() {
 const getGridItemProps = (p) => {
   return { span: getGridProps.value.span, ...p }
 }
+
+const getFormItemProps = (p) => {
+  const { labelProps } = p
+
+  return { ...labelProps }
+}
 // 默认grid参数
 const getGridProps = computed(() => {
   return {
@@ -116,6 +123,7 @@ onMounted(() => {
             :path="schema.field"
             :showRequireMark="schema.required"
             :rule="schema.rule"
+            v-bind="getFormItemProps(schema)"
           >
             <slot
               :name="schema.slot"
@@ -124,7 +132,7 @@ onMounted(() => {
             ></slot>
             <component
               v-if="
-                (schema.componentProps !== 'InputPassword' ||
+                (schema.component !== 'InputPassword' ||
                   schema.component !== 'InputTextArea') &&
                 !schema.slot
               "

@@ -32,11 +32,40 @@ const [register, { getFieldValue, validate }] = useForm({
       },
     },
     {
+      field: 'name',
+      label: 'Span演示',
+      gridItemProps: {
+        span: 20,
+      },
+      component: 'Input',
+      defaultValue: '111',
+      required: true,
+      componentProps: {
+        placeholder: '基本的 Input',
+      },
+    },
+    {
+      field: 'name',
+      label: 'label 位置演示',
+      gridItemProps: {
+        span: 20,
+      },
+      labelProps: {
+        labelPlacement: 'left',
+      },
+      component: 'Input',
+      defaultValue: '111',
+      required: true,
+      componentProps: {
+        placeholder: '基本的 Input',
+      },
+    },
+    {
       gridItemProps: {
         span: 20,
       },
       field: 'user.name',
-      label: '表单嵌套',
+      label: '属性嵌套',
       component: 'Input',
       componentProps: {
         placeholder: '嵌套的 Input',
@@ -190,12 +219,13 @@ const [register, { getFieldValue, validate }] = useForm({
       component: 'Transfer',
       componentProps: {},
     },
-    {
-      field: 'upload',
-      label: 'Upload',
-      component: 'Upload',
-      componentProps: {},
-    },
+    //TODO Upload有警告，之后处理
+    // {
+    //   field: 'upload',
+    //   label: 'Upload',
+    //   component: 'Upload',
+    //   componentProps: {},
+    // },
     {
       field: 'mention',
       label: 'Mention',
@@ -224,10 +254,10 @@ function getValue() {
 </script>
 <template>
   <div class="p-2">
-    表单数据：{{ model }}
+    <div>表单数据：{{ model }}</div>
 
     <VbenButton @click="changeSelectParams">改变选择框参数</VbenButton>
-    <VbenButton @click="getValue">获取</VbenButton>
+    <VbenButton @click="getValue">获取数据</VbenButton>
     <VbenForm @register="register" ref="Ref" v-model:model="model" />
   </div>
 </template>

@@ -5,6 +5,6 @@
   "module": "index.ts",
   "license": "MIT",
   "scripts": {
-    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+    "clean": "pnpm rimraf pnpm rimraf dist && pnpm rimraf .turbo"
   }
 }

@@ -11,7 +11,12 @@ export interface VbenFormProps {
 
   actions?: boolean
 
-  actionsProps?: GridProps
+  actionsProps?: ActionProps
+}
+
+export interface ActionProps extends GridProps {
+  submitText?: String
+  cancelText?: String
 }
 
 // 标签参数

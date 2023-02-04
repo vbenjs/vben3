@@ -1,5 +1,4 @@
 import './common.css'
 import './entry.css'
 import './variables.css'
-import './grid-layout.scss'
 import 'uno.css'

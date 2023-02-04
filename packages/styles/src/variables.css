@@ -8,7 +8,7 @@
   --component-background-color: #fff;
 
   /* transition */
-  --transition-bezier:cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-all: all 0.3s var(--transition-bezier);
 
   /* layout start */
@@ -26,18 +26,16 @@
   /* tab */
   --tab-height: 36px;
   --tab-width: calc(100% - var(--aside-width));
-  
+
   /* aside */
   --aside-height: calc(100% - var(--header-height));
   --aside-width: 210px;
-  --aside-visible: visible;
   --aside-background-color: #001628;
   --aside-submenu-background-color: #0c2135;
 
-
-  --trigger-color: #FFF;
+  --trigger-color: #fff;
   --trigger-border: 1px solid rgb(239, 239, 245);
---trigger-border-color: rgb(239, 239, 245);
+  --trigger-border-color: rgb(239, 239, 245);
   --trigger-icon-color: rgb(51, 54, 57);
 
   /* main */

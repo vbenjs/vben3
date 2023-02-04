@@ -1,5 +1,4 @@
 <script lang="ts" setup></script>
 <template>
-  <div class="vben-grid-layout-tab">tab</div>
+  <div class="grid-area-[grid-tab-nav] bg-[#0960bd]">tab</div>
 </template>
-<style lang="scss" scoped></style>

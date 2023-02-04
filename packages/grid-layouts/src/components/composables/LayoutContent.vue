@@ -6,9 +6,15 @@ import { storeToRefs } from '@vben/pinia'
 const { footerRef } = storeToRefs(useLayoutFooter())
 </script>
 <template>
-  <div class="vben-grid-layout-content">
+  <div class="grid-layout-content grid-area-[grid-content] grid">
     <Main />
     <LayoutFooter ref="footerRef" />
   </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss">
+.grid-layout-content{
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr minmax(0, var(--footer-height));
+  background: #ed6f6f;
+}
+</style>

@@ -3,17 +3,22 @@ import Trigger from '../trigger/inedx.vue'
 import { useMenuSettingStore } from '../../store'
 import { storeToRefs } from '@vben/pinia'
 const menuSettingStore = useMenuSettingStore()
-const { showHeaderTrigger, showFooterTrigger } = storeToRefs(menuSettingStore)
+const { showHeaderTrigger, showFooterTrigger, hidden } =
+  storeToRefs(menuSettingStore)
 </script>
 <template>
   <div
-    class="vben-grid-layout-sidebar"
-    :class="[{ 'pb-40px': showFooterTrigger }]"
+    class="grid-area-[grid-sidebar] relative"
+    :class="[
+      { 'pb-40px': showFooterTrigger },
+      hidden ? 'invisible' : 'visible',
+    ]"
   >
     <!--    <div class="vben-grid-layout-sidebar__container"></div>-->
     <div>sidebar</div>
-    <div class="vben-grid-layout-sidebar__border"></div>
+    <div
+      class="h-full w-1px content-none absolute top-0 bottom-0 right-0 bg-[var(--layout-border-color)] transition-colors-3000"
+    ></div>
     <Trigger v-if="!showHeaderTrigger" />
   </div>
 </template>
-<style lang="scss" scoped></style>

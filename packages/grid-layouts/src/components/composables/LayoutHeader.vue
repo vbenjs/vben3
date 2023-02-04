@@ -7,9 +7,8 @@ const { showHeaderTrigger } = storeToRefs(menuSettingStore)
 
 </script>
 <template>
-  <header class="vben-grid-layout-header">
+  <header class="grid-area-[grid-header] bg-[#666666]">
     <Trigger v-if="showHeaderTrigger" />
     header
   </header>
 </template>
-<style lang="scss" scoped></style>

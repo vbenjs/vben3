@@ -1,5 +1,6 @@
 <script lang="ts" setup></script>
 <template>
-  <footer class="vben-grid-layout-footer">footer</footer>
+  <footer class="bg-[blueviolet]">
+    footer
+  </footer>
 </template>
-<style lang="scss" scoped></style>

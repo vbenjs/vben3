@@ -17,21 +17,3 @@ const { collapsed } = storeToRefs(menuSettingStore)
     />
   </div>
 </template>
-<style lang="scss" scoped>
-.trigger-container {
-  cursor: pointer;
-  display: grid;
-  place-content: center;
-  z-index: 1;
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  border-radius: 50%;
-  transform: translateX(50%) translateY(-50%);
-  border: var(--trigger-border);
-  background-color: var(--trigger-color);
-  box-shadow: 0 2px 4px 0px rgb(0 0 0 / 6%);
-}
-</style>

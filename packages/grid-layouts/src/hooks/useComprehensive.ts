@@ -13,7 +13,6 @@ export const useComprehensive = () => {
 
     return {
       '--aside-width': asideWidth + 'px',
-      '--aside-visible': menuSettingStore.hidden ? 'hidden' : 'visible',
     }
   })
   return {

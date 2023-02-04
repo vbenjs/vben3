@@ -51,5 +51,6 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    visibility: visible;
   }
 }

@@ -1,4 +1,4 @@
-export { useSporadicSetting } from './modules/sporadicSetting'
+export { useSporadicSettingStore } from './modules/sporadicSetting'
 export { useHeaderSettingStore } from './modules/headerSetting'
 export { useMenuSettingStore } from './modules/menuSetting'
 export { useTransitionSettingStore } from './modules/transitionSetting'

@@ -12,7 +12,7 @@ const { footerRef } = storeToRefs(useLayoutFooter())
   </div>
 </template>
 <style lang="scss">
-.grid-layout-content{
+.grid-layout-content {
   grid-template-columns: 100%;
   grid-template-rows: 1fr minmax(0, var(--footer-height));
   background: #ed6f6f;

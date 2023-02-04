@@ -7,7 +7,7 @@ const { collapsed } = storeToRefs(menuSettingStore)
 </script>
 <template>
   <div
-    class="h-full w-48px grid-center cursor-pointer bg-[var(--trigger-color)]"
+    class="h-full p-x-12px grid-center cursor-pointer bg-[var(--trigger-color)]"
     @click.stop="menuSettingStore.toggleCollapsed()"
   >
     <VbenIconify

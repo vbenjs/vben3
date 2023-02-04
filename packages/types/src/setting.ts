@@ -112,6 +112,8 @@ export interface SporadicSetting {
   showDarkModeToggle: boolean
   // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum
+  // Configure where the Setting Drawer is displayed
+  showSettingDrawer: boolean
   // Permission mode
   permissionMode: PermissionModeEnum
   // Session timeout processing

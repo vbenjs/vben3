@@ -28,11 +28,11 @@ const { type } = storeToRefs(useMenuSettingStore())
     :class="[`${type}`]"
     :style="getLayoutStyles"
   >
-    <Feature />
     <LayoutHeader ref="headerRef" />
     <LayoutSidebar ref="sidebarRef" />
     <LayoutTab ref="tabRef" />
     <LayoutContent ref="contentRef" />
+    <Feature />
   </section>
 </template>
 <style lang="scss">

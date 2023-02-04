@@ -58,6 +58,7 @@ export const useMenuSettingStore = defineStore({
     isSidebar: (state) => state.type === MenuTypeEnum.SIDEBAR,
     isTopMenu: (state) => state.type === MenuTypeEnum.TOP_MENU,
     isMixSidebar: (state) => state.type === MenuTypeEnum.MIX_SIDEBAR,
+    isMix: (state) => state.type === MenuTypeEnum.MIX,
     isMixMode: (state) =>
       state.mode === MenuModeEnum.INLINE && state.type === MenuTypeEnum.MIX,
     showMenuLogo: (state) => state.type === MenuTypeEnum.SIDEBAR,

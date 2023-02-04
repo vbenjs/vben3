@@ -8,7 +8,7 @@ import {
   ContentLayoutEnum,
 } from '@vben/constants'
 
-export const useSporadicSetting = defineStore({
+export const useSporadicSettingStore = defineStore({
   id: 'LAYOUT_SPORADIC_SETTING',
   // persist: true,
   state: (): SporadicSetting => ({
@@ -18,6 +18,8 @@ export const useSporadicSetting = defineStore({
     showDarkModeToggle: true,
     // `Settings` button position
     settingButtonPosition: SettingButtonPositionEnum.AUTO,
+    // Whether to show the Setting Drawer
+    showSettingDrawer: false,
     // Permission mode
     permissionMode: PermissionModeEnum.ROUTE_MAPPING,
     // Permission-related cache is stored in sessionStorage or localStorage
@@ -68,6 +70,12 @@ export const useSporadicSetting = defineStore({
     },
     setSettingButtonPosition(value: SettingButtonPositionEnum) {
       this.settingButtonPosition = value
+    },
+    setShowSettingDrawer(value: boolean) {
+      this.showSettingDrawer = value
+    },
+    toggleSettingDrawerVisible() {
+      this.setShowSettingDrawer(!this.showSettingDrawer)
     },
     setPermissionMode(value: PermissionModeEnum) {
       this.permissionMode = value

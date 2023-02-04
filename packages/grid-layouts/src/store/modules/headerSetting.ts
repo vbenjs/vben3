@@ -26,7 +26,9 @@ export const useHeaderSettingStore = defineStore({
     showSearch: true,
     showLocalePicker: true,
   }),
-  getters: {},
+  getters: {
+    isDark: (state) => state.theme === ThemeEnum.DARK,
+  },
   actions: {
     setBgColor(value: string) {
       this.bgColor = value

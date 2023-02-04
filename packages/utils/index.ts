@@ -8,6 +8,7 @@ export {
   clone,
   isArray,
   isString,
+  toString,
 } from 'lodash-es'
 // @ts-ignore
 import Sortable from 'sortablejs'

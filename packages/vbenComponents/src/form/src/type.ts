@@ -1,9 +1,6 @@
 import type { CSSProperties, VNode } from 'vue'
 export interface VbenFormProps {
-  // api?: Function
-  // params?: Object
   title?: string
-  // afterFetch?: Function
   schemas: VbenFormSchema[]
   //栅格参数
   gridProps?: GridProps
@@ -11,6 +8,10 @@ export interface VbenFormProps {
   labelProps?: Omit<LabelProps, 'labelStyle'>
   // 表单规则
   rules?: object
+
+  actions?: boolean
+
+  actionsProps?: GridProps
 }
 
 // 标签参数
@@ -45,6 +46,7 @@ export interface VbenFormSchema {
   valueField?: string
   // Label name
   label: string | VNode
+  // 标签参数
   labelProps?: LabelProps
   // Auxiliary text
   subLabel?: string

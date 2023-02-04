@@ -3,7 +3,6 @@ import { maps } from '#/index'
 import { computed, onMounted, ref, unref, useAttrs, watch } from 'vue'
 import { GridItemProps, VbenFormProps } from './type'
 import { set } from '@vben/utils'
-import { Schema } from 'inspector'
 const emit = defineEmits(['register', 'update:model'])
 const innerProps = ref<Partial<VbenFormProps>>()
 const Form = maps.get('Form')
@@ -11,8 +10,7 @@ const formRef = ref(null)
 const props = defineProps({
   schemas: [],
   rules: {
-    type: Object,
-    Array,
+    type: Object || Array,
     default: {},
   },
 })
@@ -29,7 +27,9 @@ const setProps = (prop: Partial<VbenFormProps>) => {
       }
     }
   })
+
   innerProps.value = {
+    actions: false,
     ...prop,
     ...unref(innerProps),
   }
@@ -81,6 +81,7 @@ const getFormItemProps = (p) => {
 
   return { ...labelProps }
 }
+
 // 默认grid参数
 const getGridProps = computed(() => {
   return {
@@ -153,6 +154,21 @@ onMounted(() => {
               v-model:value="fieldValue[schema.field]"
             />
           </VbenFormItem>
+        </VbenGridItem>
+        <VbenGridItem
+          v-if="innerProps?.schemas.length > 0 && innerProps.actions"
+          v-bind="innerProps.actionsProps"
+        >
+          <slot name="actions">
+            <VbenButtonGroup
+              ><VbenButton type="error" @click="formRef.restoreValidation"
+                >取消</VbenButton
+              >
+              <VbenButton type="primary" @click="formRef.validate"
+                >提交</VbenButton
+              ></VbenButtonGroup
+            >
+          </slot>
         </VbenGridItem>
       </VbenGrid>
     </Form>

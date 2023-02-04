@@ -11,6 +11,10 @@ import {
 const Ref = ref(null)
 const selectParams = ref({ id: 1 })
 const [register, { getFieldValue, validate }] = useForm({
+  actions: true,
+  actionsProps: {
+    span: 12,
+  },
   // xGap: 30,
   rules: {
     number: [

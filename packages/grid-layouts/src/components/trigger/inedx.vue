@@ -6,8 +6,11 @@ import CenterTrigger from './SiderCenterTrigger.vue'
 import FooterTrigger from './SiderFooterTrigger.vue'
 import HeaderTrigger from './HeaderTrigger.vue'
 import { computed, defineComponent, unref } from 'vue'
-const { trigger, showHeaderTrigger } = storeToRefs(useMenuSettingStore())
+const { trigger, showHeaderTrigger, isMixSidebar } = storeToRefs(
+  useMenuSettingStore(),
+)
 const component = computed<ReturnType<typeof defineComponent>>(() => {
+  if (unref(isMixSidebar)) return FooterTrigger
   if (unref(showHeaderTrigger)) return HeaderTrigger
   if (unref(trigger) === TriggerEnum.CENTER) return CenterTrigger
   if (unref(trigger) === TriggerEnum.FOOTER) return FooterTrigger

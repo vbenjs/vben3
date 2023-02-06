@@ -6,7 +6,7 @@ const { hiddenFooter } = storeToRefs(useSporadicSettingStore())
 </script>
 <template>
   <footer
-    class="bg-[blueviolet]"
+    class="bg-[blueviolet] overflow-hidden"
     :class="[hiddenFooter ? 'invisible' : 'visible']"
   >
     footer

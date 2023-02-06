@@ -13,9 +13,9 @@ export const useComprehensive = () => {
   const sporadicSettingStore = useSporadicSettingStore()
   const getLayoutStyles = computed(() => {
     const getAsideWidth = () => {
-      if (menuSettingStore.isMixSidebar) return menuSettingStore.mixSidebarWidth
-      if (menuSettingStore.collapsed) return menuSettingStore.collapsedWidth
       if (menuSettingStore.isTopMenu || menuSettingStore.hidden) return 0
+      if (menuSettingStore.collapsed) return menuSettingStore.collapsedWidth
+      if (menuSettingStore.isMixSidebar) return menuSettingStore.mixSidebarWidth
       return menuSettingStore.width
     }
 
@@ -42,7 +42,24 @@ export const useComprehensive = () => {
     }
   })
 
+  const getShowSidebarLogo = computed(() => {
+    return menuSettingStore.isSidebar || menuSettingStore.isMixSidebar
+  })
+
+  const getShowHeaderLogo = computed(() => {
+    return menuSettingStore.isTopMenu || menuSettingStore.isMix
+  })
+
+  const getShowLogoTitle = computed(() => {
+    if (menuSettingStore.isSidebar) return !menuSettingStore.collapsed
+    if (menuSettingStore.isMixSidebar) return false
+    return true
+  })
+
   return {
     getLayoutStyles,
+    getShowSidebarLogo,
+    getShowHeaderLogo,
+    getShowLogoTitle,
   }
 }

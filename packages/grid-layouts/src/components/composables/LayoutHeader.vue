@@ -5,9 +5,11 @@ import { storeToRefs } from '@vben/pinia'
 import Setting from '../setting/index.vue'
 import Breadcrumb from '../breadcrumb/index.vue'
 import Logo from '../logo/index.vue'
+import { useComprehensive } from '../../hooks/useComprehensive'
 const menuSettingStore = useMenuSettingStore()
 const { showHeaderTrigger } = storeToRefs(menuSettingStore)
 const { hidden } = storeToRefs(useHeaderSettingStore())
+const { getShowHeaderLogo } = useComprehensive()
 </script>
 <template>
   <header
@@ -15,7 +17,7 @@ const { hidden } = storeToRefs(useHeaderSettingStore())
     :class="[hidden ? 'invisible' : 'visible']"
   >
     <div class="h-[var(--header-height)] grid-col-start-1 grid-col-end-3 flex">
-      <Logo />
+      <Logo v-if="getShowHeaderLogo" />
       <Trigger v-if="showHeaderTrigger" />
       <Breadcrumb />
     </div>

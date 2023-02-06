@@ -18,7 +18,7 @@ const { loading, handleFn: handleRedo } = usePromise(reload, {
 <template>
   <div
     @click="handleRedo"
-    class="h-full w-36px border-l grid-center border-[var(--layout-border-color)] cursor-pointer"
+    class="h-full w-36px grid-center border-l border-l-solid border-[var(--layout-border-color)] cursor-pointer"
   >
     <VbenIconify icon="ic:round-refresh" size="18" :infinite="loading" />
   </div>

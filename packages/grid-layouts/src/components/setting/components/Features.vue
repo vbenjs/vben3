@@ -131,7 +131,7 @@ const getMenuDisabled = computed(() => {
       :options="triggerOptions"
       :def="trigger"
       :event="HandlerSettingEnum.MENU_TRIGGER"
-      :disabled="!getMenuDisabled || isMixSidebar"
+      :disabled="isMixSidebar || isTopMenu || (isMix && isHorizontal)"
     />
     <SelectItem
       :title="t('layout.setting.contentMode')"

@@ -8,7 +8,7 @@ const getIcon = computed(() =>
 
 <template>
   <div
-    class="h-full w-36px grid-center border-l border-[var(--layout-border-color)] cursor-pointer"
+    class="h-full w-36px grid-center border-l border-l-solid border-[var(--layout-border-color)] cursor-pointer"
   >
     <VbenIconify :icon="getIcon" />
   </div>

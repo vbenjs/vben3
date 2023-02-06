@@ -1,4 +1,5 @@
 import type { CSSProperties, VNode } from 'vue'
+import { formMethod } from '#/form/src/hooks/useForm'
 export interface VbenFormProps {
   title?: string
   schemas: VbenFormSchema[]
@@ -13,7 +14,7 @@ export interface VbenFormProps {
   // 按钮组参数
   actionsProps?: ActionProps
   // 提交函数
-  submitFunc?: (FormRef?) => void
+  submitFunc?: (FormRef?: formMethod) => void
 }
 
 export interface ActionProps extends GridProps {

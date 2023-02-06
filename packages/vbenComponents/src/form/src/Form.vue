@@ -93,8 +93,10 @@ const getGridProps = computed(() => {
   }
 })
 
+const FormMethod = ref({})
+
 onMounted(() => {
-  emit('register', {
+  FormMethod.value = {
     setProps,
     getFieldValue,
     validate: formRef.value?.validate,
@@ -102,7 +104,8 @@ onMounted(() => {
     updateSchemas: (schemas) => {
       innerProps.value.schemas = schemas
     },
-  })
+  }
+  emit('register', unref(FormMethod))
 })
 </script>
 <template>
@@ -166,7 +169,7 @@ onMounted(() => {
               }}</VbenButton>
               <VbenButton
                 type="primary"
-                @click="innerProps.submitFunc(formRef)"
+                @click="innerProps.submitFunc(FormMethod)"
                 >{{ innerProps.actionsProps.submitText || '提交' }}</VbenButton
               ></VbenButtonGroup
             >

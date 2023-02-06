@@ -24,6 +24,9 @@ const [register, { getFieldValue, validate }] = useForm({
   },
   schemas: transferFormilySchemas(FormilyProps),
   title: '表单演示',
+  submitFunc: (FormRef) => {
+    console.log(FormRef)
+  },
 })
 const changeSelectParams = () => {
   selectParams.value = { id: 2 }

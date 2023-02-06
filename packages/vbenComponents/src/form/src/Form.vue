@@ -164,9 +164,11 @@ onMounted(() => {
               ><VbenButton type="error" @click="formRef.restoreValidation">{{
                 innerProps.actionsProps.cancelText || '取消'
               }}</VbenButton>
-              <VbenButton type="primary" @click="formRef.validate">{{
-                innerProps.actionsProps.submitText || '提交'
-              }}</VbenButton></VbenButtonGroup
+              <VbenButton
+                type="primary"
+                @click="innerProps.submitFunc(formRef)"
+                >{{ innerProps.actionsProps.submitText || '提交' }}</VbenButton
+              ></VbenButtonGroup
             >
           </slot>
         </VbenGridItem>

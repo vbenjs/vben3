@@ -8,10 +8,12 @@ export interface VbenFormProps {
   labelProps?: Omit<LabelProps, 'labelStyle'>
   // 表单规则
   rules?: object
-
+  // 是否显示按钮组
   actions?: boolean
-
+  // 按钮组参数
   actionsProps?: ActionProps
+  // 提交函数
+  submitFunc?: (FormRef?) => void
 }
 
 export interface ActionProps extends GridProps {

@@ -12,22 +12,6 @@ import { storeToRefs } from '@vben/pinia'
 
 const { t } = useI18n()
 
-// const {
-//   getShowFooter,
-//   getShowBreadCrumb,
-//   getShowBreadCrumbIcon,
-//   getShowLogo,
-//   getFullContent,
-//   getColorWeak,
-//   getGrayMode,
-// } = useRootSetting()
-
-// const { getIsHorizontal, getShowMenu, getIsMixSidebar } = useMenuSetting()
-//
-// const { getShowHeader } = useHeaderSetting()
-//
-// const { getShowMultipleTab, getShowQuick, getShowRedo, getShowFold } =
-//   useMultipleTabSetting()
 const {
   isMixSidebar,
   show: showMenu,
@@ -53,6 +37,11 @@ const { show: showHeader } = storeToRefs(useHeaderSettingStore())
 <template>
   <VbenSpace vertical>
     <SwitchItem
+      :title="t('layout.setting.header')"
+      :def="showHeader"
+      :event="HandlerSettingEnum.HEADER_SHOW"
+    />
+    <SwitchItem
       :title="t('layout.setting.breadcrumb')"
       :def="showBreadCrumb"
       :event="HandlerSettingEnum.SHOW_BREADCRUMB"
@@ -62,7 +51,19 @@ const { show: showHeader } = storeToRefs(useHeaderSettingStore())
       :title="t('layout.setting.breadcrumbIcon')"
       :def="showBreadCrumbIcon"
       :event="HandlerSettingEnum.SHOW_BREADCRUMB_ICON"
-      :disabled="!showBreadCrumb"
+      :disabled="!showBreadCrumb || !showHeader"
+    />
+    <SwitchItem
+      :title="t('layout.setting.sidebar')"
+      :def="showMenu"
+      :event="HandlerSettingEnum.MENU_SHOW_SIDEBAR"
+      :disabled="isHorizontal"
+    />
+    <SwitchItem
+      title="Logo"
+      :def="showLogo"
+      :event="HandlerSettingEnum.SHOW_LOGO"
+      :disabled="isMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.tabs')"
@@ -86,23 +87,6 @@ const { show: showHeader } = storeToRefs(useHeaderSettingStore())
       :def="showFold"
       :event="HandlerSettingEnum.TABS_SHOW_FOLD"
       :disabled="!showMultiTabs"
-    />
-    <SwitchItem
-      :title="t('layout.setting.sidebar')"
-      :def="showMenu"
-      :event="HandlerSettingEnum.MENU_SHOW_SIDEBAR"
-      :disabled="isHorizontal"
-    />
-    <SwitchItem
-      :title="t('layout.setting.header')"
-      :def="showHeader"
-      :event="HandlerSettingEnum.HEADER_SHOW"
-    />
-    <SwitchItem
-      title="Logo"
-      :def="showLogo"
-      :event="HandlerSettingEnum.SHOW_LOGO"
-      :disabled="isMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.footer')"

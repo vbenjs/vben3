@@ -12,6 +12,8 @@ export const useHeaderSettingStore = defineStore({
     fixed: true,
     // Whether to show top
     show: true,
+    // Whether to show dom
+    hidden: false,
     // theme
     theme: ThemeEnum.LIGHT,
     // Whether to enable the lock screen function
@@ -25,6 +27,7 @@ export const useHeaderSettingStore = defineStore({
     // Whether to display the menu search
     showSearch: true,
     showLocalePicker: true,
+    height: 48,
   }),
   getters: {
     isDark: (state) => state.theme === ThemeEnum.DARK,
@@ -38,6 +41,10 @@ export const useHeaderSettingStore = defineStore({
     },
     setShow(value: boolean) {
       this.show = value
+      this.setHidden(!value)
+    },
+    setHidden(value: boolean) {
+      this.hidden = value
     },
     setTheme(value: ThemeEnum) {
       this.theme = value

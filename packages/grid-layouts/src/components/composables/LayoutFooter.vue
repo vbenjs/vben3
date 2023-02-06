@@ -1,4 +1,14 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useSporadicSettingStore } from '../../store'
+import { storeToRefs } from '@vben/pinia'
+
+const { hiddenFooter } = storeToRefs(useSporadicSettingStore())
+</script>
 <template>
-  <footer class="bg-[blueviolet]">footer</footer>
+  <footer
+    class="bg-[blueviolet]"
+    :class="[hiddenFooter ? 'invisible' : 'visible']"
+  >
+    footer
+  </footer>
 </template>

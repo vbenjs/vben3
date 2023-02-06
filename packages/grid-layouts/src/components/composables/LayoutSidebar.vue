@@ -3,8 +3,7 @@ import Trigger from '../trigger/inedx.vue'
 import { useMenuSettingStore } from '../../store'
 import { storeToRefs } from '@vben/pinia'
 const menuSettingStore = useMenuSettingStore()
-const { showHeaderTrigger, showFooterTrigger, hidden } =
-  storeToRefs(menuSettingStore)
+const { showFooterTrigger, hidden } = storeToRefs(menuSettingStore)
 </script>
 <template>
   <div
@@ -19,6 +18,6 @@ const { showHeaderTrigger, showFooterTrigger, hidden } =
     <div
       class="h-full w-1px content-none absolute top-0 bottom-0 right-0 bg-[var(--layout-border-color)] transition-colors-3000"
     ></div>
-    <Trigger v-if="!showHeaderTrigger" />
+    <Trigger />
   </div>
 </template>

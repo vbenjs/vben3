@@ -7,7 +7,8 @@ export const useMultiTabsSettingStore = defineStore({
   state: (): MultiTabsSetting => ({
     cache: false,
     // Turn on
-    show: true,
+    show: true, // Turn on
+    hidden: false,
     // Is it possible to drag and drop sorting tabs
     canDrag: true,
     // Turn on quick actions
@@ -16,6 +17,7 @@ export const useMultiTabsSettingStore = defineStore({
     showRedo: true,
     // Whether to show the collapse button
     showFold: true,
+    height: 36,
   }),
   getters: {},
   actions: {
@@ -24,6 +26,10 @@ export const useMultiTabsSettingStore = defineStore({
     },
     setShow(value: boolean) {
       this.show = value
+      this.hidden = !value
+    },
+    setHidden(value: boolean) {
+      this.hidden = value
     },
     setCanDrag(value: boolean) {
       this.canDrag = value

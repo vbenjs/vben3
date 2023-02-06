@@ -39,7 +39,7 @@ const { type } = storeToRefs(useMenuSettingStore())
 .grid-layout-container {
   display: grid;
   grid-template-columns: minmax(0, var(--aside-width)) minmax(640px, 1fr);
-  grid-template-rows: var(--header-height) var(--tab-height) 1fr;
+  grid-template-rows: var(--header-height) var(--tab-bar-height) 1fr;
   grid-gap: 3px;
   transition: grid-template-columns 0.3s, grid-template-rows 0.3s;
   transition-timing-function: var(--transition-bezier);
@@ -47,14 +47,14 @@ const { type } = storeToRefs(useMenuSettingStore())
   &.mix-sidebar {
     grid-template-areas:
       'grid-sidebar grid-header'
-      'grid-sidebar grid-tab-nav'
+      'grid-sidebar grid-tab-bar'
       'grid-sidebar grid-content';
   }
   &.mix,
   &.top-menu {
     grid-template-areas:
       'grid-header grid-header'
-      'grid-sidebar grid-tab-nav'
+      'grid-sidebar grid-tab-bar'
       'grid-sidebar grid-content';
   }
 }

@@ -41,16 +41,19 @@ export interface MenuSetting {
 export interface MultiTabsSetting {
   cache: boolean
   show: boolean
+  hidden: boolean
   showQuick: boolean
   canDrag: boolean
   showRedo: boolean
   showFold: boolean
+  readonly height: number
 }
 
 export interface HeaderSetting {
   bgColor: string
   fixed: boolean
   show: boolean
+  hidden: boolean
   theme: ThemeEnum
   // Turn on full screen
   showFullScreen: boolean
@@ -62,6 +65,7 @@ export interface HeaderSetting {
   showNotice: boolean
   showSearch: boolean
   showLocalePicker: boolean
+  readonly height: number
 }
 
 export interface LocaleSetting {
@@ -133,6 +137,8 @@ export interface SporadicSetting {
   showLogo: boolean
   // Whether to show the global footer
   showFooter: boolean
+  hiddenFooter: boolean
+  readonly footerHeight: number
 }
 
 export interface ProjectConfig extends SporadicSetting {

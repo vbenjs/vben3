@@ -35,7 +35,7 @@ const { openPageLoading, openNProgress, enable, basicTransition } = storeToRefs(
       :options="routerTransitionOptions"
       :def="basicTransition"
       :event="HandlerSettingEnum.ROUTER_TRANSITION"
-      :disabled="enable"
+      :disabled="!enable"
     />
   </VbenSpace>
 </template>

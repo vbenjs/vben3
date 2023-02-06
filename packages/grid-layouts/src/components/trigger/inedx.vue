@@ -5,15 +5,15 @@ import { TriggerEnum } from '@vben/constants'
 import CenterTrigger from './SiderCenterTrigger.vue'
 import FooterTrigger from './SiderFooterTrigger.vue'
 import HeaderTrigger from './HeaderTrigger.vue'
-const { trigger } = storeToRefs(useMenuSettingStore())
-const triggers = {
-  [TriggerEnum.HEADER]: HeaderTrigger,
-  [TriggerEnum.CENTER]: CenterTrigger,
-  [TriggerEnum.FOOTER]: FooterTrigger,
-}
+import { computed, defineComponent, unref } from 'vue'
+const { trigger, showHeaderTrigger } = storeToRefs(useMenuSettingStore())
+const component = computed<ReturnType<typeof defineComponent>>(() => {
+  if (unref(showHeaderTrigger)) return HeaderTrigger
+  if (unref(trigger) === TriggerEnum.CENTER) return CenterTrigger
+  if (unref(trigger) === TriggerEnum.FOOTER) return FooterTrigger
+  return undefined
+})
 </script>
 <template>
-  <Transition name="trigger" mode="out-in">
-    <component :is="triggers[trigger]" />
-  </Transition>
+  <component :is="component" />
 </template>

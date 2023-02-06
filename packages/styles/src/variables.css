@@ -24,8 +24,8 @@
   --header-width: calc(100% - var(--aside-width));
 
   /* tab */
-  --tab-height: 36px;
-  --tab-width: calc(100% - var(--aside-width));
+  --tab-bar-height: 36px;
+  --tab-bar-width: calc(100% - var(--aside-width));
 
   /* aside */
   --aside-height: calc(100% - var(--header-height));

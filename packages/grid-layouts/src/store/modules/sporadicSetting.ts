@@ -40,6 +40,8 @@ export const useSporadicSettingStore = defineStore({
     showLogo: true,
     // Whether to show footer
     showFooter: false,
+    hiddenFooter: true,
+    footerHeight: 60,
     // Whether to open the top progress bar
     openNProgress: false,
     // Whether to enable KeepAlive cache is best to close during development, otherwise the cache needs to be cleared every time
@@ -106,6 +108,10 @@ export const useSporadicSettingStore = defineStore({
     },
     setShowFooter(value: boolean) {
       this.showFooter = value
+      this.setHiddenFooter(!value)
+    },
+    setHiddenFooter(value: boolean) {
+      this.hiddenFooter = value
     },
     setOpenNProgress(value: boolean) {
       this.openNProgress = value

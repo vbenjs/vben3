@@ -111,6 +111,7 @@ export const useMenuSettingStore = defineStore({
     },
     setShow(value: boolean) {
       this.show = value
+      this.setHidden(!value)
     },
     setHidden(value: boolean) {
       this.hidden = value

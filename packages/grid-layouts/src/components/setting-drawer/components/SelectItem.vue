@@ -1,8 +1,8 @@
 <script lang="ts" setup name="SelectItem">
 import { PropType, h } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
-import { baseHandler } from '../../../logics/handler'
 import { useI18n } from '@vben/locale'
+import { useHandler } from '../../../hooks/useHandler'
 
 const { t } = useI18n()
 
@@ -19,6 +19,8 @@ const props = defineProps({
   },
   options: { type: Array, default: () => [] },
 })
+
+const { baseHandler } = useHandler()
 const onChange = (value) => {
   baseHandler(props.event, value)
 }

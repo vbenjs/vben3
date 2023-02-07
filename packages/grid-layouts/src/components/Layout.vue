@@ -40,7 +40,6 @@ const { type } = storeToRefs(useMenuSettingStore())
   display: grid;
   grid-template-columns: minmax(0, var(--aside-width)) minmax(640px, 1fr);
   grid-template-rows: var(--header-height) var(--tab-bar-height) 1fr;
-  grid-gap: 3px;
   transition: grid-template-columns 0.3s, grid-template-rows 0.3s;
   transition-timing-function: var(--transition-bezier);
   &.sidebar,

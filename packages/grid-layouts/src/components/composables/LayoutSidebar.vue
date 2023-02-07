@@ -5,7 +5,8 @@ import { storeToRefs } from '@vben/pinia'
 const menuSettingStore = useMenuSettingStore()
 import Logo from '../logo/index.vue'
 import { useComprehensive } from '../../hooks/useComprehensive'
-const { showFooterTrigger, hidden, showHeaderTrigger } =
+import SecondaryBorder from '../comm/SecondaryBorder.vue'
+const { showFooterTrigger, hidden, showHeaderTrigger, isMixSidebar } =
   storeToRefs(menuSettingStore)
 const { getShowSidebarLogo } = useComprehensive()
 </script>
@@ -14,15 +15,13 @@ const { getShowSidebarLogo } = useComprehensive()
     class="grid-area-[grid-sidebar] relative"
     :class="[
       { 'pb-40px': showFooterTrigger },
-      hidden ? 'invisible' : 'visible',
+      hidden ? 'invisible overflow-hidden' : 'visible',
     ]"
   >
     <div>
       <Logo v-if="getShowSidebarLogo" />
     </div>
-    <div
-      class="h-full w-1px content-none absolute top-0 bottom-0 right-0 bg-[var(--layout-border-color)] transition-colors-3000"
-    ></div>
-    <Trigger v-if="!showHeaderTrigger" />
+    <SecondaryBorder right />
+    <Trigger v-if="!showHeaderTrigger || isMixSidebar" />
   </div>
 </template>

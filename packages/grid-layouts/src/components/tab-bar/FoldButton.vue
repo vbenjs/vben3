@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import SuffixItemWrapper from './SuffixItemWrapper.vue'
 
 const getIcon = computed(() =>
   true ? 'codicon:screen-full' : 'codicon:screen-normal',
@@ -7,9 +8,7 @@ const getIcon = computed(() =>
 </script>
 
 <template>
-  <div
-    class="h-full w-36px grid-center border-l border-l-solid border-[var(--layout-border-color)] cursor-pointer"
-  >
+  <SuffixItemWrapper>
     <VbenIconify :icon="getIcon" />
-  </div>
+  </SuffixItemWrapper>
 </template>

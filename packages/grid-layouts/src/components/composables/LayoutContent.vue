@@ -17,6 +17,5 @@ const { footerRef } = storeToRefs(useLayoutFooter())
   grid-template-rows: 1fr minmax(0, var(--footer-height));
   transition: grid-template-columns 0.3s, grid-template-rows 0.3s;
   transition-timing-function: var(--transition-bezier);
-  background: #ed6f6f;
 }
 </style>

@@ -1,12 +1,12 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import SuffixItemWrapper from './SuffixItemWrapper.vue'
+</script>
 <template>
-  <div
-    class="h-full w-36px grid-center border-l border-l-solid border-[var(--layout-border-color)] cursor-pointer"
-  >
+  <SuffixItemWrapper>
     <VbenIconify
       icon="material-symbols:double-arrow-rounded"
       class="rotate-90"
       rotate="90deg"
     />
-  </div>
+  </SuffixItemWrapper>
 </template>

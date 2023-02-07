@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { usePromise } from '@vben/hooks'
+import SuffixItemWrapper from './SuffixItemWrapper.vue'
 
 function reload() {
   return new Promise(async (resolve) => {
@@ -16,10 +17,7 @@ const { loading, handleFn: handleRedo } = usePromise(reload, {
 </script>
 
 <template>
-  <div
-    @click="handleRedo"
-    class="h-full w-36px grid-center border-l border-l-solid border-[var(--layout-border-color)] cursor-pointer"
-  >
-    <VbenIconify icon="ic:round-refresh" size="18" :infinite="loading" />
-  </div>
+  <SuffixItemWrapper @click="handleRedo">
+    <VbenIconify icon="ep:refresh-right" size="18" :infinite="loading" />
+  </SuffixItemWrapper>
 </template>

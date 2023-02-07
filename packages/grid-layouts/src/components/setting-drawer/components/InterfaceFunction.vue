@@ -74,7 +74,7 @@ const getMenuDisabled = computed(() => {
       :title="t('layout.setting.menuCollapse')"
       :def="collapsed"
       :event="HandlerSettingEnum.MENU_COLLAPSED"
-      :disabled="!getMenuDisabled"
+      :disabled="isTopMenu"
     />
     <SwitchItem
       :title="t('layout.setting.menuDrag')"

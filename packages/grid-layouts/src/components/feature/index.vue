@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import SettingFixedButton from '../setting/FixedButton.vue'
-import SettingDrawer from '../setting/SettingDrawer.vue'
+import SettingDrawer from '../setting-drawer/index.vue'
+import FixedSetting from '../widgets/FixedSetting.vue'
 </script>
 <template>
-  <SettingFixedButton />
+  <FixedSetting />
   <SettingDrawer />
 </template>

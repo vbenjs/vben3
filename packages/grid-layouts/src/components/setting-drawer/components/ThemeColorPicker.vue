@@ -1,7 +1,7 @@
 <script lang="ts" setup name="ThemeColorPicker">
 import { PropType } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
-import { baseHandler } from '../../../logics/handler'
+import { useHandler } from '../../../hooks/useHandler'
 
 const props = defineProps({
   colorList: {
@@ -16,6 +16,8 @@ const props = defineProps({
     default: '',
   },
 })
+
+const { baseHandler } = useHandler()
 const handleClick = (color) => {
   baseHandler(props.event, color)
 }

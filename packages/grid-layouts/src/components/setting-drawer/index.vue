@@ -2,14 +2,11 @@
 import {
   useHeaderSettingStore,
   useMenuSettingStore,
-  useMultiTabsSettingStore,
   useSporadicSettingStore,
-  useTransitionSettingStore,
 } from '../../store'
 import { storeToRefs } from '@vben/pinia'
 import { useI18n } from '@vben/locale'
 import { navigationBarTypeList } from '../../logics/constant'
-import { baseHandler } from '../../logics/handler'
 import {
   HandlerSettingEnum,
   APP_PRESET_COLOR_LIST,
@@ -20,10 +17,11 @@ import {
 import DarkModeToggle from './components/DarkModeToggle.vue'
 import NavigationBarPicker from './components/NavigationBarPicker.vue'
 import ThemeColorPicker from './components/ThemeColorPicker.vue'
-import Features from './components/Features.vue'
-import Content from './components/Content.vue'
 import Transitions from './components/Transitions.vue'
-import FooterButtons from './components/FooterButtons.vue'
+import InterfaceFunction from './components/InterfaceFunction.vue'
+import InterfaceDisplay from './components/InterfaceDisplay.vue'
+import HandleButtons from './components/HandleButtons.vue'
+import { useHandler } from '../../hooks/useHandler'
 
 const { t } = useI18n()
 const sporadicSettingStore = useSporadicSettingStore()
@@ -36,10 +34,8 @@ const {
 } = storeToRefs(menuSettingStore)
 const headerSettingStore = useHeaderSettingStore()
 const { bgColor: headerBgColor } = storeToRefs(headerSettingStore)
-const multiTabsSettingStore = useMultiTabsSettingStore()
-const {} = storeToRefs(multiTabsSettingStore)
-const transitionSettingStore = useTransitionSettingStore()
-const {} = storeToRefs(transitionSettingStore)
+
+const { baseHandler } = useHandler()
 </script>
 
 <template>
@@ -102,18 +98,20 @@ const {} = storeToRefs(transitionSettingStore)
       <VbenDivider title-placement="left">
         {{ t('layout.setting.interfaceFunction') }}
       </VbenDivider>
-      <Features />
+      <InterfaceFunction />
 
       <VbenDivider title-placement="left">
         {{ t('layout.setting.interfaceDisplay') }}
       </VbenDivider>
-      <Content />
+      <InterfaceDisplay />
+
       <VbenDivider title-placement="left">
         {{ t('layout.setting.animation') }}
       </VbenDivider>
       <Transitions />
       <VbenDivider />
-      <FooterButtons />
+
+      <HandleButtons />
     </VbenDrawerContent>
   </VbenDrawer>
 </template>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Trigger from '../trigger/inedx.vue'
 import { useHeaderSettingStore, useMenuSettingStore } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import Breadcrumb from '../breadcrumb/index.vue'
 import Logo from '../logo/index.vue'
 import { useComprehensive } from '../../hooks/useComprehensive'

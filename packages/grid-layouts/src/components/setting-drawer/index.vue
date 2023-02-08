@@ -4,7 +4,7 @@ import {
   useMenuSettingStore,
   useSporadicSettingStore,
 } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import { useI18n } from '@vben/locale'
 import { navigationBarTypeList } from '../../logics/constant'
 import {

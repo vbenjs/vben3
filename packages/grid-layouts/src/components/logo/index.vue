@@ -4,7 +4,7 @@ import {
   useMenuSettingStore,
   useSporadicSettingStore,
 } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import { useComprehensive } from '../../hooks/useComprehensive'
 import { computed, unref } from 'vue'
 import logo from '@/assets/images/logo.png'

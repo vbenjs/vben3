@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useMenuSettingStore } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import { TriggerEnum } from '@vben/constants'
 import CenterTrigger from './SiderCenterTrigger.vue'
 import FooterTrigger from './SiderFooterTrigger.vue'

@@ -6,7 +6,7 @@ import {
   ProjectConfig,
   TransitionSetting,
 } from '@vben/types'
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 import { deepMerge } from '@vben/utils'
 import { APP_DARK_MODE_KEY_, ThemeEnum } from '@vben/constants'
 import { darkMode, projectSetting } from '@/setting'

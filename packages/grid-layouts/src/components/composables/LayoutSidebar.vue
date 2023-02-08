@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Trigger from '../trigger/inedx.vue'
 import { useMenuSettingStore } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 const menuSettingStore = useMenuSettingStore()
 import Logo from '../logo/index.vue'
 import { useComprehensive } from '../../hooks/useComprehensive'

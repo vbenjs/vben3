@@ -1,4 +1,4 @@
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 import { HeaderSetting } from '@vben/types'
 import { ThemeEnum, HEADER_PRESET_BG_COLOR_LIST } from '@vben/constants'
 

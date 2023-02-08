@@ -3,7 +3,7 @@ import { useHeaderSettingStore, useSporadicSettingStore } from '../../store'
 import TopButtonWrapper from '../comm/TopButtonWrapper.vue'
 import { computed, unref } from 'vue'
 import { SettingButtonPositionEnum } from '@vben/constants'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 const sporadicSettingStore = useSporadicSettingStore()
 
 const { showSettingButton, settingButtonPosition } =

@@ -4,20 +4,20 @@ import LayoutSidebar from './composables/LayoutSidebar.vue'
 import LayoutContent from './composables/LayoutContent.vue'
 import LayoutTab from './composables/LayoutTab.vue'
 import Feature from './feature/index.vue'
-import { storeToRefs } from '@vben/pinia'
+import { StoreGeneric, storeToRefs } from 'pinia'
+import { useMenuSettingStore } from '../store'
 import {
   useLayoutHeader,
   useLayoutSidebar,
   useLayoutTab,
-  useMenuSettingStore,
   useLayoutContent,
-} from '../store'
+} from '@vben/stores'
 import { useComprehensive } from '../hooks/useComprehensive'
 
-const { headerRef } = storeToRefs(useLayoutHeader())
-const { sidebarRef } = storeToRefs(useLayoutSidebar())
-const { tabRef } = storeToRefs(useLayoutTab())
-const { contentRef } = storeToRefs(useLayoutContent())
+const { headerRef } = storeToRefs(useLayoutHeader() as StoreGeneric)
+const { sidebarRef } = storeToRefs(useLayoutSidebar() as StoreGeneric)
+const { tabRef } = storeToRefs(useLayoutTab() as StoreGeneric)
+const { contentRef } = storeToRefs(useLayoutContent() as StoreGeneric)
 const { getLayoutStyles } = useComprehensive()
 
 const { type } = storeToRefs(useMenuSettingStore())

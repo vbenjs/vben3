@@ -12,7 +12,6 @@
     "@vben/directives": "workspace:*",
     "@vben/hooks": "workspace:*",
     "@vben/locale": "workspace:*",
-    "@vben/pinia": "workspace:*",
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",

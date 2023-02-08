@@ -6,7 +6,7 @@ import {
   useSporadicSettingStore,
   useTransitionSettingStore,
 } from '../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import { reactive } from 'vue'
 import { useClipboard } from '@vben/utils'
 

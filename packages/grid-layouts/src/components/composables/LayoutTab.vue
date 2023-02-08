@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useMultiTabsSettingStore } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import TabRedo from '../tab-bar/TabRedo.vue'
 import TabQuick from '../tab-bar/TabQuick.vue'
 import FoldButton from '../tab-bar/FoldButton.vue'

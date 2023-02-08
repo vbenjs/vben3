@@ -6,7 +6,7 @@ import { createApp } from 'vue'
 import { router } from '@/router'
 import { setupRouteGuard } from '@/router/guard'
 import { setupI18n } from '@vben/locale'
-import { setupPinia } from '@vben/pinia'
+import { setupPinia } from '@vben/stores'
 import { initApplication } from './init-application'
 import { registerComponents } from '../init-components'
 ;(async () => {

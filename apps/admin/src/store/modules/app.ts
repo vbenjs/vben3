@@ -1,4 +1,4 @@
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 // import { pinia } from '@/pinia'
 import { resetRouter } from '@/router'
 

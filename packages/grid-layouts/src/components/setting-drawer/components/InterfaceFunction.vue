@@ -16,7 +16,7 @@ import {
   useMenuSettingStore,
   useSporadicSettingStore,
 } from '../../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 
 const { t } = useI18n()
 

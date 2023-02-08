@@ -1,4 +1,4 @@
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 import { MenuSetting } from '@vben/types'
 import {
   MenuModeEnum,

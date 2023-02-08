@@ -1,4 +1,4 @@
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 import { SporadicSetting } from '@vben/types'
 import {
   SettingButtonPositionEnum,

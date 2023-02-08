@@ -1,5 +1,5 @@
 import type { LoginParams } from '@/apis/auth'
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 import { BASIC_HOME_PATH, BASIC_LOGIN_PATH, PageEnum } from '@vben/constants'
 // import { pinia } from '@/pinia'
 import { router } from '@/router'

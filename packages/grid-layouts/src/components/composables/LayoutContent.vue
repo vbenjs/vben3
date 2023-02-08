@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import LayoutFooter from './LayoutFooter.vue'
 import Main from '../Main.vue'
-import { useLayoutFooter } from '../../store'
-import { storeToRefs } from '@vben/pinia'
-const { footerRef } = storeToRefs(useLayoutFooter())
+import { useLayoutFooter } from '@vben/stores'
+import { StoreGeneric, storeToRefs } from 'pinia'
+const { footerRef } = storeToRefs(useLayoutFooter() as StoreGeneric)
 </script>
 <template>
   <div class="grid-layout-content grid-area-[grid-content] grid">

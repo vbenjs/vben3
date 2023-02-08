@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useMenuSettingStore } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 
 const menuSettingStore = useMenuSettingStore()
 const { collapsed } = storeToRefs(menuSettingStore)

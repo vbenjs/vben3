@@ -5,7 +5,7 @@ import { HandlerSettingEnum } from '@vben/constants'
 import { routerTransitionOptions } from '../../../logics/constant'
 import { useI18n } from '@vben/locale'
 import { useTransitionSettingStore } from '../../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 
 const { t } = useI18n()
 

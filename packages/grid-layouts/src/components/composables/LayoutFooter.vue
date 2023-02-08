@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useSporadicSettingStore } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
 
 const { hiddenFooter } = storeToRefs(useSporadicSettingStore())

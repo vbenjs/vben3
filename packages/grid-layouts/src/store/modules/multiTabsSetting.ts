@@ -1,4 +1,4 @@
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 import { MultiTabsSetting } from '@vben/types'
 
 export const useMultiTabsSettingStore = defineStore({

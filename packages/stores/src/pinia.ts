@@ -7,6 +7,7 @@ import { createStorageName } from '@vben/utils'
 const pinia = createPinia()
 
 pinia.use(
+  // @ts-ignore
   createPersistedState(persistGlobalConfig(createStorageName(import.meta.env))),
 )
 

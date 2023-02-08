@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useMenuSettingStore } from '../../store'
-import { storeToRefs } from '@vben/pinia'
+import { defineStores } from 'pinia'
 import TopButtonWrapper from '../comm/TopButtonWrapper.vue'
 
 const menuSettingStore = useMenuSettingStore()

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useHeaderSettingStore, useSporadicSettingStore } from '../../store'
 import { computed, unref } from 'vue'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import { SettingButtonPositionEnum } from '@vben/constants'
 const sporadicSettingStore = useSporadicSettingStore()
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ThemeEnum } from '@vben/constants'
-import { storeToRefs } from '@vben/pinia'
+import { storeToRefs } from 'pinia'
 import { useHeaderSettingStore } from '../../../store'
 
 const headerSettingStore = useHeaderSettingStore()

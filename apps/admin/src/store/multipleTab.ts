@@ -4,7 +4,7 @@ import type {
   Router,
 } from 'vue-router'
 import { toRaw, unref } from 'vue'
-import { defineStore } from '@vben/pinia'
+import { defineStore } from 'pinia'
 
 import { useGo, useRedo } from '@vben/hooks'
 // import { Persistent } from '/@/utils/cache/persistent';

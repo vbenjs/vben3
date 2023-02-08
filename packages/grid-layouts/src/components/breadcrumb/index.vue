@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { useSporadicSettingStore } from '../../store'
-import { storeToRefs } from 'pinia'
+import { useAppConfig } from '@vben/hooks'
 
-const { showBreadCrumb } = storeToRefs(useSporadicSettingStore())
+const { header } = useAppConfig()
 </script>
 <template>
   <!--  <VbenBreadcrumb>-->
@@ -10,5 +9,5 @@ const { showBreadCrumb } = storeToRefs(useSporadicSettingStore())
   <!--      -->
   <!--    </VbenBreadcrumbItem>-->
   <!--  </VbenBreadcrumb>-->
-  <div v-if="showBreadCrumb">breadcrumb</div>
+  <div v-if="header.showBreadCrumb">breadcrumb</div>
 </template>

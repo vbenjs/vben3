@@ -1,22 +1,18 @@
 <script lang="ts" setup>
-import { useHeaderSettingStore, useSporadicSettingStore } from '../../store'
 import TopButtonWrapper from '../comm/TopButtonWrapper.vue'
 import { computed, unref } from 'vue'
 import { SettingButtonPositionEnum } from '@vben/constants'
-import { storeToRefs } from 'pinia'
-const sporadicSettingStore = useSporadicSettingStore()
+import { useAppConfig } from '@vben/hooks'
 
-const { showSettingButton, settingButtonPosition } =
-  storeToRefs(sporadicSettingStore)
-
-const { show } = storeToRefs(useHeaderSettingStore())
+const { toggleSettingDrawerVisible, header, settingButtonPosition } =
+  useAppConfig()
 
 const getShowSetting = computed(() => {
-  if (!unref(showSettingButton)) {
+  if (!unref(header).showSetting) {
     return false
   }
   if (unref(settingButtonPosition) === SettingButtonPositionEnum.AUTO) {
-    return unref(show)
+    return unref(header).show
   }
   return unref(settingButtonPosition) === SettingButtonPositionEnum.HEADER
 })
@@ -24,7 +20,7 @@ const getShowSetting = computed(() => {
 <template>
   <TopButtonWrapper
     v-if="getShowSetting"
-    @click.stop="sporadicSettingStore.toggleSettingDrawerVisible()"
+    @click.stop="toggleSettingDrawerVisible"
   >
     <VbenIconify icon="fluent:settings-48-regular" />
   </TopButtonWrapper>

@@ -1,17 +1,15 @@
 <script lang="ts" setup>
-import { useMenuSettingStore } from '../../store'
-import { storeToRefs } from 'pinia'
+import { useAppConfig } from '@vben/hooks'
 
-const menuSettingStore = useMenuSettingStore()
-const { collapsed } = storeToRefs(menuSettingStore)
+const { sidebar, toggleCollapsed } = useAppConfig()
 </script>
 <template>
   <div
     class="h-36px w-full absolute bottom-0 cursor-pointer grid-center bg-[#3b3b3b]"
-    @click.stop="menuSettingStore.toggleCollapsed()"
+    @click.stop="toggleCollapsed"
   >
     <VbenIconify
-      :class="[collapsed ? '-rotate-180' : 'rotate-0']"
+      :class="[sidebar.collapsed ? '-rotate-180' : 'rotate-0']"
       color="rgba(255, 255, 255, .65)"
       hover-color="rgba(255, 255, 255, 1)"
       icon="ph:caret-double-left-bold"

@@ -1,7 +1,7 @@
 <script lang="ts" setup name="InputNumberItem">
 import { PropType } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
-import { useHandler } from '../../../hooks/useHandler'
+import { useAppConfig } from '@vben/hooks'
 
 const props = defineProps({
   title: { type: String, default: '' },
@@ -17,7 +17,7 @@ const props = defineProps({
   suffix: { type: String, default: '' },
 })
 
-const { baseHandler } = useHandler()
+const { baseHandler } = useAppConfig()
 const onChange = (value) => {
   baseHandler(props.event, value)
 }

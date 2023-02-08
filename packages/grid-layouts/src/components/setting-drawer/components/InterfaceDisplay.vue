@@ -2,100 +2,85 @@
 import SwitchItem from './SwitchItem.vue'
 import { HandlerSettingEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
-import {
-  useHeaderSettingStore,
-  useMenuSettingStore,
-  useMultiTabsSettingStore,
-  useSporadicSettingStore,
-} from '../../../store'
-import { storeToRefs } from 'pinia'
+import { useAppConfig } from '@vben/hooks'
 
 const { t } = useI18n()
 
 const {
-  isMixSidebar,
-  show: showMenu,
+  header,
+  sidebar,
   isHorizontal,
-} = storeToRefs(useMenuSettingStore())
-const {
-  showBreadCrumb,
-  showBreadCrumbIcon,
-  showLogo,
-  showFooter,
-  fullContent,
+  isMixSidebar,
+  tabTar,
+  footer,
+  content,
   grayMode,
   colorWeak,
-} = storeToRefs(useSporadicSettingStore())
-const {
-  show: showMultiTabs,
-  showRedo,
-  showQuick,
-  showFold,
-} = storeToRefs(useMultiTabsSettingStore())
-const { show: showHeader } = storeToRefs(useHeaderSettingStore())
+  logo,
+} = useAppConfig()
 </script>
 <template>
   <VbenSpace vertical>
     <SwitchItem
       :title="t('layout.setting.header')"
-      :def="showHeader"
+      :def="header.visible"
       :event="HandlerSettingEnum.HEADER_SHOW"
     />
     <SwitchItem
       :title="t('layout.setting.breadcrumb')"
-      :def="showBreadCrumb"
+      :def="header.showBreadCrumb"
       :event="HandlerSettingEnum.SHOW_BREADCRUMB"
-      :disabled="!showHeader"
+      :disabled="!header.visible"
     />
     <SwitchItem
       :title="t('layout.setting.breadcrumbIcon')"
-      :def="showBreadCrumbIcon"
+      :def="header.showBreadCrumbIcon"
       :event="HandlerSettingEnum.SHOW_BREADCRUMB_ICON"
-      :disabled="!showBreadCrumb || !showHeader"
+      :disabled="!header.showBreadCrumb || !header.visible"
     />
     <SwitchItem
       :title="t('layout.setting.sidebar')"
-      :def="showMenu"
+      :def="sidebar.visible"
       :event="HandlerSettingEnum.MENU_SHOW_SIDEBAR"
       :disabled="isHorizontal"
     />
     <SwitchItem
       title="Logo"
-      :def="showLogo"
+      :def="logo.visible"
       :event="HandlerSettingEnum.SHOW_LOGO"
       :disabled="isMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.tabs')"
-      :def="showMultiTabs"
+      :def="tabTar.visible"
       :event="HandlerSettingEnum.TABS_SHOW"
     />
     <SwitchItem
       :title="t('layout.setting.tabsRedoBtn')"
-      :def="showRedo"
+      :def="tabTar.showRedo"
       :event="HandlerSettingEnum.TABS_SHOW_REDO"
-      :disabled="!showMultiTabs"
+      :disabled="!tabTar.visible"
     />
     <SwitchItem
       :title="t('layout.setting.tabsQuickBtn')"
-      :def="showQuick"
+      :def="tabTar.showQuick"
       :event="HandlerSettingEnum.TABS_SHOW_QUICK"
-      :disabled="!showMultiTabs"
+      :disabled="!tabTar.visible"
     />
     <SwitchItem
       :title="t('layout.setting.tabsFoldBtn')"
-      :def="showFold"
+      :def="tabTar.showFold"
       :event="HandlerSettingEnum.TABS_SHOW_FOLD"
-      :disabled="!showMultiTabs"
+      :disabled="!tabTar.visible"
     />
     <SwitchItem
       :title="t('layout.setting.footer')"
-      :def="showFooter"
+      :def="footer.visible"
       :event="HandlerSettingEnum.SHOW_FOOTER"
     />
     <SwitchItem
       :title="t('layout.setting.fullContent')"
-      :def="fullContent"
+      :def="content.fullScreen"
       :event="HandlerSettingEnum.FULL_CONTENT"
     />
     <SwitchItem

@@ -1,14 +1,13 @@
 <script lang="ts" setup>
-import { useSporadicSettingStore } from '../../store'
-import { storeToRefs } from 'pinia'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
+import { useAppConfig } from '@vben/hooks'
 
-const { hiddenFooter } = storeToRefs(useSporadicSettingStore())
+const { footer } = useAppConfig()
 </script>
 <template>
   <footer
     class="overflow-hidden relative"
-    :class="[hiddenFooter ? 'invisible' : 'visible']"
+    :class="[footer.visible ? 'visible' : 'invisible']"
   >
     footer
     <SecondaryBorder top />

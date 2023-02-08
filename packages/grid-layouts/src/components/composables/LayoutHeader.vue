@@ -1,10 +1,6 @@
 <script lang="ts" setup>
-import Trigger from '../trigger/inedx.vue'
-import { useHeaderSettingStore, useMenuSettingStore } from '../../store'
-import { storeToRefs } from 'pinia'
 import Breadcrumb from '../breadcrumb/index.vue'
 import Logo from '../logo/index.vue'
-import { useComprehensive } from '../../hooks/useComprehensive'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
 import FullScreen from '../widgets/FullScreen.vue'
 import Search from '../widgets/Search.vue'
@@ -12,19 +8,35 @@ import Locale from '../widgets/Locale.vue'
 import UserDropdown from '../widgets/UserDropdown.vue'
 import Notify from '../notify/index.vue'
 import Setting from '../widgets/Setting.vue'
-const menuSettingStore = useMenuSettingStore()
-const { showHeaderTrigger, isMixSidebar } = storeToRefs(menuSettingStore)
-const { hidden } = storeToRefs(useHeaderSettingStore())
-const { getShowHeaderLogo } = useComprehensive()
+import HeaderTrigger from '../widgets/HeaderTrigger.vue'
+import { useAppConfig } from '@vben/hooks'
+import { computed, unref } from 'vue'
+import { TriggerEnum } from '@vben/constants'
+
+const { isMixSidebar, isTopMenu, isMix, sidebar, menu, header } = useAppConfig()
+
+const showHeaderTrigger = computed(() => {
+  if (
+    unref(isTopMenu) ||
+    (unref(isMix) && unref(menu.split)) ||
+    unref(isMixSidebar)
+  )
+    return false
+  return unref(sidebar).trigger === TriggerEnum.HEADER
+})
+
+const showHeaderLogo = computed(() => {
+  return unref(isTopMenu) || unref(isMix)
+})
 </script>
 <template>
   <header
     class="grid-area-[grid-header] grid grid-cols-2 content-center overflow-hidden relative"
-    :class="[hidden ? 'invisible' : 'visible']"
+    :class="[header.visible ? 'visible' : 'invisible']"
   >
     <div class="h-[var(--header-height)] grid-col-start-1 grid-col-end-3 flex">
-      <Logo v-if="getShowHeaderLogo" />
-      <Trigger v-if="showHeaderTrigger && !isMixSidebar" />
+      <Logo v-if="showHeaderLogo" />
+      <HeaderTrigger v-if="showHeaderTrigger" />
       <Breadcrumb />
     </div>
     <div class="h-[var(--header-height)] grid-col-[min-content] flex">

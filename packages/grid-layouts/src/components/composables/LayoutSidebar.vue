@@ -1,27 +1,42 @@
 <script lang="ts" setup>
-import Trigger from '../trigger/inedx.vue'
-import { useMenuSettingStore } from '../../store'
-import { storeToRefs } from 'pinia'
-const menuSettingStore = useMenuSettingStore()
 import Logo from '../logo/index.vue'
-import { useComprehensive } from '../../hooks/useComprehensive'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
-const { showFooterTrigger, hidden, showHeaderTrigger, isMixSidebar } =
-  storeToRefs(menuSettingStore)
-const { getShowSidebarLogo } = useComprehensive()
+import SiderFooterTrigger from '../widgets/SiderFooterTrigger.vue'
+import SiderCenterTrigger from '../widgets/SiderCenterTrigger.vue'
+import { useAppConfig } from '@vben/hooks'
+import { computed, unref } from 'vue'
+import { TriggerEnum } from '@vben/constants'
+
+
+const { isMixSidebar, isTopMenu, sidebar, isSidebar } = useAppConfig()
+
+const showFooterTrigger = computed(() => {
+  if (unref(isMixSidebar)) return true
+  return unref(sidebar).trigger === TriggerEnum.FOOTER
+})
+
+const showCenterTrigger = computed(() => {
+  if (unref(isMixSidebar) || unref(isTopMenu)) return false
+  return unref(sidebar).trigger === TriggerEnum.CENTER
+})
+
+const showSidebarLogo = computed(()=>{
+  return unref(isSidebar) || unref(isMixSidebar)
+})
 </script>
 <template>
   <div
     class="grid-area-[grid-sidebar] relative"
     :class="[
       { 'pb-40px': showFooterTrigger },
-      hidden ? 'invisible overflow-hidden' : 'visible',
+      sidebar.visible ? 'visible' : 'invisible overflow-hidden',
     ]"
   >
     <div>
-      <Logo v-if="getShowSidebarLogo" />
+      <Logo v-if="showSidebarLogo" />
     </div>
+    <SiderFooterTrigger v-if="showFooterTrigger" />
+    <SiderCenterTrigger v-if="showCenterTrigger" />
     <SecondaryBorder right />
-    <Trigger v-if="!showHeaderTrigger || isMixSidebar" />
   </div>
 </template>

@@ -1,12 +1,6 @@
 <script lang="ts" setup>
-import {
-  useHeaderSettingStore,
-  useMenuSettingStore,
-  useSporadicSettingStore,
-} from '../../store'
-import { storeToRefs } from 'pinia'
 import { useI18n } from '@vben/locale'
-import { navigationBarTypeList } from '../../logics/constant'
+import { navigationBarTypeList } from '../constant'
 import {
   HandlerSettingEnum,
   APP_PRESET_COLOR_LIST,
@@ -21,27 +15,25 @@ import Transitions from './components/Transitions.vue'
 import InterfaceFunction from './components/InterfaceFunction.vue'
 import InterfaceDisplay from './components/InterfaceDisplay.vue'
 import HandleButtons from './components/HandleButtons.vue'
-import { useHandler } from '../../hooks/useHandler'
+import { useAppConfig } from '@vben/hooks'
+const { baseHandler } = useAppConfig()
 
 const { t } = useI18n()
-const sporadicSettingStore = useSporadicSettingStore()
-const { showSettingDrawer, themeColor } = storeToRefs(sporadicSettingStore)
-const menuSettingStore = useMenuSettingStore()
 const {
-  type: navBarType,
+  openSettingDrawer,
+  toggleSettingDrawerVisible,
   isHorizontal,
-  bgColor: menuBgColor,
-} = storeToRefs(menuSettingStore)
-const headerSettingStore = useHeaderSettingStore()
-const { bgColor: headerBgColor } = storeToRefs(headerSettingStore)
-
-const { baseHandler } = useHandler()
+  navBarMode,
+  themeColor,
+  header,
+  sidebar,
+} = useAppConfig()
 </script>
 
 <template>
   <VbenDrawer
-    :show="showSettingDrawer"
-    @update:show="sporadicSettingStore.toggleSettingDrawerVisible()"
+    :show="openSettingDrawer"
+    @update:show="toggleSettingDrawerVisible"
     :width="330"
   >
     <VbenDrawerContent closable>
@@ -55,7 +47,7 @@ const { baseHandler } = useHandler()
         {{ t('layout.setting.navMode') }}
       </VbenDivider>
       <NavigationBarPicker
-        :def="navBarType"
+        :def="navBarMode"
         :type-list="navigationBarTypeList"
         @handler="
           (item) => {
@@ -81,7 +73,7 @@ const { baseHandler } = useHandler()
         {{ t('layout.setting.headerTheme') }}
       </VbenDivider>
       <ThemeColorPicker
-        :def="headerBgColor"
+        :def="header.bgColor"
         :event="HandlerSettingEnum.HEADER_THEME"
         :color-list="HEADER_PRESET_BG_COLOR_LIST"
       />
@@ -90,7 +82,7 @@ const { baseHandler } = useHandler()
       }}</VbenDivider>
 
       <ThemeColorPicker
-        :def="menuBgColor"
+        :def="sidebar.bgColor"
         :event="HandlerSettingEnum.MENU_THEME"
         :color-list="SIDE_BAR_BG_COLOR_LIST"
       />

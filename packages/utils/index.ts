@@ -11,6 +11,7 @@ export {
   toString,
   assign as _assign,
   merge as _merge,
+  omit as _omit,
 } from 'lodash-es'
 // @ts-ignore
 import Sortable from 'sortablejs'

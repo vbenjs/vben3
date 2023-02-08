@@ -74,6 +74,7 @@ export interface DefineAppConfigOptions {
   canEmbedIFramePage: boolean
   // Whether to delete unclosed messages and notify when switching the interface
   closeMessageOnSwitch: boolean
+  closeMixSidebarOnChange: boolean
   // Whether to cancel the http request that has been sent but not responded when switching the interface.
   removeAllHttpPending: boolean
   // Storage location of permission related information
@@ -94,19 +95,20 @@ export interface DefineAppConfigOptions {
   lockTime: number
   // Whether to show the lock screen
   useLockPage: boolean
-  sidebar: Partial<SidebarConfigOptions>
-  menu: Partial<MenuConfigOptions>
-  header: Partial<HeaderConfigOptions>
-  logo: Partial<LogoConfigOptions>
-  tabTar: Partial<TabTbrConfigOptions>
-  content: Partial<ContentConfigOptions>
-  footer: Partial<FooterConfigOptions>
-  transition: Partial<TransitionConfigOptions>
+  sidebar: SidebarConfigOptions
+  menu: MenuConfigOptions
+  header: HeaderConfigOptions
+  logo: LogoConfigOptions
+  tabTar: TabTbrConfigOptions
+  content: ContentConfigOptions
+  footer: FooterConfigOptions
+  transition: TransitionConfigOptions
 }
 
 export interface SidebarConfigOptions {
   show: boolean
   visible: boolean
+  fixed: boolean
   bgColor: string
   collapsed: boolean
   width: number
@@ -142,6 +144,7 @@ export interface HeaderConfigOptions {
   show: boolean
   visible: boolean
   bgColor: string
+  fixed: boolean
   showFullScreen: boolean
   showDoc: boolean
   showNotice: boolean

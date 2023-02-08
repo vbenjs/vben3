@@ -48,10 +48,12 @@ export const useAppConfig = defineStore({
     lockTime: 0,
     useLockPage: false,
     canEmbedIFramePage: true,
+    closeMixSidebarOnChange: false,
     sidebar: {
       show: true,
       visible: true,
       bgColor: SIDE_BAR_BG_COLOR_LIST[0],
+      fixed: false,
       width: 210,
       mixSidebarWidth: 80,
       collapsedWidth: 48,
@@ -73,6 +75,7 @@ export const useAppConfig = defineStore({
       show: true,
       visible: true,
       bgColor: HEADER_PRESET_BG_COLOR_LIST[0],
+      fixed: false,
       height: 48,
       showDoc: true,
       showBreadCrumb: true,
@@ -114,6 +117,16 @@ export const useAppConfig = defineStore({
       openNProgress: false,
     },
   }),
+  getters: {
+    isSidebar: (state) => state.navBarMode === NavBarModeEnum.SIDEBAR,
+    isTopMenu: (state) => state.navBarMode === NavBarModeEnum.TOP_MENU,
+    isMixSidebar: (state) => state.navBarMode === NavBarModeEnum.MIX_SIDEBAR,
+    isMix: (state) => state.navBarMode === NavBarModeEnum.MIX,
+    isMixMode: (state) =>
+      state.menu.mode === MenuModeEnum.INLINE &&
+      state.navBarMode === NavBarModeEnum.MIX,
+    isHorizontal: (state) => state.menu.mode === MenuModeEnum.HORIZONTAL,
+  },
   actions: {
     setTheme(value: ThemeEnum) {
       this.theme = value

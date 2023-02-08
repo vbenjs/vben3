@@ -1,52 +1,47 @@
 <script lang="ts" setup>
-import {
-  useHeaderSettingStore,
-  useMenuSettingStore,
-  useSporadicSettingStore,
-} from '../../store'
-import { storeToRefs } from 'pinia'
-import { useComprehensive } from '../../hooks/useComprehensive'
 import { computed, unref } from 'vue'
-import logo from '@/assets/images/logo.png'
-const {
-  width,
-  collapsed,
-  collapsedWidth,
-  isSidebar,
-  isMixSidebar,
-  mixSidebarWidth,
-} = storeToRefs(useMenuSettingStore())
-const { height } = storeToRefs(useHeaderSettingStore())
-const { showLogo } = storeToRefs(useSporadicSettingStore())
-const { getShowLogoTitle } = useComprehensive()
+import logoImg from '@/assets/images/logo.png'
+import { useAppConfig } from '@vben/hooks'
+
+const { isMixSidebar, sidebar, isSidebar, logo, header } = useAppConfig()
 
 const getWidth = computed(() => {
-  if (unref(isSidebar) && unref(collapsed)) return unref(collapsedWidth)
-  if (unref(isMixSidebar)) return unref(mixSidebarWidth)
-  return unref(width)
+  if (unref(isSidebar) && unref(sidebar).collapsed)
+    return unref(sidebar).collapsedWidth
+  if (unref(isMixSidebar)) return unref(sidebar).mixSidebarWidth
+  return unref(sidebar).width
 })
 
+const showLogoTitle = computed(() => {
+  if (unref(isSidebar)) return !unref(sidebar).collapsed
+  if (unref(isMixSidebar)) return false
+  return true
+})
+
+const getStyles = computed(() => {
+  return {
+    width: `${unref(getWidth)}px`,
+    height: `${unref(header).height}px`,
+    transition: 'all 0.3s var(--transition-bezier)',
+    'grid-template-columns': `32px ${
+      unref(showLogoTitle) ? 'minmax(0, 1fr)' : 0
+    }`,
+  }
+})
 const title = 'Vben Admin'
 </script>
 <template>
   <div
-    v-if="showLogo"
+    v-if="logo.show"
     class="grid grid-cols-2 content-center grid-rows-none pl-8px transition-all-300"
-    :style="{
-      width: `${getWidth}px`,
-      height: `${height}px`,
-      transition: 'all 0.3s var(--transition-bezier)',
-      'grid-template-columns': `32px ${
-        getShowLogoTitle ? 'minmax(0, 1fr)' : 0
-      }`,
-    }"
+    :style="getStyles"
   >
     <div class="h-32px w-32px">
-      <img class="h-full w-full" :src="logo" alt="logo" />
+      <img class="h-full w-full" :src="logoImg" alt="logo" />
     </div>
     <div
       class="p-x-8px truncate grid content-center font-700 text-16px"
-      :class="[getShowLogoTitle ? 'visible' : 'invisible']"
+      :class="[showLogoTitle ? 'visible' : 'invisible']"
     >
       {{ title }}
     </div>

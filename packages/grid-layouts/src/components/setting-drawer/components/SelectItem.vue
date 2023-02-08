@@ -2,7 +2,7 @@
 import { PropType, h } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
-import { useHandler } from '../../../hooks/useHandler'
+import { useAppConfig } from '@vben/hooks'
 
 const { t } = useI18n()
 
@@ -20,7 +20,7 @@ const props = defineProps({
   options: { type: Array, default: () => [] },
 })
 
-const { baseHandler } = useHandler()
+const { baseHandler } = useAppConfig()
 const onChange = (value) => {
   baseHandler(props.event, value)
 }

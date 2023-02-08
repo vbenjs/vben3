@@ -5,27 +5,58 @@ import LayoutContent from './composables/LayoutContent.vue'
 import LayoutTab from './composables/LayoutTab.vue'
 import Feature from './feature/index.vue'
 import { StoreGeneric, storeToRefs } from 'pinia'
-import { useMenuSettingStore } from '../store'
 import {
   useLayoutHeader,
   useLayoutSidebar,
   useLayoutTab,
   useLayoutContent,
 } from '@vben/stores'
-import { useComprehensive } from '../hooks/useComprehensive'
+import { useAppConfig } from '@vben/hooks'
+import { computed, unref } from 'vue'
 
 const { headerRef } = storeToRefs(useLayoutHeader() as StoreGeneric)
 const { sidebarRef } = storeToRefs(useLayoutSidebar() as StoreGeneric)
 const { tabRef } = storeToRefs(useLayoutTab() as StoreGeneric)
 const { contentRef } = storeToRefs(useLayoutContent() as StoreGeneric)
-const { getLayoutStyles } = useComprehensive()
 
-const { type } = storeToRefs(useMenuSettingStore())
+const { navBarMode, isTopMenu, isMixSidebar, sidebar, header, footer, tabTar } =
+  useAppConfig()
+
+const getLayoutStyles = computed(() => {
+  const getAsideWidth = () => {
+    if (unref(isTopMenu) || !unref(sidebar).visible) return 0
+    if (unref(sidebar).collapsed) return unref(sidebar).collapsedWidth
+    if (unref(isMixSidebar)) return unref(sidebar).mixSidebarWidth
+    return unref(sidebar).width
+  }
+
+  const getHeaderHeight = () => {
+    if (!unref(header).visible) return 0
+    return unref(header).height
+  }
+
+  const getTabBarHeight = () => {
+    if (!unref(tabTar).visible) return 0
+    return unref(tabTar).height
+  }
+
+  const getFooterHeight = () => {
+    if (!unref(footer).visible) return 0
+    return unref(footer).height
+  }
+
+  return {
+    '--aside-width': `${getAsideWidth()}px`,
+    '--header-height': `${getHeaderHeight()}px`,
+    '--tab-bar-height': `${getTabBarHeight()}px`,
+    '--footer-height': `${getFooterHeight()}px`,
+  }
+})
 </script>
 <template>
   <section
     class="grid-layout-container h-full w-full"
-    :class="[`${type}`]"
+    :class="[`${navBarMode}`]"
     :style="getLayoutStyles"
   >
     <LayoutHeader ref="headerRef" />

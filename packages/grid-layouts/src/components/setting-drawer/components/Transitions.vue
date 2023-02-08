@@ -2,40 +2,37 @@
 import SwitchItem from './SwitchItem.vue'
 import SelectItem from './SelectItem.vue'
 import { HandlerSettingEnum } from '@vben/constants'
-import { routerTransitionOptions } from '../../../logics/constant'
+import { routerTransitionOptions } from '../../constant'
 import { useI18n } from '@vben/locale'
-import { useTransitionSettingStore } from '../../../store'
-import { storeToRefs } from 'pinia'
+import { useAppConfig } from '@vben/hooks'
 
 const { t } = useI18n()
 
-const { openPageLoading, openNProgress, enable, basicTransition } = storeToRefs(
-  useTransitionSettingStore(),
-)
+const { transition } = useAppConfig()
 </script>
 <template>
   <VbenSpace vertical>
     <SwitchItem
       :title="t('layout.setting.progress')"
-      :def="openNProgress"
+      :def="transition.openNProgress"
       :event="HandlerSettingEnum.OPEN_PROGRESS"
     />
     <SwitchItem
       :title="t('layout.setting.switchLoading')"
-      :def="openPageLoading"
+      :def="transition.openPageLoading"
       :event="HandlerSettingEnum.OPEN_PAGE_LOADING"
     />
     <SwitchItem
       :title="t('layout.setting.switchAnimation')"
-      :def="enable"
+      :def="transition.enable"
       :event="HandlerSettingEnum.OPEN_ROUTE_TRANSITION"
     />
     <SelectItem
       :title="t('layout.setting.animationType')"
       :options="routerTransitionOptions"
-      :def="basicTransition"
+      :def="transition.basicTransition"
       :event="HandlerSettingEnum.ROUTER_TRANSITION"
-      :disabled="!enable"
+      :disabled="!transition.enable"
     />
   </VbenSpace>
 </template>

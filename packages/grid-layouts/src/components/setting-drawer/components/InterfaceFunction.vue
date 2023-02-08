@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { computed, unref } from 'vue'
 import SwitchItem from './SwitchItem.vue'
 import SelectItem from './SelectItem.vue'
 import InputNumberItem from './InputNumberItem.vue'
@@ -7,60 +6,40 @@ import { HandlerSettingEnum } from '@vben/constants'
 import {
   mixSidebarTriggerOptions,
   topMenuAlignOptions,
-  getMenuTriggerOptions,
   contentModeOptions,
-} from '../../../logics/constant'
+  getMenuTriggerOptions,
+} from '../../constant'
 import { useI18n } from '@vben/locale'
-import {
-  useHeaderSettingStore,
-  useMenuSettingStore,
-  useSporadicSettingStore,
-} from '../../../store'
-import { storeToRefs } from 'pinia'
+import { useAppConfig } from '@vben/hooks'
 
 const { t } = useI18n()
 
 const {
+  header,
+  sidebar,
   isHorizontal,
-  hidden: sidebarHidden,
-  split,
-  isMix,
-  mixSideFixed,
-  fixed: menuFixed,
   isMixSidebar,
   isTopMenu,
+  content,
+  isMix,
+  menu,
+  lockTime,
   closeMixSidebarOnChange,
-  collapsed,
-  canDrag,
-  accordion,
-  collapsedShowTitle,
-  mixSideTrigger,
-  topMenuAlign,
-  trigger,
-  menuWidth,
-} = storeToRefs(useMenuSettingStore())
-const {
-  showSearch,
-  show: showHeader,
-  fixed: headerFixed,
-} = storeToRefs(useHeaderSettingStore())
-const { contentMode, lockTime } = storeToRefs(useSporadicSettingStore())
-const triggerOptions = getMenuTriggerOptions(unref(split))
-const getMenuDisabled = computed(() => {
-  return !isHorizontal && !sidebarHidden
-})
+} = useAppConfig()
+
+const triggerOptions = getMenuTriggerOptions(menu.split)
 </script>
 <template>
   <VbenSpace vertical>
     <SwitchItem
       :title="t('layout.setting.splitMenu')"
-      :def="split"
+      :def="menu.split"
       :event="HandlerSettingEnum.MENU_SPLIT"
       :disabled="!isMix"
     />
     <SwitchItem
       :title="t('layout.setting.mixSidebarFixed')"
-      :def="mixSideFixed"
+      :def="menu.mixSideFixed"
       :event="HandlerSettingEnum.MENU_FIXED_MIX_SIDEBAR"
       :disabled="!isMixSidebar"
     />
@@ -72,71 +51,77 @@ const getMenuDisabled = computed(() => {
     />
     <SwitchItem
       :title="t('layout.setting.menuCollapse')"
-      :def="collapsed"
+      :def="sidebar.collapsed"
       :event="HandlerSettingEnum.MENU_COLLAPSED"
       :disabled="isTopMenu"
     />
     <SwitchItem
       :title="t('layout.setting.menuDrag')"
-      :def="canDrag"
+      :def="menu.canDrag"
       :event="HandlerSettingEnum.MENU_HAS_DRAG"
-      :disabled="!getMenuDisabled"
+      :disabled="!sidebar.visible"
     />
     <SwitchItem
       :title="t('layout.setting.menuSearch')"
-      :def="showSearch"
+      :def="header.showSearch"
       :event="HandlerSettingEnum.HEADER_SEARCH"
-      :disabled="!showHeader"
+      :disabled="!header.visible"
     />
     <SwitchItem
       :title="t('layout.setting.menuAccordion')"
-      :def="accordion"
+      :def="menu.accordion"
       :event="HandlerSettingEnum.MENU_ACCORDION"
-      :disabled="!getMenuDisabled"
+      :disabled="!sidebar.visible || !menu.accordion"
     />
     <SwitchItem
       :title="t('layout.setting.collapseMenuDisplayName')"
-      :def="collapsedShowTitle"
+      :def="menu.collapsedShowLabel"
       :event="HandlerSettingEnum.MENU_COLLAPSED_SHOW_TITLE"
-      :disabled="!getMenuDisabled || !collapsed || isMixSidebar"
+      :disabled="!sidebar.collapsed || sidebar.visible || isMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.fixedHeader')"
-      :def="headerFixed"
+      :def="header.fixed"
       :event="HandlerSettingEnum.HEADER_FIXED"
-      :disabled="!showHeader"
+      :disabled="!header.visible"
     />
     <SwitchItem
       :title="t('layout.setting.fixedSideBar')"
-      :def="menuFixed"
+      :def="sidebar.fixed"
       :event="HandlerSettingEnum.MENU_FIXED"
-      :disabled="!getMenuDisabled || isMixSidebar"
+      :disabled="!sidebar.show || isHorizontal || isMixSidebar"
     />
     <SelectItem
       :title="t('layout.setting.mixSidebarTrigger')"
       :options="mixSidebarTriggerOptions"
-      :def="mixSideTrigger"
+      :def="menu.mixSideTrigger"
       :event="HandlerSettingEnum.MENU_TRIGGER_MIX_SIDEBAR"
       :disabled="!isMixSidebar"
     />
     <SelectItem
       :title="t('layout.setting.topMenuLayout')"
       :options="topMenuAlignOptions"
-      :def="topMenuAlign"
+      :def="menu.topMenuAlign"
       :event="HandlerSettingEnum.MENU_TOP_ALIGN"
-      :disabled="!showHeader || split || (!isTopMenu && !split) || isMixSidebar"
+      :disabled="
+        !sidebar.show ||
+        isHorizontal ||
+        menu.split ||
+        (!isTopMenu && !menu.split) ||
+        isMixSidebar
+      "
     />
     <SelectItem
       :title="t('layout.setting.menuCollapseButton')"
       :options="triggerOptions"
-      :def="trigger"
+      :def="sidebar.trigger"
       :event="HandlerSettingEnum.MENU_TRIGGER"
       :disabled="isMixSidebar || isTopMenu || (isMix && isHorizontal)"
     />
     <SelectItem
       :title="t('layout.setting.contentMode')"
       :options="contentModeOptions"
-      :def="contentMode"
+      :def="content.mode"
       :event="HandlerSettingEnum.CONTENT_MODE"
     />
     <InputNumberItem
@@ -155,10 +140,10 @@ const getMenuDisabled = computed(() => {
       :min="100"
       :max="240"
       :step="10"
-      :def="menuWidth"
+      :def="sidebar.width"
       suffix="px"
       :event="HandlerSettingEnum.MENU_WIDTH"
-      :disabled="!getMenuDisabled"
+      :disabled="!sidebar.visible"
     />
   </VbenSpace>
 </template>

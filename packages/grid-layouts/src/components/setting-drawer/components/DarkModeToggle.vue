@@ -1,20 +1,19 @@
 <script lang="ts" setup>
-import { ThemeEnum } from '@vben/constants'
-import { storeToRefs } from 'pinia'
-import { useHeaderSettingStore } from '../../../store'
+import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
+import { useAppConfig } from '@vben/hooks'
 
-const headerSettingStore = useHeaderSettingStore()
-
-const { isDark } = storeToRefs(headerSettingStore)
-
-const handlerDarkModeToggle = (v) => {
-  headerSettingStore.setTheme(v ? ThemeEnum.DARK : ThemeEnum.LIGHT)
+const { baseHandler, theme } = useAppConfig()
+const handlerThemeModeToggle = (v) => {
+  baseHandler(HandlerSettingEnum.CHANGE_THEME, v)
 }
 </script>
 
 <template>
   <VbenSpace justify="center">
-    <VbenSwitch :value="isDark" @update:value="handlerDarkModeToggle">
+    <VbenSwitch
+      :value="theme === ThemeEnum.DARK"
+      @update:value="handlerThemeModeToggle"
+    >
       <template #checked-icon>
         <VbenIconify icon="emojione:crescent-moon" hoverPointer />
       </template>

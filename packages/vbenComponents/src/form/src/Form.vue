@@ -93,8 +93,10 @@ const getGridProps = computed(() => {
   }
 })
 
+const FormMethod = ref({})
+
 onMounted(() => {
-  emit('register', {
+  FormMethod.value = {
     setProps,
     getFieldValue,
     validate: formRef.value?.validate,
@@ -102,7 +104,8 @@ onMounted(() => {
     updateSchemas: (schemas) => {
       innerProps.value.schemas = schemas
     },
-  })
+  }
+  emit('register', unref(FormMethod))
 })
 </script>
 <template>
@@ -159,18 +162,20 @@ onMounted(() => {
           v-if="innerProps?.schemas.length > 0 && innerProps.actions"
           v-bind="innerProps.actionsProps"
         >
-          <slot name="actions">
+          <slot name="actions-prefix" v-bind="FormMethod || {}"></slot>
+          <slot name="actions" v-bind="FormMethod || {}">
             <VbenButtonGroup
               ><VbenButton type="error" @click="formRef.restoreValidation">{{
-                innerProps.actionsProps.cancelText || '取消'
+                innerProps.actionsProps.cancelText || '重置'
               }}</VbenButton>
               <VbenButton
                 type="primary"
-                @click="innerProps.submitFunc(formRef)"
+                @click="innerProps.submitFunc(FormMethod)"
                 >{{ innerProps.actionsProps.submitText || '提交' }}</VbenButton
               ></VbenButtonGroup
             >
           </slot>
+          <slot name="actions-suffix" v-bind="FormMethod || {}"></slot>
         </VbenGridItem>
       </VbenGrid>
     </Form>

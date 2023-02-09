@@ -7,15 +7,15 @@ import {
 } from './helper'
 import { isArray, isString } from '@vben/utils'
 import { DEFAULT_SELECT_TYPE } from './constant'
-import ora from 'ora'
-const spinner = ora({
-  text: 'Loading...',
-  color: 'yellow',
-})
+// import ora from 'ora'
+// const spinner = ora({
+//   text: 'Loading...',
+//   color: 'yellow',
+// })
 const prompts = require('prompts')
 
 async function runScript(argv: string[], script: string) {
-  spinner.stop()
+  // spinner.stop()
   execa('pnpm', ['-w', 'run', `turbo:${script}`].concat(argv), {
     stdio: 'inherit',
     preferLocal: true,
@@ -72,7 +72,7 @@ async function baseScript(command: string, isFilterWorkspace: boolean) {
 }
 
 export function run(command: string, isFilterWorkspace = false) {
-  spinner.start()
+  // spinner.start()
   baseScript(command, isFilterWorkspace).catch((err) => {
     error(err)
     process.exit(1)

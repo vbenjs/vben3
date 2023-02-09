@@ -11,10 +11,9 @@ import {
   useLayoutTab,
   useLayoutContent,
 } from '@vben/stores'
-import { useAppConfig } from '@vben/hooks'
+import {useAppConfig, useGridLayoutContainerElStyle, useTheme} from '@vben/hooks'
 import { ref } from 'vue'
 import { MaybeElementRef } from '@vben/utils'
-import { useGridLayoutContainerElStyle } from '@vben/hooks/src/web/useGridLayoutContainerElStyle'
 
 const { headerRef } = storeToRefs(useLayoutHeader() as StoreGeneric)
 const { sidebarRef } = storeToRefs(useLayoutSidebar() as StoreGeneric)
@@ -24,6 +23,8 @@ const containerRef = ref<MaybeElementRef>(null)
 
 const { navBarMode } = useAppConfig()
 useGridLayoutContainerElStyle(containerRef)
+const {} = useTheme(true)
+
 </script>
 <template>
   <section

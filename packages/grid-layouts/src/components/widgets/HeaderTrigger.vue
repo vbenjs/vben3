@@ -2,10 +2,10 @@
 import TopButtonWrapper from '../comm/TopButtonWrapper.vue'
 import { useAppConfig } from '@vben/hooks'
 
-const { sidebar, toggleCollapsed } = useAppConfig()
+const { sidebar, toggleCollapse } = useAppConfig()
 </script>
 <template>
-  <TopButtonWrapper @click.stop="toggleCollapsed">
+  <TopButtonWrapper @click.stop="toggleCollapse">
     <VbenIconify
       color="var(--trigger-icon-color)"
       size="22"

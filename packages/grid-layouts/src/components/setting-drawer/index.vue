@@ -21,7 +21,7 @@ const { baseHandler } = useAppConfig()
 const { t } = useI18n()
 const {
   openSettingDrawer,
-  toggleSettingDrawerVisible,
+  toggleOpenSettingDrawer,
   isHorizontal,
   navBarMode,
   themeColor,
@@ -33,7 +33,7 @@ const {
 <template>
   <VbenDrawer
     :show="openSettingDrawer"
-    @update:show="toggleSettingDrawerVisible"
+    @update:show="toggleOpenSettingDrawer"
     :width="330"
   >
     <VbenDrawerContent closable>

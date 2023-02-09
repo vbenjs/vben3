@@ -43,7 +43,9 @@ const title = 'Vben Admin'
       class="p-x-8px truncate grid content-center font-700 text-16px"
       :class="[showLogoTitle ? 'visible' : 'invisible']"
     >
-      {{ title }}
+      <span class="block truncate">
+        {{ title }}
+      </span>
     </div>
   </div>
 </template>

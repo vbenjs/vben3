@@ -4,7 +4,7 @@ import { computed, unref } from 'vue'
 import { SettingButtonPositionEnum } from '@vben/constants'
 import { useAppConfig } from '@vben/hooks'
 
-const { toggleSettingDrawerVisible, header, settingButtonPosition } =
+const { toggleOpenSettingDrawer, header, settingButtonPosition } =
   useAppConfig()
 
 const getShowSetting = computed(() => {
@@ -20,7 +20,7 @@ const getShowSetting = computed(() => {
 <template>
   <TopButtonWrapper
     v-if="getShowSetting"
-    @click.stop="toggleSettingDrawerVisible"
+    @click.stop="toggleOpenSettingDrawer"
   >
     <VbenIconify icon="fluent:settings-48-regular" />
   </TopButtonWrapper>

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { useAppConfig } from '@vben/hooks'
 
-const { sidebar, toggleCollapsed } = useAppConfig()
+const { sidebar, toggleCollapse } = useAppConfig()
 </script>
 <template>
   <div
     class="h-36px w-full absolute bottom-0 cursor-pointer grid-center bg-[#3b3b3b]"
-    @click.stop="toggleCollapsed"
+    @click.stop="toggleCollapse"
   >
     <VbenIconify
       :class="[sidebar.collapsed ? '-rotate-180' : 'rotate-0']"

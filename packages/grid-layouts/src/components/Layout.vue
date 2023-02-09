@@ -12,52 +12,24 @@ import {
   useLayoutContent,
 } from '@vben/stores'
 import { useAppConfig } from '@vben/hooks'
-import { computed, unref } from 'vue'
+import { ref } from 'vue'
+import { MaybeElementRef } from '@vben/utils'
+import { useGridLayoutContainerElStyle } from '@vben/hooks/src/web/useGridLayoutContainerElStyle'
 
 const { headerRef } = storeToRefs(useLayoutHeader() as StoreGeneric)
 const { sidebarRef } = storeToRefs(useLayoutSidebar() as StoreGeneric)
 const { tabRef } = storeToRefs(useLayoutTab() as StoreGeneric)
 const { contentRef } = storeToRefs(useLayoutContent() as StoreGeneric)
+const containerRef = ref<MaybeElementRef>(null)
 
-const { navBarMode, isTopMenu, isMixSidebar, sidebar, header, footer, tabTar } =
-  useAppConfig()
-
-const getLayoutStyles = computed(() => {
-  const getAsideWidth = () => {
-    if (unref(isTopMenu) || !unref(sidebar).visible) return 0
-    if (unref(sidebar).collapsed) return unref(sidebar).collapsedWidth
-    if (unref(isMixSidebar)) return unref(sidebar).mixSidebarWidth
-    return unref(sidebar).width
-  }
-
-  const getHeaderHeight = () => {
-    if (!unref(header).visible) return 0
-    return unref(header).height
-  }
-
-  const getTabBarHeight = () => {
-    if (!unref(tabTar).visible) return 0
-    return unref(tabTar).height
-  }
-
-  const getFooterHeight = () => {
-    if (!unref(footer).visible) return 0
-    return unref(footer).height
-  }
-
-  return {
-    '--aside-width': `${getAsideWidth()}px`,
-    '--header-height': `${getHeaderHeight()}px`,
-    '--tab-bar-height': `${getTabBarHeight()}px`,
-    '--footer-height': `${getFooterHeight()}px`,
-  }
-})
+const { navBarMode } = useAppConfig()
+useGridLayoutContainerElStyle(containerRef)
 </script>
 <template>
   <section
-    class="grid-layout-container h-full w-full"
+    ref="containerRef"
+    class="grid-layout-container h-full w-full filter-invert-80"
     :class="[`${navBarMode}`]"
-    :style="getLayoutStyles"
   >
     <LayoutHeader ref="headerRef" />
     <LayoutSidebar ref="sidebarRef" />

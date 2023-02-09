@@ -5,7 +5,7 @@ import {
 } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
 import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
-import { _merge } from '@vben/utils'
+import { _merge, toggleClass } from '@vben/utils'
 import { reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
 
@@ -22,23 +22,31 @@ export const useAppConfig = () => {
   const appConfigOptions = storeToRefs(
     useAppConfigStore as StoreGeneric,
   ) as unknown as DefineAppConfigOptions & DefineAppConfigStoreGetters
-  const { openSettingDrawer, sidebar } = appConfigOptions
+  const { openSettingDrawer, sidebar, grayMode, colorWeak } = appConfigOptions
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
     })
   }
 
-  function toggleSettingDrawerVisible() {
+  function toggleOpenSettingDrawer() {
     useAppConfigStore.setOpenSettingDrawer(!unref(openSettingDrawer))
   }
 
-  function toggleCollapsed() {
+  function toggleCollapse() {
     useAppConfigStore.setSidebar({ collapsed: !unref(sidebar).collapsed })
   }
 
   function baseHandler(event: HandlerSettingEnum, value: any) {
     setAppConfig(handlerResults(event, value, appConfigOptions))
+  }
+
+  function toggleGrayMode(isGrayMode = unref(grayMode)) {
+    toggleClass(isGrayMode, 'gray-mode', document.body)
+  }
+
+  function toggleColorWeak(isColorWeak = colorWeak) {
+    toggleClass(isColorWeak, 'color-weak', document.body)
   }
 
   async function copyConfigs() {
@@ -65,12 +73,14 @@ export const useAppConfig = () => {
   return {
     ...appConfigOptions,
     setAppConfig,
-    toggleSettingDrawerVisible,
+    toggleOpenSettingDrawer,
     baseHandler,
     copyConfigs,
     clearAndRedo,
     resetAllConfig,
-    toggleCollapsed,
+    toggleCollapse,
+    toggleGrayMode,
+    toggleColorWeak,
   }
 }
 
@@ -168,7 +178,12 @@ function handlerResults(
       return { lockTime: value }
 
     case HandlerSettingEnum.FULL_CONTENT:
-      return { content: { fullScreen: value } }
+      return {
+        content: { fullScreen: value },
+        sidebar: { visible: !value, show: !value },
+        header: { visible: !value, show: !value },
+        tabTar: { visible: !value, show: !value },
+      }
 
     case HandlerSettingEnum.CONTENT_MODE:
       return { content: { mode: value } }
@@ -180,14 +195,12 @@ function handlerResults(
       return { header: { showBreadCrumbIcon: value } }
 
     case HandlerSettingEnum.GRAY_MODE:
-      // updateGrayMode(value)
       return { grayMode: value }
 
     case HandlerSettingEnum.SHOW_FOOTER:
       return { footer: { show: value, visible: value } }
 
     case HandlerSettingEnum.COLOR_WEAK:
-      // updateColorWeak(value)
       return { colorWeak: value }
 
     case HandlerSettingEnum.SHOW_LOGO:

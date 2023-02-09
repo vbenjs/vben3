@@ -31,7 +31,6 @@
     "@vben/directives": "workspace:*",
     "@vben/grid-layouts": "workspace:*",
     "@vben/hooks": "workspace:*",
-    "@vben/layouts": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/request": "workspace:*",
     "@vben/stores": "workspace:*",

@@ -1,20 +1,27 @@
 import { useAppConfig } from '../config'
 import { ThemeEnum } from '@vben/constants'
 import { useEventListener } from '@vben/utils'
+import { computed, unref } from 'vue'
 
-export const useTheme = (listen = false) => {
+export function createMediaPrefersColorSchemeListen() {
   const { setAppConfig } = useAppConfig()
-  if (listen) {
-    // 监听系统主题
-    useEventListener(
-      window.matchMedia('(prefers-color-scheme: dark)'),
-      'change',
-      (e: Event) => {
-        // @ts-ignore
-        setAppConfig({ theme: e.matches ? ThemeEnum.DARK : ThemeEnum.LIGHT })
-      },
-    )
-  }
+  // 监听系统主题
+  useEventListener(
+    window.matchMedia('(prefers-color-scheme: dark)'),
+    'change',
+    (e: Event) => {
+      // @ts-ignore
+      setAppConfig({ theme: e.matches ? ThemeEnum.DARK : ThemeEnum.LIGHT })
+    },
+  )
+}
 
-  return {}
+export const useAppTheme = () => {
+  const { theme } = useAppConfig()
+
+  const isDark = computed(() => {
+    return unref(theme) === ThemeEnum.DARK
+  })
+
+  return { isDark, theme }
 }

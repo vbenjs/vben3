@@ -47,6 +47,7 @@ nextTick(()=>{
   grid-template-rows: var(--header-height) var(--tab-bar-height) 1fr;
   transition: grid-template-columns 0.3s, grid-template-rows 0.3s;
   transition-timing-function: var(--transition-bezier);
+  background-color: var(--layout-container-background-color);
   &.sidebar,
   &.mix-sidebar {
     grid-template-areas:

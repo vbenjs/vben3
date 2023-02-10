@@ -49,6 +49,6 @@ const showHeaderLogo = computed(() => {
       <UserDropdown />
       <Setting />
     </div>
-    <SecondaryBorder bottom shadow />
+    <SecondaryBorder bottom shadow class="!bg-[var(--header-action-hover-bg-color)]" />
   </header>
 </template>

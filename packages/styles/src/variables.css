@@ -14,6 +14,7 @@
   /* layout start */
 
   --layout-color: #fff;
+  --layout-container-background-color: #fff;
   --layout-border-color: rgb(239, 239, 245);
 
   /* header */
@@ -35,13 +36,13 @@
   --aside-submenu-background-color: #0c2135;
   --aside-text-color: #fff;
 
-  --trigger-color: rgb(72, 72, 78);
-  --trigger-border: 1px solid rgb(239, 239, 245);
+  --trigger-background-color: rgb(72, 72, 78);
+  /*--trigger-border: 1px solid rgb(239, 239, 245);*/
   --trigger-border-color: rgb(239, 239, 245);
   /*--trigger-border-color: rgb(239, 239, 245);*/
-  --trigger-icon-color: #f3f1f1;
+  /*--trigger-icon-color: #f3f1f1;*/
   /*--trigger-icon-color: rgb(51, 54, 57);*/
-  --trigger-hover-icon-color: #fff;
+  /*--trigger-hover-icon-color: #fff;*/
 
   /* main */
   --main-height: calc(100% - var(--footer-height));
@@ -55,8 +56,9 @@
 
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    visibility: visible;
-  }
+:root[class=dark] {
+  --layout-border-color: rgba(255, 255, 255, 0.09);
+  --layout-container-background-color: rgb(16, 16, 20);
+
+  --component-background-color: rgb(24, 24, 28);
 }

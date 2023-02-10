@@ -7,8 +7,9 @@ import {
   lighten,
   pickTextColorBasedOnBgColor,
   darken,
-  addClass,
+  toggleClass,
 } from '@vben/utils'
+import { ThemeEnum } from '@vben/constants'
 
 const HEADER_HEIGHT = '--header-height'
 const HEADER_BG_COLOR_VAR = '--header-background-color'
@@ -19,6 +20,8 @@ const ASIDE_WIDTH = '--aside-width'
 const ASIDE_DARK_BG_COLOR = '--aside-background-color'
 const ASIDE_TEXT_COLOR_VAR = '--aside-text-color'
 
+const TRIGGER_BG_COLOR_VAR = '--trigger-background-color'
+
 const TAB_BAR_HEIGHT = '--tab-bar-height'
 
 const FOOTER_HEIGHT = '--footer-height'
@@ -26,7 +29,7 @@ const FOOTER_HEIGHT = '--footer-height'
 const LIGHT_TEXT_COLOR = 'rgba(0,0,0,.85)'
 const DARK_TEXT_COLOR = '#fff'
 
-export function createThemeColorListen(el: MaybeElementRef | null) {
+export function createThemeColorListen(el?: MaybeElementRef | null) {
   const {
     sidebar,
     header,
@@ -75,6 +78,10 @@ export function createThemeColorListen(el: MaybeElementRef | null) {
       initialValue: LIGHT_TEXT_COLOR,
     },
   )
+  const triggerBackgroundColor = useCssVar(
+    TRIGGER_BG_COLOR_VAR,
+    sidebarRef as MaybeElementRef,
+  )
 
   watchEffect(() => {
     headerBgColor.value = unref(header).bgColor
@@ -95,9 +102,18 @@ export function createThemeColorListen(el: MaybeElementRef | null) {
       LIGHT_TEXT_COLOR,
       DARK_TEXT_COLOR,
     )
+    triggerBackgroundColor.value = ['#fff', '#ffffff'].includes(
+      unref(sidebar).bgColor.toLowerCase(),
+    )
+      ? darken(unref(sidebar).bgColor, 6)
+      : lighten(unref(sidebar).bgColor, 6)
     toggleGrayMode(unref(grayMode))
     toggleColorWeak(unref(colorWeak))
-    addClass(document.documentElement, unref(theme))
+    toggleClass(
+      ThemeEnum.DARK === unref(theme),
+      ThemeEnum.DARK,
+      document.documentElement,
+    )
   })
 }
 

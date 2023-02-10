@@ -37,6 +37,6 @@ const showSidebarLogo = computed(()=>{
     </div>
     <SiderFooterTrigger v-if="showFooterTrigger" />
     <SiderCenterTrigger v-if="showCenterTrigger" />
-    <SecondaryBorder right />
+    <SecondaryBorder right class="!bg-[var(--trigger-background-color)]" />
   </div>
 </template>

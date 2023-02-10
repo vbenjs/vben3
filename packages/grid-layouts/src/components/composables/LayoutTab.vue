@@ -9,7 +9,7 @@ const { tabTar } = useAppConfig()
 </script>
 <template>
   <div
-    class="grid-area-[grid-tab-bar] grid grid-cols-2 content-center overflow-hidden relative dark:dark-800"
+    class="grid-area-[grid-tab-bar] grid grid-cols-2 content-center overflow-hidden relative dark:bg-[var(--component-background-color)]"
     :class="[tabTar.visible ? 'visible' : 'invisible']"
   >
     <div class="h-[var(--tab-bar-height)] grid-col-start-1 grid-col-end-3">

@@ -5,6 +5,6 @@ export function useAppInject() {
   const values = useAppProviderContext()
 
   return {
-    getIsMobile: computed(() => unref(values.isMobile)),
+    isMobile: computed(() => unref(values.isMobile)),
   }
 }

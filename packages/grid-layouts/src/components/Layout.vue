@@ -11,8 +11,8 @@ import {
   useLayoutTab,
   useLayoutContent,
 } from '@vben/stores'
-import {useAppConfig, useGridLayoutContainerElStyle, useTheme} from '@vben/hooks'
-import { ref } from 'vue'
+import {useAppConfig, createGridLayoutListen, createThemeColorListen} from '@vben/hooks'
+import {nextTick, ref} from 'vue'
 import { MaybeElementRef } from '@vben/utils'
 
 const { headerRef } = storeToRefs(useLayoutHeader() as StoreGeneric)
@@ -22,9 +22,10 @@ const { contentRef } = storeToRefs(useLayoutContent() as StoreGeneric)
 const containerRef = ref<MaybeElementRef>(null)
 
 const { navBarMode } = useAppConfig()
-useGridLayoutContainerElStyle(containerRef)
-const {} = useTheme(true)
-
+nextTick(()=>{
+  createGridLayoutListen(containerRef)
+  createThemeColorListen(containerRef)
+})
 </script>
 <template>
   <section

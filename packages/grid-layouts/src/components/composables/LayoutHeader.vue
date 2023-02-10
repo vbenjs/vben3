@@ -31,7 +31,9 @@ const showHeaderLogo = computed(() => {
 </script>
 <template>
   <header
-    class="grid-area-[grid-header] grid grid-cols-2 content-center overflow-hidden relative"
+    class="grid-area-[grid-header] grid grid-cols-2 content-center
+    overflow-hidden relative bg-[var(--header-background-color)]
+    color-[var(--header-text-color)] transition-colors-300"
     :class="[header.visible ? 'visible' : 'invisible']"
   >
     <div class="h-[var(--header-height)] grid-col-start-1 grid-col-end-3 flex">

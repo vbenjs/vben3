@@ -11,6 +11,7 @@ const { sidebar, toggleCollapse } = useAppConfig()
     <VbenIconify
       :class="[sidebar.collapsed ? '-rotate-180' : 'rotate-0']"
       icon="ph:caret-left-bold"
+      hover-color="var(--trigger-hover-icon-color)"
       color="var(--trigger-icon-color)"
     />
   </div>

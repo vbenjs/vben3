@@ -26,7 +26,7 @@ const showSidebarLogo = computed(()=>{
 </script>
 <template>
   <div
-    class="grid-area-[grid-sidebar] relative"
+    class="grid-area-[grid-sidebar] relative bg-[var(--aside-background-color)] transition-colors-300 color-[var(--aside-text-color)]"
     :class="[
       { 'pb-40px': showFooterTrigger },
       sidebar.visible ? 'visible' : 'invisible overflow-hidden',

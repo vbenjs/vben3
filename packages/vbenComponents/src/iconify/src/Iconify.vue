@@ -87,7 +87,7 @@ onMounted(update)
 <style lang="less" scoped>
 .iconify {
   display: inline-block;
-  transition: color 0.5s;
+  transition: color 0.3s, transform .3s;
   &:hover{
     color: v-bind(hoverColor) !important;
   }

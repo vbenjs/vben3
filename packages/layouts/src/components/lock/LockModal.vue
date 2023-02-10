@@ -1,25 +1,25 @@
 <script lang="ts" setup>
-import {defineProps, computed, ref} from "vue";
-import {useI18n} from '@vben/locale'
-import {useForm} from '@vben/vbencomponents'
-import {context} from '../../../bridge'
+import { computed, ref } from 'vue'
+import { useI18n } from '@vben/locale'
+import { useForm } from '@vben/vbencomponents'
+import { context } from '../../../bridge'
 import headerImg from '@/assets/images/header.jpg'
 
-const {t} = useI18n();
+const { t } = useI18n()
 
 const props = defineProps({
   show: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 })
 
-const {useUserStore, useLockStore} = context
+const { useUserStore, useLockStore } = context
 const userStore = useUserStore()
 const lockStore = useLockStore()
 const getUserInfo = computed(() => {
-  const {realName = 'Vben Admin', avatar, desc} = userStore.getUserInfo || {}
+  const { realName = 'Vben Admin', avatar, desc } = userStore.getUserInfo || {}
 
-  return {realName, avatar: avatar || headerImg, desc}
+  return { realName, avatar: avatar || headerImg, desc }
 })
 const emits = defineEmits(['update:show'])
 
@@ -27,11 +27,11 @@ const showModal = computed({
   get: () => props.show,
   set: (val) => {
     emits('update:show', val)
-  }
+  },
 })
 
 const formRef = ref(undefined)
-const [register, {getFieldValue, validate}] = useForm({
+const [register, { getFieldValue, validate }] = useForm({
   schemas: [
     {
       gridItemProps: {
@@ -42,52 +42,54 @@ const [register, {getFieldValue, validate}] = useForm({
       component: 'InputPassword',
       componentProps: {
         placeholder: t('layout.header.lockScreenPassword'),
-        showPasswordOn: 'mousedown'
+        showPasswordOn: 'mousedown',
       },
       rule: {
         required: true,
         message: t('layout.header.lockScreenPassword'),
-        trigger: ['input', 'blur']
-      }
-    }
-  ]
+        trigger: ['input', 'blur'],
+      },
+    },
+  ],
 })
 
 const formModel = ref({
-  password: ''
+  password: '',
 })
 
 const handleLock = async () => {
   await validate((errors) => {
     if (!errors) {
-      const {password} = getFieldValue();
+      const { password } = getFieldValue()
       lockStore.setLockInfo({
         isLock: true,
         pwd: password,
-      });
+      })
     }
   })
 }
-
 </script>
 
 <template>
-  <VbenModal v-model:show="showModal" :title="t('layout.header.lockScreen')" preset="card">
+  <VbenModal
+    v-model:show="showModal"
+    :title="t('layout.header.lockScreen')"
+    preset="card"
+  >
     <VbenSpace vertical align="center">
-      <VbenAvatar
-        round
-        :size="64"
-        :src="getUserInfo.avatar"
-      />
+      <VbenAvatar round :size="64" :src="getUserInfo.avatar" />
       <VbenH5>{{ getUserInfo.realName }}</VbenH5>
     </VbenSpace>
-    <VbenForm @register="register" ref="formRef" v-model:model="formModel" label-placement="left"/>
+    <VbenForm
+      @register="register"
+      ref="formRef"
+      v-model:model="formModel"
+      label-placement="left"
+    />
     <VbenButton type="info" block @click="handleLock">
-      {{ t('layout.header.lockScreenBtn')}}
+      {{ t('layout.header.lockScreenBtn') }}
     </VbenButton>
   </VbenModal>
 </template>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

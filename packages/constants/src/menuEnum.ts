@@ -18,6 +18,8 @@ export enum TriggerEnum {
   NONE = 'NONE',
   // 菜单底部
   FOOTER = 'FOOTER',
+  // 菜单中间
+  CENTER = 'CENTER',
   // 头部
   HEADER = 'HEADER',
 }

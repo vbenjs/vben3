@@ -7,12 +7,56 @@
   /* component */
   --component-background-color: #fff;
 
+  /* transition */
+  --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-all: all 0.3s var(--transition-bezier);
+
+  /* layout start */
+
+  --layout-color: #fff;
+  --layout-border-color: rgb(239, 239, 245);
+
+  /* header */
+  --header-height: 48px;
+  --header-width: calc(100% - var(--aside-width));
+  --header-background-color: #fff;
+  --header-text-color: rgba(0,0,0,0.85);
+  --header-icon-color: var(--header-text-color);
+  --header-action-hover-bg-color: #f6f6f6;
+
+  /* tab */
+  --tab-bar-height: 36px;
+  --tab-bar-width: calc(100% - var(--aside-width));
+
   /* aside */
-  --aside-background-color: #001628;
+  --aside-height: calc(100% - var(--header-height));
+  --aside-width: 210px;
+  --aside-background-color: #001529;
   --aside-submenu-background-color: #0c2135;
+  --aside-text-color: #fff;
+
+  --trigger-color: rgb(72, 72, 78);
+  --trigger-border: 1px solid rgb(239, 239, 245);
+  --trigger-border-color: rgb(239, 239, 245);
+  /*--trigger-border-color: rgb(239, 239, 245);*/
+  --trigger-icon-color: #f3f1f1;
+  /*--trigger-icon-color: rgb(51, 54, 57);*/
+  --trigger-hover-icon-color: #fff;
+
+  /* main */
+  --main-height: calc(100% - var(--footer-height));
+  --main-width: 100%;
+
+  /* footer */
+  --footer-height: 60px;
+  --footer-width: 100%;
+
+  /* layout end */
+
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    visibility: visible;
   }
 }

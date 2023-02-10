@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@iconify/iconify": "^3.0.0",
+    "@vben/hooks": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/constants": "workspace:*",
     "sass": "^1.55.0",

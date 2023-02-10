@@ -10,6 +10,9 @@ body {
   overflow: visible !important;
   overflow-x: hidden !important;
 }
+*{
+  box-sizing: border-box;
+}
 
 a:focus,
 a:active,

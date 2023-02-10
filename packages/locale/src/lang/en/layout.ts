@@ -39,6 +39,7 @@ export default {
     menuTriggerNone: 'Not Show',
     menuTriggerBottom: 'Bottom',
     menuTriggerTop: 'Top',
+    menuTriggerCenter: 'Sideways',
     // menu type
     menuTypeSidebar: 'Left menu mode',
     menuTypeMixSidebar: 'Left menu mixed mode',

@@ -40,6 +40,7 @@ export default {
     menuTriggerNone: '不显示',
     menuTriggerBottom: '底部',
     menuTriggerTop: '顶部',
+    menuTriggerCenter: '侧边',
     // menu type
     menuTypeSidebar: '左侧菜单模式',
     menuTypeMixSidebar: '左侧菜单混合模式',

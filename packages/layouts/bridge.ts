@@ -1,5 +1,6 @@
 import { VNode } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
+import { getMenus } from '@vben/router'
 
 export interface ContextOptions {
   useRootSetting: () => unknown

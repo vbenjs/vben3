@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { BasicRoutes } from '@vben/router'
+import { BasicRoutes, router } from '@vben/router'
 import { asyncRoutes } from '@/router/routes'
 
-export * from './menus'
+// export * from './menus'
 export * from '@vben/router'
 
 // The whitelist should contain basic static routes
@@ -18,15 +18,6 @@ const WHITE_NAME_LIST: string[] = []
 
   getRouteNames(BasicRoutes)
 })()
-
-console.log(asyncRoutes)
-// app router
-export const router = createRouter({
-  history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
-  routes: BasicRoutes.concat(asyncRoutes),
-  strict: true,
-  scrollBehavior: () => ({ left: 0, top: 0 }),
-})
 
 // reset router
 export function resetRouter() {

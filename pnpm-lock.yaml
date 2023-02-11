@@ -70,7 +70,6 @@ importers:
       mockjs: ^1.1.0
       monaco-editor: ^0.34.1
       naive-ui: ^2.34.3
-      path-to-regexp: ^6.2.1
       pinia: 2.0.30
       typescript: ^4.9.5
       vite: 4.0.4
@@ -97,7 +96,6 @@ importers:
       dayjs: 1.11.7
       mockjs: 1.1.0
       monaco-editor: 0.34.1
-      path-to-regexp: 6.2.1
       pinia: 2.0.30_hmuptsblhheur2tugfgucj7gc4
       vue: 3.2.47
       vue-demi: 0.13.11_vue@3.2.47
@@ -162,6 +160,8 @@ importers:
       '@vben/hooks': link:../../packages/hooks
       '@vben/locale': link:../../packages/locale
       '@vben/request': link:../../packages/request
+      '@vben/router': link:../../packages/router
+      '@vben/stores': link:../../packages/stores
       '@vben/styles': link:../../packages/styles
       '@vben/utils': link:../../packages/utils
       '@vben/vbencomponents': link:../../packages/vbenComponents
@@ -358,11 +358,39 @@ importers:
       '@vben/utils': link:../utils
       vue: 3.2.47
 
+  packages/grid-layouts:
+    specifiers:
+      '@vben/constants': workspace:*
+      '@vben/directives': workspace:*
+      '@vben/hooks': workspace:*
+      '@vben/locale': workspace:*
+      '@vben/stores': workspace:*
+      '@vben/types': workspace:*
+      '@vben/utils': workspace:*
+      '@vben/vbencomponents': workspace:*
+      pinia: ^2.0.30
+      vue: 3.2.45
+      vue-router: ^4.1.6
+    dependencies:
+      '@vben/constants': link:../constants
+      '@vben/directives': link:../directives
+      '@vben/hooks': link:../hooks
+      '@vben/locale': link:../locale
+      '@vben/stores': link:../stores
+      '@vben/utils': link:../utils
+      '@vben/vbencomponents': link:../vbenComponents
+      pinia: 2.0.30_vue@3.2.45
+      vue: 3.2.45
+      vue-router: 4.1.6_vue@3.2.45
+    devDependencies:
+      '@vben/types': link:../types
+
   packages/hooks:
     specifiers:
       '@types/lodash-es': ^4.17.6
       '@vben/constants': workspace:*
       '@vben/locale': workspace:*
+      '@vben/stores': workspace:*
       '@vben/types': workspace:*
       '@vben/utils': workspace:*
       vue: ^3.2.47
@@ -370,6 +398,7 @@ importers:
     dependencies:
       '@vben/constants': link:../constants
       '@vben/locale': link:../locale
+      '@vben/stores': link:../stores
       '@vben/utils': link:../utils
       vue: 3.2.47
       vue-router: 4.1.6_vue@3.2.47
@@ -383,7 +412,7 @@ importers:
       '@vben/directives': workspace:*
       '@vben/hooks': workspace:*
       '@vben/locale': workspace:*
-      '@vben/pinia': workspace:*
+      '@vben/router': workspace:*
       '@vben/types': workspace:*
       '@vben/utils': workspace:*
       '@vben/vbencomponents': workspace:*
@@ -394,7 +423,7 @@ importers:
       '@vben/directives': link:../directives
       '@vben/hooks': link:../hooks
       '@vben/locale': link:../locale
-      '@vben/pinia': link:../pinia
+      '@vben/router': link:../router
       '@vben/types': link:../types
       '@vben/utils': link:../utils
       '@vben/vbencomponents': link:../vbenComponents
@@ -414,18 +443,6 @@ importers:
       '@vben/utils': link:../utils
       vue: 3.2.47
       vue-i18n: 9.2.2_vue@3.2.47
-
-  packages/pinia:
-    specifiers:
-      '@vben/utils': workspace:*
-      pinia: ^2.0.30
-      pinia-plugin-persistedstate: ^3.0.2
-      vue: ^3.2.47
-    dependencies:
-      '@vben/utils': link:../utils
-      pinia: 2.0.30_vue@3.2.47
-      pinia-plugin-persistedstate: 3.0.2_pinia@2.0.30
-      vue: 3.2.47
 
   packages/request:
     specifiers:
@@ -454,6 +471,7 @@ importers:
       '@vben/types': workspace:*
       '@vben/utils': workspace:*
       nprogress: ^0.2.0
+      path-to-regexp: ^6.2.1
       vue: ^3.2.47
       vue-router: ^4.1.6
     dependencies:
@@ -464,6 +482,7 @@ importers:
       '@vben/stores': link:../stores
       '@vben/utils': link:../utils
       nprogress: 0.2.0
+      path-to-regexp: 6.2.1
       vue: 3.2.47
       vue-router: 4.1.6_vue@3.2.47
     devDependencies:

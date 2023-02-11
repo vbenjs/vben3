@@ -1,9 +1,13 @@
-import type { Router } from 'vue-router'
 import nProgress from 'nprogress'
-import { _assign } from '@vben/utils'
 
-import { useAppConfig } from '@vben/stores'
-import { DefineAppConfigOptions } from '@vben/types'
+import {
+  stores,
+  getPermissionMode,
+  isBackMode,
+  isRouteMappingMode,
+  router,
+} from './index'
+
 import type { Menu } from '@vben/types'
 import {
   BASIC_LOCK_PATH,
@@ -12,7 +16,7 @@ import {
   PermissionModeEnum,
 } from '@vben/constants'
 import { PAGE_NOT_FOUND_ROUTE, ROOT_ROUTE } from './routes'
-import { configureDynamicParamsMenu } from '../src/helper'
+import { configureDynamicParamsMenu } from './helper'
 
 const LOADED_PAGE_POOL = new Map<string, boolean>()
 const LOCK_PATH = BASIC_LOCK_PATH
@@ -20,22 +24,7 @@ const LOGIN_PATH = BASIC_LOGIN_PATH
 const whitePathList: string[] = [LOGIN_PATH, LOCK_PATH]
 const ROOT_PATH = ROOT_ROUTE.path
 
-export interface Stores {
-  userStore?: any
-  permissionStore?: any
-  lockStore?: any
-  authStore?: any
-  appConfig?: DefineAppConfigOptions
-}
-
-let stores: Stores = {}
-
-export function initGuard(s: Stores) {
-  _assign(stores, s)
-  stores.appConfig = useAppConfig()
-}
-
-export function createBasicGuard(router: Router) {
+export function createBasicGuard() {
   const openNProgress = stores.appConfig?.transition?.openNProgress
   router.beforeEach((to) => {
     // The page has already been loaded, it will be faster to open it again, you don’t need to do loading and other processing
@@ -59,8 +48,8 @@ export function createBasicGuard(router: Router) {
   })
 }
 
-export function createAuthGuard(router: Router) {
-  const { userStore, permissionStore, lockStore } = stores
+export function createAuthGuard() {
+  const { userStore, authStore, lockStore } = stores
   router.beforeEach(async (to, from, next) => {
     if (
       from.path === ROOT_PATH &&
@@ -164,13 +153,13 @@ export function createAuthGuard(router: Router) {
       }
     }
     // console.log(permissionStore.getIsDynamicAddedRoute, to)
-    if (permissionStore.getIsDynamicAddedRoute) {
+    if (authStore.getIsDynamicAddedRoute) {
       next()
       return
     }
 
     // console.log(to.params)
-    const routes = await permissionStore.buildRoutesAction()
+    const routes = await authStore.buildRoutesAction()
 
     routes.forEach((route) => {
       router.addRoute(route)
@@ -178,7 +167,7 @@ export function createAuthGuard(router: Router) {
 
     router.addRoute(PAGE_NOT_FOUND_ROUTE)
 
-    permissionStore.setDynamicAddedRoute(true)
+    authStore.setDynamicAddedRoute(true)
 
     if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
       // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
@@ -194,7 +183,7 @@ export function createAuthGuard(router: Router) {
 }
 
 // 路由守卫：进入路由，增加Tabs
-export function createTabsGuard(router: Router, func: Function) {
+export function createTabsGuard(func: Function) {
   router.beforeEach(async (to) => {
     if (whitePathList.includes(to.path)) return
     // Notify routing changes
@@ -202,7 +191,7 @@ export function createTabsGuard(router: Router, func: Function) {
   })
 }
 
-export function createParamMenuGuard(router: Router) {
+export function createParamMenuGuard() {
   const { authStore } = stores
   router.beforeEach(async (to, _, next) => {
     // filter no name route
@@ -225,13 +214,4 @@ export function createParamMenuGuard(router: Router) {
     menus.forEach((item) => configureDynamicParamsMenu(item, to.params))
     next()
   })
-}
-const getPermissionMode = () => {
-  return stores.appConfig?.permissionMode
-}
-const isBackMode = () => {
-  return getPermissionMode() === PermissionModeEnum.BACK
-}
-const isRouteMappingMode = () => {
-  return getPermissionMode() === PermissionModeEnum.ROUTE_MAPPING
 }

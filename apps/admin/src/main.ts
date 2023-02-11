@@ -3,7 +3,7 @@ import '@vben/styles'
 import 'virtual:svg-icons-register'
 import App from './app.vue'
 import { createApp } from 'vue'
-import { router } from '@/router'
+import { InitRouter } from '@vben/router'
 import { setupRouteGuard } from '@/router/guard'
 import { setupI18n } from '@vben/locale'
 import { setupPinia } from '@vben/stores'
@@ -23,8 +23,9 @@ import { registerComponents } from '../init-components'
   // Asynchronous case: language files may be obtained from the server side
   await setupI18n(app)
   // Init Router
+  const router = InitRouter(import.meta.env.VITE_PUBLIC_PATH)
   app.use(router)
-  await setupRouteGuard(router)
+  await setupRouteGuard()
   await router.isReady()
   app.mount('#app')
   // When Closing mock, Tree Shaking `mockjs` dep

@@ -1,46 +1,29 @@
 import type { RouteRecordNormalized } from 'vue-router'
-
-import { useAuthStoreWithout } from '@/store/auth'
-import { getAllParentPath } from '@/router/helper/menu'
+import { stores, isBackMode, isRoleMode, router } from '../index'
+import { getAllParentPath } from '../helper'
 import { isUrl, filterTree } from '@vben/utils'
-import { router } from '@/router'
-import { PermissionModeEnum } from '@vben/constants'
+
 import { pathToRegexp } from 'path-to-regexp'
-import { useConfigStoreWithOut } from '@/store/config'
 import { Menu } from '@vben/types'
 
 // ===========================
 // ==========Helper===========
 // ===========================
 
-const getPermissionMode = () => {
-  const appStore = useConfigStoreWithOut()
-  return appStore.getProjectConfig.permissionMode
-}
-const isBackMode = () => {
-  return getPermissionMode() === PermissionModeEnum.BACK
-}
-
-const isRoleMode = () => {
-  return getPermissionMode() === PermissionModeEnum.ROLE
-}
-
 async function getAsyncMenus() {
-  const permissionStore = useAuthStoreWithout()
+  const authStore = stores.authStore
   if (isBackMode()) {
-    return permissionStore.getBackMenuList.filter(
+    return authStore.getBackMenuList.filter(
       (item) => !item.meta?.hideMenu && !item.hideMenu,
     )
   }
-
-  return permissionStore.getFrontMenuList.filter(
+  return authStore.getFrontMenuList.filter(
     (item) => !item.hideMenu && !item.meta?.hideMenu,
   )
 }
 
 export const getMenus = async (): Promise<Menu[]> => {
   const menus = await getAsyncMenus()
-
   if (isRoleMode()) {
     const routes = router.getRoutes()
     return filterTree(menus, basicFilter(routes))

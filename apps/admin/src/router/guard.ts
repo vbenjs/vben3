@@ -1,6 +1,4 @@
 import type { Router } from 'vue-router'
-import nProgress from 'nprogress'
-
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import {
@@ -12,7 +10,6 @@ import {
 } from '@vben/router'
 import { setRouteChange } from '@/logics/mitt/routeChange'
 import { useLockStore } from '@/store/lock'
-import { configureDynamicParamsMenu } from '@/router/helper'
 
 async function setupRouteGuard(router: Router) {
   const userStore = useUserStoreWithout()

@@ -3,7 +3,7 @@ import nProgress from 'nprogress'
 import { _assign } from '@vben/utils'
 
 import { useAppConfig } from '@vben/stores'
-import { DefineAppConfigOptions, ProjectConfig } from '@vben/types'
+import { DefineAppConfigOptions } from '@vben/types'
 import type { Menu } from '@vben/types'
 import {
   BASIC_LOCK_PATH,
@@ -24,7 +24,6 @@ export interface Stores {
   userStore?: any
   permissionStore?: any
   lockStore?: any
-  authStore?: any
   appConfig?: DefineAppConfigOptions
 }
 
@@ -36,7 +35,7 @@ export function initGuard(s: Stores) {
 }
 
 export function createBasicGuard(router: Router) {
-  const { openNProgress } = stores.appConfig?.transition
+  const openNProgress = stores.appConfig?.transition?.openNProgress
   router.beforeEach((to) => {
     // The page has already been loaded, it will be faster to open it again, you don’t need to do loading and other processing
     to.meta.loaded = !!LOADED_PAGE_POOL.get(to.path)

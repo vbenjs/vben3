@@ -1,4 +1,4 @@
-import {LAYOUT} from '../../basic'
+import { LAYOUT } from '../../basic'
 
 const dashboard: RouteRecordItem = {
   path: '/demo',
@@ -18,15 +18,18 @@ const dashboard: RouteRecordItem = {
       meta: {
         title: 'routes.demo.table.table',
       },
-      children: [{
-        path: 'useTable',
-        name: 'UseTableDemo',
-        component: () => import('@/pages/demo/table/BasicTable.vue'),
-        meta: {
-          title: 'routes.demo.table.basic',
+      children: [
+        {
+          path: 'useTable',
+          name: 'UseTableDemo',
+          component: () => import('@/pages/demo/table/BasicTable.vue'),
+          meta: {
+            title: 'routes.demo.table.basic',
+          },
         },
-      }]
+      ],
     },
+
     {
       path: 'form',
       name: 'Form',

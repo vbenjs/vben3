@@ -12,6 +12,7 @@
     "@vben/components": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
+    "@vben/stores": "workspace:*",
     "vue-router": "^4.1.6",
     "vue": "^3.2.47"
   },

@@ -1,6 +1,9 @@
 import type { Router } from 'vue-router'
 import nProgress from 'nprogress'
-import { ProjectConfig } from '@vben/types'
+import { _assign } from '@vben/utils'
+
+import { useAppConfig } from '@vben/stores'
+import { DefineAppConfigOptions, ProjectConfig } from '@vben/types'
 import type { Menu } from '@vben/types'
 import {
   BASIC_LOCK_PATH,
@@ -21,24 +24,25 @@ export interface Stores {
   userStore?: any
   permissionStore?: any
   lockStore?: any
-  configStore?: any
   authStore?: any
+  appConfig?: DefineAppConfigOptions
 }
 
 let stores: Stores = {}
-let projectSetting: ProjectConfig = {}
-let config: any = {}
+
+export function initGuard(s: Stores) {
+  _assign(stores, s)
+  stores.appConfig = useAppConfig()
+}
 
 export function createBasicGuard(router: Router) {
-  const { enableProgress } = config
+  const { openNProgress } = stores.appConfig?.transition
   router.beforeEach((to) => {
-    console.log(112, to)
     // The page has already been loaded, it will be faster to open it again, you don’t need to do loading and other processing
     to.meta.loaded = !!LOADED_PAGE_POOL.get(to.path)
-
     // Display a progress bar at the top when switching pages
     // Only works when the page is loaded for the first time
-    if (enableProgress && !to.meta.loaded) {
+    if (openNProgress && !to.meta.loaded) {
       nProgress.start()
     }
     return true
@@ -49,20 +53,14 @@ export function createBasicGuard(router: Router) {
     LOADED_PAGE_POOL.set(to.path, true)
     // console.log(to)
     // Close the page loading progress bar
-    if (enableProgress && !to.meta.loaded) {
+    if (openNProgress && !to.meta.loaded) {
       nProgress.done()
     }
   })
 }
 
-export function initGuard(s: Stores, p: ProjectConfig, c: any) {
-  stores = s
-  projectSetting = p
-  config = c
-}
-
 export function createAuthGuard(router: Router) {
-  const { userStore, permissionStore, lockStore, configStore } = stores
+  const { userStore, permissionStore, lockStore } = stores
   router.beforeEach(async (to, from, next) => {
     if (
       from.path === ROOT_PATH &&
@@ -152,8 +150,7 @@ export function createAuthGuard(router: Router) {
       next(userStore.getUserInfo?.homePath || PageEnum.BASE_HOME)
       return
     }
-    const { permissionMode = projectSetting.permissionMode } =
-      configStore.getProjectConfig
+    const permissionMode = getPermissionMode()
     // TODO get userinfo while last fetch time is empty
     if (
       userStore.getLastUpdateTime === 0 &&
@@ -230,9 +227,7 @@ export function createParamMenuGuard(router: Router) {
   })
 }
 const getPermissionMode = () => {
-  const { permissionMode = projectSetting.permissionMode } =
-    stores.configStore.getProjectConfig
-  return permissionMode
+  return stores.appConfig?.permissionMode
 }
 const isBackMode = () => {
   return getPermissionMode() === PermissionModeEnum.BACK

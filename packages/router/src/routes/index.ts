@@ -1,4 +1,13 @@
-import { RouteRecordItem } from '@vben/types'
+import type { RouteRecordItem } from '@vben/types'
+import {
+  LOGIN_ROUTE,
+  PAGE_NOT_FOUND_ROUTE,
+  REDIRECT_ROUTE,
+  ROOT_ROUTE,
+  LOCK_SCREEN_ROUTE,
+} from './basic'
+
+export * from './basic'
 
 const routeModuleRecord = import.meta.globEager('./modules/**/*.ts') as any
 
@@ -12,3 +21,11 @@ Object.keys(routeModuleRecord).forEach((key) => {
 })
 
 export const asyncRoutes = [...routeModules]
+
+export const BasicRoutes = [
+  LOGIN_ROUTE,
+  LOCK_SCREEN_ROUTE,
+  ROOT_ROUTE,
+  REDIRECT_ROUTE,
+  PAGE_NOT_FOUND_ROUTE,
+]

@@ -1,0 +1,21 @@
+{
+  "name": "@vben/router",
+  "version": "3.0.0-bata.1",
+  "main": "index.ts",
+  "module": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "dependencies": {
+    "@vben/constants": "workspace:*",
+    "@vben/components": "workspace:*",
+    "@vben/locale": "workspace:*",
+    "@vben/utils": "workspace:*",
+    "vue-router": "^4.1.6",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vben/types": "workspace:*"
+  }
+}

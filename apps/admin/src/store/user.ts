@@ -1,10 +1,9 @@
 import type { LoginParams } from '@/apis/auth'
 import { defineStore } from 'pinia'
 import { BASIC_HOME_PATH, BASIC_LOGIN_PATH, PageEnum } from '@vben/constants'
-// import { pinia } from '@/pinia'
 import { router } from '@/router'
 import { doLogoutApi, getUserInfoApi, doLoginApi } from '@/apis/auth'
-import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
+import { PAGE_NOT_FOUND_ROUTE } from '@vben/router'
 import { useAuthStoreWithout } from './auth'
 import { GetUserInfoModel } from '@/apis/sys/user'
 import { UserInfo, RoleInfo } from '@vben/types'
@@ -125,7 +124,6 @@ export const useUserStore = defineStore({
       if (!this.getAccessToken) {
         return null
       }
-
       const userInfo = (await getUserInfoApi()) as unknown as UserInfo
       const { roles = [] } = userInfo
       if (isArray(roles)) {

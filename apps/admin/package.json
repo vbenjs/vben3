@@ -37,6 +37,7 @@
     "@vben/styles": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
+    "@vben/router": "workspace:*",
     "dayjs": "^1.11.7",
     "mockjs": "^1.1.0",
     "monaco-editor": "^0.34.1",

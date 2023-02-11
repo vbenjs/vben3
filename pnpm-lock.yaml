@@ -70,7 +70,6 @@ importers:
       mockjs: ^1.1.0
       monaco-editor: ^0.34.1
       naive-ui: ^2.34.3
-      nprogress: ^0.2.0
       path-to-regexp: ^6.2.1
       pinia: 2.0.30
       typescript: ^4.9.5
@@ -89,7 +88,79 @@ importers:
       '@vben/hooks': link:../../packages/hooks
       '@vben/layouts': link:../../packages/layouts
       '@vben/locale': link:../../packages/locale
-      '@vben/pinia': link:../../packages/pinia
+      '@vben/request': link:../../packages/request
+      '@vben/router': link:../../packages/router
+      '@vben/stores': link:../../packages/stores
+      '@vben/styles': link:../../packages/styles
+      '@vben/utils': link:../../packages/utils
+      '@vben/vbencomponents': link:../../packages/vbenComponents
+      dayjs: 1.11.7
+      mockjs: 1.1.0
+      monaco-editor: 0.34.1
+      path-to-regexp: 6.2.1
+      pinia: 2.0.30_hmuptsblhheur2tugfgucj7gc4
+      vue: 3.2.47
+      vue-demi: 0.13.11_vue@3.2.47
+      vue-router: 4.1.6_vue@3.2.47
+    devDependencies:
+      '@config/css-preprocess': link:../../configs/css-preprocess
+      '@config/vite': link:../../configs/vite
+      '@types/mockjs': 1.0.7
+      '@types/nprogress': 0.2.0
+      '@vben/types': link:../../packages/types
+      '@vue/compiler-sfc': 3.2.47
+      '@vue/test-utils': 2.2.9_vue@3.2.47
+      naive-ui: 2.34.3_vue@3.2.47
+      typescript: 4.9.5
+      vite: 4.0.4
+      vue-tsc: 1.0.24_typescript@4.9.5
+
+  apps/grid-admin:
+    specifiers:
+      '@ant-design/icons-vue': ^6.1.0
+      '@config/css-preprocess': workspace:*
+      '@config/vite': workspace:*
+      '@iconify/iconify': ^3.1.0
+      '@types/mockjs': ^1.0.7
+      '@types/nprogress': ^0.2.0
+      '@vben/components': workspace:*
+      '@vben/constants': workspace:*
+      '@vben/demo': workspace:*
+      '@vben/directives': workspace:*
+      '@vben/grid-layouts': workspace:*
+      '@vben/hooks': workspace:*
+      '@vben/locale': workspace:*
+      '@vben/request': workspace:*
+      '@vben/router': workspace:*
+      '@vben/stores': workspace:*
+      '@vben/styles': workspace:*
+      '@vben/types': workspace:*
+      '@vben/utils': workspace:*
+      '@vben/vbencomponents': workspace:*
+      '@vue/compiler-sfc': 3.2.47
+      '@vue/test-utils': ^2.2.9
+      dayjs: ^1.11.7
+      mockjs: ^1.1.0
+      monaco-editor: ^0.34.1
+      naive-ui: ^2.34.3
+      path-to-regexp: ^6.2.1
+      pinia: 2.0.30
+      typescript: ^4.9.5
+      vite: 4.0.4
+      vue: 3.2.47
+      vue-demi: ^0.13.11
+      vue-router: ^4.1.6
+      vue-tsc: ^1.0.24
+    dependencies:
+      '@ant-design/icons-vue': 6.1.0_vue@3.2.47
+      '@iconify/iconify': 3.1.0
+      '@vben/components': link:../../packages/components
+      '@vben/constants': link:../../packages/constants
+      '@vben/demo': link:../../packages/demo
+      '@vben/directives': link:../../packages/directives
+      '@vben/grid-layouts': link:../../packages/grid-layouts
+      '@vben/hooks': link:../../packages/hooks
+      '@vben/locale': link:../../packages/locale
       '@vben/request': link:../../packages/request
       '@vben/styles': link:../../packages/styles
       '@vben/utils': link:../../packages/utils
@@ -97,7 +168,6 @@ importers:
       dayjs: 1.11.7
       mockjs: 1.1.0
       monaco-editor: 0.34.1
-      nprogress: 0.2.0
       path-to-regexp: 6.2.1
       pinia: 2.0.30_hmuptsblhheur2tugfgucj7gc4
       vue: 3.2.47
@@ -373,6 +443,48 @@ importers:
       qs: 6.11.0
     devDependencies:
       '@types/qs': 6.9.7
+
+  packages/router:
+    specifiers:
+      '@vben/components': workspace:*
+      '@vben/constants': workspace:*
+      '@vben/layouts': workspace:*
+      '@vben/locale': workspace:*
+      '@vben/stores': workspace:*
+      '@vben/types': workspace:*
+      '@vben/utils': workspace:*
+      nprogress: ^0.2.0
+      vue: ^3.2.47
+      vue-router: ^4.1.6
+    dependencies:
+      '@vben/components': link:../components
+      '@vben/constants': link:../constants
+      '@vben/layouts': link:../layouts
+      '@vben/locale': link:../locale
+      '@vben/stores': link:../stores
+      '@vben/utils': link:../utils
+      nprogress: 0.2.0
+      vue: 3.2.47
+      vue-router: 4.1.6_vue@3.2.47
+    devDependencies:
+      '@vben/types': link:../types
+
+  packages/stores:
+    specifiers:
+      '@vben/constants': workspace:*
+      '@vben/types': workspace:*
+      '@vben/utils': workspace:*
+      pinia: ^2.0.30
+      pinia-plugin-persistedstate: ^3.0.2
+      vue: ^3.2.47
+    dependencies:
+      '@vben/constants': link:../constants
+      '@vben/utils': link:../utils
+      pinia: 2.0.30_vue@3.2.47
+      pinia-plugin-persistedstate: 3.0.2_pinia@2.0.30
+      vue: 3.2.47
+    devDependencies:
+      '@vben/types': link:../types
 
   packages/styles:
     specifiers: {}

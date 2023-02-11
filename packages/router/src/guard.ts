@@ -24,6 +24,7 @@ export interface Stores {
   userStore?: any
   permissionStore?: any
   lockStore?: any
+  authStore?: any
   appConfig?: DefineAppConfigOptions
 }
 

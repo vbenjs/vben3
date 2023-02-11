@@ -10,9 +10,11 @@
   "dependencies": {
     "@vben/constants": "workspace:*",
     "@vben/components": "workspace:*",
+    "@vben/layouts": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/stores": "workspace:*",
+    "nprogress": "^0.2.0",
     "vue-router": "^4.1.6",
     "vue": "^3.2.47"
   },

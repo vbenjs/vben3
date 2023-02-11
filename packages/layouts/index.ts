@@ -1,3 +1,6 @@
 export { default as Layout } from './src/index.vue'
 export { initLayout } from './bridge'
 export { default as DarkModeToggle } from './src/components/setting/components/DarkModeToggle.vue'
+export { default as Exception } from './src/page/exception/index.vue'
+export { default as FrameBlank } from './src/page/iframe/FrameBlank.vue'
+export { default as Redirect } from './src/page/redirect/index.vue'

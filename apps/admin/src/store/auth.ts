@@ -12,7 +12,7 @@ import {
   flatMultiLevelRoutes,
   transformObjToRoute,
   transformRouteToMenu,
-} from '@/router'
+} from '@vben/router'
 import { getMenuList } from '@/apis/sys'
 
 interface AuthState {

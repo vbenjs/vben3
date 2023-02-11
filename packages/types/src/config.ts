@@ -106,6 +106,7 @@ export interface DefineAppConfigOptions {
 }
 
 export interface SidebarConfigOptions {
+  theme: ThemeEnum
   show: boolean
   visible: boolean
   fixed: boolean
@@ -141,6 +142,7 @@ export interface MenuConfigOptions {
 }
 
 export interface HeaderConfigOptions {
+  theme: ThemeEnum
   show: boolean
   visible: boolean
   bgColor: string

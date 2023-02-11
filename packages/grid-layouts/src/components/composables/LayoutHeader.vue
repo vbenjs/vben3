@@ -4,7 +4,7 @@ import Logo from '../logo/index.vue'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
 import FullScreen from '../widgets/FullScreen.vue'
 import Search from '../widgets/Search.vue'
-import Locale from '../widgets/Locale.vue'
+import LocalePicker from '../widgets/LocalePicker.vue'
 import UserDropdown from '../widgets/UserDropdown.vue'
 import Notify from '../notify/index.vue'
 import Setting from '../widgets/Setting.vue'
@@ -31,24 +31,30 @@ const showHeaderLogo = computed(() => {
 </script>
 <template>
   <header
-    class="grid-area-[grid-header] grid grid-cols-2 content-center
-    overflow-hidden relative bg-[var(--header-background-color)]
-    color-[var(--header-text-color)] transition-colors-300"
+    class="grid-area-[grid-header] grid grid-cols-2 content-center overflow-hidden relative bg-[var(--header-background-color)] color-[var(--header-text-color)] transition-colors-300"
     :class="[header.visible ? 'visible' : 'invisible']"
   >
-    <div class="h-[var(--header-height)] grid-col-start-1 grid-col-end-3 flex">
-      <Logo v-if="showHeaderLogo" />
-      <HeaderTrigger v-if="showHeaderTrigger" />
-      <Breadcrumb />
-    </div>
-    <div class="h-[var(--header-height)] grid-col-[min-content] flex">
-      <Search />
-      <Notify />
-      <FullScreen />
-      <Locale />
-      <UserDropdown />
-      <Setting />
-    </div>
-    <SecondaryBorder bottom shadow class="!bg-[var(--header-action-hover-bg-color)]" />
+    <VbenConfig :theme-mode="header.theme" :inherit="false" abstract>
+      <div
+        class="h-[var(--header-height)] grid-col-start-1 grid-col-end-3 flex"
+      >
+        <Logo v-if="showHeaderLogo" />
+        <HeaderTrigger v-if="showHeaderTrigger" />
+        <Breadcrumb />
+      </div>
+      <div class="h-[var(--header-height)] grid-col-[min-content] flex">
+        <Search />
+        <Notify />
+        <FullScreen />
+        <LocalePicker />
+        <UserDropdown />
+        <Setting />
+      </div>
+      <SecondaryBorder
+        bottom
+        shadow
+        class="!bg-[var(--header-action-hover-bg-color)]"
+      />
+    </VbenConfig>
   </header>
 </template>

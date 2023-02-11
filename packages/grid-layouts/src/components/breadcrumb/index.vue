@@ -4,10 +4,14 @@ import { useAppConfig } from '@vben/hooks'
 const { header } = useAppConfig()
 </script>
 <template>
-  <!--  <VbenBreadcrumb>-->
-  <!--    <VbenBreadcrumbItem>-->
-  <!--      -->
-  <!--    </VbenBreadcrumbItem>-->
-  <!--  </VbenBreadcrumb>-->
-  <div v-if="header.showBreadCrumb">breadcrumb</div>
+    <VbenBreadcrumb  v-if="header.showBreadCrumb" class="grid-center">
+      <VbenBreadcrumbItem>
+        首页
+      </VbenBreadcrumbItem>
+
+      <VbenBreadcrumbItem>
+        test
+      </VbenBreadcrumbItem>
+
+    </VbenBreadcrumb>
 </template>

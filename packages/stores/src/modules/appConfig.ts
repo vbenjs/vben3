@@ -50,6 +50,7 @@ export const useAppConfig = defineStore({
     canEmbedIFramePage: true,
     closeMixSidebarOnChange: false,
     sidebar: {
+      theme: ThemeEnum.LIGHT,
       show: true,
       visible: true,
       bgColor: SIDE_BAR_BG_COLOR_LIST[0],
@@ -72,6 +73,7 @@ export const useAppConfig = defineStore({
       dropdownPlacement: 'top-start',
     },
     header: {
+      theme: ThemeEnum.DARK,
       show: true,
       visible: true,
       bgColor: HEADER_PRESET_BG_COLOR_LIST[0],

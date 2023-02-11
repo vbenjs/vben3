@@ -38,6 +38,7 @@ export function createThemeColorListen(el?: MaybeElementRef | null) {
     theme,
     toggleGrayMode,
     toggleColorWeak,
+    setAppConfig,
   } = useAppConfig()
 
   const { sidebarRef } = useLayoutSidebar()
@@ -90,11 +91,14 @@ export function createThemeColorListen(el?: MaybeElementRef | null) {
       LIGHT_TEXT_COLOR,
       DARK_TEXT_COLOR,
     )
-    headerActionHoverBgColor.value = ['#fff', '#ffffff'].includes(
-      unref(header).bgColor.toLowerCase(),
-    )
-      ? darken(unref(header).bgColor, 6)
-      : lighten(unref(header).bgColor, 6)
+
+    if (['#fff', '#ffffff'].includes(unref(header).bgColor.toLowerCase())) {
+      headerActionHoverBgColor.value = darken(unref(header).bgColor, 6)
+      setAppConfig({ header: { theme: ThemeEnum.LIGHT } })
+    } else {
+      headerActionHoverBgColor.value = lighten(unref(header).bgColor, 6)
+      setAppConfig({ header: { theme: ThemeEnum.DARK } })
+    }
 
     sidebarBgColor.value = unref(sidebar).bgColor
     asideTextColor.value = pickTextColorBasedOnBgColor(
@@ -102,11 +106,14 @@ export function createThemeColorListen(el?: MaybeElementRef | null) {
       LIGHT_TEXT_COLOR,
       DARK_TEXT_COLOR,
     )
-    triggerBackgroundColor.value = ['#fff', '#ffffff'].includes(
-      unref(sidebar).bgColor.toLowerCase(),
-    )
-      ? darken(unref(sidebar).bgColor, 6)
-      : lighten(unref(sidebar).bgColor, 6)
+
+    if (['#fff', '#ffffff'].includes(unref(sidebar).bgColor.toLowerCase())) {
+      setAppConfig({ sidebar: { theme: ThemeEnum.LIGHT } })
+      triggerBackgroundColor.value = darken(unref(sidebar).bgColor, 6)
+    } else {
+      triggerBackgroundColor.value = lighten(unref(sidebar).bgColor, 6)
+      setAppConfig({ sidebar: { theme: ThemeEnum.DARK } })
+    }
     toggleGrayMode(unref(grayMode))
     toggleColorWeak(unref(colorWeak))
     toggleClass(

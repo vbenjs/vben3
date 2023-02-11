@@ -3,10 +3,10 @@ import Logo from '../logo/index.vue'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
 import SiderFooterTrigger from '../widgets/SiderFooterTrigger.vue'
 import SiderCenterTrigger from '../widgets/SiderCenterTrigger.vue'
+import Menu from '../menu/index.vue'
 import { useAppConfig } from '@vben/hooks'
 import { computed, unref } from 'vue'
 import { TriggerEnum } from '@vben/constants'
-
 
 const { isMixSidebar, isTopMenu, sidebar, isSidebar } = useAppConfig()
 
@@ -20,7 +20,7 @@ const showCenterTrigger = computed(() => {
   return unref(sidebar).trigger === TriggerEnum.CENTER
 })
 
-const showSidebarLogo = computed(()=>{
+const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
 })
 </script>
@@ -32,11 +32,14 @@ const showSidebarLogo = computed(()=>{
       sidebar.visible ? 'visible' : 'invisible overflow-hidden',
     ]"
   >
-    <div>
-      <Logo v-if="showSidebarLogo" />
-    </div>
-    <SiderFooterTrigger v-if="showFooterTrigger" />
-    <SiderCenterTrigger v-if="showCenterTrigger" />
-    <SecondaryBorder right class="!bg-[var(--trigger-background-color)]" />
+    <VbenConfig :theme-mode="sidebar.theme" :inherit="false" abstract>
+      <div>
+        <Logo v-if="showSidebarLogo" />
+        <Menu />
+      </div>
+      <SiderFooterTrigger v-if="showFooterTrigger" />
+      <SiderCenterTrigger v-if="showCenterTrigger" />
+      <SecondaryBorder right class="!bg-[var(--trigger-background-color)]" />
+    </VbenConfig>
   </div>
 </template>

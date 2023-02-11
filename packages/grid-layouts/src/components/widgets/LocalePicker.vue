@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import TopButtonWrapper from '../comm/TopButtonWrapper.vue'
-import { ref, watchEffect, unref, computed } from 'vue'
-import {useLocale, localeList } from '@vben/locale'
+import { ref, unref, computed } from 'vue'
+import { useLocale, localeList } from '@vben/locale'
+import { LocaleType } from '@vben/types'
+import {useAppInject} from "@vben/hooks";
 
 const props = defineProps({
   /**
@@ -11,54 +13,50 @@ const props = defineProps({
   /**
    * Whether to refresh the interface when changing
    */
-  reload: { type: Boolean },
+  reload: { type: Boolean, default: true },
 })
 
-const selectedKeys = ref<string[]>([])
-
 const { changeLocale, getLocale } = useLocale()
+
+const { isMobile } = useAppInject()
+
+const selectedKeys = ref<string[]>([unref(getLocale)])
 
 const getLocaleText = computed(() => {
   const key = selectedKeys.value[0]
   if (!key) {
     return ''
   }
-  return localeList.find((item) => item.event === key)?.text
+  return localeList.find((item) => item.event === key)?.text || ''
 })
 
-const getLocaleList = computed(() => {
-  return localeList.map((item) => ({
-    label: item.text,
-    key: item.event,
-  }))
-})
-
-watchEffect(() => {
-  selectedKeys.value = [unref(getLocale)]
-})
-
-async function toggleLocale(lang: string) {
+async function toggleLocale(lang: LocaleType) {
   await changeLocale(lang)
-  selectedKeys.value = [lang as string]
   props.reload && location.reload()
 }
 
-function handleMenuEvent(menu) {
+function handleMenuEvent(menu: LocaleType) {
+  console.log('menu', menu)
   if (unref(getLocale) === menu) {
     return
   }
-  toggleLocale(menu as string)
+  toggleLocale(menu)
 }
 </script>
 <template>
   <VbenDropdown
     trigger="click"
-    :options="getLocaleList"
+    show-arrow
+    :options="localeList"
+    key-field="event"
+    label-field="text"
     @select="handleMenuEvent"
   >
     <TopButtonWrapper>
-      <VbenIconify icon="carbon:ibm-watson-language-translator" />
-<!--      <span v-if="showText" class="ml-1">{{ getLocaleText }}</span>-->
+      <div class="flex items-center">
+        <VbenIconify icon="carbon:ibm-watson-language-translator" />
+        <span v-if="showText && !isMobile" class="ml-2">{{ getLocaleText }}</span>
+      </div>
     </TopButtonWrapper>
   </VbenDropdown>
 </template>

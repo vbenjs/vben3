@@ -40,6 +40,7 @@ const locale = computedAsync(async () => {
   }
   const mod = await message[getLocale.value]()
 
+  // console.log('法搜咖啡店',mod)
   return mod?.default ?? mod
 })
 </script>

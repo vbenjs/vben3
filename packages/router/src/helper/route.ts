@@ -1,19 +1,19 @@
 import type { RouteMeta, Router, RouteRecordNormalized } from 'vue-router'
-
+import { Exception, FrameBlank } from '@vben/layouts'
 import { omit, cloneDeep } from '@vben/utils'
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { LAYOUT, PARENT_LAYOUT } from '@vben/router'
+import { LAYOUT, PARENT_LAYOUT } from '../routes'
 
 export type LayoutMapKey = 'LAYOUT'
 
-const IFRAME = () => import('@/pages/sys/iframe/FrameBlank.vue')
-export const EXCEPTION_COMPONENT = () =>
-  import('@/pages/sys/exception/index.vue')
+// const IFRAME = () => import('@/pages/sys/iframe/FrameBlank.vue')
+// export const EXCEPTION_COMPONENT = () =>
+//   import('@/pages/sys/exception/index.vue')
 
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>()
 
 LayoutMap.set('LAYOUT', LAYOUT)
-LayoutMap.set('IFRAME', IFRAME)
+LayoutMap.set('IFRAME', FrameBlank)
 
 let dynamicViewsModules: Record<string, () => Promise<Recordable<any>>>
 
@@ -29,6 +29,7 @@ function asyncImportRoute(routes: RouteRecordItem[] | undefined) {
     }
     const { component, name } = item
     const { children } = item
+
     if (component) {
       const layoutFound = LayoutMap.get(component.toUpperCase())
       if (layoutFound) {
@@ -72,7 +73,7 @@ function dynamicImport(
         component +
         '.tsx`, 请自行创建!',
     )
-    return EXCEPTION_COMPONENT
+    return Exception
   }
 }
 

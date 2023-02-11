@@ -8,7 +8,7 @@ import { REDIRECT_NAME } from '@vben/constants'
 import { VbenIconify } from '@vben/vbencomponents'
 import { Menu } from '@vben/types'
 import { context } from '../../../bridge'
-import {renderIcon} from "../index";
+import { renderIcon } from '../index'
 const { useRootSetting, getAllParentPath, getMenus } = context
 // withDefaults(defineProps<{ theme: 'dark' | 'light' }>(), {
 //   theme: 'light',

@@ -41,7 +41,7 @@ export const useAppConfig = defineStore({
     permissionCacheType: CacheTypeEnum.LOCAL,
     settingButtonPosition: SettingButtonPositionEnum.AUTO,
     openSettingDrawer: false,
-    permissionMode: PermissionModeEnum.BACK,
+    permissionMode: PermissionModeEnum.ROUTE_MAPPING,
     sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
     grayMode: false,
     colorWeak: false,

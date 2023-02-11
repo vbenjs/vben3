@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { asyncRoutes, PAGE_NOT_FOUND_ROUTE } from '@/router/routes'
+import { asyncRoutes, PAGE_NOT_FOUND_ROUTE } from '@vben/router'
 import { filterTree } from '@vben/utils'
 import { Menu } from '@vben/types'
 import { useConfigStoreWithOut } from './config'
@@ -12,7 +12,7 @@ import {
   flatMultiLevelRoutes,
   transformObjToRoute,
   transformRouteToMenu,
-} from '@/router'
+} from '@vben/router'
 import { getMenuList } from '@/apis/sys'
 
 interface AuthState {

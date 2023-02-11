@@ -15,8 +15,8 @@ import {
   getChildrenMenus,
   getCurrentParentPath,
   getMenus,
-  getShallowMenus
-} from '@/router'
+  getShallowMenus,
+} from '@vben/router'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useAppInject } from '@/hooks/web/use-app-inject'
 import { useTabs } from '@/hooks/useTabs'
@@ -28,9 +28,9 @@ import Logo from '@/layout/components/logo.vue'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import { useLockStore } from '@/store/lock'
 import { unref } from 'vue'
-import {useLockScreen} from "@/hooks/web/useLockScreen";
-import {siteSetting} from "@/config";
-import {useMultipleTabSetting} from "@/hooks/setting/useMultipleTabSetting";
+import { useLockScreen } from '@/hooks/web/useLockScreen'
+import { siteSetting } from '@/config'
+import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting'
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -109,7 +109,7 @@ async function initPackages() {
         useTransitionSetting,
         useLockStore,
         useLockScreen,
-        siteSetting
+        siteSetting,
       }
     })
   }
@@ -129,6 +129,7 @@ export async function initApplication() {
   // ! Need to pay attention to the timing of execution
   // ! 需要注意调用时机
   await initPackages()
+
   // Initialize internal system configuration
   initAppConfigStore()
 }

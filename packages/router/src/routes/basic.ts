@@ -3,7 +3,7 @@ import {
   PAGE_NOT_FOUND_NAME,
   BASIC_HOME_PATH,
 } from '@vben/constants'
-import { Redirect } from '@vben/components'
+import { Exception, Redirect } from '@vben/layouts'
 import { t } from '@vben/locale'
 
 const LAYOUT = () => import('@/layout/index.vue')
@@ -25,7 +25,7 @@ const PAGE_NOT_FOUND_ROUTE: RouteRecordItem = {
     {
       path: '/:path(.*)*',
       name: PAGE_NOT_FOUND_NAME,
-      component: () => import('@/pages/sys/exception/index.vue'),
+      component: () => Exception,
       meta: {
         title: 'ErrorPage',
         key: 3333,
@@ -91,5 +91,5 @@ export {
   REDIRECT_ROUTE,
   ROOT_ROUTE,
   LOGIN_ROUTE,
-  LOCK_SCREEN_ROUTE
+  LOCK_SCREEN_ROUTE,
 }

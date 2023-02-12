@@ -1,19 +1,11 @@
 <script lang="ts" setup>
-import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
-import { useAppConfig } from '@vben/hooks'
-
-const { baseHandler, theme } = useAppConfig()
-const handlerThemeModeToggle = (v) => {
-  baseHandler(HandlerSettingEnum.CHANGE_THEME, v)
-}
+import { useAppTheme } from '@vben/hooks'
+const { isDark, toggleTheme } = useAppTheme()
 </script>
 
 <template>
   <VbenSpace justify="center">
-    <VbenSwitch
-      :value="theme === ThemeEnum.DARK"
-      @update:value="handlerThemeModeToggle"
-    >
+    <VbenSwitch :value="isDark" @update:value="toggleTheme">
       <template #checked-icon>
         <VbenIconify icon="emojione:crescent-moon" hoverPointer />
       </template>

@@ -1,19 +1,11 @@
 <script lang="ts" setup>
-import { ThemeEnum } from '@vben/constants'
-import { context } from '../../../../bridge'
-import { computed } from "vue";
-
-const { useConfigStore } = context
-const configStore = useConfigStore()
-const isDark = computed(() => configStore.getDarkMode == ThemeEnum.DARK)
-const handlerDarkModeToggle = (v) => {
-  configStore.setDarkMode(v ? ThemeEnum.DARK : ThemeEnum.LIGHT)
-}
+import { useAppTheme } from '@vben/hooks'
+const { isDark, toggleTheme } = useAppTheme()
 </script>
 
 <template>
   <VbenSpace justify="center">
-    <VbenSwitch :value="isDark" @update:value="handlerDarkModeToggle">
+    <VbenSwitch :value="isDark" @update:value="toggleTheme">
       <template #checked-icon>
         <VbenIconify icon="emojione:crescent-moon" hoverPointer />
       </template>

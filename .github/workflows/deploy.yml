@@ -31,11 +31,11 @@ jobs:
 
       # 安装依赖项
       - name: Install
-        run: pnpm i
+        run: pnpm i --no-frozen-lockfile
 
       # 打包组件
       - name: Build Docs
-        run: pnpm build
+        run: pnpm --filter @apps/admin build
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3

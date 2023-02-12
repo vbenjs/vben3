@@ -8,6 +8,7 @@ import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
+import { useAppTheme } from '@/web'
 
 type DefineAppConfigStoreGetters = {
   isSidebar: boolean

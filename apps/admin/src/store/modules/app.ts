@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 // import { pinia } from '@/pinia'
-import { resetRouter } from '@/router'
+import { resetRouter } from '@vben/router'
 
 interface AppState {
   pageLoading: boolean

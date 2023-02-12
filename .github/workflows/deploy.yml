@@ -31,7 +31,7 @@ jobs:
 
       # 安装依赖项
       - name: Install
-        run: pnpm i
+        run: pnpm i --no-frozen-lockfile
 
       # 打包组件
       - name: Build Docs

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed, unref } from 'vue'
-import logoImg from '@/assets/images/logo.png'
-import { useAppConfig } from '@vben/hooks'
+import { useAppConfig, useSiteGeneral } from '@vben/hooks'
 
 const { isMixSidebar, sidebar, isSidebar, logo, header } = useAppConfig()
 
@@ -28,7 +27,8 @@ const getStyles = computed(() => {
     }`,
   }
 })
-const title = 'Vben Admin'
+
+const { title, logo: logoUrl } = useSiteGeneral()
 </script>
 <template>
   <div
@@ -37,7 +37,7 @@ const title = 'Vben Admin'
     :style="getStyles"
   >
     <div class="h-32px w-32px">
-      <img class="h-full w-full" :src="logoImg" alt="logo" />
+      <img class="h-full w-full" :src="logoUrl" alt="logo" />
     </div>
     <div
       class="p-x-8px truncate grid content-center font-700 text-16px"

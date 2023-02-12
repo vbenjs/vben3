@@ -44,6 +44,7 @@ const triggerOptions = getMenuTriggerOptions(menu.split)
       :disabled="!isMixSidebar"
     />
     <SwitchItem
+      v-if="false"
       :title="t('layout.setting.closeMixSidebarOnChange')"
       :def="closeMixSidebarOnChange"
       :event="HandlerSettingEnum.MENU_CLOSE_MIX_SIDEBAR_ON_CHANGE"
@@ -71,21 +72,23 @@ const triggerOptions = getMenuTriggerOptions(menu.split)
       :title="t('layout.setting.menuAccordion')"
       :def="menu.accordion"
       :event="HandlerSettingEnum.MENU_ACCORDION"
-      :disabled="!sidebar.visible || !menu.accordion"
+      :disabled="!sidebar.visible || isHorizontal || isTopMenu"
     />
     <SwitchItem
       :title="t('layout.setting.collapseMenuDisplayName')"
       :def="menu.collapsedShowLabel"
       :event="HandlerSettingEnum.MENU_COLLAPSED_SHOW_TITLE"
-      :disabled="!sidebar.collapsed || sidebar.visible || isMixSidebar"
+      :disabled="!sidebar.collapsed || !sidebar.visible || isMixSidebar"
     />
     <SwitchItem
+      v-if="false"
       :title="t('layout.setting.fixedHeader')"
       :def="header.fixed"
       :event="HandlerSettingEnum.HEADER_FIXED"
       :disabled="!header.visible"
     />
     <SwitchItem
+      v-if="false"
       :title="t('layout.setting.fixedSideBar')"
       :def="sidebar.fixed"
       :event="HandlerSettingEnum.MENU_FIXED"

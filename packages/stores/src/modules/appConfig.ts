@@ -64,7 +64,7 @@ export const useAppConfig = defineStore({
     menu: {
       canDrag: false,
       split: false,
-      mode: MenuModeEnum.INLINE,
+      mode: MenuModeEnum.VERTICAL,
       accordion: false,
       collapsedShowLabel: false,
       mixSideTrigger: MixSidebarTriggerEnum.CLICK,

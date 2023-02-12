@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { usePromise } from '@vben/hooks'
-import SuffixItemWrapper from './SuffixItemWrapper.vue'
-
+import SuffixItemWrapper from '../../comm/SuffixItemWrapper.vue'
 function reload() {
   return new Promise(async (resolve) => {
     // await refreshPage()

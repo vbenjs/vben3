@@ -5,8 +5,8 @@ import {
 } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
 import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
-import { _merge, toggleClass } from '@vben/utils'
-import { reactive, unref } from 'vue'
+import { _merge } from '@vben/utils'
+import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
 
 type DefineAppConfigStoreGetters = {
@@ -22,7 +22,8 @@ export const useAppConfig = () => {
   const appConfigOptions = storeToRefs(
     useAppConfigStore as StoreGeneric,
   ) as unknown as DefineAppConfigOptions & DefineAppConfigStoreGetters
-  const { openSettingDrawer, sidebar, grayMode, colorWeak } = appConfigOptions
+  const { openSettingDrawer, sidebar, menu, isSidebar, isMixSidebar, isMix } =
+    appConfigOptions
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
@@ -39,14 +40,6 @@ export const useAppConfig = () => {
 
   function baseHandler(event: HandlerSettingEnum, value: any) {
     setAppConfig(handlerResults(event, value, appConfigOptions))
-  }
-
-  function toggleGrayMode(isGrayMode = unref(grayMode)) {
-    toggleClass(isGrayMode, 'gray-mode', document.body)
-  }
-
-  function toggleColorWeak(isColorWeak = colorWeak) {
-    toggleClass(isColorWeak, 'color-weak', document.body)
   }
 
   async function copyConfigs() {
@@ -70,6 +63,12 @@ export const useAppConfig = () => {
   function resetAllConfig() {
     useAppConfigStore.$reset()
   }
+  const getCollapsedShowLabel = computed<boolean>(() => {
+    if (unref(isMixSidebar)) {
+      return !unref(sidebar).collapsed
+    }
+    return unref(menu).collapsedShowLabel && unref(sidebar).collapsed
+  })
   return {
     ...appConfigOptions,
     setAppConfig,
@@ -79,8 +78,7 @@ export const useAppConfig = () => {
     clearAndRedo,
     resetAllConfig,
     toggleCollapse,
-    toggleGrayMode,
-    toggleColorWeak,
+    getCollapsedShowLabel,
   }
 }
 

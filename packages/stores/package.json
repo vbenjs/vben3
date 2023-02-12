@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vben/constants": "workspace:*",
+    "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
     "pinia": "^2.0.30",
     "pinia-plugin-persistedstate": "^3.0.2",

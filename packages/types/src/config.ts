@@ -198,3 +198,24 @@ export interface TransitionConfigOptions {
   // Whether to open the top progress bar
   openNProgress: boolean
 }
+
+export interface FooterLinkOptions {
+  label?: string
+  icon?: string
+  target?: '_self' | '_blank'
+  url: string
+}
+export interface DefineSiteGeneralOptions {
+  // Logo url
+  logo: string
+  // Site title
+  title: string
+  // Copyright Information
+  copyright: string
+  // Footer link
+  links: FooterLinkOptions[]
+  // Avatar url
+  avatar: string
+  // username
+  username: string
+}

@@ -3,7 +3,7 @@ import TopButtonWrapper from '../comm/TopButtonWrapper.vue'
 import { ref, unref, computed } from 'vue'
 import { useLocale, localeList } from '@vben/locale'
 import { LocaleType } from '@vben/types'
-import {useAppInject} from "@vben/hooks";
+import { useAppInject } from '@vben/hooks'
 
 const props = defineProps({
   /**
@@ -55,7 +55,9 @@ function handleMenuEvent(menu: LocaleType) {
     <TopButtonWrapper>
       <div class="flex items-center">
         <VbenIconify icon="carbon:ibm-watson-language-translator" />
-        <span v-if="showText && !isMobile" class="ml-2">{{ getLocaleText }}</span>
+        <span v-if="showText && !isMobile" class="ml-2">{{
+          getLocaleText
+        }}</span>
       </div>
     </TopButtonWrapper>
   </VbenDropdown>

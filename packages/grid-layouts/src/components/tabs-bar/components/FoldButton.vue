@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, unref } from 'vue'
-import SuffixItemWrapper from './SuffixItemWrapper.vue'
+import SuffixItemWrapper from '../../comm/SuffixItemWrapper.vue'
 import { useAppConfig } from '@vben/hooks'
 import { triggerWindowResize } from '@vben/utils'
 

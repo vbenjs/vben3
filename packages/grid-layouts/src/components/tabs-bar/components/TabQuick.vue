@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import SuffixItemWrapper from './SuffixItemWrapper.vue'
+import SuffixItemWrapper from '../../comm/SuffixItemWrapper.vue'
 </script>
 <template>
   <SuffixItemWrapper>

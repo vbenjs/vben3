@@ -5,11 +5,7 @@ const { sidebar, toggleCollapse } = useAppConfig()
 </script>
 <template>
   <div
-    class="h-24px w-24px cursor-pointer
-    grid-center absolute top-1/2 right-0 z-1
-    rounded-1/2 translate-1/2 border border-solid
-    border-[var(--trigger-background-color)]
-    bg-[var(--trigger-background-color)] shadow shadow-color-[rgb(0 0 0 / 6%)]"
+    class="h-24px w-24px cursor-pointer grid-center absolute top-1/2 right-0 z-1 rounded-1/2 translate-1/2 border border-solid border-[var(--trigger-background-color)] bg-[var(--trigger-background-color)] shadow shadow-color-[rgb(0 0 0 / 6%)]"
     @click.stop="toggleCollapse"
   >
     <VbenIconify

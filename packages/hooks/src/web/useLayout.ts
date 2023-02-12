@@ -30,16 +30,8 @@ const LIGHT_TEXT_COLOR = 'rgba(0,0,0,.85)'
 const DARK_TEXT_COLOR = '#fff'
 
 export function createThemeColorListen(el?: MaybeElementRef | null) {
-  const {
-    sidebar,
-    header,
-    grayMode,
-    colorWeak,
-    theme,
-    toggleGrayMode,
-    toggleColorWeak,
-    setAppConfig,
-  } = useAppConfig()
+  const { sidebar, header, grayMode, colorWeak, theme, setAppConfig } =
+    useAppConfig()
 
   const { sidebarRef } = useLayoutSidebar()
   const { headerRef } = useLayoutHeader()
@@ -125,7 +117,7 @@ export function createThemeColorListen(el?: MaybeElementRef | null) {
 }
 
 export function createGridLayoutListen(el: MaybeElementRef | null) {
-  const { isTopMenu, isMixSidebar, sidebar, header, footer, tabTar } =
+  const { isTopMenu, sidebar, header, footer, tabTar, getCollapsedShowLabel } =
     useAppConfig()
   const asideWidth = useCssVar(ASIDE_WIDTH, el, {
     initialValue: `${unref(sidebar).width}px`,
@@ -143,8 +135,8 @@ export function createGridLayoutListen(el: MaybeElementRef | null) {
   watchEffect(() => {
     const getAsideWidth = () => {
       if (unref(isTopMenu) || !unref(sidebar).visible) return 0
+      if (unref(getCollapsedShowLabel)) return unref(sidebar).mixSidebarWidth
       if (unref(sidebar).collapsed) return unref(sidebar).collapsedWidth
-      if (unref(isMixSidebar)) return unref(sidebar).mixSidebarWidth
       return unref(sidebar).width
     }
 
@@ -167,4 +159,12 @@ export function createGridLayoutListen(el: MaybeElementRef | null) {
     tabBarHeight.value = `${getTabBarHeight()}px`
     footerHeight.value = `${getFooterHeight()}px`
   })
+}
+
+function toggleGrayMode(isGrayMode: boolean) {
+  toggleClass(isGrayMode, 'gray-mode', document.body)
+}
+
+function toggleColorWeak(isColorWeak: boolean) {
+  toggleClass(isColorWeak, 'color-weak', document.body)
 }

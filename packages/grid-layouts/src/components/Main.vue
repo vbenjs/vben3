@@ -6,7 +6,7 @@ import { StoreGeneric, storeToRefs } from 'pinia'
 const { headerWidth, headerHeight } = storeToRefs(
   useLayoutHeader() as StoreGeneric,
 )
-const { sidebar } = useAppConfig()
+const { sidebar, getCollapsedShowLabel } = useAppConfig()
 
 const { isMobile } = useAppInject()
 </script>
@@ -16,10 +16,11 @@ const { isMobile } = useAppInject()
     <div>headerWidth: {{ headerWidth }}, headerHeight: {{ headerHeight }}</div>
     ___________________________________________________________________________
     <div>useAppConfig : {{ sidebar }}</div>
+    <div>getCollapsedShowLabel : {{ getCollapsedShowLabel }}</div>
     <div class="dark:color-red">isMobile: {{ isMobile }}</div>
 
     <VbenButton> 大丰收的 </VbenButton>
-    <RouterView />
+<!--    <RouterView />-->
   </main>
 </template>
 <style lang="scss" scoped></style>

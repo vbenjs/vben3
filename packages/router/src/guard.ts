@@ -152,7 +152,6 @@ export function createAuthGuard() {
         return
       }
     }
-    // console.log(permissionStore.getIsDynamicAddedRoute, to)
     if (authStore.getIsDynamicAddedRoute) {
       next()
       return

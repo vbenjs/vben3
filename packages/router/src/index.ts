@@ -16,6 +16,18 @@ export interface Stores {
   appConfig?: DefineAppConfigOptions
 }
 
+const WHITE_NAME_LIST: string[] = []
+;(() => {
+  const getRouteNames = (routeRecords: RouteRecordItem[]) =>
+    routeRecords.forEach((item) => {
+      WHITE_NAME_LIST.push(item.name)
+      if (item?.children?.length) {
+        getRouteNames(item.children)
+      }
+    })
+
+  getRouteNames(BasicRoutes)
+})()
 export let stores: Stores = {}
 export let router: Router
 export function InitRouter(path: string): Router {
@@ -26,6 +38,16 @@ export function InitRouter(path: string): Router {
     scrollBehavior: () => ({ left: 0, top: 0 }),
   })
   return router
+}
+
+// reset router
+export function resetRouter() {
+  router.getRoutes().forEach((route) => {
+    const { name } = route
+    if (name && !WHITE_NAME_LIST.includes(name as string)) {
+      router.hasRoute(name) && router.removeRoute(name)
+    }
+  })
 }
 
 export function initGuard(s: Stores) {

@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { asyncRoutes, PAGE_NOT_FOUND_ROUTE } from '@vben/router'
+import { layoutRoutes, PAGE_NOT_FOUND_ROUTE } from '@vben/router'
 import { filterTree } from '@vben/utils'
 import { Menu } from '@vben/types'
 import { useConfigStoreWithOut } from './config'
 import { useUserStore } from './user'
 import { getPermCode } from '@/apis/auth'
-import { toRaw } from 'vue'
+import { toRaw, unref } from 'vue'
 import { projectSetting } from '@/setting'
 import { PermissionModeEnum, PageEnum } from '@vben/constants'
 import {
@@ -14,6 +14,8 @@ import {
   transformRouteToMenu,
 } from '@vben/router'
 import { getMenuList } from '@/apis/sys'
+import { useAppConfig } from '@vben/hooks'
+import { asyncRoutes } from '@/router/routes'
 
 interface AuthState {
   // Permission code list
@@ -90,13 +92,12 @@ export const useAuthStore = defineStore({
     },
     async buildRoutesAction(): Promise<RouteRecordItem[]> {
       // const { t } = useI18n()
+      const appConfig = useAppConfig()
       const userStore = useUserStore()
-      const configStore = useConfigStoreWithOut()
 
       let routes: RouteRecordItem[] = []
       const roleList = toRaw(userStore.getRoles) || []
-      const { permissionMode = projectSetting.permissionMode } =
-        configStore.getProjectConfig
+      const permissionMode = unref(appConfig.permissionMode)
 
       const routeFilter = (route: RouteRecordItem) => {
         const { meta } = route
@@ -141,17 +142,17 @@ export const useAuthStore = defineStore({
         }
         return
       }
-
+      // 组合框架路由与本地路由
+      const r = layoutRoutes.concat(asyncRoutes)
       switch (permissionMode) {
         case PermissionModeEnum.ROLE:
-          routes = filterTree(asyncRoutes, routeFilter)
+          routes = filterTree(r, routeFilter)
           routes = routes.filter(routeFilter)
           // Convert multi-level routing to level 2 routing
           routes = flatMultiLevelRoutes(routes)
           break
-
         case PermissionModeEnum.ROUTE_MAPPING:
-          routes = filterTree(asyncRoutes, routeFilter)
+          routes = filterTree(r, routeFilter)
           routes = routes.filter(routeFilter)
           const menuList = transformRouteToMenu(routes, true)
           routes = filterTree(routes, routeRemoveIgnoreFilter)

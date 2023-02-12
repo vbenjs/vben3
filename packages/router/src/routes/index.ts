@@ -20,7 +20,7 @@ Object.keys(routeModuleRecord).forEach((key) => {
   )
 })
 
-export const asyncRoutes = [...routeModules]
+export const layoutRoutes = [...routeModules]
 
 export const BasicRoutes = [
   LOGIN_ROUTE,

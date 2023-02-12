@@ -35,7 +35,7 @@ jobs:
 
       # 打包组件
       - name: Build Docs
-        run: pnpm build
+        run: ./apps/admin/pnpm build
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3

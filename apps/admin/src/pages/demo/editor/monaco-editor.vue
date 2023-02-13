@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import * as monaco from 'monaco-editor'
-import { onMounted } from 'vue'
-let editor = $ref(null)
+import { onMounted, ref } from 'vue'
+let editor = ref(null)
 onMounted(() => {
   initEditor()
 })
 const initEditor = () => {
   // Initialize editor , Make sure dom Has rendered
-  editor = monaco.editor.create(document.getElementById('codeEditBox'), {
+  editor.value = monaco.editor.create(document.getElementById('codeEditBox'), {
     value: 'console.log("Hello, world")',
     language: 'javascript',
   })

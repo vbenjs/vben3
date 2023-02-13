@@ -76,7 +76,7 @@ const triggerOptions = getMenuTriggerOptions(menu.split)
     />
     <SwitchItem
       :title="t('layout.setting.collapseMenuDisplayName')"
-      :def="menu.collapsedShowLabel"
+      :def="menu.collapsedShowTitle"
       :event="HandlerSettingEnum.MENU_COLLAPSED_SHOW_TITLE"
       :disabled="!sidebar.collapsed || !sidebar.visible || isMixSidebar"
     />

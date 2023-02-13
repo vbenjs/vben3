@@ -23,8 +23,7 @@ export const useAppConfig = () => {
   const appConfigOptions = storeToRefs(
     useAppConfigStore as StoreGeneric,
   ) as unknown as DefineAppConfigOptions & DefineAppConfigStoreGetters
-  const { openSettingDrawer, sidebar, menu, isSidebar, isMixSidebar, isMix } =
-    appConfigOptions
+  const { openSettingDrawer, sidebar, menu, isMixSidebar } = appConfigOptions
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
@@ -64,11 +63,11 @@ export const useAppConfig = () => {
   function resetAllConfig() {
     useAppConfigStore.$reset()
   }
-  const getCollapsedShowLabel = computed<boolean>(() => {
+  const getCollapsedShowTitle = computed<boolean>(() => {
     if (unref(isMixSidebar)) {
       return !unref(sidebar).collapsed
     }
-    return unref(menu).collapsedShowLabel && unref(sidebar).collapsed
+    return unref(menu).collapsedShowTitle && unref(sidebar).collapsed
   })
   return {
     ...appConfigOptions,
@@ -79,7 +78,7 @@ export const useAppConfig = () => {
     clearAndRedo,
     resetAllConfig,
     toggleCollapse,
-    getCollapsedShowLabel,
+    getCollapsedShowTitle,
   }
 }
 
@@ -137,7 +136,7 @@ function handlerResults(
       return { sidebar: { show: value, visible: value } }
 
     case HandlerSettingEnum.MENU_COLLAPSED_SHOW_TITLE:
-      return { menu: { collapsedShowLabel: value } }
+      return { menu: { collapsedShowTitle: value } }
 
     case HandlerSettingEnum.MENU_THEME:
       // updateSidebarBgColor(value);

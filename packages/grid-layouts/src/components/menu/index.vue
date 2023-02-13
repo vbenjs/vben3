@@ -1,16 +1,31 @@
 <script lang="ts" setup>
-import SubMenu from './SubMenu.vue'
-defineProps({
-  exclHeight: {
-    type: Number,
-    default: 0
-  }
-})
+import BasicMenu from './components/BasicMenu.vue'
+import { mapTree } from '@vben/utils'
+import { getMenus } from '@vben/router'
+import { nextTick, onMounted, ref } from 'vue'
+import { renderMenuLabelToRouterLink } from './renderMenu'
 
+const menuRef = ref(null)
+const menuOptions = ref([])
+const showOption = () => {
+  nextTick(() => {
+    if (!menuRef.value) return
+
+    console.log(menuRef.value)
+    menuRef.value.showOption()
+  })
+}
+onMounted(async () => {
+  const menus = await getMenus()
+  menuOptions.value = mapTree(menus, {
+    conversion: (menu) => renderMenuLabelToRouterLink(menu),
+  })
+  // showOption()
+})
 </script>
 <template>
   <VbenScrollbar>
-    <SubMenu />
+    <BasicMenu ref="menuRef" :menu-options="menuOptions" />
   </VbenScrollbar>
 </template>
 <style lang="scss" scoped></style>

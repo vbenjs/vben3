@@ -9,6 +9,7 @@ const dashboard: RouteRecordItem = {
     orderNo: 2,
     icon: 'line-md:clipboard-list-twotone',
     title: 'routes.demo.demo',
+    root: true,
   },
   children: [
     {

@@ -29,6 +29,7 @@
     "@vben/constants": "workspace:*",
     "@vben/demo": "workspace:*",
     "@vben/directives": "workspace:*",
+    "@vben/grid-layouts": "workspace:*",
     "@vben/hooks": "workspace:*",
     "@vben/layouts": "workspace:*",
     "@vben/locale": "workspace:*",

@@ -3,7 +3,7 @@ import {
   PAGE_NOT_FOUND_ROUTE,
   REDIRECT_ROUTE,
   ROOT_ROUTE,
-  LOCK_SCREEN_ROUTE
+  LOCK_SCREEN_ROUTE,
 } from './basic'
 
 export * from './basic'

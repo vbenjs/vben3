@@ -117,7 +117,7 @@ export function createThemeColorListen(el?: MaybeElementRef | null) {
 }
 
 export function createGridLayoutListen(el: MaybeElementRef | null) {
-  const { isTopMenu, sidebar, header, footer, tabTar, getCollapsedShowLabel } =
+  const { isTopMenu, sidebar, header, footer, tabTar, getCollapsedShowTitle } =
     useAppConfig()
   const asideWidth = useCssVar(ASIDE_WIDTH, el, {
     initialValue: `${unref(sidebar).width}px`,
@@ -135,7 +135,7 @@ export function createGridLayoutListen(el: MaybeElementRef | null) {
   watchEffect(() => {
     const getAsideWidth = () => {
       if (unref(isTopMenu) || !unref(sidebar).visible) return 0
-      if (unref(getCollapsedShowLabel)) return unref(sidebar).mixSidebarWidth
+      if (unref(getCollapsedShowTitle)) return unref(sidebar).mixSidebarWidth
       if (unref(sidebar).collapsed) return unref(sidebar).collapsedWidth
       return unref(sidebar).width
     }

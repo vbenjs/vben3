@@ -7,7 +7,7 @@ const Editor: RouteRecordItem = {
   meta: {
     orderNo: 3,
     title: '编辑器',
-    icon: 'openmoji:code-editor'
+    icon: 'openmoji:code-editor',
   },
   children: [
     {

@@ -122,7 +122,7 @@ export interface MenuConfigOptions {
   split: boolean
   mode: MenuModeEnum
   accordion: boolean
-  collapsedShowLabel: boolean
+  collapsedShowTitle: boolean
   mixSideTrigger: MixSidebarTriggerEnum
   mixSideFixed: boolean
   topMenuAlign: 'start' | 'center' | 'end'

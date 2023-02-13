@@ -8,6 +8,7 @@ const Editor: RouteRecordItem = {
     orderNo: 3,
     title: '编辑器',
     icon: 'openmoji:code-editor',
+    root: true,
   },
   children: [
     {

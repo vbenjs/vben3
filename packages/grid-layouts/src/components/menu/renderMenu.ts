@@ -7,13 +7,13 @@ import { useI18n } from '@vben/locale'
 const { t } = useI18n()
 
 type MenuOption = {
-  iconTitle: string
+  collapseTitle: string
   key: string
   icon: () => VNode
   root?: boolean
 }
 export function renderMenuIcon(menuOption: MenuOption): VNode | undefined {
-  const { iconTitle, icon, root } = menuOption
+  const { collapseTitle, icon, root } = menuOption
 
   if (!icon) return undefined
   const { getCollapsedShowTitle } = useAppConfig()
@@ -32,7 +32,7 @@ export function renderMenuIcon(menuOption: MenuOption): VNode | undefined {
             class: 'truncate',
             style: 'font-size: 12px;max-width: 64px;margin-top:2px;',
           },
-          iconTitle || '',
+          collapseTitle || '',
         ),
       ],
     )
@@ -43,7 +43,7 @@ export function renderMenuIcon(menuOption: MenuOption): VNode | undefined {
 export function renderMenuLabelToRouterLink(
   item: RouteRecordItem & { icon?: string },
 ) {
-  const { name, children, meta, icon } = item
+  const { path, children, meta, icon } = item
 
   const title = t(meta.title as string)
   return {
@@ -55,15 +55,56 @@ export function renderMenuLabelToRouterLink(
         RouterLink,
         {
           to: {
-            name,
+            path,
           },
         },
         { default: () => title },
       )
     },
-    key: name,
+    key: path,
     icon: renderIcon((icon || meta.icon) as unknown as string),
-    iconTitle: title,
+    collapseTitle: title,
     root: meta?.root || false,
+  }
+}
+
+export function renderMenuLabel(
+  item: RouteRecordItem & { icon?: string },
+  attrs: Record<string, any>,
+) {
+  const { path, meta, icon } = item
+  const title = t(meta.title as string)
+  const { sidebar } = useAppConfig()
+  const { onMouseenter, onClick } = attrs
+  return {
+    key: path,
+    label: () => {
+      return h(
+        'div',
+        {
+          class: 'flex-center flex-col h-full w-full absolute',
+          style: { left: '0', top: '0' },
+          onMouseenter: () => {
+            onMouseenter && onMouseenter(item)
+          },
+          onClick: () => {
+            onClick && onClick(item)
+          },
+        },
+        [
+          renderIcon(icon)(),
+          unref(sidebar).collapsed
+            ? ''
+            : h(
+                'div',
+                {
+                  class: 'truncate',
+                  style: 'font-size: 12px;max-width: 64px;margin-top:2px;',
+                },
+                title || '',
+              ),
+        ],
+      )
+    },
   }
 }

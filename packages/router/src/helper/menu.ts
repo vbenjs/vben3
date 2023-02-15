@@ -36,7 +36,7 @@ export function transformMenuModule(menuModule: MenuModule): Menu {
 
   const menuList = [menu]
 
-  joinParentPath(menuList)
+  joinParentPath(menuList as RouteRecordItem[])
   return menuList[0]
 }
 

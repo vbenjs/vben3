@@ -2,7 +2,15 @@
 import { computed, unref } from 'vue'
 import { useAppConfig, useSiteGeneral } from '@vben/hooks'
 
+const props = defineProps({
+  showTitle: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const { isMixSidebar, sidebar, isSidebar, logo, header } = useAppConfig()
+
 
 const getWidth = computed(() => {
   if (unref(isSidebar) && unref(sidebar).collapsed)
@@ -13,7 +21,7 @@ const getWidth = computed(() => {
 
 const showLogoTitle = computed(() => {
   if (unref(isSidebar)) return !unref(sidebar).collapsed
-  if (unref(isMixSidebar)) return false
+  if (unref(isMixSidebar)) return props.showTitle
   return true
 })
 
@@ -33,11 +41,14 @@ const { title, logo: logoUrl } = useSiteGeneral()
 <template>
   <div
     v-if="logo.show"
-    class="grid grid-cols-2 content-center grid-rows-none pl-8px transition-all-300"
+    class="grid grid-cols-2 content-center grid-rows-none transition-all-300"
+    :class="[showLogoTitle ? 'ml-8px' : '']"
     :style="getStyles"
   >
-    <div class="h-32px w-32px">
-      <img class="h-full w-full" :src="logoUrl" alt="logo" />
+    <div class="flex-center" :class="[showLogoTitle ? '' : 'w-[var(--aside-width)]']">
+      <div class="h-32px w-32px">
+        <img class="h-full w-full" :src="logoUrl" alt="logo" />
+      </div>
     </div>
     <div
       class="p-x-8px truncate grid content-center font-700 text-16px"

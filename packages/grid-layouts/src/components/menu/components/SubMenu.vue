@@ -1,11 +1,15 @@
 <script lang="ts" setup>
-import {ref, computed, unref, nextTick, onMounted} from 'vue'
-import {renderMenuIcon, renderMenuLabelToRouterLink} from '../renderMenu'
+import { ref, computed, unref, nextTick, watch } from 'vue'
+import { renderMenuIcon, renderMenuLabelToRouterLink } from '../renderMenu'
 import { useAppConfig } from '@vben/hooks'
-import {MenuModeEnum, REDIRECT_NAME} from '@vben/constants'
-import {getMenus, listenerRouteChange} from "@vben/router";
-import {RouteLocationNormalizedLoaded, useRouter} from "vue-router";
-import {mapTree} from "@vben/utils";
+import { MenuModeEnum, REDIRECT_NAME } from '@vben/constants'
+import {
+  getChildrenMenus,
+  getCurrentParentPath,
+  listenerRouteChange,
+} from '@vben/router'
+import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
+import { mapTree } from '@vben/utils'
 const { menu, sidebar, isMixSidebar, getCollapsedShowTitle } = useAppConfig()
 
 defineProps({
@@ -15,12 +19,10 @@ defineProps({
   },
 })
 
-
 const activeKey = ref(null)
 const menuOptions = ref([])
 const basicMenuRef = ref(null)
 const { currentRoute } = useRouter()
-
 
 const showOption = () => {
   nextTick(() => {
@@ -29,13 +31,23 @@ const showOption = () => {
   })
 }
 
-onMounted(async () => {
-  const menus = await getMenus()
-  menuOptions.value = mapTree(menus, {
-    conversion: (menu) => renderMenuLabelToRouterLink(menu),
-  })
-  showOption()
-})
+watch(
+  () => unref(currentRoute).path,
+  async (path: string) => {
+    let parentPath = await getCurrentParentPath(path)
+    if (parentPath) {
+      // activeKey.value = path
+      const children = await getChildrenMenus(parentPath)
+      menuOptions.value = mapTree(children, {
+        conversion: (menu) => renderMenuLabelToRouterLink(menu),
+      })
+      showOption()
+    }
+  },
+  {
+    immediate: true,
+  },
+)
 
 listenerRouteChange((route) => {
   if (route.name === REDIRECT_NAME) return
@@ -48,7 +60,6 @@ listenerRouteChange((route) => {
   }
   showOption()
 })
-
 
 async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
   const menu = route || unref(currentRoute)

@@ -106,13 +106,7 @@ const triggerOptions = getMenuTriggerOptions(menu.split)
       :options="topMenuAlignOptions"
       :def="menu.topMenuAlign"
       :event="HandlerSettingEnum.MENU_TOP_ALIGN"
-      :disabled="
-        !sidebar.show ||
-        isHorizontal ||
-        menu.split ||
-        (!isTopMenu && !menu.split) ||
-        isMixSidebar
-      "
+      :disabled="!(isTopMenu || (isMix && menu.split))"
     />
     <SelectItem
       :title="t('layout.setting.menuCollapseButton')"

@@ -3,11 +3,12 @@ import Logo from '../logo/index.vue'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
 import SiderFooterTrigger from '../widgets/SiderFooterTrigger.vue'
 import SiderCenterTrigger from '../widgets/SiderCenterTrigger.vue'
-import Menu from '../menu/index.vue'
 import { useAppConfig, useAppInject } from '@vben/hooks'
 import { computed, unref, ref } from 'vue'
 import { TriggerEnum } from '@vben/constants'
-import { useElementSize } from '@vben/utils'
+import { useElementSize, MaybeComputedElementRef } from '@vben/utils'
+import SidebarMenu from "../menu/SidebarMenu.vue";
+import MixSidebarMenu from "../menu/MixSidebarMenu.vue";
 
 const { isMixSidebar, isTopMenu, sidebar, isSidebar } = useAppConfig()
 
@@ -15,7 +16,7 @@ const { isMobile } = useAppInject()
 
 const logoRef = ref<Element>(null)
 
-const { height: lagoHeight } = useElementSize(logoRef)
+const { height: lagoHeight } = useElementSize(logoRef as MaybeComputedElementRef)
 
 const showFooterTrigger = computed(() => {
   if (unref(isMixSidebar)) return true
@@ -40,11 +41,14 @@ const showSidebarLogo = computed(() => {
     ]"
   >
     <VbenConfig :theme-mode="sidebar.theme" :inherit="false" abstract>
-      <Logo ref="logoRef" v-if="showSidebarLogo" />
-      <Menu :style="{ height: `calc(100% - ${lagoHeight}px)` }" />
-      <SiderFooterTrigger v-if="showFooterTrigger" />
-      <SiderCenterTrigger v-if="showCenterTrigger && !isMobile" />
-      <SecondaryBorder right class="!bg-[var(--trigger-background-color)]" />
+      <template v-if="!isMixSidebar">
+        <Logo ref="logoRef" v-if="showSidebarLogo" />
+        <SidebarMenu :style="{ height: `calc(100% - ${lagoHeight}px)` }" />
+        <SiderFooterTrigger v-if="showFooterTrigger" />
+        <SiderCenterTrigger v-if="showCenterTrigger && !isMobile" />
+        <SecondaryBorder right class="!bg-[var(--trigger-background-color)]" />
+      </template>
+      <MixSidebarMenu v-else/>
     </VbenConfig>
   </div>
 </template>

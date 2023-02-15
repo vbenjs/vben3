@@ -4,6 +4,7 @@ const Editor: RouteRecordItem = {
   path: '/editor',
   name: 'Editor',
   component: LAYOUT,
+  redirect: '/editor/monaco-editor',
   meta: {
     orderNo: 3,
     title: '编辑器',

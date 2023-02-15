@@ -12,6 +12,7 @@ import HeaderTrigger from '../widgets/HeaderTrigger.vue'
 import { useAppConfig } from '@vben/hooks'
 import { computed, unref } from 'vue'
 import { TriggerEnum } from '@vben/constants'
+import TopMenu from "../menu/TopMenu.vue";
 
 const { isMixSidebar, isTopMenu, isMix, sidebar, menu, header } = useAppConfig()
 
@@ -40,7 +41,8 @@ const showHeaderLogo = computed(() => {
       >
         <Logo v-if="showHeaderLogo" />
         <HeaderTrigger v-if="showHeaderTrigger" />
-        <Breadcrumb />
+        <Breadcrumb v-if="!(isTopMenu || (isMix && menu.split))" />
+        <TopMenu />
       </div>
       <div class="h-[var(--header-height)] grid-col-[min-content] flex">
         <Search />

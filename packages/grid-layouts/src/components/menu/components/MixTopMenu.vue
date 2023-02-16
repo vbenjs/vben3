@@ -1,19 +1,10 @@
 <script lang="ts" setup>
 import { ref, unref, nextTick, onMounted, watch } from 'vue'
 import { renderMenuLabelToRouterLink } from '../renderMenu'
-import { useAppConfig } from '@vben/hooks'
 import { MenuModeEnum } from '@vben/constants'
 import { getCurrentParentPath, getShallowMenus } from '@vben/router'
 import { useRouter } from 'vue-router'
 import { mapTree } from '@vben/utils'
-const { menu } = useAppConfig()
-
-defineProps({
-  mode: {
-    type: String,
-    default: () => MenuModeEnum.VERTICAL,
-  },
-})
 
 const activeKey = ref(null)
 const menuOptions = ref([])
@@ -29,10 +20,13 @@ const showOption = () => {
 
 onMounted(async () => {
   const menus = await getShallowMenus()
-  menuOptions.value = mapTree(menus, {
-    conversion: (menu) => renderMenuLabelToRouterLink(menu),
-  })
+  if (menus.length){
+    menuOptions.value = mapTree(menus, {
+      conversion: (menu) => renderMenuLabelToRouterLink(menu),
+    })
+  }
   showOption()
+
 })
 
 watch(
@@ -52,10 +46,10 @@ watch(
 </script>
 <template>
   <VbenMenu
+    v-if="menuOptions.length"
     v-model:value="activeKey"
-    :dropdown-placement="menu.dropdownPlacement"
     :options="menuOptions"
-    :mode="mode"
+    :mode="MenuModeEnum.HORIZONTAL"
     :root-indent="12"
     ref="basicMenuRef"
   />

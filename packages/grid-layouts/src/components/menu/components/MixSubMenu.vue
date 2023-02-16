@@ -2,7 +2,7 @@
 import { ref, computed, unref, nextTick, watch } from 'vue'
 import { renderMenuIcon, renderMenuLabelToRouterLink } from '../renderMenu'
 import { useAppConfig } from '@vben/hooks'
-import { MenuModeEnum, REDIRECT_NAME } from '@vben/constants'
+import { REDIRECT_NAME } from '@vben/constants'
 import {
   getChildrenMenus,
   getCurrentParentPath,
@@ -10,14 +10,8 @@ import {
 } from '@vben/router'
 import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
 import { mapTree } from '@vben/utils'
-const { menu, sidebar, isMixSidebar, getCollapsedShowTitle } = useAppConfig()
-
-defineProps({
-  mode: {
-    type: String,
-    default: () => MenuModeEnum.VERTICAL,
-  },
-})
+const { menu, sidebar, isMixSidebar, getCollapsedShowTitle, setAppConfig } =
+  useAppConfig()
 
 const activeKey = ref(null)
 const menuOptions = ref([])
@@ -36,13 +30,13 @@ watch(
   async (path: string) => {
     let parentPath = await getCurrentParentPath(path)
     if (parentPath) {
-      // activeKey.value = path
       const children = await getChildrenMenus(parentPath)
       menuOptions.value = mapTree(children, {
         conversion: (menu) => renderMenuLabelToRouterLink(menu),
       })
       showOption()
     }
+    setAppConfig({ sidebar: { visible: !!unref(menuOptions).length && !!parentPath } })
   },
   {
     immediate: true,
@@ -90,9 +84,7 @@ const getMenuItemStyles = computed(() => {
     :accordion="menu.accordion"
     :collapsed="getMenuCollapsed"
     :collapsed-width="sidebar.collapsedWidth"
-    :dropdown-placement="menu.dropdownPlacement"
     :options="menuOptions"
-    :mode="mode"
     :icon-size="getMenuItemStyles.iconSize"
     :root-indent="12"
     :render-icon="renderMenuIcon"

@@ -126,6 +126,8 @@ export interface MenuConfigOptions {
   mixSideTrigger: MixSidebarTriggerEnum
   mixSideFixed: boolean
   topMenuAlign: 'start' | 'center' | 'end'
+
+  subMenuWidth: number
   dropdownPlacement:
     | 'top-start'
     | 'top'

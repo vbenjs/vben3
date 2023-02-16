@@ -11,13 +11,15 @@ type MenuOption = {
   key: string
   icon: () => VNode
   root?: boolean
+
+  collapsedShowTitle?: boolean
 }
 export function renderMenuIcon(menuOption: MenuOption): VNode | undefined {
-  const { collapseTitle, icon, root } = menuOption
+  const { collapseTitle, icon, root, collapsedShowTitle } = menuOption
 
   if (!icon) return undefined
   const { getCollapsedShowTitle } = useAppConfig()
-  if (unref(getCollapsedShowTitle) && root) {
+  if (unref(getCollapsedShowTitle) && (root || collapsedShowTitle)) {
     return h(
       'div',
       {
@@ -65,6 +67,7 @@ export function renderMenuLabelToRouterLink(
     icon: renderIcon((icon || meta.icon) as unknown as string),
     collapseTitle: title,
     root: meta?.root || false,
+    collapsedShowTitle: meta?.collapsedShowTitle || false,
   }
 }
 

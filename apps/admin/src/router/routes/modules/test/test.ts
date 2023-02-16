@@ -19,6 +19,7 @@ const test: RouteRecordItem = {
       meta: {
         icon: 'mdi:monitor-dashboard',
         title: 'Test',
+        collapsedShowTitle: true,
       },
     },
   ],

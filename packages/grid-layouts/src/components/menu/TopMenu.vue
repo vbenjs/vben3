@@ -2,7 +2,7 @@
 import BasicMenu from './components/BasicMenu.vue'
 import { MenuModeEnum } from '@vben/constants'
 import { useAppConfig } from '@vben/hooks'
-import SimpleMenu from './components/SimpleMenu.vue'
+import MixTopMenu from './components/MixTopMenu.vue'
 
 const { isTopMenu, isMix, menu } = useAppConfig()
 </script>
@@ -13,7 +13,7 @@ const { isTopMenu, isMix, menu } = useAppConfig()
       :style="{ justifyContent: menu.topMenuAlign }"
     >
       <BasicMenu v-if="isTopMenu" :mode="MenuModeEnum.HORIZONTAL" />
-      <SimpleMenu v-else :mode="MenuModeEnum.HORIZONTAL" />
+      <MixTopMenu v-else />
     </div>
   </VbenScrollbar>
 </template>

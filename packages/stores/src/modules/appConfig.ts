@@ -71,6 +71,7 @@ export const useAppConfig = defineStore({
       mixSideFixed: false,
       topMenuAlign: 'start',
       dropdownPlacement: 'top-start',
+      subMenuWidth: 0,
     },
     header: {
       theme: ThemeEnum.DARK,

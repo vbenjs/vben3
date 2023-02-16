@@ -38,6 +38,10 @@ export const useAppConfig = () => {
     useAppConfigStore.setSidebar({ collapsed: !unref(sidebar).collapsed })
   }
 
+  function toggleMenuFixed() {
+    useAppConfigStore.setMenu({ mixSideFixed: !unref(menu).mixSideFixed })
+  }
+
   function baseHandler(event: HandlerSettingEnum, value: any) {
     setAppConfig(handlerResults(event, value, appConfigOptions))
   }
@@ -78,6 +82,7 @@ export const useAppConfig = () => {
     clearAndRedo,
     resetAllConfig,
     toggleCollapse,
+    toggleMenuFixed,
     getCollapsedShowTitle,
   }
 }

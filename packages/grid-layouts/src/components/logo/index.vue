@@ -41,11 +41,11 @@ const { title, logo: logoUrl } = useSiteGeneral()
 <template>
   <div
     v-if="logo.show"
-    class="grid grid-cols-2 content-center grid-rows-none transition-all-300"
+    class="grid grid-cols-2 content-center justify-center grid-rows-none transition-all-300"
     :class="[showLogoTitle ? 'ml-8px' : '']"
     :style="getStyles"
   >
-    <div class="flex-center" :class="[showLogoTitle ? '' : 'w-[var(--aside-width)]']">
+    <div class="flex-center" :class="[showLogoTitle ? '' : 'w-full']">
       <div class="h-32px w-32px">
         <img class="h-full w-full" :src="logoUrl" alt="logo" />
       </div>

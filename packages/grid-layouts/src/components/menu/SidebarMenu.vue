@@ -2,7 +2,7 @@
 import BasicMenu from './components/BasicMenu.vue'
 import { MenuModeEnum } from '@vben/constants'
 import { useAppConfig } from '@vben/hooks'
-import SubMenu from './components/SubMenu.vue'
+import MixSubMenu from './components/MixSubMenu.vue'
 
 const { isSidebar, isMix, menu } = useAppConfig()
 </script>
@@ -12,6 +12,6 @@ const { isSidebar, isMix, menu } = useAppConfig()
       v-if="isSidebar || (isMix && !menu.split)"
       :mode="MenuModeEnum.VERTICAL"
     />
-    <SubMenu v-if="isMix && menu.split" :mode="MenuModeEnum.VERTICAL" />
+    <MixSubMenu v-if="isMix && menu.split" />
   </VbenScrollbar>
 </template>

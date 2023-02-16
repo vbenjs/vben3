@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { usePromise } from '@vben/hooks'
+import { useAppConfig, usePromise } from '@vben/hooks'
 import SuffixItemWrapper from '../../comm/SuffixItemWrapper.vue'
+
+const { tabTar } = useAppConfig()
 function reload() {
   return new Promise(async (resolve) => {
     // await refreshPage()
@@ -16,7 +18,7 @@ const { loading, handleFn: handleRedo } = usePromise(reload, {
 </script>
 
 <template>
-  <SuffixItemWrapper @click="handleRedo">
+  <SuffixItemWrapper @click="handleRedo" v-if="tabTar.showRedo">
     <VbenIconify icon="ep:refresh-right" size="18" :infinite="loading" />
   </SuffixItemWrapper>
 </template>

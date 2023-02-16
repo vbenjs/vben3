@@ -4,7 +4,7 @@ import SuffixItemWrapper from '../../comm/SuffixItemWrapper.vue'
 import { useAppConfig } from '@vben/hooks'
 import { triggerWindowResize } from '@vben/utils'
 
-const { sidebar, header, setAppConfig } = useAppConfig()
+const { sidebar, header, setAppConfig, tabTar } = useAppConfig()
 const getIsUnFold = computed(
   () => !unref(sidebar).visible && !unref(header).visible,
 )
@@ -20,7 +20,7 @@ function handleFold() {
 </script>
 
 <template>
-  <SuffixItemWrapper @click.stop="handleFold">
+  <SuffixItemWrapper v-if="tabTar.showFold" @click.stop="handleFold">
     <VbenIconify
       :icon="getIsUnFold ? 'codicon:screen-normal' : 'codicon:screen-full'"
     />

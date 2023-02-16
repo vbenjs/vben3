@@ -5,8 +5,11 @@ import { useI18n } from '@vben/locale'
 import defaultLogo from '@/assets/images/logo.png'
 // @ts-ignore
 import defaultAvatar from '@/assets/images/header.jpg'
+import { getGlobalConfig } from '@vben/utils'
 
 const { t } = useI18n()
+
+const { title } = getGlobalConfig(import.meta.env)
 
 // github repo url
 export const GITHUB_URL = 'https://github.com/vbenjs/vben3'
@@ -36,7 +39,7 @@ export const useSiteGeneral = defineStore({
   id: 'APP_SITE_GENERAL_OPTIONS',
   state: (): DefineSiteGeneralOptions => ({
     logo: defaultLogo,
-    title: 'Vben Admin',
+    title,
     copyright: '2023 Vben Admin',
     links: links,
     avatar: defaultAvatar,

@@ -144,7 +144,7 @@ export function createGridLayoutListen(el: MaybeElementRef | null) {
     const getAsideWidth = () => {
       if (unref(isTopMenu) || !unref(sidebar).visible) return 0
       if (unref(getCollapsedShowTitle)) {
-        return unref(menu).mixSideFixed
+        return unref(menu).mixSideFixed && unref(isMixSidebar)
           ? unref(sidebar).mixSidebarWidth + unref(menu).subMenuWidth
           : unref(sidebar).mixSidebarWidth
       }

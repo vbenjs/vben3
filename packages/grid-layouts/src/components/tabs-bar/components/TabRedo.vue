@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useAppConfig, usePromise, useTabs} from '@vben/hooks'
+import { useAppConfig, usePromise, useTabs } from '@vben/hooks'
 import SuffixItemWrapper from '../../comm/SuffixItemWrapper.vue'
 
 const { refreshPage } = useTabs()

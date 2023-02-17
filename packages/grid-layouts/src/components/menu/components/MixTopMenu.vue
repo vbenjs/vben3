@@ -20,13 +20,12 @@ const showOption = () => {
 
 onMounted(async () => {
   const menus = await getShallowMenus()
-  if (menus.length){
+  if (menus.length) {
     menuOptions.value = mapTree(menus, {
       conversion: (menu) => renderMenuLabelToRouterLink(menu),
     })
   }
   showOption()
-
 })
 
 watch(
@@ -41,8 +40,6 @@ watch(
     immediate: true,
   },
 )
-
-
 </script>
 <template>
   <VbenMenu

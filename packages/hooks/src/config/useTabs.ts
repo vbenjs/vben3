@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { unref } from 'vue'
 import { useMultipleTab, useAppConfig } from '@vben/stores'
 import { TabActionEnum } from '@vben/constants'
+import { useGo, useRedo } from '../usePage'
 
 export function useTabs(_router?: Router) {
   const appStore = useAppConfig()
@@ -59,6 +60,7 @@ export function useTabs(_router?: Router) {
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
         await tabStore.refreshPage(router)
+        await useRedo(router)
         break
 
       case TabActionEnum.CLOSE_ALL:

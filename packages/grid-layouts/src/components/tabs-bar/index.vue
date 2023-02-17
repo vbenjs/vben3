@@ -7,7 +7,7 @@ import { listenerRouteChange } from '@vben/router'
 import { REDIRECT_NAME } from '@vben/constants'
 import { useI18n } from '@vben/locale'
 import { useGo, useTabs } from '@vben/hooks'
-import TabDropdown from "./components/TabDropdown.vue";
+import TabDropdown from './components/TabDropdown.vue'
 const { t } = useI18n()
 
 const multipleTabStore = useMultipleTab()
@@ -51,11 +51,14 @@ listenerRouteChange((route) => {
     multipleTabStore.checkTab(unref(route))
   }
 })
-const handleContextMenu = (e: PointerEvent, tabItem: RouteLocationNormalized) => {
+const handleContextMenu = (
+  e: PointerEvent,
+  tabItem: RouteLocationNormalized,
+) => {
   e.preventDefault()
   if (!tabItem) return
   // @ts-ignore
-  unref(tabDropdownRef)?.openDropdown(e,tabItem)
+  unref(tabDropdownRef)?.openDropdown(e, tabItem)
 }
 
 const handleChange = (value: string) => {
@@ -73,13 +76,13 @@ const handleChange = (value: string) => {
     @update:value="handleChange"
   >
     <VbenTab
-      v-for="(tab, index) in tabList"
+      v-for="tab in tabList"
       :key="tab.query ? tab.fullPath : tab.path"
       :name="tab.fullPath"
     >
       <TabItem
         :title="t(tab.meta.title)"
-        :closable="index !== 0"
+        :closable="!(tab && tab.meta && tab.meta.affix)"
         :active="activeTabName === tab.fullPath"
         @contextmenu="handleContextMenu($event, tab)"
         @close="
@@ -90,5 +93,5 @@ const handleChange = (value: string) => {
       />
     </VbenTab>
   </VbenTabs>
-  <TabDropdown ref="tabDropdownRef"/>
+  <TabDropdown ref="tabDropdownRef" />
 </template>

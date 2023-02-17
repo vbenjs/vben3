@@ -1,16 +1,11 @@
 import { defineStore } from 'pinia'
 import { toRaw, unref } from 'vue'
-// @ts-ignore
-import { useGo, useRedo } from '@vben/hooks'
-import { PageEnum } from '@vben/constants'
-import {
-  PAGE_NOT_FOUND_ROUTE,
-  REDIRECT_ROUTE,
-  type RouteLocationNormalized,
-  type RouteLocationRaw,
-  type Router,
-  // @ts-ignore
-} from '@vben/router'
+import { PAGE_NOT_FOUND_NAME, PageEnum, REDIRECT_NAME } from '@vben/constants'
+import type {
+  RouteLocationNormalized,
+  RouteLocationRaw,
+  Router,
+} from 'vue-router'
 
 import { getRawRoute, RemovableRef } from '@vben/utils'
 import { useAppConfig } from './appConfig'
@@ -21,8 +16,8 @@ export interface MultipleTabState {
 }
 
 function handleGotoPage(router: Router) {
-  const go = useGo(router)
-  go(unref(router.currentRoute).path, true)
+  // const go = useGo(router)
+  // go(unref(router.currentRoute).path, true)
 }
 
 const getToTarget = (tabItem: RouteLocationNormalized) => {
@@ -91,8 +86,6 @@ export const useMultipleTab = defineStore({
       if (findTab) {
         this.cacheTabList.delete(findTab)
       }
-      const redo = useRedo(router)
-      await redo()
     },
     clearCacheTabs(): void {
       this.cacheTabList = new Set()
@@ -129,9 +122,7 @@ export const useMultipleTab = defineStore({
         ) ||
         meta?.hideTab ||
         !name ||
-        [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(
-          name as string,
-        )
+        [REDIRECT_NAME, PAGE_NOT_FOUND_NAME].includes(name as string)
       ) {
         return
       }
@@ -373,7 +364,7 @@ export const useMultipleTab = defineStore({
       }
     },
   },
-  // persist: {
-  //   paths: []
-  // }
+  persist: {
+    paths: ['tabList'],
+  },
 })

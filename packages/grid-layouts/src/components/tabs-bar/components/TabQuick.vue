@@ -4,9 +4,9 @@ import { useAppConfig, useTabs } from '@vben/hooks'
 import { useI18n } from '@vben/locale'
 import { RouteLocationNormalized, useRouter } from 'vue-router'
 import { useMultipleTab } from '@vben/stores'
-import {TabActionEnum} from '@vben/constants'
-import {computed, unref} from 'vue'
-import {renderIcon} from "../../render";
+import { TabActionEnum } from '@vben/constants'
+import { computed, unref } from 'vue'
+import { renderIcon } from '../../render'
 const { tabTar } = useAppConfig()
 const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } =
   useTabs()

@@ -36,7 +36,9 @@ watch(
       })
       showOption()
     }
-    setAppConfig({ sidebar: { visible: !!unref(menuOptions).length && !!parentPath } })
+    setAppConfig({
+      sidebar: { visible: !!unref(menuOptions).length && !!parentPath },
+    })
   },
   {
     immediate: true,

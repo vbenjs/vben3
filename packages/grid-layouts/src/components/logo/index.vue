@@ -5,12 +5,11 @@ import { useAppConfig, useSiteGeneral } from '@vben/hooks'
 const props = defineProps({
   showTitle: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const { isMixSidebar, sidebar, isSidebar, logo, header } = useAppConfig()
-
 
 const getWidth = computed(() => {
   if (unref(isSidebar) && unref(sidebar).collapsed)

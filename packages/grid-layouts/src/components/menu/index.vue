@@ -10,8 +10,6 @@ const menuOptions = ref([])
 const showOption = () => {
   nextTick(() => {
     if (!menuRef.value) return
-
-    console.log(menuRef.value)
     menuRef.value.showOption()
   })
 }
@@ -20,7 +18,7 @@ onMounted(async () => {
   menuOptions.value = mapTree(menus, {
     conversion: (menu) => renderMenuLabelToRouterLink(menu),
   })
-  // showOption()
+  showOption()
 })
 </script>
 <template>

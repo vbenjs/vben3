@@ -6,9 +6,15 @@ import { StoreGeneric, storeToRefs } from 'pinia'
 const { footerRef } = storeToRefs(useLayoutFooter() as StoreGeneric)
 </script>
 <template>
-  <div class="grid-layout-content grid-area-[grid-content] grid">
-    <Main />
-    <LayoutFooter ref="footerRef" />
+  <div class="grid-area-[grid-content]">
+    <VbenScrollbar
+      class="h-[calc(100vh-var(--header-height)-var(--tab-bar-height))]"
+    >
+      <div class="grid-layout-content grid">
+        <Main />
+        <LayoutFooter ref="footerRef" />
+      </div>
+    </VbenScrollbar>
   </div>
 </template>
 <style lang="scss">

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import {ref, computed, unref, nextTick, onMounted} from 'vue'
-import {renderMenuIcon, renderMenuLabelToRouterLink} from '../renderMenu'
+import { ref, computed, unref, nextTick, onMounted } from 'vue'
+import { renderMenuIcon, renderMenuLabelToRouterLink } from '../renderMenu'
 import { useAppConfig } from '@vben/hooks'
-import {MenuModeEnum, REDIRECT_NAME} from '@vben/constants'
-import {getMenus, listenerRouteChange} from "@vben/router";
-import {RouteLocationNormalizedLoaded, useRouter} from "vue-router";
-import {mapTree} from "@vben/utils";
+import { MenuModeEnum, REDIRECT_NAME } from '@vben/constants'
+import { getMenus, listenerRouteChange } from '@vben/router'
+import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
+import { mapTree } from '@vben/utils'
 const { menu, sidebar, isMixSidebar, getCollapsedShowTitle } = useAppConfig()
 
 defineProps({
@@ -15,12 +15,10 @@ defineProps({
   },
 })
 
-
 const activeKey = ref(null)
 const menuOptions = ref([])
 const basicMenuRef = ref(null)
 const { currentRoute } = useRouter()
-
 
 const showOption = () => {
   nextTick(() => {
@@ -48,7 +46,6 @@ listenerRouteChange((route) => {
   }
   showOption()
 })
-
 
 async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
   const menu = route || unref(currentRoute)

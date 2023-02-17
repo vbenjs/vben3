@@ -8,9 +8,7 @@ const { menu, toggleMenuFixed } = useAppConfig()
   <TopButtonWrapper @click.stop="toggleMenuFixed">
     <VbenIconify
       size="22"
-      :icon="
-        menu.mixSideFixed ? 'ri:pushpin-2-fill' : 'ri:pushpin-2-line'
-      "
+      :icon="menu.mixSideFixed ? 'ri:pushpin-2-fill' : 'ri:pushpin-2-line'"
     />
   </TopButtonWrapper>
 </template>

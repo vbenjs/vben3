@@ -12,7 +12,7 @@ import HeaderTrigger from '../widgets/HeaderTrigger.vue'
 import { useAppConfig } from '@vben/hooks'
 import { computed, unref } from 'vue'
 import { TriggerEnum } from '@vben/constants'
-import TopMenu from "../menu/TopMenu.vue";
+import TopMenu from '../menu/TopMenu.vue'
 
 const { isMixSidebar, isTopMenu, isMix, sidebar, menu, header } = useAppConfig()
 

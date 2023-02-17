@@ -19,6 +19,7 @@ const dashboard: RouteRecordItem = {
       meta: {
         icon: 'mdi:monitor-dashboard',
         title: 'routes.dashboard.analysis',
+        affix: true,
       },
     },
     {

@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@vben/constants": "workspace:*",
+    "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
     "pinia": "^2.0.30",
     "pinia-plugin-persistedstate": "^3.0.2",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

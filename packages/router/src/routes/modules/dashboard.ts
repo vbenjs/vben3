@@ -9,6 +9,7 @@ const dashboard: RouteRecordItem = {
     orderNo: 1,
     icon: 'mdi:monitor-dashboard',
     title: 'routes.dashboard.dashboard',
+    root: true,
   },
   children: [
     {
@@ -18,6 +19,7 @@ const dashboard: RouteRecordItem = {
       meta: {
         icon: 'mdi:monitor-dashboard',
         title: 'routes.dashboard.analysis',
+        affix: true,
       },
     },
     {

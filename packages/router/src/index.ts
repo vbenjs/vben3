@@ -8,6 +8,7 @@ export * from './routes'
 export * from './helper'
 export * from './guard'
 export * from './menus'
+export * from './mitt/routeChange'
 
 export interface Stores {
   userStore?: any

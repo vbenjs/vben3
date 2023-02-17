@@ -1,26 +1,8 @@
-<script lang="ts" setup>
-import { useLayoutHeader } from '@vben/stores'
-import {useAppConfig, useAppInject} from '@vben/hooks'
-import { StoreGeneric, storeToRefs } from 'pinia'
-
-const { headerWidth, headerHeight } = storeToRefs(
-  useLayoutHeader() as StoreGeneric,
-)
-const { sidebar } = useAppConfig()
-
-const { isMobile } = useAppInject()
-</script>
+<script lang="ts" setup></script>
 <template>
-  <main class="vben-grid-layout-main">
-    <div>headerWidth: {{ headerWidth }}, headerHeight: {{ headerHeight }}</div>
-    ___________________________________________________________________________
-    <div>useAppConfig : {{ sidebar }}</div>
-    <div>isMobile: {{ isMobile }}</div>
-
-    <VbenButton>
-      大丰收的
-    </VbenButton>
-    <!--    <RouterView />-->
+  <main
+    class="min-h-[calc(100vh-var(--header-height)-var(--tab-bar-height)-var(--footer-height))] p-2"
+  >
+    <RouterView />
   </main>
 </template>
-<style lang="scss" scoped></style>

@@ -5,8 +5,8 @@ import {
 } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
 import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
-import { _merge, toggleClass } from '@vben/utils'
-import { reactive, unref } from 'vue'
+import { _merge } from '@vben/utils'
+import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
 import { useAppTheme } from '@/web'
 
@@ -23,7 +23,7 @@ export const useAppConfig = () => {
   const appConfigOptions = storeToRefs(
     useAppConfigStore as StoreGeneric,
   ) as unknown as DefineAppConfigOptions & DefineAppConfigStoreGetters
-  const { openSettingDrawer, sidebar, grayMode, colorWeak } = appConfigOptions
+  const { openSettingDrawer, sidebar, menu, isMixSidebar } = appConfigOptions
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
@@ -38,16 +38,12 @@ export const useAppConfig = () => {
     useAppConfigStore.setSidebar({ collapsed: !unref(sidebar).collapsed })
   }
 
+  function toggleMenuFixed() {
+    useAppConfigStore.setMenu({ mixSideFixed: !unref(menu).mixSideFixed })
+  }
+
   function baseHandler(event: HandlerSettingEnum, value: any) {
     setAppConfig(handlerResults(event, value, appConfigOptions))
-  }
-
-  function toggleGrayMode(isGrayMode = unref(grayMode)) {
-    toggleClass(isGrayMode, 'gray-mode', document.body)
-  }
-
-  function toggleColorWeak(isColorWeak = colorWeak) {
-    toggleClass(isColorWeak, 'color-weak', document.body)
   }
 
   async function copyConfigs() {
@@ -71,6 +67,12 @@ export const useAppConfig = () => {
   function resetAllConfig() {
     useAppConfigStore.$reset()
   }
+  const getCollapsedShowTitle = computed<boolean>(() => {
+    if (unref(isMixSidebar)) {
+      return !unref(sidebar).collapsed
+    }
+    return unref(menu).collapsedShowTitle && unref(sidebar).collapsed
+  })
   return {
     ...appConfigOptions,
     setAppConfig,
@@ -80,8 +82,8 @@ export const useAppConfig = () => {
     clearAndRedo,
     resetAllConfig,
     toggleCollapse,
-    toggleGrayMode,
-    toggleColorWeak,
+    toggleMenuFixed,
+    getCollapsedShowTitle,
   }
 }
 
@@ -139,7 +141,7 @@ function handlerResults(
       return { sidebar: { show: value, visible: value } }
 
     case HandlerSettingEnum.MENU_COLLAPSED_SHOW_TITLE:
-      return { menu: { collapsedShowLabel: value } }
+      return { menu: { collapsedShowTitle: value } }
 
     case HandlerSettingEnum.MENU_THEME:
       // updateSidebarBgColor(value);

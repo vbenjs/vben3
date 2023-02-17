@@ -18,10 +18,7 @@ const getShowSetting = computed(() => {
 })
 </script>
 <template>
-  <TopButtonWrapper
-    v-if="getShowSetting"
-    @click.stop="toggleOpenSettingDrawer"
-  >
+  <TopButtonWrapper v-if="getShowSetting" @click.stop="toggleOpenSettingDrawer">
     <VbenIconify icon="fluent:settings-48-regular" />
   </TopButtonWrapper>
 </template>

@@ -7,9 +7,8 @@ import {
   onKeyStroke,
 } from '@vben/utils'
 import { useI18n } from '@vben/locale'
-import { useGo } from '@vben/hooks'
+import { useGo, useScrollTo } from '@vben/hooks'
 import { context } from '../../../bridge'
-import { useScrollTo } from '@/hooks/event/use-scroll-to'
 
 export interface SearchResult {
   name: string

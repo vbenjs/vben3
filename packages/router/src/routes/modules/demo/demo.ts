@@ -4,11 +4,12 @@ const dashboard: RouteRecordItem = {
   path: '/demo',
   name: 'Demo',
   component: LAYOUT,
-  redirect: '/dashboard/form',
+  redirect: '/demo/form',
   meta: {
     orderNo: 2,
     icon: 'line-md:clipboard-list-twotone',
     title: 'routes.demo.demo',
+    root: true,
   },
   children: [
     {

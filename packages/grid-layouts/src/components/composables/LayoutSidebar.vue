@@ -3,12 +3,22 @@ import Logo from '../logo/index.vue'
 import SecondaryBorder from '../comm/SecondaryBorder.vue'
 import SiderFooterTrigger from '../widgets/SiderFooterTrigger.vue'
 import SiderCenterTrigger from '../widgets/SiderCenterTrigger.vue'
-import { useAppConfig } from '@vben/hooks'
-import { computed, unref } from 'vue'
+import { useAppConfig, useAppInject } from '@vben/hooks'
+import { computed, unref, ref } from 'vue'
 import { TriggerEnum } from '@vben/constants'
-
+import { useElementSize, MaybeComputedElementRef } from '@vben/utils'
+import SidebarMenu from '../menu/SidebarMenu.vue'
+import MixSidebarMenu from '../menu/MixSidebarMenu.vue'
 
 const { isMixSidebar, isTopMenu, sidebar, isSidebar } = useAppConfig()
+
+const { isMobile } = useAppInject()
+
+const logoRef = ref<Element>(null)
+
+const { height: lagoHeight } = useElementSize(
+  logoRef as MaybeComputedElementRef,
+)
 
 const showFooterTrigger = computed(() => {
   if (unref(isMixSidebar)) return true
@@ -20,7 +30,7 @@ const showCenterTrigger = computed(() => {
   return unref(sidebar).trigger === TriggerEnum.CENTER
 })
 
-const showSidebarLogo = computed(()=>{
+const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
 })
 </script>
@@ -32,11 +42,15 @@ const showSidebarLogo = computed(()=>{
       sidebar.visible ? 'visible' : 'invisible overflow-hidden',
     ]"
   >
-    <div>
-      <Logo v-if="showSidebarLogo" />
-    </div>
-    <SiderFooterTrigger v-if="showFooterTrigger" />
-    <SiderCenterTrigger v-if="showCenterTrigger" />
-    <SecondaryBorder right />
+    <VbenConfig :theme-mode="sidebar.theme" :inherit="false" abstract>
+      <template v-if="!isMixSidebar">
+        <Logo ref="logoRef" v-if="showSidebarLogo" />
+        <SidebarMenu :style="{ height: `calc(100% - ${lagoHeight}px)` }" />
+        <SiderFooterTrigger v-if="showFooterTrigger" />
+        <SiderCenterTrigger v-if="showCenterTrigger && !isMobile" />
+        <SecondaryBorder right class="!bg-[var(--trigger-background-color)]" />
+      </template>
+      <MixSidebarMenu v-else />
+    </VbenConfig>
   </div>
 </template>

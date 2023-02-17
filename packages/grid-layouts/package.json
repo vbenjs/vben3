@@ -13,6 +13,7 @@
     "@vben/hooks": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/stores": "workspace:*",
+    "@vben/router": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "pinia": "^2.0.30",

@@ -60,14 +60,16 @@ const {
         "
       />
 
-      <VbenDivider title-placement="left">
-        {{ t('layout.setting.sysTheme') }}
-      </VbenDivider>
-      <ThemeColorPicker
-        :def="themeColor"
-        :event="HandlerSettingEnum.CHANGE_THEME_COLOR"
-        :color-list="APP_PRESET_COLOR_LIST"
-      />
+      <template v-if="false">
+        <VbenDivider title-placement="left">
+          {{ t('layout.setting.sysTheme') }}
+        </VbenDivider>
+        <ThemeColorPicker
+          :def="themeColor"
+          :event="HandlerSettingEnum.CHANGE_THEME_COLOR"
+          :color-list="APP_PRESET_COLOR_LIST"
+        />
+      </template>
 
       <VbenDivider title-placement="left">
         {{ t('layout.setting.headerTheme') }}

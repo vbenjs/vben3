@@ -11,8 +11,12 @@ import {
   useLayoutTab,
   useLayoutContent,
 } from '@vben/stores'
-import {useAppConfig, createGridLayoutListen, createThemeColorListen} from '@vben/hooks'
-import {nextTick, ref} from 'vue'
+import {
+  useAppConfig,
+  createGridLayoutListen,
+  createThemeColorListen,
+} from '@vben/hooks'
+import { nextTick, ref } from 'vue'
 import { MaybeElementRef } from '@vben/utils'
 
 const { headerRef } = storeToRefs(useLayoutHeader() as StoreGeneric)
@@ -22,7 +26,7 @@ const { contentRef } = storeToRefs(useLayoutContent() as StoreGeneric)
 const containerRef = ref<MaybeElementRef>(null)
 
 const { navBarMode } = useAppConfig()
-nextTick(()=>{
+nextTick(() => {
   createGridLayoutListen(containerRef)
   createThemeColorListen(containerRef)
 })
@@ -43,10 +47,11 @@ nextTick(()=>{
 <style lang="scss">
 .grid-layout-container {
   display: grid;
-  grid-template-columns: minmax(0, var(--aside-width)) minmax(640px, 1fr);
+  grid-template-columns: minmax(0, var(--aside-width)) minmax(375px, 1fr);
   grid-template-rows: var(--header-height) var(--tab-bar-height) 1fr;
   transition: grid-template-columns 0.3s, grid-template-rows 0.3s;
   transition-timing-function: var(--transition-bezier);
+  background-color: var(--layout-container-background-color);
   &.sidebar,
   &.mix-sidebar {
     grid-template-areas:

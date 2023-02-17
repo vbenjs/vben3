@@ -7,8 +7,9 @@ import {
   lighten,
   pickTextColorBasedOnBgColor,
   darken,
-  addClass,
+  toggleClass,
 } from '@vben/utils'
+import { ThemeEnum } from '@vben/constants'
 
 const HEADER_HEIGHT = '--header-height'
 const HEADER_BG_COLOR_VAR = '--header-background-color'
@@ -19,6 +20,8 @@ const ASIDE_WIDTH = '--aside-width'
 const ASIDE_DARK_BG_COLOR = '--aside-background-color'
 const ASIDE_TEXT_COLOR_VAR = '--aside-text-color'
 
+const TRIGGER_BG_COLOR_VAR = '--trigger-background-color'
+
 const TAB_BAR_HEIGHT = '--tab-bar-height'
 
 const FOOTER_HEIGHT = '--footer-height'
@@ -26,16 +29,9 @@ const FOOTER_HEIGHT = '--footer-height'
 const LIGHT_TEXT_COLOR = 'rgba(0,0,0,.85)'
 const DARK_TEXT_COLOR = '#fff'
 
-export function createThemeColorListen(el: MaybeElementRef | null) {
-  const {
-    sidebar,
-    header,
-    grayMode,
-    colorWeak,
-    theme,
-    toggleGrayMode,
-    toggleColorWeak,
-  } = useAppConfig()
+export function createThemeColorListen(el?: MaybeElementRef | null) {
+  const { sidebar, header, grayMode, colorWeak, theme, setAppConfig } =
+    useAppConfig()
 
   const { sidebarRef } = useLayoutSidebar()
   const { headerRef } = useLayoutHeader()
@@ -75,6 +71,10 @@ export function createThemeColorListen(el: MaybeElementRef | null) {
       initialValue: LIGHT_TEXT_COLOR,
     },
   )
+  const triggerBackgroundColor = useCssVar(
+    TRIGGER_BG_COLOR_VAR,
+    sidebarRef as MaybeElementRef,
+  )
 
   watchEffect(() => {
     headerBgColor.value = unref(header).bgColor
@@ -83,11 +83,14 @@ export function createThemeColorListen(el: MaybeElementRef | null) {
       LIGHT_TEXT_COLOR,
       DARK_TEXT_COLOR,
     )
-    headerActionHoverBgColor.value = ['#fff', '#ffffff'].includes(
-      unref(header).bgColor.toLowerCase(),
-    )
-      ? darken(unref(header).bgColor, 6)
-      : lighten(unref(header).bgColor, 6)
+
+    if (['#fff', '#ffffff'].includes(unref(header).bgColor.toLowerCase())) {
+      headerActionHoverBgColor.value = darken(unref(header).bgColor, 6)
+      setAppConfig({ header: { theme: ThemeEnum.LIGHT } })
+    } else {
+      headerActionHoverBgColor.value = lighten(unref(header).bgColor, 6)
+      setAppConfig({ header: { theme: ThemeEnum.DARK } })
+    }
 
     sidebarBgColor.value = unref(sidebar).bgColor
     asideTextColor.value = pickTextColorBasedOnBgColor(
@@ -95,15 +98,35 @@ export function createThemeColorListen(el: MaybeElementRef | null) {
       LIGHT_TEXT_COLOR,
       DARK_TEXT_COLOR,
     )
+
+    if (['#fff', '#ffffff'].includes(unref(sidebar).bgColor.toLowerCase())) {
+      setAppConfig({ sidebar: { theme: ThemeEnum.LIGHT } })
+      triggerBackgroundColor.value = darken(unref(sidebar).bgColor, 6)
+    } else {
+      triggerBackgroundColor.value = lighten(unref(sidebar).bgColor, 6)
+      setAppConfig({ sidebar: { theme: ThemeEnum.DARK } })
+    }
     toggleGrayMode(unref(grayMode))
     toggleColorWeak(unref(colorWeak))
-    addClass(document.documentElement, unref(theme))
+    toggleClass(
+      ThemeEnum.DARK === unref(theme),
+      ThemeEnum.DARK,
+      document.documentElement,
+    )
   })
 }
 
 export function createGridLayoutListen(el: MaybeElementRef | null) {
-  const { isTopMenu, isMixSidebar, sidebar, header, footer, tabTar } =
-    useAppConfig()
+  const {
+    isTopMenu,
+    sidebar,
+    header,
+    footer,
+    tabTar,
+    getCollapsedShowTitle,
+    menu,
+    isMixSidebar,
+  } = useAppConfig()
   const asideWidth = useCssVar(ASIDE_WIDTH, el, {
     initialValue: `${unref(sidebar).width}px`,
   })
@@ -120,8 +143,16 @@ export function createGridLayoutListen(el: MaybeElementRef | null) {
   watchEffect(() => {
     const getAsideWidth = () => {
       if (unref(isTopMenu) || !unref(sidebar).visible) return 0
-      if (unref(sidebar).collapsed) return unref(sidebar).collapsedWidth
-      if (unref(isMixSidebar)) return unref(sidebar).mixSidebarWidth
+      if (unref(getCollapsedShowTitle)) {
+        return unref(menu).mixSideFixed && unref(isMixSidebar)
+          ? unref(sidebar).mixSidebarWidth + unref(menu).subMenuWidth
+          : unref(sidebar).mixSidebarWidth
+      }
+      if (unref(sidebar).collapsed) {
+        return unref(menu).mixSideFixed && unref(isMixSidebar)
+          ? unref(sidebar).collapsedWidth + unref(menu).subMenuWidth
+          : unref(sidebar).collapsedWidth
+      }
       return unref(sidebar).width
     }
 
@@ -144,4 +175,12 @@ export function createGridLayoutListen(el: MaybeElementRef | null) {
     tabBarHeight.value = `${getTabBarHeight()}px`
     footerHeight.value = `${getFooterHeight()}px`
   })
+}
+
+function toggleGrayMode(isGrayMode: boolean) {
+  toggleClass(isGrayMode, 'gray-mode', document.body)
+}
+
+function toggleColorWeak(isColorWeak: boolean) {
+  toggleClass(isColorWeak, 'color-weak', document.body)
 }

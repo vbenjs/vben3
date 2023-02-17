@@ -129,6 +129,7 @@ export const useAppConfig = defineStore({
       state.menu.mode === MenuModeEnum.INLINE &&
       state.navBarMode === NavBarModeEnum.MIX,
     isHorizontal: (state) => state.menu.mode === MenuModeEnum.HORIZONTAL,
+    getTabTarCache: (state) => state.tabTar.cache,
   },
   actions: {
     setTheme(value: ThemeEnum) {

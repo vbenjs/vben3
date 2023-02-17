@@ -1,48 +1,94 @@
 <script lang="ts" setup>
-import { ref, unref } from 'vue'
+import { computed, ref, unref } from 'vue'
 import TabItem from './components/TabItem.vue'
+import { useMultipleTab, storeToRefs } from '@vben/stores'
+import { RouteLocationNormalized, RouteMeta, useRouter } from 'vue-router'
+import { listenerRouteChange } from '@vben/router'
+import { REDIRECT_NAME } from '@vben/constants'
+import { useI18n } from '@vben/locale'
+import { useGo, useTabs } from '@vben/hooks'
+import TabDropdown from "./components/TabDropdown.vue";
+const { t } = useI18n()
 
-const name = ref(1)
-// const message = useMessage()
-const panels = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-function handleClose(name: number) {
-  if (unref(panels).length === 1) {
-    // message.error('最后一个了')
+const multipleTabStore = useMultipleTab()
+const { getTabList } = storeToRefs(multipleTabStore)
+const router = useRouter()
+const activeTabName = ref<string>('')
+const go = useGo()
+const tabDropdownRef = ref<HTMLElement | null>(null)
+const { close } = useTabs()
+
+const tabList = computed(() => {
+  return unref(getTabList).filter(
+    (item) => !item.meta?.hideTab && router.hasRoute(item.name),
+  )
+})
+
+listenerRouteChange((route) => {
+  const { name } = route
+  // TODO  Token needs to be verified !userStore.getAccessToken
+  if (name === REDIRECT_NAME || !route) {
     return
   }
-  // message.info('关掉 ' + name)
-  const index = unref(panels).findIndex((v) => name === v)
-  unref(panels).splice(index, 1)
-  if (unref(panels) === name) {
-    panels.value = panels[index]
+  const { path, fullPath, meta = {} } = route
+  const { currentActiveMenu, hideTab } = meta as RouteMeta
+  const isHide = !hideTab ? null : currentActiveMenu
+  const p = isHide || fullPath || path
+  if (activeTabName.value !== p) {
+    activeTabName.value = p as string
   }
+
+  if (isHide) {
+    const findParentRoute = router
+      .getRoutes()
+      .find((item) => item.path === currentActiveMenu)
+
+    findParentRoute &&
+      multipleTabStore.checkTab(
+        findParentRoute as unknown as RouteLocationNormalized,
+      )
+  } else {
+    multipleTabStore.checkTab(unref(route))
+  }
+})
+const handleContextMenu = (e: PointerEvent, tabItem: RouteLocationNormalized) => {
+  e.preventDefault()
+  if (!tabItem) return
+  // @ts-ignore
+  unref(tabDropdownRef)?.openDropdown(e,tabItem)
+}
+
+const handleChange = (value: string) => {
+  go(value, false)
 }
 </script>
 <template>
   <VbenTabs
-    v-model:value="name"
+    v-model:value="activeTabName"
     type="card"
     size="small"
     animated
     tab-style="--n-tab-padding: 0;"
     :tabs-padding="8"
-    @close="handleClose"
+    @update:value="handleChange"
   >
-    <VbenTab v-for="(panel, index) in panels" :key="panel" :name="panel">
+    <VbenTab
+      v-for="(tab, index) in tabList"
+      :key="tab.query ? tab.fullPath : tab.path"
+      :name="tab.fullPath"
+    >
       <TabItem
-        :title="panel.toString()"
-        :closable="index === 0"
-        :active="panel === name"
+        :title="t(tab.meta.title)"
+        :closable="index !== 0"
+        :active="activeTabName === tab.fullPath"
+        @contextmenu="handleContextMenu($event, tab)"
+        @close="
+          () => {
+            close(route)
+          }
+        "
       />
     </VbenTab>
-    <VbenTabPane
-      v-for="panel in panels"
-      :key="panel"
-      :tab="panel.toString()"
-      :name="panel"
-    >
-      {{ panel }}
-    </VbenTabPane>
   </VbenTabs>
+  <TabDropdown ref="tabDropdownRef"/>
 </template>
-<style lang="scss" scoped></style>

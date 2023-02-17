@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { useAppConfig, usePromise } from '@vben/hooks'
+import {useAppConfig, usePromise, useTabs} from '@vben/hooks'
 import SuffixItemWrapper from '../../comm/SuffixItemWrapper.vue'
+
+const { refreshPage } = useTabs()
 
 const { tabTar } = useAppConfig()
 function reload() {
   return new Promise(async (resolve) => {
-    // await refreshPage()
+    await refreshPage()
     setTimeout(() => {
       resolve({})
     }, 1000)

@@ -414,6 +414,7 @@ importers:
       '@vben/hooks': workspace:*
       '@vben/locale': workspace:*
       '@vben/router': workspace:*
+      '@vben/stores': workspace:*
       '@vben/types': workspace:*
       '@vben/utils': workspace:*
       '@vben/vbencomponents': workspace:*
@@ -425,6 +426,7 @@ importers:
       '@vben/hooks': link:../hooks
       '@vben/locale': link:../locale
       '@vben/router': link:../router
+      '@vben/stores': link:../stores
       '@vben/types': link:../types
       '@vben/utils': link:../utils
       '@vben/vbencomponents': link:../vbenComponents

@@ -9,6 +9,7 @@ import { getGlobalConfig } from '@vben/utils'
 
 const { t } = useI18n()
 
+// @ts-ignore
 const { title } = getGlobalConfig(import.meta.env)
 
 // github repo url

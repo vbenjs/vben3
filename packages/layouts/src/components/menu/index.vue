@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, h, onMounted, unref, nextTick } from 'vue'
+import { ref, h, onMounted, unref, nextTick, computed } from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
 import { context } from '../../../bridge'
 import {
@@ -9,12 +9,18 @@ import {
 } from 'vue-router'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
-import {renderIcon} from "../index";
-const { Logo, getMenus, listenerRouteChange, useMenuSetting, useAppInject } = context
-
-const { getAccordion } = useMenuSetting()
+import { renderIcon } from '../index'
+const { Logo, useMenuSetting, useAppInject } = context
+import { getMenus, listenerRouteChange } from '@vben/router'
+import { useAppConfig } from '@vben/hooks'
+// const { getAccordion } = useMenuSetting()
+// const {  getMenuShowLogo } = useMenuSetting()
 const { getIsMobile } = useAppInject()
-
+const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
+  useAppConfig()
+const showSidebarLogo = computed(() => {
+  return unref(isSidebar) || unref(isMixSidebar)
+})
 const props = defineProps({
   mode: {
     type: String,
@@ -24,10 +30,16 @@ const props = defineProps({
 const { bem } = createNamespace('layout-menu')
 const { t } = useI18n()
 const { currentRoute } = useRouter()
-const { getCollapsed, getMenuShowLogo } = useMenuSetting()
+
 const menuRef = ref(null)
 const menuList = ref([])
 const activeKey = ref()
+
+const getMenuCollapsed = computed(() => {
+  if (unref(isMixSidebar)) return true
+  return unref(sidebar).collapsed
+})
+
 // 定位菜单选择 与 当前路由匹配
 const showOption = () => {
   nextTick(() => {
@@ -88,22 +100,22 @@ const routerToMenu = (item: RouteRecordItem) => {
   <div :class="bem()">
     <logo
       :class="bem('logo')"
-      v-if="getMenuShowLogo || getIsMobile"
-      :showTitle="!getCollapsed"
+      v-if="showSidebarLogo || getIsMobile"
+      :showTitle="getCollapsedShowTitle"
     />
 
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
         v-model:value="activeKey"
         :options="menuList"
-        :collapsed="getCollapsed"
+        :collapsed="getMenuCollapsed"
         :collapsed-width="48"
         :collapsed-icon-size="22"
         :indent="18"
         :root-indent="18"
         ref="menuRef"
         :mode="props.mode"
-        :accordion="getAccordion"
+        :accordion="menu.accordion"
       />
     </VbenScrollbar>
   </div>

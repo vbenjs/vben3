@@ -12,8 +12,10 @@
     "@vben/directives": "workspace:*",
     "@vben/hooks": "workspace:*",
     "@vben/locale": "workspace:*",
+    "@vben/router": "workspace:*",
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
+    "@vben/stores": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "vue": "3.2.47",
     "vue-router": "^4.1.6"

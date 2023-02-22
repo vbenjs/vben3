@@ -2,14 +2,14 @@
 import { RouteLocationMatched, useRouter } from 'vue-router'
 import { h, ref, watchEffect } from 'vue'
 import { useI18n } from '@vben/locale'
-import { useGo } from '@vben/hooks'
+import { useAppConfig, useGo } from '@vben/hooks'
 import { filterTree, isString } from '@vben/utils'
 import { REDIRECT_NAME } from '@vben/constants'
 import { VbenIconify } from '@vben/vbencomponents'
 import { Menu } from '@vben/types'
-import { context } from '../../../bridge'
 import { renderIcon } from '../index'
-const { useRootSetting, getAllParentPath, getMenus } = context
+import { getMenus, getAllParentPath } from '@vben/router'
+const { header } = useAppConfig()
 // withDefaults(defineProps<{ theme: 'dark' | 'light' }>(), {
 //   theme: 'light',
 // })
@@ -17,7 +17,6 @@ const { useRootSetting, getAllParentPath, getMenus } = context
 const { currentRoute } = useRouter()
 const { t } = useI18n()
 const go = useGo()
-const { getShowBreadCrumbIcon } = useRootSetting()
 
 const routes = ref<RouteLocationMatched[]>([])
 
@@ -108,7 +107,7 @@ const handleClick = (path: string, route: Recordable<any>) => {
 
 <template>
   <VbenSpace align="center" justify="space-between" class="pl-8px pr-8px">
-    <VbenBreadcrumb>
+    <VbenBreadcrumb v-if="header.showBreadCrumb">
       <VbenBreadcrumbItem v-for="(route, index) in routes" :key="index">
         <VbenDropdown
           key-field="path"
@@ -122,7 +121,7 @@ const handleClick = (path: string, route: Recordable<any>) => {
             <VbenIconify
               class="v-middle"
               :icon="route.icon"
-              v-if="route.icon && getShowBreadCrumbIcon"
+              v-if="route.icon && header.showBreadCrumbIcon"
             />
             <span class="mr-1.2 ml-1.2">{{ t(route.meta.title) }}</span>
             <VbenIconify icon="gridicons:dropdown" v-if="route.children" />

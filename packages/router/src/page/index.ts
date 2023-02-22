@@ -1,3 +1,3 @@
-export { default as Exception } from './src/page/exception/index.vue'
-export { default as FrameBlank } from './src/page/iframe/FrameBlank.vue'
-export { default as Redirect } from './src/page/redirect/index.vue'
+export { default as Exception } from './exception/index.vue'
+export { default as FrameBlank } from './iframe/FrameBlank.vue'
+export { default as Redirect } from './redirect/index.vue'

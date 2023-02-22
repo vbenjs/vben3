@@ -1,5 +1,5 @@
 import type { RouteMeta, Router, RouteRecordNormalized } from 'vue-router'
-import { Exception, FrameBlank } from '@vben/layouts'
+import { Exception, FrameBlank } from '../page'
 import { omit, cloneDeep } from '@vben/utils'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { LAYOUT, PARENT_LAYOUT } from '../routes'
@@ -9,7 +9,7 @@ export type LayoutMapKey = 'LAYOUT'
 // const IFRAME = () => import('@/pages/sys/iframe/FrameBlank.vue')
 // export const EXCEPTION_COMPONENT = () =>
 //   import('@/pages/sys/exception/index.vue')
-
+// @ts-ignore
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>()
 
 LayoutMap.set('LAYOUT', LAYOUT)
@@ -20,6 +20,7 @@ let dynamicViewsModules: Record<string, () => Promise<Recordable<any>>>
 // Dynamic introduction
 function asyncImportRoute(routes: RouteRecordItem[] | undefined) {
   dynamicViewsModules =
+    // @ts-ignore
     dynamicViewsModules || import.meta.glob('../../pages/**/*.{vue,tsx}')
 
   if (!routes) return

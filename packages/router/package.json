@@ -10,7 +10,6 @@
   "dependencies": {
     "@vben/constants": "workspace:*",
     "@vben/components": "workspace:*",
-    "@vben/layouts": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/stores": "workspace:*",

@@ -3,7 +3,7 @@ import {
   PAGE_NOT_FOUND_NAME,
   BASIC_HOME_PATH,
 } from '@vben/constants'
-import { Exception, Redirect } from '@vben/layouts'
+import { Exception, Redirect } from '../page'
 import { t } from '@vben/locale'
 
 const LAYOUT = () => import('@/layout/index.vue')

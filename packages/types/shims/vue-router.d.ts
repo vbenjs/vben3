@@ -12,9 +12,11 @@ declare module 'vue-router' {
     // is it fixed on tab
     affix?: boolean
     // Whether the route has been dynamically added
-    hideBreadcrumb?: boolean;
+    hideBreadcrumb?: boolean
     // Never show in menu
-    hideMenu?: boolean;
+    hideMenu?: boolean
+    //隐藏子菜单
+    hideChildrenInMenu?: boolean
   }
 }
 

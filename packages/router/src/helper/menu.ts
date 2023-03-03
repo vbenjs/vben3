@@ -62,6 +62,12 @@ export function transformRouteToMenu(
       routeList.push(item)
     }
   })
+  // 筛选隐藏子菜单
+  routeList.forEach((v) => {
+    if (v.meta.hideChildrenInMenu) {
+      delete v.children
+    }
+  })
   const list = mapTree(routeList, {
     conversion: (node: RouteRecordItem) => {
       const { meta: { hideMenu = false } = {} } = node

@@ -18,11 +18,7 @@ interface UserState {
   lastUpdateTime: number
 }
 
-export const useUserStore = defineStore({
-  id: 'app-user-store',
-  persist: {
-    paths: ['userInfo', 'accessToken', 'roles'],
-  },
+export const useUserStore = defineStore('app-user-store', {
   state: (): UserState => ({
     userInfo: null,
     accessToken: undefined,
@@ -154,6 +150,9 @@ export const useUserStore = defineStore({
       if (goLogin) {
         router.push(BASIC_LOGIN_PATH)
       }
+    },
+    persist: {
+      paths: ['userInfo', 'accessToken', 'roles'],
     },
   },
 })

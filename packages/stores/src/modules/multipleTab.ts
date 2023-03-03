@@ -6,9 +6,9 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router'
-
 import { getRawRoute, RemovableRef } from '@vben/utils'
 import { useAppConfig } from './appConfig'
+import { useGo } from '@vben/hooks'
 export interface MultipleTabState {
   cacheTabList: Set<string>
   tabList: RouteLocationNormalized[] | RemovableRef<RouteLocationNormalized[]>

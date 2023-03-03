@@ -29,8 +29,7 @@ interface AuthState {
   frontMenuList: Menu[]
 }
 
-export const useAuthStore = defineStore({
-  id: 'app-auth-store',
+export const useAuthStore = defineStore('app-auth-store', {
   state: (): AuthState => ({
     permCodeList: [],
     // Whether the route has been dynamically added
@@ -142,7 +141,7 @@ export const useAuthStore = defineStore({
         }
         return
       }
-      // 组合框架路由与本地路由
+      // 组合框架路由 与 本地路由
       const r = layoutRoutes.concat(asyncRoutes)
       switch (permissionMode) {
         case PermissionModeEnum.ROLE:

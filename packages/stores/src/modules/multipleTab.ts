@@ -9,7 +9,11 @@ import type {
 import { getRawRoute, RemovableRef } from '@vben/utils'
 import { useAppConfig } from './appConfig'
 import { useRouter } from 'vue-router'
-import { RouteLocationRawEx } from '@vben/hooks'
+function handleGotoPage(router: Router) {
+  const go = useGo(router)
+  go(unref(router.currentRoute).path, true)
+}
+
 export interface MultipleTabState {
   cacheTabList: Set<string>
   tabList: RouteLocationNormalized[] | RemovableRef<RouteLocationNormalized[]>
@@ -27,7 +31,7 @@ const getToTarget = (tabItem: RouteLocationNormalized) => {
 
 export function useGo(_router?: Router) {
   const { push, replace } = _router || useRouter()
-  function go(opt: RouteLocationRawEx = PageEnum.BASE_HOME, isReplace = false) {
+  function go(opt: string, isReplace = false) {
     if (!opt) {
       return
     }
@@ -120,7 +124,7 @@ export const useMultipleTab = defineStore({
         }
       }
       // Jump to the current page and report an error
-      path !== toPath && go(toPath as PageEnum, true)
+      path !== toPath && go(toPath, true)
     },
     async checkTab(route: RouteLocationNormalized) {
       // await router.isReady()

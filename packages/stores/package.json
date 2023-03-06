@@ -11,7 +11,6 @@
     "@vben/constants": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vben/hooks": "workspace:*",
     "pinia": "^2.0.32",
     "pinia-plugin-persistedstate": "^3.1.0",
     "vue": "^3.2.47",

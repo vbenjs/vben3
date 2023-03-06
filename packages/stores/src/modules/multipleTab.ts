@@ -8,16 +8,12 @@ import type {
 } from 'vue-router'
 import { getRawRoute, RemovableRef } from '@vben/utils'
 import { useAppConfig } from './appConfig'
-import { useGo } from '@vben/hooks'
+import { useRouter } from 'vue-router'
+import { RouteLocationRawEx } from '@vben/hooks'
 export interface MultipleTabState {
   cacheTabList: Set<string>
   tabList: RouteLocationNormalized[] | RemovableRef<RouteLocationNormalized[]>
   lastDragEndIndex: number
-}
-
-function handleGotoPage(router: Router) {
-  // const go = useGo(router)
-  // go(unref(router.currentRoute).path, true)
 }
 
 const getToTarget = (tabItem: RouteLocationNormalized) => {
@@ -27,6 +23,21 @@ const getToTarget = (tabItem: RouteLocationNormalized) => {
     path,
     query: query || {},
   }
+}
+
+export function useGo(_router?: Router) {
+  const { push, replace } = _router || useRouter()
+  function go(opt: RouteLocationRawEx = PageEnum.BASE_HOME, isReplace = false) {
+    if (!opt) {
+      return
+    }
+    isReplace ? replace(opt).catch(handleError) : push(opt).catch(handleError)
+  }
+  return go
+}
+
+function handleError(e: Error) {
+  console.error(e)
 }
 
 // const appConfig = useAppConfig()

@@ -28,6 +28,14 @@ const dashboard: RouteRecordItem = {
             title: 'routes.demo.table.basic',
           },
         },
+        {
+          path: 'FixedColumn',
+          name: 'FixedColumn',
+          component: () => import('@/pages/demo/table/FixedColumn.vue'),
+          meta: {
+            title: 'routes.demo.table.fixedColumn',
+          },
+        },
       ],
     },
 

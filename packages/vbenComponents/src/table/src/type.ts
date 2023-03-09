@@ -1,4 +1,4 @@
-import type { VxeGridProps } from 'vxe-table'
+import type { VxeGridProps,VxeTableEvents } from 'vxe-table'
 import { VxeGridPropTypes } from 'vxe-table'
 
 export type VbenTableProps<D = any> = VxeGridProps<D> & {
@@ -9,3 +9,5 @@ export type VbenTableProps<D = any> = VxeGridProps<D> & {
   afterFetch?: Function
 }
 export type VbenColumns = VxeGridPropTypes.Columns
+
+export type VbenCellClick=VxeTableEvents.CellClick

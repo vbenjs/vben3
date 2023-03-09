@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import { VbenCellClick } from '../../../vbenComponents/src/table'
 import { getTableData } from '../apis/table'
-import {columns,innerColumns} from './schemas'
+import {columns,innerColumns,innerLabels} from './schemas'
 import type {Data} from './schemas'
 
 const border = ref<boolean>(false)

@@ -1,45 +1,14 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { VbenColumns, VbenCellClick } from '../../../vbenComponents/src/table'
+import { VbenCellClick } from '../../../vbenComponents/src/table'
 import { getTableData } from '../apis/table'
+import {columns,innerColumns} from './schemas'
+import type {Data} from './schemas'
 
 const border = ref<boolean>(false)
 const loading = ref<boolean>(false)
 const striped = ref<boolean>(false)
 
-const columns: VbenColumns = [
-  { field: 'userId', title: 'id', width: 100, fixed: 'left' },
-  { field: 'username', title: '名称', width: 120, fixed: 'left' },
-  { field: 'realname', title: '真实名称', width: 280 },
-  { field: 'address', title: '地址', width: 280 },
-  { field: 'startTime', title: '开始时间', width: 280 },
-  { field: 'endTime', title: '结束时间', width: 280 },
-  {
-    field: 'desc',
-    title: '备注',
-    width: 280,
-  },
-]
-const innerColumns: VbenColumns = [
-  { field: 'label', title: 'label' },
-  { field: 'value', title: 'value' },
-]
-const innerLabels: string[] = [
-  'userId',
-  'username',
-  'realname',
-  'address',
-  'startTime',
-  'endTime',
-  'desc',
-]
-
-interface Data {
-  table: {
-    items: any[]
-    total: number
-  }
-}
 const data = reactive<Data>({
   table: {
     items: [],

@@ -2,10 +2,8 @@
 import {reactive, ref} from 'vue'
 import {VbenColumns} from '../../../vbenComponents/src/table'
 import {getTableData} from '../apis/table'
-// import {msg} from '@vben/vbencomponents'
-// const { createMessage } = useMessage()
+import type {Data} from './schemas'
 
-// createMessage.loading(t('sys.app.menuLoading'))
 const border = ref(false)
 const loading = ref(false)
 const striped = ref(false)
@@ -18,8 +16,11 @@ const columns: VbenColumns = [
     title: '备注',
   },
 ]
-const data = reactive({
-  table: {}
+const data = reactive<Data>({
+  table: {
+    items:[],
+    total:0
+  }
 })
 getTableData().then(res => {
   console.log(res)

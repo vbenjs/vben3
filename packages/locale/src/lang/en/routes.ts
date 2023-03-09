@@ -16,6 +16,7 @@ export default {
     table: {
       table: 'table',
       basic: 'basic',
+      fixedColumn:'fixedColumn'
     },
   },
 }

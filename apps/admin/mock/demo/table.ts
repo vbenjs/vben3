@@ -12,6 +12,9 @@ export function createFakeTableData() {
         desc: 'manager',
         password: '123456',
         accessToken: 'fakeToken1',
+        address:'呼伦贝尔市',
+        startTime:'1997-01-26 10:45:00',
+        endTime:'2022-08-08 17:02:15',
         roles: [
           {
             name: 'Super Admin',
@@ -27,6 +30,9 @@ export function createFakeTableData() {
         avatar: 'https://q1.qlogo.cn/g?b=qq&nk=339449197&s=640',
         desc: 'tester',
         accessToken: 'fakeToken2',
+        address:'鹤壁市',
+        startTime:'2010-07-29 09:23:46	',
+        endTime:'1998-02-27 02:14:58',
         roles: [
           {
             name: 'Tester',

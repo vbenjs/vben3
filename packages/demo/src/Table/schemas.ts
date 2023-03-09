@@ -13,6 +13,7 @@ export const columns: VbenColumns = [
     field: 'desc',
     title: '备注',
     width: 280,
+    fixed:'right'
   },
 ]
 

@@ -38,7 +38,7 @@ jobs:
         run: pnpm --filter @apps/admin build
 
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: 114.115.157.254
           username: vben

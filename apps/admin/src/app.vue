@@ -1,18 +1,27 @@
 <script lang="ts" setup>
 import { useLocale } from '@vben/locale'
-import { useWebTitle } from '@vben/hooks'
+import { useAppTheme, useWebTitle } from '@vben/hooks'
 
 import { REDIRECT_NAME } from '@vben/constants'
 import { getGlobalConfig, computedAsync } from '@vben/utils'
 import AppProvider from '@/layout/components/app/AppProvider'
 import { dateEnUS, dateZhCN, enUS, zhCN } from 'naive-ui'
-import { useAppStore } from '@/store/modules/app'
+import { unref, watch } from 'vue'
 // Support Multi-language
 const { getLocale } = useLocale()
 // Listening to page changes and dynamically changing site titles
 const { title } = getGlobalConfig(import.meta.env)
 useWebTitle(title, (route) => route.name !== REDIRECT_NAME)
-const appStore = useAppStore()
+const { isDark } = useAppTheme()
+
+//监听是否暗黑模式
+watch(
+  () => unref(isDark),
+  (v) => {
+    document.getElementsByTagName('html')[0].className = v ? 'dark' : ''
+  },
+  { immediate: true },
+)
 
 // Dynamic switch component library language
 const dateLocale = computedAsync(async () => {

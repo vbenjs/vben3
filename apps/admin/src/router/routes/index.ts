@@ -1,14 +1,7 @@
-import { RouteRecordItem } from '@vben/types'
+import { loadRoutesFromModules } from '@vben/utils';
+import { RouteRecordRaw } from 'vue-router';
 
 const routeModuleRecord = import.meta.globEager('./modules/**/*.ts') as any
-
-const routeModules: RouteRecordItem[] = []
-
-Object.keys(routeModuleRecord).forEach((key) => {
-  const routeModule = routeModuleRecord[key].default || {}
-  routeModules.push(
-    ...(Array.isArray(routeModule) ? [...routeModule] : [routeModule]),
-  )
-})
+const routeModules: RouteRecordRaw[] = loadRoutesFromModules(routeModuleRecord);
 
 export const asyncRoutes = [...routeModules]

@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from '@vben/stores'
 import { layoutRoutes, PAGE_NOT_FOUND_ROUTE } from '@vben/router'
 import { filterTree } from '@vben/utils'
 import { Menu } from '@vben/types'

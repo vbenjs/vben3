@@ -1,5 +1,4 @@
-import { defineStore } from 'pinia'
-// import { pinia } from '@/pinia'
+import { defineStore } from '@vben/stores'
 import { resetRouter } from '@vben/router'
 
 interface AppState {

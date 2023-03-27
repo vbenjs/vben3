@@ -11,7 +11,7 @@
   "dependencies": {
     "@vben/utils": "workspace:*",
     "@vitejs/plugin-legacy": "^4.0.2",
-    "@vitejs/plugin-vue": "^4.0.0",
+    "@vitejs/plugin-vue": "^4.1.0",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "dayjs": "^1.11.7",
     "dotenv": "16.0.3",
@@ -19,10 +19,10 @@
     "picocolors": "^1.0.0",
     "pkg-types": "^1.0.1",
     "rollup-plugin-visualizer": "^5.8.3",
-    "terser": "^5.16.2",
+    "terser": "^5.16.8",
     "tsconfig": "workspace:*",
     "unocss": "^0.50.6",
-    "vite": "4.2.0",
+    "vite": "4.2.1",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-imagemin": "^0.6.1",
@@ -36,7 +36,7 @@
     "rollup": "^3.19.1",
     "typescript": "^5.0.2",
     "vite-plugin-http2-proxy": "^0.4.1",
-    "vite-plugin-mkcert": "1.13.3",
+    "vite-plugin-mkcert": "1.13.4",
     "vue": "3.2.47"
   }
 }

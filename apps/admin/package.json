@@ -26,6 +26,7 @@
     "@ant-design/icons-vue": "^6.1.0",
     "@iconify/iconify": "^3.1.0",
     "@vben/components": "workspace:*",
+    "@vben/component-driver-navie": "workspace:*",
     "@vben/constants": "workspace:*",
     "@vben/demo": "workspace:*",
     "@vben/directives": "workspace:*",

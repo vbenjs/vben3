@@ -1,0 +1,15 @@
+{
+  "name": "@vben/component-driver-navie",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "module": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "dependencies": {
+    "@vben/component-driver": "workspace:*",
+    "naive-ui": "^2.34.3",
+    "vue": "3.2.47"
+  }
+}

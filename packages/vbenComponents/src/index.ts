@@ -28,7 +28,7 @@ export const components = {
       // console.log(c)
       // 检测未注册组件
       if (!maps.get(c.__name) && !c.name) {
-        console.warn(c)
+        console.warn(`未注册组件:${c.__name}=${c.name}`,c)
         return
       }
       app.component(`Vben${c.name || c.__name}`, c)

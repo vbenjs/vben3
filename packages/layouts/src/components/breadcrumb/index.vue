@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { RouteLocationMatched, useRouter } from 'vue-router'
-import { h, ref, watchEffect } from 'vue'
+import { h, ref, unref, watchEffect } from 'vue'
 import { useI18n } from '@vben/locale'
 import { useAppConfig, useGo } from '@vben/hooks'
 import { filterTree, isString } from '@vben/utils'
@@ -83,7 +83,7 @@ const renderDropdownLabel = (route: any) => {
 }
 
 const renderDropdownIcon = (option) => {
-  return getShowBreadCrumbIcon && option.icon ? renderIcon(option.icon)() : null
+  return unref(header).showBreadCrumbIcon && option.icon ? renderIcon(option.icon)() : null
 }
 
 const handleClick = (path: string, route: Recordable<any>) => {

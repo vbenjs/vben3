@@ -1,30 +1,22 @@
 <script lang="ts" setup>
-import {reactive, ref} from 'vue'
-import {VbenColumns} from '../../../vbenComponents/src/table'
-import {getTableData} from '../apis/table'
-import type {Data} from './schemas'
+import { reactive, ref } from 'vue'
+// import { VbenColumns } from '../../../vbenComponents/src/table'
+import { getTableData } from '../apis/table'
+import { Data, baseColumns } from './schemas'
 
 const border = ref(false)
 const loading = ref(false)
 const striped = ref(false)
-const columns: VbenColumns = [
-  {field: 'userId', title: 'id', width: 200},
-  {field: 'username', title: '名称'},
-  {field: 'realname', title: '真实名称',},
-  {
-    field: 'desc',
-    title: '备注',
-  },
-]
+
 const data = reactive<Data>({
   table: {
-    items:[],
-    total:0
+    items: [],
+    total: 0
   }
 })
 getTableData().then(res => {
   console.log(res)
-  for (let i = 0; i < 4 ; i++) {
+  for (let i = 0; i < 4; i++) {
     res.items = res.items.concat(res.items)
   }
   console.log(res)
@@ -46,16 +38,13 @@ function toggleStriped() {
 </script>
 <template>
   <div class="p-2 h-full">
-    <VbenTable
-      :options="{
-      title: '基础示例',
-      pagination:true,
-      border:border,
+    <VbenTable :options="{
+      title: '基础演示',
+      pagination: true,
+      border: border,
       loading: loading,
       stripe: striped,
-      }"
-      :columns="columns"
-      :data="data.table.items">
+    }" :columns="baseColumns" :data="data.table.items">
       <template #toolbar>
         <div class="pb-2">
           <VbenButton type="primary" @click="toggleBorder">

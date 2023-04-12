@@ -1,11 +1,11 @@
-import type { Component, App } from 'vue'
-import TabPane from '#/tabs/src/TabPane.vue'
+import type { App, Component } from 'vue'
 const projectName = 'Vben3'
 export const components = {
   install: (app: App) => {
     // @ts-ignore
-    const comp = import.meta.globEager('./**/*.vue')
-
+    // const comp = import.meta.globEager('./**/*.vue')
+    /* 上面写法vite官方已弃用，详情见 https://cn.vitejs.dev/guide/migration-from-v2.html#importmetaglob */
+    const comp = import.meta.glob('./**/*.vue', {eager: true})
     Object.keys(comp).forEach((k) => {
       const c = comp[k].default
       switch (c.__name) {
@@ -28,7 +28,7 @@ export const components = {
       // console.log(c)
       // 检测未注册组件
       if (!maps.get(c.__name) && !c.name) {
-        console.warn(c)
+        warn(c.__name)
         return
       }
       app.component(`Vben${c.name || c.__name}`, c)
@@ -40,7 +40,7 @@ export const components = {
 export const maps = new Map<String, Component | String>()
 
 export function warn(message: string) {
-  console.warn(`[${projectName} warn]:${message}`)
+  console.warn(`[${projectName} warn]:<${message}> components not registered!`)
 }
 
 export function error(message: string) {

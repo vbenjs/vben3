@@ -13,7 +13,7 @@ import { registerComponents } from '../init-components'
   const app = createApp(App)
 
   setupPinia(app)
-
+  //注册组件
   await registerComponents(app)
 
   await initApplication()

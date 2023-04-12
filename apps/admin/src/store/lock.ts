@@ -1,5 +1,5 @@
 import type { LockInfo } from '@vben/types'
-import { defineStore } from 'pinia'
+import { defineStore } from '@vben/stores'
 import { useUserStore } from '@/store/user'
 
 interface LockState {

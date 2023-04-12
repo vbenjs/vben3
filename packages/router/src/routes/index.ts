@@ -1,4 +1,3 @@
-import type { RouteRecordItem } from '@vben/types'
 import {
   LOGIN_ROUTE,
   PAGE_NOT_FOUND_ROUTE,
@@ -6,19 +5,13 @@ import {
   ROOT_ROUTE,
   LOCK_SCREEN_ROUTE,
 } from './basic'
+import { RouteRecordRaw } from "vue-router";
+import { loadRoutesFromModules } from "@vben/utils";
 
 export * from './basic'
 
 const routeModuleRecord = import.meta.globEager('./modules/**/*.ts') as any
-
-const routeModules: RouteRecordItem[] = []
-
-Object.keys(routeModuleRecord).forEach((key) => {
-  const routeModule = routeModuleRecord[key].default || {}
-  routeModules.push(
-    ...(Array.isArray(routeModule) ? [...routeModule] : [routeModule]),
-  )
-})
+const routeModules: RouteRecordRaw[] = loadRoutesFromModules(routeModuleRecord);
 
 export const layoutRoutes = [...routeModules]
 

@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import { VbenCellClick } from '../../../vbenComponents/src/table'
 import { getTableData } from '../apis/table'
-import {columns,innerColumns,innerLabels} from './schemas'
+import {fixedColumns,innerColumns,innerLabels} from './schemas'
 import type {Data} from './schemas'
 
 const border = ref<boolean>(false)
@@ -43,7 +43,7 @@ const cellClickEvent: VbenCellClick = ({ row }) => {
         loading: loading,
         stripe: striped,
       }"
-      :columns="columns"
+      :columns="fixedColumns"
       :data="data.table.items"
       @cell-click="cellClickEvent"
     >

@@ -9,42 +9,38 @@ export interface Data {
 export const baseColumns: VbenColumns = [
   {
     field: 'userId',
-    title: 'id',
+    title: 'ID',
     align: 'center',
     width: '10%',
+    sortable: true,
   },
   {
     field: 'username',
     title: '名称',
-    width: '10%',
+    align: 'center'
   },
   {
     field: 'realname',
     title: '真实名称',
-    width: '10%',
   },
   {
     field: 'address',
     title: '地址',
-    width: '10%',
   },
   {
     field: 'startTime',
     title: '开始时间',
     align: 'center',
-    width: '10%',
   },
   {
     field: 'endTime',
     title: '结束时间',
     align: 'center',
-    width: '10%',
   },
   {
     field: 'desc',
     title: '描述',
     align: 'center',
-    width: '40%',
   },
 ]
 export const fixedColumns: VbenColumns = [

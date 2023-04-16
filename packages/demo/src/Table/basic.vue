@@ -6,7 +6,7 @@ import { Data, baseColumns } from './schemas'
 
 const border = ref(['none', 'outer', 'inner', 'full'])
 const index = ref(0)
-const loading = ref(false)
+let loading = ref(false)
 const striped = ref(false)
 const round = ref(false)
 
@@ -16,12 +16,18 @@ const data = reactive<Data>({
     total: 0,
   },
 })
-getTableData().then((res) => {
-  console.log('res->', res)
-  data.table.items = res
-}).catch((err) => {
-  console.log('err->', err);
-})
+getTableData()
+  .then((res) => {
+    loading.value = true
+    // console.log('res->', res)
+    data.table.items = res
+  })
+  .catch((err) => {
+    console.log('err->', err)
+  }).finally(() => {
+    loading.value = false
+  })
+
 const toggleBorder = () => {
   index.value++
   if (index.value >= border.value.length) {
@@ -44,19 +50,20 @@ function toggleStriped() {
 
 function toggleRound() {
   round.value = !round.value
-  console.log('round ->', round.value);
+  console.log('round ->', round.value)
 }
 </script>
 <template>
   <div class="p-2 h-full">
-    <VbenTable :options="{
+    <VbenTable 
+      :options="{
       title: '基础演示',
-        pagination: true,
-          border: borderValue,
-            loading: loading,
-              stripe: striped,
-                round: round,
-                  }" :columns="baseColumns" :data="data.table.items" :column-config="{ resizable: true }"
+      pagination: true,
+      border: borderValue,
+      loading: loading,
+      stripe: striped,
+      round: round,
+    }" :columns="baseColumns" :data="data.table.items" :column-config="{ resizable: true }"
       :row-config="{ isHover: true }">
       <template #toolbar>
         <div class="pb-2">
@@ -72,6 +79,15 @@ function toggleRound() {
             {{ !round ? '显示圆角' : '隐藏圆角' }}
           </VbenButton>
         </div>
+      </template>
+      <template #action>
+        <VbenButton size="tiny" strong secondary type="primary">
+          EDIT
+        </VbenButton>
+        <VbenButton size="tiny" strong secondary type="error">
+          DELETE
+        </VbenButton>
+
       </template>
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>

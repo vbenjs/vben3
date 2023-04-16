@@ -47,7 +47,7 @@ import { resultError, resultSuccess } from '@vben/utils/mock-util'
 
 const fakeTableData = (() => {
   const result: any[] = []
-  for (let i = 0; i <= 50; i++) {
+  for (let i = 1; i <= 50; i++) {
     result.push({
       userId: `${i}`,
       username: '@cname',
@@ -78,6 +78,31 @@ const fakeTableData = (() => {
   return result;
 })()
 
+const fakeTreeTableData = (() => {
+  const result: any[] = []
+  for (let i = 1; i <= 5; i++) {
+    result.push({
+      id: `${i}`,
+      parentId: null,
+      userName: '@cname',
+      address: '@city',
+      startTime: '@datetime()',
+      endTime: '@datetime()',
+      description: '@word'
+    },
+      {
+        id: '@id',
+        'parentId|1-5': 1,
+        userName: '@cname',
+        address: '@city',
+        startTime: '@datetime()',
+        endTime: '@datetime()',
+        description: '@word'
+      })
+  }
+
+  return result;
+})()
 
 export default [
   // mock user login
@@ -89,4 +114,12 @@ export default [
       return resultSuccess(fakeTableData)
     },
   },
+  {
+    url: '/basic-api/demo/treeTable',
+    timeout: 200,
+    method: 'post',
+    response: () => {
+      return resultSuccess(fakeTreeTableData)
+    }
+  }
 ] as MockMethod[]

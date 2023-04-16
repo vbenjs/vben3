@@ -42,6 +42,12 @@ export const baseColumns: VbenColumns = [
     title: '描述',
     align: 'center',
   },
+  {
+    field: 'action',
+    title: '操作',
+    align: 'center',
+    slots: { default: 'action'},
+  }
 ]
 export const fixedColumns: VbenColumns = [
   { field: 'userId', title: 'id', width: 100, fixed: 'left' },
@@ -71,4 +77,38 @@ export const innerLabels: string[] = [
 export const innerColumns: VbenColumns = [
   { field: 'label', title: 'label' },
   { field: 'value', title: 'value' },
+]
+
+export const treeColumns: VbenColumns = [
+  {
+    field: 'id',
+    title: 'ID',
+    align: 'center',
+    treeNode: 'true'
+  },
+  {
+    field: 'userName',
+    title: '名称',
+    align: 'center',
+  },
+  {
+    field: 'address',
+    title: '地址',
+    align: 'center'
+  },
+  {
+    field: 'startTime',
+    title: '开始时间',
+    align: 'center'
+  },
+  {
+    field: 'endTime',
+    title: '结束时间',
+    align: 'center'
+  },
+  {
+    field: 'description',
+    title: '描述',
+    align: 'center'
+  }
 ]

@@ -16,7 +16,8 @@ export default {
     table: {
       table: '表格',
       basic: '基础表格',
-      fixedColumn:'固定列'
+      fixedColumn:'固定列',
+      treeTable: '树形表格',
     },
   },
 }

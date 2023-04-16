@@ -36,6 +36,14 @@ const dashboard: RouteRecordItem = {
             title: 'routes.demo.table.fixedColumn',
           },
         },
+        {
+          path: 'TreeTable',
+          name: 'TreeTable',
+          component: () => import('@/pages/demo/table/TreeTable.vue'),
+          meta: {
+            title: 'routes.demo.table.treeTable'
+          }
+        }
       ],
     },
 

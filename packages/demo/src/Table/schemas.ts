@@ -9,43 +9,45 @@ export interface Data {
 export const baseColumns: VbenColumns = [
   {
     field: 'userId',
-    title: 'id',
+    title: 'ID',
     align: 'center',
     width: '10%',
+    sortable: true,
   },
   {
     field: 'username',
     title: '名称',
-    width: '10%',
+    align: 'center'
   },
   {
     field: 'realname',
     title: '真实名称',
-    width: '10%',
   },
   {
     field: 'address',
     title: '地址',
-    width: '10%',
   },
   {
     field: 'startTime',
     title: '开始时间',
     align: 'center',
-    width: '10%',
   },
   {
     field: 'endTime',
     title: '结束时间',
     align: 'center',
-    width: '10%',
   },
   {
     field: 'desc',
     title: '描述',
     align: 'center',
-    width: '40%',
   },
+  {
+    field: 'action',
+    title: '操作',
+    align: 'center',
+    slots: { default: 'action'},
+  }
 ]
 export const fixedColumns: VbenColumns = [
   { field: 'userId', title: 'id', width: 100, fixed: 'left' },
@@ -75,4 +77,38 @@ export const innerLabels: string[] = [
 export const innerColumns: VbenColumns = [
   { field: 'label', title: 'label' },
   { field: 'value', title: 'value' },
+]
+
+export const treeColumns: VbenColumns = [
+  {
+    field: 'id',
+    title: 'ID',
+    align: 'center',
+    treeNode: 'true'
+  },
+  {
+    field: 'userName',
+    title: '名称',
+    align: 'center',
+  },
+  {
+    field: 'address',
+    title: '地址',
+    align: 'center'
+  },
+  {
+    field: 'startTime',
+    title: '开始时间',
+    align: 'center'
+  },
+  {
+    field: 'endTime',
+    title: '结束时间',
+    align: 'center'
+  },
+  {
+    field: 'description',
+    title: '描述',
+    align: 'center'
+  }
 ]

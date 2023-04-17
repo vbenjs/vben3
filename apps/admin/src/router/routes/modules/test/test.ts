@@ -7,7 +7,7 @@ const test: RouteRecordItem = {
   redirect: '/test/test',
   meta: {
     orderNo: 1,
-    icon: 'ph:code-bold',
+    icon: 'solar:test-tube-outline',
     title: '测试',
     root: true,
   },

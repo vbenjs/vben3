@@ -7,7 +7,7 @@ const dashboard: RouteRecordItem = {
   redirect: '/demo/form',
   meta: {
     orderNo: 2,
-    icon: 'line-md:clipboard-list-twotone',
+    icon: 'uiw:component',
     title: 'routes.demo.demo',
     root: true,
   },

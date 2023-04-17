@@ -9,17 +9,18 @@ const Page2: RouteRecordItem = {
     orderNo: 4,
     title: '一级路由',
     icon: 'tabler:frame-off',
+    hideMenu: true,
     hideChildrenInMenu: true,
   },
   children: [
-    {
-      path: 'test2',
-      name: 'test2',
-      component: () => import('@/pages/demo/page/index.vue'),
-      meta: {
-        title: 'test2',
-      },
-    },
+    // {
+    //   path: 'test2',
+    //   name: 'test2',
+    //   component: () => import('@/pages/demo/page/index.vue'),
+    //   meta: {
+    //     title: 'test2',
+    //   },
+    // },
   ],
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@vben/stores",
-  "version": "3.0.0-bata.1",
+  "version": "3.0.0-beta.1",
   "main": "index.ts",
   "module": "index.ts",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "@vben/constants": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
-    "pinia": "^2.0.33",
+    "pinia": "^2.0.35",
     "pinia-plugin-persistedstate": "^3.1.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"

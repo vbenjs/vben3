@@ -41,10 +41,10 @@
     "@vben/router": "workspace:*",
     "dayjs": "^1.11.7",
     "mockjs": "^1.1.0",
-    "monaco-editor": "^0.34.1",
-    "pinia": "2.0.33",
+    "monaco-editor": "^0.37.1",
+    "pinia": "2.0.35",
     "vue": "3.2.47",
-    "vue-demi": "^0.13.11",
+    "vue-demi": "^0.14.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
@@ -54,10 +54,10 @@
     "@types/nprogress": "^0.2.0",
     "@vben/types": "workspace:*",
     "@vue/compiler-sfc": "3.2.47",
-    "@vue/test-utils": "^2.2.9",
+    "@vue/test-utils": "^2.3.2",
     "naive-ui": "^2.34.3",
-    "typescript": "^5.0.2",
-    "vite": "4.2.1",
-    "vue-tsc": "^1.0.24"
+    "typescript": "^5.0.4",
+    "vite": "4.3.1",
+    "vue-tsc": "^1.4.4"
   }
 }

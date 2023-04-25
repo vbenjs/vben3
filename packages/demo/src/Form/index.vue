@@ -22,7 +22,7 @@ const [register, { getFieldValue, validate }] = useForm({
       },
     ],
   },
-  schemas: transferFormilySchemas(FormilyProps),
+  schemas: BasicProps,
   title: '表单演示',
   submitFunc: (FormRef) => {
     console.log(FormRef.validate())

@@ -21,7 +21,7 @@ let dynamicViewsModules: Record<string, () => Promise<Recordable<any>>>
 function asyncImportRoute(routes: RouteRecordItem[] | undefined) {
   dynamicViewsModules =
     // @ts-ignore
-    dynamicViewsModules || import.meta.glob('../../pages/**/*.{vue,tsx}')
+    dynamicViewsModules || import.meta.glob('@/pages/**/*.{vue,tsx}')
 
   if (!routes) return
   routes.forEach((item: any) => {
@@ -68,7 +68,7 @@ function dynamicImport(
     return
   } else {
     console.warn(
-      '在src/pages/下找不到`' +
+      '在/src/pages/下找不到`' +
         component +
         '.vue` 或 `' +
         component +
@@ -85,8 +85,8 @@ export function transformObjToRoute<T = RouteRecordItem>(
   routeList.forEach((route) => {
     const _route: any = route
     const component = _route.component as string
+    console.log(component)
     if (component) {
-      console.log(component)
       if (component.toUpperCase() === 'LAYOUT') {
         route.component = LayoutMap.get(component.toUpperCase())
       } else {

@@ -51,7 +51,7 @@ function dynamicImport(
 ) {
   const keys = Object.keys(dynamicViewsModules)
   const matchKeys = keys.filter((key) => {
-    const k = key.replace('../../pages', '')
+    const k = key.replace('/src', '')
     const startFlag = component.startsWith('/')
     const endFlag = component.endsWith('.vue') || component.endsWith('.tsx')
     const startIndex = startFlag ? 0 : 1
@@ -68,7 +68,7 @@ function dynamicImport(
     return
   } else {
     console.warn(
-      '在src/views/下找不到`' +
+      '在src/pages/下找不到`' +
         component +
         '.vue` 或 `' +
         component +

@@ -53,7 +53,13 @@
   --footer-width: 100%;
 
   /* layout end */
-
+  --vxe-modal-header-background-color: #8eabf8;
+  --vxe-modal-header-color: #fff;
+  --vxe-table-header-font-color: #fff;
+  --vxe-table-header-background-color: #8eabf8;
+  --vxe-font-size: 14px;
+  --vxe-font-color: #666;
+  
 }
 
 :root[class=dark] {
@@ -61,4 +67,27 @@
   --layout-container-background-color: rgb(16, 16, 20);
 
   --component-background-color: rgb(24, 24, 28);
+  --vxe-modal-header-background-color: #e7eaf3;
+  --vxe-modal-header-color: #446cce;
+  --vxe-form-background-color: #212b4b;
+  --vxe-table-body-background-color: #212b4b;
+  --vxe-modal-body-background-color: #212b4b;
+  --vxe-button-default-background-color: #212b4b;
+  --vxe-pulldown-panel-background-color: #212b4b;
+  --vxe-input-background-color: #212b4b;
+  --vxe-select-panel-background-color: #212b4b;
+  --vxe-radio-button-default-background-color: #212b4b;
+  --vxe-toolbar-background-color: #212b4b;
+  --vxe-checkbox-icon-background-color: #212b4b;
+  --vxe-loading-background-color: #212b4b;
+  --vxe-pager-background-color: #212b4b;
+  --vxe-pager-font-color: #fff;
+  --vxe-table-border-color: #e2ebf6;
+  --vxe-table-header-font-color: #fff;
+  --vxe-table-header-background-color: #27355d;
+  --vxe-select-option-hover-background-color: #27355d;
+  --vxe-table-font-color: #e2ebf6;
+  --vxe-font-size: 14px;
+  --vxe-font-color: #fff;
 }
+

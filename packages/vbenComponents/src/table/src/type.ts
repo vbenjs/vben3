@@ -1,5 +1,5 @@
-import type { VxeGridProps,VxeTableEvents } from 'vxe-table'
-import { VxeGridPropTypes } from 'vxe-table'
+import type { VxeGridProps,VxeTableEvents } from 'vxe-table-demonic'
+import { VxeGridPropTypes } from 'vxe-table-demonic'
 
 export type VbenTableProps<D = any> = VxeGridProps<D> & {
   api?: Function

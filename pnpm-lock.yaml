@@ -68,6 +68,9 @@ importers:
       '@ant-design/icons-vue':
         specifier: ^6.1.0
         version: 6.1.0(vue@3.2.47)
+      '@config/vite':
+        specifier: workspace:*
+        version: link:../../configs/vite
       '@iconify/iconify':
         specifier: ^3.1.0
         version: 3.1.0
@@ -138,9 +141,6 @@ importers:
       '@config/css-preprocess':
         specifier: workspace:*
         version: link:../../configs/css-preprocess
-      '@config/vite':
-        specifier: workspace:*
-        version: link:../../configs/vite
       '@types/mockjs':
         specifier: ^1.0.7
         version: 1.0.7
@@ -679,9 +679,9 @@ importers:
       vue:
         specifier: ^3.2.47
         version: 3.2.47
-      vxe-table:
-        specifier: ^4.3.9
-        version: 4.3.10(vue@3.2.47)(xe-utils@3.5.7)
+      vxe-table-demonic:
+        specifier: ^4.4.2
+        version: 4.4.2(vue@3.2.47)(xe-utils@3.5.7)
       xe-utils:
         specifier: ^3.5.7
         version: 3.5.7
@@ -13111,8 +13111,8 @@ packages:
       vue: 3.2.47
     dev: true
 
-  /vxe-table@4.3.10(vue@3.2.47)(xe-utils@3.5.7):
-    resolution: {integrity: sha512-qxLhA3hiAfxsm8+dbN1n7+FrRwMEzUB/676x67gEb3H63WFWulRvTc88LCe0itMcuYcpy7uZHn5ruRsz0KnorQ==}
+  /vxe-table-demonic@4.4.2(vue@3.2.47)(xe-utils@3.5.7):
+    resolution: {integrity: sha512-8Krw1qju4dYI9cMjPNoXKEQkBsrSPMp1hYTshAAQWax9iWnIqpNIICq7CY7oOFphMiEkDPpAjQxYRMKK89KHDw==}
     peerDependencies:
       vue: ^3.2.28
       xe-utils: ^3.5.0

@@ -5,11 +5,11 @@ export default {
 </script>
 <script lang="ts" setup name="VbenTable">
 import 'xe-utils'
-import 'vxe-table/styles/index.scss'
+import 'vxe-table-demonic/styles/index.scss'
 import type { VbenTableProps } from './type'
 import { computed, PropType, ref, unref, useAttrs, watch } from 'vue'
 import { isBoolean, isFunction } from '@vben/utils'
-import { VxeTableInstance } from 'vxe-table'
+import { VxeTableInstance } from 'vxe-table-demonic'
 import { ThemeEnum } from '@vben/constants'
 import { context } from '../../../bridge'
 const { useAppStore } = context

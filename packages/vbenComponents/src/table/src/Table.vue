@@ -7,9 +7,9 @@ export default {
 import 'xe-utils'
 import 'vxe-table-demonic/styles/index.scss'
 import type { VbenTableProps } from './type'
-import { computed, PropType, ref, unref, useAttrs, watch } from 'vue'
+import { computed, PropType, ref, unref, useAttrs } from 'vue'
 import { isBoolean, isFunction } from '@vben/utils'
-import { VxeTableInstance } from 'vxe-table-demonic'
+import { VxeGridInstance } from 'vxe-table-demonic'
 import { ThemeEnum } from '@vben/constants'
 import { context } from '../../../bridge'
 const { useAppStore } = context
@@ -18,7 +18,7 @@ import { useInterceptor } from './hooks'
 
 useInterceptor()
 
-watch(
+/*watch(
   () => appStore.getDarkMode,
   () => {
     if (appStore.getDarkMode == ThemeEnum.DARK) {
@@ -31,7 +31,7 @@ watch(
     }
   },
   { immediate: true },
-)
+)*/
 const attrs = useAttrs()
 const emit = defineEmits(['register'])
 const titleClass = computed(() => {
@@ -62,14 +62,11 @@ const getProps = computed(() => {
     ...attrs,
   }
 })
-const xGrid = ref(null) as VxeTableInstance
+const xGrid = ref<VxeGridInstance>()
 
 const reload = () => {
   const g = unref(xGrid)
-  if (!g) {
-    return
-  }
-  g.commitProxy('query')
+  g?.commitProxy('query')
 }
 
 const getProxyConfig = (options: VbenTableProps) => {

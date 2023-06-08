@@ -17,6 +17,7 @@
     "changeset": "changeset",
     "clean": "pnpm turbo run clean && rimraf node_modules",
     "dev": "pnpm --filter scripts dev",
+    "serve": "pnpm --filter @apps/admin dev",
     "format": "pnpm run lint:eslint & pnpm run lint:stylelint & pnpm run lint:prettier",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "pnpm run stub",

@@ -61,6 +61,21 @@ describe('【测试MonoRepoResolverPlugin】', () => {
       expect(customResolver.call(null, 'src/justvue', importerId)).contains('test/plugins/testpkg/src/justvue/index.vue')
     })
     
+    test('匹配组件文件夹的时候忽略大小写', async () => {
+      const [, importerId] = buildTestPkgPath()
+      expect(customResolver.call(null, 'src/casesensitive', importerId)).contains('test/plugins/testpkg/src/casesensitive/index.ts')
+    })
+
+    test('匹配组件文件的时候忽略大小写', async () => {
+      const [, importerId] = buildTestPkgPath()
+      expect(customResolver.call(null, 'src/singleCasesensitive', importerId)).contains('test/plugins/testpkg/src/singleCaseSensitive.vue')
+    })
+
+    test('匹配组件index的时候忽略大小写', async () => {
+      const [, importerId] = buildTestPkgPath()
+      expect(customResolver.call(null, 'src/upcaseindex', importerId)).contains('test/plugins/testpkg/src/upcaseindex/Index.ts')
+    })
+
     test(`找不到组件`, async () => {
       const [, importerId] = buildTestPkgPath()
       expect(() => customResolver.call(null, 'src/notfound', importerId)).toThrowError(/find none files at/)

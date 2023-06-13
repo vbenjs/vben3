@@ -170,7 +170,7 @@ export const createAlias = (config: UserConfig, env: ConfigEnv, options: Options
             // import路径存在，确定是文件还是文件夹，分别处理
             if (fs.statSync(componentPath).isDirectory()) {
               // 如果导入的是文件夹，文件加载应该有index.xxx的入口文件
-              const components = glob.sync(`${componentPath}/index.*`, { onlyFiles: true, deep: 1 })
+              const components = glob.sync(`${componentPath}/index.*`, { onlyFiles: true, deep: 1, caseSensitiveMatch: false })
               if (components.length === 1) {
                 realPath = components[0]
               } else {
@@ -190,7 +190,7 @@ export const createAlias = (config: UserConfig, env: ConfigEnv, options: Options
             }
           } else {
             // import文件不存在，需要进一步处理，尝试直接搜索相关文件
-            const components = glob.sync(`${componentPath}.*`, { onlyFiles: true, deep: 1 })
+            const components = glob.sync(`${componentPath}.*`, { onlyFiles: true, deep: 1, caseSensitiveMatch: false, cwd: path.resolve(componentPath, '../') })
             if (components.length === 1) {
               realPath = components[0]
             } else {

@@ -1,6 +1,6 @@
 // Interface data format used to return a unified format
 export interface requestParams {
-  method: string
+  url: Recordable<any>
   body: Recordable<any>
   headers?: { authorization?: string }
   query: Recordable<any>

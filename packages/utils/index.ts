@@ -16,3 +16,5 @@ export {
 // @ts-ignore
 import Sortable from 'sortablejs'
 export { Sortable }
+
+export * from './src/datastructure'

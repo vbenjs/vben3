@@ -1,0 +1,1 @@
+export const aa = { test: true }

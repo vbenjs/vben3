@@ -14,6 +14,7 @@ import { configUnocssPlugin } from './unocss'
 import { createConfigPlugin } from './config'
 import { configHttpsPlugin } from './https'
 import monacoEditorPlugin from 'vite-plugin-monaco-editor'
+import MonoRepoAliasPlugin from './monorepo'
 export async function configVitePlugins(
   root: string,
   viteEnv: ViteEnv,
@@ -61,6 +62,8 @@ export async function configVitePlugins(
   vitePlugins.push(configHttpsPlugin(viteEnv))
   // monacoEditorPlugin
   vitePlugins.push(monacoEditorPlugin({}))
+  // MonorepoSupport
+  vitePlugins.push(MonoRepoAliasPlugin())
 
   // The following plugins only work in the production environment
   if (isBuild) {

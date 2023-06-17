@@ -1,0 +1,1 @@
+import VueAndTs from '#/vue&ts'

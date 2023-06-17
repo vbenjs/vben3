@@ -1,6 +1,6 @@
 {
   "name": "vben-admin-monorepo",
-  "version": "3.0.0-bata.1",
+  "version": "3.0.0-beta.1",
   "private": true,
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
   "bugs": {
@@ -8,20 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git"
+    "url": "git+https://github.com/vbenjs/vben3.git"
   },
   "license": "MIT",
-  "author": {
-    "name": "vben",
-    "email": "anncwb@126.com",
-    "url": "https://github.com/anncwb"
-  },
   "scripts": {
     "bootstrap": "pnpm install",
     "build": "pnpm --filter scripts build",
     "changeset": "changeset",
     "clean": "pnpm turbo run clean && rimraf node_modules",
     "dev": "pnpm --filter scripts dev",
+    "serve": "pnpm --filter @apps/admin dev",
     "format": "pnpm run lint:eslint & pnpm run lint:stylelint & pnpm run lint:prettier",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "pnpm run stub",
@@ -43,23 +39,24 @@
     "@changesets/cli": "^2.26.1",
     "@config/lint": "workspace:*",
     "@types/fs-extra": "^11.0.1",
-    "@types/node": "^18.15.10",
+    "@types/node": "^18.16.0",
     "cross-env": "^7.0.3",
     "esno": "^0.16.3",
     "fs-extra": "^11.1.1",
     "jsdom": "^21.1.1",
     "pathe": "^1.1.0",
     "rimraf": "^4.4.1",
-    "rollup": "^3.20.2",
+    "rollup": "^3.21.0",
     "ts-node": "^10.9.1",
     "tsconfig": "workspace:*",
-    "turbo": "^1.8.5",
-    "typescript": "^5.0.2",
-    "unbuild": "^1.1.2",
-    "vitest": "^0.29.7"
+    "turbo": "^1.9.3",
+    "typescript": "^5.0.4",
+    "unbuild": "^1.2.1",
+    "vitest": "^0.30.1"
   },
   "engines": {
     "node": ">=16"
   },
   "packageManager": "pnpm@7.1.0"
 }
+

@@ -1,6 +1,6 @@
 {
   "name": "@vben/grid-layouts",
-  "version": "3.0.0-bata.1",
+  "version": "3.0.0-beta.1",
   "main": "index.ts",
   "module": "index.ts",
   "license": "MIT",

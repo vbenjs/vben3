@@ -70,6 +70,7 @@ const transform: AxiosTransform = {
       return result
     }
 
+    // @ts-ignore
     context.msgFunction.error(message)
     throw new Error(message)
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
@@ -94,6 +95,7 @@ const transform: AxiosTransform = {
         content: timeoutMsg,
       })
     } else if (options.errorMessageMode === 'message') {
+      // @ts-ignore
       context.msgFunction.error(timeoutMsg)
     }
 
@@ -222,7 +224,7 @@ const transform: AxiosTransform = {
   },
 }
 
-const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
+export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
   return new VAxios(
     deepMerge(
       {

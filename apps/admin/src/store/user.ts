@@ -19,6 +19,9 @@ interface UserState {
 }
 
 export const useUserStore = defineStore('app-user-store', {
+  persist: {
+    paths: ['userInfo', 'accessToken', 'roles'],
+  },
   state: (): UserState => ({
     userInfo: null,
     accessToken: undefined,
@@ -75,7 +78,6 @@ export const useUserStore = defineStore('app-user-store', {
       try {
         const { goHome = true, mode, ...loginParams } = params
         const { accessToken } = await doLoginApi(loginParams, mode)
-
         // save token
         this.setAccessToken(accessToken)
         if (!this.getAccessToken) {
@@ -150,9 +152,6 @@ export const useUserStore = defineStore('app-user-store', {
       if (goLogin) {
         router.push(BASIC_LOGIN_PATH)
       }
-    },
-    persist: {
-      paths: ['userInfo', 'accessToken', 'roles'],
     },
   },
 })

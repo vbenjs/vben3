@@ -1,27 +1,24 @@
 <script lang="ts" setup>
-import {useComosables} from './useComosables'
+import { useComosables } from './useComosables'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
-import { context } from '../bridge'
-const { useMenuSetting, useRootSetting } = context
-const {headerRef, contentStyle, mainStyle, footerRef} = useComosables()
-
-const { toggleCollapsed, getCollapsed, getMenuWidth, getShowSidebar } = useMenuSetting()
-const { getShowFooter } = useRootSetting();
+import { useAppConfig } from '@vben/hooks'
+const { headerRef, contentStyle, mainStyle, footerRef } = useComosables()
+const { toggleCollapse, sidebar, footer } = useAppConfig()
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
     <VbenLayoutSider
-      v-if="getShowSidebar"
+      v-if="sidebar.show"
       show-trigger
       bordered
-      :collapsed-width="48"
-      :width="getMenuWidth"
+      :collapsed-width="sidebar.collapsedWidth"
+      :width="sidebar.width"
       collapse-mode="width"
-      :collapsed="getCollapsed"
-      @update:collapsed="toggleCollapsed"
+      :collapsed="sidebar.collapsed"
+      @update:collapsed="toggleCollapse"
     >
       <slot name="sider">
         <LayoutMenu />
@@ -37,9 +34,9 @@ const { getShowFooter } = useRootSetting();
             <slot name="main"></slot>
           </LayoutMain>
         </VbenLayoutContent>
-        <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
+        <VbenLayoutFooter v-if="footer.show" ref="footerRef">
           <slot name="footer">
-            <LayoutFooter/>
+            <LayoutFooter />
           </slot>
         </VbenLayoutFooter>
       </VbenLayout>

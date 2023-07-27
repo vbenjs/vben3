@@ -56,6 +56,14 @@ const dashboard: RouteRecordItem = {
       },
     },
     {
+      path: 'modal',
+      name: 'Modal',
+      component: () => import('@/pages/demo/Modal.vue'),
+      meta: {
+        title: 'routes.demo.modal'
+      }
+    },
+    {
       path: 'card',
       name: 'Card',
       component: () => import('@/pages/demo/Card.vue'),

@@ -19,5 +19,6 @@ export default {
       fixedColumn:'固定列',
       treeTable: '树形表格',
     },
+    modal: "模态框",
   },
 }

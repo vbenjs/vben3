@@ -3,39 +3,44 @@
   --success-color: #55d187;
   --error-color: #ed6f6f;
   --warning-color: #efbd47;
-
+  
+  --vxe-primary-color: var(--primary-color);
+  --vxe-success-color: var(--success-color);
+  --vxe-error-color: var(--error-color);
+  --vxe-warning-color: var(--warning-color);
+  
   /* component */
   --component-background-color: #fff;
-
+  
   /* transition */
   --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-all: all 0.3s var(--transition-bezier);
-
+  
   /* layout start */
-
+  
   --layout-color: #fff;
   --layout-container-background-color: #fff;
   --layout-border-color: rgb(239, 239, 245);
-
+  
   /* header */
   --header-height: 48px;
   --header-width: calc(100% - var(--aside-width));
   --header-background-color: #fff;
-  --header-text-color: rgba(0,0,0,0.85);
+  --header-text-color: rgba(0, 0, 0, 0.85);
   --header-icon-color: var(--header-text-color);
   --header-action-hover-bg-color: #f6f6f6;
-
+  
   /* tab */
   --tab-bar-height: 36px;
   --tab-bar-width: calc(100% - var(--aside-width));
-
+  
   /* aside */
   --aside-height: calc(100% - var(--header-height));
   --aside-width: 210px;
   --aside-background-color: #001529;
   --aside-submenu-background-color: #0c2135;
   --aside-text-color: #fff;
-
+  
   --trigger-background-color: rgb(72, 72, 78);
   /*--trigger-border: 1px solid rgb(239, 239, 245);*/
   --trigger-border-color: rgb(239, 239, 245);
@@ -43,15 +48,15 @@
   /*--trigger-icon-color: #f3f1f1;*/
   /*--trigger-icon-color: rgb(51, 54, 57);*/
   /*--trigger-hover-icon-color: #fff;*/
-
+  
   /* main */
   --main-height: calc(100% - var(--footer-height));
   --main-width: 100%;
-
+  
   /* footer */
   --footer-height: 60px;
   --footer-width: 100%;
-
+  
   /* layout end */
   --vxe-modal-header-background-color: #8eabf8;
   --vxe-modal-header-color: #fff;
@@ -65,12 +70,23 @@
 :root[class=dark] {
   --layout-border-color: rgba(255, 255, 255, 0.09);
   --layout-container-background-color: rgb(16, 16, 20);
-
+  
   --component-background-color: rgb(24, 24, 28);
-  --vxe-modal-header-background-color: #e7eaf3;
-  --vxe-modal-header-color: #446cce;
+  --vxe-modal-header-background-color: #27355d;
   --vxe-form-background-color: #212b4b;
   --vxe-table-body-background-color: #212b4b;
+  --vxe-grid-maximize-background-color: #212b4b;
+  --vxe-textarea-background-color: #212b4b;
+  --vxe-table-row-current-background-color: #334579;
+  --vxe-table-column-current-background-color: #334579;
+  --vxe-table-column-hover-background-color: #334579;
+  --vxe-table-row-hover-background-color: #405492;
+  --vxe-table-row-hover-current-background-color: #4d63ad;
+  --vxe-input-date-picker-hover-background-color: #4d63ad;
+  --vxe-loading-background-color: #677dc780;
+  --vxe-loading-color: #75bcea;
+  --vxe-table-row-checkbox-checked-background-color: #405492;
+  --vxe-table-row-radio-checked-background-color: #405492;
   --vxe-modal-body-background-color: #212b4b;
   --vxe-button-default-background-color: #212b4b;
   --vxe-pulldown-panel-background-color: #212b4b;
@@ -78,16 +94,25 @@
   --vxe-select-panel-background-color: #212b4b;
   --vxe-radio-button-default-background-color: #212b4b;
   --vxe-toolbar-background-color: #212b4b;
-  --vxe-checkbox-icon-background-color: #212b4b;
-  --vxe-loading-background-color: #212b4b;
   --vxe-pager-background-color: #212b4b;
-  --vxe-pager-font-color: #fff;
+  --vxe-pager-perfect-background-color: #212b4b;
+  --vxe-table-tree-node-line-color: #bec1c5;
   --vxe-table-border-color: #e2ebf6;
+  --vxe-textarea-count-color: #e2ebf6;
   --vxe-table-header-font-color: #fff;
   --vxe-table-header-background-color: #27355d;
   --vxe-select-option-hover-background-color: #27355d;
-  --vxe-table-font-color: #e2ebf6;
   --vxe-font-size: 14px;
-  --vxe-font-color: #fff;
+  --vxe-font-color: #e2ebf6;
+  --vxe-table-font-color: #e2ebf6;
+  --vxe-font-l10-color: #f5f8fc;
+  --vxe-font-l20-color: #fff;
+  
+  /*
+  --vxe-font-l10-color:#{darken(#e2ebf6,10%)};
+  --vxe-font-l20-color:#{darken(#e2ebf6,20%)};
+  */
+  --vxe-pager-font-color: #ffffffe6;
+  --vxe-row-selected-bg-color: #d39a26;
 }
 

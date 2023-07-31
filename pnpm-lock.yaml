@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -270,9 +270,15 @@ importers:
       dotenv:
         specifier: 16.0.3
         version: 16.0.3
+      fast-glob:
+        specifier: ^3.2.12
+        version: 3.2.12
       less:
         specifier: ^4.1.3
         version: 4.1.3
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       picocolors:
         specifier: ^1.0.0
         version: 1.0.0
@@ -680,8 +686,8 @@ importers:
         specifier: ^3.2.47
         version: 3.2.47
       vxe-table-demonic:
-        specifier: ^4.4.2
-        version: 4.4.2(vue@3.2.47)(xe-utils@3.5.7)
+        specifier: ^4.5.0-beta.3
+        version: 4.5.0-beta.3(vue@3.2.47)(xe-utils@3.5.7)
       xe-utils:
         specifier: ^3.5.7
         version: 3.5.7
@@ -5990,6 +5996,7 @@ packages:
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    requiresBuild: true
     peerDependencies:
       supports-color: '*'
     peerDependenciesMeta:
@@ -9556,6 +9563,7 @@ packages:
 
   /ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
+    requiresBuild: true
     optional: true
 
   /muggle-string@0.2.2:
@@ -10922,6 +10930,7 @@ packages:
 
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
+    requiresBuild: true
     optional: true
 
   /pseudomap@1.0.2:
@@ -11384,6 +11393,7 @@ packages:
 
   /sax@1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
+    requiresBuild: true
     optional: true
 
   /saxes@6.0.0:
@@ -13163,8 +13173,8 @@ packages:
       vue: 3.2.47
     dev: true
 
-  /vxe-table-demonic@4.4.2(vue@3.2.47)(xe-utils@3.5.7):
-    resolution: {integrity: sha512-8Krw1qju4dYI9cMjPNoXKEQkBsrSPMp1hYTshAAQWax9iWnIqpNIICq7CY7oOFphMiEkDPpAjQxYRMKK89KHDw==}
+  /vxe-table-demonic@4.5.0-beta.3(vue@3.2.47)(xe-utils@3.5.7):
+    resolution: {integrity: sha512-9jfgkgTerU/rUUvC6yUJvxfuctjxxnfy498fLht7Fa31pjaadV8v2IRKOqNnduRVNTpoQdIMqALFrRatvqTZgQ==}
     peerDependencies:
       vue: ^3.2.28
       xe-utils: ^3.5.0

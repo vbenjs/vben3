@@ -19,7 +19,6 @@ const data = reactive<Data>({
 getTableData()
   .then((res) => {
     loading.value = true
-    // console.log('res->', res)
     data.table.items = res
   })
   .catch((err) => {
@@ -55,15 +54,9 @@ function toggleRound() {
 </script>
 <template>
   <div class="p-2 h-full">
-    <VbenTable 
-      :options="{
-      title: '基础演示',
-      pagination: true,
-      border: borderValue,
-      loading: loading,
-      stripe: striped,
-      round: round,
-    }" :columns="baseColumns" :data="data.table.items" :column-config="{ resizable: true }"
+    <VbenTable
+      :options="{ title: '基础演示', pagination: true, border: borderValue, loading: loading, stripe: striped, round: round, }"
+      :columns="baseColumns" :data="data.table.items" :column-config="{ resizable: true }"
       :row-config="{ isHover: true }">
       <template #toolbar>
         <div class="pb-2">
@@ -84,10 +77,10 @@ function toggleRound() {
         <VbenButton size="tiny" strong secondary type="primary">
           EDIT
         </VbenButton>
+        <VbenDivider vertical />
         <VbenButton size="tiny" strong secondary type="error">
           DELETE
         </VbenButton>
-
       </template>
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>

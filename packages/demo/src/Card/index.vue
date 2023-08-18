@@ -13,7 +13,7 @@ function radioChange(e: Event) {
 }
 
 function handleClose() {
-  return 
+  return
 }
 </script>
 
@@ -28,12 +28,10 @@ function handleClose() {
       <VbenCard contentStyle="padding: 0">
         <VbenTabs :type="tabsType" size="large" :tabsPadding="20" paneStyle="padding: 20px;">
           <VbenTabPane name="tabs1">
-            这是一个Tabs卡片(👁️🐽👁️)
-            <p> 你可以选择Tabs的类型: </p>
+            这是一个Tabs卡片
             <!-- TODO: VbenRadioGroup似乎有bug,点击后的样式无法正常显示 -->
             <!-- TODO: VbenRadioGroup tabsType设置默认值后不起作用 -->
-            <VbenRadioGroup name="radio-group" :value="tabsType" :options="radioArr"
-              @change="radioChange" />
+            <VbenRadioGroup name="radio-group" :value="tabsType" :options="radioArr" @change="radioChange" />
           </VbenTabPane>
           <VbenTabPane name="tabs2">我本将心向明月,奈何明月照沟渠.</VbenTabPane>
         </VbenTabs>

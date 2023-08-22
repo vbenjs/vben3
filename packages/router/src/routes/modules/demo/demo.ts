@@ -7,7 +7,7 @@ const dashboard: RouteRecordItem = {
   redirect: '/demo/form',
   meta: {
     orderNo: 2,
-    icon: 'line-md:clipboard-list-twotone',
+    icon: 'uiw:component',
     title: 'routes.demo.demo',
     root: true,
   },
@@ -36,6 +36,14 @@ const dashboard: RouteRecordItem = {
             title: 'routes.demo.table.fixedColumn',
           },
         },
+        {
+          path: 'TreeTable',
+          name: 'TreeTable',
+          component: () => import('@/pages/demo/table/TreeTable.vue'),
+          meta: {
+            title: 'routes.demo.table.treeTable'
+          }
+        }
       ],
     },
 
@@ -46,6 +54,14 @@ const dashboard: RouteRecordItem = {
       meta: {
         title: 'routes.demo.form',
       },
+    },
+    {
+      path: 'modal',
+      name: 'Modal',
+      component: () => import('@/pages/demo/Modal.vue'),
+      meta: {
+        title: 'routes.demo.modal'
+      }
     },
     {
       path: 'card',

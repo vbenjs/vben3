@@ -10,13 +10,15 @@ export default {
     analysis: '分析页',
   },
   demo: {
-    demo: '演示',
+    demo: '组件',
     card: '卡片',
     form: '表单',
     table: {
       table: '表格',
       basic: '基础表格',
-      fixedColumn:'固定列'
+      fixedColumn:'固定列',
+      treeTable: '树形表格',
     },
+    modal: "模态框",
   },
 }

@@ -18,5 +18,6 @@ export default {
       basic: 'basic',
       fixedColumn:'fixedColumn'
     },
+    modal: 'Modal',
   },
 }

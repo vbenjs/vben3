@@ -9,6 +9,7 @@ const MultiLevel: RouteRecordItem = {
     orderNo: 4,
     title: '多级路由',
     icon: 'tabler:frame-off',
+    hideMenu: true
   },
   children: [
     {

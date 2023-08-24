@@ -144,7 +144,12 @@ const e3_option = ref({
     show: false,
   },
   legend: {
-    show: false,
+    show: true,
+    orient: 'vertical',
+    itemGap: 5,
+    height: 50,
+    top: 80,
+    left: '10%'
   },
   series: [
     {
@@ -152,6 +157,7 @@ const e3_option = ref({
       type: 'pie',
       radius: ['40%', '80%'],
       center: ['50%', '50%'],
+      left: '40%',
       label: {
         show: false,
       },
@@ -486,7 +492,7 @@ const e6_option = ref({
         <div class="bg-white w-1/3 h-40 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600">
           <p class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto">收入来源</p>
           <div class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"></div>
-          <div class="col-start-6 col-span-7 row-start-1 row-span-6">
+          <div class="col-start-1 col-span-12 row-start-1 row-span-6">
             <v-chart ref="pieChart" :option="e3_option" autoresize />
           </div>
         </div>

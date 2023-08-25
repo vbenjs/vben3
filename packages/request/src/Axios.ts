@@ -18,7 +18,7 @@ export * from './axiosTransform'
  */
 export class VAxios {
   private axiosInstance: AxiosInstance
-  private readonly options: CreateAxiosOptions
+  private options: CreateAxiosOptions
 
   constructor(options: CreateAxiosOptions) {
     this.options = options
@@ -45,11 +45,14 @@ export class VAxios {
   /**
    * @description: Reconfigure axios
    */
-  configAxios(config: CreateAxiosOptions) {
+  configAxios(options: CreateAxiosOptions) {
     if (!this.axiosInstance) {
       return
     }
-    this.createAxios(config)
+    const opt: CreateAxiosOptions = Object.assign({}, this.options, options)
+    this.createAxios(opt)
+    this.options = opt
+    this.setupInterceptors()
   }
 
   /**

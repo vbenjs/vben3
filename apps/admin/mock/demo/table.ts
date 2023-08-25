@@ -62,34 +62,35 @@ const fakeTableData = (() => {
       'roles|1-2': [
         {
           name: 'Admin',
-          value: 'admin'
+          value: 'admin',
         },
         {
           name: 'superAdmin',
-          value: 'superAdmin'
+          value: 'superAdmin',
         },
         {
           name: 'Tester',
-          value: 'test'
-        }
-      ]
+          value: 'test',
+        },
+      ],
     })
   }
-  return result;
+  return result
 })()
 
 const fakeTreeTableData = (() => {
   const result: any[] = []
   for (let i = 1; i <= 5; i++) {
-    result.push({
-      id: `${i}`,
-      parentId: null,
-      userName: '@cname',
-      address: '@city',
-      startTime: '@datetime()',
-      endTime: '@datetime()',
-      description: '@word'
-    },
+    result.push(
+      {
+        id: `${i}`,
+        parentId: null,
+        userName: '@cname',
+        address: '@city',
+        startTime: '@datetime()',
+        endTime: '@datetime()',
+        description: '@word',
+      },
       {
         id: '@id',
         'parentId|1-5': 1,
@@ -97,12 +98,12 @@ const fakeTreeTableData = (() => {
         address: '@city',
         startTime: '@datetime()',
         endTime: '@datetime()',
-        description: '@word'
-      })
-
+        description: '@word',
+      },
+    )
   }
 
-  return result;
+  return result
 })()
 
 const mockOperatorData = (() => {
@@ -116,10 +117,7 @@ const mockOperatorData = (() => {
       updateTime: '@datetime',
     })
   }
-  }
-
-
-  return result;
+  return result
 })()
 
 export default [
@@ -138,7 +136,7 @@ export default [
     method: 'post',
     response: () => {
       return resultSuccess(fakeTreeTableData)
-    }
+    },
   },
   {
     url: '/basic-api/demo/operator',
@@ -146,6 +144,6 @@ export default [
     method: 'post',
     response: () => {
       return resultSuccess(mockOperatorData)
-    }
-  }
+    },
+  },
 ] as MockMethod[]

@@ -99,6 +99,7 @@ const fakeTreeTableData = (() => {
         endTime: '@datetime()',
         description: '@word'
       })
+
   }
 
   return result;
@@ -115,6 +116,9 @@ const mockOperatorData = (() => {
       updateTime: '@datetime',
     })
   }
+  }
+
+
   return result;
 })()
 

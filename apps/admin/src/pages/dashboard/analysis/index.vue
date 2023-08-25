@@ -514,12 +514,12 @@ const e6_option = ref({
       </div>
     </div>
     <div class="flex flex-col items-center gap-y-5 w-1/4">
-      <div class="bg-white w-11/12 h-1/2 p-5 rounded-lg grid grid-cols-12 grid-rows-12">
+      <div class="bg-white w-11/12 h-1/2 p-5 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600">
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
           <v-chart ref="barChart" :option="e5_option" autoresize />
         </div>
       </div>
-      <div class="bg-white w-11/12 h-1/2 rounded-lg grid grid-cols-12 grid-rows-12">
+      <div class="bg-white w-11/12 h-1/2 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600">
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
           <v-chart ref="calendarChart" :option="e6_option" autoresize />
         </div>

@@ -7,3 +7,7 @@ export function getTableData() {
 export function getTreeTableData() {
   return request.post({ url: '/demo/treeTable' })
 }
+
+export function getOperatorData() {
+  return request.post({ url: '/demo/operator' })
+}

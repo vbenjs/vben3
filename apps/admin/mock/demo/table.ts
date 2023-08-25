@@ -99,7 +99,25 @@ const fakeTreeTableData = (() => {
         endTime: '@datetime()',
         description: '@word'
       })
+
   }
+
+  return result;
+})()
+
+const mockOperatorData = (() => {
+  const result: any[] = []
+  for (let i = 1; i <= 50; i++) {
+    result.push({
+      userId: `${i}`,
+      operatorName: '@cname',
+      record: '@word(10)',
+      createTime: `@datetime()`,
+      updateTime: '@datetime',
+    })
+  }
+  }
+
 
   return result;
 })()
@@ -120,6 +138,14 @@ export default [
     method: 'post',
     response: () => {
       return resultSuccess(fakeTreeTableData)
+    }
+  },
+  {
+    url: '/basic-api/demo/operator',
+    timeout: 200,
+    method: 'post',
+    response: () => {
+      return resultSuccess(mockOperatorData)
     }
   }
 ] as MockMethod[]

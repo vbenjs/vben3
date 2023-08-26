@@ -20,7 +20,7 @@ import {
 import { useDesign } from '@/hooks/web/useDesign'
 import { useAppInject } from '@/hooks/web/use-app-inject'
 import { useTabs } from '@/hooks/useTabs'
-import { usePromise } from '@vben/hooks'
+import { useAppConfig, usePromise } from '@vben/hooks'
 import { useMultipleTabStore } from '@/store/multipleTab'
 import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { useAppStore } from '@/store/modules/app'
@@ -119,10 +119,12 @@ async function initPackages() {
 
 // Initial project configuration
 function initAppConfigStore() {
-  const configStore = useConfigStoreWithOut()
-  const projectConfig = unref(configStore.getProjectConfig)
-  const projCfg = deepMerge(projectSetting, projectConfig || {})
-  configStore.setProjectConfig(projCfg)
+  // const configStore = useConfigStoreWithOut()
+  // const projectConfig = unref(configStore.getProjectConfig)
+  // const projCfg = deepMerge(projectSetting, projectConfig || {})
+  // configStore.setProjectConfig(projCfg)
+  const appConfig = useAppConfig()
+  appConfig.setAppConfig(projectSetting)
 }
 
 export async function initApplication() {

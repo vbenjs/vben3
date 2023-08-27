@@ -1,6 +1,6 @@
 import type { RouteMeta, Router, RouteRecordNormalized } from 'vue-router'
 import { Exception, FrameBlank } from '../page'
-import { omit, cloneDeep } from '@vben/utils'
+import { omit, cloneDeep, filterTree } from '@vben/utils'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { LAYOUT, PARENT_LAYOUT } from '../routes'
 
@@ -181,4 +181,16 @@ function isMultipleRoute(routeModule: RouteRecordItem) {
     }
   }
   return flag
+}
+
+export function filterRouterTree<T = any>(
+  tree: T[],
+  func: (n: T) => boolean,
+  flat: boolean = true,
+): RouteRecordItem[] {
+  let t = filterTree(tree, func).filter(func) as RouteRecordItem[]
+  if (flat) {
+    t = flatMultiLevelRoutes(t)
+  }
+  return t
 }

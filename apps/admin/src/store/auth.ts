@@ -1,18 +1,16 @@
 import { defineStore } from '@vben/stores'
-import { layoutRoutes, PAGE_NOT_FOUND_ROUTE } from '@vben/router'
-import { filterTree } from '@vben/utils'
-import { Menu } from '@vben/types'
-import { useConfigStoreWithOut } from './config'
-import { useUserStore } from './user'
-import { getPermCode } from '@/apis/auth'
-import { toRaw, unref } from 'vue'
-import { projectSetting } from '@/setting'
-import { PermissionModeEnum, PageEnum } from '@vben/constants'
 import {
-  flatMultiLevelRoutes,
+  layoutRoutes,
+  PAGE_NOT_FOUND_ROUTE,
+  filterRouterTree,
   transformObjToRoute,
   transformRouteToMenu,
 } from '@vben/router'
+import { Menu } from '@vben/types'
+import { useUserStore } from './user'
+import { getPermCode } from '@/apis/auth'
+import { toRaw, unref } from 'vue'
+import { PermissionModeEnum, PageEnum } from '@vben/constants'
 import { getMenuList } from '@/apis/sys'
 import { useAppConfig } from '@vben/hooks'
 import { asyncRoutes } from '@/router/routes'
@@ -205,18 +203,3 @@ export const useAuthStore = defineStore('app-auth-store', {
     },
   },
 })
-function filterRouterTree<T = any>(
-  tree: T[],
-  func: (n: T) => boolean,
-  flat: boolean = true,
-): RouteRecordItem[] {
-  let t = filterTree(tree, func).filter(func) as RouteRecordItem[]
-  if (flat) {
-    t = flatMultiLevelRoutes(t)
-  }
-  return t
-}
-// Need to be used outside the setup
-export function useAuthStoreWithout() {
-  return useAuthStore()
-}

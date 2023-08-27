@@ -143,19 +143,21 @@ export const useAuthStore = defineStore('app-auth-store', {
       }
       // 组合框架路由 与 本地路由
       const r = layoutRoutes.concat(asyncRoutes)
+      routes = filterRouterTree(r, routeFilter)
       switch (permissionMode) {
         case PermissionModeEnum.ROLE:
-          routes = filterTree(r, routeFilter)
-          routes = routes.filter(routeFilter)
+          // routes = filterTree(r, routeFilter)
+          // routes = routes.filter(routeFilter)
           // Convert multi-level routing to level 2 routing
-          routes = flatMultiLevelRoutes(routes)
+          // routes = flatMultiLevelRoutes(routes)
           break
         case PermissionModeEnum.ROUTE_MAPPING:
-          routes = filterTree(r, routeFilter)
-          routes = routes.filter(routeFilter)
+          // routes = filterTree(r, routeFilter)
+          // routes = routes.filter(routeFilter)
           const menuList = transformRouteToMenu(routes, true)
-          routes = filterTree(routes, routeRemoveIgnoreFilter)
-          routes = routes.filter(routeRemoveIgnoreFilter)
+          // routes = filterTree(routes, routeRemoveIgnoreFilter)
+          // routes = routes.filter(routeRemoveIgnoreFilter)
+          routes = filterRouterTree(routes, routeRemoveIgnoreFilter)
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0)
           })
@@ -163,7 +165,7 @@ export const useAuthStore = defineStore('app-auth-store', {
           this.setFrontMenuList(menuList as Menu[])
 
           // Convert multi-level routing to level 2 routing
-          routes = flatMultiLevelRoutes(routes)
+          // routes = flatMultiLevelRoutes(routes)
           break
 
         //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below
@@ -190,10 +192,10 @@ export const useAuthStore = defineStore('app-auth-store', {
           this.setBackMenuList(backMenuList as Menu[])
 
           // remove meta.ignoreRoute item
-          routeList = filterTree(routeList, routeRemoveIgnoreFilter)
-          routeList = routeList.filter(routeRemoveIgnoreFilter)
-
-          routeList = flatMultiLevelRoutes(routeList)
+          // routeList = filterTree(routeList, routeRemoveIgnoreFilter)
+          // routeList = routeList.filter(routeRemoveIgnoreFilter)
+          routeList = filterRouterTree(routeList, routeRemoveIgnoreFilter)
+          // routeList = flatMultiLevelRoutes(routeList)
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList]
           break
       }
@@ -203,7 +205,17 @@ export const useAuthStore = defineStore('app-auth-store', {
     },
   },
 })
-
+function filterRouterTree<T = any>(
+  tree: T[],
+  func: (n: T) => boolean,
+  flat: boolean = true,
+): RouteRecordItem[] {
+  let t = filterTree(tree, func).filter(func) as RouteRecordItem[]
+  if (flat) {
+    t = flatMultiLevelRoutes(t)
+  }
+  return t
+}
 // Need to be used outside the setup
 export function useAuthStoreWithout() {
   return useAuthStore()

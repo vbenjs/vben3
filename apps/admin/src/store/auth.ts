@@ -203,3 +203,7 @@ export const useAuthStore = defineStore('app-auth-store', {
     },
   },
 })
+// Need to be used outside the setup
+export function useAuthStoreWithout() {
+  return useAuthStore()
+}

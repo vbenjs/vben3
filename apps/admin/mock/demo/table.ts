@@ -116,8 +116,6 @@ const mockOperatorData = (() => {
       updateTime: '@datetime',
     })
   }
-  }
-
 
   return result;
 })()

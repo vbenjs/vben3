@@ -8,7 +8,7 @@ const Page: RouteRecordItem = {
     icon: 'tabler:frame-off',
     hideTab: true,
     root: true,
-    hideMenu: true
+    hideMenu: false
   },
 }
 

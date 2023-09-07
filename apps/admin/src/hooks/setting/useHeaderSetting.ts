@@ -5,8 +5,7 @@ import { computed, unref } from 'vue'
 // import { useConfigStoreWithOut } from '@/store/config'
 import { useAppConfig } from '@vben/hooks'
 
-import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
-import { useRootSetting } from '@vben/hooks'
+import { useRootSetting, useMenuSetting } from '@vben/hooks'
 import { useFullContent } from '@/hooks/web/useFullContent'
 import { MenuModeEnum } from '@vben/constants'
 

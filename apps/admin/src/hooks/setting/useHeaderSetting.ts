@@ -2,11 +2,9 @@ import type { HeaderSetting } from '@vben/types'
 
 import { computed, unref } from 'vue'
 
-// import { useConfigStoreWithOut } from '@/store/config'
-import { useAppConfig } from '@vben/hooks'
+import { useAppConfig, useFullContent } from '@vben/hooks'
 
 import { useRootSetting, useMenuSetting } from '@vben/hooks'
-import { useFullContent } from '@/hooks/web/useFullContent'
 import { MenuModeEnum } from '@vben/constants'
 
 export function useHeaderSetting() {

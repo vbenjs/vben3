@@ -16,6 +16,7 @@ import {useRootSetting} from "@/hooks/setting/useRootSetting";
 
 const mixSideHasChildren = ref(false)
 
+// todo src/hooks 在往 @VBen\hooks 转移
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent()
   const configStore = useConfigStoreWithOut()

@@ -13,7 +13,7 @@ import {
   TriggerEnum,
 } from '@vben/constants'
 import { useFullContent } from '@/hooks/web/useFullContent'
-import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { useRootSetting } from '@vben/hooks'
 
 const mixSideHasChildren = ref(false)
 

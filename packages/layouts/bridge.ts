@@ -1,8 +1,9 @@
 import { VNode } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
+import { useRootSetting } from '@vben/hooks'
 
 export interface ContextOptions {
-  useRootSetting: () => unknown
+  useRootSetting: () => typeof useRootSetting
   useAppStore: () => unknown
   useConfigStore: () => unknown
   useHeaderSetting: () => unknown
@@ -31,7 +32,7 @@ export interface ContextOptions {
 }
 
 export let context: ContextOptions = {
-  useRootSetting: () => undefined,
+  useRootSetting: () => useRootSetting,
   useAppStore: () => undefined,
   useConfigStore: () => undefined,
   useUserStore: () => undefined,

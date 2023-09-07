@@ -4,7 +4,7 @@ import { useThrottleFn } from '@vben/utils'
 import { useLockStore } from '@/store/lock'
 import { useConfigStore } from '@/store/config'
 import { useUserStore } from '@/store/user'
-import { useRootSetting } from '#/hooks/setting/useRootSetting'
+import { useRootSetting } from '@vben/hooks'
 import { BASIC_LOCK_PATH } from '@vben/constants'
 import { router } from '@/router'
 

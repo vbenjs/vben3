@@ -6,7 +6,7 @@ import { computed, unref } from 'vue'
 import { useAppConfig } from '@vben/hooks'
 
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
-import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { useRootSetting } from '@vben/hooks'
 import { useFullContent } from '@/hooks/web/useFullContent'
 import { MenuModeEnum } from '@vben/constants'
 

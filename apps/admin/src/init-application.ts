@@ -7,7 +7,7 @@ import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
 import { localeList } from '@vben/locale/src/config'
-import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { useRootSetting } from '@vben/hooks'
 import { useTransitionSetting } from '@/hooks/setting/useTransitionSetting'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import {

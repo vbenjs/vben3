@@ -1,22 +1,23 @@
-import type { MultiTabsSetting } from '@vben/types';
+import type { MultiTabsSetting } from '@vben/types'
 
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-import { useConfigStoreWithOut } from '@/store/config';
+// import { useConfigStoreWithOut } from '@/store/config';
+import { useAppConfig } from '@vben/hooks'
 
 export function useMultipleTabSetting() {
-  const configStore = useConfigStoreWithOut()
+  const configStore = useAppConfig()
 
-  const getShowMultipleTab = computed(() => configStore.getMultiTabsSetting.show);
+  const getShowMultipleTab = computed(() => configStore.tabTar.show)
 
-  const getShowQuick = computed(() => configStore.getMultiTabsSetting.showQuick);
+  const getShowQuick = computed(() => configStore.tabTar.showQuick)
 
-  const getShowRedo = computed(() => configStore.getMultiTabsSetting.showRedo);
+  const getShowRedo = computed(() => configStore.tabTar.showRedo)
 
-  const getShowFold = computed(() => configStore.getMultiTabsSetting.showFold);
+  const getShowFold = computed(() => configStore.tabTar.showFold)
 
   function setMultipleTabSetting(multiTabsSetting: Partial<MultiTabsSetting>) {
-    configStore.setProjectConfig({ multiTabsSetting });
+    configStore.setAppConfig({ tabTar: multiTabsSetting })
   }
   return {
     setMultipleTabSetting,
@@ -24,5 +25,5 @@ export function useMultipleTabSetting() {
     getShowQuick,
     getShowRedo,
     getShowFold,
-  };
+  }
 }

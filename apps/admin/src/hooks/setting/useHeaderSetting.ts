@@ -2,7 +2,8 @@ import type { HeaderSetting } from '@vben/types'
 
 import { computed, unref } from 'vue'
 
-import { useConfigStoreWithOut } from '@/store/config'
+// import { useConfigStoreWithOut } from '@/store/config'
+import { useAppConfig } from '@vben/hooks'
 
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
@@ -11,13 +12,10 @@ import { MenuModeEnum } from '@vben/constants'
 
 export function useHeaderSetting() {
   const { getFullContent } = useFullContent()
-  const configStore = useConfigStoreWithOut()
+  const configStore = useAppConfig()
 
   const getShowFullHeaderRef = computed(() => {
-    return (
-      (!unref(getFullContent) &&
-        unref(getShowHeader))
-    )
+    return !unref(getFullContent) && unref(getShowHeader)
   })
 
   const getUnFixedAndFull = computed(
@@ -47,28 +45,26 @@ export function useHeaderSetting() {
     () => !unref(getIsSidebarType) && unref(getShowHeader),
   )
 
-  const getShowDoc = computed(() => configStore.getHeaderSetting.showDoc)
+  const getShowDoc = computed(() => configStore.header.showDoc)
 
-  const getHeaderTheme = computed(() => configStore.getHeaderSetting.theme)
+  const getHeaderTheme = computed(() => configStore.header.theme)
 
-  const getShowHeader = computed(() => configStore.getHeaderSetting.show)
+  const getShowHeader = computed(() => configStore.header.show)
 
-  const getFixed = computed(() => configStore.getHeaderSetting.fixed)
+  const getFixed = computed(() => configStore.header.fixed)
 
-  const getHeaderBgColor = computed(() => configStore.getHeaderSetting.bgColor)
+  const getHeaderBgColor = computed(() => configStore.header.bgColor)
 
-  const getShowSearch = computed(() => configStore.getHeaderSetting.showSearch)
+  const getShowSearch = computed(() => configStore.header.showSearch)
 
-  const getUseLockPage = computed(() => configStore.getHeaderSetting.useLockPage)
+  const getUseLockPage = computed(() => false)
 
-  const getShowFullScreen = computed(
-    () => configStore.getHeaderSetting.showFullScreen,
-  )
+  const getShowFullScreen = computed(() => configStore.header.showFullScreen)
   const getShowLocalePicker = computed(
-    () => configStore.getHeaderSetting.showLocalePicker,
+    () => configStore.header.showLocalePicker,
   )
 
-  const getShowNotice = computed(() => configStore.getHeaderSetting.showNotice)
+  const getShowNotice = computed(() => configStore.header.showNotice)
 
   const getShowBread = computed(() => {
     return (
@@ -90,7 +86,7 @@ export function useHeaderSetting() {
 
   // Set header configuration
   function setHeaderSetting(headerSetting: Partial<HeaderSetting>) {
-    configStore.setProjectConfig({ headerSetting })
+    configStore.setAppConfig({ header: headerSetting })
   }
   return {
     setHeaderSetting,

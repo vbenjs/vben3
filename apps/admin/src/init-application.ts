@@ -7,8 +7,13 @@ import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
 import { localeList } from '@vben/locale/src/config'
-import { useHeaderSetting, useMenuSetting, useMultipleTabSetting, useRootSetting } from '@vben/hooks'
-import { useTransitionSetting } from '@/hooks/setting/useTransitionSetting'
+import {
+  useHeaderSetting,
+  useMenuSetting,
+  useMultipleTabSetting,
+  useRootSetting,
+  useTransitionSetting,
+} from '@vben/hooks'
 import {
   getAllParentPath,
   getChildrenMenus,

@@ -5,6 +5,7 @@ import {
   useMenuSetting,
   useHeaderSetting,
   useMultipleTabSetting,
+  useTransitionSetting,
 } from '@vben/hooks'
 
 export interface ContextOptions {
@@ -18,7 +19,7 @@ export interface ContextOptions {
   useMenuSetting: () => typeof useMenuSetting
   useMultipleTabSetting: () => typeof useMultipleTabSetting
   useMultipleTabStore: () => unknown
-  useTransitionSetting: () => unknown
+  useTransitionSetting: () => typeof useTransitionSetting
   useLockStore: () => unknown
   useLockScreen: () => unknown
   listenerRouteChange: (
@@ -44,7 +45,7 @@ export let context: ContextOptions = {
   useHeaderSetting: () => useHeaderSetting,
   useMenuSetting: () => useMenuSetting,
   useMultipleTabSetting: () => useMultipleTabSetting,
-  useTransitionSetting: () => undefined,
+  useTransitionSetting: () => useTransitionSetting,
   useLockStore: () => undefined,
   useLockScreen: () => undefined,
   useAppInject: () => undefined,

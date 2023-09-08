@@ -8,11 +8,14 @@ import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
 import { localeList } from '@vben/locale/src/config'
 import {
+  useAppInject,
   useHeaderSetting,
   useMenuSetting,
   useMultipleTabSetting,
   useRootSetting,
+  useTabs,
   useTransitionSetting,
+  useDesign
 } from '@vben/hooks'
 import {
   getAllParentPath,
@@ -21,9 +24,6 @@ import {
   getMenus,
   getShallowMenus,
 } from '@vben/router'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useAppInject } from '@/hooks/web/use-app-inject'
-import { useTabs } from '@/hooks/useTabs'
 import { useAppConfig, usePromise } from '@vben/hooks'
 import { useMultipleTabStore } from '@/store/multipleTab'
 import { listenerRouteChange } from '@/logics/mitt/routeChange'

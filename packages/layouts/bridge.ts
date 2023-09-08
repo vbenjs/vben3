@@ -6,6 +6,8 @@ import {
   useHeaderSetting,
   useMultipleTabSetting,
   useTransitionSetting,
+  useTabs,
+  useDesign,
 } from '@vben/hooks'
 
 export interface ContextOptions {
@@ -13,7 +15,7 @@ export interface ContextOptions {
   useAppStore: () => unknown
   useConfigStore: () => unknown
   useHeaderSetting: () => typeof useHeaderSetting
-  useTabs: () => unknown
+  useTabs: () => typeof useTabs
   useUserStore: () => unknown
   useAppInject: () => unknown
   useMenuSetting: () => typeof useMenuSetting
@@ -27,7 +29,7 @@ export interface ContextOptions {
     immediate?: boolean,
   ) => unknown
   usePromise: (fn: Function, config?: unknown) => unknown
-  useDesign: (scope: string) => unknown
+  useDesign: typeof useDesign
   getMenus: () => Promise<any>
   getCurrentParentPath: (currentPath: string) => Promise<any>
   getShallowMenus: () => Promise<any>
@@ -53,8 +55,8 @@ export let context: ContextOptions = {
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>
     true,
   usePromise: (fn: Function, config) => undefined,
-  useTabs: () => undefined,
-  useDesign: (scope: string) => undefined,
+  useTabs: () => useTabs,
+  useDesign: useDesign,
   getMenus: async () => ({}),
   getCurrentParentPath: async (currentPath: string) => ({}),
   getShallowMenus: async () => ({}),

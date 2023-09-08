@@ -35,7 +35,7 @@ export function useMenuSetting() {
   // TODO
   const getMenuType = computed(() => 'sidebar')
 
-  const getMenuMode = computed(() => configStore.menu.mode)
+  const getMenuMode = computed(() => configStore.menu.value.mode)
 
   // TODO
   const getMenuFixed = computed(() => true)
@@ -46,25 +46,25 @@ export function useMenuSetting() {
   // TODO
   const getMenuHidden = computed(() => false)
 
-  const getMenuWidth = computed(() => configStore.sidebar.width)
+  const getMenuWidth = computed(() => configStore.sidebar.value.width)
 
-  const getTrigger = computed(() => configStore.sidebar.trigger)
+  const getTrigger = computed(() => configStore.sidebar.value.trigger)
 
-  const getMenuTheme = computed(() => configStore.sidebar.theme)
+  const getMenuTheme = computed(() => configStore.sidebar.value.theme)
 
-  const getSplit = computed(() => configStore.menu.split)
+  const getSplit = computed(() => configStore.menu.value.split)
 
-  const getMenuBgColor = computed(() => configStore.sidebar.bgColor)
+  const getMenuBgColor = computed(() => configStore.sidebar.value.bgColor)
 
-  const getMixSideTrigger = computed(() => configStore.menu.mixSideTrigger)
+  const getMixSideTrigger = computed(() => configStore.menu.value.mixSideTrigger)
 
-  const getCanDrag = computed(() => configStore.menu.canDrag)
+  const getCanDrag = computed(() => configStore.menu.value.canDrag)
 
-  const getAccordion = computed(() => configStore.menu.accordion)
+  const getAccordion = computed(() => configStore.menu.value.accordion)
 
-  const getMixSideFixed = computed(() => configStore.menu.mixSideFixed)
+  const getMixSideFixed = computed(() => configStore.menu.value.mixSideFixed)
 
-  const getTopMenuAlign = computed(() => configStore.menu.topMenuAlign)
+  const getTopMenuAlign = computed(() => configStore.menu.value.topMenuAlign)
 
   const getCloseMixSidebarOnChange = computed(
     () => configStore.closeMixSidebarOnChange,
@@ -83,7 +83,7 @@ export function useMenuSetting() {
   )
 
   const getCollapsedShowTitle = computed(
-    () => configStore.menu.collapsedShowTitle,
+    () => configStore.menu.value.collapsedShowTitle,
   )
 
   const getShowTopMenu = computed(() => {
@@ -127,7 +127,7 @@ export function useMenuSetting() {
   })
 
   const getMiniWidthNumber = computed(() => {
-    const { collapsedShowTitle } = configStore.menu
+    const { collapsedShowTitle } = configStore.menu.value
     return collapsedShowTitle
       ? SIDE_BAR_SHOW_TIT_MINI_WIDTH
       : SIDE_BAR_MINI_WIDTH

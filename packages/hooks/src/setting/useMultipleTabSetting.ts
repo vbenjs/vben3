@@ -6,13 +6,13 @@ import { useAppConfig } from '..'
 export function useMultipleTabSetting() {
   const configStore = useAppConfig()
 
-  const getShowMultipleTab = computed(() => configStore.tabTar.show)
+  const getShowMultipleTab = computed(() => configStore.tabTar.value.show)
 
-  const getShowQuick = computed(() => configStore.tabTar.showQuick)
+  const getShowQuick = computed(() => configStore.tabTar.value.showQuick)
 
-  const getShowRedo = computed(() => configStore.tabTar.showRedo)
+  const getShowRedo = computed(() => configStore.tabTar.value.showRedo)
 
-  const getShowFold = computed(() => configStore.tabTar.showFold)
+  const getShowFold = computed(() => configStore.tabTar.value.showFold)
 
   function setMultipleTabSetting(multiTabsSetting: Partial<MultiTabsSetting>) {
     configStore.setAppConfig({ tabTar: multiTabsSetting })

@@ -46,26 +46,26 @@ export function useHeaderSetting() {
     () => !unref(getIsSidebarType) && unref(getShowHeader),
   )
 
-  const getShowDoc = computed(() => configStore.header.showDoc)
+  const getShowDoc = computed(() => configStore.header.value.showDoc)
 
-  const getHeaderTheme = computed(() => configStore.header.theme)
+  const getHeaderTheme = computed(() => configStore.header.value.theme)
 
-  const getShowHeader = computed(() => configStore.header.show)
+  const getShowHeader = computed(() => configStore.header.value.show)
 
-  const getFixed = computed(() => configStore.header.fixed)
+  const getFixed = computed(() => configStore.header.value.fixed)
 
-  const getHeaderBgColor = computed(() => configStore.header.bgColor)
+  const getHeaderBgColor = computed(() => configStore.header.value.bgColor)
 
-  const getShowSearch = computed(() => configStore.header.showSearch)
+  const getShowSearch = computed(() => configStore.header.value.showSearch)
 
   const getUseLockPage = computed(() => false)
 
-  const getShowFullScreen = computed(() => configStore.header.showFullScreen)
+  const getShowFullScreen = computed(() => configStore.header.value.showFullScreen)
   const getShowLocalePicker = computed(
-    () => configStore.header.showLocalePicker,
+    () => configStore.header.value.showLocalePicker,
   )
 
-  const getShowNotice = computed(() => configStore.header.showNotice)
+  const getShowNotice = computed(() => configStore.header.value.showNotice)
 
   const getShowBread = computed(() => {
     return (

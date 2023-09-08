@@ -1,7 +1,5 @@
 import { computed, unref } from 'vue'
-
 import { useAppConfig } from '../config'
-
 import { useRouter } from 'vue-router'
 
 /**
@@ -21,7 +19,7 @@ export const useFullContent = () => {
       return true
     }
     // Return to the configuration in the configuration file
-    return appStore.content.fullScreen
+    return appStore.content.value.fullScreen
   })
 
   return { getFullContent }

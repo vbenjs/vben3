@@ -10,7 +10,9 @@ import { useAppConfig } from '../config'
 export function useRootSetting() {
   const appStore = useAppConfig()
 
-  const getPageLoading = computed(() => appStore.transition.openPageLoading)
+  const getPageLoading = computed(
+    () => appStore.transition.value.openPageLoading,
+  )
 
   const getOpenKeepAlive = computed(() => appStore.openKeepAlive)
 
@@ -22,25 +24,25 @@ export function useRootSetting() {
 
   const getPermissionMode = computed(() => appStore.permissionMode)
 
-  const getShowLogo = computed(() => appStore.logo.show)
+  const getShowLogo = computed(() => appStore.logo.value.show)
 
-  const getContentMode = computed(() => appStore.content.mode)
+  const getContentMode = computed(() => appStore.content.value.mode)
 
   const getUseOpenBackTop = computed(() => appStore.useOpenBackTop)
 
-  const getShowSettingButton = computed(() => appStore.header.showSetting)
+  const getShowSettingButton = computed(() => appStore.header.value.showSetting)
 
-  const getShowFooter = computed(() => appStore.footer.show)
+  const getShowFooter = computed(() => appStore.footer.value.show)
 
-  const getShowBreadCrumb = computed(() => appStore.header.showBreadCrumb)
+  const getShowBreadCrumb = computed(() => appStore.header.value.showBreadCrumb)
 
   const getThemeColor = computed(() => appStore.themeColor)
 
   const getShowBreadCrumbIcon = computed(
-    () => appStore.header.showBreadCrumbIcon,
+    () => appStore.header.value.showBreadCrumbIcon,
   )
 
-  const getFullContent = computed(() => appStore.content.fullScreen)
+  const getFullContent = computed(() => appStore.content.value.fullScreen)
 
   const getColorWeak = computed(() => appStore.colorWeak)
 
@@ -51,7 +53,7 @@ export function useRootSetting() {
   const getShowDarkModeToggle = computed(() => appStore.showThemeModeToggle)
 
   const getLayoutContentMode = computed(() =>
-    appStore.content.mode === ContentLayoutEnum.FULL
+    appStore.content.value.mode === ContentLayoutEnum.FULL
       ? ContentLayoutEnum.FULL
       : ContentLayoutEnum.FIXED,
   )

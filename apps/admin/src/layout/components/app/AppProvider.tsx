@@ -1,10 +1,9 @@
-import {createBreakpointListen} from '@/hooks/event/use-breakpoint'
 import {namespace} from '@/setting'
 import {defineComponent, toRefs, ref, unref} from 'vue'
-import {createAppProviderContext} from '@/hooks/web/useAppContext'
 import {useConfigStoreWithOut} from '@/store/config'
 import {useMsg, useNotice} from '@vben/vbencomponents'
 import {setMsg, setNoice} from '@vben/request'
+import { createAppProviderContext, createBreakpointListen } from '@vben/hooks'
 
 const props = {
   /**

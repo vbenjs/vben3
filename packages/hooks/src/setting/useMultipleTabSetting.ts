@@ -1,9 +1,7 @@
 import type { MultiTabsSetting } from '@vben/types'
 
 import { computed } from 'vue'
-
-// import { useConfigStoreWithOut } from '@/store/config';
-import { useAppConfig } from '@vben/hooks'
+import { useAppConfig } from '..'
 
 export function useMultipleTabSetting() {
   const configStore = useAppConfig()

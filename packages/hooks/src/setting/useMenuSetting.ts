@@ -2,8 +2,7 @@ import type { MenuSetting } from '@vben/types'
 
 import { computed, unref, ref } from 'vue'
 
-// import { useConfigStoreWithOut } from '@/store/config'
-import { useAppConfig } from '@vben/hooks'
+import { useAppConfig } from '../config'
 
 import {
   SIDE_BAR_MINI_WIDTH,
@@ -12,16 +11,14 @@ import {
   MenuTypeEnum,
   TriggerEnum,
 } from '@vben/constants'
-import { useFullContent } from '@/hooks/web/useFullContent'
-import { useRootSetting } from '@/hooks/setting/useRootSetting'
+import { useRootSetting } from './useRootSetting'
+import { useFullContent } from '../web'
 
 const mixSideHasChildren = ref(false)
 
-// todo src/hooks 在往 @VBen\hooks 转移
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent()
   const configStore = useAppConfig()
-  // const useAppConfigStore = appConfigStore()
   const { getShowLogo } = useRootSetting()
   const getShowSidebar = computed(() => {
     return (
@@ -32,31 +29,34 @@ export function useMenuSetting() {
     )
   })
 
+  // TODO
   const getCollapsed = computed(() => false)
 
+  // TODO
   const getMenuType = computed(() => 'sidebar')
 
   const getMenuMode = computed(() => configStore.menu.mode)
 
+  // TODO
   const getMenuFixed = computed(() => true)
 
+  // TODO
   const getShowMenu = computed(() => true)
 
+  // TODO
   const getMenuHidden = computed(() => false)
 
-  const getMenuWidth = computed(() => 210)
+  const getMenuWidth = computed(() => configStore.sidebar.width)
 
-  const getTrigger = computed(() => 'HEADER')
+  const getTrigger = computed(() => configStore.sidebar.trigger)
 
-  const getMenuTheme = computed(() => 'dark')
+  const getMenuTheme = computed(() => configStore.sidebar.theme)
 
   const getSplit = computed(() => configStore.menu.split)
 
-  const getMenuBgColor = computed(() => '#001529')
+  const getMenuBgColor = computed(() => configStore.sidebar.bgColor)
 
-  const getMixSideTrigger = computed(
-    () => configStore.menu.mixSideTrigger,
-  )
+  const getMixSideTrigger = computed(() => configStore.menu.mixSideTrigger)
 
   const getCanDrag = computed(() => configStore.menu.canDrag)
 
@@ -67,7 +67,7 @@ export function useMenuSetting() {
   const getTopMenuAlign = computed(() => configStore.menu.topMenuAlign)
 
   const getCloseMixSidebarOnChange = computed(
-    () => false,
+    () => configStore.closeMixSidebarOnChange,
   )
 
   const getIsSidebarType = computed(

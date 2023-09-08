@@ -1,18 +1,27 @@
 import { VNode } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
+import {
+  useRootSetting,
+  useMenuSetting,
+  useHeaderSetting,
+  useMultipleTabSetting,
+  useTransitionSetting,
+  useTabs,
+  useDesign,
+} from '@vben/hooks'
 
 export interface ContextOptions {
-  useRootSetting: () => unknown
+  useRootSetting: () => typeof useRootSetting
   useAppStore: () => unknown
   useConfigStore: () => unknown
-  useHeaderSetting: () => unknown
-  useTabs: () => unknown
+  useHeaderSetting: () => typeof useHeaderSetting
+  useTabs: () => typeof useTabs
   useUserStore: () => unknown
   useAppInject: () => unknown
-  useMenuSetting: () => unknown
-  useMultipleTabSetting: () => unknown
+  useMenuSetting: () => typeof useMenuSetting
+  useMultipleTabSetting: () => typeof useMultipleTabSetting
   useMultipleTabStore: () => unknown
-  useTransitionSetting: () => unknown
+  useTransitionSetting: () => typeof useTransitionSetting
   useLockStore: () => unknown
   useLockScreen: () => unknown
   listenerRouteChange: (
@@ -20,7 +29,7 @@ export interface ContextOptions {
     immediate?: boolean,
   ) => unknown
   usePromise: (fn: Function, config?: unknown) => unknown
-  useDesign: (scope: string) => unknown
+  useDesign: typeof useDesign
   getMenus: () => Promise<any>
   getCurrentParentPath: (currentPath: string) => Promise<any>
   getShallowMenus: () => Promise<any>
@@ -31,14 +40,14 @@ export interface ContextOptions {
 }
 
 export let context: ContextOptions = {
-  useRootSetting: () => undefined,
+  useRootSetting: () => useRootSetting,
   useAppStore: () => undefined,
   useConfigStore: () => undefined,
   useUserStore: () => undefined,
-  useHeaderSetting: () => undefined,
-  useMenuSetting: () => undefined,
-  useMultipleTabSetting: () => undefined,
-  useTransitionSetting: () => undefined,
+  useHeaderSetting: () => useHeaderSetting,
+  useMenuSetting: () => useMenuSetting,
+  useMultipleTabSetting: () => useMultipleTabSetting,
+  useTransitionSetting: () => useTransitionSetting,
   useLockStore: () => undefined,
   useLockScreen: () => undefined,
   useAppInject: () => undefined,
@@ -46,8 +55,8 @@ export let context: ContextOptions = {
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>
     true,
   usePromise: (fn: Function, config) => undefined,
-  useTabs: () => undefined,
-  useDesign: (scope: string) => undefined,
+  useTabs: () => useTabs,
+  useDesign: useDesign,
   getMenus: async () => ({}),
   getCurrentParentPath: async (currentPath: string) => ({}),
   getShallowMenus: async () => ({}),

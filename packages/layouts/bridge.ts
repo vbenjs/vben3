@@ -1,6 +1,11 @@
 import { VNode } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
-import { useRootSetting, useMenuSetting, useHeaderSetting } from '@vben/hooks'
+import {
+  useRootSetting,
+  useMenuSetting,
+  useHeaderSetting,
+  useMultipleTabSetting,
+} from '@vben/hooks'
 
 export interface ContextOptions {
   useRootSetting: () => typeof useRootSetting
@@ -11,7 +16,7 @@ export interface ContextOptions {
   useUserStore: () => unknown
   useAppInject: () => unknown
   useMenuSetting: () => typeof useMenuSetting
-  useMultipleTabSetting: () => unknown
+  useMultipleTabSetting: () => typeof useMultipleTabSetting
   useMultipleTabStore: () => unknown
   useTransitionSetting: () => unknown
   useLockStore: () => unknown
@@ -38,7 +43,7 @@ export let context: ContextOptions = {
   useUserStore: () => undefined,
   useHeaderSetting: () => useHeaderSetting,
   useMenuSetting: () => useMenuSetting,
-  useMultipleTabSetting: () => undefined,
+  useMultipleTabSetting: () => useMultipleTabSetting,
   useTransitionSetting: () => undefined,
   useLockStore: () => undefined,
   useLockScreen: () => undefined,

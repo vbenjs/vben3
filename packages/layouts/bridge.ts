@@ -11,17 +11,17 @@ import {
 } from '@vben/hooks'
 
 export interface ContextOptions {
-  useRootSetting: () => typeof useRootSetting
+  useRootSetting: typeof useRootSetting
   useAppStore: () => unknown
   useConfigStore: () => unknown
-  useHeaderSetting: () => typeof useHeaderSetting
-  useTabs: () => typeof useTabs
+  useHeaderSetting: typeof useHeaderSetting
+  useTabs: typeof useTabs
   useUserStore: () => unknown
   useAppInject: () => unknown
-  useMenuSetting: () => typeof useMenuSetting
-  useMultipleTabSetting: () => typeof useMultipleTabSetting
+  useMenuSetting: typeof useMenuSetting
+  useMultipleTabSetting: typeof useMultipleTabSetting
   useMultipleTabStore: () => unknown
-  useTransitionSetting: () => typeof useTransitionSetting
+  useTransitionSetting: typeof useTransitionSetting
   useLockStore: () => unknown
   useLockScreen: () => unknown
   listenerRouteChange: (
@@ -40,14 +40,14 @@ export interface ContextOptions {
 }
 
 export let context: ContextOptions = {
-  useRootSetting: () => useRootSetting,
+  useRootSetting,
   useAppStore: () => undefined,
   useConfigStore: () => undefined,
   useUserStore: () => undefined,
-  useHeaderSetting: () => useHeaderSetting,
-  useMenuSetting: () => useMenuSetting,
-  useMultipleTabSetting: () => useMultipleTabSetting,
-  useTransitionSetting: () => useTransitionSetting,
+  useHeaderSetting,
+  useMenuSetting,
+  useMultipleTabSetting,
+  useTransitionSetting,
   useLockStore: () => undefined,
   useLockScreen: () => undefined,
   useAppInject: () => undefined,
@@ -55,7 +55,7 @@ export let context: ContextOptions = {
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>
     true,
   usePromise: (fn: Function, config) => undefined,
-  useTabs: () => useTabs,
+  useTabs,
   useDesign: useDesign,
   getMenus: async () => ({}),
   getCurrentParentPath: async (currentPath: string) => ({}),

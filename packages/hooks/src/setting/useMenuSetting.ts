@@ -8,8 +8,8 @@ import {
   SIDE_BAR_MINI_WIDTH,
   SIDE_BAR_SHOW_TIT_MINI_WIDTH,
   MenuModeEnum,
-  MenuTypeEnum,
   TriggerEnum,
+  NavBarModeEnum,
 } from '@vben/constants'
 import { useRootSetting } from './useRootSetting'
 import { useFullContent } from '../web'
@@ -29,22 +29,17 @@ export function useMenuSetting() {
     )
   })
 
-  // TODO
-  const getCollapsed = computed(() => false)
+  const getCollapsed = computed(() => configStore.sidebar.value.collapsed)
 
-  // TODO
-  const getMenuType = computed(() => 'sidebar')
+  const getMenuType = computed(() => configStore.navBarMode.value)
 
   const getMenuMode = computed(() => configStore.menu.value.mode)
 
-  // TODO
-  const getMenuFixed = computed(() => true)
+  const getMenuFixed = computed(() => configStore.sidebar.value.fixed)
 
-  // TODO
-  const getShowMenu = computed(() => true)
+  const getShowMenu = computed(() => configStore.sidebar.value.show)
 
-  // TODO
-  const getMenuHidden = computed(() => false)
+  const getMenuHidden = computed(() => !configStore.sidebar.value.visible)
 
   const getMenuWidth = computed(() => configStore.sidebar.value.width)
 
@@ -56,7 +51,9 @@ export function useMenuSetting() {
 
   const getMenuBgColor = computed(() => configStore.sidebar.value.bgColor)
 
-  const getMixSideTrigger = computed(() => configStore.menu.value.mixSideTrigger)
+  const getMixSideTrigger = computed(
+    () => configStore.menu.value.mixSideTrigger,
+  )
 
   const getCanDrag = computed(() => configStore.menu.value.canDrag)
 
@@ -67,15 +64,15 @@ export function useMenuSetting() {
   const getTopMenuAlign = computed(() => configStore.menu.value.topMenuAlign)
 
   const getCloseMixSidebarOnChange = computed(
-    () => configStore.closeMixSidebarOnChange,
+    () => configStore.closeMixSidebarOnChange.value,
   )
 
   const getIsSidebarType = computed(
-    () => unref(getMenuType) === MenuTypeEnum.SIDEBAR,
+    () => unref(getMenuType) === NavBarModeEnum.SIDEBAR,
   )
 
   const getIsTopMenu = computed(
-    () => unref(getMenuType) === MenuTypeEnum.TOP_MENU,
+    () => unref(getMenuType) === NavBarModeEnum.TOP_MENU,
   )
 
   const getMenuShowLogo = computed(
@@ -92,7 +89,7 @@ export function useMenuSetting() {
 
   const getShowHeaderTrigger = computed(() => {
     if (
-      unref(getMenuType) === MenuTypeEnum.TOP_MENU ||
+      unref(getMenuType) === NavBarModeEnum.TOP_MENU ||
       !unref(getShowMenu) ||
       unref(getMenuHidden)
     ) {
@@ -107,13 +104,13 @@ export function useMenuSetting() {
   })
 
   const getIsMixSidebar = computed(() => {
-    return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR
+    return unref(getMenuType) === NavBarModeEnum.MIX_SIDEBAR
   })
 
   const getIsMixMode = computed(() => {
     return (
       unref(getMenuMode) === MenuModeEnum.INLINE &&
-      unref(getMenuType) === MenuTypeEnum.MIX
+      unref(getMenuType) === NavBarModeEnum.MIX
     )
   })
 

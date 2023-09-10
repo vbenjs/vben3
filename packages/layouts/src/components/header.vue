@@ -11,7 +11,7 @@ import { computed, unref } from 'vue'
 import {
   SettingButtonPositionEnum,
   ThemeEnum,
-  MenuTypeEnum,
+  NavBarModeEnum,
 } from '@vben/constants'
 import { useAppConfig } from '@vben/hooks'
 const { isMixSidebar, isTopMenu, isMix, sidebar, menu, header } = useAppConfig()
@@ -55,7 +55,7 @@ const getShowSetting = computed(() => {
 const getShowHeaderMultipleTab = computed(() => {
   return (
     unref(getShowMultipleTab) &&
-    (unref(getMenuType) !== MenuTypeEnum.MIX || unref(getIsMobile))
+    (unref(getMenuType) !== NavBarModeEnum.MIX || unref(getIsMobile))
   )
 })
 const showHeaderLogo = computed(() => {

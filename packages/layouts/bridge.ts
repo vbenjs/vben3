@@ -8,9 +8,11 @@ import {
   useTransitionSetting,
   useTabs,
   useDesign,
+  useAppConfig,
 } from '@vben/hooks'
 
 export interface ContextOptions {
+  useAppConfig: typeof useAppConfig
   useRootSetting: typeof useRootSetting
   useAppStore: () => unknown
   useConfigStore: () => unknown
@@ -40,6 +42,7 @@ export interface ContextOptions {
 }
 
 export let context: ContextOptions = {
+  useAppConfig,
   useRootSetting,
   useAppStore: () => undefined,
   useConfigStore: () => undefined,

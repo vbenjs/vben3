@@ -3,7 +3,6 @@ import {
   CacheTypeEnum,
   ContentLayoutEnum,
   MenuModeEnum,
-  MenuTypeEnum,
   MixSidebarTriggerEnum,
   PermissionModeEnum,
   SessionTimeoutProcessingEnum,
@@ -104,8 +103,6 @@ export const projectSetting: ProjectConfig = {
     menuWidth: 210,
     // Menu mode
     mode: MenuModeEnum.INLINE,
-    // Menu type
-    type: MenuTypeEnum.SIDEBAR,
     // Menu theme
     theme: ThemeEnum.DARK,
     // Split menu

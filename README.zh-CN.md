@@ -56,4 +56,4 @@ pnpm dev
 
 ## 许可证
 
-Halo 使用 MIT 协议开源。
+Vben3 使用 MIT 协议开源

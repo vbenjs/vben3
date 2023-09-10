@@ -1,21 +1,24 @@
 <script lang="ts" setup name="SwitchItem">
 import { PropType } from 'vue'
-import { HandlerSettingEnum } from "@vben/constants";
-import {baseHandler} from "../handler";
+import { HandlerSettingEnum } from '@vben/constants'
+import { context } from '../../../../bridge'
+const { useAppConfig } = context
+const { baseHandler } = useAppConfig()
 
 const props = defineProps({
-  title: {type: String, default: ''},
+  title: { type: String, default: '' },
   def: {
     type: Boolean as PropType<boolean>,
   },
   event: {
     type: Number as PropType<HandlerSettingEnum>,
+    required: true,
   },
   disabled: {
     type: Boolean,
   },
 })
-const onChange = (value)=>{
+const onChange = (value: any) => {
   baseHandler(props.event, value)
 }
 </script>

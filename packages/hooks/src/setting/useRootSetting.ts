@@ -14,21 +14,21 @@ export function useRootSetting() {
     () => appStore.transition.value.openPageLoading,
   )
 
-  const getOpenKeepAlive = computed(() => appStore.openKeepAlive)
+  const getOpenKeepAlive = computed(() => appStore.openKeepAlive.value)
 
   const getSettingButtonPosition = computed(
-    () => appStore.settingButtonPosition,
+    () => appStore.settingButtonPosition.value,
   )
 
-  const getCanEmbedIFramePage = computed(() => appStore.canEmbedIFramePage)
+  const getCanEmbedIFramePage = computed(() => appStore.canEmbedIFramePage.value)
 
-  const getPermissionMode = computed(() => appStore.permissionMode)
+  const getPermissionMode = computed(() => appStore.permissionMode.value)
 
   const getShowLogo = computed(() => appStore.logo.value.show)
 
   const getContentMode = computed(() => appStore.content.value.mode)
 
-  const getUseOpenBackTop = computed(() => appStore.useOpenBackTop)
+  const getUseOpenBackTop = computed(() => appStore.useOpenBackTop.value)
 
   const getShowSettingButton = computed(() => appStore.header.value.showSetting)
 
@@ -36,7 +36,7 @@ export function useRootSetting() {
 
   const getShowBreadCrumb = computed(() => appStore.header.value.showBreadCrumb)
 
-  const getThemeColor = computed(() => appStore.themeColor)
+  const getThemeColor = computed(() => appStore.themeColor.value)
 
   const getShowBreadCrumbIcon = computed(
     () => appStore.header.value.showBreadCrumbIcon,
@@ -44,13 +44,13 @@ export function useRootSetting() {
 
   const getFullContent = computed(() => appStore.content.value.fullScreen)
 
-  const getColorWeak = computed(() => appStore.colorWeak)
+  const getColorWeak = computed(() => appStore.colorWeak.value)
 
-  const getGrayMode = computed(() => appStore.grayMode)
+  const getGrayMode = computed(() => appStore.grayMode.value)
 
-  const getLockTime = computed(() => appStore.lockTime)
+  const getLockTime = computed(() => appStore.lockTime.value)
 
-  const getShowDarkModeToggle = computed(() => appStore.showThemeModeToggle)
+  const getShowDarkModeToggle = computed(() => appStore.showThemeModeToggle.value)
 
   const getLayoutContentMode = computed(() =>
     appStore.content.value.mode === ContentLayoutEnum.FULL

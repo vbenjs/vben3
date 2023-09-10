@@ -29,21 +29,17 @@ export function useMenuSetting() {
     )
   })
 
-  // TODO
-  const getCollapsed = computed(() => false)
+  const getCollapsed = computed(() => configStore.sidebar.value.collapsed)
 
-  const getMenuType = computed(() => configStore.navBarMode.value)
+  const getMenuType = computed(() => configStore.menu.value.type)
 
   const getMenuMode = computed(() => configStore.menu.value.mode)
 
-  // TODO
-  const getMenuFixed = computed(() => true)
+  const getMenuFixed = computed(() => configStore.sidebar.value.fixed)
 
-  // TODO
-  const getShowMenu = computed(() => true)
+  const getShowMenu = computed(() => configStore.sidebar.value.show)
 
-  // TODO
-  const getMenuHidden = computed(() => false)
+  const getMenuHidden = computed(() => !configStore.sidebar.value.visible)
 
   const getMenuWidth = computed(() => configStore.sidebar.value.width)
 

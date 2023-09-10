@@ -11,7 +11,6 @@ export const useAppConfig = () => {
   const { openSettingDrawer, sidebar, menu, isMixSidebar } = appConfigOptions
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
-    console.log('setAppConfig', configs)
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
     })

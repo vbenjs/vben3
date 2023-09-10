@@ -32,8 +32,7 @@ export function useMenuSetting() {
   // TODO
   const getCollapsed = computed(() => false)
 
-  // TODO
-  const getMenuType = computed(() => 'sidebar')
+  const getMenuType = computed(() => configStore.navBarMode.value)
 
   const getMenuMode = computed(() => configStore.menu.value.mode)
 
@@ -56,7 +55,9 @@ export function useMenuSetting() {
 
   const getMenuBgColor = computed(() => configStore.sidebar.value.bgColor)
 
-  const getMixSideTrigger = computed(() => configStore.menu.value.mixSideTrigger)
+  const getMixSideTrigger = computed(
+    () => configStore.menu.value.mixSideTrigger,
+  )
 
   const getCanDrag = computed(() => configStore.menu.value.canDrag)
 

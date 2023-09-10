@@ -67,7 +67,7 @@ export function useMenuSetting() {
   const getTopMenuAlign = computed(() => configStore.menu.value.topMenuAlign)
 
   const getCloseMixSidebarOnChange = computed(
-    () => configStore.closeMixSidebarOnChange,
+    () => configStore.closeMixSidebarOnChange.value,
   )
 
   const getIsSidebarType = computed(

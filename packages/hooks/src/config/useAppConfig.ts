@@ -11,6 +11,7 @@ export const useAppConfig = () => {
   const { openSettingDrawer, sidebar, menu, isMixSidebar } = appConfigOptions
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
+    console.log('setAppConfig', configs)
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
     })
@@ -78,6 +79,7 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
+  console.log(event, value)
   const { themeColor, theme, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:

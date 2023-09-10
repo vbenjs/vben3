@@ -3,7 +3,7 @@ import {ref, onMounted, unref, computed, CSSProperties} from 'vue'
 import {createNamespace, getGlobalConfig} from '@vben/utils'
 import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
-import { MenuTypeEnum } from '@vben/constants'
+import { NavBarModeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
 import SiderTrigger from "./SiderTrigger.vue"
 import MixMenu from "../menu/mix-sub-menu.vue";
@@ -169,7 +169,7 @@ const handleFixedMenu = ()=> {
     <logo
       :class="[bem('logo'), 'shadow']"
       :style="{ '--un-shadow-color': 'var(--n-border-color)' }"
-      v-if="getMenuType === MenuTypeEnum.MIX_SIDEBAR"
+      v-if="getMenuType === NavBarModeEnum.MIX_SIDEBAR"
       :showTitle="false"
     />
     <VbenScrollbar :class="bem('scrollbar')">

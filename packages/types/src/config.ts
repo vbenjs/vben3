@@ -10,7 +10,6 @@ import {
   ThemeEnum,
   TriggerEnum,
   RouterTransitionEnum,
-  MenuTypeEnum,
 } from '@vben/constants'
 
 export type LocaleType = 'zh_CN' | 'en'
@@ -122,7 +121,6 @@ export interface MenuConfigOptions {
   canDrag: boolean
   split: boolean
   mode: MenuModeEnum
-  type: MenuTypeEnum
   accordion: boolean
   collapsedShowTitle: boolean
   mixSideTrigger: MixSidebarTriggerEnum

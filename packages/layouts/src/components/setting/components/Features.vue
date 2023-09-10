@@ -3,7 +3,11 @@ import { computed, unref } from 'vue'
 import SwitchItem from './SwitchItem.vue'
 import SelectItem from './SelectItem.vue'
 import InputNumberItem from './InputNumberItem.vue'
-import { MenuTypeEnum, TriggerEnum, HandlerSettingEnum } from '@vben/constants'
+import {
+  TriggerEnum,
+  HandlerSettingEnum,
+  NavBarModeEnum,
+} from '@vben/constants'
 import { context } from '../../../../bridge'
 import {
   mixSidebarTriggerOptions,
@@ -62,7 +66,7 @@ if (!some) {
       :title="t('layout.setting.splitMenu')"
       :def="getSplit"
       :event="HandlerSettingEnum.MENU_SPLIT"
-      :disabled="!getShowMenuRef || getMenuType !== MenuTypeEnum.MIX"
+      :disabled="!getShowMenuRef || getMenuType !== NavBarModeEnum.MIX"
     />
     <SwitchItem
       :title="t('layout.setting.mixSidebarFixed')"

@@ -1,6 +1,6 @@
 <script lang="ts" setup name="NavigationBarPicker">
 import { PropType } from 'vue'
-import { MenuModeEnum, MenuTypeEnum } from '@vben/constants'
+import { MenuModeEnum, NavBarModeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
 
 const { t } = useI18n()
@@ -8,13 +8,13 @@ const { t } = useI18n()
 const props = defineProps({
   typeList: {
     type: Array as PropType<
-      { title: string; type: MenuTypeEnum; mode: MenuModeEnum }[]
+      { title: string; type: NavBarModeEnum; mode: MenuModeEnum }[]
     >,
     default: () => [],
   },
   def: {
-    type: String as PropType<MenuTypeEnum>,
-    default: '',
+    type: String as PropType<NavBarModeEnum>,
+    default: NavBarModeEnum.SIDEBAR,
   },
 })
 
@@ -38,7 +38,7 @@ const handlerPicker = (data) => {
               <div class="mix-sidebar"></div>
             </div>
           </template>
-          <span>{{ t(item.title) }} {{ item.type }}{{ def }}</span>
+          <span>{{ t(item.title) }}</span>
         </VbenTooltip>
       </template>
     </VbenSpace>

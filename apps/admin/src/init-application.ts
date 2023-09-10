@@ -15,7 +15,9 @@ import {
   useRootSetting,
   useTabs,
   useTransitionSetting,
-  useDesign
+  useDesign,
+  useAppConfig,
+  usePromise,
 } from '@vben/hooks'
 import {
   getAllParentPath,
@@ -24,7 +26,6 @@ import {
   getMenus,
   getShallowMenus,
 } from '@vben/router'
-import { useAppConfig, usePromise } from '@vben/hooks'
 import { useMultipleTabStore } from '@/store/multipleTab'
 import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { useAppStore } from '@/store/modules/app'
@@ -90,6 +91,7 @@ async function initPackages() {
   const _initLayout = async () => {
     await initLayout(() => {
       return {
+        useAppConfig,
         useRootSetting,
         getMenus,
         getCurrentParentPath,

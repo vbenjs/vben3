@@ -78,6 +78,7 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
+  console.log(event, value)
   const { themeColor, theme, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:

@@ -3,6 +3,7 @@ import { context } from '../../../../bridge'
 import { useI18n } from '@vben/locale'
 import { writeTextToClipboard } from '@vben/hooks'
 import { unref } from 'vue'
+import { resetRouter } from '@vben/router'
 
 const { t } = useI18n()
 const { useAppConfig, useConfigStore, useMultipleTabStore, useUserStore } =
@@ -42,7 +43,7 @@ const handleReset = () => {
 
 const handleClearAndRedo = () => {
   localStorage.clear()
-  appStore.resetAllState()
+  resetRouter()
   // permissionStore.resetState()
   tabStore.resetState()
   userStore.resetState()

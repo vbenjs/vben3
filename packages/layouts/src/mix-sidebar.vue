@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {useComosables} from './useComosables'
+import {useComposables} from './useComposables'
 import LayoutMixMenu from './components/mixSideBar/Menu.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
@@ -8,7 +8,7 @@ import { context } from '../bridge'
 import {computed, unref} from 'vue';
 import {SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH} from '@vben/constants'
 const { useMenuSetting,useRootSetting } = context
-const {headerRef, contentStyle, mainStyle, footerRef} = useComosables()
+const {headerRef, contentStyle, mainStyle, footerRef} = useComposables()
 
 const { getCollapsed, getMenuWidth, getMixSideFixed,getShowSidebar } = useMenuSetting()
 const { getShowFooter } = useRootSetting();

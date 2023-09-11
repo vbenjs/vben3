@@ -5,13 +5,13 @@ import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import {onMounted, ref, unref} from "vue";
-import { useComosables} from './useComosables'
+import { useComposables} from './useComposables'
 const { useMenuSetting, Logo, useRootSetting } = context
 
 const { getMenuWidth } = useMenuSetting()
 const { getShowFooter } = useRootSetting();
 
-const {headerRef, footerRef, contentStyle, mainStyle} = useComosables()
+const {headerRef, footerRef, contentStyle, mainStyle} = useComposables()
 
 const active = ref(false);
 onMounted(()=>{

@@ -3,9 +3,9 @@ import LayoutHeader from './components/header.vue'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
-import { useComosables} from './useComosables'
+import { useComposables} from './useComposables'
 import {context} from "../bridge";
-const {headerRef, footerRef, contentStyle, mainStyle} = useComosables()
+const {headerRef, footerRef, contentStyle, mainStyle} = useComposables()
 const { useRootSetting } = context
 const { getShowFooter } = useRootSetting();
 </script>

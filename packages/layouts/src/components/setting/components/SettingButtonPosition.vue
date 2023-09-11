@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import SettingDrawer from "./SettingDrawer.vue";
 import {ref} from "vue";
-import {useComosables} from "../../../useComosables";
+import {useComposables} from "../../../useComposables";
 
 const settingDrawerVisible = ref(false)
-const {contentRef} = useComosables()
+const {contentRef} = useComposables()
 </script>
 <template>
   <VbenAffix @click="settingDrawerVisible = true"

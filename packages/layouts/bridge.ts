@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { DefineComponent } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
 import {
   useRootSetting,
@@ -11,6 +11,9 @@ import {
   useAppConfig,
 } from '@vben/hooks'
 
+type LogoComponent = DefineComponent<{
+  showTitle?: boolean
+}>
 export interface ContextOptions {
   useAppConfig: typeof useAppConfig
   useRootSetting: typeof useRootSetting
@@ -38,7 +41,7 @@ export interface ContextOptions {
   getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
   siteSetting: Record<string, string>
-  Logo: VNode | null
+  Logo: Nullable<LogoComponent>
 }
 
 export let context: ContextOptions = {

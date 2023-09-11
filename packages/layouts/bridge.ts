@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { DefineComponent } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
 import {
   useRootSetting,
@@ -38,7 +38,9 @@ export interface ContextOptions {
   getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
   siteSetting: Record<string, string>
-  Logo: VNode | null
+  Logo: DefineComponent<{
+    showTitle?: boolean
+  }> | null
 }
 
 export let context: ContextOptions = {

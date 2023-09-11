@@ -8,7 +8,8 @@ import { useClipboard, _omit } from '@vben/utils'
 export const useAppConfig = () => {
   const useAppConfigStore = appConfigStore()
   const appConfigOptions = storeToRefs(useAppConfigStore)
-  const { openSettingDrawer, sidebar, menu, isMixSidebar } = appConfigOptions
+  const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar } =
+    appConfigOptions
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
@@ -54,7 +55,7 @@ export const useAppConfig = () => {
     useAppConfigStore.$reset()
   }
   const getCollapsedShowTitle = computed<boolean>(() => {
-    if (unref(isMixSidebar)) {
+    if (unref(isMixSidebar) || unref(isSidebar)) {
       return !unref(sidebar).collapsed
     }
     return unref(menu).collapsedShowTitle && unref(sidebar).collapsed

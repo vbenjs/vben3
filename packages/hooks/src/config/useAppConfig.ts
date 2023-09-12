@@ -39,7 +39,7 @@ export const useAppConfig = () => {
       if (!isSupported)
         return console.error('Your browser does not support Clipboard API')
       const source = reactive(_omit(appConfigOptions, ['openSettingDrawer']))
-      await copy(JSON.stringify(source))
+      await copy(JSON.stringify(source, null, 2))
     } catch (e) {
       console.error(e)
     }

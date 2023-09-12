@@ -1,70 +1,27 @@
 <script lang="ts" setup>
 import { context } from '../../../../bridge'
 import { useI18n } from '@vben/locale'
-import { writeTextToClipboard } from '@vben/hooks'
-import { unref } from 'vue'
-import { resetRouter } from '@vben/router'
 
 const { t } = useI18n()
-const { useAppConfig, useConfigStore, useMultipleTabStore, useUserStore } =
-  context
-const appConfig = useAppConfig()
-const tabStore = useMultipleTabStore()
-const userStore = useUserStore()
-const configStore = useConfigStore()
 
-const handleCopy = () => {
-  writeTextToClipboard(
-    JSON.stringify(unref(configStore.getProjectConfig), null, 2),
-  )
-  // const { isSuccessRef } = useCopyToClipboard(
-  //   JSON.stringify(unref(configStore.getProjectConfig), null, 2),
-  // );
-  // unref(isSuccessRef) &&
-  // createSuccessModal({
-  //   title: t('layout.setting.operatingTitle'),
-  //   content: t('layout.setting.operatingContent'),
-  // });
-}
-
-const handleReset = () => {
-  try {
-    appConfig.resetAllConfig()
-    // configStore.resetAllConfig()
-    // const { colorWeak, grayMode } = defaultSetting;
-    // updateTheme(themeColor);
-    // updateColorWeak(colorWeak);
-    // updateGrayMode(grayMode);
-    // createMessage.success(t('layout.setting.resetSuccess'))
-  } catch (error: any) {
-    // createMessage.error(error);
-  }
-}
-
-const handleClearAndRedo = () => {
-  localStorage.clear()
-  resetRouter()
-  // permissionStore.resetState()
-  tabStore.resetState()
-  userStore.resetState()
-  location.reload()
-}
+const { useAppConfig } = context
+const { copyConfigs, resetAllConfig, clearAndRedo } = useAppConfig()
 </script>
 <template>
   <VbenSpace vertical>
-    <VbenButton type="info" block @click="handleCopy">
+    <VbenButton type="info" block @click="copyConfigs">
       <template #icon>
         <VbenIconify icon="ant-design:snippets-twotone" />
       </template>
       {{ t('layout.setting.copyBtn') }}
     </VbenButton>
-    <VbenButton type="warning" @click="handleReset" block>
+    <VbenButton type="warning" @click="resetAllConfig" block>
       <template #icon>
         <VbenIconify icon="ant-design:reload-outlined" />
       </template>
       {{ t('common.resetText') }}
     </VbenButton>
-    <VbenButton type="error" block @click="handleClearAndRedo">
+    <VbenButton type="error" block @click="clearAndRedo">
       <template #icon>
         <VbenIconify icon="ant-design:redo-outlined" />
       </template>

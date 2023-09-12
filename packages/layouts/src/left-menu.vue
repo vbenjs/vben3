@@ -5,7 +5,10 @@ import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { useAppConfig } from '@vben/hooks'
-const { headerRef, contentStyle, mainStyle, footerRef } = useComposables()
+
+const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
+  useComposables()
+
 const { toggleCollapse, sidebar, footer } = useAppConfig()
 </script>
 <template>
@@ -29,7 +32,7 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
       <VbenLayout :content-style="contentStyle">
-        <VbenLayoutContent :content-style="mainStyle">
+        <VbenLayoutContent :content-style="mainStyle" ref="contentRef">
           <LayoutMain>
             <slot name="main"></slot>
           </LayoutMain>

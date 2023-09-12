@@ -4,27 +4,29 @@ import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
-import {onMounted, ref, unref} from "vue";
-import { useComposables} from './useComposables'
+import { onMounted, ref, unref } from 'vue'
+import { useComposables } from './useComposables'
+
 const { useMenuSetting, Logo, useRootSetting } = context
 
 const { getMenuWidth } = useMenuSetting()
-const { getShowFooter } = useRootSetting();
+const { getShowFooter } = useRootSetting()
 
-const {headerRef, footerRef, contentStyle, mainStyle} = useComposables()
+const { headerRef, footerRef, contentStyle, mainStyle, contentRef } =
+  useComposables()
 
-const active = ref(false);
-onMounted(()=>{
+const active = ref(false)
+onMounted(() => {
   active.value = true
 })
-const activeTrigger = ()=>{
+const activeTrigger = () => {
   active.value = !unref(active)
 }
 </script>
 <template>
   <VbenLayout class="h-full min-w-375px">
     <VbenDrawer v-model:show="active" placement="left" :width="getMenuWidth">
-      <VbenDrawerContent :body-content-style="{padding:0}">
+      <VbenDrawerContent :body-content-style="{ padding: 0 }">
         <LayoutMenu />
       </VbenDrawerContent>
     </VbenDrawer>
@@ -33,22 +35,31 @@ const activeTrigger = ()=>{
         <LayoutHeader>
           <template #logo>
             <VbenSpace align="center" :wrap-item="false">
-              <Logo :show-title="false"/>
-              <VbenIconify @click="activeTrigger" :icon="active?'menu-fold-outlined':'ant-design:menu-unfold-outlined'" size="24" hoverPointer/>
+              <Logo :show-title="false" />
+              <VbenIconify
+                @click="activeTrigger"
+                :icon="
+                  active
+                    ? 'menu-fold-outlined'
+                    : 'ant-design:menu-unfold-outlined'
+                "
+                size="24"
+                hoverPointer
+              />
             </VbenSpace>
           </template>
         </LayoutHeader>
       </slot>
     </VbenLayoutHeader>
     <VbenLayout :content-style="contentStyle">
-      <VbenLayoutContent :content-style="mainStyle">
+      <VbenLayoutContent :content-style="mainStyle" ref="contentRef">
         <LayoutMain>
           <slot name="main"></slot>
         </LayoutMain>
       </VbenLayoutContent>
       <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
         <slot name="footer">
-          <LayoutFooter/>
+          <LayoutFooter />
         </slot>
       </VbenLayoutFooter>
     </VbenLayout>

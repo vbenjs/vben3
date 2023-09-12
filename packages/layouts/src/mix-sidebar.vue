@@ -1,23 +1,33 @@
 <script lang="ts" setup>
-import {useComposables} from './useComposables'
+import { useComposables } from './useComposables'
 import LayoutMixMenu from './components/mixSideBar/Menu.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
-import {computed, unref} from 'vue';
-import {SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH} from '@vben/constants'
-const { useMenuSetting,useRootSetting } = context
-const {headerRef, contentStyle, mainStyle, footerRef} = useComposables()
+import { computed, unref } from 'vue'
+import {
+  SIDE_BAR_MINI_WIDTH,
+  SIDE_BAR_SHOW_TIT_MINI_WIDTH,
+} from '@vben/constants'
 
-const { getCollapsed, getMenuWidth, getMixSideFixed,getShowSidebar } = useMenuSetting()
-const { getShowFooter } = useRootSetting();
+const { useMenuSetting, useRootSetting } = context
+const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
+  useComposables()
 
-const getMixSidebarWidth = computed(()=>{
-  return unref(getCollapsed) ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH
+const { getCollapsed, getMenuWidth, getMixSideFixed, getShowSidebar } =
+  useMenuSetting()
+const { getShowFooter } = useRootSetting()
+
+const getMixSidebarWidth = computed(() => {
+  return unref(getCollapsed)
+    ? SIDE_BAR_MINI_WIDTH
+    : SIDE_BAR_SHOW_TIT_MINI_WIDTH
 })
-const getContainerStyle = computed(()=>{
-  return {paddingLeft: (unref(getMixSideFixed) ? unref(getMenuWidth) : 0) + 'px'}
+const getContainerStyle = computed(() => {
+  return {
+    paddingLeft: (unref(getMixSideFixed) ? unref(getMenuWidth) : 0) + 'px',
+  }
 })
 </script>
 <template>
@@ -38,14 +48,14 @@ const getContainerStyle = computed(()=>{
         <slot name="header"><LayoutHeader /></slot>
       </VbenLayoutHeader>
       <VbenLayout :content-style="contentStyle">
-        <VbenLayoutContent :content-style="mainStyle">
+        <VbenLayoutContent :content-style="mainStyle" ref="contentRef">
           <LayoutMain>
             <slot name="main"></slot>
           </LayoutMain>
         </VbenLayoutContent>
         <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
           <slot name="footer">
-            <LayoutFooter/>
+            <LayoutFooter />
           </slot>
         </VbenLayoutFooter>
       </VbenLayout>

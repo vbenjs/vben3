@@ -12,6 +12,9 @@ export {
   assign as _assign,
   merge as _merge,
   omit as _omit,
+  isFunction,
+  isBoolean,
+  isNumber,
 } from 'lodash-es'
 // @ts-ignore
 import Sortable from 'sortablejs'

@@ -8,17 +8,17 @@
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
   },
   "dependencies": {
-    "@iconify/iconify": "^3.0.0",
+    "@iconify/iconify": "^3.1.1",
     "@vben/constants": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
-    "qrcode": "^1.5.1",
-    "vue": "3.2.47",
-    "vue-router": "^4.1.6"
+    "qrcode": "^1.5.3",
+    "vue": "3.3.4",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.15",
+    "@iconify/json": "^2.2.115",
     "@purge-icons/generated": "^0.9.0",
-    "@types/qrcode": "^1.5.0"
+    "@types/qrcode": "^1.5.2"
   }
 }

@@ -2,23 +2,23 @@ import type { MenuSetting } from '@vben/types'
 
 import { computed, unref, ref } from 'vue'
 
-import { useConfigStoreWithOut } from '@/store/config'
+import { useAppConfig } from '../config'
 
 import {
   SIDE_BAR_MINI_WIDTH,
   SIDE_BAR_SHOW_TIT_MINI_WIDTH,
   MenuModeEnum,
-  MenuTypeEnum,
   TriggerEnum,
+  NavBarModeEnum,
 } from '@vben/constants'
-import { useFullContent } from '@/hooks/web/useFullContent'
-import {useRootSetting} from "@/hooks/setting/useRootSetting";
+import { useRootSetting } from './useRootSetting'
+import { useFullContent } from '../web'
 
 const mixSideHasChildren = ref(false)
 
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent()
-  const configStore = useConfigStoreWithOut()
+  const configStore = useAppConfig()
   const { getShowLogo } = useRootSetting()
   const getShowSidebar = computed(() => {
     return (
@@ -29,72 +29,67 @@ export function useMenuSetting() {
     )
   })
 
-  const getCollapsed = computed(() => configStore.getMenuSetting.collapsed)
+  const getCollapsed = computed(() => configStore.sidebar.value.collapsed)
 
-  const getMenuType = computed(() => configStore.getMenuSetting.type)
+  const getMenuType = computed(() => configStore.navBarMode.value)
 
-  const getMenuMode = computed(() => configStore.getMenuSetting.mode)
+  const getMenuMode = computed(() => configStore.menu.value.mode)
 
-  const getMenuFixed = computed(() => configStore.getMenuSetting.fixed)
+  const getMenuFixed = computed(() => configStore.sidebar.value.fixed)
 
-  const getShowMenu = computed(() => configStore.getMenuSetting.show)
+  const getShowMenu = computed(() => configStore.sidebar.value.show)
 
-  const getMenuHidden = computed(() => configStore.getMenuSetting.hidden)
+  const getMenuHidden = computed(() => !configStore.sidebar.value.visible)
 
-  const getMenuWidth = computed(() => configStore.getMenuSetting.menuWidth)
+  const getMenuWidth = computed(() => configStore.sidebar.value.width)
 
-  const getTrigger = computed(() => configStore.getMenuSetting.trigger)
+  const getTrigger = computed(() => configStore.sidebar.value.trigger)
 
-  const getMenuTheme = computed(() => configStore.getMenuSetting.theme)
+  const getMenuTheme = computed(() => configStore.sidebar.value.theme)
 
-  const getSplit = computed(() => configStore.getMenuSetting.split)
+  const getSplit = computed(() => configStore.menu.value.split)
 
-  const getMenuBgColor = computed(() => configStore.getMenuSetting.bgColor)
+  const getMenuBgColor = computed(() => configStore.sidebar.value.bgColor)
 
   const getMixSideTrigger = computed(
-    () => configStore.getMenuSetting.mixSideTrigger,
+    () => configStore.menu.value.mixSideTrigger,
   )
 
-  const getCanDrag = computed(() => configStore.getMenuSetting.canDrag)
+  const getCanDrag = computed(() => configStore.menu.value.canDrag)
 
-  const getAccordion = computed(() => configStore.getMenuSetting.accordion)
+  const getAccordion = computed(() => configStore.menu.value.accordion)
 
-  const getMixSideFixed = computed(
-    () => configStore.getMenuSetting.mixSideFixed,
-  )
+  const getMixSideFixed = computed(() => configStore.menu.value.mixSideFixed)
 
-  const getTopMenuAlign = computed(
-    () => configStore.getMenuSetting.topMenuAlign,
-  )
+  const getTopMenuAlign = computed(() => configStore.menu.value.topMenuAlign)
 
   const getCloseMixSidebarOnChange = computed(
-    () => configStore.getMenuSetting.closeMixSidebarOnChange,
+    () => configStore.closeMixSidebarOnChange.value,
   )
 
   const getIsSidebarType = computed(
-    () => unref(getMenuType) === MenuTypeEnum.SIDEBAR,
+    () => unref(getMenuType) === NavBarModeEnum.SIDEBAR,
   )
 
   const getIsTopMenu = computed(
-    () => unref(getMenuType) === MenuTypeEnum.TOP_MENU,
+    () => unref(getMenuType) === NavBarModeEnum.TOP_MENU,
   )
 
   const getMenuShowLogo = computed(
-    ()=> unref(getShowLogo) && unref(getIsSidebarType)
+    () => unref(getShowLogo) && unref(getIsSidebarType),
   )
 
   const getCollapsedShowTitle = computed(
-    () => configStore.getMenuSetting.collapsedShowTitle,
+    () => configStore.menu.value.collapsedShowTitle,
   )
 
   const getShowTopMenu = computed(() => {
     return unref(getMenuMode) === MenuModeEnum.HORIZONTAL || unref(getSplit)
   })
 
-
   const getShowHeaderTrigger = computed(() => {
     if (
-      unref(getMenuType) === MenuTypeEnum.TOP_MENU ||
+      unref(getMenuType) === NavBarModeEnum.TOP_MENU ||
       !unref(getShowMenu) ||
       unref(getMenuHidden)
     ) {
@@ -109,13 +104,13 @@ export function useMenuSetting() {
   })
 
   const getIsMixSidebar = computed(() => {
-    return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR
+    return unref(getMenuType) === NavBarModeEnum.MIX_SIDEBAR
   })
 
   const getIsMixMode = computed(() => {
     return (
       unref(getMenuMode) === MenuModeEnum.INLINE &&
-      unref(getMenuType) === MenuTypeEnum.MIX
+      unref(getMenuType) === NavBarModeEnum.MIX
     )
   })
 
@@ -129,7 +124,7 @@ export function useMenuSetting() {
   })
 
   const getMiniWidthNumber = computed(() => {
-    const { collapsedShowTitle } = configStore.getMenuSetting
+    const { collapsedShowTitle } = configStore.menu.value
     return collapsedShowTitle
       ? SIDE_BAR_SHOW_TIT_MINI_WIDTH
       : SIDE_BAR_MINI_WIDTH
@@ -155,7 +150,7 @@ export function useMenuSetting() {
 
   // Set menu configuration
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
-    configStore.setProjectConfig({ menuSetting })
+    configStore.setAppConfig({ menu: menuSetting })
   }
 
   function toggleCollapsed() {
@@ -196,6 +191,6 @@ export function useMenuSetting() {
     getMixSideTrigger,
     getMixSideFixed,
     mixSideHasChildren,
-    getMenuShowLogo
+    getMenuShowLogo,
   }
 }

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { useComosables } from './useComosables'
+import { useComposables } from './useComposables'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { useAppConfig } from '@vben/hooks'
-const { headerRef, contentStyle, mainStyle, footerRef } = useComosables()
+const { headerRef, contentStyle, mainStyle, footerRef } = useComposables()
 const { toggleCollapse, sidebar, footer } = useAppConfig()
 </script>
 <template>

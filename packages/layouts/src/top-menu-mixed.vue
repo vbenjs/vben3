@@ -5,14 +5,14 @@ import LayoutTabs from './components/tabs/index.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
-import { useComosables } from './useComosables'
+import { useComposables } from './useComposables'
 import {computed, unref} from 'vue'
 const { useMenuSetting,useRootSetting, useMultipleTabSetting } = context
 const { toggleCollapsed, getCollapsed, getMenuWidth, getShowSidebar } = useMenuSetting()
 const { getShowFooter } = useRootSetting();
 const { getShowMultipleTab } = useMultipleTabSetting();
 
-const {headerRef, tabRef, footerRef, headerHeight, contentStyle, mainStyle} = useComosables()
+const {headerRef, tabRef, footerRef, headerHeight, contentStyle, mainStyle} = useComposables()
 
 const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
 

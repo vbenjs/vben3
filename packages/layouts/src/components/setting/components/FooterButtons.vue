@@ -1,23 +1,22 @@
 <script lang="ts" setup>
-import {context} from "../../../../bridge";
-import {useI18n} from '@vben/locale'
+import { context } from '../../../../bridge'
+import { useI18n } from '@vben/locale'
 import { writeTextToClipboard } from '@vben/hooks'
-import {unref} from "vue";
+import { unref } from 'vue'
+import { resetRouter } from '@vben/router'
 
-const {t} = useI18n();
-const {
-  useAppStore,
-  useConfigStore,
-  useMultipleTabStore,
-  useUserStore,
-} = context
-const appStore = useAppStore()
+const { t } = useI18n()
+const { useAppConfig, useConfigStore, useMultipleTabStore, useUserStore } =
+  context
+const appConfig = useAppConfig()
 const tabStore = useMultipleTabStore()
 const userStore = useUserStore()
 const configStore = useConfigStore()
 
-const handleCopy = ()=>{
-  writeTextToClipboard(JSON.stringify(unref(configStore.getProjectConfig), null, 2))
+const handleCopy = () => {
+  writeTextToClipboard(
+    JSON.stringify(unref(configStore.getProjectConfig), null, 2),
+  )
   // const { isSuccessRef } = useCopyToClipboard(
   //   JSON.stringify(unref(configStore.getProjectConfig), null, 2),
   // );
@@ -28,14 +27,15 @@ const handleCopy = ()=>{
   // });
 }
 
-const handleReset = ()=>{
+const handleReset = () => {
   try {
-    configStore.resetProjectConfig();
+    appConfig.resetAllConfig()
+    // configStore.resetAllConfig()
     // const { colorWeak, grayMode } = defaultSetting;
     // updateTheme(themeColor);
     // updateColorWeak(colorWeak);
     // updateGrayMode(grayMode);
-    // createMessage.success(t('layout.setting.resetSuccess'));
+    // createMessage.success(t('layout.setting.resetSuccess'))
   } catch (error: any) {
     // createMessage.error(error);
   }
@@ -43,7 +43,7 @@ const handleReset = ()=>{
 
 const handleClearAndRedo = () => {
   localStorage.clear()
-  appStore.resetAllState()
+  resetRouter()
   // permissionStore.resetState()
   tabStore.resetState()
   userStore.resetState()
@@ -54,19 +54,19 @@ const handleClearAndRedo = () => {
   <VbenSpace vertical>
     <VbenButton type="info" block @click="handleCopy">
       <template #icon>
-        <VbenIconify icon="ant-design:snippets-twotone"/>
+        <VbenIconify icon="ant-design:snippets-twotone" />
       </template>
       {{ t('layout.setting.copyBtn') }}
     </VbenButton>
     <VbenButton type="warning" @click="handleReset" block>
       <template #icon>
-        <VbenIconify icon="ant-design:reload-outlined"/>
+        <VbenIconify icon="ant-design:reload-outlined" />
       </template>
       {{ t('common.resetText') }}
     </VbenButton>
     <VbenButton type="error" block @click="handleClearAndRedo">
       <template #icon>
-        <VbenIconify icon="ant-design:redo-outlined"/>
+        <VbenIconify icon="ant-design:redo-outlined" />
       </template>
       {{ t('layout.setting.clearBtn') }}
     </VbenButton>

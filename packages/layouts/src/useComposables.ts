@@ -2,7 +2,7 @@ import {computed, ref, unref} from 'vue'
 import {useElementSize} from '@vben/utils'
 import {context} from '../bridge'
 
-export const useComosables = () => {
+export const useComposables = () => {
   const {useHeaderSetting} = context
   // @ts-ignore
   const {getFixed: getHeaderFixed} = useHeaderSetting();

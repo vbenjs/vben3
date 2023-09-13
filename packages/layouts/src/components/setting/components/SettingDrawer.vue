@@ -6,7 +6,6 @@ import Features from './Features.vue'
 import Content from './Content.vue'
 import Transitions from './Transitions.vue'
 import FooterButtons from './FooterButtons.vue'
-import { baseHandler } from '../handler'
 import {
   APP_PRESET_COLOR_LIST,
   HEADER_PRESET_BG_COLOR_LIST,
@@ -16,6 +15,9 @@ import {
 import { context } from '../../../../bridge'
 import { navigationBarTypeList } from '../constant'
 import { useI18n } from '@vben/locale'
+
+const { useAppConfig } = context
+const { baseHandler } = useAppConfig()
 
 const { t } = useI18n()
 
@@ -49,6 +51,7 @@ const onVisible = (show: boolean) => {
       }}</VbenDivider>
       <NavigationBarPicker
         :def="getMenuType"
+        :event="HandlerSettingEnum.CHANGE_LAYOUT"
         :type-list="navigationBarTypeList"
         @handler="
           (item) => {

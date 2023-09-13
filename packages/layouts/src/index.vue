@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { MenuTypeEnum } from '@vben/constants'
+import { NavBarModeEnum } from '@vben/constants'
 import {computed, defineComponent, unref} from 'vue'
 import LeftMenuLayout from './left-menu.vue'
 import TopMenuLayout from './top-menu.vue'
@@ -17,13 +17,13 @@ const { getMenuType } = useMenuSetting()
 const layout = computed<ReturnType<typeof defineComponent>>(() => {
   if (unref(getIsMobile)) return Mobile
   switch (getMenuType.value) {
-    case MenuTypeEnum.SIDEBAR:
+    case NavBarModeEnum.SIDEBAR:
       return LeftMenuLayout
-    case MenuTypeEnum.MIX:
+    case NavBarModeEnum.MIX:
       return TopMenuMixLayout
-    case MenuTypeEnum.TOP_MENU:
+    case NavBarModeEnum.TOP_MENU:
       return TopMenuLayout
-    case MenuTypeEnum.MIX_SIDEBAR:
+    case NavBarModeEnum.MIX_SIDEBAR:
       return MixSidebar
     default:
       return undefined

@@ -2,7 +2,6 @@ import {
   CacheTypeEnum,
   ContentLayoutEnum,
   MenuModeEnum,
-  MenuTypeEnum,
   MixSidebarTriggerEnum,
   PermissionModeEnum,
   SessionTimeoutProcessingEnum,
@@ -24,7 +23,6 @@ export interface MenuSetting {
   split: boolean
   menuWidth: number
   mode: MenuModeEnum
-  type: MenuTypeEnum
   theme: ThemeEnum
   topMenuAlign: 'start' | 'center' | 'end'
   trigger: TriggerEnum

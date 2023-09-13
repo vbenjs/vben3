@@ -1,28 +1,16 @@
-import {
-  StoreGeneric,
-  storeToRefs,
-  useAppConfig as appConfigStore,
-} from '@vben/stores'
+import { storeToRefs, useAppConfig as appConfigStore } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
 import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
 
-type DefineAppConfigStoreGetters = {
-  isSidebar: boolean
-  isTopMenu: boolean
-  isMixSidebar: boolean
-  isMix: boolean
-  isMixMode: boolean
-  isHorizontal: boolean
-}
 export const useAppConfig = () => {
   const useAppConfigStore = appConfigStore()
-  const appConfigOptions = storeToRefs(
-    useAppConfigStore as StoreGeneric,
-  ) as unknown as DefineAppConfigOptions & DefineAppConfigStoreGetters
-  const { openSettingDrawer, sidebar, menu, isMixSidebar } = appConfigOptions
+  const appConfigOptions = storeToRefs(useAppConfigStore)
+  const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar } =
+    appConfigOptions
+
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
@@ -42,7 +30,7 @@ export const useAppConfig = () => {
   }
 
   function baseHandler(event: HandlerSettingEnum, value: any) {
-    setAppConfig(handlerResults(event, value, appConfigOptions))
+    setAppConfig(handlerResults(event, value, useAppConfigStore.$state))
   }
 
   async function copyConfigs() {
@@ -67,7 +55,7 @@ export const useAppConfig = () => {
     useAppConfigStore.$reset()
   }
   const getCollapsedShowTitle = computed<boolean>(() => {
-    if (unref(isMixSidebar)) {
+    if (unref(isMixSidebar) || unref(isSidebar)) {
       return !unref(sidebar).collapsed
     }
     return unref(menu).collapsedShowTitle && unref(sidebar).collapsed
@@ -91,6 +79,7 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
+  console.log(event, value)
   const { themeColor, theme, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:

@@ -83,7 +83,7 @@ const renderDropdownLabel = (route: any) => {
 }
 
 const renderDropdownIcon = (option) => {
-  return getShowBreadCrumbIcon && option.icon ? renderIcon(option.icon)() : null
+  return option.icon ? renderIcon(option.icon)() : null
 }
 
 const handleClick = (path: string, route: Recordable<any>) => {

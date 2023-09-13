@@ -1,18 +1,32 @@
-import { VNode } from 'vue'
+import { DefineComponent } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
+import {
+  useRootSetting,
+  useMenuSetting,
+  useHeaderSetting,
+  useMultipleTabSetting,
+  useTransitionSetting,
+  useTabs,
+  useDesign,
+  useAppConfig,
+} from '@vben/hooks'
 
+type LogoComponent = DefineComponent<{
+  showTitle?: boolean
+}>
 export interface ContextOptions {
-  useRootSetting: () => unknown
+  useAppConfig: typeof useAppConfig
+  useRootSetting: typeof useRootSetting
   useAppStore: () => unknown
   useConfigStore: () => unknown
-  useHeaderSetting: () => unknown
-  useTabs: () => unknown
+  useHeaderSetting: typeof useHeaderSetting
+  useTabs: typeof useTabs
   useUserStore: () => unknown
   useAppInject: () => unknown
-  useMenuSetting: () => unknown
-  useMultipleTabSetting: () => unknown
+  useMenuSetting: typeof useMenuSetting
+  useMultipleTabSetting: typeof useMultipleTabSetting
   useMultipleTabStore: () => unknown
-  useTransitionSetting: () => unknown
+  useTransitionSetting: typeof useTransitionSetting
   useLockStore: () => unknown
   useLockScreen: () => unknown
   listenerRouteChange: (
@@ -20,25 +34,26 @@ export interface ContextOptions {
     immediate?: boolean,
   ) => unknown
   usePromise: (fn: Function, config?: unknown) => unknown
-  useDesign: (scope: string) => unknown
+  useDesign: typeof useDesign
   getMenus: () => Promise<any>
   getCurrentParentPath: (currentPath: string) => Promise<any>
   getShallowMenus: () => Promise<any>
   getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
   siteSetting: Record<string, string>
-  Logo: VNode | null
+  Logo: Nullable<LogoComponent>
 }
 
 export let context: ContextOptions = {
-  useRootSetting: () => undefined,
+  useAppConfig,
+  useRootSetting,
   useAppStore: () => undefined,
   useConfigStore: () => undefined,
   useUserStore: () => undefined,
-  useHeaderSetting: () => undefined,
-  useMenuSetting: () => undefined,
-  useMultipleTabSetting: () => undefined,
-  useTransitionSetting: () => undefined,
+  useHeaderSetting,
+  useMenuSetting,
+  useMultipleTabSetting,
+  useTransitionSetting,
   useLockStore: () => undefined,
   useLockScreen: () => undefined,
   useAppInject: () => undefined,
@@ -46,8 +61,8 @@ export let context: ContextOptions = {
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>
     true,
   usePromise: (fn: Function, config) => undefined,
-  useTabs: () => undefined,
-  useDesign: (scope: string) => undefined,
+  useTabs,
+  useDesign: useDesign,
   getMenus: async () => ({}),
   getCurrentParentPath: async (currentPath: string) => ({}),
   getShallowMenus: async () => ({}),

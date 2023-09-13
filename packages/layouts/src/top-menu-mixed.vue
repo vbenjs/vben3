@@ -66,15 +66,6 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
           </VbenLayoutFooter>
         </VbenLayout>
       </VbenLayout>
-
-      <!--      <VbenLayoutContent>
-        <slot name="tabs"><LayoutTabs ref="tabRef" /></slot>
-        <VbenScrollbar :style="contentStyle">
-          <LayoutMain>
-            <slot name="main"></slot>
-          </LayoutMain>
-        </VbenScrollbar>
-      </VbenLayoutContent>-->
     </VbenLayout>
   </VbenLayout>
 </template>

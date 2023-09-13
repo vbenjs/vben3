@@ -7,7 +7,7 @@ import Unocss from 'unocss/vite'
 import { presetIcons, presetMini } from 'unocss'
 export function configUnocssPlugin() {
   return Unocss({
-    exclude: ['node_modules', '.git', 'dist'],
+    content: { pipeline: { exclude: ['node_modules', '.git', 'dist'] } },
     presets: [presetIcons(), presetMini({ dark: 'class' })],
     shortcuts: {
       'flex-center': 'flex justify-center items-center',

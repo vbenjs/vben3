@@ -14,9 +14,9 @@
     "@vben/utils": "workspace:*",
     "@vben/stores": "workspace:*",
     "nprogress": "^0.2.0",
-    "vue-router": "^4.1.6",
+    "vue-router": "^4.2.4",
     "path-to-regexp": "^6.2.1",
-    "vue": "^3.2.47"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

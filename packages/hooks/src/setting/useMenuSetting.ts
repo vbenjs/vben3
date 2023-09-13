@@ -37,7 +37,7 @@ export function useMenuSetting() {
 
   const getMenuFixed = computed(() => configStore.sidebar.value.fixed)
 
-  const getShowMenu = computed(() => configStore.sidebar.value.show)
+  const getShowMenu = computed(() => configStore.menu.value.show)
 
   const getMenuHidden = computed(() => !configStore.sidebar.value.visible)
 

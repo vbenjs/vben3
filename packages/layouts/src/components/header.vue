@@ -8,23 +8,15 @@ import { SettingButton } from '../components/setting'
 import UserDropdown from '../components/user-dropdown/index.vue'
 import { context } from '../../bridge'
 import { computed, unref } from 'vue'
-import {
-  SettingButtonPositionEnum,
-  ThemeEnum,
-  NavBarModeEnum,
-} from '@vben/constants'
+import { SettingButtonPositionEnum, NavBarModeEnum } from '@vben/constants'
+import { useAppTheme } from '@vben/hooks'
 
-const {
-  useAppConfig,
-  useHeaderSetting,
-  useRootSetting,
-  useMenuSetting,
-  useConfigStore,
-  Logo,
-  useAppInject,
-  useMultipleTabSetting,
-} = context
+const { useAppConfig, useMenuSetting, useHeaderSetting, useRootSetting } =
+  context
+
 const { isTopMenu, isMix, menu } = useAppConfig()
+
+const { Logo, useAppInject, useMultipleTabSetting } = context
 const {
   getShowFullScreen,
   getShowLocalePicker,
@@ -33,15 +25,11 @@ const {
   getShowNotice,
   getShowFullHeaderRef,
 } = useHeaderSetting()
-
-const { getDarkMode } = useConfigStore()
-const isDark = computed(() => getDarkMode == ThemeEnum.DARK)
-
+const { isDark } = useAppTheme()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
 const { getMenuType, getMenuWidth } = useMenuSetting()
 const { getIsMobile } = useAppInject()
 const { getShowMultipleTab } = useMultipleTabSetting()
-
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
     return false

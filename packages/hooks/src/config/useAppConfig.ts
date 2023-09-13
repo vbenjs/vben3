@@ -8,7 +8,7 @@ import { useClipboard, _omit } from '@vben/utils'
 export const useAppConfig = () => {
   const useAppConfigStore = appConfigStore()
   const appConfigOptions = storeToRefs(useAppConfigStore)
-  const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar } =
+  const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar, header } =
     appConfigOptions
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
@@ -60,6 +60,7 @@ export const useAppConfig = () => {
     }
     return unref(menu).collapsedShowTitle && unref(sidebar).collapsed
   })
+
   return {
     ...appConfigOptions,
     setAppConfig,

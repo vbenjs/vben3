@@ -13,17 +13,17 @@ import {
   ThemeEnum,
   NavBarModeEnum,
 } from '@vben/constants'
-import { useAppConfig } from '@vben/hooks'
-const { isMixSidebar, isTopMenu, isMix, sidebar, menu, header } = useAppConfig()
-const {
+import {
+  useAppConfig,
+  useMenuSetting,
   useHeaderSetting,
   useRootSetting,
-  useMenuSetting,
-  useConfigStore,
-  Logo,
-  useAppInject,
-  useMultipleTabSetting,
-} = context
+  useAppTheme,
+} from '@vben/hooks'
+
+const { isMixSidebar, isTopMenu, isMix, sidebar, menu, header } = useAppConfig()
+
+const { useConfigStore, Logo, useAppInject, useMultipleTabSetting } = context
 const {
   getShowBread,
   getShowFullScreen,
@@ -34,12 +34,11 @@ const {
   getShowFullHeaderRef,
   getShowHeaderLogo,
 } = useHeaderSetting()
-const { getDarkMode } = useConfigStore()
+const { isDark } = useAppTheme()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
 const { getMenuType, getMenuWidth, getIsTopMenu } = useMenuSetting()
 const { getIsMobile } = useAppInject()
 const { getShowMultipleTab } = useMultipleTabSetting()
-const isDark = computed(() => getDarkMode == ThemeEnum.DARK)
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
     return false

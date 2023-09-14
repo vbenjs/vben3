@@ -27,6 +27,7 @@ const style = computed(
 )
 </script>
 <template>
+  <!-- todo i18n fail -->
   <footer :class="bem()" :style="style">
     <div class="lh-32px">
       <template v-for="(item, index) in links" :key="index">

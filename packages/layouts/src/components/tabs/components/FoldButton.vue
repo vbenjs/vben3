@@ -11,10 +11,10 @@ const getIcon = computed(() =>
 )
 function handleFold() {
   // 设置菜单和头部是否显示
-  setMenuSetting({
-    show: !unref(getShowMenu),
-  })
-  setHeaderSetting({ show: !unref(getShowHeader) })
+  const show = unref(getIsUnFold)
+
+  setMenuSetting({ show })
+  setHeaderSetting({ show })
 
   triggerWindowResize()
 }

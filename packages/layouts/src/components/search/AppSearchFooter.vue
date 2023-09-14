@@ -30,8 +30,6 @@ const { t } = useI18n()
   </div>
 </template>
 <style lang="less" scoped>
-// @prefix-cls: ~'@{namespace}-app-search-footer';
-
 .vben-app-search-footer {
   position: relative;
   display: flex;

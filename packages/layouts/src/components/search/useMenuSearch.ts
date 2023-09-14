@@ -16,10 +16,6 @@ export interface SearchResult {
   icon?: string
 }
 
-// interface ChangeEvent extends Event {
-//   target: HTMLInputElement
-// }
-
 // Translate special characters
 function transform(c: string) {
   const code: string[] = [

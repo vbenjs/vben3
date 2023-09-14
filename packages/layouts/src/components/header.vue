@@ -8,35 +8,26 @@ import { SettingButton } from '../components/setting'
 import UserDropdown from '../components/user-dropdown/index.vue'
 import { context } from '../../bridge'
 import { computed, unref } from 'vue'
-import {
-  SettingButtonPositionEnum,
-  ThemeEnum,
-  NavBarModeEnum,
-} from '@vben/constants'
-import {
-  useAppConfig,
-  useMenuSetting,
-  useHeaderSetting,
-  useRootSetting,
-  useAppTheme,
-} from '@vben/hooks'
+import { SettingButtonPositionEnum, NavBarModeEnum } from '@vben/constants'
+import { useAppTheme } from '@vben/hooks'
 
-const { isMixSidebar, isTopMenu, isMix, sidebar, menu, header } = useAppConfig()
+const { useAppConfig, useMenuSetting, useHeaderSetting, useRootSetting } =
+  context
 
-const { useConfigStore, Logo, useAppInject, useMultipleTabSetting } = context
+const { isTopMenu, isMix, menu } = useAppConfig()
+
+const { Logo, useAppInject, useMultipleTabSetting } = context
 const {
-  getShowBread,
   getShowFullScreen,
   getShowLocalePicker,
   getShowSearch,
   getShowHeader,
   getShowNotice,
   getShowFullHeaderRef,
-  getShowHeaderLogo,
 } = useHeaderSetting()
 const { isDark } = useAppTheme()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
-const { getMenuType, getMenuWidth, getIsTopMenu } = useMenuSetting()
+const { getMenuType, getMenuWidth } = useMenuSetting()
 const { getIsMobile } = useAppInject()
 const { getShowMultipleTab } = useMultipleTabSetting()
 const getShowSetting = computed(() => {

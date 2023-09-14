@@ -8,7 +8,7 @@ import { useClipboard, _omit } from '@vben/utils'
 export const useAppConfig = () => {
   const useAppConfigStore = appConfigStore()
   const appConfigOptions = storeToRefs(useAppConfigStore)
-  const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar, header } =
+  const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar } =
     appConfigOptions
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
@@ -80,7 +80,6 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
-  console.log(event, value)
   const { themeColor, theme, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:

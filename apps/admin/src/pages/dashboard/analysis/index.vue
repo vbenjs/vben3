@@ -437,17 +437,19 @@ setInterval(() => {
   data1.push(Math.round(Math.random() * 1000))
   categories1.shift()
   categories1.push(axisData)
-  barChart.value.setOption({
-    xAxis: {
-      data: categories1,
-    },
-    series: [
-      {
-        name: '模拟数据',
-        data: data1,
+
+  barChart.value &&
+    barChart.value.setOption({
+      xAxis: {
+        data: categories1,
       },
-    ],
-  })
+      series: [
+        {
+          name: '模拟数据',
+          data: data1,
+        },
+      ],
+    })
 }, 2000)
 
 const operatorData = ref([])

@@ -171,9 +171,10 @@ function handlerResults(
     case HandlerSettingEnum.FULL_CONTENT:
       return {
         content: { fullScreen: value },
-        sidebar: { visible: !value, show: !value },
+        // sidebar: { visible: !value, show: !value },
         header: { visible: !value, show: !value },
         tabTar: { visible: !value, show: !value },
+        menu: { show: !value },
       }
 
     case HandlerSettingEnum.CONTENT_MODE:

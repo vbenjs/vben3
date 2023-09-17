@@ -3,36 +3,39 @@ import { computed, ref, watch, unref } from 'vue'
 import { ListItem } from './data'
 import { isNumber } from '@vben/utils'
 
-const {
-  list = [],
-  pageSize = 5,
-  currentPage = 1,
-  titleRows = 1,
-  descRows = 2,
-  onTitleClick = null,
-} = defineProps<{
-  list: Array<ListItem>
-  pageSize?: boolean | number
-  currentPage?: number
-  titleRows?: number
-  descRows?: number
-  onTitleClick?: (Recordable) => void
-}>()
-const current = ref(currentPage || 1)
+const props = withDefaults(
+  defineProps<{
+    list: Array<ListItem>
+    pageSize?: boolean | number
+    currentPage?: number
+    titleRows?: number
+    descRows?: number
+    onTitleClick?: (Recordable) => void
+  }>(),
+  {
+    list: [],
+    pageSize: 5,
+    currentPage: 1,
+    titleRows: 1,
+    descRows: 2,
+    onTitleClick: null,
+  },
+)
+const current = ref(props.currentPage || 1)
 const getData = computed(() => {
-  if (pageSize === false) return []
-  let size = isNumber(pageSize) ? pageSize : 5
-  return list.slice(size * (unref(current) - 1), size * unref(current))
+  if (props.pageSize === false) return []
+  let size = isNumber(props.pageSize) ? props.pageSize : 5
+  return props.list.slice(size * (unref(current) - 1), size * unref(current))
 })
 watch(
-  () => currentPage,
+  () => props.currentPage,
   (v) => {
     current.value = v
   },
 )
 
 function handleTitleClick(item: ListItem) {
-  onTitleClick && onTitleClick(item)
+  props.onTitleClick && props.onTitleClick(item)
 }
 </script>
 <template>

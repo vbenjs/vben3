@@ -91,6 +91,7 @@ function handlerResults(
           ...splitOpt,
           mode,
         },
+        sidebar: { collapsed: false },
       }
 
     case HandlerSettingEnum.CHANGE_THEME_COLOR:

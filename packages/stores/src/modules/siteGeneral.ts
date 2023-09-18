@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { FooterLinkOptions, DefineSiteGeneralOptions } from '@vben/types'
-import { i18n } from '@vben/locale'
+import { type ComposerTranslation, i18n } from '@vben/locale'
 // @ts-ignore
 import defaultLogo from '@/assets/images/logo.png'
 // @ts-ignore
@@ -19,26 +19,28 @@ export const DOC_URL = 'https://vbenjs.github.io/vben3-doc/'
 // site url
 export const SITE_URL = 'https://vben.mufei88.com/'
 
+const links = (t: ComposerTranslation): FooterLinkOptions[] => [
+  {
+    label: t('layout.footer.onlinePreview'),
+    url: SITE_URL,
+  },
+  {
+    icon: 'uim:github',
+    url: GITHUB_URL,
+  },
+  {
+    label: t('layout.footer.onlineDocument'),
+    url: DOC_URL,
+  },
+]
+
 export const useSiteGeneral = defineStore({
   id: 'APP_SITE_GENERAL_OPTIONS',
   state: (): DefineSiteGeneralOptions => ({
     logo: defaultLogo,
     title,
     copyright: '2023 Vben Admin',
-    links: [
-      {
-        label: i18n.global.t('layout.footer.onlinePreview'),
-        url: SITE_URL,
-      },
-      {
-        icon: 'uim:github',
-        url: GITHUB_URL,
-      },
-      {
-        label: i18n.global.t('layout.footer.onlineDocument'),
-        url: DOC_URL,
-      },
-    ] as FooterLinkOptions[],
+    links: links(i18n.global.t),
     avatar: defaultAvatar,
     username: 'Vben Admin',
   }),

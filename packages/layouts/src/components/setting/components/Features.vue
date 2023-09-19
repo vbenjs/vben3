@@ -173,7 +173,7 @@ if (!some) {
       :def="getMenuWidth"
       suffix="px"
       :event="HandlerSettingEnum.MENU_WIDTH"
-      :disabled="getShowMenuRef"
+      :disabled="!getShowMenuRef"
     />
   </VbenSpace>
 </template>

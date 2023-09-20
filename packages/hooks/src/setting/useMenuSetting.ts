@@ -1,4 +1,4 @@
-import type { MenuSetting } from '@vben/types'
+import type { MenuSetting, SidebarConfigOptions } from '@vben/types'
 
 import { computed, unref, ref } from 'vue'
 
@@ -153,8 +153,15 @@ export function useMenuSetting() {
     configStore.setAppConfig({ menu: menuSetting })
   }
 
+  function setSidebarSetting(
+    sidebarSetting: Partial<SidebarConfigOptions>,
+  ): void {
+    configStore.setAppConfig({ sidebar: sidebarSetting })
+  }
+
   function toggleCollapsed() {
-    setMenuSetting({
+    console.log(unref(getCollapsed))
+    setSidebarSetting({
       collapsed: !unref(getCollapsed),
     })
   }

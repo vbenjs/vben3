@@ -1,8 +1,8 @@
 import { initRequest } from '@vben/request'
 import { useUserStoreWithout, useUserStore } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
-import { deepMerge, getGlobalConfig } from '@vben/utils'
-import { useConfigStoreWithOut, useConfigStore } from '@/store/config'
+import { getGlobalConfig } from '@vben/utils'
+import { useConfigStore } from '@/store/config'
 import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
@@ -25,16 +25,16 @@ import {
   getCurrentParentPath,
   getMenus,
   getShallowMenus,
+  listenerRouteChange,
 } from '@vben/router'
 import { useMultipleTabStore } from '@/store/multipleTab'
-import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { useAppStore } from '@/store/modules/app'
 import Logo from '@/layout/components/logo.vue'
 
 import { useLockStore } from '@/store/lock'
-import { unref } from 'vue'
 import { useLockScreen } from '@/hooks/web/useLockScreen'
 import { siteSetting } from '@/config'
+
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import HeaderTrigger from './trigger/HeaderTrigger.vue'
 import LayoutBreadcrumb from '../components/breadcrumb/index.vue'
 import LayoutTabs from '../components/tabs/index.vue'
 import AppSearch from '../components/search/AppSearch.vue'
@@ -8,15 +9,19 @@ import { SettingButton } from '../components/setting'
 import UserDropdown from '../components/user-dropdown/index.vue'
 import { context } from '../../bridge'
 import { computed, unref } from 'vue'
-import { SettingButtonPositionEnum, NavBarModeEnum } from '@vben/constants'
+import {
+  SettingButtonPositionEnum,
+  NavBarModeEnum,
+  TriggerEnum,
+} from '@vben/constants'
 import { useAppTheme } from '@vben/hooks'
 
 const { useAppConfig, useMenuSetting, useHeaderSetting, useRootSetting } =
   context
 
-const { isTopMenu, isMix, menu } = useAppConfig()
+const { isTopMenu, isMix, menu, sidebar } = useAppConfig()
 
-const { Logo, useAppInject, useMultipleTabSetting } = context
+const { Logo, useMultipleTabSetting } = context
 const {
   getShowFullScreen,
   getShowLocalePicker,
@@ -28,7 +33,6 @@ const {
 const { isDark } = useAppTheme()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
 const { getMenuType, getMenuWidth } = useMenuSetting()
-const { getIsMobile } = useAppInject()
 const { getShowMultipleTab } = useMultipleTabSetting()
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
@@ -43,13 +47,14 @@ const getShowSetting = computed(() => {
 })
 
 const getShowHeaderMultipleTab = computed(() => {
-  return (
-    unref(getShowMultipleTab) &&
-    (unref(getMenuType) !== NavBarModeEnum.MIX || unref(getIsMobile))
-  )
+  return unref(getShowMultipleTab) && unref(getMenuType) !== NavBarModeEnum.MIX
 })
 const showHeaderLogo = computed(() => {
   return unref(isTopMenu) || unref(isMix)
+})
+
+const showHeaderTrigger = computed(() => {
+  return unref(sidebar).trigger === TriggerEnum.HEADER
 })
 </script>
 <template>
@@ -62,7 +67,7 @@ const showHeaderLogo = computed(() => {
       align="center"
     >
       <slot name="logo">
-        <VbenSpace align="center" :size="0">
+        <VbenSpace align="center" class="items-center" :size="0">
           <Logo
             v-if="showHeaderLogo"
             :style="{
@@ -70,6 +75,7 @@ const showHeaderLogo = computed(() => {
               maxWidth: getMenuWidth + 'px',
             }"
           />
+          <HeaderTrigger v-if="showHeaderTrigger" />
           <slot name="breadcrumb">
             <LayoutBreadcrumb v-if="!(isTopMenu || (isMix && menu.split))" />
           </slot>

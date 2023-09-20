@@ -5,7 +5,7 @@ import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import { NavBarModeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
-import SiderTrigger from "./SiderTrigger.vue"
+import SiderTrigger from "../trigger/SiderTrigger.vue"
 import MixMenu from "../menu/mix-sub-menu.vue";
 import {
   RouteLocationNormalized

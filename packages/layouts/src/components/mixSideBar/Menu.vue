@@ -41,14 +41,6 @@ onMounted(async () => {
   openMenu.value = unref(getMixSideFixed)
 });
 
-listenerRouteChange((route) => {
-  currentRoute.value = route;
-  setActive(true);
-  if (unref(getCloseMixSidebarOnChange)) {
-    closeMenu();
-  }
-});
-
 const getIsFixed = computed(() => {
   /* eslint-disable-next-line */
   mixSideHasChildren.value = unref(childrenMenus).length > 0;
@@ -122,6 +114,15 @@ function closeMenu() {
     openMenu.value = false;
   }
 }
+
+listenerRouteChange((route) => {
+  currentRoute.value = route;
+  setActive(true);
+  if (unref(getCloseMixSidebarOnChange)) {
+    closeMenu();
+  }
+});
+
 // Set the currently active menu and submenu
 async function setActive(setChildren = false) {
   const path = currentRoute.value?.path;

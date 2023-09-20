@@ -236,6 +236,7 @@ export const useAppConfig = defineStore({
       'lockTime',
       'useLockPage',
       'canEmbedIFramePage',
+      'closeMixSidebarOnChange',
       'sidebar',
       'menu',
       'header',

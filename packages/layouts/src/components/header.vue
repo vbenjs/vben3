@@ -9,17 +9,13 @@ import { SettingButton } from '../components/setting'
 import UserDropdown from '../components/user-dropdown/index.vue'
 import { context } from '../../bridge'
 import { computed, unref } from 'vue'
-import {
-  SettingButtonPositionEnum,
-  NavBarModeEnum,
-  TriggerEnum,
-} from '@vben/constants'
+import { SettingButtonPositionEnum, NavBarModeEnum } from '@vben/constants'
 import { useAppTheme } from '@vben/hooks'
 
 const { useAppConfig, useMenuSetting, useHeaderSetting, useRootSetting } =
   context
 
-const { isTopMenu, isMix, menu, sidebar } = useAppConfig()
+const { isTopMenu, isMix, menu } = useAppConfig()
 
 const { Logo, useMultipleTabSetting } = context
 const {
@@ -32,7 +28,7 @@ const {
 } = useHeaderSetting()
 const { isDark } = useAppTheme()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
-const { getMenuType, getMenuWidth } = useMenuSetting()
+const { getMenuType, getMenuWidth, getShowHeaderTrigger } = useMenuSetting()
 const { getShowMultipleTab } = useMultipleTabSetting()
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
@@ -51,10 +47,6 @@ const getShowHeaderMultipleTab = computed(() => {
 })
 const showHeaderLogo = computed(() => {
   return unref(isTopMenu) || unref(isMix)
-})
-
-const showHeaderTrigger = computed(() => {
-  return unref(sidebar).trigger === TriggerEnum.HEADER
 })
 </script>
 <template>
@@ -75,7 +67,7 @@ const showHeaderTrigger = computed(() => {
               maxWidth: getMenuWidth + 'px',
             }"
           />
-          <HeaderTrigger v-if="showHeaderTrigger" />
+          <HeaderTrigger v-if="getShowHeaderTrigger" />
           <slot name="breadcrumb">
             <LayoutBreadcrumb v-if="!(isTopMenu || (isMix && menu.split))" />
           </slot>

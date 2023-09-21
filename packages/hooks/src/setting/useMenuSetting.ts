@@ -99,6 +99,14 @@ export function useMenuSetting() {
     return unref(getTrigger) === TriggerEnum.HEADER
   })
 
+  const getShowCenterTrigger = computed(() => {
+    return unref(getTrigger) === TriggerEnum.CENTER
+  })
+
+  const getShowFooterTrigger = computed(() => {
+    return unref(getTrigger) === TriggerEnum.FOOTER
+  })
+
   const getIsHorizontal = computed(() => {
     return unref(getMenuMode) === MenuModeEnum.HORIZONTAL
   })
@@ -160,7 +168,6 @@ export function useMenuSetting() {
   }
 
   function toggleCollapsed() {
-    console.log(unref(getCollapsed))
     setSidebarSetting({
       collapsed: !unref(getCollapsed),
     })
@@ -187,6 +194,8 @@ export function useMenuSetting() {
     getAccordion,
     getShowTopMenu,
     getShowHeaderTrigger,
+    getShowCenterTrigger,
+    getShowFooterTrigger,
     getTopMenuAlign,
     getMenuHidden,
     getIsTopMenu,

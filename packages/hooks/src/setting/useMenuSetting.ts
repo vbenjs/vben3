@@ -1,4 +1,4 @@
-import type { MenuSetting } from '@vben/types'
+import type { MenuSetting, SidebarConfigOptions } from '@vben/types'
 
 import { computed, unref, ref } from 'vue'
 
@@ -99,6 +99,14 @@ export function useMenuSetting() {
     return unref(getTrigger) === TriggerEnum.HEADER
   })
 
+  const getShowCenterTrigger = computed(() => {
+    return unref(getTrigger) === TriggerEnum.CENTER
+  })
+
+  const getShowFooterTrigger = computed(() => {
+    return unref(getTrigger) === TriggerEnum.FOOTER
+  })
+
   const getIsHorizontal = computed(() => {
     return unref(getMenuMode) === MenuModeEnum.HORIZONTAL
   })
@@ -153,8 +161,14 @@ export function useMenuSetting() {
     configStore.setAppConfig({ menu: menuSetting })
   }
 
+  function setSidebarSetting(
+    sidebarSetting: Partial<SidebarConfigOptions>,
+  ): void {
+    configStore.setAppConfig({ sidebar: sidebarSetting })
+  }
+
   function toggleCollapsed() {
-    setMenuSetting({
+    setSidebarSetting({
       collapsed: !unref(getCollapsed),
     })
   }
@@ -180,6 +194,8 @@ export function useMenuSetting() {
     getAccordion,
     getShowTopMenu,
     getShowHeaderTrigger,
+    getShowCenterTrigger,
+    getShowFooterTrigger,
     getTopMenuAlign,
     getMenuHidden,
     getIsTopMenu,

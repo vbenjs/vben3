@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import HeaderTrigger from './trigger/HeaderTrigger.vue'
 import LayoutBreadcrumb from '../components/breadcrumb/index.vue'
 import LayoutTabs from '../components/tabs/index.vue'
 import AppSearch from '../components/search/AppSearch.vue'
@@ -16,7 +17,7 @@ const { useAppConfig, useMenuSetting, useHeaderSetting, useRootSetting } =
 
 const { isTopMenu, isMix, menu } = useAppConfig()
 
-const { Logo, useAppInject, useMultipleTabSetting } = context
+const { Logo, useMultipleTabSetting } = context
 const {
   getShowFullScreen,
   getShowLocalePicker,
@@ -27,8 +28,7 @@ const {
 } = useHeaderSetting()
 const { isDark } = useAppTheme()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
-const { getMenuType, getMenuWidth } = useMenuSetting()
-const { getIsMobile } = useAppInject()
+const { getMenuType, getMenuWidth, getShowHeaderTrigger } = useMenuSetting()
 const { getShowMultipleTab } = useMultipleTabSetting()
 const getShowSetting = computed(() => {
   if (!unref(getShowSettingButton)) {
@@ -43,10 +43,7 @@ const getShowSetting = computed(() => {
 })
 
 const getShowHeaderMultipleTab = computed(() => {
-  return (
-    unref(getShowMultipleTab) &&
-    (unref(getMenuType) !== NavBarModeEnum.MIX || unref(getIsMobile))
-  )
+  return unref(getShowMultipleTab) && unref(getMenuType) !== NavBarModeEnum.MIX
 })
 const showHeaderLogo = computed(() => {
   return unref(isTopMenu) || unref(isMix)
@@ -62,7 +59,7 @@ const showHeaderLogo = computed(() => {
       align="center"
     >
       <slot name="logo">
-        <VbenSpace align="center" :size="0">
+        <VbenSpace align="center" class="items-center" :size="0">
           <Logo
             v-if="showHeaderLogo"
             :style="{
@@ -70,6 +67,7 @@ const showHeaderLogo = computed(() => {
               maxWidth: getMenuWidth + 'px',
             }"
           />
+          <HeaderTrigger v-if="getShowHeaderTrigger" />
           <slot name="breadcrumb">
             <LayoutBreadcrumb v-if="!(isTopMenu || (isMix && menu.split))" />
           </slot>

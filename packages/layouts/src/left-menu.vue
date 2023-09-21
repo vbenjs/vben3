@@ -4,17 +4,26 @@ import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
-import { useAppConfig, useMenuSetting } from '@vben/hooks'
-const { getShowMenu, getCollapsed } = useMenuSetting()
+import { context } from '../bridge'
+
+const { useAppConfig, useMenuSetting } = context
+const {
+  getShowMenu,
+  getCollapsed,
+  getShowCenterTrigger,
+  getShowFooterTrigger,
+} = useMenuSetting()
+
 const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
   useComposables()
+
 const { toggleCollapse, sidebar, footer } = useAppConfig()
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
     <VbenLayoutSider
       v-if="getShowMenu"
-      show-trigger
+      :show-trigger="getShowCenterTrigger"
       bordered
       :collapsed-width="sidebar.collapsedWidth"
       :width="sidebar.width"
@@ -24,6 +33,7 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
     >
       <slot name="sider">
         <LayoutMenu />
+        <div v-if="getShowFooterTrigger">trigger</div>
       </slot>
     </VbenLayoutSider>
     <VbenLayout>

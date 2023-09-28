@@ -1,6 +1,6 @@
 import { storeToRefs, useAppConfig as appConfigStore } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
-import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
+import { HandlerSettingEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
@@ -80,7 +80,7 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
-  const { themeColor, theme, sidebar, header } = configOptions
+  const { themeColor, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:
       const { mode, type, split } = value
@@ -102,11 +102,7 @@ function handlerResults(
       return { themeColor: value }
 
     case HandlerSettingEnum.CHANGE_THEME:
-      if (unref(theme) === value) {
-        return {}
-      }
-      // updateDarkTheme(value);
-      return { theme: value ? ThemeEnum.DARK : ThemeEnum.LIGHT }
+      return { theme: value }
 
     case HandlerSettingEnum.MENU_HAS_DRAG:
       return { menu: { canDrag: value } }

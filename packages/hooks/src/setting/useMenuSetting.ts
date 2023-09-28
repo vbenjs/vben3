@@ -14,8 +14,6 @@ import {
 import { useRootSetting } from './useRootSetting'
 import { useFullContent } from '../web'
 
-const mixSideHasChildren = ref(false)
-
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent()
   const configStore = useAppConfig()
@@ -28,6 +26,8 @@ export function useMenuSetting() {
         !unref(fullContent))
     )
   })
+
+  const mixSideHasChildren = ref(false)
 
   const getCollapsed = computed(() => configStore.sidebar.value.collapsed)
 
@@ -156,6 +156,10 @@ export function useMenuSetting() {
     return `calc(100% - ${unref(width)}px)`
   })
 
+  const getIsFixed = computed(() => {
+    return unref(getMixSideFixed) && unref(mixSideHasChildren)
+  })
+
   // Set menu configuration
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
     configStore.setAppConfig({ menu: menuSetting })
@@ -207,6 +211,7 @@ export function useMenuSetting() {
     getMixSideTrigger,
     getMixSideFixed,
     mixSideHasChildren,
+    getIsFixed,
     getMenuShowLogo,
   }
 }

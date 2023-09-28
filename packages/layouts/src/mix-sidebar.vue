@@ -15,7 +15,7 @@ const { useMenuSetting, useRootSetting } = context
 const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
   useComposables()
 
-const { getCollapsed, getMenuWidth, getMixSideFixed, getShowSidebar } =
+const { getCollapsed, getMenuWidth, getIsFixed, getShowSidebar } =
   useMenuSetting()
 const { getShowFooter } = useRootSetting()
 
@@ -26,7 +26,7 @@ const getMixSidebarWidth = computed(() => {
 })
 const getContainerStyle = computed(() => {
   return {
-    paddingLeft: (unref(getMixSideFixed) ? unref(getMenuWidth) : 0) + 'px',
+    paddingLeft: (unref(getIsFixed) ? unref(getMenuWidth) : 0) + 'px',
   }
 })
 </script>

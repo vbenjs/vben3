@@ -25,6 +25,7 @@ const getMixSidebarWidth = computed(() => {
     : SIDE_BAR_SHOW_TIT_MINI_WIDTH
 })
 const getContainerStyle = computed(() => {
+  console.log(unref(getIsFixed))
   return {
     paddingLeft: (unref(getIsFixed) ? unref(getMenuWidth) : 0) + 'px',
   }

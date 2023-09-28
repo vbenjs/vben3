@@ -14,6 +14,8 @@ import {
 import { useRootSetting } from './useRootSetting'
 import { useFullContent } from '../web'
 
+const mixSideHasChildren = ref(false)
+
 export function useMenuSetting() {
   const { getFullContent: fullContent } = useFullContent()
   const configStore = useAppConfig()
@@ -26,8 +28,6 @@ export function useMenuSetting() {
         !unref(fullContent))
     )
   })
-
-  const mixSideHasChildren = ref(false)
 
   const getCollapsed = computed(() => configStore.sidebar.value.collapsed)
 

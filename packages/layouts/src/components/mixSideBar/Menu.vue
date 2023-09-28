@@ -64,9 +64,7 @@ onMounted(async () => {
 
 watchEffect(() => {
   mixSideHasChildren.value = unref(childrenMenus).length > 0
-  if (unref(getIsFixed)) {
-    openMenu.value = true
-  }
+  openMenu.value = unref(mixSideHasChildren)
 })
 
 // Process module menu click

@@ -7,7 +7,6 @@ import defaultLogo from '@/assets/images/logo.png'
 import defaultAvatar from '@/assets/images/header.jpg'
 import { getGlobalConfig } from '@vben/utils'
 
-// @ts-ignore
 const { title } = getGlobalConfig(import.meta.env)
 
 // github repo url

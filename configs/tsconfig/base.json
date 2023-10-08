@@ -22,7 +22,11 @@
     "resolveJsonModule": true,
     "removeComments": true,
     "noImplicitAny": false,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "module": "esnext",
+    "types": ["node", "vite/client"],
+    "lib": ["dom", "esnext"]
   },
   "exclude": ["**/node_modules/**", "**/dist/**"]
 }

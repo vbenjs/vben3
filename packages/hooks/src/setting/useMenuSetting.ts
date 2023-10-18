@@ -1,4 +1,4 @@
-import type { MenuSetting } from '@vben/types'
+import type { MenuSetting, SidebarConfigOptions } from '@vben/types'
 
 import { computed, unref, ref } from 'vue'
 
@@ -37,7 +37,7 @@ export function useMenuSetting() {
 
   const getMenuFixed = computed(() => configStore.sidebar.value.fixed)
 
-  const getShowMenu = computed(() => configStore.sidebar.value.show)
+  const getShowMenu = computed(() => configStore.menu.value.show)
 
   const getMenuHidden = computed(() => !configStore.sidebar.value.visible)
 
@@ -99,6 +99,14 @@ export function useMenuSetting() {
     return unref(getTrigger) === TriggerEnum.HEADER
   })
 
+  const getShowCenterTrigger = computed(() => {
+    return unref(getTrigger) === TriggerEnum.CENTER
+  })
+
+  const getShowFooterTrigger = computed(() => {
+    return unref(getTrigger) === TriggerEnum.FOOTER
+  })
+
   const getIsHorizontal = computed(() => {
     return unref(getMenuMode) === MenuModeEnum.HORIZONTAL
   })
@@ -148,13 +156,23 @@ export function useMenuSetting() {
     return `calc(100% - ${unref(width)}px)`
   })
 
+  const getIsFixed = computed(() => {
+    return unref(getMixSideFixed) && unref(mixSideHasChildren)
+  })
+
   // Set menu configuration
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
     configStore.setAppConfig({ menu: menuSetting })
   }
 
+  function setSidebarSetting(
+    sidebarSetting: Partial<SidebarConfigOptions>,
+  ): void {
+    configStore.setAppConfig({ sidebar: sidebarSetting })
+  }
+
   function toggleCollapsed() {
-    setMenuSetting({
+    setSidebarSetting({
       collapsed: !unref(getCollapsed),
     })
   }
@@ -180,6 +198,8 @@ export function useMenuSetting() {
     getAccordion,
     getShowTopMenu,
     getShowHeaderTrigger,
+    getShowCenterTrigger,
+    getShowFooterTrigger,
     getTopMenuAlign,
     getMenuHidden,
     getIsTopMenu,
@@ -191,6 +211,7 @@ export function useMenuSetting() {
     getMixSideTrigger,
     getMixSideFixed,
     mixSideHasChildren,
+    getIsFixed,
     getMenuShowLogo,
   }
 }

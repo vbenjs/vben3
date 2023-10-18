@@ -3,11 +3,13 @@ import LayoutHeader from './components/header.vue'
 import LayoutMenu from './components/menu/index.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
-import { useComposables} from './useComposables'
-import {context} from "../bridge";
-const {headerRef, footerRef, contentStyle, mainStyle} = useComposables()
+import { useComposables } from './useComposables'
+import { context } from '../bridge'
+
+const { headerRef, footerRef, contentStyle, mainStyle, contentRef } =
+  useComposables()
 const { useRootSetting } = context
-const { getShowFooter } = useRootSetting();
+const { getShowFooter } = useRootSetting()
 </script>
 <template>
   <VbenLayout class="h-full">
@@ -15,20 +17,20 @@ const { getShowFooter } = useRootSetting();
       <slot name="header">
         <LayoutHeader ref="headerRef">
           <template #menu>
-            <LayoutMenu mode="horizontal"/>
+            <LayoutMenu mode="horizontal" />
           </template>
         </LayoutHeader>
       </slot>
     </VbenLayoutHeader>
     <VbenLayout :content-style="contentStyle">
-      <VbenLayoutContent :content-style="mainStyle">
+      <VbenLayoutContent :content-style="mainStyle" ref="contentRef">
         <LayoutMain>
           <slot name="main"></slot>
         </LayoutMain>
       </VbenLayoutContent>
       <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
         <slot name="footer">
-          <LayoutFooter/>
+          <LayoutFooter />
         </slot>
       </VbenLayoutFooter>
     </VbenLayout>

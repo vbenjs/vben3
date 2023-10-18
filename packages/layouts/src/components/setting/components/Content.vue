@@ -1,17 +1,14 @@
 <script lang="ts" setup>
 import SwitchItem from './SwitchItem.vue'
 import { HandlerSettingEnum } from '@vben/constants'
-import { context } from '../../../../bridge'
 import { useI18n } from '@vben/locale'
-
-const { t } = useI18n()
-
-const {
-  useMultipleTabSetting,
+import {
+  useRootSetting,
   useMenuSetting,
   useHeaderSetting,
-  useRootSetting,
-} = context
+  useMultipleTabSetting,
+} from '@vben/hooks'
+const { t } = useI18n()
 
 const {
   getShowFooter,

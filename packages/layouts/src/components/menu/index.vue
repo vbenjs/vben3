@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref, h, onMounted, unref, nextTick, computed } from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
-import { context } from '../../../bridge'
 import {
   RouteLocationNormalizedLoaded,
   RouterLink,
@@ -10,12 +9,13 @@ import {
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 import { renderIcon } from '../index'
-const { Logo, useMenuSetting, useAppInject } = context
+import { context } from '../../../bridge'
+
+const { Logo, useAppInject, useAppConfig } = context
 import { getMenus, listenerRouteChange } from '@vben/router'
-import { useAppConfig } from '@vben/hooks'
-// const { getAccordion } = useMenuSetting()
-// const {  getMenuShowLogo } = useMenuSetting()
+
 const { getIsMobile } = useAppInject()
+
 const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
   useAppConfig()
 const showSidebarLogo = computed(() => {

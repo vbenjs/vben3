@@ -72,7 +72,7 @@ if (!some) {
       :title="t('layout.setting.mixSidebarFixed')"
       :def="getMixSideFixed"
       :event="HandlerSettingEnum.MENU_FIXED_MIX_SIDEBAR"
-      :disabled="getIsMixSidebar"
+      :disabled="!getIsMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.closeMixSidebarOnChange')"
@@ -173,7 +173,7 @@ if (!some) {
       :def="getMenuWidth"
       suffix="px"
       :event="HandlerSettingEnum.MENU_WIDTH"
-      :disabled="getShowMenuRef"
+      :disabled="!getShowMenuRef"
     />
   </VbenSpace>
 </template>

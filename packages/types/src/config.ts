@@ -118,6 +118,7 @@ export interface SidebarConfigOptions {
   readonly collapsedWidth: number
 }
 export interface MenuConfigOptions {
+  show: boolean
   canDrag: boolean
   split: boolean
   mode: MenuModeEnum

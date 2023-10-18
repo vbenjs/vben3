@@ -62,6 +62,7 @@ export const useAppConfig = defineStore({
       trigger: TriggerEnum.CENTER,
     },
     menu: {
+      show: true,
       canDrag: false,
       split: false,
       mode: MenuModeEnum.VERTICAL,
@@ -235,6 +236,7 @@ export const useAppConfig = defineStore({
       'lockTime',
       'useLockPage',
       'canEmbedIFramePage',
+      'closeMixSidebarOnChange',
       'sidebar',
       'menu',
       'header',

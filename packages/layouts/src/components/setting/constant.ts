@@ -68,6 +68,10 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
       label: t('layout.setting.menuTriggerNone'),
     },
     {
+      value: TriggerEnum.CENTER,
+      label: t('layout.setting.menuTriggerCenter'),
+    },
+    {
       value: TriggerEnum.FOOTER,
       label: t('layout.setting.menuTriggerBottom'),
     },

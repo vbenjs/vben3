@@ -57,7 +57,7 @@ function sObject(m, key?) {
       sObject(m[k], tempKey)
       return
     }
-    fieldValue.value[tempKey] = m[k]
+    // fieldValue.value[tempKey] = m[k]
   })
 }
 function getFieldValue() {

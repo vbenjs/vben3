@@ -1,6 +1,6 @@
 import { storeToRefs, useAppConfig as appConfigStore } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
-import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
+import { HandlerSettingEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
@@ -39,7 +39,7 @@ export const useAppConfig = () => {
       if (!isSupported)
         return console.error('Your browser does not support Clipboard API')
       const source = reactive(_omit(appConfigOptions, ['openSettingDrawer']))
-      await copy(JSON.stringify(source))
+      await copy(JSON.stringify(source, null, 2))
     } catch (e) {
       console.error(e)
     }
@@ -60,6 +60,7 @@ export const useAppConfig = () => {
     }
     return unref(menu).collapsedShowTitle && unref(sidebar).collapsed
   })
+
   return {
     ...appConfigOptions,
     setAppConfig,
@@ -79,8 +80,7 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
-  console.log(event, value)
-  const { themeColor, theme, sidebar, header } = configOptions
+  const { themeColor, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:
       const { mode, type, split } = value
@@ -91,6 +91,7 @@ function handlerResults(
           ...splitOpt,
           mode,
         },
+        sidebar: { collapsed: false },
       }
 
     case HandlerSettingEnum.CHANGE_THEME_COLOR:
@@ -101,11 +102,7 @@ function handlerResults(
       return { themeColor: value }
 
     case HandlerSettingEnum.CHANGE_THEME:
-      if (unref(theme) === value) {
-        return {}
-      }
-      // updateDarkTheme(value);
-      return { theme: value ? ThemeEnum.DARK : ThemeEnum.LIGHT }
+      return { theme: value }
 
     case HandlerSettingEnum.MENU_HAS_DRAG:
       return { menu: { canDrag: value } }
@@ -171,9 +168,10 @@ function handlerResults(
     case HandlerSettingEnum.FULL_CONTENT:
       return {
         content: { fullScreen: value },
-        sidebar: { visible: !value, show: !value },
+        // sidebar: { visible: !value, show: !value },
         header: { visible: !value, show: !value },
         tabTar: { visible: !value, show: !value },
+        menu: { show: !value },
       }
 
     case HandlerSettingEnum.CONTENT_MODE:

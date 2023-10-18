@@ -60,7 +60,9 @@ export function useHeaderSetting() {
 
   const getUseLockPage = computed(() => false)
 
-  const getShowFullScreen = computed(() => configStore.header.value.showFullScreen)
+  const getShowFullScreen = computed(
+    () => configStore.header.value.showFullScreen,
+  )
   const getShowLocalePicker = computed(
     () => configStore.header.value.showLocalePicker,
   )

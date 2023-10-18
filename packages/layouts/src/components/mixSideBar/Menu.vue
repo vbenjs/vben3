@@ -1,146 +1,163 @@
 <script lang="ts" setup>
-import {ref, onMounted, unref, computed, CSSProperties} from 'vue'
-import {createNamespace, getGlobalConfig} from '@vben/utils'
+import {
+  ref,
+  onMounted,
+  unref,
+  computed,
+  CSSProperties,
+  watchEffect,
+} from 'vue'
+import { createNamespace, getGlobalConfig } from '@vben/utils'
 import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import { NavBarModeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
-import SiderTrigger from "./SiderTrigger.vue"
-import MixMenu from "../menu/mix-sub-menu.vue";
-import {
-  RouteLocationNormalized
-} from 'vue-router'
-import {Menu} from "@vben/types";
-import {useGo} from "@vben/hooks";
+import SiderTrigger from '../trigger/SiderTrigger.vue'
+import MixMenu from '../menu/mix-sub-menu.vue'
+import { RouteLocationNormalized } from 'vue-router'
+import { Menu } from '@vben/types'
+import { useGo } from '@vben/hooks'
 
-const { Logo, useMenuSetting, getShallowMenus, getChildrenMenus, getCurrentParentPath, listenerRouteChange } = context
-const { getCollapsed, getMixSideTrigger, getMenuType, getIsMixSidebar, getMixSideFixed, setMenuSetting,mixSideHasChildren, getMenuWidth, getCloseMixSidebarOnChange} = useMenuSetting()
+const {
+  Logo,
+  useMenuSetting,
+  getShallowMenus,
+  getChildrenMenus,
+  getCurrentParentPath,
+  listenerRouteChange,
+} = context
+const {
+  getCollapsed,
+  getMixSideTrigger,
+  getMenuType,
+  getIsMixSidebar,
+  getMixSideFixed,
+  setMenuSetting,
+  mixSideHasChildren,
+  getMenuWidth,
+  getCloseMixSidebarOnChange,
+  getIsFixed,
+} = useMenuSetting()
 const { title } = getGlobalConfig(import.meta.env)
 
 const { bem } = createNamespace('layout-mix-menu')
 const { t } = useI18n()
-const go = useGo();
-const currentRoute = ref<Nullable<RouteLocationNormalized>>(null);
+const go = useGo()
+const currentRoute = ref<Nullable<RouteLocationNormalized>>(null)
 const props = defineProps({
   mixSidebarWidth: {
     type: Number,
-    default: 48
-  }
+    default: 48,
+  },
 })
 
-
-let menuModules = ref<Menu[]>([]);
-const activePath = ref('');
-const childrenMenus = ref<Menu[]>([]);
-const openMenu = ref(false);
-const sideRef = ref<ElRef>(null);
-const childrenTitle= ref('');
+let menuModules = ref<Menu[]>([])
+const activePath = ref('')
+const childrenMenus = ref<Menu[]>([])
+const openMenu = ref(false)
+const sideRef = ref<ElRef>(null)
+const childrenTitle = ref('')
 
 onMounted(async () => {
-  menuModules.value = await getShallowMenus();
-  openMenu.value = unref(getMixSideFixed)
-});
+  menuModules.value = await getShallowMenus()
+})
 
-listenerRouteChange((route) => {
-  currentRoute.value = route;
-  setActive(true);
-  if (unref(getCloseMixSidebarOnChange)) {
-    closeMenu();
-  }
-});
-
-const getIsFixed = computed(() => {
-  /* eslint-disable-next-line */
-  mixSideHasChildren.value = unref(childrenMenus).length > 0;
-  const isFixed = unref(getMixSideFixed) && unref(mixSideHasChildren);
-  if (isFixed) {
-    /* eslint-disable-next-line */
-    openMenu.value = true;
-  }
-  return isFixed;
-});
-
+watchEffect(() => {
+  mixSideHasChildren.value = unref(childrenMenus).length > 0
+  openMenu.value = unref(mixSideHasChildren)
+})
 
 // Process module menu click
 const handleModuleClick = async (path: string, hover = false, title = '') => {
-  const children = await getChildrenMenus(path);
-  childrenTitle.value = t(title);
+  const children = await getChildrenMenus(path)
+  childrenTitle.value = t(title)
   if (unref(activePath) === path) {
     if (!hover) {
       if (!unref(openMenu)) {
-        openMenu.value = true;
+        openMenu.value = true
       } else {
-        closeMenu();
+        closeMenu()
       }
     } else {
       if (!unref(openMenu)) {
-        openMenu.value = true;
+        openMenu.value = true
       }
     }
     if (!unref(openMenu)) {
-      setActive();
+      setActive()
     }
   } else {
-    openMenu.value = true;
-    activePath.value = path;
+    openMenu.value = true
+    activePath.value = path
   }
 
   if (!children || children.length === 0) {
-    if (!hover) go(path);
-    childrenMenus.value = [];
-    closeMenu();
-    return;
+    if (!hover) go(path)
+    childrenMenus.value = []
+    closeMenu()
+    return
   }
-  childrenMenus.value = children;
+  childrenMenus.value = children
 }
 
 const getMenuStyle = computed((): CSSProperties => {
   return {
     width: unref(openMenu) ? `${unref(getMenuWidth)}px` : 0,
     left: `${props.mixSidebarWidth}px`,
-  };
-});
+  }
+})
 
 const getItemEvents = (item) => {
   if (unref(getMixSideTrigger) === 'hover') {
     return {
       onMouseenter: () => handleModuleClick(item.path, true, item.meta.title),
       onClick: async () => {
-        const children = await getChildrenMenus(item.path);
-        if (item.path && (!children || children.length === 0)) go(item.path);
+        const children = await getChildrenMenus(item.path)
+        if (item.path && (!children || children.length === 0)) go(item.path)
       },
-    };
+    }
   }
   return {
-    onClick: () => handleModuleClick(item.path,false, item.meta.title),
-  };
+    onClick: () => handleModuleClick(item.path, false, item.meta.title),
+  }
 }
 
 // Close menu
 function closeMenu() {
   if (!unref(getIsFixed)) {
-    openMenu.value = false;
+    openMenu.value = false
   }
 }
+
+listenerRouteChange((route) => {
+  currentRoute.value = route
+  setActive(true)
+  if (unref(getCloseMixSidebarOnChange)) {
+    closeMenu()
+  }
+})
+
 // Set the currently active menu and submenu
 async function setActive(setChildren = false) {
-  const path = currentRoute.value?.path;
-  if (!path) return;
-  activePath.value = await getCurrentParentPath(path);
+  const path = currentRoute.value?.path
+  if (!path) return
+  activePath.value = await getCurrentParentPath(path)
   if (unref(getIsMixSidebar)) {
-    const activeMenu = unref(menuModules).find((item) => item.path === unref(activePath));
-    const p = activeMenu?.path;
+    const activeMenu = unref(menuModules).find(
+      (item) => item.path === unref(activePath),
+    )
+    const p = activeMenu?.path
     if (p) {
-      const children = await getChildrenMenus(p);
+      const children = await getChildrenMenus(p)
       if (setChildren) {
-        childrenMenus.value = children;
+        childrenMenus.value = children
 
         if (unref(getMixSideFixed)) {
-          openMenu.value = children.length > 0;
+          openMenu.value = children.length > 0
         }
       }
       if (children.length === 0) {
-        childrenMenus.value = [];
+        childrenMenus.value = []
       }
     }
   }
@@ -149,18 +166,18 @@ async function setActive(setChildren = false) {
 const getMenuEvents = computed(() => {
   return !unref(getMixSideFixed)
     ? {
-      onMouseleave: () => {
-        setActive(true);
-        closeMenu();
-      },
-    }
-    : {};
-});
+        onMouseleave: () => {
+          setActive(true)
+          closeMenu()
+        },
+      }
+    : {}
+})
 
-const handleFixedMenu = ()=> {
+const handleFixedMenu = () => {
   setMenuSetting({
     mixSideFixed: !unref(getIsFixed),
-  });
+  })
 }
 </script>
 
@@ -185,15 +202,23 @@ const handleFixedMenu = ()=> {
           v-for="item in menuModules"
           :key="item.path"
         >
-          <VbenIconify :class="bem('module__icon')" :size="getCollapsed ? 16 : 20" :icon="item.icon || (item.meta && item.meta.icon)" />
+          <VbenIconify
+            :class="bem('module__icon')"
+            :size="getCollapsed ? 16 : 20"
+            :icon="item.icon || (item.meta && item.meta.icon)"
+          />
           <p v-show="!getCollapsed" :class="bem('module__name')">
-            {{ t(item.meta.title) }}
+            {{ item.meta?.title && t(`${item.meta.title}`) }}
           </p>
         </li>
       </ul>
     </VbenScrollbar>
     <SiderTrigger />
-    <div :class="['shadow', bem('menu-list')]" :style="getMenuStyle" ref="sideRef">
+    <div
+      :class="['shadow', bem('menu-list')]"
+      :style="getMenuStyle"
+      ref="sideRef"
+    >
       <div
         v-show="openMenu"
         :class="[
@@ -213,10 +238,11 @@ const handleFixedMenu = ()=> {
           hoverPointer
         />
       </div>
-      <VbenH5 v-if="openMenu" :class="bem('menu-list__children-title')">{{ childrenTitle }}</VbenH5>
+      <VbenH5 v-if="openMenu" :class="bem('menu-list__children-title')">{{
+        childrenTitle
+      }}</VbenH5>
       <MixMenu :list="childrenMenus" />
     </div>
-
   </div>
 </template>
 
@@ -235,11 +261,11 @@ const handleFixedMenu = ()=> {
     flex: 1;
     flex-basis: auto;
   }
-  &__module{
+  &__module {
     position: relative;
     padding: 1px 0 40px 0;
     margin: 0;
-    &__item{
+    &__item {
       position: relative;
       padding: 12px 0;
       display: flex;
@@ -276,7 +302,7 @@ const handleFixedMenu = ()=> {
       transition: all 0.3s;
     }
   }
-  &__menu-list{
+  &__menu-list {
     position: fixed;
     top: 0;
     width: 0px;
@@ -299,11 +325,11 @@ const handleFixedMenu = ()=> {
         opacity: 100%;
         transition: all 0.5s ease;
       }
-      .pushpin{
+      .pushpin {
         margin-right: 8px;
       }
     }
-    &__children-title{
+    &__children-title {
       padding: 6px 20px;
       margin: 0;
     }

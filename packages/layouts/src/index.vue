@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import { NavBarModeEnum } from '@vben/constants'
-import {computed, defineComponent, unref} from 'vue'
+import { computed, defineComponent, unref } from 'vue'
 import LeftMenuLayout from './left-menu.vue'
 import TopMenuLayout from './top-menu.vue'
 import TopMenuMixLayout from './top-menu-mixed.vue'
 import MixSidebar from './mix-sidebar.vue'
 import Mobile from './mobile-menu.vue'
 import { context } from '../bridge'
+
 const { useMenuSetting, useLockScreen, useAppInject } = context
 // Create a lock screen monitor
-const lockEvents = useLockScreen();
+const lockEvents = useLockScreen()
 
 const { getIsMobile } = useAppInject()
 

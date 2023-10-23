@@ -29,9 +29,9 @@ You are very welcome to join！[Raise an issue](https://github.com/vbenjs/vben3/
 
 1. Fork code!
 2. Create your own branch: `git checkout -b feat/xxxx`
-3. Submit your changes: `git commit -am 'feat(function): add xxxxx'`
+3. Submit your changes: `git commit -m 'feat(function): add xxxxx'`
 4. Push your branch: `git push origin feat/xxxx`
-5. submit`pull request`
+5. submit: `pull request`
 
 
 

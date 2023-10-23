@@ -19,6 +19,7 @@
   "devDependencies": {
     "@iconify/json": "^2.2.115",
     "@purge-icons/generated": "^0.9.0",
-    "@types/qrcode": "^1.5.2"
+    "@types/qrcode": "^1.5.2",
+    "@vben/types": "workspace:*"
   }
 }

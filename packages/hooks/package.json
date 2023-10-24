@@ -12,11 +12,11 @@
     "@vben/locale": "workspace:*",
     "@vben/stores": "workspace:*",
     "@vben/utils": "workspace:*",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
+    "vue": "^3.3.6",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.9",
+    "@types/lodash-es": "^4.17.10",
     "@vben/types": "workspace:*"
   }
 }

@@ -141,7 +141,8 @@ export const useAuthStore = defineStore('app-auth-store', {
       }
       // 组合框架路由 与 本地路由
       const r = layoutRoutes.concat(asyncRoutes)
-      routes = filterRouterTree(r, routeFilter)
+      // 过滤路由树，扁平化false
+      routes = filterRouterTree(r, routeFilter, false)
       switch (permissionMode) {
         case PermissionModeEnum.ROLE:
           // routes = filterTree(r, routeFilter)

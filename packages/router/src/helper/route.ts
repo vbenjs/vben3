@@ -183,6 +183,8 @@ function isMultipleRoute(routeModule: RouteRecordItem) {
   return flag
 }
 
+// 路由树过滤函数
+// flat参数是否扁平化
 export function filterRouterTree<T = any>(
   tree: T[],
   func: (n: T) => boolean,

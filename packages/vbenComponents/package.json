@@ -13,13 +13,13 @@
     "@vben/hooks": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/constants": "workspace:*",
-    "sass": "^1.66.1",
-    "vue": "^3.3.4",
-    "vxe-table-demonic": "^4.5.3",
+    "sass": "^1.69.4",
+    "vue": "^3.3.6",
+    "vxe-table-demonic": "^4.5.4",
     "xe-utils": "^3.5.13"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.115",
+    "@iconify/json": "^2.2.132",
     "@purge-icons/generated": "^0.9.0"
   }
 }

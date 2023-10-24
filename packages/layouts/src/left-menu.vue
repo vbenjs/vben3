@@ -4,6 +4,7 @@ import LayoutMenu from './components/menu/index.vue'
 import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
+import HeaderTrigger from './components/trigger/FooterTrigger.vue'
 import { context } from '../bridge'
 
 const { useAppConfig, useMenuSetting } = context
@@ -33,7 +34,7 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
     >
       <slot name="sider">
         <LayoutMenu />
-        <div v-if="getShowFooterTrigger">trigger</div>
+        <HeaderTrigger v-if="getShowFooterTrigger" />
       </slot>
     </VbenLayoutSider>
     <VbenLayout>

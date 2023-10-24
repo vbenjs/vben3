@@ -8,14 +8,6 @@
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
     "prepack": "pnpm unbuild --stub"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "vite-plugin-mock>@rollup/plugin-node-resolve": "13.3.0",
-        "vite-plugin-mock>@rollup/pluginutils": "3.1.0"
-      }
-    }
-  },
   "dependencies": {
     "@vben/utils": "workspace:*",
     "@vitejs/plugin-legacy": "^4.1.1",

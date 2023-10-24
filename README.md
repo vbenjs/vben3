@@ -1,5 +1,7 @@
 # vben3 
 
+English | [简体中文](./README.zh-CN.md)
+
 ## Introduction
 
 Vben3 is a free and open source middle and back-end template. Using the latest `vue3`, `vite4`, `TypeScript` and other mainstream technology development, the out-of-the-box middle and back-end front-end solutions can also be used for learning reference.

@@ -4,13 +4,20 @@ import LayoutHeader from './components/header.vue'
 import LayoutTabs from './components/tabs/index.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
+import SiderTrigger from './components/trigger/SiderTrigger.vue'
 import { context } from '../bridge'
 import { useComposables } from './useComposables'
 import { computed, unref } from 'vue'
 
 const { useMenuSetting, useRootSetting, useMultipleTabSetting } = context
-const { toggleCollapsed, getCollapsed, getMenuWidth, getShowSidebar } =
-  useMenuSetting()
+const {
+  toggleCollapsed,
+  getCollapsed,
+  getMenuWidth,
+  getShowSidebar,
+  getShowFooterTrigger,
+  getShowCenterTrigger,
+} = useMenuSetting()
 const { getShowFooter } = useRootSetting()
 const { getShowMultipleTab } = useMultipleTabSetting()
 
@@ -36,7 +43,8 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
     <VbenLayout has-sider :style="{ height: menuHeight }">
       <VbenLayoutSider
         v-if="getShowSidebar"
-        show-trigger
+        :class="getShowFooterTrigger && 'pb-9'"
+        :show-trigger="getShowCenterTrigger"
         bordered
         :collapsed-width="48"
         :width="getMenuWidth"
@@ -46,6 +54,7 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
       >
         <slot name="sider">
           <LayoutMenu />
+          <SiderTrigger v-if="getShowFooterTrigger" />
         </slot>
       </VbenLayoutSider>
 

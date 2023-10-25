@@ -10,14 +10,16 @@ import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 import { renderIcon } from '../index'
 import { context } from '../../../bridge'
+import type { RouteMeta } from 'vue-router'
 
-const { Logo, useAppInject, useAppConfig } = context
+const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
 import { getMenus, listenerRouteChange } from '@vben/router'
 
 const { getIsMobile } = useAppInject()
 
 const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
   useAppConfig()
+const { getTopMenuAlign } = useMenuSetting()
 const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
 })
@@ -72,7 +74,7 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
 }
 
 // 路由格式化
-const routerToMenu = (item: RouteRecordItem) => {
+const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
   const { name, children, meta, icon } = item
   const title = t(meta.title as string)
   return {
@@ -106,6 +108,7 @@ const routerToMenu = (item: RouteRecordItem) => {
 
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
+        :class="getTopMenuAlign"
         v-model:value="activeKey"
         :options="menuList"
         :collapsed="getMenuCollapsed"
@@ -120,6 +123,11 @@ const routerToMenu = (item: RouteRecordItem) => {
     </VbenScrollbar>
   </div>
 </template>
+<style>
+div:has(> div[class='layout-menu']) {
+  flex: 1;
+}
+</style>
 
 <style lang="less" scoped>
 .layout-menu {
@@ -134,6 +142,22 @@ const routerToMenu = (item: RouteRecordItem) => {
   &__scrollbar {
     flex: 1;
     flex-basis: auto;
+  }
+
+  & .n-menu--horizontal {
+    width: 100%;
+
+    &.start {
+      justify-content: flex-start;
+    }
+
+    &.center {
+      justify-content: center;
+    }
+
+    &.end {
+      justify-content: flex-end;
+    }
   }
 }
 </style>

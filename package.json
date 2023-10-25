@@ -35,28 +35,35 @@
   "resolutions": {
     "bin-wrapper": "npm:bin-wrapper-china"
   },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "vite-plugin-mock>@rollup/plugin-node-resolve": "13.3.0",
+        "vite-plugin-mock>@rollup/pluginutils": "3.1.0"
+      }
+    }
+  },
   "devDependencies": {
-    "@changesets/cli": "^2.26.1",
+    "@changesets/cli": "^2.26.2",
     "@config/lint": "workspace:*",
-    "@types/fs-extra": "^11.0.1",
-    "@types/node": "^18.16.0",
+    "@types/fs-extra": "^11.0.3",
+    "@types/node": "^20.8.8",
     "cross-env": "^7.0.3",
-    "esno": "^0.16.3",
+    "esno": "^0.17.0",
     "fs-extra": "^11.1.1",
-    "jsdom": "^21.1.1",
-    "pathe": "^1.1.0",
-    "rimraf": "^4.4.1",
-    "rollup": "^3.21.0",
+    "jsdom": "^22.1.0",
+    "pathe": "^1.1.1",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.1.4",
     "ts-node": "^10.9.1",
     "tsconfig": "workspace:*",
-    "turbo": "^1.9.3",
-    "typescript": "^5.0.4",
-    "unbuild": "^1.2.1",
-    "vitest": "^0.30.1"
+    "turbo": "^1.10.16",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^0.34.6"
   },
   "engines": {
     "node": ">=16"
   },
   "packageManager": "pnpm@7.1.0"
 }
-

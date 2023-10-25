@@ -108,7 +108,11 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
 
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
-        :class="getTopMenuAlign"
+        class="w-full"
+        :style="{
+          justifyContent:
+            getTopMenuAlign === 'center' ? 'center' : `flex-${getTopMenuAlign}`,
+        }"
         v-model:value="activeKey"
         :options="menuList"
         :collapsed="getMenuCollapsed"
@@ -142,22 +146,6 @@ div:has(> div[class='layout-menu']) {
   &__scrollbar {
     flex: 1;
     flex-basis: auto;
-  }
-
-  & .n-menu--horizontal {
-    width: 100%;
-
-    &.start {
-      justify-content: flex-start;
-    }
-
-    &.center {
-      justify-content: center;
-    }
-
-    &.end {
-      justify-content: flex-end;
-    }
   }
 }
 </style>

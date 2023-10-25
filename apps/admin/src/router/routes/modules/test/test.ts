@@ -7,7 +7,7 @@ const test: RouteRecordItem = {
   redirect: '/test/test',
   meta: {
     orderNo: 1,
-    icon: 'ph:code-bold',
+    icon: 'solar:test-tube-outline',
     title: '测试',
     root: true,
   },
@@ -21,6 +21,18 @@ const test: RouteRecordItem = {
         title: 'Test',
         collapsedShowTitle: true,
       },
+      children: [
+        {
+          path: 'test',
+          name: 'ttest',
+          component: () => import('@/pages/test/test.vue'),
+          meta: {
+            icon: 'mdi:monitor-dashboard',
+            title: 'Test2',
+            collapsedShowTitle: true,
+          },
+        },
+      ],
     },
   ],
 }

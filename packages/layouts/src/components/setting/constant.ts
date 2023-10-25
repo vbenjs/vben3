@@ -1,6 +1,6 @@
 import {
   MenuModeEnum,
-  MenuTypeEnum,
+  NavBarModeEnum,
   ContentLayoutEnum,
   TopMenuAlignEnum,
   TriggerEnum,
@@ -15,23 +15,23 @@ export const navigationBarTypeList = [
   {
     title: t('layout.setting.menuTypeSidebar'),
     mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.SIDEBAR,
+    type: NavBarModeEnum.SIDEBAR,
   },
   {
     title: t('layout.setting.menuTypeMix'),
     mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.MIX,
+    type: NavBarModeEnum.MIX,
   },
 
   {
     title: t('layout.setting.menuTypeTopMenu'),
     mode: MenuModeEnum.HORIZONTAL,
-    type: MenuTypeEnum.TOP_MENU,
+    type: NavBarModeEnum.TOP_MENU,
   },
   {
     title: t('layout.setting.menuTypeMixSidebar'),
     mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.MIX_SIDEBAR,
+    type: NavBarModeEnum.MIX_SIDEBAR,
   },
 ];
 
@@ -66,6 +66,10 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
     {
       value: TriggerEnum.NONE,
       label: t('layout.setting.menuTriggerNone'),
+    },
+    {
+      value: TriggerEnum.CENTER,
+      label: t('layout.setting.menuTriggerCenter'),
     },
     {
       value: TriggerEnum.FOOTER,

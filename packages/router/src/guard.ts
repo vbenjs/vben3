@@ -24,6 +24,8 @@ const LOGIN_PATH = BASIC_LOGIN_PATH
 const whitePathList: string[] = [LOGIN_PATH, LOCK_PATH]
 const ROOT_PATH = ROOT_ROUTE.path
 
+// 创建基础路由守卫
+// 加载页面进度条
 export function createBasicGuard() {
   const openNProgress = stores.appConfig?.transition?.openNProgress
   router.beforeEach((to) => {
@@ -47,6 +49,8 @@ export function createBasicGuard() {
     }
   })
 }
+
+//创建权限路由守卫
 
 export function createAuthGuard() {
   const { userStore, authStore, lockStore } = stores
@@ -181,7 +185,7 @@ export function createAuthGuard() {
   })
 }
 
-// 路由守卫：进入路由，增加Tabs
+// 标签路由守卫：进入路由，增加Tabs
 export function createTabsGuard(func: Function) {
   router.beforeEach(async (to) => {
     if (whitePathList.includes(to.path)) return

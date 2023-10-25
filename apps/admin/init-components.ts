@@ -92,6 +92,7 @@ import naive, {
   NTab,
   NResult,
   NAffix,
+  NAlert,
   NGradientText,
 } from 'naive-ui'
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
@@ -101,6 +102,7 @@ export async function registerComponents(app) {
     Affix: NAffix,
     Avatar: NAvatar,
     AutoComplete: NAutoComplete,
+    Alert: NAlert,
 
     Badge: NBadge,
     Button: NButton,

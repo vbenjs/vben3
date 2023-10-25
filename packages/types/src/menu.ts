@@ -1,4 +1,4 @@
-import { MenuModeEnum, MenuTypeEnum, RoleEnum } from '@vben/constants'
+import { MenuModeEnum, NavBarModeEnum, RoleEnum } from '@vben/constants'
 import type { RouteMeta } from 'vue-router'
 
 export interface MenuTag {
@@ -45,5 +45,5 @@ export interface BeforeMiniState {
   menuCollapsed?: boolean
   menuSplit?: boolean
   menuMode?: MenuModeEnum
-  menuType?: MenuTypeEnum
+  menuType?: NavBarModeEnum
 }

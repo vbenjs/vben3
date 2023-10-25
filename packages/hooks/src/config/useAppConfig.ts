@@ -1,28 +1,16 @@
-import {
-  StoreGeneric,
-  storeToRefs,
-  useAppConfig as appConfigStore,
-} from '@vben/stores'
+import { storeToRefs, useAppConfig as appConfigStore } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
-import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
+import { HandlerSettingEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
 
-type DefineAppConfigStoreGetters = {
-  isSidebar: boolean
-  isTopMenu: boolean
-  isMixSidebar: boolean
-  isMix: boolean
-  isMixMode: boolean
-  isHorizontal: boolean
-}
 export const useAppConfig = () => {
   const useAppConfigStore = appConfigStore()
-  const appConfigOptions = storeToRefs(
-    useAppConfigStore as StoreGeneric,
-  ) as unknown as DefineAppConfigOptions & DefineAppConfigStoreGetters
-  const { openSettingDrawer, sidebar, menu, isMixSidebar } = appConfigOptions
+  const appConfigOptions = storeToRefs(useAppConfigStore)
+  const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar } =
+    appConfigOptions
+
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
       _merge(state, configs)
@@ -42,7 +30,7 @@ export const useAppConfig = () => {
   }
 
   function baseHandler(event: HandlerSettingEnum, value: any) {
-    setAppConfig(handlerResults(event, value, appConfigOptions))
+    setAppConfig(handlerResults(event, value, useAppConfigStore.$state))
   }
 
   async function copyConfigs() {
@@ -51,7 +39,7 @@ export const useAppConfig = () => {
       if (!isSupported)
         return console.error('Your browser does not support Clipboard API')
       const source = reactive(_omit(appConfigOptions, ['openSettingDrawer']))
-      await copy(JSON.stringify(source))
+      await copy(JSON.stringify(source, null, 2))
     } catch (e) {
       console.error(e)
     }
@@ -67,11 +55,12 @@ export const useAppConfig = () => {
     useAppConfigStore.$reset()
   }
   const getCollapsedShowTitle = computed<boolean>(() => {
-    if (unref(isMixSidebar)) {
+    if (unref(isMixSidebar) || unref(isSidebar)) {
       return !unref(sidebar).collapsed
     }
     return unref(menu).collapsedShowTitle && unref(sidebar).collapsed
   })
+
   return {
     ...appConfigOptions,
     setAppConfig,
@@ -91,7 +80,7 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
-  const { themeColor, theme, sidebar, header } = configOptions
+  const { themeColor, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:
       const { mode, type, split } = value
@@ -102,6 +91,7 @@ function handlerResults(
           ...splitOpt,
           mode,
         },
+        sidebar: { collapsed: false },
       }
 
     case HandlerSettingEnum.CHANGE_THEME_COLOR:
@@ -112,11 +102,7 @@ function handlerResults(
       return { themeColor: value }
 
     case HandlerSettingEnum.CHANGE_THEME:
-      if (unref(theme) === value) {
-        return {}
-      }
-      // updateDarkTheme(value);
-      return { theme: value ? ThemeEnum.DARK : ThemeEnum.LIGHT }
+      return { theme: value }
 
     case HandlerSettingEnum.MENU_HAS_DRAG:
       return { menu: { canDrag: value } }
@@ -182,9 +168,10 @@ function handlerResults(
     case HandlerSettingEnum.FULL_CONTENT:
       return {
         content: { fullScreen: value },
-        sidebar: { visible: !value, show: !value },
+        // sidebar: { visible: !value, show: !value },
         header: { visible: !value, show: !value },
         tabTar: { visible: !value, show: !value },
+        menu: { show: !value },
       }
 
     case HandlerSettingEnum.CONTENT_MODE:

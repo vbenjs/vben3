@@ -1,36 +1,40 @@
 import { initRequest } from '@vben/request'
 import { useUserStoreWithout, useUserStore } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
-import { deepMerge, getGlobalConfig } from '@vben/utils'
-import { useConfigStoreWithOut, useConfigStore } from '@/store/config'
+import { getGlobalConfig } from '@vben/utils'
+import { useConfigStore } from '@/store/config'
 import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
 import { localeList } from '@vben/locale/src/config'
-import { useRootSetting } from '@/hooks/setting/useRootSetting'
-import { useTransitionSetting } from '@/hooks/setting/useTransitionSetting'
-import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
+import {
+  useAppInject,
+  useHeaderSetting,
+  useMenuSetting,
+  useMultipleTabSetting,
+  useRootSetting,
+  useTabs,
+  useTransitionSetting,
+  useDesign,
+  useAppConfig,
+  usePromise,
+} from '@vben/hooks'
 import {
   getAllParentPath,
   getChildrenMenus,
   getCurrentParentPath,
   getMenus,
   getShallowMenus,
+  listenerRouteChange,
 } from '@vben/router'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useAppInject } from '@/hooks/web/use-app-inject'
-import { useTabs } from '@/hooks/useTabs'
-import { usePromise } from '@vben/hooks'
 import { useMultipleTabStore } from '@/store/multipleTab'
-import { listenerRouteChange } from '@/logics/mitt/routeChange'
 import { useAppStore } from '@/store/modules/app'
 import Logo from '@/layout/components/logo.vue'
-import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
+
 import { useLockStore } from '@/store/lock'
-import { unref } from 'vue'
 import { useLockScreen } from '@/hooks/web/useLockScreen'
 import { siteSetting } from '@/config'
-import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting'
+
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
 // Each module needs to provide `bridge` file as a decoupling method
@@ -87,6 +91,7 @@ async function initPackages() {
   const _initLayout = async () => {
     await initLayout(() => {
       return {
+        useAppConfig,
         useRootSetting,
         getMenus,
         getCurrentParentPath,
@@ -119,10 +124,12 @@ async function initPackages() {
 
 // Initial project configuration
 function initAppConfigStore() {
-  const configStore = useConfigStoreWithOut()
-  const projectConfig = unref(configStore.getProjectConfig)
-  const projCfg = deepMerge(projectSetting, projectConfig || {})
-  configStore.setProjectConfig(projCfg)
+  // const configStore = useConfigStoreWithOut()
+  // const projectConfig = unref(configStore.getProjectConfig)
+  // const projCfg = deepMerge(projectSetting, projectConfig || {})
+  // configStore.setProjectConfig(projCfg)
+  const appConfig = useAppConfig()
+  appConfig.setAppConfig(projectSetting)
 }
 
 export async function initApplication() {

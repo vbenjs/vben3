@@ -5,10 +5,7 @@ export default { name: 'LayoutFooter' }
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 import { createNamespace } from '@vben/utils'
-import { useI18n } from '@vben/locale'
 import { useSiteGeneral } from '@vben/hooks'
-
-const { t } = useI18n()
 
 const { copyright, links } = useSiteGeneral()
 
@@ -28,11 +25,13 @@ const style = computed(
 </script>
 <template>
   <footer :class="bem()" :style="style">
-    <div class="lh-32px">
+    <div class="flex items-center justify-center">
       <template v-for="(item, index) in links" :key="index">
-        <VbenButton text tag="a" :href="item.url" target="_blank">
-          <VbenIconify :icon="item.icon" size="18" />
-          <VbenText depth="3">{{ item.label }}</VbenText>
+        <VbenButton text tag="a" :href="item.url" target="_blank" class="mx-1">
+          <span class="lh-32px flex items-center">
+            <VbenIconify :icon="item.icon" size="18" />
+            <VbenText depth="3">{{ item.label }}</VbenText>
+          </span>
         </VbenButton>
       </template>
     </div>

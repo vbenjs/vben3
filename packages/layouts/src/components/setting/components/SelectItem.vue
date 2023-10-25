@@ -1,41 +1,50 @@
 <script lang="ts" setup name="SelectItem">
-import {PropType,  h} from 'vue'
-import {HandlerSettingEnum} from "@vben/constants";
-import {baseHandler} from "../handler";
-import {useI18n} from '@vben/locale'
+import { PropType, h } from 'vue'
+import { HandlerSettingEnum } from '@vben/constants'
+import { useI18n } from '@vben/locale'
+import { context } from '../../../../bridge'
+const { useAppConfig } = context
+const { baseHandler } = useAppConfig()
 
-const {t} = useI18n();
+const { t } = useI18n()
 
 const props = defineProps({
-  title: {type: String, default: ''},
+  title: { type: String, default: '' },
   def: {
     type: [String, Number] as PropType<string | number>,
   },
   event: {
     type: Number as PropType<HandlerSettingEnum>,
+    required: true,
   },
   disabled: {
     type: Boolean,
   },
-  options: {type: Array, default: () => []},
+  options: { type: Array, default: () => [] },
 })
-const onChange = (value) => {
+const onChange = (value: any) => {
   baseHandler(props.event, value)
 }
 /*
-* options 数据传入时,多语言会失效,这里再渲染一遍
-* */
-function renderLabel(option: { label: string, value: string | number }) {
-  return h('span',{},t(option.label))
+ * options 数据传入时,多语言会失效,这里再渲染一遍
+ * */
+function renderLabel(option: { label: string; value: string | number }) {
+  return h('span', {}, t(option.label))
 }
-
 </script>
 <template>
   <div class="switch-item">
     <VbenSpace justify="space-between" align="center">
       <span>{{ title }}</span>
-      <VbenSelect class="w-130px" size="small" :value="def" :options="options" :disabled="disabled"
-                  @update:value="onChange" :render-label="renderLabel"/>
+      <VbenSelect
+        class="w-130px"
+        size="small"
+        :value="def"
+        :options="options"
+        :disabled="disabled"
+        @update:value="onChange"
+        :render-label="renderLabel"
+      />
     </VbenSpace>
   </div>
 </template>

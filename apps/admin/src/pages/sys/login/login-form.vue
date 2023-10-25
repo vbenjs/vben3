@@ -137,7 +137,7 @@ async function handleLogin() {
           {{t('sys.login.mobileSignInFormTitle')}}
         </vben-button>
       </vben-grid-item>
-      <vben-grid-item :md="8" :xs="24" class="!my-2 md:!my-0 xs:mx-0 md:mx-2">
+      <vben-grid-item :md="8" :xs="24" class="md:!my-0 xs:mx-0 md:mx-2">
         <vben-button block @click="setLoginState(LoginStateEnum.QR_CODE)">
           {{t('sys.login.qrSignInFormTitle')}}
         </vben-button>

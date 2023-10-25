@@ -9,8 +9,7 @@ export function createMediaPrefersColorSchemeListen() {
   useEventListener(
     window.matchMedia('(prefers-color-scheme: dark)'),
     'change',
-    (e: Event) => {
-      // @ts-ignore
+    (e: MediaQueryListEvent) => {
       setAppConfig({ theme: e.matches ? ThemeEnum.DARK : ThemeEnum.LIGHT })
     },
   )
@@ -22,8 +21,11 @@ export const useAppTheme = () => {
   const isDark = computed(() => {
     return unref(theme) === ThemeEnum.DARK
   })
-  const toggleTheme = (v) => {
-    baseHandler(HandlerSettingEnum.CHANGE_THEME, v)
+  const toggleTheme = (dark: boolean) => {
+    baseHandler(
+      HandlerSettingEnum.CHANGE_THEME,
+      dark ? ThemeEnum.DARK : ThemeEnum.LIGHT,
+    )
   }
   return { isDark, theme, toggleTheme }
 }

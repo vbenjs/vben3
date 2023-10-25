@@ -119,8 +119,6 @@ function handleClose() {
 </template>
 
 <style lang="less" scoped>
-// @prefix-cls: ~'@{namespace}-app-search-modal';
-// @footer-prefix-cls: ~'@{namespace}-app-search-footer';
 .vben-app-search-modal {
   position: fixed;
   top: 0;

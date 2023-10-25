@@ -1,18 +1,19 @@
 <script lang="ts" setup>
 import { RouteLocationMatched, useRouter } from 'vue-router'
-import { h, ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useI18n } from '@vben/locale'
-import { useAppConfig, useGo } from '@vben/hooks'
+import { useGo } from '@vben/hooks'
 import { filterTree, isString } from '@vben/utils'
 import { REDIRECT_NAME } from '@vben/constants'
 import { VbenIconify } from '@vben/vbencomponents'
 import { Menu } from '@vben/types'
 import { renderIcon } from '../index'
 import { getMenus, getAllParentPath } from '@vben/router'
+import { context } from '../../../bridge'
+
+const { useAppConfig } = context
+
 const { header } = useAppConfig()
-// withDefaults(defineProps<{ theme: 'dark' | 'light' }>(), {
-//   theme: 'light',
-// })
 
 const { currentRoute } = useRouter()
 const { t } = useI18n()
@@ -83,7 +84,7 @@ const renderDropdownLabel = (route: any) => {
 }
 
 const renderDropdownIcon = (option) => {
-  return getShowBreadCrumbIcon && option.icon ? renderIcon(option.icon)() : null
+  return option.icon ? renderIcon(option.icon)() : null
 }
 
 const handleClick = (path: string, route: Recordable<any>) => {

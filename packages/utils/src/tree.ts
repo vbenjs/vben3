@@ -131,7 +131,7 @@ export function findAllParentField(tree: any, path: string, field: string) {
   const list = findAllParentPath(tree, (n) => n[field] === path)
   return (list || []).map((item) => item[field])
 }
-
+//树结构筛选函数
 export function filterTree<T = any>(
   tree: T[],
   func: (n: T) => boolean,

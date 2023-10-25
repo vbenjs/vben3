@@ -17,11 +17,7 @@ const data = reactive<Data>({
 })
 getTableData().then((res) => {
   console.log(res)
-  for (let i = 0; i < 4; i++) {
-    res.items = res.items.concat(res.items)
-  }
-  console.log(res)
-  data.table = res
+  data.table.items = res
 })
 
 const showDetails = ref<boolean>(false)
@@ -45,6 +41,7 @@ const cellClickEvent: VbenCellClick = ({ row }) => {
       }"
       :columns="fixedColumns"
       :data="data.table.items"
+      :row-config="{isHover: true}"
       @cell-click="cellClickEvent"
     >
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">

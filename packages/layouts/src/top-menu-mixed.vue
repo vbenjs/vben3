@@ -5,17 +5,26 @@ import LayoutTabs from './components/tabs/index.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
-import { useComosables } from './useComosables'
-import {computed, unref} from 'vue'
-const { useMenuSetting,useRootSetting, useMultipleTabSetting } = context
-const { toggleCollapsed, getCollapsed, getMenuWidth, getShowSidebar } = useMenuSetting()
-const { getShowFooter } = useRootSetting();
-const { getShowMultipleTab } = useMultipleTabSetting();
+import { useComposables } from './useComposables'
+import { computed, unref } from 'vue'
 
-const {headerRef, tabRef, footerRef, headerHeight, contentStyle, mainStyle} = useComosables()
+const { useMenuSetting, useRootSetting, useMultipleTabSetting } = context
+const { toggleCollapsed, getCollapsed, getMenuWidth, getShowSidebar } =
+  useMenuSetting()
+const { getShowFooter } = useRootSetting()
+const { getShowMultipleTab } = useMultipleTabSetting()
+
+const {
+  headerRef,
+  tabRef,
+  footerRef,
+  headerHeight,
+  contentStyle,
+  mainStyle,
+  contentRef,
+} = useComposables()
 
 const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
-
 </script>
 <template>
   <VbenLayout class="h-full">
@@ -45,28 +54,18 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
           <slot name="tabs"><LayoutTabs ref="tabRef" /></slot>
         </VbenLayoutHeader>
         <VbenLayout :content-style="contentStyle">
-          <VbenLayoutContent :content-style="mainStyle">
+          <VbenLayoutContent :content-style="mainStyle" ref="contentRef">
             <LayoutMain>
               <slot name="main"></slot>
             </LayoutMain>
           </VbenLayoutContent>
           <VbenLayoutFooter v-if="getShowFooter" ref="footerRef">
             <slot name="footer">
-              <LayoutFooter/>
+              <LayoutFooter />
             </slot>
           </VbenLayoutFooter>
         </VbenLayout>
       </VbenLayout>
-
-
-<!--      <VbenLayoutContent>
-        <slot name="tabs"><LayoutTabs ref="tabRef" /></slot>
-        <VbenScrollbar :style="contentStyle">
-          <LayoutMain>
-            <slot name="main"></slot>
-          </LayoutMain>
-        </VbenScrollbar>
-      </VbenLayoutContent>-->
     </VbenLayout>
   </VbenLayout>
 </template>

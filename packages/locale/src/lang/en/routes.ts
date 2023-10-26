@@ -20,5 +20,28 @@ export default {
       fixedColumn:'fixedColumn'
     },
     modal: 'Modal',
+    permission: {
+      permission: "Permission",
+      back: "background",
+      backPage: "Page",
+      backBtn: "Button"
+    },
+    multiLevel: {
+      multiLevel: "MultiMenu"
+    },
+    iframe: {
+      frame: "External",
+      doc: "Project doc (embedded)",
+      docExternal: "Project doc (external)"
+    },
+    system: {
+      moduleName: "System management",
+      account: "Account management",
+      account_detail: "Account detail",
+      password: "Change password",
+      dept: "Department management",
+      menu: "Menu management",
+      role: "Role management"
+    },
   },
 }

@@ -68,7 +68,7 @@ function dynamicImport(
     return
   } else {
     console.warn(
-      '在/src/pages/下找不到`' +
+      '在/src下找不到`' +
         component +
         '.vue` 或 `' +
         component +
@@ -183,6 +183,8 @@ function isMultipleRoute(routeModule: RouteRecordItem) {
   return flag
 }
 
+// 路由树过滤函数
+// flat参数是否扁平化
 export function filterRouterTree<T = any>(
   tree: T[],
   func: (n: T) => boolean,

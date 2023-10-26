@@ -29,7 +29,7 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
       @update:collapsed="toggleCollapse"
     >
       <slot name="sider">
-        <div class="static">
+        <div class="static h-full">
           <SiderDragBar
             :mix="sidebar.mixSidebarWidth"
             :width="sidebar.width"

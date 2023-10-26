@@ -1,26 +1,26 @@
 <script lang="ts" setup>
-import {ref, h, onMounted, unref, nextTick, computed} from 'vue'
-import {createNamespace, mapTree} from '@vben/utils'
+import { ref, h, onMounted, unref, nextTick, computed } from 'vue'
+import { createNamespace, mapTree } from '@vben/utils'
 import {
   RouteLocationNormalizedLoaded,
   RouterLink,
   useRouter,
 } from 'vue-router'
-import {useI18n} from '@vben/locale'
-import {REDIRECT_NAME} from '@vben/constants'
-import {renderIcon} from '../index'
-import {context} from '../../../bridge'
-import type {RouteMeta} from 'vue-router'
+import { useI18n } from '@vben/locale'
+import { REDIRECT_NAME } from '@vben/constants'
+import { renderIcon } from '../index'
+import { context } from '../../../bridge'
+import type { RouteMeta } from 'vue-router'
 
-const {Logo, useAppInject, useAppConfig, useMenuSetting} = context
-import {getMenus, listenerRouteChange} from '@vben/router'
-import FooterTrigger from "../trigger/FooterTrigger.vue"
+const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
+import { getMenus, listenerRouteChange } from '@vben/router'
+import FooterTrigger from '../trigger/FooterTrigger.vue'
 
-const {getIsMobile} = useAppInject()
+const { getIsMobile } = useAppInject()
 
-const {menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar} =
+const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
   useAppConfig()
-const {getTopMenuAlign, getShowFooterTrigger} = useMenuSetting()
+const { getShowFooterTrigger } = useMenuSetting()
 const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
 })
@@ -30,9 +30,9 @@ const props = defineProps({
     default: () => 'vertical',
   },
 })
-const {bem} = createNamespace('layout-menu')
-const {t} = useI18n()
-const {currentRoute} = useRouter()
+const { bem } = createNamespace('layout-menu')
+const { t } = useI18n()
+const { currentRoute } = useRouter()
 
 const menuRef = ref(null)
 const menuList = ref([])
@@ -53,7 +53,7 @@ const showOption = () => {
 // TODO 静态路由 待实现
 onMounted(async () => {
   const menus = await getMenus()
-  menuList.value = mapTree(menus, {conversion: (menu) => routerToMenu(menu)})
+  menuList.value = mapTree(menus, { conversion: (menu) => routerToMenu(menu) })
   showOption()
 })
 
@@ -76,7 +76,7 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
 
 // 路由格式化
 const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
-  const {name, children, meta, icon} = item
+  const { name, children, meta, icon } = item
   const title = t(meta.title as string)
   return {
     label: () => {
@@ -90,7 +90,7 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
             name,
           },
         },
-        {default: () => title},
+        { default: () => title },
       )
     },
     key: name,
@@ -121,7 +121,7 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
         :accordion="menu.accordion"
       />
     </VbenScrollbar>
-    <FooterTrigger v-if="getShowFooterTrigger"/>
+    <FooterTrigger v-if="getShowFooterTrigger" />
   </div>
 </template>
 

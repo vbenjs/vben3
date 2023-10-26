@@ -5,9 +5,11 @@ import LayoutHeader from './components/header.vue'
 import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
+import SiderDragBar from './components/trigger/SiderDragBar.vue'
 
 const { useAppConfig, useMenuSetting } = context
-const { getShowMenu, getCollapsed, getShowCenterTrigger } = useMenuSetting()
+const { getShowMenu, getCollapsed, getShowCenterTrigger, setSiderWidth } =
+  useMenuSetting()
 
 const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
   useComposables()
@@ -27,7 +29,13 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
       @update:collapsed="toggleCollapse"
     >
       <slot name="sider">
-        <LayoutMenu />
+        <div class="static">
+          <SiderDragBar
+            :mix="sidebar.mixSidebarWidth"
+            :width="sidebar.width"
+            :fn="setSiderWidth"
+          /><LayoutMenu />
+        </div>
       </slot>
     </VbenLayoutSider>
     <VbenLayout>

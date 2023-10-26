@@ -168,7 +168,8 @@ const getMenuEvents = computed(() => {
     ? {
         onMouseleave: () => {
           setActive(true)
-          closeMenu()
+          //鼠标离开Menu 不触发关闭菜单面板
+          // closeMenu()
         },
       }
     : {}
@@ -241,7 +242,7 @@ const handleFixedMenu = () => {
       <VbenH5 v-if="openMenu" :class="bem('menu-list__children-title')">{{
         childrenTitle
       }}</VbenH5>
-      <MixMenu :list="childrenMenus" />
+      <MixMenu :list="childrenMenus" @mouseleave="closeMenu" />
     </div>
   </div>
 </template>

@@ -13,6 +13,14 @@ const dashboard: RouteRecordItem = {
   },
   children: [
     {
+      path: 'basic',
+      name: 'Basic',
+      component: () => import('@/pages/demo/Basic.vue'),
+      meta: {
+        title: 'routes.demo.basic',
+      },
+    },
+    {
       path: 'table',
       name: 'Table',
       redirect: '/demo/form/basic',
@@ -41,9 +49,9 @@ const dashboard: RouteRecordItem = {
           name: 'TreeTable',
           component: () => import('@/pages/demo/table/TreeTable.vue'),
           meta: {
-            title: 'routes.demo.table.treeTable'
-          }
-        }
+            title: 'routes.demo.table.treeTable',
+          },
+        },
       ],
     },
 
@@ -60,8 +68,8 @@ const dashboard: RouteRecordItem = {
       name: 'Modal',
       component: () => import('@/pages/demo/Modal.vue'),
       meta: {
-        title: 'routes.demo.modal'
-      }
+        title: 'routes.demo.modal',
+      },
     },
     {
       path: 'card',

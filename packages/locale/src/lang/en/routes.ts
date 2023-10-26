@@ -10,6 +10,7 @@ export default {
     analysis: 'Analysis',
   },
   demo: {
+    baisc: 'Basic',
     demo: 'Demo',
     card: 'Card',
     form: 'Form',

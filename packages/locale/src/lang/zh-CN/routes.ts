@@ -10,6 +10,7 @@ export default {
     analysis: '分析页',
   },
   demo: {
+    baisc: '基础组件',
     demo: '组件',
     card: '卡片',
     form: '表单',

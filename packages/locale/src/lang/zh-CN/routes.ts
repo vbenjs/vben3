@@ -35,6 +35,15 @@ export default {
       doc: "项目文档(内嵌)",
       docExternal: "项目文档(外链)"
     },
+    charts: {
+      baiduMap: "百度地图",
+      aMap: "高德地图",
+      googleMap: "谷歌地图",
+      charts: "图表",
+      map: "地图",
+      line: "折线图",
+      pie: "饼图"
+    },
     system: {
       moduleName: "系统管理",
       account: "账号管理",

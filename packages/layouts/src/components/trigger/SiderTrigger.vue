@@ -5,18 +5,17 @@ import { createNamespace } from '@vben/utils'
 const { useMenuSetting } = context
 const { toggleCollapsed, getCollapsed } = useMenuSetting()
 
-const { bem } = createNamespace('side-menu')
+const { bem } = createNamespace('side-trigger')
 </script>
 <template>
-  <div :class="bem('trigger')" @click.stop="toggleCollapsed">
+  <div :class="bem()" @click.stop="toggleCollapsed">
     <VbenIconify v-if="getCollapsed" icon="ph:caret-double-right-bold" />
     <VbenIconify v-else icon="ph:caret-double-left-bold" />
   </div>
 </template>
 
 <style lang="less" scoped>
-.side-menu {
-  &__trigger {
+.side-trigger {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -28,6 +27,5 @@ const { bem } = createNamespace('side-menu')
     display: flex;
     justify-content: center;
     align-items: center;
-  }
 }
 </style>

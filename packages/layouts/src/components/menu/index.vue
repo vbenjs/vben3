@@ -20,7 +20,7 @@ const { getIsMobile } = useAppInject()
 
 const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
   useAppConfig()
-const { getShowFooterTrigger } = useMenuSetting()
+const { getTopMenuAlign, getShowFooterTrigger } = useMenuSetting()
 const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
 })

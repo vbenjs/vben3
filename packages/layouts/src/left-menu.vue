@@ -7,12 +7,7 @@ import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 
 const { useAppConfig, useMenuSetting } = context
-const {
-  getShowMenu,
-  getCollapsed,
-  getShowCenterTrigger,
-  getShowFooterTrigger,
-} = useMenuSetting()
+const { getShowMenu, getCollapsed, getShowCenterTrigger } = useMenuSetting()
 
 const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
   useComposables()
@@ -33,7 +28,6 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
     >
       <slot name="sider">
         <LayoutMenu />
-        <div v-if="getShowFooterTrigger">trigger</div>
       </slot>
     </VbenLayoutSider>
     <VbenLayout>

@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@vben/constants": "workspace:*",
-    "pinia": "2.1.6",
-    "vue": "3.3.4",
-    "vue-router": "^4.2.4"
+    "pinia": "2.1.7",
+    "vue": "3.3.6",
+    "vue-router": "^4.2.5"
   }
 }

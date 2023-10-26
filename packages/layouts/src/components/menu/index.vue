@@ -109,6 +109,11 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
 
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
+        class="w-full"
+        :style="{
+          justifyContent:
+            getTopMenuAlign === 'center' ? 'center' : `flex-${getTopMenuAlign}`,
+        }"
         v-model:value="activeKey"
         :options="menuList"
         :collapsed="getMenuCollapsed"
@@ -124,6 +129,11 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
     <FooterTrigger v-if="getShowFooterTrigger" />
   </div>
 </template>
+<style>
+div:has(> div[class='layout-menu']) {
+  flex: 1;
+}
+</style>
 
 <style lang="less" scoped>
 .layout-menu {

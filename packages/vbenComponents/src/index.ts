@@ -7,7 +7,7 @@ export const components = {
     /* 上面写法vite官方已弃用，详情见 https://cn.vitejs.dev/guide/migration-from-v2.html#importmetaglob */
     const comp = import.meta.glob('./**/*.vue', {eager: true})
     Object.keys(comp).forEach((k) => {
-      const c = comp[k].default
+      const c = (comp[k] as Record<string, any>)['default'];
       switch (c.__name) {
         case 'TabPane':
           c.__TAB_PANE__ = true

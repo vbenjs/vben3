@@ -1,6 +1,6 @@
 import { storeToRefs, useAppConfig as appConfigStore } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
-import { HandlerSettingEnum } from '@vben/constants'
+import { HandlerSettingEnum, NavBarModeEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
@@ -85,7 +85,7 @@ function handlerResults(
     case HandlerSettingEnum.CHANGE_LAYOUT:
       const { mode, type, split } = value
       const splitOpt = split === undefined ? { split } : {}
-      return {
+      const returnData: Recordable = {
         navBarMode: type,
         menu: {
           ...splitOpt,
@@ -93,6 +93,10 @@ function handlerResults(
         },
         sidebar: { collapsed: false },
       }
+      if (type === NavBarModeEnum.MIX_SIDEBAR) {
+        returnData.logo = { show: true, visible: true }
+      }
+      return returnData
 
     case HandlerSettingEnum.CHANGE_THEME_COLOR:
       if (unref(themeColor) === value) {

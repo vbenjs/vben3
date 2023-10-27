@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import { computed, unref } from 'vue';
 import { useRouter } from 'vue-router'
 import { BASIC_HOME_PATH } from '@vben/constants'
 import { createNamespace, getGlobalConfig } from '@vben/utils'
 import logo from '@/assets/images/logo.png'
+import { useRootSetting } from '@vben/hooks'
 
 const { bem } = createNamespace('app-logo')
 
@@ -21,19 +23,20 @@ const props = defineProps({
 const { push } = useRouter()
 const { title } = getGlobalConfig(import.meta.env)
 
+const { getShowLogo } = useRootSetting();
+
+const getIsShowLogo = computed(() => unref(getShowLogo));
+
+
 function goHome() {
   push(props.homePath)
 }
 </script>
 
 <template>
-  <div :class="bem()" @click="goHome">
+  <div v-if="getIsShowLogo" :class="bem()" @click="goHome">
     <img :src="logo" alt="logo" />
-    <div
-      class="ml-2 truncate md:opacity-100"
-      :class="bem('title')"
-      v-show="showTitle"
-    >
+    <div class="ml-2 truncate md:opacity-100" :class="bem('title')" v-show="showTitle">
       {{ title }}
     </div>
   </div>

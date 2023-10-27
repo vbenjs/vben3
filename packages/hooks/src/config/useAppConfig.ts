@@ -13,8 +13,19 @@ export const useAppConfig = () => {
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
-      _merge(state, configs)
+      _merge(state, preDealConfig(configs))
     })
+  }
+
+  function preDealConfig(configs: DeepPartial<DefineAppConfigOptions>) {
+    if (
+      configs.navBarMode &&
+      configs.navBarMode === NavBarModeEnum.MIX_SIDEBAR
+    ) {
+      configs.logo = { show: true, visible: true }
+    }
+
+    return configs
   }
 
   function toggleOpenSettingDrawer() {
@@ -85,7 +96,7 @@ function handlerResults(
     case HandlerSettingEnum.CHANGE_LAYOUT:
       const { mode, type, split } = value
       const splitOpt = split === undefined ? { split } : {}
-      const returnData: Recordable = {
+      return {
         navBarMode: type,
         menu: {
           ...splitOpt,
@@ -93,10 +104,6 @@ function handlerResults(
         },
         sidebar: { collapsed: false },
       }
-      if (type === NavBarModeEnum.MIX_SIDEBAR) {
-        returnData.logo = { show: true, visible: true }
-      }
-      return returnData
 
     case HandlerSettingEnum.CHANGE_THEME_COLOR:
       if (unref(themeColor) === value) {

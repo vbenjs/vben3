@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
+let isActive = ref(-1)
 </script>
 <template>
   <!-- Grid Layout -->
@@ -19,7 +20,10 @@ import { ref } from 'vue';
               <div class="text-white text-3xl">20</div>
             </div>
             <div class="weather h-17 ml-2 flex flex-col justify-between">
-              <div class="font-bold">weather</div>
+              <div class="font-bold flex">
+                <VbenIconify icon="ion:snow" size="20" />
+                <span class="ml-2">-10</span>
+              </div>
               <div class="text-slate-500 font-bold text-base/7 italic whitespace-nowrap">工欲善其事，必先利其器</div>
             </div>
           </div>
@@ -34,7 +38,7 @@ import { ref } from 'vue';
       <div class="text-white/60 text-xl font-bold">今日待办</div>
       <div class=" w-3/4 flex justify-around">
         <div class="">
-          <img src="@/assets/images/Todo.png" alt="todo icon">
+          <img src="@/assets/images/Todo.png" alt="todo icon" />
         </div>
         <div class="flex justify-center items-end mb-5">
           <div class="text-white/60 font-semibold text-5xl">23</div>
@@ -43,15 +47,19 @@ import { ref } from 'vue';
       </div>
     </div>
     <div
-      class="card row-start-7 row-span-4 col-start-9 col-span-5 bg-black/25 rounded-md flex flex-col justify-around items-center">
+      class="card row-start-7 row-span-4 col-start-8 col-span-5 bg-black/25 rounded-md flex flex-col justify-around items-center">
       <div class="text-white/60 text-xl font-bold">通知</div>
       <div class="w-3/4 flex justify-around">
         <div>
           <img src="@/assets/images/Notification.png" alt="Notification icon" />
         </div>
-        <div class="w-3/4 text-left flex flex-col justify-center items-center">
-          <div class="w-full text-white/60 text-lg font-semibold ">已读 10 条</div>
-          <div class="w-full text-white/60 text-lg font-semibold ">未读 5 条</div>
+        <div class="w-3/4 text-left flex flex-col justify-center">
+          <div class="w-full text-white/60 text-lg font-semibold flex items-center">
+            <VbenIconify icon="iconamoon:check-bold" size="24" color="green" /><span class="ml-2">已读 10 条</span>
+          </div>
+          <div class="w-full text-white/60 text-lg font-semibold flex items-center">
+            <VbenIconify icon="solar:letter-unread-bold" size="24" /> <span class="ml-2">未读 5 条</span>
+          </div>
         </div>
       </div>
     </div>
@@ -62,19 +70,19 @@ import { ref } from 'vue';
       <div class="w-full h-1/10 border-b-1 border-b-solid border-gray-200 flex items-center">
         <span class="ml-4 text-lg text-gray-500 font-semibold">待办列表</span>
       </div>
-      <div class="h-9/10 m-3 border border-gray-300 border-dashed overflow-auto ">
+      <div class="h-9/10 m-3 overflow-auto ">
         <template v-for="item in 6">
           <div class="w-full h-1/7 hover:bg-green-100 rounded-md mb-2 flex">
             <div class="w-5/6 h-full flex items-center">
               <div class="w-10 h-10 rounded-lg border border-solid border-gray-200 ml-4 overflow-hidden">
-                <img src="@/assets/images/avatar01.png" width="100%" height="100%" alt="avatar">
+                <img src="@/assets/images/avatar01.png" width="100%" height="100%" alt="avatar" />
               </div>
               <div class="ml-2">
                 <div class="text-4 font-semibold">MIKU</div>
                 <div class="text-xs text-gray-500">创建了一个待办，等待你审核</div>
               </div>
             </div>
-            <div class="w-1/6 flex items-center">处理</div>
+            <div class="w-1/6 flex items-center" :class="{active: isActive==item}">处理</div>
           </div>
         </template>
       </div>

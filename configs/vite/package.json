@@ -1,6 +1,6 @@
 {
   "name": "@config/vite",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
@@ -22,7 +22,7 @@
     "pkg-types": "^1.0.3",
     "rollup-plugin-visualizer": "^5.9.2",
     "terser": "^5.22.0",
-    "tsconfig": "workspace:*",
+    "@config/tsconfig": "workspace:*",
     "unocss": "^0.57.1",
     "vite": "4.5.0",
     "vite-plugin-compression": "^0.5.1",

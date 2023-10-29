@@ -34,6 +34,15 @@ export default {
       doc: "Project doc (embedded)",
       docExternal: "Project doc (external)"
     },
+    charts: {
+      baiduMap: "Baidu map",
+      aMap: "A map",
+      googleMap: "Google map",
+      charts: "Chart",
+      map: "Map",
+      line: "Line",
+      pie: "Pie"
+    },
     system: {
       moduleName: "System management",
       account: "Account management",

@@ -19,3 +19,11 @@ export interface UserInfo {
   homePath?: string
   roles: RoleInfo[]
 }
+
+export interface UserState {
+  userInfo: Nullable<UserInfo>
+  accessToken?: string
+  roles: RoleInfo[]
+  sessionTimeout?: boolean
+  lastUpdateTime: number
+}

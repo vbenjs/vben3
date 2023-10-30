@@ -1,10 +1,123 @@
 <script lang="ts" setup>
+import * as echarts from "echarts/core"
+import { CanvasRenderer } from 'echarts/renderers'
+import { BarChart } from "echarts/charts"
+import { GridComponent, TitleComponent, TooltipComponent, LegendComponent, ToolboxComponent, } from "echarts/components"
+import vChart from "vue-echarts"
 import { ref } from 'vue';
+echarts.use([
+  BarChart,
+  CanvasRenderer,
+  GridComponent,
+  TitleComponent,
+  TooltipComponent,
+  LegendComponent,
+  ToolboxComponent
+])
 let isActive = ref(-1)
 
 function handleActive(index: number) {
   return isActive.value = index
 }
+
+const chartOption = ref({
+  grid: {
+    width: '85%',
+    height: '70%',
+    top: 80,
+    left: 60,
+  },
+  color: [],
+  title: {
+    text: "待办统计",
+    textStyle: {
+      color: '#6B7280'
+    },
+    left: 10,
+    top: 10,
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        backgroundColor: '#283b56'
+      }
+    }
+  },
+  legend: {
+    show: false
+  },
+  xAxis: [
+    {
+      type: 'category',
+      boundaryGap: true,
+      axisTick: {
+        alignWithLabel: true,
+      },
+      data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value',
+      scale: true,
+      name: '数量',
+      max: 2000,
+      min: 0,
+      boundaryGap: [0.2, 0.2]
+    }
+  ],
+  series: [
+    {
+      name: '今年',
+      type: 'bar',
+      left: '40%',
+      label: {
+        show: false,
+      },
+      labelLine: {
+        show: false,
+      },
+      data: [
+        200, 300, 350, 400, 500, 600, 700
+      ],
+      barWidth: 10,
+      itemStyle: {
+        borderRadius: 2,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#BCF0D5"
+          },
+          {
+            offset: 1,
+            color: '#55D995'
+          }
+        ])
+      }
+    },
+    {
+      name: '去年',
+      type: "bar",
+      data: [230, 300, 350, 420, 520, 650, 780],
+      barWidth: 10,
+      itemStyle: {
+        borderRadius: 2,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#BCF0D5"
+          },
+          {
+            offset: 1,
+            color: '#55D995'
+          }
+        ])
+      }
+    }
+  ]
+})
 </script>
 <template>
   <div class="grid grid-cols-24 grid-rows-24 w-full h-screen">
@@ -94,7 +207,9 @@ function handleActive(index: number) {
     </div>
 
     <!-- calendar chart -->
-    <div></div>
+    <div class="row-start-12 row-span-12 col-start-9 col-span-10 rounded-md border border-solid border-gray-200 flex">
+      <v-chart ref="barChat" :option="chartOption" autoresize />
+    </div>
   </div>
 </template>
 

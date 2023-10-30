@@ -9,6 +9,7 @@ import {
   useTabs,
   useDesign,
   useAppConfig,
+  usePromise,
 } from '@vben/hooks'
 
 type LogoComponent = DefineComponent<{
@@ -33,7 +34,7 @@ export interface ContextOptions {
     callback: (route: RouteLocationNormalized) => void,
     immediate?: boolean,
   ) => unknown
-  usePromise: (fn: Function, config?: unknown) => unknown
+  usePromise: typeof usePromise
   useDesign: typeof useDesign
   getMenus: () => Promise<any>
   getCurrentParentPath: (currentPath: string) => Promise<any>
@@ -60,8 +61,8 @@ export let context: ContextOptions = {
   useMultipleTabStore: () => undefined,
   listenerRouteChange: (listenerRouteChange: (route) => void, immediate?) =>
     true,
-  usePromise: (fn: Function, config) => undefined,
   useTabs,
+  usePromise,
   useDesign: useDesign,
   getMenus: async () => ({}),
   getCurrentParentPath: async (currentPath: string) => ({}),

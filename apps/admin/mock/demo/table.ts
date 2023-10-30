@@ -53,7 +53,7 @@ const fakeTableData = (() => {
       username: '@cname',
       password: '@natural',
       realname: '@name',
-      avatar: `@dataImage('50 * 50')`,
+      avatar: `https://i.pravatar.cc/50?img=${i}`,
       desc: '@word',
       accessToken: '@guid',
       address: '@city',

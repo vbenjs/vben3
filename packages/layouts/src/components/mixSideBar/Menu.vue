@@ -126,6 +126,7 @@ const getItemEvents = (item) => {
 function closeMenu() {
   if (!unref(getIsFixed)) {
     openMenu.value = false
+    setActive(false)
   }
 }
 
@@ -167,10 +168,14 @@ const getMenuEvents = computed(() => {
   return !unref(getMixSideFixed)
     ? {
         onMouseleave: () => {
-          setActive(true)
+          // 鼠标移出菜单不做操作
+          // if (!openMenu.value) {
+          //   setActive(true)
+          // }
           //鼠标离开Menu 不触发关闭菜单面板
           // closeMenu()
         },
+        onMouseenter: () => {},
       }
     : {}
 })
@@ -183,14 +188,14 @@ const handleFixedMenu = () => {
 </script>
 
 <template>
-  <div :class="bem()" v-bind="getMenuEvents">
+  <div :class="bem()">
     <logo
       :class="[bem('logo'), 'shadow']"
       :style="{ '--un-shadow-color': 'var(--n-border-color)' }"
       v-if="getMenuType === NavBarModeEnum.MIX_SIDEBAR"
       :showTitle="false"
     />
-    <VbenScrollbar :class="bem('scrollbar')">
+    <VbenScrollbar :class="bem('scrollbar')" v-bind="getMenuEvents">
       <ul :class="bem('module')">
         <li
           :class="[

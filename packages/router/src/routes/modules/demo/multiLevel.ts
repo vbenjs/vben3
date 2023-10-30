@@ -7,9 +7,8 @@ const MultiLevel: RouteRecordItem = {
   redirect: '/multiLevel/level1',
   meta: {
     orderNo: 4,
-    title: '多级路由',
+    title: 'routes.demo.multiLevel.multiLevel',
     icon: 'tabler:frame-off',
-    hideMenu: true
   },
   children: [
     {

@@ -48,6 +48,8 @@ const getShowHeaderMultipleTab = computed(() => {
 const showHeaderLogo = computed(() => {
   return unref(isTopMenu) || unref(isMix)
 })
+//根据布局模式设置logo宽度
+const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth))
 </script>
 <template>
   <VbenSpace vertical>
@@ -63,8 +65,8 @@ const showHeaderLogo = computed(() => {
           <Logo
             v-if="showHeaderLogo"
             :style="{
-              width: getMenuWidth + 'px',
-              maxWidth: getMenuWidth + 'px',
+              width: logoWidth + 'px',
+              maxWidth: logoWidth + 'px',
             }"
           />
           <HeaderTrigger v-if="getShowHeaderTrigger" />

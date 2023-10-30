@@ -170,6 +170,10 @@ export function useMenuSetting() {
   ): void {
     configStore.setAppConfig({ sidebar: sidebarSetting })
   }
+  // 设置Sider宽度
+  function setSiderWidth(width: number) {
+    setSidebarSetting({ width })
+  }
 
   function toggleCollapsed() {
     setSidebarSetting({
@@ -177,6 +181,7 @@ export function useMenuSetting() {
     })
   }
   return {
+    setSiderWidth,
     setMenuSetting,
     toggleCollapsed,
     getMenuFixed,

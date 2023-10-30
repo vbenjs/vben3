@@ -1,6 +1,6 @@
 import { storeToRefs, useAppConfig as appConfigStore } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
-import { HandlerSettingEnum } from '@vben/constants'
+import { HandlerSettingEnum, NavBarModeEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
@@ -13,8 +13,19 @@ export const useAppConfig = () => {
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
     useAppConfigStore.$patch((state) => {
-      _merge(state, configs)
+      _merge(state, preDealConfig(configs))
     })
+  }
+
+  function preDealConfig(configs: DeepPartial<DefineAppConfigOptions>) {
+    if (
+      configs.navBarMode &&
+      configs.navBarMode === NavBarModeEnum.MIX_SIDEBAR
+    ) {
+      configs.logo = { show: true, visible: true }
+    }
+
+    return configs
   }
 
   function toggleOpenSettingDrawer() {

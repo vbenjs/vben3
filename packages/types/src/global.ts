@@ -27,7 +27,7 @@ declare global {
     ReturnType<T>
   >
   type Nullable<T> = T | null
-  type Recordable<T> = Record<string, T>
+  type Recordable<T = any> = Record<string, T>
   type TimeoutHandle = ReturnType<typeof setTimeout>
   type IntervalHandle = ReturnType<typeof setInterval>
   type DeepPartial<T> = {

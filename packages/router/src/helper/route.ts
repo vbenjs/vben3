@@ -68,7 +68,7 @@ function dynamicImport(
     return
   } else {
     console.warn(
-      '在/src/pages/下找不到`' +
+      '在/src下找不到`' +
         component +
         '.vue` 或 `' +
         component +

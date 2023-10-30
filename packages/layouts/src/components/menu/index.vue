@@ -10,14 +10,17 @@ import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 import { renderIcon } from '../index'
 import { context } from '../../../bridge'
+import type { RouteMeta } from 'vue-router'
 
-const { Logo, useAppInject, useAppConfig } = context
+const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
 import { getMenus, listenerRouteChange } from '@vben/router'
+import FooterTrigger from '../trigger/FooterTrigger.vue'
 
 const { getIsMobile } = useAppInject()
 
 const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
   useAppConfig()
+const { getTopMenuAlign, getShowFooterTrigger } = useMenuSetting()
 const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
 })
@@ -72,7 +75,7 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
 }
 
 // 路由格式化
-const routerToMenu = (item: RouteRecordItem) => {
+const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
   const { name, children, meta, icon } = item
   const title = t(meta.title as string)
   return {
@@ -106,6 +109,11 @@ const routerToMenu = (item: RouteRecordItem) => {
 
     <VbenScrollbar :class="bem('scrollbar')">
       <VbenMenu
+        class="w-full"
+        :style="{
+          justifyContent:
+            getTopMenuAlign === 'center' ? 'center' : `flex-${getTopMenuAlign}`,
+        }"
         v-model:value="activeKey"
         :options="menuList"
         :collapsed="getMenuCollapsed"
@@ -118,8 +126,14 @@ const routerToMenu = (item: RouteRecordItem) => {
         :accordion="menu.accordion"
       />
     </VbenScrollbar>
+    <FooterTrigger v-if="getShowFooterTrigger" />
   </div>
 </template>
+<style>
+div:has(> div[class='layout-menu']) {
+  flex: 1;
+}
+</style>
 
 <style lang="less" scoped>
 .layout-menu {

@@ -1,14 +1,17 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 let isActive = ref(-1)
+
+function handleActive(index: number) {
+  return isActive.value = index
+}
 </script>
 <template>
-  <!-- Grid Layout -->
   <div class="grid grid-cols-24 grid-rows-24 w-full h-screen">
     <!-- Profile Container -->
     <div class="ml-4 mr-4 p-4 col-start-1 col-span-24 row-start-2 row-span-6 bg-green-100 rounded-md">
+      <!-- User Information start -->
       <div class="grid grid-cols-24 grid-rows-24 w-full h-full">
-        <!-- User Information -->
         <div class="col-start-1 col-span-4 row-start-1 row-span-23 flex justify-center items-center">
           <img class="drop-shadow-xl" src="@/assets/images/avatar_man.png" width="200" height="200" alt="avatar.png" />
         </div>
@@ -22,7 +25,7 @@ let isActive = ref(-1)
             <div class="weather h-17 ml-2 flex flex-col justify-between">
               <div class="font-bold flex">
                 <VbenIconify icon="ion:snow" size="20" />
-                <span class="ml-2">-10</span>
+                <span class="ml-2">-10°</span>
               </div>
               <div class="text-slate-500 font-bold text-base/7 italic whitespace-nowrap">工欲善其事，必先利其器</div>
             </div>
@@ -30,6 +33,7 @@ let isActive = ref(-1)
           <div class="text-2xl font-bold">早上好，管理员</div>
         </div>
       </div>
+      <!-- User Information end -->
     </div>
 
     <!-- Card Container -->
@@ -55,7 +59,7 @@ let isActive = ref(-1)
         </div>
         <div class="w-3/4 text-left flex flex-col justify-center">
           <div class="w-full text-white/60 text-lg font-semibold flex items-center">
-            <VbenIconify icon="iconamoon:check-bold" size="24" color="green" /><span class="ml-2">已读 10 条</span>
+            <VbenIconify icon="iconamoon:check-bold" size="24" color="#169b82" /><span class="ml-2">已读 10 条</span>
           </div>
           <div class="w-full text-white/60 text-lg font-semibold flex items-center">
             <VbenIconify icon="solar:letter-unread-bold" size="24" /> <span class="ml-2">未读 5 条</span>
@@ -71,18 +75,19 @@ let isActive = ref(-1)
         <span class="ml-4 text-lg text-gray-500 font-semibold">待办列表</span>
       </div>
       <div class="h-9/10 m-3 overflow-auto ">
-        <template v-for="item in 6">
-          <div class="w-full h-1/7 hover:bg-green-100 rounded-md mb-2 flex">
+        <template v-for="(item, index) in 6">
+          <div class="w-full h-1/7 hover:bg-green-100 rounded-md mb-2 flex" @mouseenter="handleActive(index)"
+            @mouseleave="(() => { isActive = -1 })">
             <div class="w-5/6 h-full flex items-center">
               <div class="w-10 h-10 rounded-lg border border-solid border-gray-200 ml-4 overflow-hidden">
                 <img src="@/assets/images/avatar01.png" width="100%" height="100%" alt="avatar" />
               </div>
               <div class="ml-2">
-                <div class="text-4 font-semibold">MIKU</div>
+                <div class="text-4 font-semibold">Jack</div>
                 <div class="text-xs text-gray-500">创建了一个待办，等待你审核</div>
               </div>
             </div>
-            <div class="w-1/6 flex items-center" :class="{active: isActive==item}">处理</div>
+            <div class="w-1/6 flex items-center invisible cursor-pointer" :class="{ active: isActive === index }">处理</div>
           </div>
         </template>
       </div>
@@ -96,4 +101,9 @@ let isActive = ref(-1)
 <style lang="less" scoped>
 .card {
   backdrop-filter: blur(16px);
-}</style>
+}
+
+.active {
+  visibility: visible;
+}
+</style>

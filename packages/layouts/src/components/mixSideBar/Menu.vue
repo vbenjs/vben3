@@ -224,6 +224,7 @@ const handleFixedMenu = () => {
       :class="['shadow', bem('menu-list')]"
       :style="getMenuStyle"
       ref="sideRef"
+      @mouseleave="closeMenu"
     >
       <div
         v-show="openMenu"
@@ -247,7 +248,7 @@ const handleFixedMenu = () => {
       <VbenH5 v-if="openMenu" :class="bem('menu-list__children-title')">{{
         childrenTitle
       }}</VbenH5>
-      <MixMenu :list="childrenMenus" @mouseleave="closeMenu" />
+      <MixMenu :list="childrenMenus" />
     </div>
   </div>
 </template>

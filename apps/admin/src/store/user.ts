@@ -6,17 +6,9 @@ import { doLogoutApi, getUserInfoApi, doLoginApi } from '@/apis/auth'
 import { PAGE_NOT_FOUND_ROUTE } from '@vben/router'
 import { useAuthStoreWithout } from './auth'
 import { GetUserInfoModel } from '@/apis/sys/user'
-import { UserInfo, RoleInfo } from '@vben/types'
+import { UserInfo, RoleInfo, UserState } from '@vben/types'
 import { ErrorMessageMode } from '@vben/types'
 import { isArray } from '@vben/utils'
-
-interface UserState {
-  userInfo: Nullable<UserInfo>
-  accessToken?: string
-  roles: RoleInfo[]
-  sessionTimeout?: boolean
-  lastUpdateTime: number
-}
 
 export const useUserStore = defineStore('app-user-store', {
   persist: {

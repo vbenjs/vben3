@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 export { initComp } from './bridge'
 import VXETable from 'vxe-table-demonic'
-export { VbenIconify } from './src/iconify'
+export { VbenIconify, renderIcon } from './src/iconify'
 //VC组件map
 
 // 初始化组件

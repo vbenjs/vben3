@@ -17,6 +17,9 @@ importers:
       '@config/lint':
         specifier: workspace:*
         version: link:configs/lint
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:configs/tsconfig
       '@types/fs-extra':
         specifier: ^11.0.3
         version: 11.0.3
@@ -47,9 +50,6 @@ importers:
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@20.8.8)(typescript@5.2.2)
-      tsconfig:
-        specifier: workspace:*
-        version: link:configs/tsconfig
       turbo:
         specifier: ^1.10.16
         version: 1.10.16
@@ -258,6 +258,9 @@ importers:
 
   configs/vite:
     dependencies:
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@vben/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -297,9 +300,6 @@ importers:
       terser:
         specifier: ^5.22.0
         version: 5.22.0
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
       unocss:
         specifier: ^0.57.1
         version: 0.57.1(postcss@8.4.31)(rollup@4.1.4)(vite@4.5.0)

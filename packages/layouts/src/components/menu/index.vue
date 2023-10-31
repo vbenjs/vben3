@@ -8,7 +8,7 @@ import {
 } from 'vue-router'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
-import { renderIcon } from '../index'
+import { renderIcon } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import type { RouteMeta } from 'vue-router'
 

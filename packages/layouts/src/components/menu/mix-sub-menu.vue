@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ref, h, unref, nextTick, computed} from 'vue'
+import { ref, h, unref, nextTick, computed } from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
 import { context } from '../../../bridge'
 import {
@@ -9,14 +9,13 @@ import {
 } from 'vue-router'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
-import {renderIcon} from "../index";
-
+import { renderIcon } from '@vben/vbencomponents'
 const { listenerRouteChange, useMenuSetting } = context
 const { getAccordion } = useMenuSetting()
 const props = defineProps({
   list: {
     type: Array,
-    default: ()=>[],
+    default: () => [],
   },
 })
 const { bem } = createNamespace('layout-menu')
@@ -33,7 +32,7 @@ const showOption = () => {
   })
 }
 
-const menuList = computed(()=>{
+const menuList = computed(() => {
   return mapTree(props.list, { conversion: (menu) => routerToMenu(menu) })
 })
 

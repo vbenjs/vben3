@@ -2,7 +2,7 @@
 import { ref, unref } from 'vue'
 import { useI18n } from '@vben/locale'
 import LockModal from '../lock/LockModal.vue'
-import { renderIcon } from '../../components'
+import { renderIcon } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 const { useUserStore } = context
 

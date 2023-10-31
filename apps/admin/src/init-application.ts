@@ -27,7 +27,6 @@ import {
   getShallowMenus,
   listenerRouteChange,
 } from '@vben/router'
-import { useMultipleTabStore } from '@/store/multipleTab'
 import { useAppStore } from '@/store/modules/app'
 import Logo from '@/layout/components/logo.vue'
 
@@ -103,7 +102,6 @@ async function initPackages() {
         useAppInject,
         useTabs,
         usePromise,
-        useMultipleTabStore,
         listenerRouteChange,
         useUserStore,
         useAppStore,

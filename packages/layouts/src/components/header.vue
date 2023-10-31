@@ -49,7 +49,7 @@ const showHeaderLogo = computed(() => {
   return unref(isTopMenu) || unref(isMix)
 })
 //根据布局模式设置logo宽度
-const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth))
+const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth.value))
 </script>
 <template>
   <VbenSpace vertical>

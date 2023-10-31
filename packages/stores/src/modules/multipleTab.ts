@@ -399,7 +399,7 @@ export const useMultipleTab = defineStore({
       )
       const refreshDisabled = !isCurItem
       // Close left
-      const closeLeftDisabled = index === 0 || !isCurItem
+      const closeLeftDisabled = index === 0
 
       const disabled = this.getTabList.length === 1
 
@@ -407,6 +407,7 @@ export const useMultipleTab = defineStore({
       const closeRightDisabled =
         !isCurItem ||
         (index === this.getTabList.length - 1 && this.getLastDragEndIndex >= 0)
+
       return [
         {
           label: 'layout.multipleTab.reload',

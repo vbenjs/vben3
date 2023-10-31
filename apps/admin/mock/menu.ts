@@ -15,25 +15,25 @@ const dashboardRoute = {
   redirect: '/dashboard/analysis',
   meta: {
     title: 'routes.dashboard.dashboard',
-    icon: 'bx:bx-home',
+    icon: 'mdi:monitor-dashboard',
   },
   children: [
     {
       path: 'analysis',
       name: 'Analysis',
-      component: '/dashboard/analysis/index',
+        component: '/pages/dashboard/analysis/index',
       meta: {
         title: 'routes.dashboard.analysis',
-        icon: 'bx:bx-home',
+        icon: 'icon-park-outline:analysis',
       },
     },
     {
       path: 'workbench',
       name: 'Workbench',
-      component: '/dashboard/workbench/index',
+      component: '/pages/dashboard/workbench/index',
       meta: {
         title: 'routes.dashboard.workbench',
-        icon: 'bx:bx-home',
+        icon: 'icon-park-outline:workbench',
       },
     },
   ],
@@ -50,7 +50,7 @@ const backRoute = {
     {
       path: 'page',
       name: 'BackAuthPage',
-      component: '/demo/permission/back/index',
+      component: '/pages/demo/permission/back/index',
       meta: {
         title: 'routes.demo.permission.backPage',
       },
@@ -58,7 +58,7 @@ const backRoute = {
     {
       path: 'btn',
       name: 'BackAuthBtn',
-      component: '/demo/permission/back/Btn',
+      component: '/pages/demo/permission/back/Btn',
       meta: {
         title: 'routes.demo.permission.backBtn',
       },
@@ -78,14 +78,14 @@ const authRoute = {
   children: [backRoute],
 }
 
-const levelRoute = {
-  path: '/level',
-  name: 'Level',
+const multiLevelRoute = {
+  path: '/multiLevel',
+  name: 'MultiLevel',
   component: 'LAYOUT',
-  redirect: '/level/menu1/menu1-1',
+  redirect: '/multiLevel/level1',
   meta: {
-    icon: 'carbon:user-role',
-    title: 'routes.demo.level.level',
+    icon: 'tabler:frame-off',
+    title: 'routes.demo.multiLevel.multiLevel',
   },
 
   children: [
@@ -93,6 +93,7 @@ const levelRoute = {
       path: 'menu1',
       name: 'Menu1Demo',
       meta: {
+        icon: 'tabler:frame-off',
         title: 'Menu1',
       },
       children: [
@@ -106,7 +107,7 @@ const levelRoute = {
             {
               path: 'menu1-1-1',
               name: 'Menu111Demo',
-              component: '/demo/level/Menu111',
+              component: '/pages/demo/page/index',
               meta: {
                 title: 'Menu111',
               },
@@ -116,7 +117,7 @@ const levelRoute = {
         {
           path: 'menu1-2',
           name: 'Menu12Demo',
-          component: '/demo/level/Menu12',
+          component: '/pages/demo/page/index',
           meta: {
             title: 'Menu1-2',
           },
@@ -126,7 +127,7 @@ const levelRoute = {
     {
       path: 'menu2',
       name: 'Menu2Demo',
-      component: '/demo/level/Menu2',
+      component: '/pages/demo/page/index',
       meta: {
         title: 'Menu2',
       },
@@ -150,19 +151,20 @@ const sysRoute = {
       meta: {
         title: 'routes.demo.system.account',
         ignoreKeepAlive: true,
-      },
-      component: '/demo/system/account/index',
-    },
-    {
-      path: 'account_detail/:id',
-      name: 'AccountDetail',
-      meta: {
-        title: 'routes.demo.system.account_detail',
-        ignoreKeepAlive: true,
         showMenu: false,
       },
-      component: '/demo/system/account/AccountDetail',
+      component: '/pages/demo/system/account/index',
     },
+    // {
+    //   path: 'account_detail/:id',
+    //   name: 'AccountDetail',
+    //   meta: {
+    //     title: 'routes.demo.system.account_detail',
+    //     ignoreKeepAlive: true,
+    //     showMenu: false,
+    //   },
+    //   component: '/pages/demo/system/account/AccountDetail',
+    // },
     {
       path: 'role',
       name: 'RoleManagement',
@@ -170,9 +172,8 @@ const sysRoute = {
         title: 'routes.demo.system.role',
         ignoreKeepAlive: true,
       },
-      component: '/demo/system/role/index',
+      component: '/pages/demo/system/role/index',
     },
-
     {
       path: 'menu',
       name: 'MenuManagement',
@@ -180,7 +181,7 @@ const sysRoute = {
         title: 'routes.demo.system.menu',
         ignoreKeepAlive: true,
       },
-      component: '/demo/system/menu/index',
+      component: '/pages/demo/system/menu/index',
     },
     {
       path: 'dept',
@@ -189,7 +190,7 @@ const sysRoute = {
         title: 'routes.demo.system.dept',
         ignoreKeepAlive: true,
       },
-      component: '/demo/system/dept/index',
+      component: '/pages/demo/system/dept/index',
     },
     {
       path: 'changePassword',
@@ -198,7 +199,7 @@ const sysRoute = {
         title: 'routes.demo.system.password',
         ignoreKeepAlive: true,
       },
-      component: '/demo/system/password/index',
+      component: '/pages/demo/system/password/index',
     },
   ],
 }
@@ -217,10 +218,11 @@ const linkRoute = {
       name: 'Doc',
       meta: {
         title: 'routes.demo.iframe.doc',
+        frameSrc: 'https://doc.vvbin.cn/',
       },
     },
     {
-      path: 'https://vvbin.cn/doc-next/',
+      path: 'https://doc.vvbin.cn/',
       name: 'DocExternal',
       component: 'LAYOUT',
       meta: {
@@ -241,7 +243,7 @@ export default [
         return resultError('Invalid token!')
       }
       const checkUser = createFakeUserList().find(
-        (item) => item.token === token,
+        (item) => item.accessToken === token,
       )
       if (!checkUser) {
         return resultError('Invalid user token!')
@@ -252,12 +254,12 @@ export default [
         case '1':
           dashboardRoute.redirect =
             dashboardRoute.path + '/' + dashboardRoute.children[0].path
-          menu = [dashboardRoute, authRoute, levelRoute, sysRoute, linkRoute]
+          menu = [dashboardRoute, authRoute, multiLevelRoute, linkRoute, sysRoute]
           break
         case '2':
           dashboardRoute.redirect =
             dashboardRoute.path + '/' + dashboardRoute.children[1].path
-          menu = [dashboardRoute, authRoute, levelRoute, linkRoute]
+          menu = [dashboardRoute, authRoute, multiLevelRoute, linkRoute]
           break
         default:
           menu = []

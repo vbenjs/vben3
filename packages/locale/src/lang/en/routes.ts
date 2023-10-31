@@ -10,6 +10,7 @@ export default {
     analysis: 'Analysis',
   },
   demo: {
+    basic: 'Basic',
     demo: 'Demo',
     card: 'Card',
     form: 'Form',
@@ -19,5 +20,37 @@ export default {
       fixedColumn:'fixedColumn'
     },
     modal: 'Modal',
+    permission: {
+      permission: "Permission",
+      back: "background",
+      backPage: "Page",
+      backBtn: "Button"
+    },
+    multiLevel: {
+      multiLevel: "MultiMenu"
+    },
+    iframe: {
+      frame: "External",
+      doc: "Project doc (embedded)",
+      docExternal: "Project doc (external)"
+    },
+    charts: {
+      baiduMap: "Baidu map",
+      aMap: "A map",
+      googleMap: "Google map",
+      charts: "Chart",
+      map: "Map",
+      line: "Line",
+      pie: "Pie"
+    },
+    system: {
+      moduleName: "System management",
+      account: "Account management",
+      account_detail: "Account detail",
+      password: "Change password",
+      dept: "Department management",
+      menu: "Menu management",
+      role: "Role management"
+    },
   },
 }

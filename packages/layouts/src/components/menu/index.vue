@@ -14,12 +14,13 @@ import type { RouteMeta } from 'vue-router'
 
 const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
 import { getMenus, listenerRouteChange } from '@vben/router'
+import FooterTrigger from '../trigger/FooterTrigger.vue'
 
 const { getIsMobile } = useAppInject()
 
 const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
   useAppConfig()
-const { getTopMenuAlign } = useMenuSetting()
+const { getTopMenuAlign, getShowFooterTrigger } = useMenuSetting()
 const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
 })
@@ -125,6 +126,7 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
         :accordion="menu.accordion"
       />
     </VbenScrollbar>
+    <FooterTrigger v-if="getShowFooterTrigger" />
   </div>
 </template>
 <style>

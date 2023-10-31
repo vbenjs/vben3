@@ -64,7 +64,9 @@
   --vxe-table-header-background-color: #8eabf8;
   --vxe-font-size: 14px;
   --vxe-font-color: #666;
-  
+
+  /* mix sidebar */
+  --mix-sider-z-index: 500;
 }
 
 :root[class=dark] {

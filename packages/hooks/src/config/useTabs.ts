@@ -60,7 +60,8 @@ export function useTabs(_router?: Router) {
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
         await tabStore.refreshPage(router)
-        await useRedo(router)
+        const redo = useRedo(router)
+        await redo()
         break
 
       case TabActionEnum.CLOSE_ALL:

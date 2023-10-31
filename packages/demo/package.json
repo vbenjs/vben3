@@ -10,12 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@vben/request": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "vue": "^3.3.6"
   },
   "devDependencies": {
-    "@vben/types": "workspace:*"
+    "@vben/types": "workspace:*",
+    "@amap/amap-jsapi-types": "^0.0.13"
   }
 }

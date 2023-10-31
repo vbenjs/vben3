@@ -8,7 +8,7 @@ const { toggleCollapsed, getCollapsed } = useMenuSetting()
 const { bem } = createNamespace('header-trigger')
 </script>
 <template>
-  <span :class="bem()" @click="toggleCollapsed">
+  <span :class="bem()" @click="toggleCollapsed" class="hover:cursor-pointer">
     <VbenIconify v-if="getCollapsed" icon="ant-design:menu-unfold-outlined" />
     <VbenIconify v-else icon="ant-design:menu-fold-outlined" />
   </span>

@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 import { computed, nextTick, ref, unref } from 'vue'
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
-import { useGo, useTabs } from '@vben/hooks'
+import { useGo, useTabs, useMultipleTabSetting } from '@vben/hooks'
 import TabRedo from './components/TabRedo.vue'
 import TabDropdown from './components/TabDropdown.vue'
 import { context } from '../../../bridge'
@@ -13,7 +13,7 @@ import TabQuick from './components/TabQuick.vue'
 import FoldButton from './components/FoldButton.vue'
 import { useMultipleTab, storeToRefs } from '@vben/stores'
 import { listenerRouteChange } from '@vben/router'
-const { useUserStore, useMultipleTabSetting } = context
+const { useUserStore } = context
 const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting()
 const { close } = useTabs()
 const { t } = useI18n()

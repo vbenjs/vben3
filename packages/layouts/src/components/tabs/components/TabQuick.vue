@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import {computed, unref} from 'vue'
-import {context} from '../../../../bridge'
-import {useI18n} from '@vben/locale'
-import {VbenIconify} from '@vben/vbencomponents'
-import {TabActionEnum} from '@vben/constants'
-import {RouteLocationNormalized, useRouter} from "vue-router"
-import {renderIcon} from "../../index";
-
-const {useTabs, useMultipleTabStore} = context
-const {refreshPage, close, closeAll, closeLeft, closeRight, closeOther} = useTabs()
-const {t} = useI18n();
-
-const tabStore = useMultipleTabStore();
-const {currentRoute} = useRouter();
+import { computed, unref } from 'vue'
+import { useI18n } from '@vben/locale'
+import { VbenIconify } from '@vben/vbencomponents'
+import { TabActionEnum } from '@vben/constants'
+import { RouteLocationNormalized, useRouter } from 'vue-router'
+import { renderIcon } from '../../index'
+import { useMultipleTab } from '@vben/stores'
+import { useTabs } from '@vben/hooks'
+const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } =
+  useTabs()
+const { t } = useI18n()
+const tabStore = useMultipleTab()
+const { currentRoute } = useRouter()
 
 const props = defineProps({
   tabItem: {
@@ -23,24 +22,28 @@ const props = defineProps({
 
 const options = computed(() => {
   if (!props.tabItem) {
-    return;
+    return
   }
-  const {meta} = props.tabItem;
-  const {path} = unref(currentRoute);
+  const { meta } = props.tabItem
+  const { path } = unref(currentRoute)
 
-  const isCurItem = props.tabItem ? props.tabItem.path === path : false;
+  const isCurItem = props.tabItem ? props.tabItem.path === path : false
 
   // Refresh button
-  const index = tabStore.getTabList.findIndex((tab) => tab.path === props.tabItem.path)
-  const refreshDisabled = !isCurItem;
+  const index = tabStore.getTabList.findIndex(
+    (tab) => tab.path === props.tabItem.path,
+  )
+  const refreshDisabled = !isCurItem
   // Close left
-  const closeLeftDisabled = index === 0 || !isCurItem;
+  const closeLeftDisabled = index === 0 || !isCurItem
 
-  const disabled = tabStore.getTabList.length === 1;
+  const disabled = tabStore.getTabList.length === 1
 
   // Close right
   const closeRightDisabled =
-    !isCurItem || (index === tabStore.getTabList.length - 1 && tabStore.getLastDragEndIndex >= 0);
+    !isCurItem ||
+    (index === tabStore.getTabList.length - 1 &&
+      tabStore.getLastDragEndIndex >= 0)
   return [
     {
       label: t('layout.multipleTab.reload'),
@@ -52,11 +55,11 @@ const options = computed(() => {
       label: t('layout.multipleTab.close'),
       key: TabActionEnum.CLOSE_CURRENT,
       icon: renderIcon('clarity:close-line'),
-      disabled: !!meta?.affix || disabled
+      disabled: !!meta?.affix || disabled,
     },
     {
       type: 'divider',
-      key: 'divider1'
+      key: 'divider1',
     },
     {
       icon: renderIcon('line-md:arrow-close-left'),
@@ -72,7 +75,7 @@ const options = computed(() => {
     },
     {
       type: 'divider',
-      key: 'divider2'
+      key: 'divider2',
     },
     {
       icon: renderIcon('dashicons:align-center'),
@@ -119,8 +122,14 @@ const handleSelect = async (key) => {
     :show-arrow="true"
     @select="handleSelect"
   >
-    <div class="h-full w-32px border-l flex-center border-[var(--n-border-color)] cursor-pointer">
-      <VbenIconify icon="material-symbols:double-arrow-rounded" class="rotate-90" rotate="90deg"/>
+    <div
+      class="h-full w-32px border-l flex-center border-[var(--n-border-color)] cursor-pointer"
+    >
+      <VbenIconify
+        icon="material-symbols:double-arrow-rounded"
+        class="rotate-90"
+        rotate="90deg"
+      />
     </div>
   </VbenDropdown>
 </template>

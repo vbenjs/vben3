@@ -1,14 +1,21 @@
 import { defineStore } from 'pinia'
-import { toRaw, unref } from 'vue'
-import { PAGE_NOT_FOUND_NAME, PageEnum, REDIRECT_NAME } from '@vben/constants'
+import { h, toRaw, unref } from 'vue'
+import {
+  PAGE_NOT_FOUND_NAME,
+  PageEnum,
+  REDIRECT_NAME,
+  TabActionEnum,
+} from '@vben/constants'
 import type {
   RouteLocationNormalized,
   RouteLocationRaw,
   Router,
 } from 'vue-router'
 import { getRawRoute, RemovableRef } from '@vben/utils'
+
 // import { useAppConfig } from './appConfig'
 import { useRouter } from 'vue-router'
+import { useI18n } from '@vben/locale'
 function handleGotoPage(router: Router) {
   const go = useGo(router)
   go(unref(router.currentRoute).path, true)
@@ -165,7 +172,7 @@ export const useMultipleTab = defineStore({
       } else {
         // Add tab
         // 获取动态路由打开数，超过 0 即代表需要控制打开数
-        const dynamicLevel =(meta?.dynamicLevel ?? -1)as unknown as number
+        const dynamicLevel = (meta?.dynamicLevel ?? -1) as unknown as number
         if (dynamicLevel > 0) {
           // 如果动态路由层级大于 0 了，那么就要限制该路由的打开数限制了
           // 首先获取到真实的路由，使用配置方式减少计算开销.
@@ -377,6 +384,75 @@ export const useMultipleTab = defineStore({
         findTab.path = fullPath
         await this.updateCacheTab()
       }
+    },
+    getTabActions(tabItem: RouteLocationNormalized) {
+      if (!tabItem) return
+      const { meta } = tabItem
+      const { currentRoute } = useRouter()
+      const { path } = unref(currentRoute)
+
+      const isCurItem = tabItem ? tabItem.path === path : false
+
+      // Refresh button
+      const index = this.getTabList.findIndex(
+        (tab) => tab.path === tabItem.path,
+      )
+      const refreshDisabled = !isCurItem
+      // Close left
+      const closeLeftDisabled = index === 0 || !isCurItem
+
+      const disabled = this.getTabList.length === 1
+
+      // Close right
+      const closeRightDisabled =
+        !isCurItem ||
+        (index === this.getTabList.length - 1 && this.getLastDragEndIndex >= 0)
+      return [
+        {
+          label: 'layout.multipleTab.reload',
+          key: TabActionEnum.REFRESH_PAGE,
+          icon: 'ion:reload-sharp',
+          disabled: refreshDisabled,
+        },
+        {
+          label: 'layout.multipleTab.close',
+          key: TabActionEnum.CLOSE_CURRENT,
+          icon: 'clarity:close-line',
+          disabled: !!meta?.affix || disabled,
+        },
+        {
+          type: 'divider',
+          key: 'divider1',
+        },
+        {
+          icon: 'line-md:arrow-close-left',
+          key: TabActionEnum.CLOSE_LEFT,
+          label: 'layout.multipleTab.closeLeft',
+          disabled: closeLeftDisabled,
+        },
+        {
+          icon: 'line-md:arrow-close-right',
+          key: TabActionEnum.CLOSE_RIGHT,
+          label: 'layout.multipleTab.closeRight',
+          disabled: closeRightDisabled,
+        },
+        {
+          type: 'divider',
+          key: 'divider2',
+        },
+        {
+          icon: 'dashicons:align-center',
+          key: TabActionEnum.CLOSE_OTHER,
+          label: 'layout.multipleTab.closeOther',
+          disabled: disabled || !isCurItem,
+        },
+        {
+          label: 'layout.multipleTab.closeAll',
+          key: TabActionEnum.CLOSE_ALL,
+          icon: 'clarity:minus-line',
+          disabled,
+        },
+      ]
     },
   },
   persist: {

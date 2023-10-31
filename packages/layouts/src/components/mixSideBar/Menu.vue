@@ -62,10 +62,10 @@ onMounted(async () => {
   menuModules.value = await getShallowMenus()
 })
 
-watchEffect(() => {
-  mixSideHasChildren.value = unref(childrenMenus).length > 0
-  openMenu.value = unref(mixSideHasChildren)
-})
+// watchEffect(() => {
+//   mixSideHasChildren.value = unref(childrenMenus).length > 0
+//   openMenu.value = unref(mixSideHasChildren)
+// })
 
 // Process module menu click
 const handleModuleClick = async (path: string, hover = false, title = '') => {
@@ -133,6 +133,7 @@ function closeMenu() {
 listenerRouteChange((route) => {
   currentRoute.value = route
   setActive(true)
+  console.log(getCloseMixSidebarOnChange.value)
   if (unref(getCloseMixSidebarOnChange)) {
     closeMenu()
   }

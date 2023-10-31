@@ -10,24 +10,28 @@ import { useMultipleTab } from '@vben/stores'
 const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } =
   useTabs()
 const { t } = useI18n()
+
 const x = ref(0)
 const y = ref(0)
-const targetTab = ref<RouteLocationNormalized>(null)
+const targetTab = ref<RouteLocationNormalized>()
 const showDropdown = ref(false)
 const tabStore = useMultipleTab()
-const options = computed(
-  () =>
+const options = computed(() => {
+  const tab = targetTab.value
+  if (!tab) return []
+  return (
     tabStore
-      .getTabActions(targetTab.value)
+      .getTabActions(tab)
       //筛选非当前路由tab的重新加载按钮
       ?.filter((v) => !(v.key == 0 && v.disabled))
       //渲染多语言和图标
       .map((v) => {
-        v.label = t(v.label)
-        v.icon = renderIcon(v.icon)
-        return v
-      }),
-)
+        const label = v.label && t(v.label)
+        const icon = v.icon && renderIcon(v.icon)
+        return { ...v, label, icon }
+      })
+  )
+})
 
 const openDropdown = (e: PointerEvent, tabItem: RouteLocationNormalized) => {
   targetTab.value = tabItem

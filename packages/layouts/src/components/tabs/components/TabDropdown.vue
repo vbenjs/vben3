@@ -4,8 +4,9 @@ import { context } from '../../../../bridge'
 import { useI18n } from '@vben/locale'
 import { TabActionEnum } from '@vben/constants'
 import {RouteLocationNormalized, useRouter} from "vue-router"
-import {renderIcon} from "../../index";
-const { useTabs, useMultipleTabStore } = context
+import { renderIcon } from "../../index";
+import { useMultipleTab } from '@vben/stores'
+const { useTabs } = context
 const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } = useTabs()
 const { t } = useI18n();
 const x = ref(0)
@@ -13,7 +14,7 @@ const y = ref(0)
 const targetTab = ref<RouteLocationNormalized>(null)
 const showDropdown = ref(false)
 
-const tabStore = useMultipleTabStore();
+const tabStore = useMultipleTab();
 const { currentRoute } = useRouter();
 
 const options = computed(() => {

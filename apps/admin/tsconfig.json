@@ -3,6 +3,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "moduleResolution": "Node",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
@@ -11,7 +12,7 @@
     "lib": ["dom", "esnext"],
     "types": [
       "vite/client",
-      "@vben/constant",
+      "@vben/constants",
       "@vben/types/shims/pinia",
       "@vben/types/shims/vue-router",
     ]

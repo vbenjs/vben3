@@ -1,4 +1,4 @@
-import { DefineComponent } from 'vue'
+import { Component } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
 import {
   useRootSetting,
@@ -12,9 +12,10 @@ import {
   usePromise,
 } from '@vben/hooks'
 
-type LogoComponent = DefineComponent<{
+type LogoComponent = Component & {
   showTitle?: boolean
-}>
+}
+
 export interface ContextOptions {
   useAppConfig: typeof useAppConfig
   useRootSetting: typeof useRootSetting
@@ -41,10 +42,10 @@ export interface ContextOptions {
   getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
   siteSetting: Record<string, string>
-  Logo: Nullable<LogoComponent>
+  Logo: LogoComponent
 }
 
-export let context: ContextOptions = {
+export let context: Partial<ContextOptions> = {
   useAppConfig,
   useRootSetting,
   useAppStore: () => undefined,
@@ -68,7 +69,6 @@ export let context: ContextOptions = {
   getChildrenMenus: async (parentPath: string) => ({}),
   getAllParentPath: (menu, path) => [],
   siteSetting: {},
-  Logo: null,
 }
 
 //TODO 需要区分哪些是必填的，其余的为选填

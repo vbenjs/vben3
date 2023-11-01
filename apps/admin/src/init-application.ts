@@ -41,76 +41,70 @@ import { siteSetting } from '@/config'
 // 如果模块相互依赖严重，则需要对外提供解耦方式，由调用方去进行参数传递
 // 各个模块需要提供 `bridge` 文件作为解耦方式
 async function initPackages() {
-  const _initRequest = async () => {
+  const _initRequest = () => {
     const { apiUrl } = getGlobalConfig(import.meta.env)
     const { t } = useI18n()
-    await initRequest(() => {
-      return {
-        apiUrl,
-        getTokenFunction: () => {
-          const userStore = useUserStoreWithout()
-          return userStore.getAccessToken
-        },
-        errorFunction: null,
-        noticeFunction: null,
-        errorModalFunction: null,
-        timeoutFunction: () => {
-          const userStore = useUserStoreWithout()
-          userStore.setAccessToken(undefined)
-          userStore.logout(true)
-        },
-        unauthorizedFunction: (msg?: string) => {
-          const userStore = useUserStoreWithout()
-          userStore.setAccessToken(undefined)
-          userStore.logout(true)
-          return msg || t('sys.api.errMsg401')
-        },
-        handleErrorFunction: (msg, mode) => {
-          if (mode === 'modal') {
-            Modal.error({ title: t('sys.api.errorTip'), content: msg })
-          } else if (mode === 'message') {
-            message.error(msg)
-          }
-        },
-      }
+    initRequest({
+      apiUrl,
+      getTokenFunction: () => {
+        const userStore = useUserStoreWithout()
+        return userStore.getAccessToken
+      },
+      errorFunction: null,
+      noticeFunction: null,
+      errorModalFunction: null,
+      timeoutFunction: () => {
+        const userStore = useUserStoreWithout()
+        userStore.setAccessToken(undefined)
+        userStore.logout(true)
+      },
+      unauthorizedFunction: (msg?: string) => {
+        const userStore = useUserStoreWithout()
+        userStore.setAccessToken(undefined)
+        userStore.logout(true)
+        return msg || t('sys.api.errMsg401')
+      },
+      handleErrorFunction: (msg, mode) => {
+        if (mode === 'modal') {
+          Modal.error({ title: t('sys.api.errorTip'), content: msg })
+        } else if (mode === 'message') {
+          message.error(msg)
+        }
+      },
     })
   }
 
-  const _initComp = async () => {
-    await initComp(() => {
-      return {
-        useLocale,
-        localeList,
-        useAppStore,
-      }
+  const _initComp = () => {
+    initComp({
+      useLocale,
+      localeList,
+      useAppStore,
     })
   }
-  const _initLayout = async () => {
-    await initLayout(() => {
-      return {
-        useAppConfig,
-        useRootSetting,
-        getMenus,
-        getCurrentParentPath,
-        getShallowMenus,
-        getChildrenMenus,
-        getAllParentPath,
-        useHeaderSetting,
-        useDesign,
-        useAppInject,
-        useTabs,
-        usePromise,
-        listenerRouteChange,
-        useUserStore,
-        useAppStore,
-        Logo,
-        useMenuSetting,
-        useMultipleTabSetting,
-        useTransitionSetting,
-        useLockStore,
-        useLockScreen,
-        siteSetting,
-      }
+  const _initLayout = () => {
+    initLayout({
+      useAppConfig,
+      useRootSetting,
+      getMenus,
+      getCurrentParentPath,
+      getShallowMenus,
+      getChildrenMenus,
+      getAllParentPath,
+      useHeaderSetting,
+      useDesign,
+      useAppInject,
+      useTabs,
+      usePromise,
+      listenerRouteChange,
+      useUserStore,
+      useAppStore,
+      Logo,
+      useMenuSetting,
+      useMultipleTabSetting,
+      useTransitionSetting,
+      useLockStore,
+      useLockScreen,
+      siteSetting,
     })
   }
 

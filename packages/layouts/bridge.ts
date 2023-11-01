@@ -71,6 +71,7 @@ export let context: ContextOptions = {
   Logo: null,
 }
 
-export const initLayout = async (func: AnyFunction<any>) => {
-  context = func()
+//TODO 需要区分哪些是必填的，其余的为选填
+export const initLayout = (params: Partial<ContextOptions>) => {
+  context = { ...context, ...params }
 }

@@ -42,10 +42,10 @@ export interface ContextOptions {
   getChildrenMenus: (parentPath: string) => Promise<any>
   getAllParentPath: (menu, path) => string[]
   siteSetting: Record<string, string>
-  Logo: LogoComponent
+  Logo?: LogoComponent
 }
 
-export let context: Partial<ContextOptions> = {
+const defaultOptions: Partial<ContextOptions> = {
   useAppConfig,
   useRootSetting,
   useAppStore: () => undefined,
@@ -71,7 +71,17 @@ export let context: Partial<ContextOptions> = {
   siteSetting: {},
 }
 
-//TODO 需要区分哪些是必填的，其余的为选填
-export const initLayout = (params: Partial<ContextOptions>) => {
-  context = { ...context, ...params }
+export let context: ContextOptions
+
+export const initLayout = (options: Partial<ContextOptions>) => {
+  context = { ...defaultOptions, ...options } as ContextOptions
+  assertOptions(context)
+}
+
+function assertOptions(
+  options: ContextOptions,
+): asserts options is ContextOptions {
+  if (!options.useRootSetting) {
+    throw new Error('Missing required property: useRootSetting')
+  }
 }

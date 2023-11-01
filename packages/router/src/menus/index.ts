@@ -23,11 +23,12 @@ async function getAsyncMenus() {
 }
 
 export const getMenus = async (): Promise<Menu[]> => {
-  const menus = await getAsyncMenus()
+  const menus: Menu[] = await getAsyncMenus()
   if (isRoleMode()) {
     const routes = router.getRoutes()
     return filterTree(menus, basicFilter(routes))
   }
+
   return menus
 }
 

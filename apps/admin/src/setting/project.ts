@@ -98,8 +98,6 @@ export const projectSetting: ProjectConfig = {
     canDrag: false,
     // Whether to show no dom
     show: true,
-    // Whether to show dom
-    hidden: false,
     // Menu width
     menuWidth: 210,
     // Menu mode

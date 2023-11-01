@@ -11,7 +11,6 @@ import {
   RouterTransitionEnum,
 } from '@vben/constants'
 import { LocaleType } from './config'
-// export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko'
 
 export interface MenuSetting {
   bgColor: string
@@ -19,7 +18,6 @@ export interface MenuSetting {
   collapsed: boolean
   canDrag: boolean
   show: boolean
-  hidden: boolean
   split: boolean
   menuWidth: number
   mode: MenuModeEnum
@@ -39,7 +37,6 @@ export interface MenuSetting {
 export interface MultiTabsSetting {
   cache: boolean
   show: boolean
-  hidden: boolean
   showQuick: boolean
   canDrag: boolean
   showRedo: boolean
@@ -51,7 +48,6 @@ export interface HeaderSetting {
   bgColor: string
   fixed: boolean
   show: boolean
-  hidden: boolean
   theme: ThemeEnum
   // Turn on full screen
   showFullScreen: boolean
@@ -135,7 +131,6 @@ export interface SporadicSetting {
   showLogo: boolean
   // Whether to show the global footer
   showFooter: boolean
-  hiddenFooter: boolean
   readonly footerHeight: number
 }
 

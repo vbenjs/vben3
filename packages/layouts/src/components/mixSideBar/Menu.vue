@@ -112,8 +112,6 @@ const getMenuStyle = computed((): CSSProperties => {
       pushpin = false
     }
   }
-  console.log(getIsFixed.value)
-
   oldIsFixed = unref(getIsFixed)
 
   return {
@@ -150,7 +148,6 @@ listenerRouteChange((route) => {
   setActive(true)
   console.log(getCloseMixSidebarOnChange.value)
   if (unref(getCloseMixSidebarOnChange)) {
-    console.log("closeMenu")
     closeMenu()
   }
 })

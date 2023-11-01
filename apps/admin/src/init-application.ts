@@ -2,7 +2,6 @@ import { initRequest } from '@vben/request'
 import { useUserStoreWithout, useUserStore } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
 import { getGlobalConfig } from '@vben/utils'
-import { useConfigStore } from '@/store/config'
 import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
@@ -83,7 +82,6 @@ async function initPackages() {
         useLocale,
         localeList,
         useAppStore,
-        useConfigStore,
       }
     })
   }
@@ -105,7 +103,6 @@ async function initPackages() {
         listenerRouteChange,
         useUserStore,
         useAppStore,
-        useConfigStore,
         Logo,
         useMenuSetting,
         useMultipleTabSetting,
@@ -122,10 +119,6 @@ async function initPackages() {
 
 // Initial project configuration
 function initAppConfigStore() {
-  // const configStore = useConfigStoreWithOut()
-  // const projectConfig = unref(configStore.getProjectConfig)
-  // const projCfg = deepMerge(projectSetting, projectConfig || {})
-  // configStore.setProjectConfig(projCfg)
   const appConfig = useAppConfig()
   appConfig.setAppConfig(projectSetting)
 }

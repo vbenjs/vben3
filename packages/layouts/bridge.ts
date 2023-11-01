@@ -19,7 +19,6 @@ export interface ContextOptions {
   useAppConfig: typeof useAppConfig
   useRootSetting: typeof useRootSetting
   useAppStore: () => unknown
-  useConfigStore: () => unknown
   useHeaderSetting: typeof useHeaderSetting
   useTabs: typeof useTabs
   useUserStore: () => unknown
@@ -49,7 +48,6 @@ export let context: ContextOptions = {
   useAppConfig,
   useRootSetting,
   useAppStore: () => undefined,
-  useConfigStore: () => undefined,
   useUserStore: () => undefined,
   useHeaderSetting,
   useMenuSetting,

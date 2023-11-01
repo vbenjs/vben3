@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { h, toRaw, unref } from 'vue'
+import { toRaw, unref } from 'vue'
 import {
   PAGE_NOT_FOUND_NAME,
   PageEnum,
@@ -12,13 +12,20 @@ import type {
   Router,
 } from 'vue-router'
 import { getRawRoute, RemovableRef } from '@vben/utils'
-
-// import { useAppConfig } from './appConfig'
 import { useRouter } from 'vue-router'
-import { useI18n } from '@vben/locale'
-function handleGotoPage(router: Router) {
-  const go = useGo(router)
-  go(unref(router.currentRoute).path, true)
+
+function handleGotoPage(router: Router, route?: RouteLocationNormalized) {
+  const currentPath = unref(router.currentRoute).path
+  // check if current route in tablist
+  const isExist = useMultipleTab().getTabList.find(
+    (item) => item.path === currentPath,
+  )
+  // if not in tablist, jump to target page or homepage
+  if (!isExist) {
+    const go = useGo(router)
+    const targetPath = route?.path || PageEnum.BASE_HOME
+    go(targetPath, true)
+  }
 }
 
 export interface MultipleTabState {
@@ -51,10 +58,6 @@ function handleError(e: Error) {
   console.error(e)
 }
 
-// const appConfig = useAppConfig()
-
-// const cacheTab = appConfig.getTabTarCache
-
 export const useMultipleTab = defineStore({
   id: 'APP_MULTIPLE_TABS',
   state: (): MultipleTabState => ({
@@ -80,7 +83,7 @@ export const useMultipleTab = defineStore({
     /**
      * Update the cache according to the currently opened tabs
      */
-    async updateCacheTab() {
+    updateCacheTab() {
       const cacheMap: Set<string> = new Set()
 
       for (const tab of this.tabList) {
@@ -192,8 +195,7 @@ export const useMultipleTab = defineStore({
         }
         this.tabList.push(route)
       }
-      await this.updateCacheTab()
-      // cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList)
+      this.updateCacheTab()
     },
 
     async closeTab(tab: RouteLocationNormalized, router: Router) {
@@ -299,7 +301,7 @@ export const useMultipleTab = defineStore({
         this.bulkCloseTabs(pathList)
       }
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     // Close the tab on the left and jump
@@ -321,7 +323,7 @@ export const useMultipleTab = defineStore({
         this.bulkCloseTabs(pathList)
       }
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     async closeAllTab(router: Router) {
@@ -352,13 +354,13 @@ export const useMultipleTab = defineStore({
       }
       this.bulkCloseTabs(pathList)
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     /**
      * Close tabs in bulk
      */
-    async bulkCloseTabs(pathList: string[]) {
+    bulkCloseTabs(pathList: string[]) {
       this.tabList = this.tabList.filter(
         (item) => !pathList.includes(item.fullPath),
       )
@@ -371,7 +373,7 @@ export const useMultipleTab = defineStore({
       const findTab = this.getTabList.find((item) => item === route)
       if (findTab) {
         findTab.meta.title = title
-        await this.updateCacheTab()
+        this.updateCacheTab()
       }
     },
     /**
@@ -382,7 +384,7 @@ export const useMultipleTab = defineStore({
       if (findTab) {
         findTab.fullPath = fullPath
         findTab.path = fullPath
-        await this.updateCacheTab()
+        this.updateCacheTab()
       }
     },
     getTabActions(tabItem: RouteLocationNormalized) {
@@ -393,10 +395,10 @@ export const useMultipleTab = defineStore({
 
       const isCurItem = tabItem ? tabItem.path === path : false
 
-      // Refresh button
       const index = this.getTabList.findIndex(
         (tab) => tab.path === tabItem.path,
       )
+      // Refresh button
       const refreshDisabled = !isCurItem
       // Close left
       const closeLeftDisabled = index === 0
@@ -405,8 +407,7 @@ export const useMultipleTab = defineStore({
 
       // Close right
       const closeRightDisabled =
-        !isCurItem ||
-        (index === this.getTabList.length - 1 && this.getLastDragEndIndex >= 0)
+        index === this.getTabList.length - 1 && this.getLastDragEndIndex >= 0
 
       return [
         {
@@ -445,7 +446,7 @@ export const useMultipleTab = defineStore({
           icon: 'dashicons:align-center',
           key: TabActionEnum.CLOSE_OTHER,
           label: 'layout.multipleTab.closeOther',
-          disabled: disabled || !isCurItem,
+          disabled,
         },
         {
           label: 'layout.multipleTab.closeAll',

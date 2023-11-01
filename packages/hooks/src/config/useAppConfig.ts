@@ -12,7 +12,6 @@ export const useAppConfig = () => {
     appConfigOptions
 
   const setAppConfig = (configs: DeepPartial<DefineAppConfigOptions>) => {
-    console.log('setAppConfig', configs)
     useAppConfigStore.$patch((state) => {
       _merge(state, preDealConfig(configs))
     })

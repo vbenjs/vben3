@@ -56,7 +56,7 @@ export function useTabs(_router?: Router) {
     if (!canIUse) {
       return
     }
-    const currentTab = getCurrentTab()
+    const currentTab = tab || getCurrentTab()
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
         await tabStore.refreshPage(router)
@@ -69,20 +69,20 @@ export function useTabs(_router?: Router) {
         break
 
       case TabActionEnum.CLOSE_LEFT:
-        await tabStore.closeLeftTabs(tab || currentTab, router)
+        await tabStore.closeLeftTabs(currentTab, router)
         break
 
       case TabActionEnum.CLOSE_RIGHT:
-        await tabStore.closeRightTabs(tab || currentTab, router)
+        await tabStore.closeRightTabs(currentTab, router)
         break
 
       case TabActionEnum.CLOSE_OTHER:
-        await tabStore.closeOtherTabs(tab || currentTab, router)
+        await tabStore.closeOtherTabs(currentTab, router)
         break
 
       case TabActionEnum.CLOSE_CURRENT:
       case TabActionEnum.CLOSE:
-        await tabStore.closeTab(tab || currentTab, router)
+        await tabStore.closeTab(currentTab, router)
         break
     }
   }
@@ -90,14 +90,14 @@ export function useTabs(_router?: Router) {
   return {
     refreshPage: () => handleTabAction(TabActionEnum.REFRESH_PAGE),
     closeAll: () => handleTabAction(TabActionEnum.CLOSE_ALL),
-    closeLeft: (tab?: RouteLocationNormalized) =>
+    closeLeft: (tab: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE_LEFT, tab),
-    closeRight: (tab?: RouteLocationNormalized) =>
+    closeRight: (tab: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE_RIGHT, tab),
-    closeOther: (tab?: RouteLocationNormalized) =>
+    closeOther: (tab: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE_OTHER, tab),
     closeCurrent: () => handleTabAction(TabActionEnum.CLOSE_CURRENT),
-    close: (tab?: RouteLocationNormalized) =>
+    close: (tab: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE, tab),
     setTitle: (title: string, tab?: RouteLocationNormalized) =>
       updateTabTitle(title, tab),

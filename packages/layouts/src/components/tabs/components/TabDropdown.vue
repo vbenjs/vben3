@@ -61,7 +61,7 @@ const handleSelect = async (key) => {
       await closeRight(tab)
       break
     case TabActionEnum.CLOSE_OTHER:
-      await closeOther()
+      await closeOther(tab)
       break
   }
 }

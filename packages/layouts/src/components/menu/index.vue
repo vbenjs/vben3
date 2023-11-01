@@ -11,15 +11,21 @@ import { REDIRECT_NAME } from '@vben/constants'
 import { renderIcon } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import type { RouteMeta } from 'vue-router'
-
+import { Menu } from '@vben/types'
 const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
-import { getMenus, listenerRouteChange } from '@vben/router'
+import { getMenus, listenerRouteChange, emitter } from '@vben/router'
 import FooterTrigger from '../trigger/FooterTrigger.vue'
 
 const { getIsMobile } = useAppInject()
 
-const { menu, isMixSidebar, getCollapsedShowTitle, sidebar, isSidebar } =
-  useAppConfig()
+const {
+  menu,
+  isMixSidebar,
+  getCollapsedShowTitle,
+  sidebar,
+  isSidebar,
+  isTopMenu,
+} = useAppConfig()
 const { getTopMenuAlign, getShowFooterTrigger } = useMenuSetting()
 const showSidebarLogo = computed(() => {
   return unref(isSidebar) || unref(isMixSidebar)
@@ -29,13 +35,18 @@ const props = defineProps({
     type: String,
     default: () => 'vertical',
   },
+  split: {
+    type: Boolean,
+    default: () => false,
+  },
 })
 const { bem } = createNamespace('layout-menu')
 const { t } = useI18n()
 const { currentRoute } = useRouter()
 
 const menuRef = ref(null)
-const menuList = ref([])
+const options = ref<Menu[]>([])
+const menuList = ref<Menu[]>([])
 const activeKey = ref()
 
 const getMenuCollapsed = computed(() => {
@@ -50,28 +61,71 @@ const showOption = () => {
     menuRef.value.Ref.showOption()
   })
 }
+
 // TODO 静态路由 待实现
 onMounted(async () => {
   const menus = await getMenus()
-  menuList.value = mapTree(menus, { conversion: (menu) => routerToMenu(menu) })
-  showOption()
+  menuList.value = mapTree(menus, {
+    conversion: (menu) => routerToMenu(menu),
+  })
+  options.value = mapTree(menus, {
+    conversion: (menu) => routerToMenu(menu),
+  })
+
+  if (props.split) {
+    //监听菜单改变事件以接受子路由
+    emitter.on('menuChange', (p) => {
+      activeKey.value = p.name
+      options.value = p.options
+    })
+  }
+  handleMenuChange()
 })
 
 listenerRouteChange((route) => {
   if (route.name === REDIRECT_NAME) return
-
   const currentActiveMenu = route.meta?.currentActiveMenu as string
   handleMenuChange(route)
-
   if (currentActiveMenu) {
     activeKey.value = currentActiveMenu
   }
+
   showOption()
-})
+}, false)
 
 async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
-  const menu = route || unref(currentRoute)
-  activeKey.value = menu.name
+  const currentMenu = route || unref(currentRoute)
+  activeKey.value = currentMenu.name
+  //分割菜单 独有逻辑
+  if (menu.value.split) {
+    options.value.forEach((v) => {
+      delete v.children
+    })
+    getActiveKey(menuList.value, currentMenu.name as string)
+    //切换tab更新子路由
+    emitter.emit('menuChange', {
+      name: currentMenu.name,
+      options: menuList.value.find((v) => v.key == activeKey.value)?.children,
+    })
+  }
+  showOption()
+}
+
+//暂存菜单层级
+let parent = []
+//通过子菜单key获取菜单顶层key
+function getActiveKey(menus: Menu[], key: string) {
+  menus.forEach((v) => {
+    if (v.key === key) {
+      activeKey.value = parent[0]
+      return
+    }
+    if (v.children?.length > 0) {
+      parent.push(v.key)
+      return getActiveKey(v.children, key)
+    }
+  })
+  parent = []
 }
 
 // 路由格式化
@@ -97,6 +151,15 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
     icon: renderIcon(icon),
   }
 }
+const clickMenu = (key) => {
+  if (isTopMenu && menu.value.split && !props.split) {
+    //通过emit将子路由传递出去
+    emitter.emit('menuChange', {
+      name: activeKey.value,
+      options: menuList.value.find((v) => v.key == key)?.children,
+    })
+  }
+}
 </script>
 
 <template>
@@ -115,7 +178,7 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
             getTopMenuAlign === 'center' ? 'center' : `flex-${getTopMenuAlign}`,
         }"
         v-model:value="activeKey"
-        :options="menuList"
+        :options="options"
         :collapsed="getMenuCollapsed"
         :collapsed-width="48"
         :collapsed-icon-size="22"
@@ -124,6 +187,7 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
         ref="menuRef"
         :mode="props.mode"
         :accordion="menu.accordion"
+        @update:value="clickMenu"
       />
     </VbenScrollbar>
     <FooterTrigger v-if="getShowFooterTrigger" />

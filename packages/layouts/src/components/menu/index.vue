@@ -98,10 +98,17 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
   activeKey.value = currentMenu.name
   //分割菜单 独有逻辑
   if (menu.value.split) {
-    options.value.forEach((v) => {
-      delete v.children
-    })
-    getActiveKey(menuList.value, currentMenu.name as string)
+    if (!props.split) {
+      options.value.forEach((v) => {
+        delete v.children
+      })
+    }
+    //递归获取顶层key
+    activeKey.value = findTopKey(
+      flatten(menuList.value),
+      currentMenu.name as string,
+    )
+    // console.log(menuList.value, currentMenu.name)
     //切换tab更新子路由
     emitter.emit('menuChange', {
       name: currentMenu.name,
@@ -111,21 +118,25 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
   showOption()
 }
 
-//暂存菜单层级
-let parent = []
-//通过子菜单key获取菜单顶层key
-function getActiveKey(menus: Menu[], key: string) {
-  menus.forEach((v) => {
-    if (v.key === key) {
-      activeKey.value = parent[0]
-      return
-    }
-    if (v.children?.length > 0) {
-      parent.push(v.key)
-      return getActiveKey(v.children, key)
+//递归通过子菜单key获取菜单顶层key
+function flatten(arr, prefix = '') {
+  let result = {}
+  arr.forEach((item) => {
+    let key = `${prefix}|${item.key}`
+    if (Array.isArray(item.children)) {
+      result = { ...result, ...flatten(item.children, key) }
+    } else {
+      result[key] = item
     }
   })
-  parent = []
+  return result
+}
+//筛选获取顶层key
+function findTopKey(flattened, key) {
+  return Object.keys(flattened)
+    .find((k) => k.endsWith(key))
+    .split('|')
+    .filter((v) => v)[0]
 }
 
 // 路由格式化

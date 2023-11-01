@@ -15,9 +15,17 @@ import { getRawRoute, RemovableRef } from '@vben/utils'
 import { useRouter } from 'vue-router'
 
 function handleGotoPage(router: Router, route?: RouteLocationNormalized) {
-  const targetRoute = route || unref(router.currentRoute)
-  const go = useGo(router)
-  go(targetRoute.path, true)
+  const currentPath = unref(router.currentRoute).path
+  // check if current route in tablist
+  const isExist = useMultipleTab().getTabList.find(
+    (item) => item.path === currentPath,
+  )
+  // if not in tablist, jump to target page or homepage
+  if (!isExist) {
+    const go = useGo(router)
+    const targetPath = route?.path || PageEnum.BASE_HOME
+    go(targetPath, true)
+  }
 }
 
 export interface MultipleTabState {
@@ -75,7 +83,7 @@ export const useMultipleTab = defineStore({
     /**
      * Update the cache according to the currently opened tabs
      */
-    async updateCacheTab() {
+    updateCacheTab() {
       const cacheMap: Set<string> = new Set()
 
       for (const tab of this.tabList) {
@@ -187,8 +195,7 @@ export const useMultipleTab = defineStore({
         }
         this.tabList.push(route)
       }
-      await this.updateCacheTab()
-      // cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList)
+      this.updateCacheTab()
     },
 
     async closeTab(tab: RouteLocationNormalized, router: Router) {
@@ -353,7 +360,7 @@ export const useMultipleTab = defineStore({
     /**
      * Close tabs in bulk
      */
-    async bulkCloseTabs(pathList: string[]) {
+    bulkCloseTabs(pathList: string[]) {
       this.tabList = this.tabList.filter(
         (item) => !pathList.includes(item.fullPath),
       )
@@ -366,7 +373,7 @@ export const useMultipleTab = defineStore({
       const findTab = this.getTabList.find((item) => item === route)
       if (findTab) {
         findTab.meta.title = title
-        await this.updateCacheTab()
+        this.updateCacheTab()
       }
     },
     /**
@@ -377,7 +384,7 @@ export const useMultipleTab = defineStore({
       if (findTab) {
         findTab.fullPath = fullPath
         findTab.path = fullPath
-        await this.updateCacheTab()
+        this.updateCacheTab()
       }
     },
     getTabActions(tabItem: RouteLocationNormalized) {

@@ -1,4 +1,7 @@
 # vben3 后台管理系统
+[![Build Status](https://img.shields.io/github/actions/workflow/status/vbenjs/vben3/deploy.yml?branch=master)](https://github.com/vbenjs/vben3/actions)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/vbenjs/vben3)](https://github.com/vbenjs/vben3/graphs/commit-activity)
+[![GitHub contributors](https://img.shields.io/github/contributors/vbenjs/vben3)](https://github.com/vbenjs/vben3/graphs/contributors)
 
 [English](./README.en-US.md) | 简体中文
 
@@ -29,6 +32,10 @@ pnpm dev
 
 详见[贡献指南](./CONTRIBUTING.md)
 
+<a href="https://github.com/vbenjs/vben3/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=vbenjs/vben3" />
+</a>
+
 ## 许可证
 
-Vben3 使用 MIT 协议开源
+Vben3 使用 [MIT](https://opensource.org/licenses/MIT) 协议开源

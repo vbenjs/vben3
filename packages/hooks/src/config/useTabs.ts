@@ -90,14 +90,14 @@ export function useTabs(_router?: Router) {
   return {
     refreshPage: () => handleTabAction(TabActionEnum.REFRESH_PAGE),
     closeAll: () => handleTabAction(TabActionEnum.CLOSE_ALL),
-    closeLeft: (tab: RouteLocationNormalized) =>
+    closeLeft: (tab?: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE_LEFT, tab),
-    closeRight: (tab: RouteLocationNormalized) =>
+    closeRight: (tab?: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE_RIGHT, tab),
-    closeOther: (tab: RouteLocationNormalized) =>
+    closeOther: (tab?: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE_OTHER, tab),
     closeCurrent: () => handleTabAction(TabActionEnum.CLOSE_CURRENT),
-    close: (tab: RouteLocationNormalized) =>
+    close: (tab?: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE, tab),
     setTitle: (title: string, tab?: RouteLocationNormalized) =>
       updateTabTitle(title, tab),

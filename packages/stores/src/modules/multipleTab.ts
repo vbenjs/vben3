@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { h, toRaw, unref } from 'vue'
+import { toRaw, unref } from 'vue'
 import {
   PAGE_NOT_FOUND_NAME,
   PageEnum,
@@ -12,13 +12,12 @@ import type {
   Router,
 } from 'vue-router'
 import { getRawRoute, RemovableRef } from '@vben/utils'
-
-// import { useAppConfig } from './appConfig'
 import { useRouter } from 'vue-router'
-import { useI18n } from '@vben/locale'
-function handleGotoPage(router: Router) {
+
+function handleGotoPage(router: Router, route?: RouteLocationNormalized) {
+  const targetRoute = route || unref(router.currentRoute)
   const go = useGo(router)
-  go(unref(router.currentRoute).path, true)
+  go(targetRoute.path, true)
 }
 
 export interface MultipleTabState {
@@ -50,10 +49,6 @@ export function useGo(_router?: Router) {
 function handleError(e: Error) {
   console.error(e)
 }
-
-// const appConfig = useAppConfig()
-
-// const cacheTab = appConfig.getTabTarCache
 
 export const useMultipleTab = defineStore({
   id: 'APP_MULTIPLE_TABS',
@@ -299,7 +294,7 @@ export const useMultipleTab = defineStore({
         this.bulkCloseTabs(pathList)
       }
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     // Close the tab on the left and jump
@@ -321,7 +316,7 @@ export const useMultipleTab = defineStore({
         this.bulkCloseTabs(pathList)
       }
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     async closeAllTab(router: Router) {
@@ -352,7 +347,7 @@ export const useMultipleTab = defineStore({
       }
       this.bulkCloseTabs(pathList)
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     /**

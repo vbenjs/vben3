@@ -393,10 +393,10 @@ export const useMultipleTab = defineStore({
 
       const isCurItem = tabItem ? tabItem.path === path : false
 
-      // Refresh button
       const index = this.getTabList.findIndex(
         (tab) => tab.path === tabItem.path,
       )
+      // Refresh button
       const refreshDisabled = !isCurItem
       // Close left
       const closeLeftDisabled = index === 0
@@ -405,8 +405,7 @@ export const useMultipleTab = defineStore({
 
       // Close right
       const closeRightDisabled =
-        !isCurItem ||
-        (index === this.getTabList.length - 1 && this.getLastDragEndIndex >= 0)
+        index === this.getTabList.length - 1 && this.getLastDragEndIndex >= 0
 
       return [
         {
@@ -445,7 +444,7 @@ export const useMultipleTab = defineStore({
           icon: 'dashicons:align-center',
           key: TabActionEnum.CLOSE_OTHER,
           label: 'layout.multipleTab.closeOther',
-          disabled: disabled || !isCurItem,
+          disabled,
         },
         {
           label: 'layout.multipleTab.closeAll',

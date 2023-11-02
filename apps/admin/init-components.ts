@@ -94,6 +94,7 @@ import naive, {
   NAffix,
   NAlert,
   NGradientText,
+  NPageHeader
 } from 'naive-ui'
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
 
@@ -172,6 +173,7 @@ export async function registerComponents(app) {
 
     Popover: NPopover,
     Popconfirm: NPopconfirm,
+    PageHeader: NPageHeader,
     Pagination: NPagination,
     PopSelect: NPopselect,
 

@@ -3,11 +3,9 @@ import { resolve } from 'path'
 import { red } from 'picocolors'
 import { readPackageJSON } from 'pkg-types'
 import type { UserConfig } from 'vite'
-import { loadEnv, mergeConfig } from 'vite'
+import { loadEnv } from 'vite'
 import { OUTPUT_DIR } from './constants'
 import { configVitePlugins } from './plugins'
-import type { PresetType } from './presets'
-import { createPreset } from './presets'
 import { resolveProxy, wrapperEnv } from './utils'
 
 export * from './constants'
@@ -16,7 +14,6 @@ export async function createViteConfig(
   command: 'build' | 'serve',
   mode: string,
   cwd: string,
-  { preset }: { preset: PresetType },
 ): Promise<UserConfig> {
   console.log()
   console.log(
@@ -88,5 +85,5 @@ export async function createViteConfig(
     plugins: await configVitePlugins(root, viteEnv, command === 'build'),
   }
 
-  return mergeConfig(commonConfig, await createPreset(preset)())
+  return commonConfig
 }

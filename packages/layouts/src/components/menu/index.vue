@@ -141,13 +141,18 @@ function findTopKey(flattened, key) {
 
 // 路由格式化
 const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
+  // 将路由条目和路由元数据解构为name，children，meta和icon
   const { name, children, meta, icon } = item
+  // 将meta.title翻译为字符串，并将其作为参数传递给t函数，返回结果赋值给title变量
   const title = t(meta.title as string)
+  // 返回一个对象，包含label、key和icon属性
   return {
+    // label属性返回一个函数，用于在渲染时根据是否存在children来决定是否返回title
     label: () => {
       if (children) {
         return title
       }
+      // 如果存在children，则使用RouterLink组件渲染一个链接，链接到name对应的路由
       return h(
         RouterLink,
         {
@@ -158,10 +163,13 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
         { default: () => title },
       )
     },
+    // key属性设置为name，用于在菜单中唯一标识该菜单项
     key: name,
+    // icon属性调用renderIcon函数渲染icon
     icon: renderIcon(icon),
   }
 }
+
 const clickMenu = (key) => {
   if (isTopMenu && menu.value.split && !props.split) {
     //通过emit将子路由传递出去

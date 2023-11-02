@@ -69,7 +69,7 @@ declare global {
   }
 
   interface Window {
-    initGoogleMap: () => void;
+    initGoogleMap: () => void
   }
   interface ViteEnv {
     VITE_USE_MOCK: boolean

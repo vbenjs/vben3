@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import { computed, defineComponent, nextTick, unref } from 'vue'
 import { NavBarModeEnum } from '@vben/constants'
-import { computed, defineComponent, unref } from 'vue'
+import { createThemeColorListen } from '@vben/hooks'
+
 import LeftMenuLayout from './left-menu.vue'
 import TopMenuLayout from './top-menu.vue'
 import TopMenuMixLayout from './top-menu-mixed.vue'
@@ -29,6 +31,10 @@ const layout = computed<ReturnType<typeof defineComponent>>(() => {
     default:
       return undefined
   }
+})
+
+nextTick(() => {
+  createThemeColorListen()
 })
 </script>
 <template>

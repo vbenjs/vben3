@@ -1,6 +1,11 @@
-<script lang="ts" setup>
-</script>
 <template>
-  <div>拖拽</div>
+  <div>
+    <PageWrapper title="123" content="456"/>
+  </div>
 </template>
-<style lang="scss" scoped></style>
+
+<script setup lang="ts">
+import { PageWrapper } from '@vben/components';
+</script>
+
+<style scoped></style>

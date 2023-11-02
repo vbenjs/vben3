@@ -12,6 +12,7 @@
     "@vben/constants": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
+    "@vben/hooks": "workspace:*",
     "qrcode": "^1.5.3",
     "vue": "3.3.4",
     "vue-router": "^4.2.4"

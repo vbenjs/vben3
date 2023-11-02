@@ -67,6 +67,11 @@ declare global {
   interface ImportMetaEnv extends ViteEnv {
     __: never
   }
+
+  interface Window {
+    initGoogleMap: () => void;
+  }
+
   interface ViteEnv {
     VITE_USE_MOCK: boolean
     VITE_PUBLIC_PATH: string

@@ -73,7 +73,7 @@ onMounted(() => {
 
 <template>
   <div class="bmap-input">
-    <VbenInput size="small" clearable placeholder="search" @input="handleInput">
+    <VbenInput clearable placeholder="search" @input="handleInput">
       <template #prefix>
         <VbenIconify :size="20" color="gray" icon="ant-design:search-outlined" />
       </template>

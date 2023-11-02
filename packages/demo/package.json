@@ -14,6 +14,7 @@
     "@vben/request": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
+    "@vben/hooks": "workspace:*",
     "vue": "^3.3.6"
   },
   "devDependencies": {

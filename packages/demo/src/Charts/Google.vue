@@ -5,7 +5,7 @@ import { useScript } from '@vben/hooks'
 import { useDebounceFn } from '@vben/utils'
 
 // 可以换@googlemaps/js-api-loader 软件包方案
-const MAP_URL = 'https://maps.googleapis.com/maps/api/js?key=你的apiKey&callback=initGoogleMap'
+const MAP_URL = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCPBFJ6Dkc0dLcqr8_wCfWyGUGwNN5N5G8&callback=initGoogleMap'
 // @googlemaps/js-api-loader 软件包方案
 /* const loader = new Loader({
 apiKey: "YOUR_API_KEY",

@@ -1,28 +1,34 @@
 <script lang="ts" setup>
 import { ref, unref, onMounted } from 'vue'
-/* import { Loader } from "@googlemaps/js-api-loader" */
 import { useScript } from '@vben/hooks'
 import { useDebounceFn } from '@vben/utils'
+/* import { Loader } from "@googlemaps/js-api-loader" */
+
 // 可以换@googlemaps/js-api-loader 软件包方案
-const MAP_URL =
-  'https://maps.googleapis.com/maps/api/js?key=AIzaSyCPBFJ6Dkc0dLcqr8_wCfWyGUGwNN5N5G8&callback=initGoogleMap'
-// @googlemaps/js-api-loader 软件包方案
-/* const loader = new Loader({
-apiKey: "YOUR_API_KEY",
-version: "weekly",
-...additionalOptions,
-}); */
-/* loader.load().then(async () => {
-const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
-map = new Map(document.getElementById("map") as HTMLElement, {
-  center: { lat: -34.397, lng: 150.644 },
-  zoom: 8,
-});
-}); */
+/*
+  const loader = new Loader({
+    apiKey: 'YOUR_API_KEY',
+    version: 'weekly',
+    ...additionalOptions,
+  })
+  loader.load().then(async () => {
+    const { Map } = (await google.maps.importLibrary(
+      'maps',
+    )) as google.maps.MapsLibrary
+    map = new Map(document.getElementById('map') as HTMLElement, {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 8,
+    })
+  })
+*/
+
 defineProps({
   width: { type: String, default: '100%' },
   height: { type: String, default: 'calc(100vh - 90px)' },
 })
+const MAP_URL =
+  'https://maps.googleapis.com/maps/api/js?key=AIzaSyCPBFJ6Dkc0dLcqr8_wCfWyGUGwNN5N5G8&callback=initGoogleMap'
+
 const emit = defineEmits(['change-point', 'point-changed'])
 const wrapGoogleRef = ref<HTMLDivElement | null>(null)
 const { load } = useScript({ src: MAP_URL })

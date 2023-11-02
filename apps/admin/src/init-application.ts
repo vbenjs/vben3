@@ -41,7 +41,7 @@ import { siteSetting } from '@/config'
 // 如果模块相互依赖严重，则需要对外提供解耦方式，由调用方去进行参数传递
 // 各个模块需要提供 `bridge` 文件作为解耦方式
 async function initPackages() {
-  const _initRequest = () => {
+  const _initRequest = async () => {
     const { apiUrl } = getGlobalConfig(import.meta.env)
     const { t } = useI18n()
     initRequest({
@@ -74,14 +74,14 @@ async function initPackages() {
     })
   }
 
-  const _initComp = () => {
+  const _initComp = async () => {
     initComp({
       useLocale,
       localeList,
       useAppStore,
     })
   }
-  const _initLayout = () => {
+  const _initLayout = async () => {
     initLayout({
       useAppConfig,
       useRootSetting,
@@ -112,9 +112,9 @@ async function initPackages() {
 }
 
 // Initial project configuration
-function initAppConfigStore() {
-  const appConfig = useAppConfig()
-  appConfig.setAppConfig(projectSetting)
+export function initAppConfigStore() {
+  useAppConfig(projectSetting)
+  // appConfig.setAppConfig(projectSetting)
 }
 
 export async function initApplication() {
@@ -123,5 +123,5 @@ export async function initApplication() {
   await initPackages()
 
   // Initialize internal system configuration
-  initAppConfigStore()
+  // initAppConfigStore()
 }

@@ -5,8 +5,8 @@ import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
 
-export const useAppConfig = () => {
-  const useAppConfigStore = appConfigStore()
+export const useAppConfig = (options: any) => {
+  const useAppConfigStore = appConfigStore(options)
   const appConfigOptions = storeToRefs(useAppConfigStore)
   const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar } =
     appConfigOptions

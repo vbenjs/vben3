@@ -7,12 +7,13 @@ import { InitRouter } from '@vben/router'
 import { setupRouteGuard } from '@/router/guard'
 import { setupI18n } from '@vben/locale'
 import { setupPinia } from '@vben/stores'
-import { initApplication } from './init-application'
+import { initAppConfigStore, initApplication } from './init-application'
 import { registerComponents } from '../init-components'
 ;(async () => {
   const app = createApp(App)
 
   setupPinia(app)
+  initAppConfigStore()
   //注册组件
   await registerComponents(app)
 

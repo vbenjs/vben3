@@ -22,7 +22,7 @@ import {
 // ! You need to clear the browser cache after the change
 export const projectSetting: DefineAppConfigOptions = {
   theme: ThemeEnum.LIGHT,
-  navBarMode: NavBarModeEnum.MIX_SIDEBAR,
+  navBarMode: NavBarModeEnum.SIDEBAR,
   themeColor: primaryColor,
   showThemeModeToggle: true,
   openKeepAlive: true,

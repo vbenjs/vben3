@@ -1,12 +1,19 @@
-import { storeToRefs, useAppConfig as appConfigStore } from '@vben/stores'
+import {
+  initAppConfigStore,
+  storeToRefs,
+  useAppConfig as appConfigStore,
+} from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
 import { HandlerSettingEnum, NavBarModeEnum } from '@vben/constants'
 import { _merge } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
 import { useClipboard, _omit } from '@vben/utils'
 
-export const useAppConfig = (options: any) => {
-  const useAppConfigStore = appConfigStore(options)
+export const initAppConfig = (options: DefineAppConfigOptions) => {
+  initAppConfigStore(options)
+}
+export const useAppConfig = () => {
+  const useAppConfigStore = appConfigStore()
   const appConfigOptions = storeToRefs(useAppConfigStore)
   const { openSettingDrawer, sidebar, menu, isMixSidebar, isSidebar } =
     appConfigOptions

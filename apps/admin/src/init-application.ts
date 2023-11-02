@@ -17,6 +17,7 @@ import {
   useDesign,
   useAppConfig,
   usePromise,
+  initAppConfig,
 } from '@vben/hooks'
 import {
   getAllParentPath,
@@ -111,17 +112,11 @@ async function initPackages() {
   await Promise.all([_initRequest(), _initComp(), _initLayout()])
 }
 
-// Initial project configuration
-export function initAppConfigStore() {
-  useAppConfig(projectSetting)
-  // appConfig.setAppConfig(projectSetting)
-}
-
 export async function initApplication() {
   // ! Need to pay attention to the timing of execution
   // ! 需要注意调用时机
   await initPackages()
 
-  // Initialize internal system configuration
-  // initAppConfigStore()
+  // Initial project configuration
+  initAppConfig(projectSetting)
 }

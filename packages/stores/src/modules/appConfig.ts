@@ -120,144 +120,109 @@ const defaultOptions: DefineAppConfigOptions = {
   },
 }
 
-export const useAppConfig = (
-  options: DefineAppConfigOptions = defaultOptions,
-) =>
-  defineStore({
-    id: 'APP_CONFIG',
-    state: (): DefineAppConfigOptions => ({ ...options }),
-    getters: {
-      isSidebar: (state) => state.navBarMode === NavBarModeEnum.SIDEBAR,
-      isTopMenu: (state) => state.navBarMode === NavBarModeEnum.TOP_MENU,
-      isMixSidebar: (state) => state.navBarMode === NavBarModeEnum.MIX_SIDEBAR,
-      isMix: (state) => state.navBarMode === NavBarModeEnum.MIX,
-      isMixMode: (state) =>
-        state.menu.mode === MenuModeEnum.INLINE &&
-        state.navBarMode === NavBarModeEnum.MIX,
-      isHorizontal: (state) => state.menu.mode === MenuModeEnum.HORIZONTAL,
-      getTabTarCache: (state) => state.tabTar.cache,
+// Must be called before the first use of useAppConfig
+export const initAppConfigStore = (options: DefineAppConfigOptions) => {
+  Object.assign(defaultOptions, options)
+  useAppConfig()
+}
+
+export const useAppConfig = defineStore({
+  id: 'APP_CONFIG',
+  state: (): DefineAppConfigOptions => ({ ...defaultOptions }),
+  getters: {
+    isSidebar: (state) => state.navBarMode === NavBarModeEnum.SIDEBAR,
+    isTopMenu: (state) => state.navBarMode === NavBarModeEnum.TOP_MENU,
+    isMixSidebar: (state) => state.navBarMode === NavBarModeEnum.MIX_SIDEBAR,
+    isMix: (state) => state.navBarMode === NavBarModeEnum.MIX,
+    isMixMode: (state) =>
+      state.menu.mode === MenuModeEnum.INLINE &&
+      state.navBarMode === NavBarModeEnum.MIX,
+    isHorizontal: (state) => state.menu.mode === MenuModeEnum.HORIZONTAL,
+    getTabTarCache: (state) => state.tabTar.cache,
+  },
+  actions: {
+    setTheme(value: ThemeEnum) {
+      this.theme = value
     },
-    actions: {
-      setTheme(value: ThemeEnum) {
-        this.theme = value
-      },
-      setNavBarMode(value: NavBarModeEnum) {
-        this.navBarMode = value
-      },
-      setThemeColor(value: string) {
-        this.themeColor = value
-      },
-      setShowThemeModeToggle(value: boolean) {
-        this.showThemeModeToggle = value
-      },
-      setOpenKeepAlive(value: boolean) {
-        this.openKeepAlive = value
-      },
-      setUseOpenBackTop(value: boolean) {
-        this.useOpenBackTop = value
-      },
-      setCloseMessageOnSwitch(value: boolean) {
-        this.closeMessageOnSwitch = value
-      },
-      setRemoveAllHttpPending(value: boolean) {
-        this.removeAllHttpPending = value
-      },
-      setPermissionCacheType(value: CacheTypeEnum) {
-        this.permissionCacheType = value
-      },
-      setSettingButtonPosition(value: SettingButtonPositionEnum) {
-        this.settingButtonPosition = value
-      },
-      setOpenSettingDrawer(value: boolean) {
-        this.openSettingDrawer = value
-      },
-      setPermissionMode(value: PermissionModeEnum) {
-        this.permissionMode = value
-      },
-      setSessionTimeoutProcessing(value: SessionTimeoutProcessingEnum) {
-        this.sessionTimeoutProcessing = value
-      },
-      setGrayMode(value: boolean) {
-        this.grayMode = value
-      },
-      setColorWeak(value: boolean) {
-        this.colorWeak = value
-      },
-      setLockTime(value: number) {
-        this.lockTime = value
-      },
-      setUseLockPage(value: boolean) {
-        this.useLockPage = value
-      },
-      setCanEmbedIFramePage(value: boolean) {
-        this.canEmbedIFramePage = value
-      },
-      setSidebar(
-        value: Partial<
-          Omit<SidebarConfigOptions, 'mixSidebarWidth' | 'collapsedWidth'>
-        >,
-      ) {
-        _assign(this.sidebar, value)
-      },
-      setMenu(value: Partial<MenuConfigOptions>) {
-        _assign(this.menu, value)
-      },
-      setHeader(value: Partial<Omit<HeaderConfigOptions, 'height'>>) {
-        _assign(this.header, value)
-      },
-      setLogo(value: Partial<LogoConfigOptions>) {
-        _assign(this.logo, value)
-      },
-      setTabTar(value: Partial<TabTbrConfigOptions>) {
-        _assign(this.tabTar, value)
-      },
-      setContent(value: Partial<ContentConfigOptions>) {
-        _assign(this.content, value)
-      },
-      setFooter(value: Partial<Omit<FooterConfigOptions, 'height'>>) {
-        _assign(this.footer, value)
-      },
-      setTransition(value: Partial<TransitionConfigOptions>) {
-        _assign(this.transition, value)
-      },
+    setNavBarMode(value: NavBarModeEnum) {
+      this.navBarMode = value
     },
-    persist: {
-      beforeRestore: (ctx) => {
-        console.log(`about to restore '${ctx.store.$state.navBarMode}'`)
-      },
-      afterRestore: (ctx) => {
-        console.log(`just restored '${ctx.store.$state.navBarMode}'`)
-      },
+    setThemeColor(value: string) {
+      this.themeColor = value
     },
-    // persist: {
-    //   // excludedPaths: ['openSettingDrawer'], // Temporarily invalid
-    //   paths: [
-    //     'theme',
-    //     'navBarMode',
-    //     'themeColor',
-    //     'showThemeModeToggle',
-    //     'openKeepAlive',
-    //     'useOpenBackTop',
-    //     'closeMessageOnSwitch',
-    //     'removeAllHttpPending',
-    //     'permissionCacheType',
-    //     'settingButtonPosition',
-    //     'permissionMode',
-    //     'sessionTimeoutProcessing',
-    //     'grayMode',
-    //     'colorWeak',
-    //     'lockTime',
-    //     'useLockPage',
-    //     'canEmbedIFramePage',
-    //     'closeMixSidebarOnChange',
-    //     'sidebar',
-    //     'menu',
-    //     'header',
-    //     'logo',
-    //     'tabTar',
-    //     'content',
-    //     'footer',
-    //     'transition',
-    //   ],
-    // },
-  })()
+    setShowThemeModeToggle(value: boolean) {
+      this.showThemeModeToggle = value
+    },
+    setOpenKeepAlive(value: boolean) {
+      this.openKeepAlive = value
+    },
+    setUseOpenBackTop(value: boolean) {
+      this.useOpenBackTop = value
+    },
+    setCloseMessageOnSwitch(value: boolean) {
+      this.closeMessageOnSwitch = value
+    },
+    setRemoveAllHttpPending(value: boolean) {
+      this.removeAllHttpPending = value
+    },
+    setPermissionCacheType(value: CacheTypeEnum) {
+      this.permissionCacheType = value
+    },
+    setSettingButtonPosition(value: SettingButtonPositionEnum) {
+      this.settingButtonPosition = value
+    },
+    setOpenSettingDrawer(value: boolean) {
+      this.openSettingDrawer = value
+    },
+    setPermissionMode(value: PermissionModeEnum) {
+      this.permissionMode = value
+    },
+    setSessionTimeoutProcessing(value: SessionTimeoutProcessingEnum) {
+      this.sessionTimeoutProcessing = value
+    },
+    setGrayMode(value: boolean) {
+      this.grayMode = value
+    },
+    setColorWeak(value: boolean) {
+      this.colorWeak = value
+    },
+    setLockTime(value: number) {
+      this.lockTime = value
+    },
+    setUseLockPage(value: boolean) {
+      this.useLockPage = value
+    },
+    setCanEmbedIFramePage(value: boolean) {
+      this.canEmbedIFramePage = value
+    },
+    setSidebar(
+      value: Partial<
+        Omit<SidebarConfigOptions, 'mixSidebarWidth' | 'collapsedWidth'>
+      >,
+    ) {
+      _assign(this.sidebar, value)
+    },
+    setMenu(value: Partial<MenuConfigOptions>) {
+      _assign(this.menu, value)
+    },
+    setHeader(value: Partial<Omit<HeaderConfigOptions, 'height'>>) {
+      _assign(this.header, value)
+    },
+    setLogo(value: Partial<LogoConfigOptions>) {
+      _assign(this.logo, value)
+    },
+    setTabTar(value: Partial<TabTbrConfigOptions>) {
+      _assign(this.tabTar, value)
+    },
+    setContent(value: Partial<ContentConfigOptions>) {
+      _assign(this.content, value)
+    },
+    setFooter(value: Partial<Omit<FooterConfigOptions, 'height'>>) {
+      _assign(this.footer, value)
+    },
+    setTransition(value: Partial<TransitionConfigOptions>) {
+      _assign(this.transition, value)
+    },
+  },
+  persist: true,
+})

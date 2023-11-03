@@ -14,9 +14,11 @@
     "@vben/request": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
+    "@vben/hooks": "workspace:*",
     "vue": "^3.3.6"
   },
   "devDependencies": {
-    "@vben/types": "workspace:*"
+    "@vben/types": "workspace:*",
+    "@amap/amap-jsapi-types": "^0.0.13"
   }
 }

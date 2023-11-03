@@ -45,11 +45,17 @@ const getShowSetting = computed(() => {
 const getShowHeaderMultipleTab = computed(() => {
   return unref(getShowMultipleTab) && unref(getMenuType) !== NavBarModeEnum.MIX
 })
+// 是否显示header中的logo
 const showHeaderLogo = computed(() => {
   return unref(isTopMenu) || unref(isMix)
 })
+//是否显示header中的面包屑
+const showHeaderBreadcrumb = computed(() => {
+  return !(unref(isTopMenu) || (unref(isMix) && unref(menu).split))
+})
+
 //根据布局模式设置logo宽度
-const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth))
+const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth.value))
 </script>
 <template>
   <VbenSpace vertical>
@@ -70,12 +76,12 @@ const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth))
             }"
           />
           <HeaderTrigger v-if="getShowHeaderTrigger" />
-          <slot name="breadcrumb">
-            <LayoutBreadcrumb v-if="!(isTopMenu || (isMix && menu.split))" />
+          <slot name="breadcrumb" v-if="showHeaderBreadcrumb">
+            <LayoutBreadcrumb />
           </slot>
         </VbenSpace>
       </slot>
-      <slot name="menu"></slot>
+      <slot name="menu" v-if="!showHeaderBreadcrumb"></slot>
       <div class="pl-8px pr-8px">
         <slot name="buttons">
           <VbenSpace class="p-1" :size="16" align="center">

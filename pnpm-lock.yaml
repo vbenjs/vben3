@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   bin-wrapper: npm:bin-wrapper-china
 
@@ -13,6 +17,9 @@ importers:
       '@config/lint':
         specifier: workspace:*
         version: link:configs/lint
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:configs/tsconfig
       '@types/fs-extra':
         specifier: ^11.0.3
         version: 11.0.3
@@ -43,9 +50,6 @@ importers:
       ts-node:
         specifier: ^10.9.1
         version: 10.9.1(@types/node@20.8.8)(typescript@5.2.2)
-      tsconfig:
-        specifier: workspace:*
-        version: link:configs/tsconfig
       turbo:
         specifier: ^1.10.16
         version: 1.10.16
@@ -254,6 +258,9 @@ importers:
 
   configs/vite:
     dependencies:
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@vben/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -293,9 +300,6 @@ importers:
       terser:
         specifier: ^5.22.0
         version: 5.22.0
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
       unocss:
         specifier: ^0.57.1
         version: 0.57.1(postcss@8.4.31)(rollup@4.1.4)(vite@4.5.0)
@@ -387,6 +391,9 @@ importers:
       '@amap/amap-jsapi-loader':
         specifier: ^1.0.1
         version: 1.0.1
+      '@vben/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@vben/request':
         specifier: workspace:*
         version: link:../request
@@ -400,6 +407,9 @@ importers:
         specifier: ^3.3.6
         version: 3.3.6(typescript@5.2.2)
     devDependencies:
+      '@amap/amap-jsapi-types':
+        specifier: ^0.0.13
+        version: 0.0.13
       '@vben/types':
         specifier: workspace:*
         version: link:../types
@@ -676,7 +686,7 @@ importers:
   packages/vbenComponents:
     dependencies:
       '@iconify/iconify':
-        specifier: ^3.1.1
+        specifier: ^3.0.0
         version: 3.1.1
       '@vben/constants':
         specifier: workspace:*
@@ -688,21 +698,21 @@ importers:
         specifier: workspace:*
         version: link:../utils
       sass:
-        specifier: ^1.69.4
-        version: 1.69.4
+        specifier: ^1.55.0
+        version: 1.55.0
       vue:
-        specifier: ^3.3.6
-        version: 3.3.6(typescript@5.2.2)
+        specifier: ^3.2.47
+        version: 3.3.4
       vxe-table-demonic:
-        specifier: ^4.5.4
-        version: 4.5.4(vue@3.3.6)(xe-utils@3.5.13)
+        specifier: ^4.5.0-beta.3
+        version: 4.5.4(vue@3.3.4)(xe-utils@3.5.7)
       xe-utils:
-        specifier: ^3.5.13
-        version: 3.5.13
+        specifier: ^3.5.7
+        version: 3.5.7
     devDependencies:
       '@iconify/json':
-        specifier: ^2.2.132
-        version: 2.2.132
+        specifier: ^2.2.15
+        version: 2.2.15
       '@purge-icons/generated':
         specifier: ^0.9.0
         version: 0.9.0
@@ -763,6 +773,10 @@ packages:
     resolution: {integrity: sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==}
     dev: false
 
+  /@amap/amap-jsapi-types@0.0.13:
+    resolution: {integrity: sha512-hwp36URjQT9vDTmoUPYph3SEAiOvoUB+PGK0jZeZamgvaxew7rgc1XZWL/HphyMfRAqKwIYsAvXm9v8DTSjjzA==}
+    dev: true
+
   /@ampproject/remapping@2.2.1:
     resolution: {integrity: sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==}
     engines: {node: '>=6.0.0'}
@@ -811,6 +825,7 @@ packages:
   /@babel/code-frame@7.22.13:
     resolution: {integrity: sha512-XktuhWlJ5g+3TJXc5upd9Ks1HutSArik6jf2eAjYFyIOf4ej3RN+184cZbzDvbPnuTJIUhPKKJE3cIsYTiAT3w==}
     engines: {node: '>=6.9.0'}
+    requiresBuild: true
     dependencies:
       '@babel/highlight': 7.22.20
       chalk: 2.4.2
@@ -831,7 +846,7 @@ packages:
       '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-module-transforms': 7.22.9(@babel/core@7.22.10)
       '@babel/helpers': 7.22.10
-      '@babel/parser': 7.22.10
+      '@babel/parser': 7.23.0
       '@babel/template': 7.22.5
       '@babel/traverse': 7.22.10
       '@babel/types': 7.22.10
@@ -962,7 +977,7 @@ packages:
       '@babel/helper-module-imports': 7.22.5
       '@babel/helper-simple-access': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
-      '@babel/helper-validator-identifier': 7.22.5
+      '@babel/helper-validator-identifier': 7.22.20
 
   /@babel/helper-optimise-call-expression@7.22.5:
     resolution: {integrity: sha512-HBwaojN0xFRx4yIvpwGqxiV2tUfl7401jlok564NgB9EHS1y6QT17FmKWm4ztqjeVdXLuC4fSvHc5ePpQjoTbw==}
@@ -1065,19 +1080,13 @@ packages:
   /@babel/highlight@7.22.20:
     resolution: {integrity: sha512-dkdMCN3py0+ksCgYmGG8jKeGA/8Tk+gJwSYYlFGxG5lmhfKNoAy004YpLxpS1W2J8m/EK2Ew+yOs9pVRwO89mg==}
     engines: {node: '>=6.9.0'}
+    requiresBuild: true
     dependencies:
       '@babel/helper-validator-identifier': 7.22.20
       chalk: 2.4.2
       js-tokens: 4.0.0
     dev: true
     optional: true
-
-  /@babel/parser@7.22.10:
-    resolution: {integrity: sha512-lNbdGsQb9ekfsnjFGhEiF4hfFqGgfOP3H3d27re3n+CGhNuTSUEQdfWk556sTLNTloczcdM5TYF2LhzmDQKyvQ==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-    dependencies:
-      '@babel/types': 7.22.10
 
   /@babel/parser@7.23.0:
     resolution: {integrity: sha512-vvPKKdMemU85V9WE/l5wZEmImpCtLqbnTvqDS2U1fJ96KrxoW7KrXhNsNCblQlg8Ck4b85yxdTyelsMUgFUXiw==}
@@ -1574,7 +1583,7 @@ packages:
       '@babel/helper-hoist-variables': 7.22.5
       '@babel/helper-module-transforms': 7.22.9(@babel/core@7.22.10)
       '@babel/helper-plugin-utils': 7.22.5
-      '@babel/helper-validator-identifier': 7.22.5
+      '@babel/helper-validator-identifier': 7.22.20
     dev: false
 
   /@babel/plugin-transform-modules-umd@7.22.5(@babel/core@7.22.10):
@@ -1973,7 +1982,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.22.10
-      '@babel/parser': 7.22.10
+      '@babel/parser': 7.23.0
       '@babel/types': 7.22.10
 
   /@babel/traverse@7.22.10:
@@ -1986,7 +1995,7 @@ packages:
       '@babel/helper-function-name': 7.22.5
       '@babel/helper-hoist-variables': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
-      '@babel/parser': 7.22.10
+      '@babel/parser': 7.23.0
       '@babel/types': 7.22.10
       debug: 4.3.4
       globals: 11.12.0
@@ -3453,8 +3462,8 @@ packages:
       pathe: 1.1.1
     dev: true
 
-  /@iconify/json@2.2.132:
-    resolution: {integrity: sha512-iRhfaUp7yQvez1lubMgjtBflpPXl2/2ItOoEybbA+u4Xv9sOJ3n7131DavvzhXqWiRu2NOhGpiGoqcU4RlOLnA==}
+  /@iconify/json@2.2.15:
+    resolution: {integrity: sha512-+BVLIjTJpBiEOGD3xhCY7/ajH+7QTl/jzF59gf9Hf5y/HyU8D+HUmOsXEGLIsCZErEQB66wZ36AziOlYf3wuPA==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.1
@@ -11818,9 +11827,9 @@ packages:
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  /sass@1.69.4:
-    resolution: {integrity: sha512-+qEreVhqAy8o++aQfCJwp0sklr2xyEzkm9Pp/Igu9wNPoe7EZEQ8X/MBvvXggI2ql607cxKg/RKOwDj6pp2XDA==}
-    engines: {node: '>=14.0.0'}
+  /sass@1.55.0:
+    resolution: {integrity: sha512-Pk+PMy7OGLs9WaxZGJMn7S96dvlyVBwwtToX895WmCpAOr5YiJYEUJfiJidMuKb613z2xNWcXCHEuOvjZbqC6A==}
+    engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.3
@@ -13753,15 +13762,15 @@ packages:
       vue: 3.3.6(typescript@5.2.2)
     dev: true
 
-  /vxe-table-demonic@4.5.4(vue@3.3.6)(xe-utils@3.5.13):
+  /vxe-table-demonic@4.5.4(vue@3.3.4)(xe-utils@3.5.7):
     resolution: {integrity: sha512-L+y1rXt3F/uizH7xlurlu114cfzdE3C2RaaVeTTe5aepoJHBVpE6RHOAE7gQFAlDLUu/HeJkJVUF/DSQ5xpuww==}
     peerDependencies:
       vue: ^3.2.28
       xe-utils: ^3.5.0
     dependencies:
       dom-zindex: 1.0.1
-      vue: 3.3.6(typescript@5.2.2)
-      xe-utils: 3.5.13
+      vue: 3.3.4
+      xe-utils: 3.5.7
     dev: false
 
   /w3c-xmlserializer@4.0.0:
@@ -13917,8 +13926,8 @@ packages:
         optional: true
     dev: true
 
-  /xe-utils@3.5.13:
-    resolution: {integrity: sha512-ORT6ghCRk0mUVavMBxetcPzUPskS6NGfntzpWazJ86e+XU0uK4HwHfDhN/jKATiyInrOH5RwQo9SO/+DB8XeBw==}
+  /xe-utils@3.5.7:
+    resolution: {integrity: sha512-3H+fDBKBR2wLJgyA7k9C/w1Xljx6Maml5ukV0WDY06HjYyGs2FEz6XhcwRCLIDXX4pBP3Gu0nX9DbCeuuRA2Ew==}
     dev: false
 
   /xml-name-validator@4.0.0:
@@ -14024,7 +14033,3 @@ packages:
     dependencies:
       tslib: 2.3.0
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

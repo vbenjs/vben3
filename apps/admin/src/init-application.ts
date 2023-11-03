@@ -2,7 +2,6 @@ import { initRequest } from '@vben/request'
 import { useUserStoreWithout, useUserStore } from '@/store/user'
 import { useI18n, useLocale } from '@vben/locale'
 import { getGlobalConfig } from '@vben/utils'
-import { useConfigStore } from '@/store/config'
 import { projectSetting } from './setting'
 import { initComp } from '@vben/vbencomponents'
 import { initLayout } from '@vben/layouts'
@@ -18,6 +17,7 @@ import {
   useDesign,
   useAppConfig,
   usePromise,
+  initAppConfig,
 } from '@vben/hooks'
 import {
   getAllParentPath,
@@ -27,7 +27,6 @@ import {
   getShallowMenus,
   listenerRouteChange,
 } from '@vben/router'
-import { useMultipleTabStore } from '@/store/multipleTab'
 import { useAppStore } from '@/store/modules/app'
 import Logo from '@/layout/components/logo.vue'
 
@@ -46,90 +45,71 @@ async function initPackages() {
   const _initRequest = async () => {
     const { apiUrl } = getGlobalConfig(import.meta.env)
     const { t } = useI18n()
-    await initRequest(() => {
-      return {
-        apiUrl,
-        getTokenFunction: () => {
-          const userStore = useUserStoreWithout()
-          return userStore.getAccessToken
-        },
-        errorFunction: null,
-        noticeFunction: null,
-        errorModalFunction: null,
-        timeoutFunction: () => {
-          const userStore = useUserStoreWithout()
-          userStore.setAccessToken(undefined)
-          userStore.logout(true)
-        },
-        unauthorizedFunction: (msg?: string) => {
-          const userStore = useUserStoreWithout()
-          userStore.setAccessToken(undefined)
-          userStore.logout(true)
-          return msg || t('sys.api.errMsg401')
-        },
-        handleErrorFunction: (msg, mode) => {
-          if (mode === 'modal') {
-            Modal.error({ title: t('sys.api.errorTip'), content: msg })
-          } else if (mode === 'message') {
-            message.error(msg)
-          }
-        },
-      }
+    initRequest({
+      apiUrl,
+      getTokenFunction: () => {
+        const userStore = useUserStoreWithout()
+        return userStore.getAccessToken
+      },
+      errorFunction: null,
+      noticeFunction: null,
+      errorModalFunction: null,
+      timeoutFunction: () => {
+        const userStore = useUserStoreWithout()
+        userStore.setAccessToken(undefined)
+        userStore.logout(true)
+      },
+      unauthorizedFunction: (msg?: string) => {
+        const userStore = useUserStoreWithout()
+        userStore.setAccessToken(undefined)
+        userStore.logout(true)
+        return msg || t('sys.api.errMsg401')
+      },
+      handleErrorFunction: (msg, mode) => {
+        if (mode === 'modal') {
+          Modal.error({ title: t('sys.api.errorTip'), content: msg })
+        } else if (mode === 'message') {
+          message.error(msg)
+        }
+      },
     })
   }
 
   const _initComp = async () => {
-    await initComp(() => {
-      return {
-        useLocale,
-        localeList,
-        useAppStore,
-        useConfigStore,
-      }
+    initComp({
+      useLocale,
+      localeList,
+      useAppStore,
     })
   }
   const _initLayout = async () => {
-    await initLayout(() => {
-      return {
-        useAppConfig,
-        useRootSetting,
-        getMenus,
-        getCurrentParentPath,
-        getShallowMenus,
-        getChildrenMenus,
-        getAllParentPath,
-        useHeaderSetting,
-        useDesign,
-        useAppInject,
-        useTabs,
-        usePromise,
-        useMultipleTabStore,
-        listenerRouteChange,
-        useUserStore,
-        useAppStore,
-        useConfigStore,
-        Logo,
-        useMenuSetting,
-        useMultipleTabSetting,
-        useTransitionSetting,
-        useLockStore,
-        useLockScreen,
-        siteSetting,
-      }
+    initLayout({
+      useAppConfig,
+      useRootSetting,
+      getMenus,
+      getCurrentParentPath,
+      getShallowMenus,
+      getChildrenMenus,
+      getAllParentPath,
+      useHeaderSetting,
+      useDesign,
+      useAppInject,
+      useTabs,
+      usePromise,
+      listenerRouteChange,
+      useUserStore,
+      useAppStore,
+      Logo,
+      useMenuSetting,
+      useMultipleTabSetting,
+      useTransitionSetting,
+      useLockStore,
+      useLockScreen,
+      siteSetting,
     })
   }
 
   await Promise.all([_initRequest(), _initComp(), _initLayout()])
-}
-
-// Initial project configuration
-function initAppConfigStore() {
-  // const configStore = useConfigStoreWithOut()
-  // const projectConfig = unref(configStore.getProjectConfig)
-  // const projCfg = deepMerge(projectSetting, projectConfig || {})
-  // configStore.setProjectConfig(projCfg)
-  const appConfig = useAppConfig()
-  appConfig.setAppConfig(projectSetting)
 }
 
 export async function initApplication() {
@@ -137,6 +117,6 @@ export async function initApplication() {
   // ! 需要注意调用时机
   await initPackages()
 
-  // Initialize internal system configuration
-  initAppConfigStore()
+  // Initial project configuration
+  initAppConfig(projectSetting)
 }

@@ -1,3 +1,8 @@
 import VbenIconify from './src/Iconify.vue'
+import { h } from 'vue'
 
-export { VbenIconify }
+const renderIcon = (icon: string) => {
+  if (!icon) return undefined
+  return () => h(VbenIconify, { icon })
+}
+export { VbenIconify, renderIcon }

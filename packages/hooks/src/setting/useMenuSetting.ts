@@ -157,7 +157,7 @@ export function useMenuSetting() {
   })
 
   const getIsFixed = computed(() => {
-    return unref(getMixSideFixed) && unref(mixSideHasChildren)
+    return unref(getMixSideFixed)// && unref(mixSideHasChildren)
   })
 
   // Set menu configuration

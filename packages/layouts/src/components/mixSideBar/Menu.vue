@@ -57,15 +57,17 @@ const childrenMenus = ref<Menu[]>([])
 const openMenu = ref(false)
 const sideRef = ref<ElRef>(null)
 const childrenTitle = ref('')
+let oldIsFixed = unref(getIsFixed)
+let pushpin = unref(getIsFixed)
 
 onMounted(async () => {
   menuModules.value = await getShallowMenus()
 })
 
-watchEffect(() => {
-  mixSideHasChildren.value = unref(childrenMenus).length > 0
-  openMenu.value = unref(mixSideHasChildren)
-})
+// watchEffect(() => {
+//   mixSideHasChildren.value = unref(childrenMenus).length > 0
+//   openMenu.value = unref(mixSideHasChildren)
+// })
 
 // Process module menu click
 const handleModuleClick = async (path: string, hover = false, title = '') => {
@@ -84,7 +86,7 @@ const handleModuleClick = async (path: string, hover = false, title = '') => {
       }
     }
     if (!unref(openMenu)) {
-      setActive()
+      await setActive()
     }
   } else {
     openMenu.value = true
@@ -101,6 +103,17 @@ const handleModuleClick = async (path: string, hover = false, title = '') => {
 }
 
 const getMenuStyle = computed((): CSSProperties => {
+  if (getIsFixed.value) {
+    setActive(true)
+  } else {
+    if (oldIsFixed != unref(getIsFixed) && !pushpin) {
+      closeMenu()
+    } else {
+      pushpin = false
+    }
+  }
+  oldIsFixed = unref(getIsFixed)
+
   return {
     width: unref(openMenu) ? `${unref(getMenuWidth)}px` : 0,
     left: `${props.mixSidebarWidth}px`,
@@ -126,12 +139,14 @@ const getItemEvents = (item) => {
 function closeMenu() {
   if (!unref(getIsFixed)) {
     openMenu.value = false
+    setActive(false)
   }
 }
 
 listenerRouteChange((route) => {
   currentRoute.value = route
   setActive(true)
+  console.log(getCloseMixSidebarOnChange.value)
   if (unref(getCloseMixSidebarOnChange)) {
     closeMenu()
   }
@@ -167,10 +182,14 @@ const getMenuEvents = computed(() => {
   return !unref(getMixSideFixed)
     ? {
         onMouseleave: () => {
-          setActive(true)
+          // 鼠标移出菜单不做操作
+          // if (!openMenu.value) {
+          //   setActive(true)
+          // }
           //鼠标离开Menu 不触发关闭菜单面板
           // closeMenu()
         },
+        onMouseenter: () => {},
       }
     : {}
 })
@@ -179,18 +198,19 @@ const handleFixedMenu = () => {
   setMenuSetting({
     mixSideFixed: !unref(getIsFixed),
   })
+  pushpin = !unref(getIsFixed);
 }
 </script>
 
 <template>
-  <div :class="bem()" v-bind="getMenuEvents">
+  <div :class="bem()">
     <logo
       :class="[bem('logo'), 'shadow']"
       :style="{ '--un-shadow-color': 'var(--n-border-color)' }"
       v-if="getMenuType === NavBarModeEnum.MIX_SIDEBAR"
       :showTitle="false"
     />
-    <VbenScrollbar :class="bem('scrollbar')">
+    <VbenScrollbar :class="bem('scrollbar')" v-bind="getMenuEvents">
       <ul :class="bem('module')">
         <li
           :class="[
@@ -219,6 +239,7 @@ const handleFixedMenu = () => {
       :class="['shadow', bem('menu-list')]"
       :style="getMenuStyle"
       ref="sideRef"
+      @mouseleave="closeMenu"
     >
       <div
         v-show="openMenu"
@@ -242,7 +263,7 @@ const handleFixedMenu = () => {
       <VbenH5 v-if="openMenu" :class="bem('menu-list__children-title')">{{
         childrenTitle
       }}</VbenH5>
-      <MixMenu :list="childrenMenus" @mouseleave="closeMenu" />
+      <MixMenu :list="childrenMenus" />
     </div>
   </div>
 </template>

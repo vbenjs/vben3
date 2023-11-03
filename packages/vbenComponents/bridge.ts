@@ -13,12 +13,12 @@ export interface ContextOptions {
 }
 
 export let context: ContextOptions = {
-  useLocale: () => ({} as LocaleReturn),
+  useLocale: () => ({}) as LocaleReturn,
   useAppStore: () => undefined,
   useConfigStore: () => undefined,
   localeList: [],
 }
 
-export const initComp = async (func: AnyFunction<any>) => {
-  context = func()
+export const initComp = (params: Partial<ContextOptions>) => {
+  context = { ...context, ...params }
 }

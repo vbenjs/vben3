@@ -87,6 +87,14 @@ const dashboard: RouteRecordItem = {
         title: '拖拽',
       },
     },
+    {
+      path: 'auto-animate',
+      name: 'AutoAnimate',
+      component: () => import('@/pages/demo/AutoAnimate.vue'),
+      meta: {
+        title: 'routes.demo.animate',
+      },
+    },
   ],
 }
 

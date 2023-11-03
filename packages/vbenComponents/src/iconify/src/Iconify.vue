@@ -1,14 +1,9 @@
-<script lang="ts">
-export default {
-  name: 'Iconify',
-}
-</script>
-<script setup lang="ts" name="VbenIconify">
+<script setup lang="ts">
 import type { PropType, CSSProperties } from 'vue'
 import { unref, computed, useAttrs, ref, nextTick, watch, onMounted } from 'vue'
 import { createNamespace, isString } from '@vben/utils'
 import Iconify from '@purge-icons/generated'
-
+defineOptions({ name: 'Iconify' })
 const props = defineProps({
   color: { type: String },
   size: {
@@ -81,14 +76,20 @@ onMounted(update)
 </script>
 
 <template>
-  <span :class="[classes,{'hover:cursor-pointer': hoverPointer}]" :style="styles" ref="iconRefEl"></span>
+  <span
+    :class="[classes, { 'hover:cursor-pointer': hoverPointer }]"
+    :style="styles"
+    ref="iconRefEl"
+  ></span>
 </template>
 
 <style lang="less" scoped>
 .iconify {
   display: inline-block;
-  transition: color 0.3s, transform .3s;
-  &:hover{
+  transition:
+    color 0.3s,
+    transform 0.3s;
+  &:hover {
     color: v-bind(hoverColor) !important;
   }
 }
@@ -96,5 +97,4 @@ onMounted(update)
 .iconify__infinite {
   animation: loading-circle 1s infinite linear;
 }
-
 </style>

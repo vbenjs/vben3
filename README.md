@@ -1,4 +1,16 @@
-# vben3 后台管理系统
+<div align="center">
+  <img alt="VbenAdmin Logo" width="200" height="180" src="https://anncwb.github.io/anncwb/images/logo.png"/>
+  <h1>vben3 后台管理系统</h1>
+</div>
+<div align="center">
+  <a href="https://github.com/vbenjs/vben3/blob/master/LICENSE" alt="GitHub license"><img src="https://img.shields.io/github/license/vbenjs/vben3?style=flat"/></a>
+  <a href="https://github.com/vbenjs/vben3/actions" alt="Build Status"><img src="https://img.shields.io/github/actions/workflow/status/vbenjs/vben3/deploy.yml?branch=master"/></a>
+  <a href="https://github.com/vbenjs/vben3/stargazers" alt="GitHub stars"><img src="https://img.shields.io/github/stars/vbenjs/vben3?color=fa6470&style=flat"/></a>
+  <a href="https://github.com/vbenjs/vben3/forks" alt="GitHub forks"><img src="https://img.shields.io/github/forks/vbenjs/vben3?style=flat"/></a>
+  <a href="https://github.com/vbenjs/vben3/graphs/contributors" alt="GitHub contributors"><img src="https://img.shields.io/github/contributors/vbenjs/vben3" /></a>
+  <a href="https://github.com/vbenjs/vben3/graphs/commit-activity" alt="GitHub commit activity"><img src="https://img.shields.io/github/commit-activity/m/vbenjs/vben3"/></a>
+</div>
+
 
 [English](./README.en-US.md) | 简体中文
 
@@ -29,6 +41,10 @@ pnpm dev
 
 详见[贡献指南](./CONTRIBUTING.md)
 
+<a href="https://github.com/vbenjs/vben3/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=vbenjs/vben3" />
+</a>
+
 ## 许可证
 
-Vben3 使用 MIT 协议开源
+Vben3 使用 [MIT](https://opensource.org/licenses/MIT) 协议开源

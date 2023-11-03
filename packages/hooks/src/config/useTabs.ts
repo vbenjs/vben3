@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { unref } from 'vue'
 import { useMultipleTab, useAppConfig } from '@vben/stores'
 import { TabActionEnum } from '@vben/constants'
-import { useGo, useRedo } from '../usePage'
+import { useRedo } from '../usePage'
 
 export function useTabs(_router?: Router) {
   const appStore = useAppConfig()
@@ -56,7 +56,7 @@ export function useTabs(_router?: Router) {
     if (!canIUse) {
       return
     }
-    const currentTab = getCurrentTab()
+    const currentTab = tab || getCurrentTab()
     switch (action) {
       case TabActionEnum.REFRESH_PAGE:
         await tabStore.refreshPage(router)
@@ -82,7 +82,7 @@ export function useTabs(_router?: Router) {
 
       case TabActionEnum.CLOSE_CURRENT:
       case TabActionEnum.CLOSE:
-        await tabStore.closeTab(tab || currentTab, router)
+        await tabStore.closeTab(currentTab, router)
         break
     }
   }
@@ -90,9 +90,12 @@ export function useTabs(_router?: Router) {
   return {
     refreshPage: () => handleTabAction(TabActionEnum.REFRESH_PAGE),
     closeAll: () => handleTabAction(TabActionEnum.CLOSE_ALL),
-    closeLeft: () => handleTabAction(TabActionEnum.CLOSE_LEFT),
-    closeRight: () => handleTabAction(TabActionEnum.CLOSE_RIGHT),
-    closeOther: () => handleTabAction(TabActionEnum.CLOSE_OTHER),
+    closeLeft: (tab?: RouteLocationNormalized) =>
+      handleTabAction(TabActionEnum.CLOSE_LEFT, tab),
+    closeRight: (tab?: RouteLocationNormalized) =>
+      handleTabAction(TabActionEnum.CLOSE_RIGHT, tab),
+    closeOther: (tab?: RouteLocationNormalized) =>
+      handleTabAction(TabActionEnum.CLOSE_OTHER, tab),
     closeCurrent: () => handleTabAction(TabActionEnum.CLOSE_CURRENT),
     close: (tab?: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE, tab),

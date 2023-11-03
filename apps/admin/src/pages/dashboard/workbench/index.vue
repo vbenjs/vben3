@@ -36,7 +36,7 @@ const chartOption = ref({
     text: '待办统计',
     textStyle: {
       color: '#6B7280',
-      fontWeight: '500',
+      fontWeight: '600',
     },
     left: 10,
     top: 10,

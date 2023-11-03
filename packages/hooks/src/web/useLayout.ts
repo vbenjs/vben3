@@ -29,7 +29,7 @@ const FOOTER_HEIGHT = '--footer-height'
 const LIGHT_TEXT_COLOR = 'rgba(0,0,0,.85)'
 const DARK_TEXT_COLOR = '#fff'
 
-export function createThemeColorListen(el?: MaybeElementRef | null) {
+export function createThemeColorListen() {
   const { sidebar, header, grayMode, colorWeak, theme, setAppConfig } =
     useAppConfig()
 

@@ -1,17 +1,31 @@
 import { defineStore } from 'pinia'
 import { toRaw, unref } from 'vue'
-import { PAGE_NOT_FOUND_NAME, PageEnum, REDIRECT_NAME } from '@vben/constants'
+import {
+  PAGE_NOT_FOUND_NAME,
+  PageEnum,
+  REDIRECT_NAME,
+  TabActionEnum,
+} from '@vben/constants'
 import type {
   RouteLocationNormalized,
   RouteLocationRaw,
   Router,
 } from 'vue-router'
 import { getRawRoute, RemovableRef } from '@vben/utils'
-// import { useAppConfig } from './appConfig'
 import { useRouter } from 'vue-router'
-function handleGotoPage(router: Router) {
-  const go = useGo(router)
-  go(unref(router.currentRoute).path, true)
+
+function handleGotoPage(router: Router, route?: RouteLocationNormalized) {
+  const currentPath = unref(router.currentRoute).path
+  // check if current route in tablist
+  const isExist = useMultipleTab().getTabList.find(
+    (item) => item.path === currentPath,
+  )
+  // if not in tablist, jump to target page or homepage
+  if (!isExist) {
+    const go = useGo(router)
+    const targetPath = route?.path || PageEnum.BASE_HOME
+    go(targetPath, true)
+  }
 }
 
 export interface MultipleTabState {
@@ -44,10 +58,6 @@ function handleError(e: Error) {
   console.error(e)
 }
 
-// const appConfig = useAppConfig()
-
-// const cacheTab = appConfig.getTabTarCache
-
 export const useMultipleTab = defineStore({
   id: 'APP_MULTIPLE_TABS',
   state: (): MultipleTabState => ({
@@ -73,7 +83,7 @@ export const useMultipleTab = defineStore({
     /**
      * Update the cache according to the currently opened tabs
      */
-    async updateCacheTab() {
+    updateCacheTab() {
       const cacheMap: Set<string> = new Set()
 
       for (const tab of this.tabList) {
@@ -165,7 +175,7 @@ export const useMultipleTab = defineStore({
       } else {
         // Add tab
         // 获取动态路由打开数，超过 0 即代表需要控制打开数
-        const dynamicLevel =(meta?.dynamicLevel ?? -1)as unknown as number
+        const dynamicLevel = (meta?.dynamicLevel ?? -1) as unknown as number
         if (dynamicLevel > 0) {
           // 如果动态路由层级大于 0 了，那么就要限制该路由的打开数限制了
           // 首先获取到真实的路由，使用配置方式减少计算开销.
@@ -185,8 +195,7 @@ export const useMultipleTab = defineStore({
         }
         this.tabList.push(route)
       }
-      await this.updateCacheTab()
-      // cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList)
+      this.updateCacheTab()
     },
 
     async closeTab(tab: RouteLocationNormalized, router: Router) {
@@ -292,7 +301,7 @@ export const useMultipleTab = defineStore({
         this.bulkCloseTabs(pathList)
       }
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     // Close the tab on the left and jump
@@ -314,7 +323,7 @@ export const useMultipleTab = defineStore({
         this.bulkCloseTabs(pathList)
       }
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     async closeAllTab(router: Router) {
@@ -345,13 +354,13 @@ export const useMultipleTab = defineStore({
       }
       this.bulkCloseTabs(pathList)
       this.updateCacheTab()
-      handleGotoPage(router)
+      handleGotoPage(router, route)
     },
 
     /**
      * Close tabs in bulk
      */
-    async bulkCloseTabs(pathList: string[]) {
+    bulkCloseTabs(pathList: string[]) {
       this.tabList = this.tabList.filter(
         (item) => !pathList.includes(item.fullPath),
       )
@@ -364,7 +373,7 @@ export const useMultipleTab = defineStore({
       const findTab = this.getTabList.find((item) => item === route)
       if (findTab) {
         findTab.meta.title = title
-        await this.updateCacheTab()
+        this.updateCacheTab()
       }
     },
     /**
@@ -375,8 +384,77 @@ export const useMultipleTab = defineStore({
       if (findTab) {
         findTab.fullPath = fullPath
         findTab.path = fullPath
-        await this.updateCacheTab()
+        this.updateCacheTab()
       }
+    },
+    getTabActions(tabItem: RouteLocationNormalized) {
+      if (!tabItem) return
+      const { meta } = tabItem
+      const { currentRoute } = useRouter()
+      const { path } = unref(currentRoute)
+
+      const isCurItem = tabItem ? tabItem.path === path : false
+
+      const index = this.getTabList.findIndex(
+        (tab) => tab.path === tabItem.path,
+      )
+      // Refresh button
+      const refreshDisabled = !isCurItem
+      // Close left
+      const closeLeftDisabled = index === 0
+
+      const disabled = this.getTabList.length === 1
+
+      // Close right
+      const closeRightDisabled =
+        index === this.getTabList.length - 1 && this.getLastDragEndIndex >= 0
+
+      return [
+        {
+          label: 'layout.multipleTab.reload',
+          key: TabActionEnum.REFRESH_PAGE,
+          icon: 'ion:reload-sharp',
+          disabled: refreshDisabled,
+        },
+        {
+          label: 'layout.multipleTab.close',
+          key: TabActionEnum.CLOSE_CURRENT,
+          icon: 'clarity:close-line',
+          disabled: !!meta?.affix || disabled,
+        },
+        {
+          type: 'divider',
+          key: 'divider1',
+        },
+        {
+          icon: 'line-md:arrow-close-left',
+          key: TabActionEnum.CLOSE_LEFT,
+          label: 'layout.multipleTab.closeLeft',
+          disabled: closeLeftDisabled,
+        },
+        {
+          icon: 'line-md:arrow-close-right',
+          key: TabActionEnum.CLOSE_RIGHT,
+          label: 'layout.multipleTab.closeRight',
+          disabled: closeRightDisabled,
+        },
+        {
+          type: 'divider',
+          key: 'divider2',
+        },
+        {
+          icon: 'dashicons:align-center',
+          key: TabActionEnum.CLOSE_OTHER,
+          label: 'layout.multipleTab.closeOther',
+          disabled,
+        },
+        {
+          label: 'layout.multipleTab.closeAll',
+          key: TabActionEnum.CLOSE_ALL,
+          icon: 'clarity:minus-line',
+          disabled,
+        },
+      ]
     },
   },
   persist: {

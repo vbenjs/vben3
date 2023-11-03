@@ -24,8 +24,8 @@ export let context: ContextOptions = {
   apiUrl: '',
 }
 
-export const initRequest = async (func: AnyFunction<any>) => {
-  context = func()
+export const initRequest = (params: Partial<ContextOptions>) => {
+  context = { ...context, ...params }
 }
 export const setMsg = (func: AnyFunction<any>) => {
   context.msgFunction = func

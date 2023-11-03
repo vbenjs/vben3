@@ -35,7 +35,11 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
   <VbenLayout class="h-full">
     <VbenLayoutHeader ref="headerRef">
       <slot name="header">
-        <LayoutHeader />
+        <LayoutHeader>
+          <template #menu>
+            <LayoutMenu mode="horizontal" />
+          </template>
+        </LayoutHeader>
       </slot>
     </VbenLayoutHeader>
     <VbenLayout has-sider :style="{ height: menuHeight }">
@@ -50,7 +54,7 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
         @update:collapsed="toggleCollapsed"
       >
         <slot name="sider">
-          <LayoutMenu />
+          <LayoutMenu split />
         </slot>
       </VbenLayoutSider>
 

@@ -1,91 +1,39 @@
 <script lang="ts" setup>
-import {computed, h, nextTick, ref, unref} from 'vue'
-import { context } from '../../../../bridge'
+import { computed, nextTick, ref, unref } from 'vue'
 import { useI18n } from '@vben/locale'
 import { TabActionEnum } from '@vben/constants'
-import {RouteLocationNormalized, useRouter} from "vue-router"
-import {renderIcon} from "../../index";
-const { useTabs, useMultipleTabStore } = context
-const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } = useTabs()
-const { t } = useI18n();
+import { RouteLocationNormalized } from 'vue-router'
+import { renderIcon } from '@vben/vbencomponents'
+import { useTabs } from '@vben/hooks'
+import { useMultipleTab } from '@vben/stores'
+
+const { refreshPage, close, closeAll, closeLeft, closeRight, closeOther } =
+  useTabs()
+const { t } = useI18n()
+
 const x = ref(0)
 const y = ref(0)
-const targetTab = ref<RouteLocationNormalized>(null)
+const targetTab = ref<RouteLocationNormalized>()
 const showDropdown = ref(false)
-
-const tabStore = useMultipleTabStore();
-const { currentRoute } = useRouter();
-
+const tabStore = useMultipleTab()
 const options = computed(() => {
-
-  if (!unref(targetTab)) {
-    return;
-  }
-  const { meta } = unref(targetTab);
-  const { path } = unref(currentRoute);
-
-  const isCurItem = unref(targetTab) ? unref(targetTab).path === path : false;
-
-  // Refresh button
-  const index = tabStore.getTabList.findIndex((tab) => tab.path === unref(targetTab).path)
-  const refreshDisabled = !isCurItem;
-  // Close left
-  const closeLeftDisabled = index === 0 || !isCurItem;
-
-  const disabled = tabStore.getTabList.length === 1;
-
-  // Close right
-  const closeRightDisabled =
-    !isCurItem || (index === tabStore.getTabList.length - 1 && tabStore.getLastDragEndIndex >= 0);
-  return [
-    {
-      label: t('layout.multipleTab.reload'),
-      key: TabActionEnum.REFRESH_PAGE,
-      icon: renderIcon('ion:reload-sharp'),
-      disabled: refreshDisabled,
-    },
-    {
-      label: t('layout.multipleTab.close'),
-      key: TabActionEnum.CLOSE_CURRENT,
-      icon: renderIcon('clarity:close-line'),
-      disabled: !!meta?.affix || disabled
-    },
-    {
-      type: 'divider',
-      key: 'divider1'
-    },
-    {
-      icon: renderIcon('line-md:arrow-close-left'),
-      key: TabActionEnum.CLOSE_LEFT,
-      label: t('layout.multipleTab.closeLeft'),
-      disabled: closeLeftDisabled,
-    },
-    {
-      icon: renderIcon('line-md:arrow-close-right'),
-      key: TabActionEnum.CLOSE_RIGHT,
-      label: t('layout.multipleTab.closeRight'),
-      disabled: closeRightDisabled,
-    },
-    {
-      type: 'divider',
-      key: 'divider2'
-    },
-    {
-      icon: renderIcon('dashicons:align-center'),
-      key: TabActionEnum.CLOSE_OTHER,
-      label: t('layout.multipleTab.closeOther'),
-      disabled: disabled || !isCurItem,
-    },
-    {
-      label: t('layout.multipleTab.closeAll'),
-      key: TabActionEnum.CLOSE_ALL,
-      icon: renderIcon('clarity:minus-line'),
-      disabled: disabled,
-    },
-  ]
+  const tab = targetTab.value
+  if (!tab) return []
+  return (
+    tabStore
+      .getTabActions(tab)
+      //筛选非当前路由tab的重新加载按钮
+      ?.filter((v) => !(v.key == 0 && v.disabled))
+      //渲染多语言和图标
+      .map((v) => {
+        const label = v.label && t(v.label)
+        const icon = v.icon && renderIcon(v.icon)
+        return { ...v, label, icon }
+      })
+  )
 })
 
-const openDropdown = (e:PointerEvent, tabItem: RouteLocationNormalized) => {
+const openDropdown = (e: PointerEvent, tabItem: RouteLocationNormalized) => {
   targetTab.value = tabItem
   showDropdown.value = false
   nextTick().then(() => {
@@ -95,24 +43,25 @@ const openDropdown = (e:PointerEvent, tabItem: RouteLocationNormalized) => {
   })
 }
 const handleSelect = async (key) => {
+  let tab = unref(targetTab)
   switch (key) {
     case TabActionEnum.REFRESH_PAGE:
       await refreshPage()
       break
     case TabActionEnum.CLOSE_CURRENT:
-      await close(unref(targetTab))
+      await close(tab)
       break
     case TabActionEnum.CLOSE_ALL:
       await closeAll()
       break
     case TabActionEnum.CLOSE_LEFT:
-      await closeLeft()
+      await closeLeft(tab)
       break
     case TabActionEnum.CLOSE_RIGHT:
-      await closeRight()
+      await closeRight(tab)
       break
     case TabActionEnum.CLOSE_OTHER:
-      await closeOther()
+      await closeOther(tab)
       break
   }
 }

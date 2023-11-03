@@ -11,23 +11,25 @@ import { initApplication } from './init-application'
 import { registerComponents } from '../init-components'
 ;(async () => {
   const app = createApp(App)
-
   setupPinia(app)
-  //注册组件
+
+  // Register Global Components
   await registerComponents(app)
 
   await initApplication()
-  // Register Global Components
 
   // Multilingual configuration
   // Asynchronous case: language files may be obtained from the server side
   await setupI18n(app)
+
   // Init Router
   const router = InitRouter(import.meta.env.VITE_PUBLIC_PATH)
   app.use(router)
   await setupRouteGuard()
   await router.isReady()
+
   app.mount('#app')
+
   // When Closing mock, Tree Shaking `mockjs` dep
   if (__VITE_USE_MOCK__) {
     import('../mock/_mock-server').then(({ setupProdMockServer }) =>

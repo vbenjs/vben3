@@ -57,15 +57,17 @@ const childrenMenus = ref<Menu[]>([])
 const openMenu = ref(false)
 const sideRef = ref<ElRef>(null)
 const childrenTitle = ref('')
+let oldIsFixed = unref(getIsFixed)
+let pushpin = unref(getIsFixed)
 
 onMounted(async () => {
   menuModules.value = await getShallowMenus()
 })
 
-watchEffect(() => {
-  mixSideHasChildren.value = unref(childrenMenus).length > 0
-  openMenu.value = unref(mixSideHasChildren)
-})
+// watchEffect(() => {
+//   mixSideHasChildren.value = unref(childrenMenus).length > 0
+//   openMenu.value = unref(mixSideHasChildren)
+// })
 
 // Process module menu click
 const handleModuleClick = async (path: string, hover = false, title = '') => {
@@ -84,7 +86,7 @@ const handleModuleClick = async (path: string, hover = false, title = '') => {
       }
     }
     if (!unref(openMenu)) {
-      setActive()
+      await setActive()
     }
   } else {
     openMenu.value = true
@@ -101,6 +103,17 @@ const handleModuleClick = async (path: string, hover = false, title = '') => {
 }
 
 const getMenuStyle = computed((): CSSProperties => {
+  if (getIsFixed.value) {
+    setActive(true)
+  } else {
+    if (oldIsFixed != unref(getIsFixed) && !pushpin) {
+      closeMenu()
+    } else {
+      pushpin = false
+    }
+  }
+  oldIsFixed = unref(getIsFixed)
+
   return {
     width: unref(openMenu) ? `${unref(getMenuWidth)}px` : 0,
     left: `${props.mixSidebarWidth}px`,
@@ -133,6 +146,7 @@ function closeMenu() {
 listenerRouteChange((route) => {
   currentRoute.value = route
   setActive(true)
+  console.log(getCloseMixSidebarOnChange.value)
   if (unref(getCloseMixSidebarOnChange)) {
     closeMenu()
   }
@@ -184,6 +198,7 @@ const handleFixedMenu = () => {
   setMenuSetting({
     mixSideFixed: !unref(getIsFixed),
   })
+  pushpin = !unref(getIsFixed);
 }
 </script>
 

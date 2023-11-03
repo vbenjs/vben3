@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-
+import { Baidu } from '@vben/demo'
 </script>
 <template>
-  <div>Demo待补充</div>
+  <Baidu />
 </template>
+ 

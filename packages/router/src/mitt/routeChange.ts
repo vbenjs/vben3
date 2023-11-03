@@ -5,7 +5,7 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { getRawRoute, mitt } from '@vben/utils'
 
-const emitter = mitt()
+export const emitter = mitt()
 
 const key = Symbol()
 

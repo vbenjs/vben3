@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-
+import { Google } from '@vben/demo'
 </script>
 <template>
-  <div>Demo待补充</div>
+  <Google />
 </template>

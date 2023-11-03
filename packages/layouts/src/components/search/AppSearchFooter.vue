@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { useI18n } from '@vben/locale'
 import AppSearchKeyItem from './AppSearchKeyItem.vue'
-import {context} from "../../../bridge";
-
+import { context } from '../../../bridge'
 
 const { useDesign } = context
 const { prefixCls } = useDesign('app-search-footer')
@@ -37,8 +36,7 @@ const { t } = useI18n()
   padding: 0 16px;
   font-size: 12px;
   color: #666;
-  background-color: @component-background;
-  border-top: 1px solid @border-color-base;
+  border-top: 1px solid #cdcde6;
   border-radius: 0 0 16px 16px;
   align-items: center;
   flex-shrink: 0;
@@ -49,9 +47,11 @@ const { t } = useI18n()
     height: 18px;
     padding-bottom: 2px;
     margin-right: 0.4em;
-    background-color: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
+    background: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
     border-radius: 2px;
-    box-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px #fff,
+    box-shadow:
+      inset 0 -2px 0 0 #cdcde6,
+      inset 0 0 1px 1px #fff,
       0 1px 2px 1px rgb(30 35 90 / 40%);
     align-items: center;
     justify-content: center;

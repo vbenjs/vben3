@@ -50,7 +50,7 @@ const backRoute = {
     {
       path: 'page',
       name: 'BackAuthPage',
-      component: '/pages/demo/permission/back/index',
+      // component: '/pages/demo/permission/back/index',
       meta: {
         title: 'routes.demo.permission.backPage',
       },
@@ -58,7 +58,7 @@ const backRoute = {
     {
       path: 'btn',
       name: 'BackAuthBtn',
-      component: '/pages/demo/permission/back/Btn',
+      // component: '/pages/demo/permission/back/Btn',
       meta: {
         title: 'routes.demo.permission.backBtn',
       },
@@ -153,18 +153,18 @@ const sysRoute = {
         ignoreKeepAlive: true,
         showMenu: false,
       },
-      component: '/pages/demo/system/account/index',
+      // component: '/pages/demo/system/account/index',
     },
-    // {
-    //   path: 'account_detail/:id',
-    //   name: 'AccountDetail',
-    //   meta: {
-    //     title: 'routes.demo.system.account_detail',
-    //     ignoreKeepAlive: true,
-    //     showMenu: false,
-    //   },
-    //   component: '/pages/demo/system/account/AccountDetail',
-    // },
+    {
+      path: 'account_detail/:id',
+      name: 'AccountDetail',
+      meta: {
+        title: 'routes.demo.system.account_detail',
+        ignoreKeepAlive: true,
+        showMenu: false,
+      },
+      // component: '/pages/demo/system/account/AccountDetail',
+    },
     {
       path: 'role',
       name: 'RoleManagement',
@@ -172,7 +172,7 @@ const sysRoute = {
         title: 'routes.demo.system.role',
         ignoreKeepAlive: true,
       },
-      component: '/pages/demo/system/role/index',
+      // component: '/pages/demo/system/role/index',
     },
     {
       path: 'menu',
@@ -181,7 +181,7 @@ const sysRoute = {
         title: 'routes.demo.system.menu',
         ignoreKeepAlive: true,
       },
-      component: '/pages/demo/system/menu/index',
+      // component: '/pages/demo/system/menu/index',
     },
     {
       path: 'dept',
@@ -190,7 +190,7 @@ const sysRoute = {
         title: 'routes.demo.system.dept',
         ignoreKeepAlive: true,
       },
-      component: '/pages/demo/system/dept/index',
+      // component: '/pages/demo/system/dept/index',
     },
     {
       path: 'changePassword',
@@ -199,7 +199,7 @@ const sysRoute = {
         title: 'routes.demo.system.password',
         ignoreKeepAlive: true,
       },
-      component: '/pages/demo/system/password/index',
+      // component: '/pages/demo/system/password/index',
     },
   ],
 }

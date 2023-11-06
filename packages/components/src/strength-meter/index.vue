@@ -1,3 +1,48 @@
+<script lang="ts" setup name="StrengthMeter">
+import { computed, ref, watch, unref, watchEffect } from 'vue'
+import { zxcvbn } from '@zxcvbn-ts/core'
+import { createNamespace } from '@vben/utils'
+
+const { bem } = createNamespace('strength-meter')
+const emit = defineEmits(['score-change', 'change'])
+
+const props = defineProps({
+  value: { type: String },
+  showInput: {
+    type: Boolean,
+    default: true,
+  },
+  disabled: { type: Boolean },
+})
+
+const innerValueRef = ref('')
+
+const getPasswordStrength = computed(() => {
+  const { disabled } = props
+  if (disabled) return -1
+  const innerValue = unref(innerValueRef)
+  const score = innerValue ? zxcvbn(unref(innerValueRef)).score : -1
+  emit('score-change', score)
+  return score
+})
+
+function handleChange(value: string) {
+  emit('change', value)
+  innerValueRef.value = value
+}
+
+watchEffect(() => {
+  innerValueRef.value = props.value || ''
+})
+
+watch(
+  () => unref(innerValueRef),
+  (val) => {
+    emit('change', val)
+  },
+)
+</script>
+
 <template>
   <div :class="bem()" class="relative">
     <VbenInput
@@ -24,60 +69,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref, watch, unref, watchEffect } from 'vue'
-import { zxcvbn } from '@zxcvbn-ts/core'
-import { createNamespace } from '@vben/utils'
-
-export default defineComponent({
-  name: 'StrengthMeter',
-  props: {
-    value: String,
-    showInput: {
-      type: Boolean,
-      default: true,
-    },
-    disabled: Boolean,
-  },
-  emits: ['score-change', 'change'],
-  setup(props, { emit }) {
-    const innerValueRef = ref('')
-    const { bem } = createNamespace('strength-meter')
-
-    const getPasswordStrength = computed(() => {
-      const { disabled } = props
-      if (disabled) return -1
-      const innerValue = unref(innerValueRef)
-      const score = innerValue ? zxcvbn(unref(innerValueRef)).score : -1
-      emit('score-change', score)
-      return score
-    })
-
-    function handleChange(value: string) {
-      emit('change', value)
-      innerValueRef.value = value
-    }
-
-    watchEffect(() => {
-      innerValueRef.value = props.value || ''
-    })
-
-    watch(
-      () => unref(innerValueRef),
-      (val) => {
-        emit('change', val)
-      },
-    )
-
-    return {
-      getPasswordStrength,
-      handleChange,
-      innerValueRef,
-      bem,
-    }
-  },
-})
-</script>
 <style lang="less" scoped>
 .strength-meter {
   &-bar {

@@ -95,6 +95,14 @@ const dashboard: RouteRecordItem = {
         title: 'routes.demo.animate',
       },
     },
+    {
+      path: 'strength-meter',
+      name: 'StrengthMeter',
+      component: () => import('@/pages/demo/StrengthMeter.vue'),
+      meta: {
+        title: 'routes.demo.strength',
+      },
+    },
   ],
 }
 

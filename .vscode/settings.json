@@ -75,7 +75,8 @@
   "[vue]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": false
-    }
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "i18n-ally.localesPaths": ["packages/locale/src/lang"],
   "i18n-ally.keystyle": "nested",

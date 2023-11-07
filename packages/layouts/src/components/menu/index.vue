@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, h, onMounted, unref, nextTick, computed } from 'vue'
+import { ref, h, onMounted, unref, nextTick, computed, watch } from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
 import {
   RouteLocationNormalizedLoaded,
@@ -25,6 +25,7 @@ const {
   sidebar,
   isSidebar,
   isTopMenu,
+  isMix,
 } = useAppConfig()
 const { getTopMenuAlign, getShowFooterTrigger } = useMenuSetting()
 const showSidebarLogo = computed(() => {
@@ -97,7 +98,7 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
   const currentMenu = route || unref(currentRoute)
   activeKey.value = currentMenu.name
   //分割菜单 独有逻辑
-  if (menu.value.split) {
+  if (menu.value.split && isMix.value) {
     if (!props.split) {
       options.value.forEach((v) => {
         delete v.children
@@ -108,7 +109,6 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
       flatten(menuList.value),
       currentMenu.name as string,
     )
-    // console.log(menuList.value, currentMenu.name)
     //切换tab更新子路由
     emitter.emit('menuChange', {
       name: currentMenu.name,
@@ -171,7 +171,7 @@ const routerToMenu = (item: RouteRecordItem & RouteMeta) => {
 }
 
 const clickMenu = (key) => {
-  if (isTopMenu && menu.value.split && !props.split) {
+  if (isMix && menu.value.split && !props.split) {
     //通过emit将子路由传递出去
     emitter.emit('menuChange', {
       name: activeKey.value,

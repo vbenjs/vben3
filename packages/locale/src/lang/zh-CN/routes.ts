@@ -55,5 +55,8 @@ export default {
       role: '角色管理',
     },
     strength: '密码强度组件',
+    feat: {
+      ripple: '水波纹',
+    },
   },
 }

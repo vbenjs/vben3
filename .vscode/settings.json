@@ -120,5 +120,8 @@
     "esbuild"
   ],
   "commentTranslate.multiLineMerge": true,
-  "typescript.suggest.autoImports": false
+  "typescript.suggest.autoImports": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

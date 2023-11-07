@@ -54,5 +54,8 @@ export default {
       role: 'Role management',
     },
     strength: 'Password strength',
+    feat: {
+      ripple: 'Ripple',
+    },
   },
 }

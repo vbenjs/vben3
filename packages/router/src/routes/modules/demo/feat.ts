@@ -4,15 +4,23 @@ const feat: RouteRecordItem = {
   path: '/feat',
   name: 'Feat',
   component: LAYOUT,
-  redirect: '/feat/index',
+  redirect: '/feat/ripple',
   meta: {
     orderNo: 4,
     title: '功能',
     icon: 'ri:function-line',
-    root: true
+    root: true,
   },
-  children: []
+  children: [
+    {
+      path: 'ripple',
+      name: 'RippleDemo',
+      component: () => import('@/pages/demo/feat/ripple.vue'),
+      meta: {
+        title: 'routes.demo.feat.ripple',
+      },
+    },
+  ],
 }
 
 export default feat
-

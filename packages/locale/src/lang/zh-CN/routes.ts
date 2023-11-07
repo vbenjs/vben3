@@ -57,6 +57,7 @@ export default {
     strength: '密码强度组件',
     feat: {
       ripple: '水波纹',
+      clickOutSide: 'ClickOutSide组件',
     },
   },
 }

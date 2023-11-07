@@ -20,6 +20,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.ripple',
       },
     },
+    {
+      path: 'click-out-side',
+      name: 'ClickOutSideDemo',
+      component: () => import('@/pages/demo/feat/click-out-side.vue'),
+      meta: {
+        title: 'routes.demo.feat.clickOutSide',
+      },
+    },
   ],
 }
 

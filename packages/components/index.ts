@@ -7,5 +7,6 @@ export { default as QrCode } from './src/qrcode/index.vue'
 export { default as CountDownButton } from './src/countdown-input/countdown-button.vue'
 export { default as CountDownInput } from './src/countdown-input/index.vue'
 export { default as StrengthMeter } from './src/strength-meter/index.vue'
+export { default as ClickOutside } from './src/click-outside/index.vue'
 
 export type { QrCodeActionType } from './src/qrcode/typing'

@@ -1,7 +1,7 @@
 export default {
   basic: {
     login: 'Login',
-    lock: 'LockScreen'
+    lock: 'LockScreen',
   },
   dashboard: {
     dashboard: 'Dashboard',
@@ -13,44 +13,46 @@ export default {
     basic: 'Basic',
     demo: 'Demo',
     card: 'Card',
+    animate: 'Animate',
     form: 'Form',
     table: {
       table: 'table',
       basic: 'basic',
-      fixedColumn:'fixedColumn'
+      fixedColumn: 'fixedColumn',
     },
     modal: 'Modal',
     permission: {
-      permission: "Permission",
-      back: "background",
-      backPage: "Page",
-      backBtn: "Button"
+      permission: 'Permission',
+      back: 'background',
+      backPage: 'Page',
+      backBtn: 'Button',
     },
     multiLevel: {
-      multiLevel: "MultiMenu"
+      multiLevel: 'MultiMenu',
     },
     iframe: {
-      frame: "External",
-      doc: "Project doc (embedded)",
-      docExternal: "Project doc (external)"
+      frame: 'External',
+      doc: 'Project doc (embedded)',
+      docExternal: 'Project doc (external)',
     },
     charts: {
-      baiduMap: "Baidu map",
-      aMap: "A map",
-      googleMap: "Google map",
-      charts: "Chart",
-      map: "Map",
-      line: "Line",
-      pie: "Pie"
+      baiduMap: 'Baidu map',
+      aMap: 'A map',
+      googleMap: 'Google map',
+      charts: 'Chart',
+      map: 'Map',
+      line: 'Line',
+      pie: 'Pie',
     },
     system: {
-      moduleName: "System management",
-      account: "Account management",
-      account_detail: "Account detail",
-      password: "Change password",
-      dept: "Department management",
-      menu: "Menu management",
-      role: "Role management"
+      moduleName: 'System management',
+      account: 'Account management',
+      account_detail: 'Account detail',
+      password: 'Change password',
+      dept: 'Department management',
+      menu: 'Menu management',
+      role: 'Role management',
     },
+    strength: 'Password strength',
   },
 }

@@ -56,6 +56,7 @@ export default {
     strength: 'Password strength',
     feat: {
       ripple: 'Ripple',
+      clickOutSide: 'ClickOutSide',
     },
   },
 }

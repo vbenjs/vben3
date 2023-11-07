@@ -21,7 +21,7 @@ const dashboardRoute = {
     {
       path: 'analysis',
       name: 'Analysis',
-        component: '/pages/dashboard/analysis/index',
+      component: '/pages/dashboard/analysis/index',
       meta: {
         title: 'routes.dashboard.analysis',
         icon: 'icon-park-outline:analysis',
@@ -151,7 +151,7 @@ const sysRoute = {
       meta: {
         title: 'routes.demo.system.account',
         ignoreKeepAlive: true,
-        showMenu: false,
+        // hideMenu: true,
       },
       component: '/pages/demo/system/account/index',
     },
@@ -161,7 +161,7 @@ const sysRoute = {
     //   meta: {
     //     title: 'routes.demo.system.account_detail',
     //     ignoreKeepAlive: true,
-    //     showMenu: false,
+    //     hideMenu: true,
     //   },
     //   component: '/pages/demo/system/account/AccountDetail',
     // },
@@ -254,7 +254,13 @@ export default [
         case '1':
           dashboardRoute.redirect =
             dashboardRoute.path + '/' + dashboardRoute.children[0].path
-          menu = [dashboardRoute, authRoute, multiLevelRoute, linkRoute, sysRoute]
+          menu = [
+            dashboardRoute,
+            authRoute,
+            multiLevelRoute,
+            linkRoute,
+            sysRoute,
+          ]
           break
         case '2':
           dashboardRoute.redirect =

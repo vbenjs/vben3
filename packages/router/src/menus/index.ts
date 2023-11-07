@@ -13,13 +13,9 @@ import { Menu } from '@vben/types'
 async function getAsyncMenus() {
   const authStore = stores.authStore
   if (isBackMode()) {
-    return authStore.getBackMenuList.filter(
-      (item) => !item.meta?.hideMenu && !item.hideMenu,
-    )
+    return filterTree(authStore.getBackMenuList, hideFilter)
   }
-  return authStore.getFrontMenuList.filter(
-    (item) => !item.hideMenu && !item.meta?.hideMenu,
-  )
+  return filterTree(authStore.getFrontMenuList, hideFilter)
 }
 
 export const getMenus = async (): Promise<Menu[]> => {
@@ -87,4 +83,9 @@ function basicFilter(routes: RouteRecordNormalized[]) {
     menu.meta = matchRoute.meta
     return true
   }
+}
+
+// only show the menu without 'hideMenu=true'
+function hideFilter(menu: Menu) {
+  return !(menu.meta?.hideMenu || menu.hideMenu)
 }

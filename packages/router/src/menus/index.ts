@@ -85,6 +85,7 @@ function basicFilter(routes: RouteRecordNormalized[]) {
   }
 }
 
+// only show the menu without 'hideMenu=true'
 function hideFilter(menu: Menu) {
-  return !menu.meta?.hideMenu && !menu.hideMenu
+  return !(menu.meta?.hideMenu || menu.hideMenu)
 }

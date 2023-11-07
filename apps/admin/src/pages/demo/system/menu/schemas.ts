@@ -39,40 +39,46 @@ export const formSchema: VbenFormSchema[] = [
 
 export const menuColumns:VbenColumns = [
   {
-    field: 'menuName',
+    field: 'name',
     title: '菜单名称',
     width: '20%',
     align: 'center',
     fixed: 'left'
   },
   {
-    field: 'menuFlags',
+    field: 'permission',
     title: '权限标识',
     align: 'center',
     width: '10%',
   },
   {
-    field: 'menuComp',
+    field: 'component',
     title: '组件',
     align: 'center',
     width: '40%',
   },
   {
-    field: 'menuSort',
+    field: 'icon',
+    title: '图标',
+    align: 'center',
+    width: '5%'
+  },
+  {
+    field: 'orderNo',
     title: '排序',
     align: 'center',
     width: '5%'
   },
   {
-    field: 'menuState',
+    field: 'status',
     title: '状态',
     align: 'center',
     width: '5%'
   },
   {
-    field:'menuCreate',
+    field:'createTime',
     title: '创建时间',
     align: 'center',
-    width: '20%'
+    width: '15%'
   }
 ]

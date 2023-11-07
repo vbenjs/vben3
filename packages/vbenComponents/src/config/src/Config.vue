@@ -10,24 +10,48 @@ const props = defineProps({
   // Customize the configuration theme mode
   themeMode: {
     type: String,
-    default: 'dark'
+    default: 'dark',
   },
   // Whether to inherit the theme
   inherit: {
     type: Boolean,
-    default: true
-  }
+    default: true,
+  },
 })
 const { isDark } = useAppTheme()
 const appTheme = computed(() => {
-  if (!props.inherit){
+  if (!props.inherit) {
     return props.themeMode === ThemeEnum.DARK ? darkTheme : null
   }
   return unref(isDark) ? darkTheme : null
 })
+
+const themeOverrides = {
+  common: {
+    primaryColor: '#FF0000',
+  },
+  Button: {
+    textColor: '#FF0000',
+  },
+  Select: {
+    peers: {
+      InternalSelection: {
+        textColor: '#FF0000',
+      },
+    },
+  },
+  // ...
+}
 </script>
 <template>
-  <Config v-bind="$attrs" abstract :theme="appTheme"> <slot></slot></Config>
+  <Config
+    v-bind="$attrs"
+    abstract
+    :theme="appTheme"
+    :theme-overrides="themeOverrides"
+  >
+    <slot></slot
+  ></Config>
 </template>
 
 <style scoped></style>

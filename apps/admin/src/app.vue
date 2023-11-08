@@ -5,14 +5,14 @@ import { useAppTheme, useWebTitle } from '@vben/hooks'
 import { REDIRECT_NAME } from '@vben/constants'
 import { getGlobalConfig, computedAsync } from '@vben/utils'
 import AppProvider from '@/layout/components/app/AppProvider'
-import { dateEnUS, dateZhCN, enUS, zhCN } from 'naive-ui'
-import { unref, watch } from 'vue'
+import { dateEnUS, dateZhCN, enUS, zhCN, darkTheme } from 'naive-ui'
+import { unref, watch, computed } from 'vue'
 // Support Multi-language
 const { getLocale } = useLocale()
 // Listening to page changes and dynamically changing site titles
 const { title } = getGlobalConfig(import.meta.env)
 useWebTitle(title, (route) => route.name !== REDIRECT_NAME)
-const { isDark } = useAppTheme()
+const { isDark, themeColors } = useAppTheme()
 
 //监听是否暗黑模式
 watch(
@@ -53,10 +53,29 @@ const locale = computedAsync(async () => {
 
   return mod?.default ?? mod
 })
+
+const theme = computed(() => {
+  return unref(isDark) ? darkTheme : null
+})
+
+const themeOverrides = computed(() => {
+  return {
+    themeOverrides: {
+      common: {
+        ...unref(themeColors),
+      },
+    },
+  }
+})
 </script>
 
 <template>
-  <VbenConfig :locale="locale" :date-locale="dateLocale">
+  <VbenConfig
+    :locale="locale"
+    :date-locale="dateLocale"
+    :theme="theme"
+    v-bind="themeOverrides"
+  >
     <VbenNotificationProvider>
       <VbenMessageProvider>
         <AppProvider>

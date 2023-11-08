@@ -16,3 +16,10 @@ export function setCssVar(
 ) {
   dom.style.setProperty(prop, val)
 }
+
+export function getCssVar(
+  prop: string,
+  dom: HTMLElement = document.documentElement,
+) {
+  return dom.style.getPropertyValue(prop)
+}

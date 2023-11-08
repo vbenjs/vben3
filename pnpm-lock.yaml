@@ -655,6 +655,9 @@ importers:
 
   packages/utils:
     dependencies:
+      '@ant-design/colors':
+        specifier: ^7.0.0
+        version: 7.0.0
       '@formkit/auto-animate':
         specifier: ^0.8.0
         version: 0.8.0
@@ -695,6 +698,9 @@ importers:
 
   packages/vbenComponents:
     dependencies:
+      '@ant-design/colors':
+        specifier: ^7.0.0
+        version: 7.0.0
       '@iconify/iconify':
         specifier: ^3.0.0
         version: 3.1.1
@@ -796,6 +802,12 @@ packages:
 
   /@ant-design/colors@6.0.0:
     resolution: {integrity: sha512-qAZRvPzfdWHtfameEGP2Qvuf838NhergR35o+EuVyB5XvSA98xod5r4utvi4TJ3ywmevm290g9nsCG5MryrdWQ==}
+    dependencies:
+      '@ctrl/tinycolor': 3.6.0
+    dev: false
+
+  /@ant-design/colors@7.0.0:
+    resolution: {integrity: sha512-iVm/9PfGCbC0dSMBrz7oiEXZaaGH7ceU40OJEfKmyuzR9R5CRimJYPlRiFtMQGQcbNMea/ePcoIebi4ASGYXtg==}
     dependencies:
       '@ctrl/tinycolor': 3.6.0
     dev: false

@@ -12,7 +12,7 @@ const { getLocale } = useLocale()
 // Listening to page changes and dynamically changing site titles
 const { title } = getGlobalConfig(import.meta.env)
 useWebTitle(title, (route) => route.name !== REDIRECT_NAME)
-const { isDark } = useAppTheme()
+const { isDark, themeOverrides } = useAppTheme()
 
 //监听是否暗黑模式
 watch(
@@ -56,7 +56,11 @@ const locale = computedAsync(async () => {
 </script>
 
 <template>
-  <VbenConfig :locale="locale" :date-locale="dateLocale">
+  <VbenConfig
+    :locale="locale"
+    :date-locale="dateLocale"
+    v-bind="themeOverrides"
+  >
     <VbenNotificationProvider>
       <VbenMessageProvider>
         <AppProvider>

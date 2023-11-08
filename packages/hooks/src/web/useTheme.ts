@@ -2,6 +2,7 @@ import { useAppConfig } from '../config'
 import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
 import { useEventListener } from '@vben/utils'
 import { computed, unref } from 'vue'
+import { useThemeStore } from '@vben/stores'
 
 export function createMediaPrefersColorSchemeListen() {
   const { setAppConfig } = useAppConfig()
@@ -16,6 +17,7 @@ export function createMediaPrefersColorSchemeListen() {
 }
 
 export const useAppTheme = () => {
+  const { getTheme, getThemeConfig } = useThemeStore()
   const { theme, baseHandler } = useAppConfig()
 
   const isDark = computed(() => {
@@ -27,5 +29,21 @@ export const useAppTheme = () => {
       dark ? ThemeEnum.DARK : ThemeEnum.LIGHT,
     )
   }
-  return { isDark, theme, toggleTheme }
+
+  const themeColor = computed(() => {
+    return themeConfig.colorPrimary
+  })
+
+  const themeOverrides = computed(() => {
+    return {
+      theme: 'default',
+      themeOverrides: {
+        common: {
+          primaryColor: '#ff0000',
+        },
+      },
+    }
+  })
+
+  return { isDark, theme, toggleTheme, themeColor, themeOverrides }
 }

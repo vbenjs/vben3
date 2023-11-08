@@ -16,9 +16,6 @@ export function configUnocssPlugin() {
     theme: {
       colors: {
         primary: 'var(--primary-color)',
-        vben: {
-          primary: 'var(--primary-color)',
-        },
       },
       backgroundColor: {},
       transitionProperty: [],

@@ -2,8 +2,7 @@ import { useAppConfig } from '../config'
 import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
 import { generateColors, setCssVar, useEventListener } from '@vben/utils'
 import { computed, unref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useThemeStore } from '@vben/stores'
+import { useThemeStore, storeToRefs } from '@vben/stores'
 
 export function createMediaPrefersColorSchemeListen() {
   const { setAppConfig } = useAppConfig()
@@ -15,6 +14,29 @@ export function createMediaPrefersColorSchemeListen() {
       setAppConfig({ theme: e.matches ? ThemeEnum.DARK : ThemeEnum.LIGHT })
     },
   )
+}
+
+interface ThemeColors {
+  primaryColor?: string
+  primaryColorHover?: string
+  primaryColorPressed?: string
+  primaryColorSuppl?: string
+  infoColor?: string
+  infoColorHover?: string
+  infoColorPressed?: string
+  infoColorSuppl?: string
+  successColor?: string
+  successColorHover?: string
+  successColorPressed?: string
+  successColorSuppl?: string
+  warningColor?: string
+  warningColorHover?: string
+  warningColorPressed?: string
+  warningColorSuppl?: string
+  errorColor?: string
+  errorColorHover?: string
+  errorColorPressed?: string
+  errorColorSuppl?: string
 }
 
 export const useAppTheme = () => {
@@ -40,83 +62,86 @@ export const useAppTheme = () => {
   })
 
   const themeColors = computed(() => {
-    //todo 仅当配色存在是才支持生成操作，否者会报错。
-    const colorPrimaryList = generateColors(getThemeConfig.value.colorPrimary)
-    const primaryColorSet = {
-      primaryColor: colorPrimaryList[5],
-      primaryColorHover: colorPrimaryList[4],
-      primaryColorPressed: colorPrimaryList[4],
-      primaryColorSuppl: colorPrimaryList[6],
+    let colors: ThemeColors = {}
+    const themeConfig = getThemeConfig.value
+
+    if (themeConfig.primaryColor) {
+      const primaryColorList = generateColors(themeConfig.primaryColor)
+      colors = {
+        ...colors,
+        ...{
+          primaryColor: primaryColorList[5],
+          primaryColorHover: primaryColorList[4],
+          primaryColorPressed: primaryColorList[4],
+          primaryColorSuppl: primaryColorList[6],
+        },
+      }
     }
 
-    const colorInfoList = generateColors(getThemeConfig.value.colorInfo)
-    const infoColorSet = {
-      infoColor: colorInfoList[5],
-      infoColorHover: colorInfoList[4],
-      infoColorPressed: colorInfoList[4],
-      infoColorSuppl: colorInfoList[6],
+    if (themeConfig.infoColor) {
+      const infoColorList = generateColors(themeConfig.infoColor)
+      colors = {
+        ...colors,
+        ...{
+          infoColor: infoColorList[5],
+          infoColorHover: infoColorList[4],
+          infoColorPressed: infoColorList[4],
+          infoColorSuppl: infoColorList[6],
+        },
+      }
     }
 
-    const colorSuccessList = generateColors(getThemeConfig.value.colorSuccess)
-    const successColorSet = {
-      successColor: colorSuccessList[5],
-      successColorHover: colorSuccessList[4],
-      successColorPressed: colorSuccessList[4],
-      successColorSuppl: colorSuccessList[6],
+    if (themeConfig.successColor) {
+      const successColorList = generateColors(themeConfig.successColor)
+      colors = {
+        ...colors,
+        ...{
+          successColor: successColorList[5],
+          successColorHover: successColorList[4],
+          successColorPressed: successColorList[4],
+          successColorSuppl: successColorList[6],
+        },
+      }
     }
 
-    const colorWarningList = generateColors(getThemeConfig.value.colorWarning)
-    const warningColorSet = {
-      warningColor: colorWarningList[5],
-      warningColorHover: colorWarningList[4],
-      warningColorPressed: colorWarningList[4],
-      warningColorSuppl: colorWarningList[6],
+    if (themeConfig.warningColor) {
+      const warningColorList = generateColors(themeConfig.warningColor)
+      colors = {
+        ...colors,
+        ...{
+          warningColor: warningColorList[5],
+          warningColorHover: warningColorList[4],
+          warningColorPressed: warningColorList[4],
+          warningColorSuppl: warningColorList[6],
+        },
+      }
     }
 
-    const colorErrorList = generateColors(getThemeConfig.value.colorError)
-    const errorColorSet = {
-      errorColor: colorErrorList[5],
-      errorColorHover: colorErrorList[4],
-      errorColorPressed: colorErrorList[4],
-      errorColorSuppl: colorErrorList[6],
+    if (themeConfig.errorColor) {
+      const errorColorList = generateColors(themeConfig.errorColor)
+      colors = {
+        ...colors,
+        ...{
+          errorColor: errorColorList[5],
+          errorColorHover: errorColorList[4],
+          errorColorPressed: errorColorList[4],
+          errorColorSuppl: errorColorList[6],
+        },
+      }
     }
-
-    return {
-      ...primaryColorSet,
-      ...infoColorSet,
-      ...successColorSet,
-      ...warningColorSet,
-      ...errorColorSet,
-    }
+    return colors
   })
 
   watch(
     themeColors,
     (val) => {
-      setCssVar('--primary-color', val.primaryColor)
-      setCssVar('--success-color', val.successColor)
-      setCssVar('--error-color', val.errorColor)
-      setCssVar('--warning-color', val.warningColor)
+      val.primaryColor && setCssVar('--primary-color', val.primaryColor)
+      val.successColor && setCssVar('--success-color', val.successColor)
+      val.errorColor && setCssVar('--error-color', val.errorColor)
+      val.warningColor && setCssVar('--warning-color', val.warningColor)
     },
     { deep: true },
   )
 
-  // todo 组件依赖
-  const themeProp = computed(() => {
-    //import { darkTheme } from 'naive-ui'
-    return unref(isDark) ? null : null
-  })
-
-  // todo 组件依赖, 后面考虑看在哪里统一处理组件库差异性
-  const themeOverrides = computed(() => {
-    return {
-      themeOverrides: {
-        common: {
-          ...themeColors.value,
-        },
-      },
-    }
-  })
-
-  return { isDark, theme: themeProp, toggleTheme, themeColor, themeOverrides }
+  return { isDark, toggleTheme, themeColor, themeColors }
 }

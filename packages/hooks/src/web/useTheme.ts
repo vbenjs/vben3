@@ -3,7 +3,7 @@ import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
 import { generateColors, setCssVar, useEventListener } from '@vben/utils'
 import { computed, unref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { ThemeColorConfig, useThemeStore } from '@vben/stores'
+import { useThemeStore } from '@vben/stores'
 
 export function createMediaPrefersColorSchemeListen() {
   const { setAppConfig } = useAppConfig()
@@ -19,7 +19,7 @@ export function createMediaPrefersColorSchemeListen() {
 
 export const useAppTheme = () => {
   const themeStore = useThemeStore()
-  const { setTheme, setThemeConfig } = themeStore
+  //todo theme从themeStore里取
   const { getTheme, getThemeConfig } = storeToRefs(themeStore)
 
   const { theme, baseHandler } = useAppConfig()
@@ -40,6 +40,7 @@ export const useAppTheme = () => {
   })
 
   const themeColors = computed(() => {
+    //todo 仅当配色存在是才支持生成操作，否者会报错。
     const colorPrimaryList = generateColors(getThemeConfig.value.colorPrimary)
     const primaryColorSet = {
       primaryColor: colorPrimaryList[5],
@@ -106,6 +107,7 @@ export const useAppTheme = () => {
     return unref(isDark) ? null : null
   })
 
+  // todo 组件依赖, 后面考虑看在哪里统一处理组件库差异性
   const themeOverrides = computed(() => {
     return {
       themeOverrides: {

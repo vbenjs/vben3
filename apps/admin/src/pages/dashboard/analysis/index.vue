@@ -25,7 +25,6 @@ import VChart from 'vue-echarts'
 
 import { operatorColumns } from './modules/schema'
 import { getOperatorData } from '@vben/demo/src/apis/table'
-import { useThemeVars } from 'naive-ui'
 
 // provide(THEME_KEY, "dark")
 echarts.use([
@@ -520,12 +519,9 @@ const e6_option = ref({
     },
   ],
 })
-
-const themeVars = useThemeVars()
 </script>
 <template>
   <div class="bg-light-400 p-5 mx-2 flex justify-between gap-x-2">
-    <span :class="`text-[${themeVars.primaryColor}]`">test</span>
     <div class="w-3/4 flex flex-col gap-y-5">
       <div class="flex justify-evenly gap-x-3">
         <div

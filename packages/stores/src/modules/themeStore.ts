@@ -8,7 +8,7 @@ interface ThemeColorConfig {
   warningColor: string //警告色
   errorColor: string //错误色
   textBaseColor: string //文本色
-  colorBgBase: string //背景色
+  bgBaseColor: string //背景色
 }
 
 interface ThemeStoreState {
@@ -26,7 +26,7 @@ export const useThemeStore = defineStore({
       warningColor: '#faad14',
       errorColor: '#D03050',
       textBaseColor: '#000000',
-      colorBgBase: '#ffffff',
+      bgBaseColor: '#ffffff',
     },
     theme: ThemeEnum.LIGHT,
   }),

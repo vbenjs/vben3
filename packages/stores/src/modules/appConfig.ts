@@ -28,9 +28,9 @@ import {
 } from '@vben/constants'
 
 const defaultOptions: DefineAppConfigOptions = {
-  theme: ThemeEnum.LIGHT,
+  theme: ThemeEnum.LIGHT, //TODO remove
   navBarMode: NavBarModeEnum.SIDEBAR,
-  themeColor: '',
+  themeColor: '', //TODO remove
   showThemeModeToggle: true,
   openKeepAlive: true,
   useOpenBackTop: true,

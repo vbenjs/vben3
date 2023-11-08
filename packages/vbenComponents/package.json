@@ -16,7 +16,8 @@
     "sass": "^1.55.0",
     "vue": "^3.2.47",
     "vxe-table-demonic": "^4.5.0-beta.3",
-    "xe-utils": "^3.5.7"
+    "xe-utils": "^3.5.7",
+    "@ant-design/colors": "^7.0.0"
   },
   "devDependencies": {
     "@iconify/json": "^2.2.15",

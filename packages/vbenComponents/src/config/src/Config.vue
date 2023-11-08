@@ -4,6 +4,7 @@ import { computed, unref } from 'vue'
 import { useAppTheme } from '@vben/hooks'
 import { ThemeEnum } from '@vben/constants'
 import { generate } from '@ant-design/colors'
+import { setCssVar } from '@vben/utils'
 
 const Config = maps.get('Config')
 const darkTheme = maps.get('DarkTheme')
@@ -41,8 +42,10 @@ const colorInfoList = generate(colorInfo)
 const colorNeutral = '#000000'
 
 // TODO 改变variables里的变量值
-const $root: HTMLElement = document.documentElement
-$root.style.cssText = `--primary-color:${colorPrimaryList[5]}`
+setCssVar('--primary-color', colorPrimaryList[5])
+setCssVar('--success-color', colorSuccessList[5])
+setCssVar('--error-color', colorErrorList[5])
+setCssVar('--warning-color', colorWarningList[5])
 
 function generateThemeOverrides() {
   return {

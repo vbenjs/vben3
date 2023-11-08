@@ -40,6 +40,10 @@ const colorInfo = '#2080F0'
 const colorInfoList = generate(colorInfo)
 const colorNeutral = '#000000'
 
+// TODO 改变variables里的变量值
+const $root: HTMLElement = document.documentElement
+$root.style.cssText = `--primary-color:${colorPrimaryList[5]}`
+
 function generateThemeOverrides() {
   return {
     themeOverrides: {

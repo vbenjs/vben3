@@ -1,3 +1,5 @@
+import { generate } from '@ant-design/colors'
+
 /**
  * 判断是否 十六进制颜色值.
  * 输入形式可为 #fff000 #f00
@@ -175,4 +177,30 @@ export function pickTextColorBasedOnBgColor(
   })
   const L = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
   return L < 0.8 ? darkColor : lightColor
+}
+
+interface GenerateColorsOptions {
+  theme?: 'dark' | 'default'
+  backgroundColor?: string
+}
+
+type GeneratedColors = [
+  string, //最浅色
+  string,
+  string,
+  string,
+  string,
+  string, //基本色
+  string,
+  string,
+  string,
+  string, //最深色
+]
+export function generateColors(
+  color: string,
+  opts: GenerateColorsOptions = { theme: 'default' },
+) {
+  return generate(color, {
+    ...opts,
+  }) as GeneratedColors
 }

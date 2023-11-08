@@ -18,7 +18,8 @@
     "pinia": "2.1.7",
     "vue": "3.3.6",
     "vue-router": "^4.2.5",
-    "sortablejs": "^1.15.0"
+    "sortablejs": "^1.15.0",
+    "@ant-design/colors": "^7.0.0"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.10",

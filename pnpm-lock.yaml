@@ -655,6 +655,9 @@ importers:
 
   packages/utils:
     dependencies:
+      '@ant-design/colors':
+        specifier: ^7.0.0
+        version: 7.0.0
       '@formkit/auto-animate':
         specifier: ^0.8.0
         version: 0.8.0

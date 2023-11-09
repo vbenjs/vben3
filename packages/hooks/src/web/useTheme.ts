@@ -57,13 +57,24 @@ export const useAppTheme = () => {
     )
   }
 
-  //TODO remove it
-  const themeColor = computed(() => {
-    return ''
-  })
-
   const primaryColor = computed(() => {
     return getThemeConfig.value.primaryColor
+  })
+
+  const infoColor = computed(() => {
+    return getThemeConfig.value.infoColor
+  })
+
+  const successColor = computed(() => {
+    return getThemeConfig.value.successColor
+  })
+
+  const warningColor = computed(() => {
+    return getThemeConfig.value.warningColor
+  })
+
+  const errorColor = computed(() => {
+    return getThemeConfig.value.errorColor
   })
 
   const themeColors = computed(() => {
@@ -151,8 +162,11 @@ export const useAppTheme = () => {
   return {
     isDark,
     toggleTheme,
-    themeColor,
     primaryColor,
+    infoColor,
+    successColor,
+    warningColor,
+    errorColor,
     themeColors,
     setThemeConfig,
   }

@@ -11,6 +11,7 @@ import {
   HEADER_PRESET_BG_COLOR_LIST,
   SIDE_BAR_BG_COLOR_LIST,
   HandlerSettingEnum,
+  ThemeChangeEnum,
 } from '@vben/constants'
 import { context } from '../../../../bridge'
 import { navigationBarTypeList } from '../constant'
@@ -20,7 +21,8 @@ import { useAppTheme } from '@vben/hooks'
 const { useAppConfig } = context
 const { baseHandler } = useAppConfig()
 
-const { primaryColor } = useAppTheme()
+const { primaryColor, infoColor, successColor, warningColor, errorColor } =
+  useAppTheme()
 
 const { t } = useI18n()
 
@@ -67,11 +69,43 @@ const onVisible = (show: boolean) => {
         "
       />
       <VbenDivider title-placement="left">{{
-        t('layout.setting.sysTheme')
+        t('layout.setting.primaryColor')
       }}</VbenDivider>
       <ThemeColorPicker
         :def="primaryColor"
-        :event="HandlerSettingEnum.CHANGE_THEME_COLOR"
+        :event="ThemeChangeEnum.THEME_PRIMARY_COLOR_CHANGE"
+        :color-list="APP_PRESET_COLOR_LIST"
+      />
+      <VbenDivider title-placement="left">{{
+        t('layout.setting.infoColor')
+      }}</VbenDivider>
+      <ThemeColorPicker
+        :def="infoColor"
+        :event="ThemeChangeEnum.THEME_INFO_COLOR_CHANGE"
+        :color-list="APP_PRESET_COLOR_LIST"
+      />
+      <VbenDivider title-placement="left">{{
+        t('layout.setting.successColor')
+      }}</VbenDivider>
+      <ThemeColorPicker
+        :def="successColor"
+        :event="ThemeChangeEnum.THEME_SUCCESS_COLOR_CHANGE"
+        :color-list="APP_PRESET_COLOR_LIST"
+      />
+      <VbenDivider title-placement="left">{{
+        t('layout.setting.warningColor')
+      }}</VbenDivider>
+      <ThemeColorPicker
+        :def="warningColor"
+        :event="ThemeChangeEnum.THEME_WARNING_COLOR_CHANGE"
+        :color-list="APP_PRESET_COLOR_LIST"
+      />
+      <VbenDivider title-placement="left">{{
+        t('layout.setting.errorColor')
+      }}</VbenDivider>
+      <ThemeColorPicker
+        :def="errorColor"
+        :event="ThemeChangeEnum.THEME_ERROR_COLOR_CHANGE"
         :color-list="APP_PRESET_COLOR_LIST"
       />
       <VbenDivider title-placement="left">{{
@@ -79,7 +113,7 @@ const onVisible = (show: boolean) => {
       }}</VbenDivider>
       <ThemeColorPicker
         :def="getHeaderBgColor"
-        :event="HandlerSettingEnum.HEADER_THEME"
+        :event="ThemeChangeEnum.THEME_HEADER_BG_COLOR_CHANGE"
         :color-list="HEADER_PRESET_BG_COLOR_LIST"
       />
       <VbenDivider title-placement="left">{{
@@ -87,7 +121,7 @@ const onVisible = (show: boolean) => {
       }}</VbenDivider>
       <ThemeColorPicker
         :def="getMenuBgColor"
-        :event="HandlerSettingEnum.MENU_THEME"
+        :event="ThemeChangeEnum.THEME_SIDEBAR_BG_COLOR_CHANGE"
         :color-list="SIDE_BAR_BG_COLOR_LIST"
       />
       <VbenDivider title-placement="left"

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ThemeEnum } from '@vben/constants'
 
-interface ThemeColorConfig {
+export interface ThemeColorConfig {
   primaryColor: string //主题色
   infoColor: string //信息色
   successColor: string //成功色

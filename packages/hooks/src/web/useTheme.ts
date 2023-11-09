@@ -16,7 +16,7 @@ export function createMediaPrefersColorSchemeListen() {
   )
 }
 
-interface ThemeColors {
+export interface ThemeColors {
   primaryColor?: string
   primaryColorHover?: string
   primaryColorPressed?: string
@@ -42,6 +42,7 @@ interface ThemeColors {
 export const useAppTheme = () => {
   const themeStore = useThemeStore()
   //todo theme从themeStore里取
+  const { setThemeConfig } = themeStore
   const { getTheme, getThemeConfig } = storeToRefs(themeStore)
 
   const { theme, baseHandler } = useAppConfig()
@@ -59,6 +60,10 @@ export const useAppTheme = () => {
   //TODO remove it
   const themeColor = computed(() => {
     return ''
+  })
+
+  const primaryColor = computed(() => {
+    return getThemeConfig.value.primaryColor
   })
 
   const themeColors = computed(() => {
@@ -143,5 +148,12 @@ export const useAppTheme = () => {
     { deep: true },
   )
 
-  return { isDark, toggleTheme, themeColor, themeColors }
+  return {
+    isDark,
+    toggleTheme,
+    themeColor,
+    primaryColor,
+    themeColors,
+    setThemeConfig,
+  }
 }

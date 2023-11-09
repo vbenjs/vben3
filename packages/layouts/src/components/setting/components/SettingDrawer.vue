@@ -15,15 +15,18 @@ import {
 import { context } from '../../../../bridge'
 import { navigationBarTypeList } from '../constant'
 import { useI18n } from '@vben/locale'
+import { useAppTheme } from '@vben/hooks'
 
 const { useAppConfig } = context
 const { baseHandler } = useAppConfig()
+
+const { primaryColor } = useAppTheme()
 
 const { t } = useI18n()
 
 const { useMenuSetting, useHeaderSetting, useRootSetting } = context
 
-const { getShowDarkModeToggle, getThemeColor } = useRootSetting()
+const { getShowDarkModeToggle } = useRootSetting()
 const { getIsHorizontal, getMenuType, getMenuBgColor } = useMenuSetting()
 const { getHeaderBgColor } = useHeaderSetting()
 
@@ -67,7 +70,7 @@ const onVisible = (show: boolean) => {
         t('layout.setting.sysTheme')
       }}</VbenDivider>
       <ThemeColorPicker
-        :def="getThemeColor"
+        :def="primaryColor"
         :event="HandlerSettingEnum.CHANGE_THEME_COLOR"
         :color-list="APP_PRESET_COLOR_LIST"
       />

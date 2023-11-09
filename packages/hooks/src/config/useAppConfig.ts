@@ -111,14 +111,14 @@ function handlerResults(
         },
         sidebar: { collapsed: false },
       }
-
+    //todo remove it
     case HandlerSettingEnum.CHANGE_THEME_COLOR:
       if (unref(themeColor) === value) {
         return {}
       }
       // changeTheme(value);
       return { themeColor: value }
-
+    //todo remove it
     case HandlerSettingEnum.CHANGE_THEME:
       return { theme: value }
 

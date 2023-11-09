@@ -1,9 +1,8 @@
 <script lang="ts" setup name="ThemeColorPicker">
 import { PropType } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
-import { context } from '../../../../bridge'
-const { useAppConfig } = context
-const { baseHandler } = useAppConfig()
+import { useAppTheme } from '@vben/hooks'
+const { setThemeConfig } = useAppTheme()
 
 const props = defineProps({
   colorList: {
@@ -20,8 +19,11 @@ const props = defineProps({
   },
 })
 
-const handleClick = (color) => {
-  baseHandler(props.event, color)
+const handleClick = (color: string) => {
+  switch (props.event) {
+    case HandlerSettingEnum.CHANGE_THEME_COLOR:
+      setThemeConfig({ primaryColor: color })
+  }
 }
 </script>
 <template>

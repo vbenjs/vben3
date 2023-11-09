@@ -94,7 +94,9 @@ import naive, {
   NAffix,
   NAlert,
   NGradientText,
-  NPageHeader
+  NPageHeader,
+  NCollapse,
+  NCollapseItem,
 } from 'naive-ui'
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
 
@@ -117,6 +119,8 @@ export async function registerComponents(app) {
     CheckboxGroup: NCheckboxGroup,
     ColorPicker: NColorPicker,
     Cascader: NCascader,
+    Collapse: NCollapse,
+    CollapseItem: NCollapseItem,
 
     Drawer: NDrawer,
     Divider: NDivider,

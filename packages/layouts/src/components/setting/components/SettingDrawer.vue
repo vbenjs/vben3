@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import DarkModeToggle from './DarkModeToggle.vue'
 import NavigationBarPicker from './NavigationBarPicker.vue'
-import ThemeColorPicker from './ThemeColorPicker.vue'
+
 import Features from './Features.vue'
 import Content from './Content.vue'
 import Transitions from './Transitions.vue'
@@ -17,6 +17,7 @@ import { context } from '../../../../bridge'
 import { navigationBarTypeList } from '../constant'
 import { useI18n } from '@vben/locale'
 import { useAppTheme } from '@vben/hooks'
+import ThemeEditor from '#/components/setting/components/ThemeEditor.vue'
 
 const { useAppConfig } = context
 const { baseHandler } = useAppConfig()
@@ -46,14 +47,14 @@ const onVisible = (show: boolean) => {
     <VbenDrawerContent closable>
       <template #header>{{ t('layout.setting.drawerTitle') }}</template>
       <template v-if="getShowDarkModeToggle">
-        <VbenDivider title-placement="left">{{
-          t('layout.setting.darkMode')
-        }}</VbenDivider>
+        <VbenDivider title-placement="left">
+          {{ t('layout.setting.darkMode') }}
+        </VbenDivider>
         <DarkModeToggle />
       </template>
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.navMode')
-      }}</VbenDivider>
+      <VbenDivider title-placement="left">
+        {{ t('layout.setting.navMode') }}
+      </VbenDivider>
       <NavigationBarPicker
         :def="getMenuType"
         :event="HandlerSettingEnum.CHANGE_LAYOUT"
@@ -68,73 +69,21 @@ const onVisible = (show: boolean) => {
           }
         "
       />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.primaryColor')
-      }}</VbenDivider>
-      <ThemeColorPicker
-        :def="primaryColor"
-        :event="ThemeChangeEnum.THEME_PRIMARY_COLOR_CHANGE"
-        :color-list="APP_PRESET_COLOR_LIST"
-      />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.infoColor')
-      }}</VbenDivider>
-      <ThemeColorPicker
-        :def="infoColor"
-        :event="ThemeChangeEnum.THEME_INFO_COLOR_CHANGE"
-        :color-list="APP_PRESET_COLOR_LIST"
-      />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.successColor')
-      }}</VbenDivider>
-      <ThemeColorPicker
-        :def="successColor"
-        :event="ThemeChangeEnum.THEME_SUCCESS_COLOR_CHANGE"
-        :color-list="APP_PRESET_COLOR_LIST"
-      />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.warningColor')
-      }}</VbenDivider>
-      <ThemeColorPicker
-        :def="warningColor"
-        :event="ThemeChangeEnum.THEME_WARNING_COLOR_CHANGE"
-        :color-list="APP_PRESET_COLOR_LIST"
-      />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.errorColor')
-      }}</VbenDivider>
-      <ThemeColorPicker
-        :def="errorColor"
-        :event="ThemeChangeEnum.THEME_ERROR_COLOR_CHANGE"
-        :color-list="APP_PRESET_COLOR_LIST"
-      />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.headerTheme')
-      }}</VbenDivider>
-      <ThemeColorPicker
-        :def="getHeaderBgColor"
-        :event="ThemeChangeEnum.THEME_HEADER_BG_COLOR_CHANGE"
-        :color-list="HEADER_PRESET_BG_COLOR_LIST"
-      />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.sidebarTheme')
-      }}</VbenDivider>
-      <ThemeColorPicker
-        :def="getMenuBgColor"
-        :event="ThemeChangeEnum.THEME_SIDEBAR_BG_COLOR_CHANGE"
-        :color-list="SIDE_BAR_BG_COLOR_LIST"
-      />
-      <VbenDivider title-placement="left"
-        >{{ t('layout.setting.interfaceFunction') }}
+      <VbenDivider title-placement="left">
+        {{ t('layout.setting.themeEditor') }}
+      </VbenDivider>
+      <ThemeEditor />
+      <VbenDivider title-placement="left">
+        {{ t('layout.setting.interfaceFunction') }}
       </VbenDivider>
       <Features />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.interfaceDisplay')
-      }}</VbenDivider>
+      <VbenDivider title-placement="left">
+        {{ t('layout.setting.interfaceDisplay') }}
+      </VbenDivider>
       <Content />
-      <VbenDivider title-placement="left">{{
-        t('layout.setting.animation')
-      }}</VbenDivider>
+      <VbenDivider title-placement="left">
+        {{ t('layout.setting.animation') }}
+      </VbenDivider>
       <Transitions />
       <VbenDivider />
       <FooterButtons />

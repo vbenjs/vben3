@@ -1,26 +1,27 @@
-<script lang="ts" setup name="ThemeColorPicker">
-import { PropType } from 'vue'
+<script lang="ts" setup name="InputNumberItem">
+import { PropType, ref } from 'vue'
 import { ThemeChangeEnum } from '@vben/constants'
 import { useAppTheme } from '@vben/hooks'
 
 const { setThemeConfig } = useAppTheme()
 
 const props = defineProps({
-  colorList: {
-    type: Array as PropType<string[]>,
-    default: () => [],
+  title: { type: String, default: '' },
+  def: {
+    type: String as PropType<string>,
   },
   event: {
     type: Number as PropType<ThemeChangeEnum>,
     required: true,
   },
-  def: {
-    type: String,
-    default: '',
+  disabled: {
+    type: Boolean,
   },
 })
 
-const handleClick = (color: string) => {
+const color = ref(props.def)
+
+const onChange = (color: string) => {
   switch (props.event) {
     case ThemeChangeEnum.THEME_PRIMARY_COLOR_CHANGE:
       setThemeConfig({ primaryColor: color })
@@ -41,32 +42,19 @@ const handleClick = (color: string) => {
 }
 </script>
 <template>
-  <div class="theme-color-picker">
-    <VbenSpace justify="space-between" :size="0" :wrap="false">
-      <template v-for="color in colorList" :key="color">
-        <span
-          @click="handleClick(color)"
-          class="h-20px w-20px cursor-pointer border rounded-sm box-border border-gray-300 inline-block color-item"
-          :class="{ active: def == color }"
-          :style="{ background: color }"
-        >
-          <VbenSpace v-if="def == color" justify="center">
-            <VbenIconify
-              icon="ant-design:check-outlined"
-              color="#D1D5DB"
-              hover-color="#D1D5DB"
-            />
-          </VbenSpace>
-        </span>
-      </template>
+  <div class="switch-item">
+    <VbenSpace justify="space-between" align="center">
+      <span>{{ title }}</span>
+      <div class="w-80px">
+        <VbenColorPicker
+          v-model:value="color"
+          :show-alpha="false"
+          :modes="['hex']"
+          size="small"
+          @complete="onChange"
+        />
+      </div>
     </VbenSpace>
   </div>
 </template>
-<style lang="less" scoped>
-.color-item {
-  &:hover,
-  &.active {
-    border-color: rgba(6, 96, 189, 1);
-  }
-}
-</style>
+<style lang="less" scoped></style>

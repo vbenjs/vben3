@@ -1,3 +1,4 @@
+// TODO remove preset color lists
 export const APP_PRESET_COLOR_LIST: string[] = [
   '#0960bd',
   '#0084f4',

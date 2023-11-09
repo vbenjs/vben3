@@ -69,6 +69,7 @@ export default {
     splitMenu: '分割菜单',
     closeMixSidebarOnChange: '切换页面关闭菜单',
 
+    themeEditor: '主题编辑',
     primaryColor: '主题色',
     successColor: '成功色',
     warningColor: '警告色',

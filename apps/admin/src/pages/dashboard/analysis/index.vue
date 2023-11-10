@@ -233,7 +233,8 @@ const e4_option = ref({
   title: {
     text: '广告来源',
     textStyle: {
-      color: '#3b3a39',
+      color: '#6B7280',
+      fontWeight: 600,
     },
   },
   tooltip: {
@@ -360,7 +361,8 @@ const e5_option = ref({
   title: {
     text: '实时数据',
     textStyle: {
-      color: '#3b3a39',
+      color: '#6B7280',
+      fontWeight: 600,
     },
   },
   legend: {
@@ -415,7 +417,7 @@ const e5_option = ref({
       data: data1,
       barWidth: 10,
       itemStyle: {
-        borderRadius: 5,
+        borderRadius: 2,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
@@ -525,10 +527,10 @@ const e6_option = ref({
     <div class="w-3/4 flex flex-col gap-y-5">
       <div class="flex justify-evenly gap-x-3">
         <div
-          class="bg-white w-1/3 h-40 rounded-3xl p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-1/3 h-40 rounded-md p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
         >
           <p
-            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
+            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-500 m-auto"
           >
             访问量
           </p>
@@ -548,7 +550,7 @@ const e6_option = ref({
           </div>
         </div>
         <div
-          class="bg-white w-1/3 h-40 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
         >
           <p
             class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
@@ -573,7 +575,7 @@ const e6_option = ref({
           </div>
         </div>
         <div
-          class="bg-white w-1/3 h-40 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
         >
           <p
             class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
@@ -590,7 +592,7 @@ const e6_option = ref({
       </div>
       <div>
         <div
-          class="bg-white p-5 w-full h-96 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white p-5 w-full h-96 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
         >
           <div class="col-start-1 col-span-12 row-start-1 row-span-6">
             <v-chart ref="lineCharts2" :option="e4_option" autoresize />
@@ -599,7 +601,7 @@ const e6_option = ref({
       </div>
       <div>
         <div
-          class="bg-white w-full h-60 rounded-lg grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-full h-60 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
         >
           <div class="col-start-1 col-span-12 row-start-1 row-span-6">
             <VbenTable
@@ -619,14 +621,14 @@ const e6_option = ref({
     </div>
     <div class="flex flex-col items-center gap-y-5 w-1/4">
       <div
-        class="bg-white w-11/12 h-1/2 p-5 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
+        class="bg-white w-11/12 h-1/2 p-5 rounded-md grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
       >
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
           <v-chart ref="barChart" :option="e5_option" autoresize />
         </div>
       </div>
       <div
-        class="bg-white w-11/12 h-1/2 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
+        class="bg-white w-11/12 h-1/2 rounded-md grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
       >
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
           <v-chart ref="calendarChart" :option="e6_option" autoresize />

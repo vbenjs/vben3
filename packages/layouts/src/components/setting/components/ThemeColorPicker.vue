@@ -17,6 +17,9 @@ const props = defineProps({
   disabled: {
     type: Boolean,
   },
+  colorList: {
+    type: Array,
+  },
 })
 
 const color = ref(props.def)
@@ -52,6 +55,8 @@ const onChange = (color: string) => {
           :modes="['hex']"
           size="small"
           @complete="onChange"
+          :swatches="colorList"
+          @update:value="onChange"
         />
       </div>
     </VbenSpace>

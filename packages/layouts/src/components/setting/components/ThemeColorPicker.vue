@@ -45,21 +45,16 @@ const onChange = (color: string) => {
 }
 </script>
 <template>
-  <div class="switch-item">
-    <VbenSpace justify="space-between" align="center">
-      <span>{{ title }}</span>
-      <div class="w-80px">
-        <VbenColorPicker
-          v-model:value="color"
-          :show-alpha="false"
-          :modes="['hex']"
-          size="small"
-          @complete="onChange"
-          :swatches="colorList"
-          @update:value="onChange"
-        />
-      </div>
-    </VbenSpace>
+  <div class="min-w-83px">
+    <VbenColorPicker
+      v-model:value="color"
+      :show-alpha="false"
+      :modes="['hex']"
+      :render-label="() => title"
+      @complete="onChange"
+      :swatches="colorList"
+      @update:value="onChange"
+    />
   </div>
 </template>
 <style lang="less" scoped></style>

@@ -21,7 +21,7 @@ const { primaryColor, infoColor, successColor, warningColor, errorColor } =
   useAppTheme()
 </script>
 <template>
-  <VbenSpace vertical>
+  <VbenSpace justify="space-between" align="center">
     <ThemeColorPicker
       :title="t('layout.setting.primaryColor')"
       :def="primaryColor"

@@ -1,4 +1,4 @@
-// TODO remove preset color lists
+// primary preset color
 export const APP_PRESET_COLOR_LIST: string[] = [
   '#0960bd',
   '#0084f4',
@@ -26,7 +26,7 @@ export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
   '#383f45',
 ]
 
-// sider preset color
+// sidebar preset color
 export const SIDE_BAR_BG_COLOR_LIST: string[] = [
   '#001529',
   '#212121',

@@ -40,6 +40,8 @@
     "@vben/styles": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
+    "@vueuse/core": "^10.5.0",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "mockjs": "^1.1.0",

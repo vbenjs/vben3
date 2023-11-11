@@ -10,6 +10,7 @@ import {
 import { useI18n } from '@vben/locale';
 import { notice } from '@vben/vbencomponents'
 import { useUserStore } from '@/store/user';
+import { onKeyStroke } from '@vueuse/core';
 import {
   LoginStateEnum,
   useLoginState,
@@ -17,8 +18,8 @@ import {
   useFormValid
 } from './use-login';
 import LoginFormTitle from './login-form-title.vue';
-
-const formRef = ref();
+import md5 from 'crypto-js/md5';
+const formRef = ref(null);
 const loading = ref(false);
 const rememberMe = ref(false);
 
@@ -26,35 +27,73 @@ const { t } = useI18n();
 const userStore = useUserStore();
 const { setLoginState, getLoginState } = useLoginState();
 const { getFormRules } = useFormRules();
-
 const formData = reactive({
-  account: 'vben',
+  account: 'shixia',
   password: '123456'
 });
 
 const { validForm } = useFormValid(formRef);
-//onKeyStroke('Enter', handleLogin);
-
 const show = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
-
+onKeyStroke('Enter', handleLogin);
+let login_time = 0;
 async function handleLogin() {
+  if (Date.now() - login_time < 100) return;
+  login_time = Date.now();
   // 暂时不做校验
   // const data = await validForm()
   // if (!data) return
   try {
     loading.value = true;
     const userInfo = await userStore.login({
-      password: formData.password,
-      username: formData.account,
+      password: md5(formData.password).toString(),
+      account: formData.account,
       mode: 'none' //不要默认的错误提示
     });
-
     if (userInfo) {
       notice.success({
         content: t('sys.login.loginSuccessTitle'),
-        meta: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realname}`,
+        meta: `${t('sys.login.loginSuccessDesc')}: ${userInfo.name=="新用户" ? '尊贵的起飞用户':userInfo.name}`,
         duration: 3000
       });
+      // setTimeout(() => {
+      //   const GetTS = function () {
+      //     const nge_Hour = new Date().getHours();
+      //     const nge_warmprompt = [
+      //       '现在已经过凌晨了，身体是无价的资本喔，早点休息吧！',
+      //       '凌晨1点多了，工作是永远都做不完的，别熬坏身子！',
+      //       '该休息了，身体可是革命的本钱啊！',
+      //       '夜深了，熬夜很容易导致身体内分泌失调，长痘痘的！',
+      //       '四点过了，你明天不上班？？？',
+      //       '你知道吗，此时是国内网络速度最快的时候！',
+      //       '清晨好，这麽早就上班啦，昨晚做的梦好吗？ ',
+      //       '新的一天又开始了，祝你过得快乐!',
+      //       '早上好，一天之际在于晨，又是美好的一天！',
+      //       '上午好！今天你看上去好精神哦！',
+      //       '上午好！今天你看上去好精神哦！',
+      //       '该吃午饭啦！有什么好吃的？您有中午休息的好习惯吗？',
+      //       '该吃午饭啦！有什么好吃的？您有中午休息的好习惯吗？',
+      //       '下午好！外面的天气好吗？记得朵朵白云曾捎来朋友殷殷的祝福。',
+      //       '下午好！外面的天气好吗？记得朵朵白云曾捎来朋友殷殷的祝福。',
+      //       '下午好！外面的天气好吗？记得朵朵白云曾捎来朋友殷殷的祝福。',
+      //       '下午好！外面的天气好吗？记得朵朵白云曾捎来朋友殷殷的祝福。',
+      //       '太阳落山了！快看看夕阳吧！如果外面下雨，就不必了 ^_^',
+      //       '太阳落山了！快看看夕阳吧！如果外面下雨，就不必了 ^_^',
+      //       '晚上好，今天的心情怎么样?',
+      //       '忙碌了一天，累了吧？快去嫖一下，放松下吧！',
+      //       '忙碌了一天，累了吧？快去嫖一下，放松下吧！',
+      //       '忙碌了一天，累了吧？快去嫖一下，放松下吧！',
+      //       '这么晚了，还在上网？早点洗洗睡吧，睡前记得洗洗脸喔！',
+      //       '这么晚了，还在上网？早点洗洗睡吧，睡前记得洗洗脸喔！',
+      //     ];
+      //     const msg = ' 温馨提示';
+      //     return {
+      //       message: msg,
+      //       description: nge_warmprompt[nge_Hour],
+      //       icon: '🚀',
+      //     };
+      //   };
+      //   notice.info(GetTS());
+      // }, 1000);
     }
   } catch (error) {
     // dialog.error({
@@ -62,6 +101,7 @@ async function handleLogin() {
     //   content:
     //     (error as unknown as Error).message || t('sys.api.networkExceptionMsg')
     // });
+    console.log(error)
   } finally {
     loading.value = false;
   }
@@ -70,9 +110,9 @@ async function handleLogin() {
 <template>
   <login-form-title v-show="show" class="enter-x" />
   <vben-form
+    ref="formRef"
     :model="formData"
     :rules="getFormRules"
-    ref="formRef"
     v-show="show"
     @keypress.enter="handleLogin"
   >

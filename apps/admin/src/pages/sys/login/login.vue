@@ -23,7 +23,7 @@ const { t } = useI18n()
   <div :class="bem()">
     <div :class="bem('slogan')" class="hidden xl:flex">
       <div :class="bem('logo')">
-        <img :title="title" :alt="title" src="@/assets/images/logo.png" />
+        <img :title="title" :alt="title" src="@/assets/images/logo.svg" />
         <div :class="[bem('logo-title'), 'truncate']">
           {{ title }}
         </div>

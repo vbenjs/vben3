@@ -1,10 +1,10 @@
-import { LAYOUT } from '../basic'
+import {LAYOUT} from '../basic'
 
 const dashboard: RouteRecordItem = {
   path: '/dashboard',
   name: 'Dashboard',
   component: LAYOUT,
-  redirect: '/dashboard/analysis',
+  redirect: '/dashboard/workbench',
   meta: {
     orderNo: 1,
     icon: 'mdi:monitor-dashboard',
@@ -13,24 +13,26 @@ const dashboard: RouteRecordItem = {
   },
   children: [
     {
-      path: 'analysis',
-      name: 'Analysis',
-      component: () => import('@/pages/dashboard/analysis/index.vue'),
-      meta: {
-        icon: 'icon-park-outline:analysis',
-        title: 'routes.dashboard.analysis',
-        affix: true,
-      },
-    },
-    {
       path: 'workbench',
       name: 'Workbench',
       component: () => import('@/pages/dashboard/workbench/index.vue'),
       meta: {
         icon: 'icon-park-outline:workbench',
         title: 'routes.dashboard.workbench',
+        affix: true,
       },
     },
+    {
+      path: 'analysis',
+      name: 'Analysis',
+      component: () => import('@/pages/dashboard/analysis/index.vue'),
+      meta: {
+        icon: 'icon-park-outline:analysis',
+        title: 'routes.dashboard.analysis',
+
+      },
+    },
+
   ],
 }
 

@@ -13,15 +13,15 @@ const { t } = useI18n()
 import UserInfo from './user-info.vue'
 
 const options = ref([
-  {
-    label: t('文档'),
-    key: 'doc',
-    icon: renderIcon('carbon:document'),
-  },
-  {
-    key: 'header-divider',
-    type: 'divider',
-  },
+  // {
+  //   label: t('文档'),
+  //   key: 'doc',
+  //   icon: renderIcon('carbon:document'),
+  // },
+  // {
+  //   key: 'header-divider',
+  //   type: 'divider',
+  // },
   {
     label: t('锁定屏幕'),
     key: 'lock',

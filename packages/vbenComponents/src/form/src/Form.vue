@@ -111,7 +111,7 @@ onMounted(() => {
 <template>
   <div>
     <!--    {{ $attrs }}-->
-    <Form ref="formRef" v-bind="$attrs" :rules="getRules">
+    <Form v-bind="$attrs" ref="formRef" :rules="getRules">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>

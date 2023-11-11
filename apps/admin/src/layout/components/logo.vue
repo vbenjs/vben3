@@ -3,7 +3,7 @@ import { computed, unref } from 'vue';
 import { useRouter } from 'vue-router'
 import { BASIC_HOME_PATH } from '@vben/constants'
 import { createNamespace, getGlobalConfig } from '@vben/utils'
-import logo from '@/assets/images/logo.png'
+import logo from '@/assets/images/logo.svg'
 import { useRootSetting } from '@vben/hooks'
 
 const { bem } = createNamespace('app-logo')

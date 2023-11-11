@@ -1,8 +1,83 @@
+<template>
+  <div class="bg-light-400 p-5 mx-2 flex justify-between gap-x-2">
+    <div class=" flex flex-col gap-y-5">
+      <div class="flex justify-evenly gap-x-3">
+        <div class="bg-white w-1/3 h-40 rounded-3xl p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600">
+          <p class="col-start-1 col-span-3 row-start-2 row-span-2 text-lg text-gray-400 m-auto">
+            活跃设备
+          </p>
+          <div class="col-start-2 col-span-1 row-start-4 row-span-2 flex items-center justify-center">
+            <CountTo
+                :duration="1000"
+                :endVal="200"
+                :startVal="100"
+                class="text-3xl"
+                color="#595959"
+            />
+          </div>
+          <div class="col-start-4 col-span-10 row-start-1 row-span-6">
+            <v-chart ref="lineChart" :option="e1_option" autoresize/>
+          </div>
+        </div>
+        <div class="bg-white w-1/3 h-40 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600">
+          <p class="col-start-1 col-span-6 row-start-2 row-span-2 text-lg text-gray-400 m-auto">
+            活跃设备
+          </p>
+          <div class="col-start-2 col-span-4 row-start-4 row-span-2 flex items-center justify-center">
+            <CountTo
+                :duration="300"
+                :endVal="DeviceOnline.online"
+                :startVal="0"
+                class="text-3xl"
+                color="#595959"
+            />
+          </div>
+          <div class="col-start-6 col-span-7 row-start-1 row-span-6">
+            <v-chart ref="DeviceRef" :option="Device_chart" autoresize/>
+          </div>
+        </div>
+        <div class="bg-white w-1/3 h-40 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600">
+          <p class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto">
+            收入来源
+          </p>
+          <div
+              class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"
+          ></div>
+          <div class="col-start-1 col-span-12 row-start-1 row-span-6">
+            <v-chart ref="pieChart" :option="e3_option" autoresize/>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="bg-white p-5 w-full h-96 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600">
+          <div class="col-start-1 col-span-12 row-start-1 row-span-6">
+            <v-chart ref="lineCharts2" :option="Order_chart" autoresize/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--    <div class="flex flex-col items-center gap-y-5 w-1/4">-->
+    <!--      <div class="bg-white w-11/12 h-1/2 p-5 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600">-->
+    <!--        <div class="col-start-1 col-span-12 row-start-1 row-span-12">-->
+    <!--          <v-chart ref="barChart" :option="e5_option" autoresize />-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div-->
+    <!--        class="bg-white w-11/12 h-1/2 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"-->
+    <!--      >-->
+    <!--        <div class="col-start-1 col-span-12 row-start-1 row-span-12">-->
+    <!--          <v-chart ref="calendarChart" :option="e6_option" autoresize />-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+  </div>
+</template>
+
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { CountTo } from '@vben/components/index'
+import {ref, onMounted, onBeforeUnmount} from 'vue'
+import {CountTo} from '@vben/components/index'
 import * as echarts from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
+import {CanvasRenderer} from 'echarts/renderers'
 import {
   LineChart,
   GaugeChart,
@@ -23,10 +98,15 @@ import {
 } from 'echarts/components'
 import VChart from 'vue-echarts'
 
-import { operatorColumns } from './modules/schema'
-import { getOperatorData } from '@vben/demo/src/apis/table'
+// import { operatorColumns } from './modules/schema'
+import {api_entry} from '@/apis/home'
+// import { getOperatorData } from '@vben/demo/src/apis/table'
 
-// provide(THEME_KEY, "dark")
+const DeviceOnline = ref({
+  online: 30,
+  max: 500,
+})
+
 echarts.use([
   CanvasRenderer,
   LineChart,
@@ -55,7 +135,7 @@ const e1_option = ref({
     {
       name: 'text',
       type: 'line',
-      data: [30, 50, 150, 200],
+      data: [140, 100, 170, 20],
       smooth: true,
       itemStyle: {
         color: '#36cfc9',
@@ -85,8 +165,7 @@ const e1_option = ref({
     splitNumber: 2,
   },
 })
-
-const e2_option = ref({
+const Device_chart = ref({
   series: [
     {
       type: 'gauge',
@@ -95,7 +174,7 @@ const e2_option = ref({
       center: ['50%', '80%'],
       radius: '100%',
       min: 0,
-      max: 10000,
+      max: DeviceOnline.value.max,
       splitNumber: 5,
       axisLine: {
         lineStyle: {
@@ -163,14 +242,14 @@ const e2_option = ref({
       },
       data: [
         {
-          value: 5000,
-          name: '月收入',
+          value: DeviceOnline.value.online,
+          name: '活跃设备',
         },
       ],
     },
   ],
 })
-
+const DeviceRef = ref()
 const e3_option = ref({
   color: ['#afffff', '#74dbef', '#5e88fc', '#264e86'],
   title: {
@@ -221,8 +300,7 @@ const e3_option = ref({
     },
   ],
 })
-
-const e4_option = ref({
+const Order_chart = ref({
   color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
   grid: {
     width: '85%',
@@ -231,7 +309,7 @@ const e4_option = ref({
     left: 40,
   },
   title: {
-    text: '广告来源',
+    text: '订单统计',
     textStyle: {
       color: '#3b3a39',
     },
@@ -331,307 +409,34 @@ const e4_option = ref({
     },
   ],
 })
-
-const categories1 = (() => {
-  let res = []
-  let now = new Date()
-  let len = 8
-  while (len--) {
-    res.unshift(now.toLocaleTimeString().replace(/^\D*/, ''))
-    now = new Date(+now - 2000)
-  }
-  return res
-})()
-const data1 = (() => {
-  let res = []
-  let len = 8
-  while (len--) {
-    res.push(Math.round(Math.random() * 1000))
-  }
-  return res
-})()
-const e5_option = ref({
-  grid: {
-    width: '85%',
-    height: '70%',
-    top: 60,
-    left: 40,
-  },
-  title: {
-    text: '实时数据',
-    textStyle: {
-      color: '#3b3a39',
-    },
-  },
-  legend: {
-    show: false,
-  },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross',
-      label: {
-        backgroundColor: '#283b56',
-      },
-    },
-  },
-  toolbox: {
-    show: true,
-    feature: {
-      dataView: { readOnly: false },
-      restore: {},
-      saveAsImage: {},
-    },
-  },
-  dataZoom: {
-    show: false,
-    start: 0,
-    end: 100,
-  },
-  xAxis: [
-    {
-      type: 'category',
-      boundaryGap: true,
-      axisTick: {
-        alignWithLabel: true,
-      },
-      data: categories1,
-    },
-  ],
-  yAxis: [
-    {
-      type: 'value',
-      scale: true,
-      name: '价格',
-      max: 1000,
-      min: 0,
-      boundaryGap: [0.2, 0.2],
-    },
-  ],
-  series: [
-    {
-      name: '模拟数据',
-      type: 'bar',
-      data: data1,
-      barWidth: 10,
-      itemStyle: {
-        borderRadius: 5,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+let entry = null
+onMounted(() => {
+  const handleEntry = async () => {
+    const res = await api_entry()
+    DeviceOnline.value = res.device_online
+    DeviceRef.value &&
+    DeviceRef.value.setOption({
+      series: [{
+        max: DeviceOnline.value.max,
+        data: [
           {
-            offset: 0,
-            color: '#14c8d4',
+            value: DeviceOnline.value.online,
+            name: '活跃设备',
           },
-          {
-            offset: 1,
-            color: '#43eec6',
-          },
-        ]),
-      },
-    },
-  ],
-})
-const barChart = ref(null)
-setInterval(() => {
-  let axisData = new Date().toLocaleTimeString().replace(/^\D*/, '')
-  data1.shift()
-  data1.push(Math.round(Math.random() * 1000))
-  categories1.shift()
-  categories1.push(axisData)
+        ]
+      }],
 
-  barChart.value &&
-    barChart.value.setOption({
-      xAxis: {
-        data: categories1,
-      },
-      series: [
-        {
-          name: '模拟数据',
-          data: data1,
-        },
-      ],
     })
-}, 2000)
 
-const operatorData = ref([])
-
-getOperatorData()
-  .then((res) => {
-    operatorData.value = res
-  })
-  .catch((err) => {
-    console.log('err->', err)
-  })
-  .finally(() => {
-    console.log('operatorData ->', operatorData.value)
-  })
-
-const getVirtualData = (year: any) => {
-  year = year || '2017'
-  let date = +echarts.number.parseDate(year + '-01-01')
-  let end = +echarts.number.parseDate(+year + 1 + '-01-01')
-  let dayTime = 3600 * 24 * 1000
-  let data = []
-  for (let time = date; time < end; time += dayTime) {
-    data.push([
-      echarts.time.format(time, 'yyyy-MM-dd'),
-      Math.floor(Math.random() * 10000),
-    ])
   }
-  return data
-}
-const e6_option = ref({
-  tooltip: {},
-  calendar: {
-    top: 'middle',
-    left: 'center',
-    orient: 'vertical',
-    cellSize: 40,
-    yearLabel: {
-      margin: 50,
-      fontSize: 30,
-    },
-    dayLabel: {
-      firstDay: 1,
-      nameMap: 'cn',
-    },
-    monthLabel: {
-      nameMap: 'cn',
-      margin: 10,
-      fontSize: 20,
-      color: '#999999',
-    },
-    range: '2023-08',
-  },
-  visualMap: {
-    min: 0,
-    max: 10000,
-    calculable: true,
-    orient: 'horizontal',
-    left: 'center',
-    bottom: '15%',
-  },
-  series: [
-    {
-      type: 'heatmap',
-      coordinateSystem: 'calendar',
-      calendarIndex: 0,
-      data: getVirtualData(2023),
-    },
-  ],
+  console.log("创建 entry")
+  handleEntry()
+  entry = setInterval(handleEntry, 5000)
+})
+
+
+onBeforeUnmount(() => {
+  console.log("销毁 entry")
+  clearInterval(entry)
 })
 </script>
-<template>
-  <div class="bg-light-400 p-5 mx-2 flex justify-between gap-x-2">
-    <div class="w-3/4 flex flex-col gap-y-5">
-      <div class="flex justify-evenly gap-x-3">
-        <div
-          class="bg-white w-1/3 h-40 rounded-3xl p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
-        >
-          <p
-            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
-          >
-            访问量
-          </p>
-          <div
-            class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"
-          >
-            <CountTo
-              class="text-3xl"
-              color="#595959"
-              :startVal="0"
-              :endVal="200"
-              :duration="1000"
-            />
-          </div>
-          <div class="col-start-6 col-span-7 row-start-1 row-span-6">
-            <v-chart ref="lineChart" :option="e1_option" autoresize />
-          </div>
-        </div>
-        <div
-          class="bg-white w-1/3 h-40 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
-        >
-          <p
-            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
-          >
-            月收入
-          </p>
-          <div
-            class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"
-          >
-            <CountTo
-              class="text-3xl"
-              color="#595959"
-              prefix="¥"
-              :startVal="0"
-              :endVal="5000"
-              :decimals="2"
-              :duration="1000"
-            />
-          </div>
-          <div class="col-start-6 col-span-7 row-start-1 row-span-6">
-            <v-chart ref="gaugeChart" :option="e2_option" autoresize />
-          </div>
-        </div>
-        <div
-          class="bg-white w-1/3 h-40 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
-        >
-          <p
-            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
-          >
-            收入来源
-          </p>
-          <div
-            class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"
-          ></div>
-          <div class="col-start-1 col-span-12 row-start-1 row-span-6">
-            <v-chart ref="pieChart" :option="e3_option" autoresize />
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          class="bg-white p-5 w-full h-96 rounded-3xl grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
-        >
-          <div class="col-start-1 col-span-12 row-start-1 row-span-6">
-            <v-chart ref="lineCharts2" :option="e4_option" autoresize />
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          class="bg-white w-full h-60 rounded-lg grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
-        >
-          <div class="col-start-1 col-span-12 row-start-1 row-span-6">
-            <VbenTable
-              :columns="operatorColumns"
-              :data="operatorData"
-              :options="{
-                border: 'none',
-                size: 'mini',
-                stripe: true,
-                round: true,
-                maxHeight: 200,
-              }"
-            ></VbenTable>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flex flex-col items-center gap-y-5 w-1/4">
-      <div
-        class="bg-white w-11/12 h-1/2 p-5 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
-      >
-        <div class="col-start-1 col-span-12 row-start-1 row-span-12">
-          <v-chart ref="barChart" :option="e5_option" autoresize />
-        </div>
-      </div>
-      <div
-        class="bg-white w-11/12 h-1/2 rounded-lg grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
-      >
-        <div class="col-start-1 col-span-12 row-start-1 row-span-12">
-          <v-chart ref="calendarChart" :option="e6_option" autoresize />
-        </div>
-      </div>
-    </div>
-  </div>
-</template>

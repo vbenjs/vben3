@@ -6,7 +6,7 @@ import {
 } from '@vben/constants'
 
 
-export const namespace = 'vben'
+export const namespace = 'Zafkiel'
 
 export const primaryColor = '#0960bd'
 

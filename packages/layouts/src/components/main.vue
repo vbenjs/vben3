@@ -2,6 +2,7 @@
 import LayoutFeature from './feature/index.vue'
 import { createNamespace } from '@vben/utils'
 const { bem } = createNamespace('main')
+
 </script>
 <template>
   <LayoutFeature />

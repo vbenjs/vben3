@@ -3,18 +3,19 @@ export default {
   name: 'Table',
 }
 </script>
-<script lang="ts" setup name="VbenTable">
+<script lang="ts" name="VbenTable" setup>
 import 'xe-utils'
 import 'vxe-table-demonic/styles/index.scss'
-import type { VbenTableProps } from './type'
-import { computed, PropType, ref, unref, useAttrs } from 'vue'
-import { isBoolean, isFunction } from '@vben/utils'
-import { VxeGridInstance } from 'vxe-table-demonic'
-import { ThemeEnum } from '@vben/constants'
-import { context } from '../../../bridge'
-const { useAppStore } = context
+import type {VbenTableProps} from './type'
+import {computed, PropType, ref, unref, useAttrs} from 'vue'
+import {isBoolean, isFunction} from '@vben/utils'
+import {VxeGridInstance} from 'vxe-table-demonic'
+import {ThemeEnum} from '@vben/constants'
+import {context} from '../../../bridge'
+
+const {useAppStore} = context
 const appStore = useAppStore()
-import { useInterceptor } from './hooks'
+import {useInterceptor} from './hooks'
 
 useInterceptor()
 
@@ -37,7 +38,8 @@ const emit = defineEmits(['register'])
 const titleClass = computed(() => {
   return {
     backgroundColor:
-      appStore.getDarkMode === ThemeEnum.DARK ? '#262626' : '#FFF',
+        appStore.getDarkMode === ThemeEnum.DARK ? '#262626' : '#FFF',
+    
   }
 })
 const props = defineProps({
@@ -70,7 +72,7 @@ const reload = () => {
 }
 
 const getProxyConfig = (options: VbenTableProps) => {
-  const { api, proxyConfig, data, afterFetch } = options
+  const {api, proxyConfig, data, afterFetch} = options
   if (proxyConfig || data) return
   if (api && isFunction(api)) {
     options.proxyConfig = {
@@ -79,8 +81,8 @@ const getProxyConfig = (options: VbenTableProps) => {
         total: 'total', // 配置响应结果总页数字段
       },
       ajax: {
-        query: async ({ page, sorts, filters, form }) => {
-          const { currentPage, pageSize } = page
+        query: async ({page, sorts, filters, form}) => {
+          const {currentPage, pageSize} = page
           let res = await api({
             ...options.params,
             page: currentPage,
@@ -97,7 +99,7 @@ const getProxyConfig = (options: VbenTableProps) => {
   }
 }
 const getPageConfig = (options: VbenTableProps) => {
-  const { pagination, pagerConfig } = options
+  const {pagination, pagerConfig} = options
   if (pagerConfig) return
 
   if (pagination) {
@@ -113,19 +115,19 @@ const getPageConfig = (options: VbenTableProps) => {
 }
 
 const setProps = (prop: Partial<VbenTableProps>) => {
-  innerProps.value = { ...unref(innerProps), ...prop }
+  innerProps.value = {...unref(innerProps), ...prop}
 }
-defineExpose({ reload, Ref: xGrid })
-emit('register', { reload, setProps })
+defineExpose({reload, Ref: xGrid})
+emit('register', {reload, setProps})
 </script>
 <template>
-  <div class="m-2 p-2" :style="titleClass">
+  <div :style="titleClass" class="m-2 p-2">
     <div v-if="title" class="flex m-2">
       <div class="ml-2 text-xl">{{ title }}</div>
     </div>
 
-    <VxeGrid v-bind="getProps" ref="xGrid">
-      <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+    <VxeGrid ref="xGrid" v-bind="getProps">
+      <template v-for="item in Object.keys($slots)" :key="item" #[item]="data">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </VxeGrid>

@@ -1,5 +1,6 @@
 import type { ErrorMessageMode } from '@vben/types'
 import { request } from '@vben/request'
+import {UserInfo} from "@vben/types";
 
 export interface RoleInfo {
   name: string
@@ -7,20 +8,17 @@ export interface RoleInfo {
 }
 
 export interface LoginParams {
-  username: string
+  account: string
   password: string
 }
 
 export interface LoginResultModel {
-  userId: string | number
-  accessToken: string
-  role: RoleInfo
+  UserInfoModel
 }
 
 export interface UserInfoModel {
-  roles: RoleInfo[]
-  userId: string | number
-  username: string
+  id: number
+  account: string
   realName?: string
   avatar: string
   desc?: string
@@ -30,7 +28,7 @@ export function doLoginApi(
   params: LoginParams,
   mode: ErrorMessageMode = 'modal',
 ) {
-  return request.post<LoginResultModel>(
+  return request.post<UserInfo>(
     {
       url: '/login',
       params,

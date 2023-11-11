@@ -11,13 +11,12 @@ export interface RoleInfo {
   value: string
 }
 export interface UserInfo {
-  userId: string | number
-  username: string
-  realName: string
+  id:  number
+  account: string
+  name: string
   avatar: string
   desc?: string
   homePath?: string
-  roles: RoleInfo[]
 }
 
 export interface UserState {

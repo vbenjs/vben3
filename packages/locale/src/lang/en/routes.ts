@@ -63,6 +63,9 @@ export default {
       exception: 'Exception',
       netWorkError: 'Network Error',
       notData: 'No data',
+      result: 'Result',
+      resultSuccess: 'Success',
+      resultFail: 'Failed',
     },
   },
 }

@@ -22,6 +22,8 @@ import naive, {
   NEmpty,
   NUpload,
   NUploadDragger,
+  NSteps,
+  NStep,
   NTabs,
   NTabPane,
   NGrid,
@@ -194,6 +196,9 @@ export async function registerComponents(app) {
     Skeleton: NSkeleton,
     Scrollbar: NScrollbar,
     Statistic: NStatistic,
+
+    Steps: NSteps,
+    Step: NStep,
 
     Tag: NTag,
     Tab: NTab,

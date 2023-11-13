@@ -13,6 +13,36 @@ const pages: RouteRecordItem = {
     root: true,
   },
   children: [
+    // =============================result start=============================
+    {
+      path: 'result',
+      name: 'ResultPage',
+      redirect: '/pages/result/success',
+      component: getParentLayout('ResultPage'),
+
+      meta: {
+        title: 'routes.demo.page.result',
+      },
+      children: [
+        {
+          path: 'success',
+          name: 'ResultSuccessPage',
+          component: () => import('@/pages/demo/page/result/success.vue'),
+          meta: {
+            title: 'routes.demo.page.resultSuccess',
+          },
+        },
+        {
+          path: 'fail',
+          name: 'ResultFailPage',
+          component: () => import('@/pages/demo/page/result/fail.vue'),
+          meta: {
+            title: 'routes.demo.page.resultFail',
+          },
+        },
+      ],
+    },
+    // =============================result end=============================
     // =============================exception start=============================
     {
       path: 'exception',

@@ -64,6 +64,9 @@ export default {
       exception: '异常页',
       netWorkError: '网络错误',
       notData: '无数据',
+      result: '结果页',
+      resultSuccess: '成功页',
+      resultFail: '失败页',
     },
   },
 }

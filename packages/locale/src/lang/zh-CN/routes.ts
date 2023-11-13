@@ -59,5 +59,11 @@ export default {
       ripple: '水波纹',
       clickOutSide: 'ClickOutSide组件',
     },
+    page: {
+      page: '页面',
+      exception: '异常页',
+      netWorkError: '网络错误',
+      notData: '无数据',
+    },
   },
 }

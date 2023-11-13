@@ -2,7 +2,7 @@ import type { RouteMeta, Router, RouteRecordNormalized } from 'vue-router'
 import { Exception, FrameBlank } from '../page'
 import { omit, cloneDeep, filterTree } from '@vben/utils'
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { LAYOUT, PARENT_LAYOUT } from '../routes'
+import { LAYOUT, getParentLayout } from '../routes'
 
 export type LayoutMapKey = 'LAYOUT'
 
@@ -39,7 +39,7 @@ function asyncImportRoute(routes: RouteRecordItem[] | undefined) {
         item.component = dynamicImport(dynamicViewsModules, component as string)
       }
     } else if (name) {
-      item.component = PARENT_LAYOUT()
+      item.component = getParentLayout()
     }
     children && asyncImportRoute(children)
   })

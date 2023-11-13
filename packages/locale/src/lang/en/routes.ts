@@ -58,5 +58,11 @@ export default {
       ripple: 'Ripple',
       clickOutSide: 'ClickOutSide',
     },
+    page: {
+      page: 'Page',
+      exception: 'Exception',
+      netWorkError: 'Network Error',
+      notData: 'No data',
+    },
   },
 }

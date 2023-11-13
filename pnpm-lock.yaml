@@ -698,9 +698,6 @@ importers:
 
   packages/vbenComponents:
     dependencies:
-      '@ant-design/colors':
-        specifier: ^7.0.0
-        version: 7.0.0
       '@iconify/iconify':
         specifier: ^3.0.0
         version: 3.1.1

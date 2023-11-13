@@ -8,33 +8,42 @@ import { t } from '@vben/locale'
 
 const LAYOUT = () => import('@/layout/index.vue')
 
-const PARENT_LAYOUT = () => () =>
-  new Promise((resolve) => {
-    resolve({ name: 'ParentLayout' })
-  })
+/**
+ * @description: parent-layout
+ */
+export const getParentLayout = (_name?: string) => {
+  return () =>
+    new Promise((resolve) => {
+      resolve({
+        name: _name || 'ParentLayout',
+      })
+    })
+}
 
+// 404 on a page
 const PAGE_NOT_FOUND_ROUTE: RouteRecordItem = {
   path: '/:path(.*)*',
   name: PAGE_NOT_FOUND_NAME,
   component: LAYOUT,
   meta: {
     title: 'ErrorPage',
-    key: 333,
+    hideBreadcrumb: true,
+    hideMenu: true,
   },
   children: [
     {
       path: '/:path(.*)*',
       name: PAGE_NOT_FOUND_NAME,
-      component: () => Exception,
+      component: Exception,
       meta: {
         title: 'ErrorPage',
-        key: 3333,
+        hideBreadcrumb: true,
+        hideMenu: true,
       },
     },
   ],
 }
 
-// 404 on a page
 const REDIRECT_ROUTE: RouteRecordItem = {
   path: '/redirect',
   component: LAYOUT,
@@ -46,7 +55,7 @@ const REDIRECT_ROUTE: RouteRecordItem = {
   },
   children: [
     {
-      path: '/redirect/:path(.*)',
+      path: '/redirect/:path(.*)/:_redirect_type(.*)/:_origin_params(.*)?',
       name: REDIRECT_NAME,
       component: Redirect,
       meta: {
@@ -86,7 +95,6 @@ const LOCK_SCREEN_ROUTE: RouteRecordItem = {
 
 export {
   LAYOUT,
-  PARENT_LAYOUT,
   PAGE_NOT_FOUND_ROUTE,
   REDIRECT_ROUTE,
   ROOT_ROUTE,

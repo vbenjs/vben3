@@ -3,7 +3,7 @@ import { PermissionModeEnum } from '@vben/constants'
 import { useAppConfig } from '@vben/stores'
 import { _assign } from '@vben/utils'
 import { createRouter, createWebHashHistory, Router } from 'vue-router'
-import { BasicRoutes } from './routes'
+import { BasicRoutes, ROOT_ROUTE } from './routes'
 export * from './routes'
 export * from './helper'
 export * from './guard'
@@ -68,4 +68,9 @@ export const isRouteMappingMode = () => {
 }
 export const isRoleMode = () => {
   return getPermissionMode() === PermissionModeEnum.ROLE
+}
+
+export function ChangeRootPath(path: string) {
+  ROOT_ROUTE.redirect = path
+  router.addRoute(ROOT_ROUTE)
 }

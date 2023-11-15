@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { VbenColumns, useTable } from '../../../vbenComponents/src/table'
-import { getTableData } from '../apis/table'
+import { VbenColumns, useTable } from '@vben/vbencomponents/src/table'
+import { getUseTableData } from '../apis/table'
 const columns: VbenColumns = [
   { field: 'userId', title: 'id', width: 100 },
   { field: 'username', title: '名称', width: 150 },
@@ -18,7 +18,7 @@ const Ref = ref(null)
 const [registerTable, { reload }] = useTable({
   title: '角色列表',
   border: true,
-  api: getTableData,
+  api: getUseTableData,
   params: {
     i: 'role',
     a: 'list',

@@ -1,5 +1,9 @@
 import { MockMethod } from 'vite-plugin-mock'
-import { resultError, resultSuccess } from '@vben/utils/mock-util'
+import {
+  resultError,
+  resultPageSuccess,
+  resultSuccess,
+} from '@vben/utils/mock-util'
 
 // export function createFakeTableData() {
 //   return {
@@ -47,7 +51,7 @@ import { resultError, resultSuccess } from '@vben/utils/mock-util'
 
 const fakeTableData = (() => {
   const result: any[] = []
-  for (let i = 1; i <= 50; i++) {
+  for (let i = 1; i <= 100; i++) {
     result.push({
       userId: `${i}`,
       username: '@cname',
@@ -128,6 +132,14 @@ export default [
     method: 'post',
     response: ({ body }) => {
       return resultSuccess(fakeTableData)
+    },
+  },
+  {
+    url: '/basic-api/demo/useTable',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      return resultPageSuccess(body.page, body.pageSize, fakeTableData)
     },
   },
   {

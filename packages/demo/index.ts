@@ -1,7 +1,7 @@
 export { default as Card } from './src/Card/index.vue'
 export { default as Form } from './src/Form/index.vue'
-export { default as Table } from './src/Table/index.vue'
 export { default as BasicTable } from './src/Table/basic.vue'
+export { default as UseTable } from './src/Table/UseTable.vue'
 export { default as FixedColumn } from './src/Table/fixedColumn.vue'
 export { default as TreeTable } from './src/Table/TreeTable.vue'
 export { default as Modal } from './src/Modal/index.vue'

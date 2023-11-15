@@ -29,11 +29,19 @@ const dashboard: RouteRecordItem = {
       },
       children: [
         {
-          path: 'useTable',
-          name: 'UseTableDemo',
+          path: 'basic',
+          name: 'BasicDemo',
           component: () => import('@/pages/demo/table/BasicTable.vue'),
           meta: {
             title: 'routes.demo.table.basic',
+          },
+        },
+        {
+          path: 'useTable',
+          name: 'UseTableDemo',
+          component: () => import('@/pages/demo/table/UseTable.vue'),
+          meta: {
+            title: 'UseTableDemo',
           },
         },
         {

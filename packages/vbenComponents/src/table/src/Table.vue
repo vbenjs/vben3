@@ -119,7 +119,7 @@ defineExpose({ reload, Ref: xGrid })
 emit('register', { reload, setProps })
 </script>
 <template>
-  <div class="m-2 p-2" :style="titleClass">
+  <div :style="titleClass">
     <div v-if="title" class="flex m-2">
       <div class="ml-2 text-xl">{{ title }}</div>
     </div>

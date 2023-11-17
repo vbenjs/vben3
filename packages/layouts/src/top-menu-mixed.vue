@@ -52,6 +52,7 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
         collapse-mode="width"
         :collapsed="getCollapsed"
         @update:collapsed="toggleCollapsed"
+        inverted
       >
         <slot name="sider">
           <LayoutMenu split />

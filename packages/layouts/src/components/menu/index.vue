@@ -207,6 +207,7 @@ const clickMenu = (key) => {
         :mode="props.mode"
         :accordion="menu.accordion"
         @update:value="clickMenu"
+        inverted
       />
     </VbenScrollbar>
     <FooterTrigger v-if="getShowFooterTrigger" />

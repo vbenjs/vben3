@@ -43,6 +43,7 @@ const { bem } = createNamespace('layout-mix-sidebar')
       collapse-mode="width"
       :collapsed="true"
       :class="bem()"
+      inverted
     >
       <slot name="sider">
         <LayoutMixMenu :mix-sidebar-width="getMixSidebarWidth" />

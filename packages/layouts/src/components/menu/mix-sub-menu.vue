@@ -91,6 +91,7 @@ const routerToMenu = (item: RouteRecordItem) => {
         :root-indent="18"
         ref="menuRef"
         :accordion="getAccordion"
+        inverted
       />
     </VbenScrollbar>
   </div>

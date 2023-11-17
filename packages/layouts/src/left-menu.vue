@@ -27,6 +27,7 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
       collapse-mode="width"
       :collapsed="getCollapsed"
       @update:collapsed="toggleCollapse"
+      inverted
     >
       <slot name="sider">
         <div class="static h-full">

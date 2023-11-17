@@ -1,5 +1,5 @@
 import { useAppConfig } from '../config'
-import { HandlerSettingEnum, ThemeEnum } from '@vben/constants'
+import { ThemeEnum } from '@vben/constants'
 import { generateColors, setCssVar, useEventListener } from '@vben/utils'
 import { computed, unref, watch } from 'vue'
 import { useThemeStore, storeToRefs } from '@vben/stores'
@@ -41,20 +41,34 @@ export interface ThemeColors {
 
 export const useAppTheme = () => {
   const themeStore = useThemeStore()
-  //todo theme从themeStore里取
-  const { setThemeConfig } = themeStore
-  const { getTheme, getThemeConfig } = storeToRefs(themeStore)
-
-  const { theme, baseHandler } = useAppConfig()
+  const { setTheme, setThemeConfig, setSidebarTheme } = themeStore
+  const { getTheme, getThemeConfig, getSidebarTheme, getHeaderTheme } =
+    storeToRefs(themeStore)
 
   const isDark = computed(() => {
-    return unref(theme) === ThemeEnum.DARK
+    return unref(getTheme) === ThemeEnum.DARK
   })
-  const toggleTheme = (dark: boolean) => {
-    baseHandler(
-      HandlerSettingEnum.CHANGE_THEME,
-      dark ? ThemeEnum.DARK : ThemeEnum.LIGHT,
+
+  const isSidebarDark = computed(() => {
+    return (
+      unref(getTheme) === ThemeEnum.DARK ||
+      unref(getSidebarTheme) === ThemeEnum.DARK
     )
+  })
+
+  const isHeaderDark = computed(() => {
+    return (
+      unref(getTheme) === ThemeEnum.DARK ||
+      unref(getHeaderTheme) === ThemeEnum.DARK
+    )
+  })
+
+  const toggleTheme = (dark: boolean) => {
+    setTheme(dark ? ThemeEnum.DARK : ThemeEnum.LIGHT)
+  }
+
+  const toggleSidebarTheme = (dark: boolean) => {
+    setSidebarTheme(dark ? ThemeEnum.DARK : ThemeEnum.LIGHT)
   }
 
   const primaryColor = computed(() => {
@@ -161,6 +175,8 @@ export const useAppTheme = () => {
 
   return {
     isDark,
+    isSidebarDark,
+    isHeaderDark,
     toggleTheme,
     primaryColor,
     infoColor,
@@ -169,5 +185,6 @@ export const useAppTheme = () => {
     errorColor,
     themeColors,
     setThemeConfig,
+    toggleSidebarTheme,
   }
 }

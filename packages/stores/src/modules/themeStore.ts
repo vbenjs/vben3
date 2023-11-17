@@ -7,13 +7,13 @@ export interface ThemeColorConfig {
   successColor: string //成功色
   warningColor: string //警告色
   errorColor: string //错误色
-  textBaseColor: string //文本色
-  bgBaseColor: string //背景色
 }
 
 interface ThemeStoreState {
   themeConfig: ThemeColorConfig
   theme: ThemeEnum
+  sidebar: ThemeEnum
+  header: ThemeEnum
 }
 
 export const useThemeStore = defineStore({
@@ -25,10 +25,10 @@ export const useThemeStore = defineStore({
       successColor: '#52c41a',
       warningColor: '#faad14',
       errorColor: '#D03050',
-      textBaseColor: '#000000',
-      bgBaseColor: '#ffffff',
     },
     theme: ThemeEnum.LIGHT,
+    sidebar: ThemeEnum.DARK,
+    header: ThemeEnum.LIGHT,
   }),
   getters: {
     getThemeConfig(state) {
@@ -36,6 +36,12 @@ export const useThemeStore = defineStore({
     },
     getTheme(state) {
       return state.theme
+    },
+    getSidebarTheme(state) {
+      return state.sidebar
+    },
+    getHeaderTheme(state) {
+      return state.header
     },
   },
   actions: {
@@ -45,6 +51,12 @@ export const useThemeStore = defineStore({
     setThemeConfig(config: Partial<ThemeColorConfig>) {
       this.themeConfig = { ...this.themeConfig, ...config }
     },
+    setSidebarTheme(value: ThemeEnum) {
+      this.sidebar = value
+    },
+    setHeaderTheme(value: ThemeEnum) {
+      this.header = value
+    },
   },
-  persist: true,
+  persist: false,
 })

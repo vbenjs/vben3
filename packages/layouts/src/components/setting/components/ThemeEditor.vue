@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import {
   APP_PRESET_COLOR_LIST,
-  HandlerSettingEnum,
   HEADER_PRESET_BG_COLOR_LIST,
-  SIDE_BAR_BG_COLOR_LIST,
   ThemeChangeEnum,
 } from '@vben/constants'
 import { useI18n } from '@vben/locale'
@@ -11,13 +9,11 @@ import { useAppTheme } from '@vben/hooks'
 import { context } from '../../../../bridge'
 import ThemeColorPicker from './ThemeColorPicker.vue'
 import SwitchItem from '#/components/setting/components/SwitchItem.vue'
-import ThemeSwitch from '#/components/setting/components/ThemeSwitch.vue'
 
 const { t } = useI18n()
 
-const { useMenuSetting, useHeaderSetting } = context
+const { useHeaderSetting } = context
 
-const { getMenuBgColor } = useMenuSetting()
 const { getHeaderBgColor } = useHeaderSetting()
 
 const {
@@ -66,7 +62,7 @@ const {
         :colorList="HEADER_PRESET_BG_COLOR_LIST"
       />
     </VbenSpace>
-    <ThemeSwitch
+    <SwitchItem
       :title="t('layout.setting.sidebarDark')"
       :value="isSidebarDark"
       :callback="toggleSidebarTheme"

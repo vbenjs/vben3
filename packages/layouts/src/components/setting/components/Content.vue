@@ -8,6 +8,11 @@ import {
   useHeaderSetting,
   useMultipleTabSetting,
 } from '@vben/hooks'
+
+import { context } from '../../../../bridge'
+const { useAppConfig } = context
+const { baseHandler } = useAppConfig()
+
 const { t } = useI18n()
 
 const {
@@ -26,80 +31,86 @@ const { getShowHeader } = useHeaderSetting()
 
 const { getShowMultipleTab, getShowQuick, getShowRedo, getShowFold } =
   useMultipleTabSetting()
+
+const eventHandler = (evt: HandlerSettingEnum, val: boolean) => {
+  baseHandler(evt, val)
+}
 </script>
 <template>
   <VbenSpace vertical>
     <SwitchItem
       :title="t('layout.setting.breadcrumb')"
-      :def="getShowBreadCrumb"
-      :event="HandlerSettingEnum.SHOW_BREADCRUMB"
+      :value="getShowBreadCrumb"
+      :callback="(v) => eventHandler(HandlerSettingEnum.SHOW_BREADCRUMB, v)"
       :disabled="!getShowHeader"
     />
     <SwitchItem
       :title="t('layout.setting.breadcrumbIcon')"
-      :def="getShowBreadCrumbIcon"
-      :event="HandlerSettingEnum.SHOW_BREADCRUMB_ICON"
+      :value="getShowBreadCrumbIcon"
+      :callback="
+        (v) => eventHandler(HandlerSettingEnum.SHOW_BREADCRUMB_ICON, v)
+      "
       :disabled="!getShowBreadCrumb"
     />
     <SwitchItem
       :title="t('layout.setting.tabs')"
-      :def="getShowMultipleTab"
-      :event="HandlerSettingEnum.TABS_SHOW"
+      :value="getShowMultipleTab"
+      :callback="(v) => eventHandler(HandlerSettingEnum.TABS_SHOW, v)"
     />
     <SwitchItem
       :title="t('layout.setting.tabsRedoBtn')"
-      :def="getShowRedo"
-      :event="HandlerSettingEnum.TABS_SHOW_REDO"
+      :value="getShowRedo"
+      :callback="(v) => eventHandler(HandlerSettingEnum.TABS_SHOW_REDO, v)"
       :disabled="!getShowMultipleTab"
     />
     <SwitchItem
       :title="t('layout.setting.tabsQuickBtn')"
-      :def="getShowQuick"
-      :event="HandlerSettingEnum.TABS_SHOW_QUICK"
+      :value="getShowQuick"
+      :callback="(v) => eventHandler(HandlerSettingEnum.TABS_SHOW_QUICK, v)"
       :disabled="!getShowMultipleTab"
     />
     <SwitchItem
       :title="t('layout.setting.tabsFoldBtn')"
-      :def="getShowFold"
-      :event="HandlerSettingEnum.TABS_SHOW_FOLD"
+      :value="getShowFold"
+      :callback="(v) => eventHandler(HandlerSettingEnum.TABS_SHOW_FOLD, v)"
       :disabled="!getShowMultipleTab"
     />
     <SwitchItem
       :title="t('layout.setting.sidebar')"
       :def="getShowMenu"
-      :event="HandlerSettingEnum.MENU_SHOW_SIDEBAR"
+      :callback="(v) => eventHandler(HandlerSettingEnum.MENU_SHOW_SIDEBAR, v)"
       :disabled="getIsHorizontal"
     />
     <SwitchItem
       :title="t('layout.setting.header')"
-      :def="getShowHeader"
-      :event="HandlerSettingEnum.HEADER_SHOW"
+      :value="getShowHeader"
+      :callback="(v) => eventHandler(HandlerSettingEnum.HEADER_SHOW, v)"
     />
     <SwitchItem
       title="Logo"
-      :def="getShowLogo"
-      :event="HandlerSettingEnum.SHOW_LOGO"
+      :value="getShowLogo"
+      :callback="(v) => eventHandler(HandlerSettingEnum.SHOW_LOGO, v)"
       :disabled="getIsMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.footer')"
-      :def="getShowFooter"
-      :event="HandlerSettingEnum.SHOW_FOOTER"
+      :value="getShowFooter"
+      :callback="(v) => eventHandler(HandlerSettingEnum.SHOW_FOOTER, v)"
     />
     <SwitchItem
       :title="t('layout.setting.fullContent')"
-      :def="getFullContent"
-      :event="HandlerSettingEnum.FULL_CONTENT"
+      :value="getFullContent"
+      :callback="(v) => eventHandler(HandlerSettingEnum.FULL_CONTENT, v)"
     />
     <SwitchItem
       :title="t('layout.setting.grayMode')"
-      :def="getGrayMode"
-      :event="HandlerSettingEnum.GRAY_MODE"
+      :value="getGrayMode"
+      :callback="(v) => eventHandler(HandlerSettingEnum.GRAY_MODE, v)"
     />
     <SwitchItem
       :title="t('layout.setting.colorWeak')"
-      :def="getColorWeak"
-      :event="HandlerSettingEnum.COLOR_WEAK"
+      :value="getColorWeak"
+      :callback="(v) => eventHandler(HandlerSettingEnum.COLOR_WEAK, v)"
     />
   </VbenSpace>
 </template>

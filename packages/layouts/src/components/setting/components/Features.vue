@@ -19,7 +19,8 @@ import { useI18n } from '@vben/locale'
 
 const { t } = useI18n()
 
-const { useMenuSetting, useHeaderSetting, useRootSetting } = context
+const { useMenuSetting, useHeaderSetting, useRootSetting, useAppConfig } =
+  context
 
 const { getContentMode, getLockTime } = useRootSetting()
 
@@ -59,73 +60,85 @@ const some = triggerOptions.some((item) => item.value === unref(getTrigger))
 if (!some) {
   setMenuSetting({ trigger: TriggerEnum.FOOTER })
 }
+
+const { baseHandler } = useAppConfig()
+const eventHandler = (evt: HandlerSettingEnum, val: boolean) => {
+  baseHandler(evt, val)
+}
 </script>
 <template>
   <VbenSpace vertical>
     <SwitchItem
       :title="t('layout.setting.splitMenu')"
-      :def="getSplit"
-      :event="HandlerSettingEnum.MENU_SPLIT"
+      :value="getSplit"
+      :callback="(v) => eventHandler(HandlerSettingEnum.MENU_SPLIT, v)"
       :disabled="!getShowMenuRef || getMenuType !== NavBarModeEnum.MIX"
     />
     <SwitchItem
       :title="t('layout.setting.mixSidebarFixed')"
-      :def="getMixSideFixed"
-      :event="HandlerSettingEnum.MENU_FIXED_MIX_SIDEBAR"
+      :value="getMixSideFixed"
+      :callback="
+        (v) => eventHandler(HandlerSettingEnum.MENU_FIXED_MIX_SIDEBAR, v)
+      "
       :disabled="!getIsMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.closeMixSidebarOnChange')"
-      :def="getCloseMixSidebarOnChange"
-      :event="HandlerSettingEnum.MENU_CLOSE_MIX_SIDEBAR_ON_CHANGE"
+      :value="getCloseMixSidebarOnChange"
+      :callback="
+        (v) =>
+          eventHandler(HandlerSettingEnum.MENU_CLOSE_MIX_SIDEBAR_ON_CHANGE, v)
+      "
       :disabled="!getIsMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.menuCollapse')"
-      :def="getCollapsed"
-      :event="HandlerSettingEnum.MENU_COLLAPSED"
+      :value="getCollapsed"
+      :callback="(v) => eventHandler(HandlerSettingEnum.MENU_COLLAPSED, v)"
       :disabled="!getShowMenuRef"
     />
     <SwitchItem
       :title="t('layout.setting.menuDrag')"
-      :def="getCanDrag"
-      :event="HandlerSettingEnum.MENU_HAS_DRAG"
+      :value="getCanDrag"
+      :callback="(v) => eventHandler(HandlerSettingEnum.MENU_HAS_DRAG, v)"
       :disabled="!getShowMenuRef"
     />
     <SwitchItem
       :title="t('layout.setting.menuSearch')"
-      :def="getShowSearch"
-      :event="HandlerSettingEnum.HEADER_SEARCH"
+      :value="getShowSearch"
+      :callback="(v) => eventHandler(HandlerSettingEnum.HEADER_SEARCH, v)"
       :disabled="!getShowHeader"
     />
     <SwitchItem
       :title="t('layout.setting.menuAccordion')"
-      :def="getAccordion"
-      :event="HandlerSettingEnum.MENU_ACCORDION"
+      :value="getAccordion"
+      :callback="(v) => eventHandler(HandlerSettingEnum.MENU_ACCORDION, v)"
       :disabled="!getShowMenuRef"
     />
     <SwitchItem
       :title="t('layout.setting.collapseMenuDisplayName')"
-      :def="getCollapsedShowTitle"
-      :event="HandlerSettingEnum.MENU_COLLAPSED_SHOW_TITLE"
+      :value="getCollapsedShowTitle"
+      :callback="
+        (v) => eventHandler(HandlerSettingEnum.MENU_COLLAPSED_SHOW_TITLE, v)
+      "
       :disabled="!getShowMenuRef || !getCollapsed || getIsMixSidebar"
     />
     <SwitchItem
       :title="t('layout.setting.fixedHeader')"
-      :def="getHeaderFixed"
-      :event="HandlerSettingEnum.HEADER_FIXED"
+      :value="getHeaderFixed"
+      :callback="(v) => eventHandler(HandlerSettingEnum.HEADER_FIXED, v)"
       :disabled="!getShowHeader"
     />
     <SwitchItem
       :title="t('layout.setting.fixedSideBar')"
-      :def="getMenuFixed"
-      :event="HandlerSettingEnum.MENU_FIXED"
+      :value="getMenuFixed"
+      :callback="(v) => eventHandler(HandlerSettingEnum.MENU_FIXED, v)"
       :disabled="!getShowMenuRef || getIsMixSidebar"
     />
     <SelectItem
       :title="t('layout.setting.mixSidebarTrigger')"
       :options="mixSidebarTriggerOptions"
-      :def="getMixSideTrigger"
+      :value="getMixSideTrigger"
       :event="HandlerSettingEnum.MENU_TRIGGER_MIX_SIDEBAR"
       :disabled="!getIsMixSidebar"
     />

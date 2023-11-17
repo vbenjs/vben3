@@ -1,32 +1,32 @@
 <script lang="ts" setup name="SwitchItem">
 import { PropType } from 'vue'
-import { HandlerSettingEnum } from '@vben/constants'
-import { context } from '../../../../bridge'
-const { useAppConfig } = context
-const { baseHandler } = useAppConfig()
 
 const props = defineProps({
   title: { type: String, default: '' },
-  def: {
+  value: {
     type: Boolean as PropType<boolean>,
   },
-  event: {
-    type: Number as PropType<HandlerSettingEnum>,
+  callback: {
+    type: Function as PropType<(val: boolean) => void>,
     required: true,
   },
   disabled: {
     type: Boolean,
   },
 })
-const onChange = (value: any) => {
-  baseHandler(props.event, value)
+const onChange = (value: boolean) => {
+  props.callback(value)
 }
 </script>
 <template>
   <div class="switch-item">
     <VbenSpace justify="space-between" align="center">
       <span>{{ title }}</span>
-      <VbenSwitch :value="def" :disabled="disabled" @update:value="onChange">
+      <VbenSwitch
+        :value="props.value"
+        :disabled="disabled"
+        @update:value="onChange"
+      >
         <template #checked-icon>
           <VbenIconify icon="ant-design:check-outlined" color="#18A058" />
         </template>

@@ -8,7 +8,7 @@ import { useI18n } from '@vben/locale'
 
 const { t } = useI18n()
 
-const { useTransitionSetting } = context
+const { useTransitionSetting, useAppConfig } = context
 
 const {
   getOpenPageLoading,
@@ -16,23 +16,30 @@ const {
   getEnableTransition,
   getOpenNProgress,
 } = useTransitionSetting()
+
+const { baseHandler } = useAppConfig()
+const eventHandler = (evt: HandlerSettingEnum, val: boolean) => {
+  baseHandler(evt, val)
+}
 </script>
 <template>
   <VbenSpace vertical>
     <SwitchItem
       :title="t('layout.setting.progress')"
-      :def="getOpenNProgress"
-      :event="HandlerSettingEnum.OPEN_PROGRESS"
+      :value="getOpenNProgress"
+      :callback="(v) => eventHandler(HandlerSettingEnum.OPEN_PROGRESS, v)"
     />
     <SwitchItem
       :title="t('layout.setting.switchLoading')"
-      :def="getOpenPageLoading"
-      :event="HandlerSettingEnum.OPEN_PAGE_LOADING"
+      :value="getOpenPageLoading"
+      :callback="(v) => eventHandler(HandlerSettingEnum.OPEN_PAGE_LOADING, v)"
     />
     <SwitchItem
       :title="t('layout.setting.switchAnimation')"
-      :def="getEnableTransition"
-      :event="HandlerSettingEnum.OPEN_ROUTE_TRANSITION"
+      :value="getEnableTransition"
+      :callback="
+        (v) => eventHandler(HandlerSettingEnum.OPEN_ROUTE_TRANSITION, v)
+      "
     />
     <SelectItem
       :title="t('layout.setting.animationType')"

@@ -10,7 +10,7 @@ import {
   TabTbrConfigOptions,
   TransitionConfigOptions,
 } from '@vben/types'
-import { _assign } from '@vben/utils'
+import { _assign, deepMerge } from '@vben/utils'
 import {
   CacheTypeEnum,
   ContentLayoutEnum,
@@ -27,7 +27,7 @@ import {
   TriggerEnum,
 } from '@vben/constants'
 
-const defaultOptions: DefineAppConfigOptions = {
+let defaultOptions: DefineAppConfigOptions = {
   theme: ThemeEnum.LIGHT, //TODO remove
   navBarMode: NavBarModeEnum.SIDEBAR,
   themeColor: '', //TODO remove
@@ -122,7 +122,7 @@ const defaultOptions: DefineAppConfigOptions = {
 
 // Must be called before the first use of useAppConfig
 export const initAppConfigStore = (options: DefineAppConfigOptions) => {
-  Object.assign(defaultOptions, options)
+  defaultOptions = deepMerge(defaultOptions, options)
   useAppConfig()
 }
 

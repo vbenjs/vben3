@@ -75,7 +75,7 @@ export default {
     errorColor: 'Error color',
     infoColor: 'Info color',
     headerTheme: 'Header theme',
-    sidebarTheme: 'Menu theme',
+    sidebarDark: 'Sidebar dark',
 
     menuDrag: 'Drag Sidebar',
     menuSearch: 'Menu search',

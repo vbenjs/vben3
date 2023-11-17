@@ -11,6 +11,7 @@ import { useAppTheme } from '@vben/hooks'
 import { context } from '../../../../bridge'
 import ThemeColorPicker from './ThemeColorPicker.vue'
 import SwitchItem from '#/components/setting/components/SwitchItem.vue'
+import ThemeSwitch from '#/components/setting/components/ThemeSwitch.vue'
 
 const { t } = useI18n()
 
@@ -19,8 +20,15 @@ const { useMenuSetting, useHeaderSetting } = context
 const { getMenuBgColor } = useMenuSetting()
 const { getHeaderBgColor } = useHeaderSetting()
 
-const { primaryColor, infoColor, successColor, warningColor, errorColor } =
-  useAppTheme()
+const {
+  primaryColor,
+  infoColor,
+  successColor,
+  warningColor,
+  errorColor,
+  isSidebarDark,
+  toggleSidebarTheme,
+} = useAppTheme()
 </script>
 <template>
   <VbenSpace vertical>
@@ -58,6 +66,10 @@ const { primaryColor, infoColor, successColor, warningColor, errorColor } =
         :colorList="HEADER_PRESET_BG_COLOR_LIST"
       />
     </VbenSpace>
-    <SwitchItem title="侧边栏深色" />
+    <ThemeSwitch
+      :title="t('layout.setting.sidebarDark')"
+      :value="isSidebarDark"
+      :callback="toggleSidebarTheme"
+    />
   </VbenSpace>
 </template>

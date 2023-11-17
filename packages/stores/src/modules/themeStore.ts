@@ -28,7 +28,7 @@ export const useThemeStore = defineStore({
     },
     theme: ThemeEnum.LIGHT,
     sidebar: ThemeEnum.DARK,
-    header: ThemeEnum.LIGHT,
+    header: ThemeEnum.DARK,
   }),
   getters: {
     getThemeConfig(state) {
@@ -58,5 +58,5 @@ export const useThemeStore = defineStore({
       this.header = value
     },
   },
-  persist: false,
+  persist: true,
 })

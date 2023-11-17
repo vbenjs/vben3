@@ -33,6 +33,15 @@ const system: RouteRecordItem = {
         affix: true,
       },
     },
+    {
+      path: 'role',
+      name: 'Role',
+      component: () => import('@/pages/demo/system/role/index.vue'),
+      meta: {
+        icon: 'carbon:user-role',
+        title: t('routes.demo.system.role')
+      }
+    }
   ],
 }
 

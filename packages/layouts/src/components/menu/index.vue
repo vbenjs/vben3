@@ -12,9 +12,13 @@ import { renderIcon } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import type { RouteMeta } from 'vue-router'
 import { Menu } from '@vben/types'
-const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
 import { getMenus, listenerRouteChange, emitter } from '@vben/router'
 import FooterTrigger from '../trigger/FooterTrigger.vue'
+import { useAppTheme } from '@vben/hooks'
+
+const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
+
+const { isSidebarDark } = useAppTheme()
 
 const { getIsMobile } = useAppInject()
 
@@ -207,6 +211,7 @@ const clickMenu = (key) => {
         :mode="props.mode"
         :accordion="menu.accordion"
         @update:value="clickMenu"
+        :inverted="!!isSidebarDark"
       />
     </VbenScrollbar>
     <FooterTrigger v-if="getShowFooterTrigger" />

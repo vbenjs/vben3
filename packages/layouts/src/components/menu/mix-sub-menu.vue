@@ -10,6 +10,7 @@ import {
 import { useI18n } from '@vben/locale'
 import { REDIRECT_NAME } from '@vben/constants'
 import { renderIcon } from '@vben/vbencomponents'
+import { useAppTheme } from '@vben/hooks'
 const { listenerRouteChange, useMenuSetting } = context
 const { getAccordion } = useMenuSetting()
 const props = defineProps({
@@ -76,6 +77,8 @@ const routerToMenu = (item: RouteRecordItem) => {
     icon: renderIcon(icon),
   }
 }
+
+const { isSidebarDark } = useAppTheme()
 </script>
 
 <template>
@@ -91,6 +94,7 @@ const routerToMenu = (item: RouteRecordItem) => {
         :root-indent="18"
         ref="menuRef"
         :accordion="getAccordion"
+        :inverted="!!isSidebarDark"
       />
     </VbenScrollbar>
   </div>

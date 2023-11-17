@@ -7,6 +7,7 @@ import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import { useComposables } from './useComposables'
 import { computed, unref } from 'vue'
+import { useAppTheme } from '@vben/hooks'
 
 const { useMenuSetting, useRootSetting, useMultipleTabSetting } = context
 const {
@@ -30,6 +31,8 @@ const {
 } = useComposables()
 
 const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
+
+const { isSidebarDark } = useAppTheme()
 </script>
 <template>
   <VbenLayout class="h-full">
@@ -52,6 +55,7 @@ const menuHeight = computed(() => `calc(100vh - ${unref(headerHeight)}px)`)
         collapse-mode="width"
         :collapsed="getCollapsed"
         @update:collapsed="toggleCollapsed"
+        :inverted="!!isSidebarDark"
       >
         <slot name="sider">
           <LayoutMenu split />

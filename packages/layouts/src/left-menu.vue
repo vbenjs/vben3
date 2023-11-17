@@ -6,6 +6,7 @@ import LayoutMain from './components/main.vue'
 import LayoutFooter from './components/footer.vue'
 import { context } from '../bridge'
 import SiderDragBar from './components/trigger/SiderDragBar.vue'
+import { useAppTheme } from '@vben/hooks'
 
 const { useAppConfig, useMenuSetting } = context
 const { getShowMenu, getCollapsed, getShowCenterTrigger, setSiderWidth } =
@@ -15,6 +16,8 @@ const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
   useComposables()
 
 const { toggleCollapse, sidebar, footer } = useAppConfig()
+
+const { isSidebarDark } = useAppTheme()
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
@@ -27,6 +30,7 @@ const { toggleCollapse, sidebar, footer } = useAppConfig()
       collapse-mode="width"
       :collapsed="getCollapsed"
       @update:collapsed="toggleCollapse"
+      :inverted="!!isSidebarDark"
     >
       <slot name="sider">
         <div class="static h-full">

@@ -11,6 +11,7 @@ import {
   SIDE_BAR_SHOW_TIT_MINI_WIDTH,
 } from '@vben/constants'
 import { createNamespace } from '@vben/utils'
+import { useAppTheme } from '@vben/hooks'
 
 const { useMenuSetting, useRootSetting } = context
 const { headerRef, contentStyle, mainStyle, footerRef, contentRef } =
@@ -26,13 +27,14 @@ const getMixSidebarWidth = computed(() => {
     : SIDE_BAR_SHOW_TIT_MINI_WIDTH
 })
 const getContainerStyle = computed(() => {
-  console.log(unref(getIsFixed))
   return {
     paddingLeft: (unref(getIsFixed) ? unref(getMenuWidth) : 0) + 'px',
   }
 })
 
 const { bem } = createNamespace('layout-mix-sidebar')
+
+const { isSidebarDark } = useAppTheme()
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
@@ -43,6 +45,7 @@ const { bem } = createNamespace('layout-mix-sidebar')
       collapse-mode="width"
       :collapsed="true"
       :class="bem()"
+      :inverted="!!isSidebarDark"
     >
       <slot name="sider">
         <LayoutMixMenu :mix-sidebar-width="getMixSidebarWidth" />

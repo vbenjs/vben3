@@ -29,4 +29,4 @@ yarn-error.log*
 *.sw?
 !/pnpm-lock.yaml
 !/.gitignore
-apps/admin/mock/
+# apps/admin/mock/

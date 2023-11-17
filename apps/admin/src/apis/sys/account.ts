@@ -7,3 +7,7 @@ export const getDeptTree = () => {
 export const getDeptUser = (params?: any) => {
   return request.post({ url: '/demo/deptUserList', params })
 }
+
+export const getRoleList = (params?: any) => {
+  return request.post({ url: '/demo/roleList', params })
+}

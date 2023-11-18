@@ -34,7 +34,7 @@ const setProps = (prop: Partial<VbenFormProps>) => {
     ...unref(innerProps),
   }
 }
-const fieldValue = ref({})
+const fieldValue = ref(attrs.model)
 watch(
   () => attrs.model,
   () => {

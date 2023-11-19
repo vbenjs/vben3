@@ -12,8 +12,7 @@ import { isBoolean, isFunction } from '@vben/utils'
 import { VxeGridInstance } from 'vxe-table-demonic'
 import { ThemeEnum } from '@vben/constants'
 import { context } from '../../../bridge'
-const { useAppStore } = context
-const appStore = useAppStore()
+
 import { useInterceptor } from './hooks'
 
 useInterceptor()
@@ -34,12 +33,7 @@ useInterceptor()
 )*/
 const attrs = useAttrs()
 const emit = defineEmits(['register'])
-const titleClass = computed(() => {
-  return {
-    backgroundColor:
-      appStore.getDarkMode === ThemeEnum.DARK ? '#262626' : '#FFF',
-  }
-})
+
 const props = defineProps({
   options: {
     type: Object as PropType<VbenTableProps>,
@@ -119,7 +113,7 @@ defineExpose({ reload, Ref: xGrid })
 emit('register', { reload, setProps })
 </script>
 <template>
-  <div :style="titleClass">
+  <div>
     <div v-if="title" class="flex m-2">
       <div class="ml-2 text-xl">{{ title }}</div>
     </div>

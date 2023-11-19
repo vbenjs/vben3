@@ -67,6 +67,9 @@ export default {
       result: '结果页',
       resultSuccess: '成功页',
       resultFail: '失败页',
+      account: '个人页',
+      accountCenter: '个人中心',
+      accountSetting: '个人设置',
     },
   },
 }

@@ -66,6 +66,9 @@ export default {
       result: 'Result',
       resultSuccess: 'Success',
       resultFail: 'Failed',
+      account: 'Account',
+      accountCenter: 'Center',
+      accountSetting: 'Setting',
     },
   },
 }

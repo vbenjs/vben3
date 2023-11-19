@@ -43,6 +43,38 @@ const pages: RouteRecordItem = {
       ],
     },
     // =============================result end=============================
+
+    // =============================account start=============================
+    {
+      path: 'account',
+      name: 'AccountPage',
+      redirect: '/pages/account/center',
+      component: getParentLayout('AccountPage'),
+
+      meta: {
+        title: 'routes.demo.page.account',
+      },
+      children: [
+        {
+          path: 'center',
+          name: 'AccountCenterPage',
+          component: () => import('@/pages/demo/page/account/center/index.vue'),
+          meta: {
+            title: 'routes.demo.page.accountCenter',
+          },
+        },
+        {
+          path: 'setting',
+          name: 'AccountSettingPage',
+          component: () => import('@/pages/demo/page/account/setting/index.vue'),
+          meta: {
+            title: 'routes.demo.page.accountSetting',
+          },
+        },
+      ],
+    },
+    // =============================account end=============================
+
     // =============================exception start=============================
     {
       path: 'exception',

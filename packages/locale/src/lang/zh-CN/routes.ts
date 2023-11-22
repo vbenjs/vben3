@@ -71,5 +71,6 @@ export default {
       accountCenter: '个人中心',
       accountSetting: '个人设置',
     },
+    transition: '过渡动画',
   },
 }

@@ -70,5 +70,6 @@ export default {
       accountCenter: 'Center',
       accountSetting: 'Setting',
     },
+    transition: 'Transition',
   },
 }

@@ -1,20 +1,11 @@
 <script lang="ts" setup>
-import {
-  APP_PRESET_COLOR_LIST,
-  HEADER_PRESET_BG_COLOR_LIST,
-  ThemeChangeEnum,
-} from '@vben/constants'
+import { APP_PRESET_COLOR_LIST, ThemeChangeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
 import { useAppTheme } from '@vben/hooks'
-import { context } from '../../../../bridge'
 import ThemeColorPicker from './ThemeColorPicker.vue'
 import SwitchItem from '#/components/setting/components/SwitchItem.vue'
 
 const { t } = useI18n()
-
-const { useHeaderSetting } = context
-
-const { getHeaderBgColor } = useHeaderSetting()
 
 const {
   primaryColor,

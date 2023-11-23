@@ -54,8 +54,6 @@ export function useHeaderSetting() {
 
   const getFixed = computed(() => configStore.header.value.fixed)
 
-  const getHeaderBgColor = computed(() => configStore.header.value.bgColor)
-
   const getShowSearch = computed(() => configStore.header.value.showSearch)
 
   const getUseLockPage = computed(() => false)
@@ -108,7 +106,6 @@ export function useHeaderSetting() {
     getShowFullHeaderRef,
     getShowInsetHeaderRef,
     getUnFixedAndFull,
-    getHeaderBgColor,
     getShowLocalePicker,
   }
 }

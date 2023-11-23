@@ -11,21 +11,6 @@ export const APP_PRESET_COLOR_LIST: string[] = [
   '#ff9800',
 ]
 
-// header preset color
-export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
-  '#ffffff',
-  '#151515',
-  '#009688',
-  '#5172DC',
-  '#018ffb',
-  '#409eff',
-  '#e74c3c',
-  '#24292e',
-  '#394664',
-  '#001529',
-  '#383f45',
-]
-
 // sidebar preset color
 export const SIDE_BAR_BG_COLOR_LIST: string[] = [
   '#001529',

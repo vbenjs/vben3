@@ -26,7 +26,7 @@ const {
   getShowNotice,
   getShowFullHeaderRef,
 } = useHeaderSetting()
-const { isDark } = useAppTheme()
+const { isHeaderDark } = useAppTheme()
 const { getSettingButtonPosition, getShowSettingButton } = useRootSetting()
 const { getMenuType, getMenuWidth, getShowHeaderTrigger } = useMenuSetting()
 const { getShowMultipleTab } = useMultipleTabSetting()
@@ -59,46 +59,49 @@ const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth.value))
 </script>
 <template>
   <VbenSpace vertical>
-    <VbenSpace
-      v-if="getShowFullHeaderRef"
-      :class="['h-48px', 'shadow', { 'mb-8px': !getShowHeaderMultipleTab }]"
-      :style="{ '--un-shadow-color': 'var(--n-border-color)' }"
-      justify="space-between"
-      align="center"
-    >
-      <slot name="logo">
-        <VbenSpace align="center" class="items-center" :size="0">
-          <Logo
-            v-if="showHeaderLogo"
-            :style="{
-              width: logoWidth + 'px',
-              maxWidth: logoWidth + 'px',
-            }"
-          />
-          <HeaderTrigger v-if="getShowHeaderTrigger" />
-          <slot name="breadcrumb" v-if="showHeaderBreadcrumb">
-            <LayoutBreadcrumb />
-          </slot>
-        </VbenSpace>
-      </slot>
-      <slot name="menu" v-if="!showHeaderBreadcrumb"></slot>
-      <div class="pl-8px pr-8px">
-        <slot name="buttons">
-          <VbenSpace class="p-1" :size="16" align="center">
-            <AppSearch v-if="getShowSearch" />
-            <AppNotify :is-dark="isDark" v-if="getShowNotice" />
-            <AppFullScreen v-if="getShowFullScreen" />
-            <VbenLocalePicker
-              v-if="getShowLocalePicker"
-              :reload="true"
-              :showText="false"
+    <VbenLayoutHeader :inverted="!!isHeaderDark" class="text-white">
+      <VbenSpace
+        v-if="getShowFullHeaderRef"
+        :class="['h-48px', 'shadow', { 'mb-8px': !getShowHeaderMultipleTab }]"
+        :style="{ '--un-shadow-color': 'var(--n-border-color)' }"
+        justify="space-between"
+        align="center"
+      >
+        <slot name="logo">
+          <VbenSpace align="center" class="items-center" :size="0">
+            <Logo
+              v-if="showHeaderLogo"
+              :style="{
+                width: logoWidth + 'px',
+                maxWidth: logoWidth + 'px',
+              }"
             />
-            <UserDropdown />
-            <SettingButton v-if="getShowSetting" />
+            <HeaderTrigger v-if="getShowHeaderTrigger" />
+            <slot name="breadcrumb" v-if="showHeaderBreadcrumb">
+              <LayoutBreadcrumb />
+            </slot>
           </VbenSpace>
         </slot>
-      </div>
-    </VbenSpace>
+        <slot name="menu" v-if="!showHeaderBreadcrumb"></slot>
+        <div class="pl-8px pr-8px">
+          <slot name="buttons">
+            <VbenSpace class="p-1" :size="16" align="center">
+              <AppSearch v-if="getShowSearch" />
+              <AppNotify :is-dark="true" v-if="getShowNotice" />
+              <AppFullScreen v-if="getShowFullScreen" />
+              <VbenLocalePicker
+                v-if="getShowLocalePicker"
+                :reload="true"
+                :showText="false"
+              />
+              <UserDropdown />
+              <SettingButton v-if="getShowSetting" />
+            </VbenSpace>
+          </slot>
+        </div>
+      </VbenSpace>
+    </VbenLayoutHeader>
+
     <template v-if="getShowHeaderMultipleTab">
       <slot name="tabs">
         <LayoutTabs />

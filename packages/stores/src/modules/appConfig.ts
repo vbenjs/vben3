@@ -14,7 +14,6 @@ import { _assign, deepMerge } from '@vben/utils'
 import {
   CacheTypeEnum,
   ContentLayoutEnum,
-  HEADER_PRESET_BG_COLOR_LIST,
   MenuModeEnum,
   MixSidebarTriggerEnum,
   NavBarModeEnum,
@@ -22,7 +21,6 @@ import {
   RouterTransitionEnum,
   SessionTimeoutProcessingEnum,
   SettingButtonPositionEnum,
-  SIDE_BAR_BG_COLOR_LIST,
   ThemeEnum,
   TriggerEnum,
 } from '@vben/constants'
@@ -51,7 +49,6 @@ let defaultOptions: DefineAppConfigOptions = {
     theme: ThemeEnum.LIGHT,
     show: true,
     visible: true,
-    bgColor: SIDE_BAR_BG_COLOR_LIST[0],
     fixed: false,
     width: 210,
     mixSidebarWidth: 80,
@@ -76,7 +73,6 @@ let defaultOptions: DefineAppConfigOptions = {
     theme: ThemeEnum.DARK,
     show: true,
     visible: true,
-    bgColor: HEADER_PRESET_BG_COLOR_LIST[0],
     fixed: false,
     height: 48,
     showDoc: true,

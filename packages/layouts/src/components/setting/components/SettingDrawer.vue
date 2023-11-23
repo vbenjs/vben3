@@ -1,37 +1,25 @@
 <script lang="ts" setup>
 import DarkModeToggle from './DarkModeToggle.vue'
 import NavigationBarPicker from './NavigationBarPicker.vue'
-
 import Features from './Features.vue'
 import Content from './Content.vue'
 import Transitions from './Transitions.vue'
 import FooterButtons from './FooterButtons.vue'
-import {
-  APP_PRESET_COLOR_LIST,
-  HEADER_PRESET_BG_COLOR_LIST,
-  SIDE_BAR_BG_COLOR_LIST,
-  HandlerSettingEnum,
-  ThemeChangeEnum,
-} from '@vben/constants'
+import { HandlerSettingEnum } from '@vben/constants'
 import { context } from '../../../../bridge'
 import { navigationBarTypeList } from '../constant'
 import { useI18n } from '@vben/locale'
-import { useAppTheme } from '@vben/hooks'
 import ThemeEditor from '#/components/setting/components/ThemeEditor.vue'
 
 const { useAppConfig } = context
 const { baseHandler } = useAppConfig()
 
-const { primaryColor, infoColor, successColor, warningColor, errorColor } =
-  useAppTheme()
-
 const { t } = useI18n()
 
-const { useMenuSetting, useHeaderSetting, useRootSetting } = context
+const { useMenuSetting, useRootSetting } = context
 
 const { getShowDarkModeToggle } = useRootSetting()
-const { getIsHorizontal, getMenuType, getMenuBgColor } = useMenuSetting()
-const { getHeaderBgColor } = useHeaderSetting()
+const { getIsHorizontal, getMenuType } = useMenuSetting()
 
 defineProps({
   visible: { type: Boolean, default: false },

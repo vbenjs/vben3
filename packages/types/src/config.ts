@@ -110,7 +110,6 @@ export interface SidebarConfigOptions {
   show: boolean
   visible: boolean
   fixed: boolean
-  bgColor: string
   collapsed: boolean
   width: number
   trigger: TriggerEnum
@@ -148,7 +147,6 @@ export interface HeaderConfigOptions {
   theme: ThemeEnum
   show: boolean
   visible: boolean
-  bgColor: string
   fixed: boolean
   showFullScreen: boolean
   showDoc: boolean

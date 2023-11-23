@@ -27,8 +27,8 @@ export const useThemeStore = defineStore({
       errorColor: '#D03050',
     },
     theme: ThemeEnum.LIGHT,
-    sidebar: ThemeEnum.DARK,
-    header: ThemeEnum.DARK,
+    sidebar: ThemeEnum.LIGHT,
+    header: ThemeEnum.LIGHT,
   }),
   getters: {
     getThemeConfig(state) {

@@ -75,7 +75,7 @@ export default {
     warningColor: '警告色',
     errorColor: '错误色',
     infoColor: '信息色',
-    headerTheme: '顶栏主题',
+    headerDark: '顶栏深色',
     sidebarDark: '侧边栏深色',
 
     menuDrag: '侧边菜单拖拽',

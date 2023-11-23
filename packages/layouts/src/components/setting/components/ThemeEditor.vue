@@ -23,12 +23,14 @@ const {
   warningColor,
   errorColor,
   isSidebarDark,
+  isHeaderDark,
   toggleSidebarTheme,
+  toggleHeaderTheme,
 } = useAppTheme()
 </script>
 <template>
   <VbenSpace vertical>
-    <VbenSpace justify="space-between" align="center">
+    <VbenSpace align="center">
       <ThemeColorPicker
         :title="t('layout.setting.primaryColor')"
         :def="primaryColor"
@@ -55,17 +57,16 @@ const {
         :def="errorColor"
         :event="ThemeChangeEnum.THEME_ERROR_COLOR_CHANGE"
       />
-      <ThemeColorPicker
-        :title="t('layout.setting.headerTheme')"
-        :def="getHeaderBgColor"
-        :event="ThemeChangeEnum.THEME_HEADER_BG_COLOR_CHANGE"
-        :colorList="HEADER_PRESET_BG_COLOR_LIST"
-      />
     </VbenSpace>
     <SwitchItem
       :title="t('layout.setting.sidebarDark')"
       :value="isSidebarDark"
       :callback="toggleSidebarTheme"
+    />
+    <SwitchItem
+      :title="t('layout.setting.headerDark')"
+      :value="isHeaderDark"
+      :callback="toggleHeaderTheme"
     />
   </VbenSpace>
 </template>

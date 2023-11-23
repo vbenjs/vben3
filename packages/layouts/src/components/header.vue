@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import HeaderTrigger from './trigger/HeaderTrigger.vue'
 import LayoutBreadcrumb from '../components/breadcrumb/index.vue'
+import LayoutTabs from '../components/tabs/index.vue'
 import AppSearch from '../components/search/AppSearch.vue'
 import AppNotify from '../components/notify/index.vue'
 import AppFullScreen from '../components/FullScreen.vue'
@@ -102,7 +103,7 @@ const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth.value))
     </VbenLayoutHeader>
 
     <template v-if="getShowHeaderMultipleTab">
-      <slot name="tabs"> </slot>
+      <slot name="tabs"> <LayoutTabs /></slot>
     </template>
   </VbenSpace>
 </template>

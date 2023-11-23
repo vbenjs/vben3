@@ -9,4 +9,7 @@ export { default as CountDownInput } from './src/countdown-input/index.vue'
 export { default as StrengthMeter } from './src/strength-meter/index.vue'
 export { default as ClickOutside } from './src/click-outside/index.vue'
 
+export { default as CollapseTransition } from './src/transition/collapse-transition.vue'
+export { default as CustomTransition } from './src/transition/index'
+
 export type { QrCodeActionType } from './src/qrcode/typing'

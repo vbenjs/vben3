@@ -111,6 +111,14 @@ const dashboard: RouteRecordItem = {
         title: 'routes.demo.strength',
       },
     },
+    {
+      path: 'transition',
+      name: 'Transition',
+      component: () => import('@/pages/demo/Transition.vue'),
+      meta: {
+        title: 'routes.demo.transition',
+      },
+    },
   ],
 }
 

@@ -58,7 +58,7 @@ const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth.value))
 </script>
 <template>
   <VbenSpace vertical>
-    <VbenLayoutHeader :inverted="!!isHeaderDark" class="text-white">
+    <VbenLayoutHeader :inverted="isHeaderDark">
       <VbenSpace
         v-if="getShowFullHeaderRef"
         :class="['h-48px', 'shadow']"
@@ -86,7 +86,7 @@ const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth.value))
           <slot name="buttons">
             <VbenSpace class="p-1" :size="16" align="center">
               <AppSearch v-if="getShowSearch" />
-              <AppNotify :is-dark="true" v-if="getShowNotice" />
+              <AppNotify :is-dark="isHeaderDark" v-if="getShowNotice" />
               <AppFullScreen v-if="getShowFullScreen" />
               <VbenLocalePicker
                 v-if="getShowLocalePicker"

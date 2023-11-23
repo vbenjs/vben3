@@ -41,7 +41,8 @@ export interface ThemeColors {
 
 export const useAppTheme = () => {
   const themeStore = useThemeStore()
-  const { setTheme, setThemeConfig, setSidebarTheme } = themeStore
+  const { setTheme, setThemeConfig, setSidebarTheme, setHeaderTheme } =
+    themeStore
   const { getTheme, getThemeConfig, getSidebarTheme, getHeaderTheme } =
     storeToRefs(themeStore)
 
@@ -69,6 +70,10 @@ export const useAppTheme = () => {
 
   const toggleSidebarTheme = (dark: boolean) => {
     setSidebarTheme(dark ? ThemeEnum.DARK : ThemeEnum.LIGHT)
+  }
+
+  const toggleHeaderTheme = (dark: boolean) => {
+    setHeaderTheme(dark ? ThemeEnum.DARK : ThemeEnum.LIGHT)
   }
 
   const primaryColor = computed(() => {
@@ -186,5 +191,6 @@ export const useAppTheme = () => {
     themeColors,
     setThemeConfig,
     toggleSidebarTheme,
+    toggleHeaderTheme,
   }
 }

@@ -13,11 +13,7 @@ import {
   TriggerEnum,
 } from '@vben/constants'
 
-import {
-  HEADER_PRESET_BG_COLOR_LIST,
-  primaryColor,
-  SIDE_BAR_BG_COLOR_LIST,
-} from './design'
+import { primaryColor } from './design'
 
 // ! You need to clear the browser cache after the change
 export const projectSetting: DefineAppConfigOptions = {
@@ -44,7 +40,6 @@ export const projectSetting: DefineAppConfigOptions = {
     theme: ThemeEnum.LIGHT,
     show: true,
     visible: true,
-    bgColor: SIDE_BAR_BG_COLOR_LIST[0],
     fixed: false,
     width: 210,
     mixSidebarWidth: 80,
@@ -69,7 +64,6 @@ export const projectSetting: DefineAppConfigOptions = {
     theme: ThemeEnum.LIGHT,
     show: true,
     visible: true,
-    bgColor: HEADER_PRESET_BG_COLOR_LIST[0],
     fixed: false,
     height: 48,
     showDoc: true,

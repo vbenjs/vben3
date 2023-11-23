@@ -88,7 +88,7 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
 </script>
 
 <template>
-  <div>
+  <div class="mt-2">
     <VbenTabs
       v-model:value="activeTabName"
       type="card"

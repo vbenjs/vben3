@@ -1,12 +1,7 @@
 <script lang="ts" setup>
 import { useI18n } from '@vben/locale'
 import { navigationBarTypeList } from '../constant'
-import {
-  HandlerSettingEnum,
-  APP_PRESET_COLOR_LIST,
-  HEADER_PRESET_BG_COLOR_LIST,
-  SIDE_BAR_BG_COLOR_LIST,
-} from '@vben/constants'
+import { HandlerSettingEnum, APP_PRESET_COLOR_LIST } from '@vben/constants'
 
 import DarkModeToggle from './components/DarkModeToggle.vue'
 import NavigationBarPicker from './components/NavigationBarPicker.vue'
@@ -74,20 +69,9 @@ const {
       <VbenDivider title-placement="left">
         {{ t('layout.setting.headerTheme') }}
       </VbenDivider>
-      <ThemeColorPicker
-        :def="header.bgColor"
-        :event="HandlerSettingEnum.HEADER_THEME"
-        :color-list="HEADER_PRESET_BG_COLOR_LIST"
-      />
       <VbenDivider title-placement="left">{{
         t('layout.setting.sidebarTheme')
       }}</VbenDivider>
-
-      <ThemeColorPicker
-        :def="sidebar.bgColor"
-        :event="HandlerSettingEnum.MENU_THEME"
-        :color-list="SIDE_BAR_BG_COLOR_LIST"
-      />
 
       <VbenDivider title-placement="left">
         {{ t('layout.setting.interfaceFunction') }}

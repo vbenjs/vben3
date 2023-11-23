@@ -43,9 +43,9 @@ const { isSidebarDark } = useAppTheme()
       </slot>
     </VbenLayoutSider>
     <VbenLayout>
-      <VbenLayoutHeader ref="headerRef">
+      <VbenLayout ref="headerRef">
         <slot name="header"><LayoutHeader /></slot>
-      </VbenLayoutHeader>
+      </VbenLayout>
       <VbenLayout :content-style="contentStyle">
         <VbenLayoutContent :content-style="mainStyle" ref="contentRef">
           <LayoutMain>

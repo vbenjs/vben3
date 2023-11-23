@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, h, onMounted, unref, nextTick, computed, watch } from 'vue'
+import { ref, h, onMounted, unref, nextTick, computed } from 'vue'
 import { createNamespace, mapTree } from '@vben/utils'
 import {
   RouteLocationNormalizedLoaded,
@@ -16,25 +16,6 @@ import { getMenus, listenerRouteChange, emitter } from '@vben/router'
 import FooterTrigger from '../trigger/FooterTrigger.vue'
 import { useAppTheme } from '@vben/hooks'
 
-const { Logo, useAppInject, useAppConfig, useMenuSetting } = context
-
-const { isSidebarDark } = useAppTheme()
-
-const { getIsMobile } = useAppInject()
-
-const {
-  menu,
-  isMixSidebar,
-  getCollapsedShowTitle,
-  sidebar,
-  isSidebar,
-  isTopMenu,
-  isMix,
-} = useAppConfig()
-const { getTopMenuAlign, getShowFooterTrigger } = useMenuSetting()
-const showSidebarLogo = computed(() => {
-  return unref(isSidebar) || unref(isMixSidebar)
-})
 const props = defineProps({
   mode: {
     type: String,
@@ -45,6 +26,30 @@ const props = defineProps({
     default: () => false,
   },
 })
+
+const { Logo, useAppConfig, useMenuSetting } = context
+
+const {
+  menu,
+  isMixSidebar,
+  getCollapsedShowTitle,
+  sidebar,
+  isSidebar,
+  isTopMenu,
+  isMix,
+} = useAppConfig()
+
+const { isSidebarDark, isHeaderDark } = useAppTheme()
+const inverted = computed(() =>
+  unref(isTopMenu) ? unref(isHeaderDark) : unref(isSidebarDark),
+)
+
+const { getTopMenuAlign, getShowFooterTrigger } = useMenuSetting()
+
+const showSidebarLogo = computed(() => {
+  return unref(isSidebar) || unref(isMixSidebar)
+})
+
 const { bem } = createNamespace('layout-menu')
 const { t } = useI18n()
 const { currentRoute } = useRouter()
@@ -211,7 +216,7 @@ const clickMenu = (key) => {
         :mode="props.mode"
         :accordion="menu.accordion"
         @update:value="clickMenu"
-        :inverted="!!isSidebarDark"
+        :inverted="inverted"
       />
     </VbenScrollbar>
     <FooterTrigger v-if="getShowFooterTrigger" />

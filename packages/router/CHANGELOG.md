@@ -1,0 +1,13 @@
+# @vben/router
+
+## 1.0.1
+
+### Patch Changes
+
+- publish 1.0.0
+- Updated dependencies
+  - @vben/components@1.0.1
+  - @vben/constants@1.0.1
+  - @vben/locale@1.0.1
+  - @vben/stores@1.0.1
+  - @vben/utils@1.0.1

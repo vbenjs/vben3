@@ -1,12 +1,15 @@
 {
   "name": "@vben/utils",
-  "version": "3.0.0-beta.1",
+  "version": "1.0.1",
   "main": "./index.ts",
   "module": "./index.ts",
   "type": "module",
   "license": "MIT",
   "scripts": {
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@vue/runtime-core": "3.3.6",

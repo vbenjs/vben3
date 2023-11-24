@@ -1,11 +1,14 @@
 {
   "name": "@vben/hooks",
-  "version": "3.0.0-beta.1",
+  "version": "1.0.1",
   "main": "index.ts",
   "module": "index.ts",
   "license": "MIT",
   "scripts": {
     "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@vben/constants": "workspace:*",

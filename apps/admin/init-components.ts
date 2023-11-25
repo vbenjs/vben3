@@ -99,6 +99,7 @@ import naive, {
   NPageHeader,
   NCollapse,
   NCollapseItem,
+  NSpin,
 } from 'naive-ui'
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
 
@@ -190,6 +191,7 @@ export async function registerComponents(app) {
     Result: NResult,
 
     Space: NSpace,
+    Spin: NSpin,
     Select: NSelect,
     Switch: NSwitch,
     Slider: NSlider,

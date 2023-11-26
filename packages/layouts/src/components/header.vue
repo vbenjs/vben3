@@ -83,7 +83,7 @@ const logoWidth = computed(() => (unref(isTopMenu) ? 150 : getMenuWidth.value))
           </VbenSpace>
         </slot>
         <slot name="menu" v-if="!showHeaderBreadcrumb"></slot>
-        <div class="pl-8px pr-8px">
+        <div class="pl-8px pr-8px" id="userActionElement">
           <slot name="buttons">
             <VbenSpace class="p-1" :size="16" align="center">
               <AppSearch v-if="getShowSearch" />

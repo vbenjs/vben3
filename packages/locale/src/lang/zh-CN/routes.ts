@@ -72,5 +72,8 @@ export default {
       accountSetting: '个人设置',
     },
     transition: '过渡动画',
+    setup: {
+      page: '引导页',
+    },
   },
 }

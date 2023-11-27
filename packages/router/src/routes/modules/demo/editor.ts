@@ -20,6 +20,14 @@ const Editor: RouteRecordItem = {
         title: 'monaco-editor',
       },
     },
+    {
+      path: 'rich-text-editor',
+      name: 'rich-text-editor',
+      component: () => import('@/pages/demo/editor/rich-text-editor.vue'),
+      meta: {
+        title: '富文本编辑器',
+      },
+    },
   ],
 }
 

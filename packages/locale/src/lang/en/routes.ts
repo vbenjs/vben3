@@ -71,7 +71,7 @@ export default {
       accountSetting: 'Setting',
     },
     transition: 'Transition',
-    setup: {
+    steps: {
       page: 'Intro page',
     },
   },

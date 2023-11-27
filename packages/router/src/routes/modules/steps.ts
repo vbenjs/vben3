@@ -1,24 +1,24 @@
 import { LAYOUT } from '../basic'
 
-const setup: RouteRecordItem = {
-  path: '/setup',
-  name: 'SetupDemo',
+const steps: RouteRecordItem = {
+  path: '/steps',
+  name: 'StepsDemo',
   component: LAYOUT,
-  redirect: '/setup/index',
+  redirect: '/steps/index',
   meta: {
     orderNo: 90000,
     icon: 'whh:paintroll',
-    title: 'routes.demo.setup.page',
+    title: 'routes.demo.steps.page',
     root: true,
     hideChildrenInMenu: true,
   },
   children: [
     {
       path: 'index',
-      name: 'SetupDemoPage',
-      component: () => import('@/pages/demo/setup/setup.vue'),
+      name: 'StepsDemoPage',
+      component: () => import('@/pages/demo/steps/steps.vue'),
       meta: {
-        title: 'routes.demo.setup.page',
+        title: 'routes.demo.steps.page',
         icon: 'whh:paintroll',
         hideMenu: true,
       },
@@ -26,4 +26,4 @@ const setup: RouteRecordItem = {
   ],
 }
 
-export default setup
+export default steps

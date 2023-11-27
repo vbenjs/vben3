@@ -45,6 +45,7 @@
     "mockjs": "^1.1.0",
     "monaco-editor": "^0.44.0",
     "pinia": "2.1.7",
+    "print-js": "^1.6.0",
     "vue": "3.3.6",
     "vue-demi": "^0.14.6",
     "vue-echarts": "^6.6.1",

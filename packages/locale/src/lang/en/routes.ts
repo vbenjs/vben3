@@ -57,6 +57,7 @@ export default {
     feat: {
       ripple: 'Ripple',
       clickOutSide: 'ClickOutSide',
+      print: 'Print',
     },
     page: {
       page: 'Page',

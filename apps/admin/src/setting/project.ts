@@ -46,6 +46,7 @@ export const projectSetting: DefineAppConfigOptions = {
     collapsedWidth: 48,
     collapsed: false,
     trigger: TriggerEnum.CENTER,
+    bgColor: ''
   },
   menu: {
     show: true,
@@ -74,6 +75,7 @@ export const projectSetting: DefineAppConfigOptions = {
     showSearch: true,
     showLocalePicker: true,
     showSetting: true,
+    bgColor: ''
   },
   logo: {
     show: true,

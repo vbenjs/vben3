@@ -112,6 +112,7 @@ export interface SidebarConfigOptions {
   fixed: boolean
   collapsed: boolean
   width: number
+  bgColor: string
   trigger: TriggerEnum
   readonly mixSidebarWidth: number
   readonly collapsedWidth: number
@@ -153,6 +154,7 @@ export interface HeaderConfigOptions {
   showNotice: boolean
   showSearch: boolean
   showLocalePicker: boolean
+  bgColor: string
   showSetting: boolean
   readonly height: number
   // Show breadcrumbs

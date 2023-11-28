@@ -28,6 +28,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.clickOutSide',
       },
     },
+    {
+      path: 'print',
+      name: 'Print',
+      component: () => import('@/pages/demo/feat/print.vue'),
+      meta: {
+        title: 'routes.demo.feat.print',
+      },
+    },
   ],
 }
 

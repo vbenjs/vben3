@@ -134,6 +134,9 @@ importers:
       pinia:
         specifier: 2.1.7
         version: 2.1.7(typescript@5.2.2)(vue@3.3.6)
+      print-js:
+        specifier: ^1.6.0
+        version: 1.6.0
       vue:
         specifier: 3.3.6
         version: 3.3.6(typescript@5.2.2)
@@ -11316,6 +11319,10 @@ packages:
       mri: 1.2.0
       multimatch: 4.0.0
       prettier: 3.0.3
+    dev: false
+
+  /print-js@1.6.0:
+    resolution: {integrity: sha512-BfnOIzSKbqGRtO4o0rnj/K3681BSd2QUrsIZy/+WdCIugjIswjmx3lDEZpXB2ruGf9d4b3YNINri81+J0FsBWg==}
     dev: false
 
   /process-nextick-args@2.0.1:

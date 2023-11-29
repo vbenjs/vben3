@@ -1,7 +1,7 @@
 <!--
  * @Author       : ya2glu@163.com
  * @Date         : 2023-11-16 16:32:56
- * @LastEditTime : 2023-11-17 09:46:18
+ * @LastEditTime : 2023-11-28 11:24:30
  * @LastEditors  : ya2glu
  * @Description  : role manager
  * @FilePath     : \vben3\apps\admin\src\pages\demo\system\role\index.vue
@@ -31,6 +31,9 @@ const [roleTableReg, { reload }] = useTable({
   border: 'none',
   minHeight: '700px',
   maxHeight: '700px',
+  rowConfig: {
+    isHover: true
+  },
   stripe: true,
   round: true,
 })

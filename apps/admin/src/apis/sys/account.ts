@@ -11,3 +11,6 @@ export const getDeptUser = (params?: any) => {
 export const getRoleList = (params?: any) => {
   return request.post({ url: '/demo/roleList', params })
 }
+export const getDepartment = () => {
+  return request.get({ url: '/demo/account/department' })
+}

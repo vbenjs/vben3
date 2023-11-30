@@ -14,14 +14,15 @@
   "license": "ISC",
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@tinymce/tinymce-vue": "^5.1.1",
+    "@vben/hooks": "workspace:*",
     "@vben/request": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
-    "@vben/hooks": "workspace:*",
     "vue": "^3.3.6"
   },
   "devDependencies": {
-    "@vben/types": "workspace:*",
-    "@amap/amap-jsapi-types": "^0.0.13"
+    "@amap/amap-jsapi-types": "^0.0.13",
+    "@vben/types": "workspace:*"
   }
 }

@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   bin-wrapper: npm:bin-wrapper-china
 
@@ -133,9 +137,6 @@ importers:
       pinia:
         specifier: 2.1.7
         version: 2.1.7(typescript@5.2.2)(vue@3.3.6)
-      tinymce:
-        specifier: ^6.8.0
-        version: 6.8.0
       print-js:
         specifier: ^1.6.0
         version: 1.6.0
@@ -402,6 +403,9 @@ importers:
       '@amap/amap-jsapi-loader':
         specifier: ^1.0.1
         version: 1.0.1
+      '@tinymce/tinymce-vue':
+        specifier: ^5.1.1
+        version: 5.1.1(vue@3.3.6)
       '@vben/hooks':
         specifier: workspace:*
         version: link:../hooks
@@ -14076,7 +14080,3 @@ packages:
     dependencies:
       tslib: 2.3.0
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

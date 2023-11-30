@@ -58,6 +58,7 @@ export default {
     feat: {
       ripple: '水波纹',
       clickOutSide: 'ClickOutSide组件',
+      print: '打印',
     },
     page: {
       page: '页面',
@@ -72,5 +73,8 @@ export default {
       accountSetting: '个人设置',
     },
     transition: '过渡动画',
+    steps: {
+      page: '引导页',
+    },
   },
 }

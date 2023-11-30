@@ -8,6 +8,7 @@ const { contentRef } = useComposables()
 </script>
 <template>
   <VbenAffix
+    id="userActionElement"
     @click="settingDrawerVisible = true"
     :listen-to="contentRef"
     :trigger-top="240"

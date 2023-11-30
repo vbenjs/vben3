@@ -24,7 +24,7 @@ export const roleColumns: VbenColumns = [
     slots: {
       default: ({ row }) => {
         return (
-          <VbenTag type={row.state.value === '1' ? 'info' : 'error'}>
+          <VbenTag size={'small'} type={row.state.value === '1' ? 'info' : 'error'}>
             {row.state.name}
           </VbenTag>
         )

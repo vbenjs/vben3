@@ -108,12 +108,12 @@ const mockRoleListData = (() => {
       'state|1': [
         {
           name: '启用',
-          value: '1'
+          value: '1',
         },
         {
           name: '停用',
-          value: '0'
-        }
+          value: '0',
+        },
       ],
       createTime: `@datetime`,
       remark: `@cword(5, 10)`,
@@ -121,6 +121,68 @@ const mockRoleListData = (() => {
   }
   return result
 })()
+
+const mockDeptTreeList = (() => {
+  const result: any[] = []
+  result.push(
+    {
+      id: '1',
+      parentId: null,
+      deptName: '华北',
+      sort: 0,
+      'state|1': [
+        {
+          name: '启用',
+          value: '1'
+        },
+        {
+          name: '停用',
+          value: '0'
+        }
+      ],
+      createTime: new Date(),
+      remark: 'remark',
+    },
+    {
+      id: '1-1',
+      parentId: '1',
+      deptName: '财务部',
+      sort: 0,
+      'state|1': [
+        {
+          name: '启用',
+          value: '1'
+        },
+        {
+          name: '停用',
+          value: '0'
+        }
+      ],
+      createTime: '@datetime()',
+      remark: '财务',
+    },
+    {
+      id: '1-1-1',
+      parentId: '1-1',
+      deptName: '资产管理',
+      sort: 0,
+      'state|1': [
+        {
+          name: '启用',
+          value: '1'
+        },
+        {
+          name: '停用',
+          value: '0'
+        }
+      ],
+      createTime: '@datetime()',
+      remark: '资产',
+    },
+  )
+  return result
+})()
+
 export default [
   {
     url: '/basic-api/demo/deptTreeList',
@@ -142,8 +204,16 @@ export default [
     url: '/basic-api/demo/roleList',
     timeout: 200,
     method: 'post',
-    response: ({body}) => {
+    response: ({ body }) => {
       return resultPageSuccess(body.page, body.pageSize, mockRoleListData)
-    }
-  }
+    },
+  },
+  {
+    url: '/basic-api/demo/account/department',
+    timeout: 200,
+    method: 'get',
+    response: () => {
+      return resultSuccess(mockDeptTreeList)
+    },
+  },
 ] as MockMethod[]

@@ -20,7 +20,6 @@ const system: RouteRecordItem = {
       meta: {
         icon: 'majesticons:menu',
         title: t('routes.demo.system.menu'),
-        affix: true,
       },
     },
     {
@@ -30,7 +29,6 @@ const system: RouteRecordItem = {
       meta: {
         icon: 'mdi:account',
         title: t('routes.demo.system.account'),
-        affix: true,
       },
     },
     {
@@ -40,6 +38,15 @@ const system: RouteRecordItem = {
       meta: {
         icon: 'carbon:user-role',
         title: t('routes.demo.system.role')
+      }
+    },
+    {
+      path: 'dept',
+      name: 'Dept',
+      component: () => import('@/pages/demo/system/dept/index.vue'),
+      meta: {
+        icon: 'mingcute:department-line',
+        title: t('routes.demo.system.dept')
       }
     }
   ],

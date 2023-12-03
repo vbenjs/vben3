@@ -58,6 +58,7 @@ export default {
       ripple: 'Ripple',
       clickOutSide: 'ClickOutSide',
       print: 'Print',
+      ellipsis: 'EllipsisText',
     },
     page: {
       page: 'Page',

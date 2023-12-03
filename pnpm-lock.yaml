@@ -400,6 +400,9 @@ importers:
       '@amap/amap-jsapi-loader':
         specifier: ^1.0.1
         version: 1.0.1
+      '@vben/components':
+        specifier: workspace:*
+        version: link:../components
       '@vben/hooks':
         specifier: workspace:*
         version: link:../hooks

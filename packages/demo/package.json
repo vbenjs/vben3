@@ -16,6 +16,7 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@vben/request": "workspace:*",
     "@vben/utils": "workspace:*",
+    "@vben/components": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "@vben/hooks": "workspace:*",
     "vue": "^3.3.6"

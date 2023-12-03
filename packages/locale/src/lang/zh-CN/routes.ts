@@ -15,6 +15,7 @@ export default {
     card: '卡片',
     animate: '动画',
     form: '表单',
+    qrcode: '二维码组件',
     table: {
       table: '表格',
       basic: '基础表格',

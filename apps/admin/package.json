@@ -26,6 +26,7 @@
     "@ant-design/icons-vue": "^7.0.1",
     "@config/vite": "workspace:*",
     "@iconify/iconify": "^3.1.1",
+    "@tinymce/tinymce-vue": "^5.1.1",
     "@vben/components": "workspace:*",
     "@vben/constants": "workspace:*",
     "@vben/demo": "workspace:*",

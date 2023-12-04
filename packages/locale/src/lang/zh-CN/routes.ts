@@ -60,6 +60,7 @@ export default {
       ripple: '水波纹',
       clickOutSide: 'ClickOutSide组件',
       print: '打印',
+      ellipsis: '文本省略',
     },
     page: {
       page: '页面',

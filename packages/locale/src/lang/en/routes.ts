@@ -15,6 +15,7 @@ export default {
     card: 'Card',
     animate: 'Animate',
     form: 'Form',
+    qrcode: 'QR code',
     table: {
       table: 'table',
       basic: 'basic',

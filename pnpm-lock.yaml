@@ -403,6 +403,9 @@ importers:
       '@amap/amap-jsapi-loader':
         specifier: ^1.0.1
         version: 1.0.1
+      '@vben/components':
+        specifier: workspace:*
+        version: link:../components
       '@tinymce/tinymce-vue':
         specifier: ^5.1.1
         version: 5.1.1(vue@3.3.6)

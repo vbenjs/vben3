@@ -18,6 +18,7 @@
     "@vben/hooks": "workspace:*",
     "@vben/request": "workspace:*",
     "@vben/utils": "workspace:*",
+    "@vben/components": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "vue": "^3.3.6"
   },

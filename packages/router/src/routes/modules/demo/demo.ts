@@ -119,6 +119,14 @@ const dashboard: RouteRecordItem = {
         title: 'routes.demo.transition',
       },
     },
+    {
+      path: 'qrcode',
+      name: 'qrcode',
+      component: () => import('@/pages/demo/QrCode.vue'),
+      meta: {
+        title: 'routes.demo.qrcode',
+      },
+    },
   ],
 }
 

@@ -61,6 +61,7 @@ export default {
       clickOutSide: 'ClickOutSide组件',
       print: '打印',
       ellipsis: '文本省略',
+      watermark: '水印',
     },
     page: {
       page: '页面',

@@ -62,7 +62,7 @@ const resetWatermarkStyle = (element: HTMLElement, watermarkText: string) => {
 const obFn = () => {
   const obInstance = new MutationObserver((mutationRecords) => {
     for (const mutation of mutationRecords) {
-      for (const node of mutation?.removedNodes) {
+      for (const node of Array.from(mutation.removedNodes)) {
         const target = Array.from(sourceMap.values()).find(
           (item) => item.targetElement === node,
         )
@@ -76,7 +76,10 @@ const obFn = () => {
       if (mutation.attributeName === 'style' && mutation.target) {
         const _target = mutation.target as HTMLElement
         if (_target.className === '__' + watermarkSymbol) {
-          resetWatermarkStyle(_target as HTMLElement, _target?.watermarkText)
+          resetWatermarkStyle(
+            _target as HTMLElement,
+            _target?.['data-watermark-text'],
+          )
         }
       }
     }
@@ -143,7 +146,7 @@ export function useWatermark(
       return
     }
     const div = document.createElement('div')
-    div.watermarkText = str //自定义属性 用于恢复水印
+    div['data-watermark-text'] = str //自定义属性 用于恢复水印
     updateWatermarkText.value = str
     watermarkEl.value = div
     resetWatermarkStyle(div, str)

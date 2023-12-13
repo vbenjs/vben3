@@ -100,6 +100,7 @@ import naive, {
   NCollapse,
   NCollapseItem,
   NSpin,
+  NWatermark,
 } from 'naive-ui'
 import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
 
@@ -217,6 +218,8 @@ export async function registerComponents(app) {
 
     Upload: NUpload,
     UploadDragger: NUploadDragger,
+
+    Watermark: NWatermark,
   })
   setMessage(useMessage)
   setNotice(useNotification)

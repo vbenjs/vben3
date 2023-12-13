@@ -60,6 +60,7 @@ export default {
       clickOutSide: 'ClickOutSide',
       print: 'Print',
       ellipsis: 'EllipsisText',
+      watermark: 'Watermark',
     },
     page: {
       page: 'Page',

@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenWatermark">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Watermark = maps.get('Watermark')
 </script>
 <template>

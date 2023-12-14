@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenImage">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Image = maps.get('Image')
 </script>
 <template>

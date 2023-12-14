@@ -1,4 +1,4 @@
-import { ComponentType, VbenFormSchema } from '#/form'
+import { ComponentType, VbenFormSchema } from '../../form'
 
 const p = {
   form: {

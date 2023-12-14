@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenDynamicInput">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const DynamicInput = maps.get('DynamicInput')
 </script>
 <template>

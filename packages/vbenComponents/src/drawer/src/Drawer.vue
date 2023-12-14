@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenDrawer">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Drawer = maps.get('Drawer')
 </script>
 <template>

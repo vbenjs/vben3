@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenSteps">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Steps = maps.get('Steps')
 </script>
 <template>

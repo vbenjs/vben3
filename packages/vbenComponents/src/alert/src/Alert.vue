@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenAlert">
-import {maps} from '#/index'
+import { maps } from '../../index'
 
 const Alert = maps.get('Alert')
 </script>

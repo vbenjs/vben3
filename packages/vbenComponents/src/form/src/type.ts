@@ -1,5 +1,5 @@
 import type { CSSProperties, VNode } from 'vue'
-import { formMethod } from '#/form/src/hooks/useForm'
+import { formMethod } from '../../form/src/hooks/useForm'
 export interface VbenFormProps {
   title?: string
   schemas: VbenFormSchema[]

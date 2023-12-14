@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTooltip">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Popover = maps.get('Tooltip')
 </script>
 <template>

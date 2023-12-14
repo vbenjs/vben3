@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenEmpty">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Empty = maps.get('Empty')
 </script>
 <template>

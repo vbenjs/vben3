@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenText">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Text = maps.get('Text')
 </script>
 <template>

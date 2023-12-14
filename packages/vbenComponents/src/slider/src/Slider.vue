@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenSlider">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Slider = maps.get('Slider')
 </script>

@@ -37,7 +37,7 @@ const emit = defineEmits(['register'])
 const props = defineProps({
   options: {
     type: Object as PropType<VbenTableProps>,
-    default: {},
+    default: () => {},
   },
 })
 const innerProps = ref<Partial<VbenTableProps>>()

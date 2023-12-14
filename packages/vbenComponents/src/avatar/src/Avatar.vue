@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenAvatar">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Avatar = maps.get('Avatar')
 </script>

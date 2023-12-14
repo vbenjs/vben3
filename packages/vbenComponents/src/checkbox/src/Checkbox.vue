@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenCheckbox">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Checkbox = maps.get('Checkbox')
 </script>
 <template>

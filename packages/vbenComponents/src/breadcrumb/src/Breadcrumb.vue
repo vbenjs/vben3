@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenBreadcrumb">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Breadcrumb = maps.get('Breadcrumb')
 </script>

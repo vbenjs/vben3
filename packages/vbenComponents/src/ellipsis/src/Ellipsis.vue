@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenEllipsis">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Ellipsis = maps.get('Ellipsis')
 </script>
 <template>

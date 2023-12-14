@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenLayoutSider">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const LayoutSider = maps.get('LayoutSider')
 </script>

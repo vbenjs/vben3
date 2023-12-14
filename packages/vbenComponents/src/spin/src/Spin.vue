@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenSpin">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Spin = maps.get('Spin')
 </script>

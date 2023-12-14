@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenButton">
-import { maps } from '#/index'
+import { maps } from '../../index'
 import { ref } from 'vue'
 const Button = maps.get('Button')
 const Ref = ref(null)

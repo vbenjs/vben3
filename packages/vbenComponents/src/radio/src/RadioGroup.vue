@@ -1,6 +1,6 @@
 <script lang="ts" setup name="VbenRadioGroup">
-import { maps } from '#/index'
-import { fetchProps, fetch } from '#/fetch'
+import { maps } from '../../index'
+import { fetchProps, fetch } from '../../fetch'
 import { ref, watch, watchEffect } from 'vue'
 const RadioGroup = maps.get('RadioGroup')
 const props = defineProps({

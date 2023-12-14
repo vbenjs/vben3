@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenLayoutHeader">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const LayoutHeader = maps.get('LayoutHeader')
 </script>

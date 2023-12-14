@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenAffix">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Affix = maps.get('Affix')
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenScrollbar">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Scrollbar = maps.get('Scrollbar')
 </script>

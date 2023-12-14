@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTransfer">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Transfer = maps.get('Transfer')
 </script>

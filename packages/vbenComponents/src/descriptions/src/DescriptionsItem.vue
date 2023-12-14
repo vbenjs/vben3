@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenDescItem">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const DescriptionsItem = maps.get('DescriptionsItem')
 </script>
 <template>

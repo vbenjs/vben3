@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenConfig">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Config = maps.get('Config')
 </script>

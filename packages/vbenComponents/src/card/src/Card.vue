@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenCard">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Card = maps.get('Card')
 const props = defineProps({
   loading: {

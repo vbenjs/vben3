@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenCollapseItem">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const CollapseItem = maps.get('CollapseItem')
 </script>
 <template>

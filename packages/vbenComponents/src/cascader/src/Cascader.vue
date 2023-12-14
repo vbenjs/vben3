@@ -1,6 +1,6 @@
 <script lang="ts" setup name="VbenCascader">
-import { maps } from '#/index'
-import { fetchProps, fetch } from '#/fetch'
+import { maps } from '../../index'
+import { fetchProps, fetch } from '../../fetch'
 import { ref, watch, watchEffect } from 'vue'
 const Cascader = maps.get('Cascader')
 const props = defineProps({

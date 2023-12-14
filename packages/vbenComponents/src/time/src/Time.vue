@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTime">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Time = maps.get('Time')
 </script>
 <template>

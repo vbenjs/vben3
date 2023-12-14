@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenIcon">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Icon = maps.get('Icon')
 </script>
 <template>

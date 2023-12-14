@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenMenu">
-import { maps } from '#/index'
+import { maps } from '../../index'
 import { ref } from 'vue'
 const Menu = maps.get('Menu')
 const Ref = ref(null)

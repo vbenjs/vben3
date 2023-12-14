@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenLayoutFooter">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const LayoutFooter = maps.get('LayoutFooter')
 </script>

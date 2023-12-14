@@ -5,7 +5,7 @@
   ></Badge>
 </template>
 <script setup lang="ts" name="VbenBadge">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Badge = maps.get('Badge')
 </script>

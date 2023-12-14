@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenMention">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Mention = maps.get('Mention')
 </script>

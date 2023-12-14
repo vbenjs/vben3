@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenDropdown">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Dropdown = maps.get('Dropdown')
 </script>
 <template>

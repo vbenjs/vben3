@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenTabPane">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const TabPane = maps.get('TabPane')
 </script>
 <template>

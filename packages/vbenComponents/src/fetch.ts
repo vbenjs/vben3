@@ -1,5 +1,5 @@
 import { isFunction } from '@vben/utils'
-import { error } from '#/index'
+import { error } from '../../index'
 export interface FetchProps {
   api?: Function
   params?: Object

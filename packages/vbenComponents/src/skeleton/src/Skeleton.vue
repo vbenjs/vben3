@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenSkeleton">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const Skeleton = maps.get('Skeleton')
 </script>

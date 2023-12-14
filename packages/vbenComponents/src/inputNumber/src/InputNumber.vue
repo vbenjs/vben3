@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenInputNumber">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const InputNumber = maps.get('InputNumber')
 </script>
 <template>

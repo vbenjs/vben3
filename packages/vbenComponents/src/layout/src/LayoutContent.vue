@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenLayoutContent">
-import { maps } from '#/index'
+import { maps } from '../../index'
 
 const LayoutContent = maps.get('LayoutContent')
 </script>

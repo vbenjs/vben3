@@ -1,6 +1,6 @@
 import { nextTick, Ref, ref, unref } from 'vue'
-import { VbenFormProps, VbenFormSchema } from '#/form'
-import { error } from '#/index'
+import { VbenFormProps, VbenFormSchema } from '../../../form'
+import { error } from '../../../index'
 
 export interface formMethod {
   // reload: () => void

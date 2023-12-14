@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenFormItemGi">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const FormItemGi = maps.get('FormItemGi')
 </script>
 <template>

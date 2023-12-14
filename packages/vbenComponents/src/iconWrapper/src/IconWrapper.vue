@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenIconWrapper">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Icon = maps.get('IconWrapper')
 </script>
 <template>

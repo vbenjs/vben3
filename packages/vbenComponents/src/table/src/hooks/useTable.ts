@@ -1,13 +1,13 @@
 import { ref, unref } from 'vue'
 import { VbenTableProps } from '../type'
-import { error } from '#/index'
+import { error } from '../../../index'
 
 export interface tableMethod {
   reload: () => void
   setProps: (props: VbenTableProps) => void
 }
 
-export function useTable(props: VbenTableProps):[Function,tableMethod] {
+export function useTable(props: VbenTableProps): [Function, tableMethod] {
   const tableRef = ref<Nullable<tableMethod>>(null)
 
   function register(instance) {

@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenUpload">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const Upload = maps.get('Upload')
 const UploadDragger = maps.get('UploadDragger')
 </script>

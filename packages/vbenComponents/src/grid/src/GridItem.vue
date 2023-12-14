@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenGridItem">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const GridItem = maps.get('GridItem')
 </script>
 <template>

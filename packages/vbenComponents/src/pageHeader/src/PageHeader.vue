@@ -1,5 +1,5 @@
 <script lang="ts" setup name="VbenPageHeader">
-import { maps } from '#/index'
+import { maps } from '../../index'
 const PageHeader = maps.get('PageHeader')
 </script>
 <template>

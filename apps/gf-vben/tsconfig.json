@@ -1,0 +1,27 @@
+{
+  "extends": "@config/tsconfig/base.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["src/*"]
+    },
+    "lib": ["dom", "esnext"],
+    "types": [
+      "vite/client",
+      "@vben/constants",
+      "@vben/types/shims/pinia",
+      "@vben/types/shims/vue-router",
+    ]
+  },
+  "include": [
+    "src",
+    "mock",
+    "vite.config.ts",
+    "../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/macros-global.d.ts"
+  ]
+}

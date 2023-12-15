@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenPagination">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenPagination' })
 import { maps } from '../../index'
 const Pagination = maps.get('Pagination')
 </script>

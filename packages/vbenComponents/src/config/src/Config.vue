@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenConfig">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenConfig' })
 import { maps } from '../../index'
 
 const Config = maps.get('Config')

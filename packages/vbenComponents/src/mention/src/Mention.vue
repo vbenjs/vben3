@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenMention">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenMention' })
 import { maps } from '../../index'
 
 const Mention = maps.get('Mention')

@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenEllipsis">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenEllipsis' })
 import { maps } from '../../index'
 const Ellipsis = maps.get('Ellipsis')
 </script>

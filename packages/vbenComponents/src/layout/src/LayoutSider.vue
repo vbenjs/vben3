@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenLayoutSider">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenLayoutSider' })
 import { maps } from '../../index'
 
 const LayoutSider = maps.get('LayoutSider')

@@ -1,6 +1,7 @@
-<script lang="ts" setup name="VbenButtonGroup">
-  import {maps} from '../../index'
-  const ButtonGroup = maps.get('ButtonGroup');
+<script lang="ts" setup>
+defineOptions({ name: 'VbenButtonGroup' })
+import { maps } from '../../index'
+const ButtonGroup = maps.get('ButtonGroup')
 </script>
 <template>
   <ButtonGroup v-bind="$attrs">

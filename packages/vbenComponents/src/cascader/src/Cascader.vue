@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenCascader">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenCascader' })
 import { maps } from '../../index'
 import { fetchProps, fetch } from '../../fetch'
 import { ref, watch, watchEffect } from 'vue'

@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenPopover">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenPopover' })
 import { maps } from '../../index'
 const Popover = maps.get('Popover')
 </script>

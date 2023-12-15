@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenTransfer">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenTransfer' })
 import { maps } from '../../index'
 
 const Transfer = maps.get('Transfer')

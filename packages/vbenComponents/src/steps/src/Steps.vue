@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenSteps">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenSteps' })
 import { maps } from '../../index'
 const Steps = maps.get('Steps')
 </script>

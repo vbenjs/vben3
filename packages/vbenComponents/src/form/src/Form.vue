@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenForm">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenForm' })
 import { maps } from '../../index'
 import { computed, onMounted, ref, unref, useAttrs, watch } from 'vue'
 import { GridItemProps, VbenFormProps } from './type'

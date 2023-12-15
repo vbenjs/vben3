@@ -1,4 +1,5 @@
-<script lang="ts" setup name="ThemeColorPicker">
+<script lang="ts" setup>
+defineOptions({ name: 'ThemeColorPicker' })
 import { PropType } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
 import { useAppConfig } from '@vben/hooks'

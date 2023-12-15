@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenDrawerContent">
+<script lang="ts" setup >
+defineOptions({ name: 'VbenDrawerContent' })
 import { maps } from '../../index'
 const DrawerContent = maps.get('DrawerContent')
 </script>

@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenTreeSelect">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenTreeSelect' })
 import { maps } from '../../index'
 import { onMounted, watch, ref, watchEffect } from 'vue'
 import { fetchProps, fetch } from '../../fetch'

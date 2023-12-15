@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenGradientText">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenGradientText' })
 import { maps } from '../../index'
 
 const GradientText = maps.get('GradientText')

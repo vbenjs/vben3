@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenGrid">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenGrid' })
 import { maps } from '../../index'
 const Grid = maps.get('Grid')
 </script>

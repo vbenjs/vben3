@@ -1,4 +1,5 @@
-<script lang="ts" setup name="NavigationBarPicker">
+<script lang="ts" setup>
+defineOptions({ name: 'NavigationBarPicker' })
 import { useI18n } from '@vben/locale'
 
 const { t } = useI18n()

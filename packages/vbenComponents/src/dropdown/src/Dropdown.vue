@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenDropdown">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenDropdown' })
 import { maps } from '../../index'
 const Dropdown = maps.get('Dropdown')
 </script>

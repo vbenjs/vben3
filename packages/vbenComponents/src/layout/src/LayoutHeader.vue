@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenLayoutHeader">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenLayoutHeader' })
 import { maps } from '../../index'
 
 const LayoutHeader = maps.get('LayoutHeader')

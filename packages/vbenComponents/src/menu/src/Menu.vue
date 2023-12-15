@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenMenu">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenMenu' })
 import { maps } from '../../index'
 import { ref } from 'vue'
 const Menu = maps.get('Menu')

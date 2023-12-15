@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenSpace">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenSpace' })
 import { maps } from '../../index'
 const Space = maps.get('Space')
 </script>

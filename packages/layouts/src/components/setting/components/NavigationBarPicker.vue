@@ -1,4 +1,5 @@
-<script lang="ts" setup name="NavigationBarPicker">
+<script lang="ts" setup>
+defineOptions({ name: 'NavigationBarPicker' })
 import { PropType } from 'vue'
 import { MenuModeEnum, NavBarModeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'

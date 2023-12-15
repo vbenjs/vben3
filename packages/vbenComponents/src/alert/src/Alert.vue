@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenAlert">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenAlert' })
 import { maps } from '../../index'
 
 const Alert = maps.get('Alert')

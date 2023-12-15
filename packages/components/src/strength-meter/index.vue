@@ -1,4 +1,5 @@
-<script lang="ts" setup name="StrengthMeter">
+<script lang="ts" setup>
+defineOptions({ name: 'StrengthMeter' })
 import { computed, ref, watch, unref, watchEffect } from 'vue'
 import { zxcvbn } from '@zxcvbn-ts/core'
 import { createNamespace } from '@vben/utils'

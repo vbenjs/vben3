@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenH4">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenH4' })
 import { maps } from '../../index'
 const H4 = maps.get('H4')
 </script>

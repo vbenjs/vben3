@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenInputGroupLabel">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenInputGroupLabel' })
 import { maps } from '../../index'
 const InputGroupLabel = maps.get('InputGroupLabel')
 </script>

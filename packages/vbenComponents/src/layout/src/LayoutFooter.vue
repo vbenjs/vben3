@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenLayoutFooter">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenLayoutFooter' })
 import { maps } from '../../index'
 
 const LayoutFooter = maps.get('LayoutFooter')

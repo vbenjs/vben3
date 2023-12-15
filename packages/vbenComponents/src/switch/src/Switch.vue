@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenSwitch">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenSwitch' })
 import { maps } from '../../index'
 const Switch = maps.get('Switch')
 </script>

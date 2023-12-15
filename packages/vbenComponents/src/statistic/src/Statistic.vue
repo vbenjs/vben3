@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenStatistic">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenStatistic' })
 import { maps } from '../../index'
 const Statistic = maps.get('Statistic')
 </script>

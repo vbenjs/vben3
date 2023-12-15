@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenCheckbox">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenCheckbox' })
 import { maps } from '../../index'
 const Checkbox = maps.get('Checkbox')
 </script>

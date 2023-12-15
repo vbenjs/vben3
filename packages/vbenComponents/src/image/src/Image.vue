@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenImage">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenImage' })
 import { maps } from '../../index'
 const Image = maps.get('Image')
 </script>

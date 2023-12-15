@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenTab">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenTab' })
 import { maps } from '../../index'
 import { ref } from 'vue'
 const Tab = maps.get('Tab')

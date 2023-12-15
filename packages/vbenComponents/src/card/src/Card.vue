@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenCard">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenCard' })
 import { maps } from '../../index'
 const Card = maps.get('Card')
 const props = defineProps({

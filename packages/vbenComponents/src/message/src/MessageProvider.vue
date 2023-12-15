@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenMessageProvider">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenMessageProvider' })
 import { maps } from '../../index'
 const MessageProvider = maps.get('MessageProvider')
 </script>

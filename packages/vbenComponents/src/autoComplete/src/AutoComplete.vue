@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenAutoComplete">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenAutoComplete' })
 import { maps } from '../../index'
 import { fetchProps, fetch } from '../../fetch'
 import { computed, ref, watch, watchEffect } from 'vue'

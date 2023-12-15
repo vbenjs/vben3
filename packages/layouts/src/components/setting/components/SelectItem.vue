@@ -1,4 +1,5 @@
-<script lang="ts" setup name="SelectItem">
+<script lang="ts" setup>
+defineOptions({ name: 'SelectItem' })
 import { PropType, h } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'

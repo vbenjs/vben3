@@ -1,4 +1,5 @@
-<script lang="ts" setup name="SwitchItem">
+<script lang="ts" setup>
+defineOptions({ name: 'SwitchItem' })
 import { PropType } from 'vue'
 
 const props = defineProps({

@@ -1,4 +1,5 @@
-<script lang="ts" setup name="InputNumberItem">
+<script lang="ts" setup>
+defineOptions({ name: 'InputNumberItem' })
 import { PropType, ref } from 'vue'
 import { ThemeChangeEnum } from '@vben/constants'
 import { useAppTheme } from '@vben/hooks'

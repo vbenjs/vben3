@@ -1,4 +1,5 @@
-<script lang="ts" setup name="InputNumberItem">
+<script lang="ts" setup>
+defineOptions({ name: 'InputNumberItem' })
 import { PropType } from 'vue'
 import { HandlerSettingEnum } from '@vben/constants'
 import { useAppConfig } from '@vben/hooks'

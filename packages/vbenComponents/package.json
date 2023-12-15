@@ -1,6 +1,6 @@
 {
   "name": "@vben/vbencomponents",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "./index.ts",
   "scripts": {
@@ -18,7 +18,7 @@
     "@vben/constants": "workspace:*",
     "sass": "^1.55.0",
     "vue": "^3.2.47",
-    "vxe-table-demonic": "^4.5.0-beta.3",
+    "vxe-table-demonic": "^4.5.11",
     "xe-utils": "^3.5.7"
   },
   "devDependencies": {

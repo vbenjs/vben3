@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenText">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenText' })
 import { maps } from '../../index'
 const Text = maps.get('Text')
 </script>

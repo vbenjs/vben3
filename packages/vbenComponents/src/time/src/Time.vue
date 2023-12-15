@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenTime">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenTime' })
 import { maps } from '../../index'
 const Time = maps.get('Time')
 </script>

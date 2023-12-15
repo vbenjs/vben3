@@ -1,4 +1,5 @@
-<script lang="ts" setup name="VbenSelect">
+<script lang="ts" setup>
+defineOptions({ name: 'VbenSelect' })
 import { maps } from '../../index'
 import { fetchProps, fetch } from '../../fetch'
 import { watch, ref, watchEffect } from 'vue'

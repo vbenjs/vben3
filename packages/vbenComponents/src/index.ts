@@ -29,7 +29,7 @@ export const components = {
         warn(c.__name)
         return
       }
-      app.component(`Vben${c.name || c.__name}`, c)
+      app.component(`${c.name || c.__name}`, c)
     })
   },
 }

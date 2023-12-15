@@ -1,9 +1,5 @@
-<script lang="ts">
-export default {
-  name: 'Table',
-}
-</script>
-<script lang="ts" setup name="VbenTable">
+<script lang="ts" setup >
+defineOptions({ name: 'VbenTable' })
 import 'xe-utils'
 import 'vxe-table-demonic/styles/index.scss'
 import type { VbenTableProps } from './type'

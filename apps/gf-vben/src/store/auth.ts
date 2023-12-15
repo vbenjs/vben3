@@ -177,7 +177,7 @@ export const useAuthStore = defineStore('app-auth-store', {
           // this function may only need to be executed once, and the actual project can be put at the right time by itself
           let routeList: RouteRecordItem[] = []
           try {
-            this.changePermissionCode()
+            // this.changePermissionCode()
             routeList = (await getMenuList()) as RouteRecordItem[]
           } catch (error) {
             console.error(error)

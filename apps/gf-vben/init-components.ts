@@ -116,6 +116,7 @@ import {
   Alert,
   Avatar,
   AutoComplete,
+  Result,
 } from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
 export async function registerComponents(app) {
@@ -203,7 +204,7 @@ export async function registerComponents(app) {
     Radio: NRadio,
     RadioButton: NRadioButton,
     RadioGroup: NRadioGroup,
-    Result: NResult,
+    Result,
 
     Space: NSpace,
     Spin: NSpin,

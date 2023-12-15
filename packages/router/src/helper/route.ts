@@ -85,7 +85,6 @@ export function transformObjToRoute<T = RouteRecordItem>(
   routeList.forEach((route) => {
     const _route: any = route
     const component = _route.component as string
-    console.log(component)
     if (component) {
       if (component.toUpperCase() === 'LAYOUT') {
         route.component = LayoutMap.get(component.toUpperCase())

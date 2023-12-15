@@ -128,21 +128,22 @@ export default defineComponent({
         unref(getMapValue) || {}
 
       // const img = () => (icon ? <img src={icon} /> : null)
-
+      const button = () =>
+        btnText && (
+          <VbenButton type="primary" onClick={handler}>
+            {() => btnText}
+          </VbenButton>
+        )
       return (
         <VbenResult
-          class={bem() + ' m-4'}
           status={status as any}
           title={props.title || title}
           description={props.subTitle || subTitle}
+          subtitle={props.subTitle || subTitle}
         >
           {{
-            footer: () =>
-              btnText && (
-                <VbenButton type="primary" onClick={handler}>
-                  {() => btnText}
-                </VbenButton>
-              ),
+            footer: button,
+            extra: button,
             icon: icon ? () => <img src={icon} /> : null,
           }}
         </VbenResult>

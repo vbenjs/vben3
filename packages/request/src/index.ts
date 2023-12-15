@@ -7,7 +7,6 @@ import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 
 import { VAxios } from './Axios'
 import { checkStatus } from './checkStatus'
-import { context } from '../bridge'
 import { useI18n } from '@vben/locale'
 import {
   isString,
@@ -105,7 +104,7 @@ const transform: AxiosTransform = {
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
     const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options
-
+    const { baseURL } = config
     if (apiUrl) {
       const _apuUrl = isString(apiUrl)
         ? apiUrl
@@ -234,7 +233,7 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
         authenticationScheme: '',
         timeout: 10 * 1000,
         // 基础接口地址
-        // baseURL: globSetting.apiUrl,
+        baseURL: '',
 
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 如果是form-data格式
@@ -254,7 +253,7 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
           // 消息提示类型
           errorMessageMode: 'message',
           // 接口地址
-          apiUrl: () => context.apiUrl,
+          apiUrl: '',
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求
@@ -268,7 +267,46 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
   )
 }
 
-export const request = createAxios()
+export let request = createAxios()
+
+export function initRequest(
+  opt: Partial<CreateAxiosOptions>,
+  ctx: Partial<ContextOptions>,
+) {
+  request = createAxios(opt)
+  context = { ...context, ...ctx }
+}
+import type { ErrorMessageMode } from '@vben/types'
+
+export interface ContextOptions {
+  errorFunction: AnyFunction<any>
+  msgFunction: AnyFunction<any>
+  errorModalFunction: AnyFunction<any>
+  noticeFunction: AnyFunction<any>
+  getTokenFunction: () => unknown
+  unauthorizedFunction: (msg?: string) => void
+  timeoutFunction: () => void
+  handleErrorFunction: (message?: string, mode?: ErrorMessageMode) => void
+  apiUrl?: string
+}
+
+export let context: ContextOptions = {
+  getTokenFunction: () => undefined,
+  unauthorizedFunction: () => {},
+  errorFunction: () => {},
+  msgFunction: () => {},
+  noticeFunction: () => {},
+  errorModalFunction: () => {},
+  handleErrorFunction: () => {},
+  timeoutFunction: () => {},
+  apiUrl: '',
+}
+export const setMsg = (func: AnyFunction<any>) => {
+  context.msgFunction = func
+}
+export const setNoice = (func: AnyFunction<any>) => {
+  context.noticeFunction = func
+}
 
 // other api url
 // export const otherHttp = createAxios({

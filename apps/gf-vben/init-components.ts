@@ -112,14 +112,18 @@ import {
   Form,
   FormItem,
   Divider,
+  Checkbox,
+  Alert,
+  Avatar,
+  AutoComplete,
 } from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
 export async function registerComponents(app) {
   initVbenComponent(app, {
     Affix,
-    Avatar: NAvatar,
-    AutoComplete: NAutoComplete,
-    Alert: NAlert,
+    Avatar,
+    AutoComplete,
+    Alert,
 
     Badge: NBadge,
     Button,
@@ -129,7 +133,7 @@ export async function registerComponents(app) {
 
     Card: NCard,
     Config: NConfigProvider,
-    Checkbox: NCheckbox,
+    Checkbox,
     CheckboxGroup: NCheckboxGroup,
     ColorPicker: NColorPicker,
     Cascader: NCascader,

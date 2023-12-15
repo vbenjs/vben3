@@ -183,7 +183,6 @@ export class VAxios {
     const transform = this.getTransform()
 
     const { requestOptions } = this.options
-
     const opt: RequestOptions = Object.assign({}, requestOptions, options)
 
     const { beforeRequestHook, requestCatchHook, transformRequestHook } =

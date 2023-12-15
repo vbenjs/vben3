@@ -46,6 +46,8 @@ export interface GlobConfig {
   apiUrl: string
   // Project abbreviation
   shortName: string
+  //Backend url
+  baseUrl: string
 }
 
 export interface GlobEnvConfig {
@@ -55,6 +57,8 @@ export interface GlobEnvConfig {
   VITE_GLOB_API_URL: string
   // Project abbreviation
   VITE_GLOB_APP_SHORT_NAME: string
+  //Backend url
+  VITE_GLOB_BASE_URL: string
 }
 
 export interface DefineAppConfigOptions {

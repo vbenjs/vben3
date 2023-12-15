@@ -12,9 +12,7 @@ export interface LoginParams {
 }
 
 export interface LoginResultModel {
-  userId: string | number
-  accessToken: string
-  role: RoleInfo
+  token: string
 }
 
 export interface UserInfoModel {
@@ -37,13 +35,14 @@ export function doLoginApi(
     },
     {
       errorMessageMode: mode,
+      apiUrl: '',
     },
   )
 }
 
 export function getUserInfoApi() {
   return request.get<UserInfoModel>(
-    { url: '/getUserInfo' },
+    { url: '/user/info' },
     { errorMessageMode: 'none' },
   )
 }

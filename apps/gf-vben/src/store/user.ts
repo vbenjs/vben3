@@ -69,9 +69,9 @@ export const useUserStore = defineStore('app-user-store', {
     ): Promise<UserInfo | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params
-        const { accessToken } = await doLoginApi(loginParams, mode)
+        const { token } = await doLoginApi(loginParams, mode)
         // save token
-        this.setAccessToken(accessToken)
+        this.setAccessToken(token)
         if (!this.getAccessToken) {
           return null
         }

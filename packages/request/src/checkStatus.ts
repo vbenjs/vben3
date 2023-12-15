@@ -1,6 +1,6 @@
 import type { ErrorMessageMode } from '@vben/types'
 import { useI18n } from '@vben/locale'
-import { context } from '../bridge'
+import { context } from './index'
 
 export function checkStatus(
   status: number,

@@ -168,6 +168,7 @@ export const useMultipleTab = defineStore({
         if (!curTab) {
           return
         }
+        curTab.meta = meta || curTab.meta
         curTab.params = params || curTab.params
         curTab.query = query || curTab.query
         curTab.fullPath = fullPath || curTab.fullPath

@@ -117,6 +117,13 @@ import {
   Avatar,
   AutoComplete,
   Result,
+  Layout,
+  LayoutFooter,
+  LayoutContent,
+  LayoutHeader,
+  LayoutSider,
+  Switch,
+  Select,
 } from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
 export async function registerComponents(app) {
@@ -181,11 +188,11 @@ export async function registerComponents(app) {
 
     ListItem: NListItem,
     List: NList,
-    Layout: NLayout,
-    LayoutHeader: NLayoutHeader,
-    LayoutFooter: NLayoutFooter,
-    LayoutSider: NLayoutSider,
-    LayoutContent: NLayoutContent,
+    Layout,
+    LayoutHeader,
+    LayoutFooter,
+    LayoutSider,
+    LayoutContent,
 
     Menu: NMenu,
     Modal: NModal,
@@ -209,7 +216,7 @@ export async function registerComponents(app) {
     Space: NSpace,
     Spin: NSpin,
     Select: NSelect,
-    Switch: NSwitch,
+    Switch,
     Slider: NSlider,
     Skeleton: NSkeleton,
     Scrollbar: NScrollbar,

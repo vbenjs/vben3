@@ -57,6 +57,7 @@ export async function createViteConfig(
       }),
     },
     server: {
+      hmr: true,
       https: VITE_USE_HTTPS,
       port: 3000,
       host: true,

@@ -75,7 +75,7 @@ export function createThemeColorListen() {
     TRIGGER_BG_COLOR_VAR,
     sidebarRef as MaybeElementRef,
   )
-
+  //TODO 颜色模式无效
   watchEffect(() => {
     headerBgColor.value = unref(header).bgColor
     headerTextColor.value = pickTextColorBasedOnBgColor(

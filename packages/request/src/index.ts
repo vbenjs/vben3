@@ -15,6 +15,7 @@ import {
   deepMerge,
   appendUrlParams,
 } from '@vben/utils'
+import { getGlobalConfig } from '@vben/utils/src/config'
 import { RequestEnum, ResultEnum, ContentTypeEnum } from './constants'
 import { joinTimestamp, formatRequestDate } from './helper'
 
@@ -224,6 +225,7 @@ const transform: AxiosTransform = {
 }
 
 export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
+  const { apiUrl } = getGlobalConfig(import.meta.env)
   return new VAxios(
     deepMerge(
       {
@@ -233,7 +235,7 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
         authenticationScheme: '',
         timeout: 10 * 1000,
         // 基础接口地址
-        baseURL: '',
+        baseURL: apiUrl,
 
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 如果是form-data格式

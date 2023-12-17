@@ -47,10 +47,6 @@ async function initPackages() {
     const { t } = useI18n()
     initRequest({
       apiUrl,
-      getTokenFunction: () => {
-        const userStore = useUserStoreWithout()
-        return userStore.getAccessToken
-      },
       errorFunction: null,
       noticeFunction: null,
       errorModalFunction: null,
@@ -72,6 +68,11 @@ async function initPackages() {
           message.error(msg)
         }
       },
+    }, {
+      getTokenFunction: () => {
+        const userStore = useUserStoreWithout()
+        return userStore.getAccessToken
+      }
     })
   }
 

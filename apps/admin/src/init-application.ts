@@ -45,34 +45,41 @@ async function initPackages() {
   const _initRequest = async () => {
     const { apiUrl } = getGlobalConfig(import.meta.env)
     const { t } = useI18n()
-    initRequest({
-      apiUrl,
-      getTokenFunction: () => {
-        const userStore = useUserStoreWithout()
-        return userStore.getAccessToken
+
+    initRequest(
+      {
+        requestOptions: {
+          apiUrl,
+        },
       },
-      errorFunction: null,
-      noticeFunction: null,
-      errorModalFunction: null,
-      timeoutFunction: () => {
-        const userStore = useUserStoreWithout()
-        userStore.setAccessToken(undefined)
-        userStore.logout(true)
+      {
+        getTokenFunction: () => {
+          const userStore = useUserStoreWithout()
+          return userStore.getAccessToken
+        },
+        errorFunction: undefined,
+        noticeFunction: undefined,
+        errorModalFunction: undefined,
+        timeoutFunction: () => {
+          const userStore = useUserStoreWithout()
+          userStore.setAccessToken(undefined)
+          userStore.logout(true)
+        },
+        unauthorizedFunction: (msg?: string) => {
+          const userStore = useUserStoreWithout()
+          userStore.setAccessToken(undefined)
+          userStore.logout(true)
+          return msg || t('sys.api.errMsg401')
+        },
+        handleErrorFunction: (msg, mode) => {
+          if (mode === 'modal') {
+            Modal.error({ title: t('sys.api.errorTip'), content: msg })
+          } else if (mode === 'message') {
+            message.error(msg)
+          }
+        },
       },
-      unauthorizedFunction: (msg?: string) => {
-        const userStore = useUserStoreWithout()
-        userStore.setAccessToken(undefined)
-        userStore.logout(true)
-        return msg || t('sys.api.errMsg401')
-      },
-      handleErrorFunction: (msg, mode) => {
-        if (mode === 'modal') {
-          Modal.error({ title: t('sys.api.errorTip'), content: msg })
-        } else if (mode === 'message') {
-          message.error(msg)
-        }
-      },
-    })
+    )
   }
 
   const _initComp = async () => {

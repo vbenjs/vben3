@@ -79,7 +79,7 @@ async function handleLogin() {
     <vben-form-item class="enter-x" inline :show-label="false">
       <vben-input
         size="large"
-        v-model:value="formData.account"
+        v-model="formData.account"
         :placeholder="t('sys.login.userName')"
         class="fix-auto-fill"
       />
@@ -89,7 +89,7 @@ async function handleLogin() {
         type="password"
         show-password-on="click"
         size="large"
-        v-model:value="formData.password"
+        v-model="formData.password"
         :placeholder="t('sys.login.password')"
       />
     </vben-form-item>

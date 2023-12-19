@@ -21,29 +21,49 @@ const { isSidebarDark } = useAppTheme()
 </script>
 <template>
   <VbenLayout has-sider class="h-full">
-    <VbenLayoutSider
-      v-if="getShowMenu"
-      :show-trigger="getShowCenterTrigger"
-      bordered
-      :collapsed-width="sidebar.collapsedWidth"
-      :width="sidebar.width"
-      collapse-mode="width"
-      :collapsed="getCollapsed"
-      @update:collapsed="toggleCollapse"
-      :inverted="!!isSidebarDark"
+    <VbenConfig
+      :themeOverrides="{
+        common: {
+          primaryColor: '#0960bd',
+          invertedColor: '#0960bd',
+        },
+      }"
     >
-      <slot name="sider">
-        <div class="static h-full">
-          <SiderDragBar
-            :mix="sidebar.mixSidebarWidth"
-            :width="sidebar.width"
-            :fn="setSiderWidth"
-          /><LayoutMenu />
-        </div>
-      </slot>
-    </VbenLayoutSider>
+      <VbenLayoutSider
+        v-if="getShowMenu"
+        :show-trigger="getShowCenterTrigger"
+        bordered
+        :collapsed-width="sidebar.collapsedWidth"
+        :width="sidebar.width"
+        collapse-mode="width"
+        :collapsed="getCollapsed"
+        @update:collapsed="toggleCollapse"
+        :inverted="true"
+      >
+        <slot name="sider">
+          <div class="static h-full">
+            <SiderDragBar
+              :mix="sidebar.mixSidebarWidth"
+              :width="sidebar.width"
+              :fn="setSiderWidth"
+            /><LayoutMenu />
+          </div>
+        </slot>
+      </VbenLayoutSider>
+    </VbenConfig>
     <VbenLayout>
-      <slot name="header"><LayoutHeader ref="headerRef" /></slot>
+      <slot name="header">
+        <VbenConfig
+          :themeOverrides="{
+            common: {
+              primaryColor: '#0960bd',
+              invertedColor: '#0960bd',
+            },
+          }"
+        >
+          <LayoutHeader ref="headerRef" />
+        </VbenConfig>
+      </slot>
       <VbenLayout :content-style="contentStyle">
         <VbenLayoutContent :content-style="mainStyle" ref="contentRef">
           <LayoutMain>

@@ -18,7 +18,7 @@ const system: RouteRecordItem = {
       name: 'Menus',
       component: () => import('@/pages/demo/system/menu/index.vue'),
       meta: {
-        icon: 'majesticons:menu',
+        icon: 'solar:hamburger-menu-bold-duotone',
         title: t('routes.demo.system.menu'),
       },
     },
@@ -27,7 +27,7 @@ const system: RouteRecordItem = {
       name: 'Account',
       component: () => import('@/pages/demo/system/account/index.vue'),
       meta: {
-        icon: 'mdi:account',
+        icon: 'solar:user-bold-duotone',
         title: t('routes.demo.system.account'),
       },
     },
@@ -36,19 +36,28 @@ const system: RouteRecordItem = {
       name: 'Role',
       component: () => import('@/pages/demo/system/role/index.vue'),
       meta: {
-        icon: 'carbon:user-role',
-        title: t('routes.demo.system.role')
-      }
+        icon: 'solar:user-check-rounded-bold-duotone',
+        title: t('routes.demo.system.role'),
+      },
     },
     {
       path: 'dept',
       name: 'Dept',
       component: () => import('@/pages/demo/system/dept/index.vue'),
       meta: {
-        icon: 'mingcute:department-line',
-        title: t('routes.demo.system.dept')
-      }
-    }
+        icon: 'solar:suspension-bold-duotone',
+        title: t('routes.demo.system.dept'),
+      },
+    },
+    {
+      path: 'password',
+      name: 'Password',
+      component: () => import('@/pages/demo/system/password/index.vue'),
+      meta: {
+        icon: 'solar:lock-password-bold-duotone',
+        title: t('routes.demo.system.password'),
+      },
+    },
   ],
 }
 

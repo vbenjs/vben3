@@ -64,6 +64,7 @@ export default {
       ellipsis: '文本省略',
       watermark: '水印',
       fullScreen: '全屏',
+      copy: '剪切板',
     },
     page: {
       page: '页面',

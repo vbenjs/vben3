@@ -52,6 +52,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.watermark',
       },
     },
+    {
+      path: 'full-screen',
+      name: 'FullScreenDemo',
+      component: () => import('@/pages/demo/feat/full-screen.vue'),
+      meta: {
+        title: 'routes.demo.feat.fullScreen',
+      },
+    },
   ],
 }
 

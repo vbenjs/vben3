@@ -16,6 +16,7 @@ export default {
     animate: '动画',
     form: '表单',
     qrcode: '二维码组件',
+    countTo: '数字动画',
     table: {
       table: '表格',
       basic: '基础表格',

@@ -16,6 +16,7 @@ export default {
     animate: 'Animate',
     form: 'Form',
     qrcode: 'QR code',
+    countTo: 'Count To',
     table: {
       table: 'table',
       basic: 'basic',

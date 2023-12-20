@@ -127,6 +127,14 @@ const dashboard: RouteRecordItem = {
         title: 'routes.demo.qrcode',
       },
     },
+    {
+      path: 'countTo',
+      name: 'CountTo',
+      component: () => import('@/pages/demo/CountTo.vue'),
+      meta: {
+        title: 'routes.demo.countTo',
+      },
+    },
   ],
 }
 

@@ -61,6 +61,7 @@ export default {
       print: 'Print',
       ellipsis: 'EllipsisText',
       watermark: 'Watermark',
+      copy: 'Clipboard',
     },
     page: {
       page: 'Page',

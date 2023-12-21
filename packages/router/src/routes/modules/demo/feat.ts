@@ -68,6 +68,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.copy',
       },
     },
+    {
+      path: 'ws',
+      name: 'WebSocket',
+      component: () => import('@/pages/demo/feat/web-socket.vue'),
+      meta: {
+        title: 'routes.demo.feat.ws',
+      },
+    },
   ],
 }
 

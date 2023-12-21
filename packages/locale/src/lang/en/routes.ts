@@ -64,6 +64,7 @@ export default {
       watermark: 'Watermark',
       fullScreen: 'Full Screen',
       copy: 'Clipboard',
+      ws: 'Websocket test',
     },
     page: {
       page: 'Page',

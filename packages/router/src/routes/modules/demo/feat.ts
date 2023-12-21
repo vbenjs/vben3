@@ -76,6 +76,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.ws',
       },
     },
+    {
+      path: 'request',
+      name: 'RequestDemo',
+      component: () => import('@/pages/demo/feat/request-demo.vue'),
+      meta: {
+        title: 'routes.demo.feat.requestDemo',
+      },
+    },
   ],
 }
 

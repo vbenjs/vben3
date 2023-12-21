@@ -63,6 +63,7 @@ export default {
       ellipsis: 'EllipsisText',
       watermark: 'Watermark',
       fullScreen: 'Full Screen',
+      copy: 'Clipboard',
     },
     page: {
       page: 'Page',

@@ -60,6 +60,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.fullScreen',
       },
     },
+    {
+      path: 'copy',
+      name: 'CopyDemo',
+      component: () => import('@/pages/demo/feat/copy.vue'),
+      meta: {
+        title: 'routes.demo.feat.copy',
+      },
+    },
   ],
 }
 

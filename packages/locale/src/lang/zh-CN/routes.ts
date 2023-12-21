@@ -65,6 +65,7 @@ export default {
       watermark: '水印',
       fullScreen: '全屏',
       copy: '剪切板',
+      ws: 'websocket测试',
     },
     page: {
       page: '页面',

@@ -101,8 +101,16 @@ import naive, {
   NCollapseItem,
   NSpin,
   NWatermark,
+  NDialog,
+  NDialogProvider,
+  useDialog,
 } from 'naive-ui'
-import { initVbenComponent, setNotice, setMessage } from '@vben/vbencomponents'
+import {
+  initVbenComponent,
+  setNotice,
+  setMessage,
+  setDialog,
+} from '@vben/vbencomponents'
 
 export async function registerComponents(app) {
   initVbenComponent(app, {
@@ -178,6 +186,8 @@ export async function registerComponents(app) {
     Mention: NMention,
 
     NotificationProvider: NNotificationProvider,
+    Dialog: NDialog,
+    DialogProvider: NDialogProvider,
 
     Popover: NPopover,
     Popconfirm: NPopconfirm,
@@ -223,6 +233,7 @@ export async function registerComponents(app) {
   })
   setMessage(useMessage)
   setNotice(useNotification)
+  setDialog(useDialog)
   // @ts-ignore
   // app.use(naive)
 }

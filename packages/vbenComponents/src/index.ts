@@ -45,7 +45,7 @@ export function error(message: string) {
   throw new Error(`[${projectName} error]:${message}`)
 }
 
-//Notification 相关
+//Dialog 相关
 let registerDialog = () => {}
 export let dialog
 export const setDialog = (func = () => {}) => {

@@ -34,7 +34,6 @@ import { useLockStore } from '@/store/lock'
 import { useLockScreen } from '@/hooks/web/useLockScreen'
 import { siteSetting } from '@/config'
 import { context } from '@vben/request/src'
-import { MessageApiInjection } from 'naive-ui/es/message/src/MessageProvider'
 
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters

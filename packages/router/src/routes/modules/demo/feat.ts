@@ -76,6 +76,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.ws',
       },
     },
+    {
+      path: 'msg',
+      name: 'MsgDemo',
+      component: () => import('@/pages/demo/feat/msg.vue'),
+      meta: {
+        title: 'routes.demo.feat.msg',
+      },
+    },
   ],
 }
 

@@ -46,6 +46,21 @@ export function error(message: string) {
 }
 
 //Notification 相关
+let registerDialog = () => {}
+export let dialog
+export const setDialog = (func = () => {}) => {
+  registerDialog = func
+  console.log('useDialog已注册')
+}
+export const useDialog = () => {
+  dialog = registerDialog()
+  if (!dialog) {
+    console.log('注册失败')
+  }
+  return dialog
+}
+
+//Notification 相关
 let registerNotice = () => {}
 export let notice
 export const setNotice = (func = () => {}) => {

@@ -77,11 +77,13 @@ const themeOverrides = computed(() => {
     v-bind="themeOverrides"
   >
     <VbenNotificationProvider>
-      <VbenMessageProvider>
-        <AppProvider>
-          <router-view />
-        </AppProvider>
-      </VbenMessageProvider>
+      <VbenDialogProvider>
+        <VbenMessageProvider>
+          <AppProvider>
+            <router-view />
+          </AppProvider>
+        </VbenMessageProvider>
+      </VbenDialogProvider>
     </VbenNotificationProvider>
   </VbenConfig>
 </template>

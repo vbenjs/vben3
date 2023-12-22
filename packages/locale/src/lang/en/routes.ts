@@ -65,6 +65,7 @@ export default {
       fullScreen: 'Full Screen',
       copy: 'Clipboard',
       ws: 'Websocket test',
+      msg: 'Message prompt',
     },
     page: {
       page: 'Page',

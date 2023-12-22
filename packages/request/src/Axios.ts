@@ -4,6 +4,7 @@ import type {
   AxiosInstance,
   AxiosResponse,
   AxiosError,
+  InternalAxiosRequestConfig,
 } from 'axios'
 import type { RequestOptions, RequestResult } from '@vben/types'
 import axios from 'axios'
@@ -84,7 +85,7 @@ export class VAxios {
 
     // Request interceptor configuration processing
     this.axiosInstance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config: InternalAxiosRequestConfig) => {
         // If cancel repeat request is turned on, then cancel repeat request is prohibited
         // @ts-ignore
         const { ignoreCancelToken } = config.requestOptions
@@ -122,10 +123,9 @@ export class VAxios {
     // Response result interceptor error capture
     responseInterceptorsCatch &&
       isFunction(responseInterceptorsCatch) &&
-      this.axiosInstance.interceptors.response.use(
-        undefined,
-        responseInterceptorsCatch,
-      )
+      this.axiosInstance.interceptors.response.use(undefined, (error) => {
+        return responseInterceptorsCatch(this.axiosInstance, error)
+      })
   }
 
   // support form-data

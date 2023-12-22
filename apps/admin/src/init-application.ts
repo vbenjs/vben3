@@ -51,7 +51,7 @@ async function initPackages() {
       {
         requestOptions: {
           apiUrl,
-          errorMessageMode: 'modal',
+          //errorMessageMode: 'modal',
         },
       },
       {

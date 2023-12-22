@@ -1,5 +1,11 @@
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined
 
+export interface RetryRequest {
+  isOpenRetry: boolean
+  count: number
+  waitTime: number
+}
+
 export interface RequestOptions {
   // Splicing request parameters to url
   joinParamsToUrl?: boolean
@@ -19,6 +25,8 @@ export interface RequestOptions {
   ignoreCancelToken?: boolean
   // Whether to send token in header
   withToken?: boolean
+  // 请求重试机制
+  retryRequest?: RetryRequest
 }
 
 export interface RequestResult<T = any> {

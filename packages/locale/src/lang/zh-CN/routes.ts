@@ -66,6 +66,7 @@ export default {
       fullScreen: '全屏',
       copy: '剪切板',
       ws: 'websocket测试',
+      requestDemo: '测试请求重试',
       msg: '消息提示',
       requestDemo: '测试请求重试',
     },

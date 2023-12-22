@@ -68,7 +68,6 @@ export default {
       ws: 'websocket测试',
       requestDemo: '测试请求重试',
       msg: '消息提示',
-      requestDemo: '测试请求重试',
     },
     page: {
       page: '页面',

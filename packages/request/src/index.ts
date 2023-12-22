@@ -1,7 +1,7 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
-import type { AxiosResponse } from 'axios'
+import type { AxiosInstance, AxiosResponse } from 'axios'
 import type { RequestOptions, RequestResult } from '@vben/types'
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform'
 
@@ -17,6 +17,8 @@ import {
 } from '@vben/utils'
 import { RequestEnum, ResultEnum, ContentTypeEnum } from './constants'
 import { joinTimestamp, formatRequestDate } from './helper'
+import type { ErrorMessageMode } from '@vben/types'
+import { AxiosRetry } from './axiosRetry'
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -187,7 +189,7 @@ const transform: AxiosTransform = {
   /**
    * @description: 响应错误处理
    */
-  responseInterceptorsCatch: (error: any) => {
+  responseInterceptorsCatch: (axiosInstance: AxiosInstance, error: any) => {
     const { t } = useI18n()
     const { response, code, message, config } = error || {}
     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none'
@@ -219,6 +221,14 @@ const transform: AxiosTransform = {
     }
 
     checkStatus(error?.response?.status, msg, errorMessageMode)
+
+    // 添加自动重试机制 保险起见 只针对GET请求
+    const retryRequest = new AxiosRetry()
+    const { isOpenRetry } = config.requestOptions.retryRequest
+    config.method?.toUpperCase() === RequestEnum.GET &&
+      isOpenRetry &&
+      retryRequest.retry(axiosInstance, error)
+
     return Promise.reject(error)
   },
 }
@@ -260,6 +270,11 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
           ignoreCancelToken: true,
           // 是否携带token
           withToken: true,
+          retryRequest: {
+            isOpenRetry: true,
+            count: 5,
+            waitTime: 100,
+          },
         },
       },
       opt || {},
@@ -276,13 +291,13 @@ export function initRequest(
   request = createAxios(opt)
   context = { ...context, ...ctx }
 }
-import type { ErrorMessageMode } from '@vben/types'
 
 export interface ContextOptions {
   errorFunction: AnyFunction<any>
   msgFunction: AnyFunction<any>
   errorModalFunction: AnyFunction<any>
   noticeFunction: AnyFunction<any>
+  modalFunction: AnyFunction<any>
   getTokenFunction: () => unknown
   unauthorizedFunction: (msg?: string) => void
   timeoutFunction: () => void
@@ -295,6 +310,7 @@ export let context: ContextOptions = {
   unauthorizedFunction: () => {},
   errorFunction: () => {},
   msgFunction: () => {},
+  modalFunction: () => {},
   noticeFunction: () => {},
   errorModalFunction: () => {},
   handleErrorFunction: () => {},
@@ -306,6 +322,9 @@ export const setMsg = (func: AnyFunction<any>) => {
 }
 export const setNoice = (func: AnyFunction<any>) => {
   context.noticeFunction = func
+}
+export const setDialog = (func: AnyFunction<any>) => {
+  context.modalFunction = func
 }
 
 // other api url

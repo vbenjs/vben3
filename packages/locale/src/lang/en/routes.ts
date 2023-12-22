@@ -65,6 +65,7 @@ export default {
       fullScreen: 'Full Screen',
       copy: 'Clipboard',
       ws: 'Websocket test',
+      requestDemo: 'Retry request demo',
       msg: 'Message prompt',
       requestDemo: 'Retry request demo',
     },

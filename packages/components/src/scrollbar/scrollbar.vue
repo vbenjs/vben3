@@ -13,7 +13,6 @@ import {
   provide,
   computed,
   unref,
-  defineExpose,
   watch,
 } from 'vue'
 import Bar from './bar'

@@ -24,6 +24,12 @@ export default {
       fixedColumn: '固定列',
       treeTable: '树形表格',
     },
+    scroll: {
+      scroll: '滚动组件',
+      basic: '基础滚动',
+      action: '滚动函数',
+      virtual: '虚拟滚动',
+    },
     modal: '模态框',
     permission: {
       permission: '权限管理',

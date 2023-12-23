@@ -62,6 +62,40 @@ const dashboard: RouteRecordItem = {
         },
       ],
     },
+    {
+      path: 'scroll',
+      name: 'ScrollDemo',
+      redirect: '/demo/scroll/basic',
+      meta: {
+        title: 'routes.demo.scroll.scroll',
+      },
+      children: [
+        {
+          path: 'basic',
+          name: 'basicScrollDemo',
+          component: () => import('@/pages/demo/scroll/BasicScroll.vue'),
+          meta: {
+            title: 'routes.demo.scroll.basic',
+          },
+        },
+        {
+          path: 'action',
+          name: 'actionScrollDemo',
+          component: () => import('@/pages/demo/scroll/ActionScroll.vue'),
+          meta: {
+            title: 'routes.demo.scroll.action',
+          },
+        },
+        {
+          path: 'virtual',
+          name: 'virtualScrollDemo',
+          component: () => import('@/pages/demo/scroll/VirtualScroll.vue'),
+          meta: {
+            title: 'routes.demo.scroll.virtual',
+          },
+        },
+      ],
+    },
 
     {
       path: 'form',

@@ -135,6 +135,14 @@ const dashboard: RouteRecordItem = {
         title: 'routes.demo.countTo',
       },
     },
+    {
+      path: 'time',
+      name: 'Time',
+      component: () => import('@/pages/demo/Time.vue'),
+      meta: {
+        title: 'routes.demo.time',
+      },
+    },
   ],
 }
 

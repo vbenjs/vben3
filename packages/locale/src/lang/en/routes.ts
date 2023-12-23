@@ -67,6 +67,7 @@ export default {
       copy: 'Clipboard',
       ws: 'Websocket test',
       msg: 'Message prompt',
+      requestDemo: 'Retry request demo',
     },
     page: {
       page: 'Page',

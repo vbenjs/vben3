@@ -4,6 +4,7 @@ import type {
   AxiosInstance,
   AxiosResponse,
   AxiosError,
+  InternalAxiosRequestConfig,
 } from 'axios'
 import type { RequestOptions, RequestResult } from '@vben/types'
 import axios from 'axios'
@@ -11,6 +12,7 @@ import qs from 'qs'
 import { isFunction, cloneDeep } from '@vben/utils'
 import { AxiosCanceler } from './axiosCancel'
 import { ContentTypeEnum, RequestEnum } from './constants'
+import axiosRetry from 'axios-retry'
 export * from './axiosTransform'
 
 /**
@@ -23,6 +25,7 @@ export class VAxios {
   constructor(options: CreateAxiosOptions) {
     this.options = options
     this.axiosInstance = axios.create(options)
+    axiosRetry(this.axiosInstance)
     this.setupInterceptors()
   }
 
@@ -31,6 +34,7 @@ export class VAxios {
    */
   private createAxios(config: CreateAxiosOptions): void {
     this.axiosInstance = axios.create(config)
+    axiosRetry(this.axiosInstance)
   }
 
   private getTransform() {
@@ -84,7 +88,7 @@ export class VAxios {
 
     // Request interceptor configuration processing
     this.axiosInstance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config: InternalAxiosRequestConfig) => {
         // If cancel repeat request is turned on, then cancel repeat request is prohibited
         // @ts-ignore
         const { ignoreCancelToken } = config.requestOptions

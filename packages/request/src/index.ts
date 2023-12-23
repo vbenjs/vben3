@@ -283,6 +283,7 @@ export interface ContextOptions {
   msgFunction: AnyFunction<any>
   errorModalFunction: AnyFunction<any>
   noticeFunction: AnyFunction<any>
+  modalFunction: AnyFunction<any>
   getTokenFunction: () => unknown
   unauthorizedFunction: (msg?: string) => void
   timeoutFunction: () => void
@@ -296,6 +297,7 @@ export let context: ContextOptions = {
   errorFunction: () => {},
   msgFunction: () => {},
   noticeFunction: () => {},
+  modalFunction: () => {},
   errorModalFunction: () => {},
   handleErrorFunction: () => {},
   timeoutFunction: () => {},
@@ -306,6 +308,9 @@ export const setMsg = (func: AnyFunction<any>) => {
 }
 export const setNoice = (func: AnyFunction<any>) => {
   context.noticeFunction = func
+}
+export const setDialog = (func: AnyFunction<any>) => {
+  context.modalFunction = func
 }
 
 // other api url

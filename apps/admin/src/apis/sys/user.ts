@@ -45,6 +45,7 @@ enum Api {
   Logout = '/logout',
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
+  TestRetry = '/testRetry',
 }
 
 /**
@@ -81,4 +82,14 @@ export function getPermCode() {
 
 export function doLogout() {
   return request.get({ url: Api.Logout })
+}
+
+export function testRetry() {
+  return request.get({
+    url: Api.TestRetry,
+    'axios-retry': {
+      retries: 5,
+      retryDelay: () => 100,
+    },
+  })
 }

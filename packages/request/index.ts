@@ -5,4 +5,5 @@ export {
   initRequest,
   setMsg,
   setNoice,
+  setDialog,
 } from './src/index'

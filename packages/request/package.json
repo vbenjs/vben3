@@ -15,6 +15,7 @@
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "axios": "^1.5.1",
+    "axios-retry": "^4.0.0",
     "qs": "^6.11.2"
   },
   "devDependencies": {

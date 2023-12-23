@@ -124,4 +124,12 @@ export default [
       return resultSuccess(undefined, { message: 'Token has been destroyed' })
     },
   },
+  {
+    url: '/basic-api/testRetry',
+    statusCode: 505,
+    method: 'get',
+    response: () => {
+      return resultError('Error!')
+    },
+  },
 ] as MockMethod[]

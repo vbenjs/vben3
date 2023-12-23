@@ -11,6 +11,7 @@ import qs from 'qs'
 import { isFunction, cloneDeep } from '@vben/utils'
 import { AxiosCanceler } from './axiosCancel'
 import { ContentTypeEnum, RequestEnum } from './constants'
+import axiosRetry from 'axios-retry'
 export * from './axiosTransform'
 
 /**
@@ -23,6 +24,7 @@ export class VAxios {
   constructor(options: CreateAxiosOptions) {
     this.options = options
     this.axiosInstance = axios.create(options)
+    axiosRetry(this.axiosInstance)
     this.setupInterceptors()
   }
 
@@ -31,6 +33,7 @@ export class VAxios {
    */
   private createAxios(config: CreateAxiosOptions): void {
     this.axiosInstance = axios.create(config)
+    axiosRetry(this.axiosInstance)
   }
 
   private getTransform() {

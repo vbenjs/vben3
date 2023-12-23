@@ -1,8 +1,8 @@
 import {namespace} from '@/setting'
 import {defineComponent, toRefs, ref, unref} from 'vue'
 import {useConfigStoreWithOut} from '@/store/config'
-import {useMsg, useNotice} from '@vben/vbencomponents'
-import {setMsg, setNoice} from '@vben/request'
+import {useMsg, useNotice, useDialog} from '@vben/vbencomponents'
+import {setMsg, setNoice, setDialog} from '@vben/request'
 import { createAppProviderContext, createBreakpointListen } from '@vben/hooks'
 
 const props = {
@@ -24,8 +24,10 @@ export default defineComponent({
     //注册msg以及notice，方便全局使用
     const msg = useMsg()
     const notice = useNotice()
+    const dialog = useDialog()
     setMsg(msg)
     setNoice(notice)
+    setDialog(dialog)
     // Monitor screen breakpoint information changes
     createBreakpointListen(({screenMap, sizeEnum, width}) => {
       const lgWidth = screenMap.get(sizeEnum.LG)

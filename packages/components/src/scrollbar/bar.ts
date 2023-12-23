@@ -29,7 +29,7 @@ export default defineComponent({
     const bar = computed(() => {
       return BAR_MAP[props.vertical ? 'vertical' : 'horizontal']
     })
-    const barStore = ref({})
+    const barStore = ref<Recordable>({})
     const cursorDown = ref()
     const clickThumbHandler = (e: any) => {
       // prevent click event of right button

@@ -13,8 +13,11 @@ import {
   provide,
   computed,
   unref,
+  defineExpose,
+  watch,
 } from 'vue'
 import Bar from './bar'
+import { useScrollTo } from '@vben/hooks'
 
 const props = defineProps({
   native: {
@@ -41,6 +44,11 @@ const props = defineProps({
   tag: {
     type: String,
     default: 'div',
+  },
+  scrollHeight: {
+    // 用于监控内部scrollHeight的变化
+    type: Number,
+    default: 0,
   },
 })
 
@@ -80,6 +88,54 @@ const update = () => {
   sizeHeight.value = heightPercentage < 100 ? heightPercentage + '%' : ''
   sizeWidth.value = widthPercentage < 100 ? widthPercentage + '%' : ''
 }
+
+watch(
+  () => props.scrollHeight,
+  () => {
+    if (props.native) return
+    update()
+  },
+)
+
+/**
+ * Scroll to the specified position
+ */
+function scrollTo(to: number = 0, duration = 500) {
+  nextTick(() => {
+    if (!unref(wrap)) {
+      return
+    }
+    const { start } = useScrollTo({
+      el: unref(wrap),
+      to,
+      duration,
+    })
+    start()
+  })
+}
+
+/**
+ * Scroll to the bottom
+ */
+function scrollBottom() {
+  nextTick(() => {
+    if (!unref(wrap)) {
+      return
+    }
+    const scrollHeight = unref(wrap).scrollHeight as number
+    const { start } = useScrollTo({
+      el: unref(wrap),
+      to: scrollHeight,
+    })
+    start()
+  })
+}
+
+defineExpose({
+  wrap,
+  scrollTo,
+  scrollBottom,
+})
 
 onMounted(() => {
   if (props.native) return

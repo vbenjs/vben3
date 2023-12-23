@@ -4,6 +4,6 @@ export {
   createAxios,
   initRequest,
   setMsg,
-  setNoice,
+  setNotice,
   setDialog,
 } from './src/index'

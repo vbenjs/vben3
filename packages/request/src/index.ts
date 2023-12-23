@@ -306,7 +306,7 @@ export let context: ContextOptions = {
 export const setMsg = (func: AnyFunction<any>) => {
   context.msgFunction = func
 }
-export const setNoice = (func: AnyFunction<any>) => {
+export const setNotice = (func: AnyFunction<any>) => {
   context.noticeFunction = func
 }
 export const setDialog = (func: AnyFunction<any>) => {

@@ -17,6 +17,7 @@ export default {
     form: 'Form',
     qrcode: 'QR code',
     countTo: 'Count To',
+    time: 'Relative Time"',
     table: {
       table: 'table',
       basic: 'basic',

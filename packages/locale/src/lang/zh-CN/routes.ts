@@ -17,6 +17,7 @@ export default {
     form: '表单',
     qrcode: '二维码组件',
     countTo: '数字动画',
+    time: '相对时间',
     table: {
       table: '表格',
       basic: '基础表格',

@@ -128,7 +128,7 @@ function handleClose() {
   width: 100%;
   height: 100%;
   padding-top: 50px;
-  background-color: rgb(0 0 0 / 25%);
+  background-color: rgb(0 0 0 / 45%);
   justify-content: center;
 
   &--mobile {
@@ -172,7 +172,7 @@ function handleClose() {
     position: relative;
     width: 632px;
     margin: 0 auto auto;
-    background-color: #fff;
+    background-color: var(--component-background-color);
     border-radius: 16px;
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
     flex-direction: column;

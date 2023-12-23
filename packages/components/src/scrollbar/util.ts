@@ -1,5 +1,19 @@
 import type { BarMap } from './types'
 
+type Merge<O extends object, T extends object> = {
+  [K in keyof O | keyof T]: K extends keyof T
+    ? T[K]
+    : K extends keyof O
+    ? O[K]
+    : never
+}
+type MergeAll<T extends object[], R extends object = {}> = T extends [
+  infer F extends object,
+  ...infer Rest extends object[],
+]
+  ? MergeAll<Rest, Merge<R, F>>
+  : R
+
 export const BAR_MAP: BarMap = {
   vertical: {
     offset: 'offsetHeight',
@@ -35,13 +49,20 @@ export function renderThumbStyle({ move, size, bar }) {
   return style
 }
 
-function extend<T, K>(to: T, _from: K): T & K {
-  // @ts-ignore
+function extend<T extends object, K extends object>(to: T, _from: K): T & K {
   return Object.assign(to, _from)
 }
 
-export function toObject<T>(arr: Array<T>): Recordable<T> {
-  const res = {}
+/**
+ * [
+ *  { name: 'zhangsan', age: 18 },
+ *  { sex: 'male', age: 20 }
+ * ]
+ * =>
+ * { name: 'zhangsan', sex: 'male', age: 20 }
+ */
+export function toObject<T extends object[]>(arr: T): MergeAll<T> {
+  const res = {} as MergeAll<T>
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
       extend(res, arr[i])

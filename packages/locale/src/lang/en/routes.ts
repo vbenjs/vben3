@@ -23,6 +23,12 @@ export default {
       basic: 'basic',
       fixedColumn: 'fixedColumn',
     },
+    scroll: {
+      scroll: 'Scroll',
+      basic: 'Basic',
+      action: 'Scroll Function',
+      virtual: 'Virtual Scroll',
+    },
     modal: 'Modal',
     permission: {
       permission: 'Permission',

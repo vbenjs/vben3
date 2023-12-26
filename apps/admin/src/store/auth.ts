@@ -1,6 +1,6 @@
 import { defineStore } from '@vben/stores'
 import {
-  layoutRoutes,
+  getTemplateRoutes,
   PAGE_NOT_FOUND_ROUTE,
   filterRouterTree,
   transformObjToRoute,
@@ -139,8 +139,8 @@ export const useAuthStore = defineStore('app-auth-store', {
         }
         return
       }
-      // 组合框架路由 与 本地路由
-      const r = layoutRoutes.concat(asyncRoutes)
+      // 组合模版路由 与 本地路由 可选择是否合并demo路由
+      const r = getTemplateRoutes().concat(asyncRoutes)
       // 过滤路由树，扁平化false
       routes = filterRouterTree(r, routeFilter, false)
       switch (permissionMode) {

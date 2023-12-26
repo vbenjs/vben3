@@ -5,15 +5,24 @@ import {
   ROOT_ROUTE,
   LOCK_SCREEN_ROUTE,
 } from './basic'
-import { RouteRecordRaw } from "vue-router";
-import { loadRoutesFromModules } from "@vben/utils";
+import { RouteRecordRaw } from 'vue-router'
+import { loadRoutesFromModules } from '@vben/utils'
 
 export * from './basic'
 
 const routeModuleRecord = import.meta.globEager('./modules/**/*.ts') as any
-const routeModules: RouteRecordRaw[] = loadRoutesFromModules(routeModuleRecord);
+const routeModules: RouteRecordRaw[] = loadRoutesFromModules(routeModuleRecord)
 
 export const layoutRoutes = [...routeModules]
+
+export const getTemplateRoutes: RouteRecordRaw[] = (demo = true) => {
+  return layoutRoutes.filter((v) => {
+    if (demo) {
+      return true
+    }
+    return !v.path.includes('demo')
+  })
+}
 
 export const BasicRoutes = [
   LOGIN_ROUTE,

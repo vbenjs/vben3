@@ -10,7 +10,6 @@ pnpm-lock.yaml
 .local
 # local env files
 .env.local
-.env.development
 .env.*.local
 .eslintcache
 

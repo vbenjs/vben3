@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { Department } from "@vben/demo";
+import { Workbench } from '@vben/demo';
 </script>
 <template>
-  <Department />
+  <Workbench />
 </template>

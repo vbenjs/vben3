@@ -15,7 +15,7 @@ const dashboard: RouteRecordItem = {
     {
       path: 'analysis',
       name: 'Analysis',
-      component: () => import('@/pages/dashboard/analysis/index.vue'),
+      component: () => import('@/pages/demo/page/analysis/index.vue'),
       meta: {
         icon: 'icon-park-outline:analysis',
         title: 'routes.dashboard.analysis',
@@ -25,7 +25,7 @@ const dashboard: RouteRecordItem = {
     {
       path: 'workbench',
       name: 'Workbench',
-      component: () => import('@/pages/dashboard/workbench/index.vue'),
+      component: () => import('@/pages/demo/page/workbench/index.vue'),
       meta: {
         icon: 'icon-park-outline:workbench',
         title: 'routes.dashboard.workbench',

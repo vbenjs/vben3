@@ -30,5 +30,3 @@ export const operatorColumns: VbenColumns = [
     align: 'center',
   },
 ]
-
-

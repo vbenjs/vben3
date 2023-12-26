@@ -13,7 +13,6 @@ const { bem } = createNamespace('main')
 <style scoped>
 .main {
   display: block;
-  flex: 1;
   flex-basis: auto;
   overflow: auto;
   box-sizing: border-box;

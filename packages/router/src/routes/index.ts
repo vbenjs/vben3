@@ -17,7 +17,7 @@ const routeModules: RouteRecordRaw[] = loadRoutesFromModules(routeModuleRecord)
 
 export const layoutRoutes = [...routeModules]
 
-export const getTemplateRoutes: RouteRecordRaw[] = (demo = true) => {
+export function getTemplateRoutes(demo: boolean = true): RouteRecordRaw[] {
   return layoutRoutes.filter((v) => {
     if (demo) {
       return true

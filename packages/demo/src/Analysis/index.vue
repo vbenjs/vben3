@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+/*********************** NOTE *********************************
+ * 使用 vue-echarts 和 echarts 直接引入开发未进行二次封装，        *
+ * 若后期使用 usehooks 方式二次封装echarts相关组件，可重构这里的代码 *
+ *                  代码仅供参考👀 2023-12-26                  *
+ **************************************************************/
 import { ref } from 'vue'
 import { CountTo } from '@vben/components/index'
 import * as echarts from 'echarts/core'
@@ -23,8 +28,8 @@ import {
 } from 'echarts/components'
 import VChart from 'vue-echarts'
 
-import { operatorColumns } from './modules/schema'
-import { getOperatorData } from '@vben/demo/src/apis/table'
+import { operatorColumns } from './modules/schemas'
+import { getOperatorData } from '../apis/table'
 
 // provide(THEME_KEY, "dark")
 echarts.use([

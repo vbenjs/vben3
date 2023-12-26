@@ -1,5 +1,5 @@
 import { VbenFormSchema } from '@vben/vbencomponents/src/form'
-import { getRadioData } from '@vben/demo/src/apis/form'
+import { getRadioData } from '../../apis/form'
 export const menuAddSchema: VbenFormSchema[] = [
   {
     field: 'types',

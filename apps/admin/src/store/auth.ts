@@ -145,17 +145,9 @@ export const useAuthStore = defineStore('app-auth-store', {
       routes = filterRouterTree(r, routeFilter, false)
       switch (permissionMode) {
         case PermissionModeEnum.ROLE:
-          // routes = filterTree(r, routeFilter)
-          // routes = routes.filter(routeFilter)
-          // Convert multi-level routing to level 2 routing
-          // routes = flatMultiLevelRoutes(routes)
           break
         case PermissionModeEnum.ROUTE_MAPPING:
-          // routes = filterTree(r, routeFilter)
-          // routes = routes.filter(routeFilter)
           const menuList = transformRouteToMenu(routes, true)
-          // routes = filterTree(routes, routeRemoveIgnoreFilter)
-          // routes = routes.filter(routeRemoveIgnoreFilter)
           routes = filterRouterTree(routes, routeRemoveIgnoreFilter)
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0)
@@ -163,8 +155,6 @@ export const useAuthStore = defineStore('app-auth-store', {
 
           this.setFrontMenuList(menuList as Menu[])
 
-          // Convert multi-level routing to level 2 routing
-          // routes = flatMultiLevelRoutes(routes)
           break
 
         //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below

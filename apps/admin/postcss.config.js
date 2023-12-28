@@ -1,1 +1,1 @@
-module.exports = require('@config/css-preprocess/postcss')
+export * from '@config/css-preprocess/postcss.js'

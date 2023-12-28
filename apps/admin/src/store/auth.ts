@@ -1,6 +1,6 @@
 import { defineStore } from '@vben/stores'
 import {
-  layoutRoutes,
+  getTemplateRoutes,
   PAGE_NOT_FOUND_ROUTE,
   filterRouterTree,
   transformObjToRoute,
@@ -139,23 +139,15 @@ export const useAuthStore = defineStore('app-auth-store', {
         }
         return
       }
-      // 组合框架路由 与 本地路由
-      const r = layoutRoutes.concat(asyncRoutes)
+      // 组合模版路由 与 本地路由 可选择是否合并demo路由
+      const r = getTemplateRoutes().concat(asyncRoutes)
       // 过滤路由树，扁平化false
       routes = filterRouterTree(r, routeFilter, false)
       switch (permissionMode) {
         case PermissionModeEnum.ROLE:
-          // routes = filterTree(r, routeFilter)
-          // routes = routes.filter(routeFilter)
-          // Convert multi-level routing to level 2 routing
-          // routes = flatMultiLevelRoutes(routes)
           break
         case PermissionModeEnum.ROUTE_MAPPING:
-          // routes = filterTree(r, routeFilter)
-          // routes = routes.filter(routeFilter)
           const menuList = transformRouteToMenu(routes, true)
-          // routes = filterTree(routes, routeRemoveIgnoreFilter)
-          // routes = routes.filter(routeRemoveIgnoreFilter)
           routes = filterRouterTree(routes, routeRemoveIgnoreFilter)
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0)
@@ -163,8 +155,6 @@ export const useAuthStore = defineStore('app-auth-store', {
 
           this.setFrontMenuList(menuList as Menu[])
 
-          // Convert multi-level routing to level 2 routing
-          // routes = flatMultiLevelRoutes(routes)
           break
 
         //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below

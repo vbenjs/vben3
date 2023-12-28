@@ -2,7 +2,6 @@ import type { App, Component } from 'vue'
 const projectName = 'Vben3'
 export const components = {
   install: (app: App) => {
-    // const comp = import.meta.globEager('./**/*.vue')
     /* 上面写法vite官方已弃用，详情见 https://cn.vitejs.dev/guide/migration-from-v2.html#importmetaglob */
     const comp = import.meta.glob<any>('./**/*.vue', { eager: true })
     Object.keys(comp).forEach((k) => {

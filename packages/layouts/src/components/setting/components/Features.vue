@@ -14,6 +14,7 @@ import {
   topMenuAlignOptions,
   getMenuTriggerOptions,
   contentModeOptions,
+  sessionTimeoutModeOptions,
 } from '../constant'
 import { useI18n } from '@vben/locale'
 
@@ -22,7 +23,7 @@ const { t } = useI18n()
 const { useMenuSetting, useHeaderSetting, useRootSetting, useAppConfig } =
   context
 
-const { getContentMode, getLockTime } = useRootSetting()
+const { getContentMode, getLockTime, getSessionTimeoutMode } = useRootSetting()
 
 const {
   getIsHorizontal,
@@ -166,6 +167,12 @@ const eventHandler = (evt: HandlerSettingEnum, val: boolean) => {
       :options="contentModeOptions"
       :def="getContentMode"
       :event="HandlerSettingEnum.CONTENT_MODE"
+    />
+    <SelectItem
+      :title="t('layout.setting.sessionTimeoutMode')"
+      :options="sessionTimeoutModeOptions"
+      :def="getSessionTimeoutMode"
+      :event="HandlerSettingEnum.SESSIONTIMEOUT_MODE"
     />
     <InputNumberItem
       :title="t('layout.setting.autoScreenLock')"

@@ -75,6 +75,7 @@ export default {
       ws: 'websocket测试',
       msg: '消息提示',
       requestDemo: '测试请求重试',
+      sessionTimeout: '登录过期',
     },
     page: {
       page: '页面',

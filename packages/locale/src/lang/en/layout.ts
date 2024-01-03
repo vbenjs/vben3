@@ -31,6 +31,9 @@ export default {
     // content mode
     contentModeFull: 'Full',
     contentModeFixed: 'Fixed width',
+    // session timeout mode
+    sessionTimeoutModeRouterJump: 'Router jump',
+    sessionTimeoutModePageCoverage: 'Page coverage',
     // topMenu align
     topMenuAlignLeft: 'Left',
     topMenuAlignRight: 'Center',
@@ -85,6 +88,7 @@ export default {
     topMenuLayout: 'Top menu layout',
     menuCollapseButton: 'Menu collapse button',
     contentMode: 'Content area width',
+    sessionTimeoutMode: 'Session timeout mode',
     expandedMenuWidth: 'Expanded menu width',
 
     breadcrumb: 'Breadcrumbs',

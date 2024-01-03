@@ -34,6 +34,8 @@ import { useLockStore } from '@/store/lock'
 import { useLockScreen } from '@/hooks/web/useLockScreen'
 import { siteSetting } from '@/config'
 import { context } from '@vben/request/src'
+import { SessionTimeoutProcessingEnum } from '@vben/constants'
+import { useAppConfig as appConfigStore } from '@vben/stores'
 
 // To decouple the modules below `packages/*`, they no longer depend on each other
 // If the modules are heavily dependent on each other, you need to provide a decoupling method, and the caller will pass the parameters
@@ -69,8 +71,14 @@ async function initPackages() {
         },
         unauthorizedFunction: (msg?: string) => {
           const userStore = useUserStoreWithout()
+          const useAppConfigStore = appConfigStore()
+          const stp = useAppConfigStore.sessionTimeoutProcessing
           userStore.setAccessToken(undefined)
-          userStore.logout(true)
+          if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
+            userStore.setSessionTimeout(true)
+          } else {
+            userStore.logout(true)
+          }
           return msg || t('sys.api.errMsg401')
         },
         handleErrorFunction: (msg, mode) => {

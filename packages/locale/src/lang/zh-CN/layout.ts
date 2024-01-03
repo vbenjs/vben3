@@ -32,6 +32,9 @@ export default {
     // content mode
     contentModeFull: '流式',
     contentModeFixed: '定宽',
+    // session timeout mode
+    sessionTimeoutModeRouterJump: '路由跳转',
+    sessionTimeoutModePageCoverage: '页面覆盖',
     // topMenu align
     topMenuAlignLeft: '居左',
     topMenuAlignRight: '居中',
@@ -86,6 +89,7 @@ export default {
     topMenuLayout: '顶部菜单布局',
     menuCollapseButton: '菜单折叠按钮',
     contentMode: '内容区域宽度',
+    sessionTimeoutMode: '登录过期模式',
     expandedMenuWidth: '菜单展开宽度',
 
     breadcrumb: '面包屑',

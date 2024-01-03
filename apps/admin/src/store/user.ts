@@ -75,11 +75,7 @@ export const useUserStore = defineStore('app-user-store', {
         if (!this.getAccessToken) {
           return null
         }
-        const userInfo = await this.getUserInfoAction()
-        if (goHome) {
-          await router.replace(BASIC_HOME_PATH)
-        }
-        return userInfo
+        return this.afterLoginAction(goHome)
       } catch (error) {
         return Promise.reject(error)
       }

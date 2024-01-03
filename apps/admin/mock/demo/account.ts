@@ -1,5 +1,10 @@
 import { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultPageSuccess } from '@vben/utils/mock-util'
+import {
+  resultSuccess,
+  resultPageSuccess,
+  resultError,
+} from '@vben/utils/mock-util'
+import { ResultEnum } from '@vben/request/src/constants'
 
 const mockDeptTreeData = (() => {
   const result: any[] = []
@@ -133,12 +138,12 @@ const mockDeptTreeList = (() => {
       'state|1': [
         {
           name: '启用',
-          value: '1'
+          value: '1',
         },
         {
           name: '停用',
-          value: '0'
-        }
+          value: '0',
+        },
       ],
       createTime: new Date(),
       remark: 'remark',
@@ -151,12 +156,12 @@ const mockDeptTreeList = (() => {
       'state|1': [
         {
           name: '启用',
-          value: '1'
+          value: '1',
         },
         {
           name: '停用',
-          value: '0'
-        }
+          value: '0',
+        },
       ],
       createTime: '@datetime()',
       remark: '财务',
@@ -169,12 +174,12 @@ const mockDeptTreeList = (() => {
       'state|1': [
         {
           name: '启用',
-          value: '1'
+          value: '1',
         },
         {
           name: '停用',
-          value: '0'
-        }
+          value: '0',
+        },
       ],
       createTime: '@datetime()',
       remark: '资产',
@@ -214,6 +219,24 @@ export default [
     method: 'get',
     response: () => {
       return resultSuccess(mockDeptTreeList)
+    },
+  },
+  {
+    url: '/basic-api/user/sessionTimeout',
+    method: 'post',
+    statusCode: 401,
+    response: () => {
+      return resultError()
+    },
+  },
+  {
+    url: '/basic-api/user/tokenExpired',
+    method: 'post',
+    statusCode: 200,
+    response: () => {
+      return resultError('Token Expired!', {
+        code: ResultEnum.TIMEOUT as number,
+      })
     },
   },
 ] as MockMethod[]

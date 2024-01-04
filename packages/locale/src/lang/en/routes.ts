@@ -74,6 +74,7 @@ export default {
       ws: 'Websocket test',
       msg: 'Message prompt',
       requestDemo: 'Retry request demo',
+      sessionTimeout: 'Session Timeout',
     },
     page: {
       page: 'Page',

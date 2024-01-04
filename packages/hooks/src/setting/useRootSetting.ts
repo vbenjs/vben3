@@ -57,6 +57,11 @@ export function useRootSetting() {
       ? ContentLayoutEnum.FULL
       : ContentLayoutEnum.FIXED,
   )
+
+  const getSessionTimeoutMode = computed(
+    () => appStore.sessionTimeoutProcessing.value,
+  )
+
   // TODO 待实现
   // const getDarkMode = computed(() => configStore.getDarkMode)
 
@@ -92,5 +97,6 @@ export function useRootSetting() {
     // getDarkMode,
     // setDarkMode,
     getShowDarkModeToggle,
+    getSessionTimeoutMode,
   }
 }

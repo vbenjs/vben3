@@ -5,9 +5,8 @@ import {
 } from '@vben/stores'
 import { DefineAppConfigOptions } from '@vben/types'
 import { HandlerSettingEnum, NavBarModeEnum } from '@vben/constants'
-import { _merge } from '@vben/utils'
+import { _merge, useClipboard, _omit } from '@vben/utils'
 import { computed, reactive, unref } from 'vue'
-import { useClipboard, _omit } from '@vben/utils'
 
 export const initAppConfig = (options: DefineAppConfigOptions) => {
   initAppConfigStore(options)
@@ -240,6 +239,9 @@ function handlerResults(
 
     case HandlerSettingEnum.HEADER_SHOW:
       return { header: { show: value, visible: value } }
+
+    case HandlerSettingEnum.SESSIONTIMEOUT_MODE:
+      return { sessionTimeoutProcessing: value }
     default:
       return {}
   }

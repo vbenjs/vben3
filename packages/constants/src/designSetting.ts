@@ -57,6 +57,8 @@ export enum HandlerSettingEnum {
   OPEN_PROGRESS,
   OPEN_PAGE_LOADING,
   OPEN_ROUTE_TRANSITION,
+
+  SESSIONTIMEOUT_MODE,
 }
 
 export enum ThemeChangeEnum {

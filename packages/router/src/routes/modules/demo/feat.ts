@@ -92,6 +92,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.requestDemo',
       },
     },
+    {
+      path: 'session-timeout',
+      name: 'SessionTimeout',
+      component: () => import('@/pages/demo/feat/session-timeout.vue'),
+      meta: {
+        title: 'routes.demo.feat.sessionTimeout',
+      },
+    },
   ],
 }
 

@@ -5,11 +5,12 @@ import {
   TopMenuAlignEnum,
   TriggerEnum,
   RouterTransitionEnum,
-  MixSidebarTriggerEnum
+  MixSidebarTriggerEnum,
+  SessionTimeoutProcessingEnum,
 } from '@vben/constants'
-import { useI18n} from '@vben/locale'
+import { useI18n } from '@vben/locale'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 export const navigationBarTypeList = [
   {
@@ -33,7 +34,7 @@ export const navigationBarTypeList = [
     mode: MenuModeEnum.INLINE,
     type: NavBarModeEnum.MIX_SIDEBAR,
   },
-];
+]
 
 export const contentModeOptions = [
   {
@@ -44,7 +45,18 @@ export const contentModeOptions = [
     value: ContentLayoutEnum.FIXED,
     label: t('layout.setting.contentModeFixed'),
   },
-];
+]
+
+export const sessionTimeoutModeOptions = [
+  {
+    value: SessionTimeoutProcessingEnum.ROUTE_JUMP,
+    label: t('layout.setting.sessionTimeoutModeRouterJump'),
+  },
+  {
+    value: SessionTimeoutProcessingEnum.PAGE_COVERAGE,
+    label: t('layout.setting.sessionTimeoutModePageCoverage'),
+  },
+]
 
 export const topMenuAlignOptions = [
   {
@@ -59,7 +71,7 @@ export const topMenuAlignOptions = [
     value: TopMenuAlignEnum.END,
     label: t('layout.setting.topMenuAlignCenter'),
   },
-];
+]
 
 export const getMenuTriggerOptions = (hideTop: boolean) => {
   return [
@@ -78,13 +90,13 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
     ...(hideTop
       ? []
       : [
-        {
-          value: TriggerEnum.HEADER,
-          label: t('layout.setting.menuTriggerTop'),
-        },
-      ]),
-  ];
-};
+          {
+            value: TriggerEnum.HEADER,
+            label: t('layout.setting.menuTriggerTop'),
+          },
+        ]),
+  ]
+}
 
 export const routerTransitionOptions = [
   RouterTransitionEnum.ZOOM_FADE,
@@ -97,8 +109,8 @@ export const routerTransitionOptions = [
   return {
     label: item,
     value: item,
-  };
-});
+  }
+})
 
 export const mixSidebarTriggerOptions = [
   {
@@ -109,4 +121,4 @@ export const mixSidebarTriggerOptions = [
     value: MixSidebarTriggerEnum.CLICK,
     label: t('layout.setting.triggerClick'),
   },
-];
+]

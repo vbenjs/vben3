@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
+    "url": "git+https://github.com/vbenjs/vben3.git",
     "directory": "apps/ant-app"
   },
   "type": "module",

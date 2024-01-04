@@ -1,5 +1,5 @@
 // 按需导入组件
-import naive, {
+import {
   darkTheme,
   NTag,
   NCard,
@@ -46,8 +46,6 @@ import naive, {
   NNotificationProvider,
   NSwitch,
   NMenu,
-  // dateZhCN,
-  zhCN,
   // darkTheme,
   NBreadcrumb,
   NBreadcrumbItem,

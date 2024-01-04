@@ -12,7 +12,7 @@ const { title } = getGlobalConfig(import.meta.env)
 // github repo url
 export const GITHUB_URL = 'https://github.com/vbenjs/vben3'
 
-// vue-vben-admin-next-doc
+// vben3-doc
 export const DOC_URL = 'https://vbenjs.github.io/vben3-doc/'
 
 // site url

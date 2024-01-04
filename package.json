@@ -2,9 +2,9 @@
   "name": "vben-admin-monorepo",
   "version": "3.0.0-rc1",
   "private": true,
-  "homepage": "https://github.com/vbenjs/vue-vben-admin",
+  "homepage": "https://github.com/vbenjs/vben3",
   "bugs": {
-    "url": "https://github.com/vbenjs/vue-vben-admin/issues"
+    "url": "https://github.com/vbenjs/vben3/issues"
   },
   "repository": {
     "type": "git",

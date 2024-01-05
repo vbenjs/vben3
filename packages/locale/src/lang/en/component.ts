@@ -17,4 +17,8 @@ export default {
     hours: ' hours',
     days: ' days',
   },
+  icon: {
+    placeholder: 'Click the select icon',
+    search: 'Search icon',
+  },
 }

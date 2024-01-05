@@ -34,7 +34,6 @@ export function copyTextToClipboard(
   input: string,
   { target = document.body }: Options = {},
 ) {
-  console.log('dsfasdf', input)
   const element = document.createElement('textarea')
   const previouslyFocusedElement = document.activeElement
 

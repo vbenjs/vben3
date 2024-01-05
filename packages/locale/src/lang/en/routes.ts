@@ -75,6 +75,7 @@ export default {
       msg: 'Message prompt',
       requestDemo: 'Retry request demo',
       sessionTimeout: 'Session Timeout',
+      icon: 'Icon',
     },
     page: {
       page: 'Page',

@@ -17,4 +17,8 @@ export default {
     hours: '小时',
     days: '天',
   },
+  icon: {
+    placeholder: '点击选择图标',
+    search: '搜索图标',
+  },
 }

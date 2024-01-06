@@ -76,6 +76,7 @@ export default {
       msg: '消息提示',
       requestDemo: '测试请求重试',
       sessionTimeout: '登录过期',
+      icon: '图标',
     },
     page: {
       page: '页面',

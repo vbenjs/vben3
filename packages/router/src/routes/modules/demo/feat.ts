@@ -100,6 +100,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.sessionTimeout',
       },
     },
+    {
+      path: 'icon',
+      name: 'IconDemo',
+      component: () => import('@/pages/demo/feat/icon.vue'),
+      meta: {
+        title: 'routes.demo.feat.icon',
+      },
+    },
   ],
 }
 

@@ -76,6 +76,7 @@ export default {
       requestDemo: 'Retry request demo',
       sessionTimeout: 'Session Timeout',
       icon: 'Icon',
+      contextMenu: 'Context Menu',
     },
     page: {
       page: 'Page',

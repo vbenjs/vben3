@@ -77,6 +77,7 @@ export default {
       requestDemo: '测试请求重试',
       sessionTimeout: '登录过期',
       icon: '图标',
+      contextMenu: '右键菜单',
     },
     page: {
       page: '页面',

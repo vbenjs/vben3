@@ -18,6 +18,7 @@ export default {
     qrcode: 'QR code',
     countTo: 'Count To',
     time: 'Relative Time"',
+    cropperImage: 'Cropper Image',
     table: {
       table: 'table',
       basic: 'basic',

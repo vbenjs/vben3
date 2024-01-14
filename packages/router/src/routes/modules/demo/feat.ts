@@ -116,6 +116,14 @@ const feat: RouteRecordItem = {
         title: 'routes.demo.feat.contextMenu',
       },
     },
+    {
+      path: 'download',
+      name: 'downloadDemo',
+      component: () => import('@/pages/demo/feat/download.vue'),
+      meta: {
+        title: 'routes.demo.feat.download',
+      },
+    },
   ],
 }
 

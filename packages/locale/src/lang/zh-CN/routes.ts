@@ -78,6 +78,7 @@ export default {
       sessionTimeout: '登录过期',
       icon: '图标',
       contextMenu: '右键菜单',
+      download: '文件下载',
     },
     page: {
       page: '页面',

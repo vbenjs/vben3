@@ -78,6 +78,7 @@ export default {
       sessionTimeout: 'Session Timeout',
       icon: 'Icon',
       contextMenu: 'Context Menu',
+      download: 'Download',
     },
     page: {
       page: 'Page',

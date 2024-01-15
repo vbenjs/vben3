@@ -10,6 +10,8 @@ export { default as CountDownInput } from './src/countdown-input/index.vue'
 export { default as StrengthMeter } from './src/strength-meter/index.vue'
 export { default as ClickOutside } from './src/click-outside/index.vue'
 export { default as IconPicker } from './src/icon-picker/index.vue'
+export { default as CropperImage } from './src/cropper/index.vue'
+export { default as CropperAvatar } from './src/cropper/cropper-avatar.vue'
 
 export { default as CollapseTransition } from './src/transition/collapse-transition.vue'
 export { default as CustomTransition } from './src/transition/index'

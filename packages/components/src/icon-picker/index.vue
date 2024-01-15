@@ -2,10 +2,9 @@
 import { ref, watchEffect, watch } from 'vue'
 import Icon from '../icon/index.vue'
 import SvgIcon from '../svg-icon/index.vue'
-import { createNamespace } from '@vben/utils'
+import { createNamespace, useDebounceFn } from '@vben/utils'
 import iconsData from './icons.data'
 import { usePagination, copyTextToClipboard } from '@vben/hooks'
-import { useDebounceFn } from '@vben/utils'
 import { useI18n } from '@vben/locale'
 import svgIcons from 'virtual:svg-icons-names'
 

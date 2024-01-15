@@ -18,6 +18,7 @@ export default {
     qrcode: '二维码组件',
     countTo: '数字动画',
     time: '相对时间',
+    cropperImage: '图片裁剪',
     table: {
       table: '表格',
       basic: '基础表格',

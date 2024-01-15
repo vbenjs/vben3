@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, defineComponent, nextTick, unref } from 'vue'
+import { computed, defineComponent, nextTick, unref, useAttrs } from 'vue'
 import { NavBarModeEnum } from '@vben/constants'
 import { createThemeColorListen } from '@vben/hooks'
 
@@ -9,6 +9,7 @@ import TopMenuMixLayout from './top-menu-mixed.vue'
 import MixSidebar from './mix-sidebar.vue'
 import Mobile from './mobile-menu.vue'
 import { context } from '../bridge'
+import { useRoute } from 'vue-router'
 
 const { useMenuSetting, useLockScreen, useAppInject } = context
 // Create a lock screen monitor
@@ -33,6 +34,8 @@ const layout = computed<ReturnType<typeof defineComponent>>(() => {
   }
 })
 
+const frame = computed(() => useRoute().meta.frame)
+
 nextTick(() => {
   createThemeColorListen()
 })
@@ -40,7 +43,8 @@ nextTick(() => {
 <template>
   <component :is="layout" v-bind="lockEvents">
     <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
-      <slot :name="item" v-bind="data || {}"></slot>
+      <slot :name="item" v-bind="data || {}" v-if="!frame"></slot>
+      <iframe v-else v-bind="frame"></iframe>
     </template>
   </component>
 </template>

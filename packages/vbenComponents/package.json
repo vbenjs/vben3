@@ -12,17 +12,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@iconify/iconify": "^3.0.0",
+    "@iconify/iconify": "^3.1.1",
+    "@vben/constants": "workspace:*",
     "@vben/hooks": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vben/constants": "workspace:*",
-    "sass": "^1.55.0",
-    "vue": "^3.2.47",
-    "vxe-table-demonic": "^4.5.11",
-    "xe-utils": "^3.5.7"
+    "sass": "^1.69.7",
+    "vue": "^3.4.14",
+    "vxe-table-demonic": "^4.5.17",
+    "xe-utils": "^3.5.17"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.15",
+    "@iconify/json": "^2.2.169",
     "@purge-icons/generated": "^0.9.0"
   }
 }

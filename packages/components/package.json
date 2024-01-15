@@ -13,19 +13,19 @@
   "dependencies": {
     "@iconify/iconify": "^3.1.1",
     "@vben/constants": "workspace:*",
+    "@vben/hooks": "workspace:*",
     "@vben/locale": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vben/hooks": "workspace:*",
     "@zxcvbn-ts/core": "^3.0.4",
+    "cropperjs": "^1.6.1",
     "qrcode": "^1.5.3",
     "vue": "3.3.6",
-    "vue-router": "^4.2.4",
-    "cropperjs": "^1.6.1"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.115",
+    "@iconify/json": "^2.2.169",
     "@purge-icons/generated": "^0.9.0",
-    "@types/qrcode": "^1.5.2",
+    "@types/qrcode": "^1.5.5",
     "@vben/types": "workspace:*"
   }
 }

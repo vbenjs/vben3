@@ -11,15 +11,15 @@
     "access": "public"
   },
   "dependencies": {
-    "@vben/constants": "workspace:*",
     "@vben/components": "workspace:*",
+    "@vben/constants": "workspace:*",
     "@vben/locale": "workspace:*",
-    "@vben/utils": "workspace:*",
     "@vben/stores": "workspace:*",
+    "@vben/utils": "workspace:*",
     "nprogress": "^0.2.0",
-    "vue-router": "^4.2.5",
     "path-to-regexp": "^6.2.1",
-    "vue": "^3.3.6"
+    "vue": "^3.4.14",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

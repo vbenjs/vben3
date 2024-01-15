@@ -12,20 +12,20 @@
     "access": "public"
   },
   "dependencies": {
+    "@ant-design/colors": "^7.0.2",
+    "@formkit/auto-animate": "^0.8.1",
     "@vue/runtime-core": "3.3.6",
-    "@vueuse/core": "^10.5.0",
-    "@vueuse/shared": "^10.5.0",
-    "@formkit/auto-animate": "^0.8.0",
+    "@vueuse/core": "^10.7.2",
+    "@vueuse/shared": "^10.7.2",
     "dayjs": "^1.11.10",
     "lodash-es": "^4.17.21",
     "pinia": "2.1.7",
+    "sortablejs": "^1.15.2",
     "vue": "3.3.6",
-    "vue-router": "^4.2.5",
-    "sortablejs": "^1.15.0",
-    "@ant-design/colors": "^7.0.0"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.10",
+    "@types/lodash-es": "^4.17.12",
     "@vben/types": "workspace:*"
   }
 }

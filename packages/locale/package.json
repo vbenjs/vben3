@@ -15,6 +15,6 @@
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
     "vue": "3.3.6",
-    "vue-i18n": "^9.5.0"
+    "vue-i18n": "^9.9.0"
   }
 }

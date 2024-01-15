@@ -14,11 +14,11 @@
     "@vben/locale": "workspace:*",
     "@vben/types": "workspace:*",
     "@vben/utils": "workspace:*",
-    "axios": "^1.5.1",
+    "axios": "^1.6.5",
     "axios-retry": "^4.0.0",
     "qs": "^6.11.2"
   },
   "devDependencies": {
-    "@types/qs": "^6.9.9"
+    "@types/qs": "^6.9.11"
   }
 }

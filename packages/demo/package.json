@@ -21,8 +21,8 @@
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
     "echarts": "^5.4.3",
-    "vue": "^3.3.6",
-    "vue-echarts": "^6.6.1"
+    "vue": "^3.4.14",
+    "vue-echarts": "^6.6.8"
   },
   "devDependencies": {
     "@amap/amap-jsapi-types": "^0.0.13",

@@ -12,13 +12,13 @@
     "@vben/directives": "workspace:*",
     "@vben/hooks": "workspace:*",
     "@vben/locale": "workspace:*",
-    "@vben/stores": "workspace:*",
     "@vben/router": "workspace:*",
+    "@vben/stores": "workspace:*",
     "@vben/utils": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
-    "pinia": "^2.1.6",
+    "pinia": "^2.1.7",
     "vue": "3.3.6",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

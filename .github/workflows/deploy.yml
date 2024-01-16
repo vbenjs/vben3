@@ -41,7 +41,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: 114.115.157.254
-          port: 2121
+          port: 21
           username: vben
           password: ${{ secrets.ftp_password }}
           local-dir: ./apps/admin/dist/

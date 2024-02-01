@@ -185,6 +185,14 @@ const dashboard: RouteRecordItem = {
         title: 'routes.demo.cropperImage',
       },
     },
+    {
+      path: 'desc',
+      name: 'Desc',
+      component: () => import('@/pages/demo/Desc.vue'),
+      meta: {
+        title: 'routes.demo.desc',
+      },
+    },
   ],
 }
 

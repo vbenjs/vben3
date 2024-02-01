@@ -12,8 +12,11 @@ export { default as ClickOutside } from './src/click-outside/index.vue'
 export { default as IconPicker } from './src/icon-picker/index.vue'
 export { default as CropperImage } from './src/cropper/index.vue'
 export { default as CropperAvatar } from './src/cropper/cropper-avatar.vue'
+export { default as Description } from './src/description/index.vue'
+export { useDescription } from './src/description/useDescription'
 
 export { default as CollapseTransition } from './src/transition/collapse-transition.vue'
 export { default as CustomTransition } from './src/transition/index'
 
 export type { QrCodeActionType } from './src/qrcode/typing'
+export * from './src/description/typing'

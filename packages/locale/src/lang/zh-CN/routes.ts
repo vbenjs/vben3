@@ -97,5 +97,6 @@ export default {
     steps: {
       page: '引导页',
     },
+    desc: '详情组件',
   },
 }

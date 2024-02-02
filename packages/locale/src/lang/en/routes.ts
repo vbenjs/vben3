@@ -96,5 +96,6 @@ export default {
     steps: {
       page: 'Intro page',
     },
+    desc: 'Desc',
   },
 }

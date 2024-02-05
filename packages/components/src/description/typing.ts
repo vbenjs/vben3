@@ -1,4 +1,9 @@
-import type { VNode, CSSProperties } from 'vue'
+import type {
+  VNode,
+  CSSProperties,
+  ExtractPublicPropTypes,
+  PropType,
+} from 'vue'
 
 declare type Recordable<T = any> = Record<string, T>
 
@@ -18,8 +23,39 @@ export interface DescItem {
   ) => VNode | undefined | JSX.Element | Element | string | number
 }
 
-export interface DescriptionProps {
-  title?: string
+export const descriptionsProps = {
+  title: String,
+  column: {
+    type: Number,
+    default: 3,
+  },
+  columns: Number,
+  labelPlacement: {
+    type: String as PropType<'left' | 'top'>,
+    default: 'top',
+  },
+  labelAlign: {
+    type: String as PropType<'left' | 'right' | 'center'>,
+    default: 'left',
+  },
+  separator: {
+    type: String,
+    default: ':',
+  },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium',
+  },
+  bordered: Boolean,
+  labelClass: String,
+  labelStyle: [Object, String] as PropType<string | CSSProperties>,
+  contentClass: String,
+  contentStyle: [Object, String] as PropType<string | CSSProperties>,
+} as const
+
+export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
+
+export interface DescriptionProps extends DescriptionsProps {
   useContainer?: boolean
   /**
    * item configuration

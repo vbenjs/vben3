@@ -91,6 +91,9 @@ export default {
       account: 'Account',
       accountCenter: 'Center',
       accountSetting: 'Setting',
+      desc: 'Details',
+      descBasic: 'Basic Details',
+      descHigh: 'Advanced Details',
     },
     transition: 'Transition',
     steps: {

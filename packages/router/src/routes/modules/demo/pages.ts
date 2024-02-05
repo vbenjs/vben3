@@ -66,7 +66,8 @@ const pages: RouteRecordItem = {
         {
           path: 'setting',
           name: 'AccountSettingPage',
-          component: () => import('@/pages/demo/page/account/setting/index.vue'),
+          component: () =>
+            import('@/pages/demo/page/account/setting/index.vue'),
           meta: {
             title: 'routes.demo.page.accountSetting',
           },
@@ -143,6 +144,35 @@ const pages: RouteRecordItem = {
       ],
     },
     // =============================exception end=============================
+    // =============================desc start=============================
+    {
+      path: 'desc',
+      name: 'DescPage',
+      component: getParentLayout('DescPage'),
+      redirect: '/pages/desc/basic',
+      meta: {
+        title: 'routes.demo.page.desc',
+      },
+      children: [
+        {
+          path: 'basic',
+          name: 'DescBasicPage',
+          component: () => import('@/pages/demo/page/desc/basic/index.vue'),
+          meta: {
+            title: 'routes.demo.page.descBasic',
+          },
+        },
+        {
+          path: 'high',
+          name: 'DescHighPage',
+          component: () => import('@/pages/demo/page/desc/high/index.vue'),
+          meta: {
+            title: 'routes.demo.page.descHigh',
+          },
+        },
+      ],
+    },
+    // =============================desc end=============================
   ],
 }
 

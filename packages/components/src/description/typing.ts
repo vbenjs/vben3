@@ -19,6 +19,7 @@ export interface DescItem {
 }
 
 export interface DescriptionProps {
+  title?: string
   useContainer?: boolean
   /**
    * item configuration

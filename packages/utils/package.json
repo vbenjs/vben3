@@ -11,7 +11,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
+    "dependencies": {
     "@ant-design/colors": "^7.0.2",
     "@formkit/auto-animate": "^0.8.1",
     "@vue/runtime-core": "3.3.6",
@@ -21,7 +21,7 @@
     "lodash-es": "^4.17.21",
     "pinia": "2.1.7",
     "sortablejs": "^1.15.2",
-    "vue": "3.3.6",
+    "vue": "3.4.18",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

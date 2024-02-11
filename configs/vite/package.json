@@ -12,8 +12,8 @@
   "dependencies": {
     "@config/tsconfig": "workspace:*",
     "@vben/utils": "workspace:*",
-    "@vitejs/plugin-legacy": "^4.1.1",
-    "@vitejs/plugin-vue": "^4.6.2",
+    "@vitejs/plugin-legacy": "^5.3.0",
+    "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "dayjs": "^1.11.10",
     "dotenv": "16.3.1",
@@ -25,14 +25,14 @@
     "rollup-plugin-visualizer": "^5.12.0",
     "terser": "^5.26.0",
     "unocss": "^0.58.3",
-    "vite": "5.0.11",
+    "vite": "5.1.1",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-html": "^3.2.1",
+    "vite-plugin-html": "^3.2.2",
     "vite-plugin-imagemin": "^0.6.1",
-    "vite-plugin-mock": "2.9.6",
     "vite-plugin-monaco-editor": "^1.1.0",
-    "vite-plugin-purge-icons": "^0.9.2",
-    "vite-plugin-svg-icons": "^2.0.1"
+    "vite-plugin-purge-icons": "^0.10.0",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-fake-server": "^2.1.1"
   },
   "devDependencies": {
     "mockjs": "^1.1.0",
@@ -40,6 +40,6 @@
     "typescript": "^5.3.3",
     "vite-plugin-http2-proxy": "^0.4.1",
     "vite-plugin-mkcert": "1.16.0",
-    "vue": "3.3.6"
+    "vue": "3.4.18"
   }
 }

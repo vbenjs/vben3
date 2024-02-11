@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@vben/utils": "workspace:*",
-    "vue": "3.3.6"
+    "vue": "3.4.18"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

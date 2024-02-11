@@ -20,7 +20,7 @@
     "@vben/utils": "workspace:*",
     "@vben/stores": "workspace:*",
     "@vben/vbencomponents": "workspace:*",
-    "vue": "3.3.6",
+    "vue": "3.4.18",
     "vue-router": "^4.2.5"
   }
 }

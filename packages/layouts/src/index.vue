@@ -34,7 +34,7 @@ const layout = computed<ReturnType<typeof defineComponent>>(() => {
   }
 })
 
-const frame = computed(() => useRoute().meta.frame)
+const frame = computed(() => useRoute()?.meta.frame)
 
 nextTick(() => {
   createThemeColorListen()

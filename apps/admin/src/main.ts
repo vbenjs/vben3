@@ -31,9 +31,9 @@ import { registerComponents } from '../init-components'
   app.mount('#app')
 
   // When Closing mock, Tree Shaking `mockjs` dep
-  if (__VITE_USE_MOCK__) {
-    import('../mock/_mock-server').then(({ setupProdMockServer }) =>
-      setupProdMockServer(),
-    )
-  }
+  // if (__VITE_USE_MOCK__) {
+  //   import('../mock/_mock-server').then(({ setupProdMockServer }) =>
+  //     setupProdMockServer(),
+  //   )
+  // }
 })()

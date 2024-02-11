@@ -1,9 +1,5 @@
-import { MockMethod } from 'vite-plugin-mock'
-import {
-  resultError,
-  resultPageSuccess,
-  resultSuccess,
-} from '@vben/utils/mock-util'
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import { resultError, resultPageSuccess, resultSuccess } from '../util'
 
 // export function createFakeTableData() {
 //   return {
@@ -124,7 +120,7 @@ const mockOperatorData = (() => {
   return result
 })()
 
-export default [
+export default defineFakeRoute([
   // mock user login
   {
     url: '/basic-api/demo/table',
@@ -158,4 +154,4 @@ export default [
       return resultSuccess(mockOperatorData)
     },
   },
-] as MockMethod[]
+])

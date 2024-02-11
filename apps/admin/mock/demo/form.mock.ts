@@ -1,7 +1,41 @@
-import { MockMethod } from 'vite-plugin-mock'
-import { resultError, resultSuccess } from '@vben/utils/mock-util'
-
-export function createSelectData() {
+import { resultSuccess } from '../util'
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+export default defineFakeRoute([
+  // mock user login
+  {
+    url: '/basic-api/demo/form/select',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      return resultSuccess(createSelectData())
+    },
+  },
+  {
+    url: '/basic-api/demo/form/treeSelect',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      return resultSuccess(createTreeSelectData())
+    },
+  },
+  {
+    url: '/basic-api/demo/form/radio',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      return resultSuccess(createRadioData())
+    },
+  },
+  {
+    url: '/basic-api/demo/form/cascader',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      return resultSuccess({ options: createCascaderOptions() })
+    },
+  },
+])
+function createSelectData() {
   return {
     options: [
       {
@@ -63,7 +97,7 @@ export function createSelectData() {
   }
 }
 
-export function createTreeSelectData() {
+function createTreeSelectData() {
   return {
     options: [
       {
@@ -185,7 +219,7 @@ export function createTreeSelectData() {
   }
 }
 
-export function createRadioData() {
+function createRadioData() {
   return {
     options: [
       {
@@ -205,7 +239,7 @@ export function createRadioData() {
   }
 }
 
-export function createCascaderOptions(depth = 3, iterator = 1, prefix = '') {
+function createCascaderOptions(depth = 3, iterator = 1, prefix = '') {
   const length = 12
   const options = []
   for (let i = 1; i <= length; ++i) {
@@ -233,39 +267,3 @@ export function createCascaderOptions(depth = 3, iterator = 1, prefix = '') {
   }
   return options
 }
-
-export default [
-  // mock user login
-  {
-    url: '/basic-api/demo/form/select',
-    timeout: 200,
-    method: 'post',
-    response: ({ body }) => {
-      return resultSuccess(createSelectData())
-    },
-  },
-  {
-    url: '/basic-api/demo/form/treeSelect',
-    timeout: 200,
-    method: 'post',
-    response: ({ body }) => {
-      return resultSuccess(createTreeSelectData())
-    },
-  },
-  {
-    url: '/basic-api/demo/form/radio',
-    timeout: 200,
-    method: 'post',
-    response: ({ body }) => {
-      return resultSuccess(createRadioData())
-    },
-  },
-  {
-    url: '/basic-api/demo/form/cascader',
-    timeout: 200,
-    method: 'post',
-    response: ({ body }) => {
-      return resultSuccess({ options: createCascaderOptions() })
-    },
-  },
-] as MockMethod[]

@@ -92,6 +92,9 @@ export default {
       account: '个人页',
       accountCenter: '个人中心',
       accountSetting: '个人设置',
+      desc: '详情页',
+      descBasic: '基础详情页',
+      descHigh: '高级详情页',
     },
     transition: '过渡动画',
     steps: {

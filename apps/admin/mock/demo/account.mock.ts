@@ -1,10 +1,5 @@
-import { MockMethod } from 'vite-plugin-mock'
-import {
-  resultSuccess,
-  resultPageSuccess,
-  resultError,
-} from '@vben/utils/mock-util'
-import { ResultEnum } from '@vben/request/src/constants'
+import { resultError, resultSuccess, resultPageSuccess } from '../util'
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 
 const mockDeptTreeData = (() => {
   const result: any[] = []
@@ -188,7 +183,7 @@ const mockDeptTreeList = (() => {
   return result
 })()
 
-export default [
+export default defineFakeRoute([
   {
     url: '/basic-api/demo/deptTreeList',
     timeout: 200,
@@ -235,8 +230,8 @@ export default [
     statusCode: 200,
     response: () => {
       return resultError('Token Expired!', {
-        code: ResultEnum.TIMEOUT as number,
+        code: 401,
       })
     },
   },
-] as MockMethod[]
+])

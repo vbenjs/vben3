@@ -3,9 +3,9 @@ import {
   resultError,
   getRequestToken,
   requestParams,
-} from '@vben/utils/mock-util'
-import { MockMethod } from 'vite-plugin-mock'
-import { createFakeUserList } from './auth'
+  createFakeUserList,
+} from './util'
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 
 // single
 const dashboardRoute = {
@@ -232,7 +232,7 @@ const linkRoute = {
   ],
 }
 
-export default [
+export default defineFakeRoute([
   {
     url: '/basic-api/getMenuList',
     timeout: 1000,
@@ -274,4 +274,4 @@ export default [
       return resultSuccess(menu)
     },
   },
-] as MockMethod[]
+])

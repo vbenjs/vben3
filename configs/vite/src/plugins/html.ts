@@ -44,7 +44,6 @@ export async function configHtmlPlugin(
           ]
         : [],
     },
-    viteNext: true,
   })
   return htmlPlugin
 }

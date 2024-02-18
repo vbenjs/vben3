@@ -159,7 +159,7 @@ const memberOption = ref({
   <div class="grid grid-cols-24 grid-rows-24 w-full h-screen">
     <!-- Profile Container -->
     <div
-      class="ml-4 mr-4 p-4 col-start-1 col-span-24 row-start-2 row-span-6 bg-green-100 rounded-md"
+      class="ml-4 mr-4 p-4 col-start-1 col-span-24 row-start-2 row-span-6 bg-green-100 dark:bg-green-800 rounded-md"
     >
       <!-- User Information start -->
       <div class="grid grid-cols-24 grid-rows-24 w-full h-full">
@@ -179,7 +179,7 @@ const memberOption = ref({
         >
           <div class="flex">
             <div
-              class="w-14 h-17 bg-green-400 rounded-md shadow-xl flex flex-col justify-around items-center cursor-pointer"
+              class="w-14 h-17 bg-green-400 dark:bg-green-700 rounded-md shadow-xl flex flex-col justify-around items-center cursor-pointer"
             >
               <div class="text-white text-xl">Fir</div>
               <div class="text-white text-3xl">20</div>
@@ -273,10 +273,10 @@ const memberOption = ref({
 
     <!-- Todo List Start -->
     <div
-      class="row-start-12 row-span-12 col-start-2 col-span-6 mr-4 rounded-md border border-solid border-gray-200 flex flex-col"
+      class="row-start-12 row-span-12 col-start-2 col-span-6 mr-4 rounded-md border border-solid border-gray-200 dark:border-dark-200 flex flex-col"
     >
       <div
-        class="w-full h-1/10 border-b-1 border-b-solid border-gray-200 flex items-center"
+        class="w-full h-1/10 border-b-1 border-b-solid border-gray-200 dark:border-dark-200 flex items-center"
       >
         <span class="ml-4 text-lg text-gray-500 font-semibold cursor-default"
           >待办列表</span
@@ -285,7 +285,7 @@ const memberOption = ref({
       <div class="h-9/10 m-3 overflow-auto">
         <template v-for="(item, index) in 6" :key="index">
           <div
-            class="w-full h-1/7 hover:bg-green-100 duration-150 rounded-md mb-2 flex"
+            class="w-full h-1/7 hover:bg-green-100 dark:hover:bg-green-800 duration-150 rounded-md mb-2 flex"
             @mouseenter="() => (isActive = index)"
             @mouseleave="() => (isActive = -1)"
           >
@@ -302,7 +302,7 @@ const memberOption = ref({
               </div>
               <div class="ml-2">
                 <div class="text-4 font-semibold">Jack</div>
-                <div class="text-xs text-gray-500">
+                <div class="text-xs text-gray-500 dark:text-light-200">
                   创建了一个待办，等待你审核
                 </div>
               </div>
@@ -321,7 +321,7 @@ const memberOption = ref({
 
     <!-- chart start -->
     <div
-      class="row-start-12 row-span-12 col-start-8 col-span-9 mr-4 rounded-md border border-solid border-gray-200 flex"
+      class="row-start-12 row-span-12 col-start-8 col-span-9 mr-4 rounded-md border border-solid border-gray-200 dark:border-dark-200 flex"
     >
       <v-chart ref="barChat" :option="chartOption" autoresize />
     </div>
@@ -329,10 +329,10 @@ const memberOption = ref({
 
     <!-- Latest News start -->
     <div
-      class="row-start-8 row-span-8 col-start-17 col-span-8 mr-4 mt-4 rounded-md border border-solid border-gray-200"
+      class="row-start-8 row-span-8 col-start-17 col-span-8 mr-4 mt-4 rounded-md border border-solid border-gray-200 dark:border-dark-200"
     >
       <div
-        class="w-full h-12 border-b-1 border-b-solid border-gray-200 flex items-center"
+        class="w-full h-12 border-b-1 border-b-solid border-gray-200 dark:border-dark-200 flex items-center"
       >
         <span class="ml-4 text-lg text-gray-500 font-semibold cursor-default"
           >最新动态</span
@@ -340,7 +340,7 @@ const memberOption = ref({
       </div>
       <div class="w-full h-full flex flex-col px-4">
         <div
-          class="w-full h-1/5 border-1 border-solid my-2 border-gray-200 rounded-md flex items-center hover:border-green-600 duration-150 cursor-pointer"
+          class="w-full h-1/5 border-1 border-solid my-2 border-gray-200 dark:border-dark-200 rounded-md flex items-center hover:border-green-600 duration-150 cursor-pointer"
           v-for="(items, index) in 3"
           :key="index"
         >
@@ -358,7 +358,7 @@ const memberOption = ref({
 
     <!-- member charts start -->
     <div
-      class="row-start-16 row-span-8 col-start-17 col-span-8 mr-4 mt-4 border border-solid border-gray-200 rounded-md"
+      class="row-start-16 row-span-8 col-start-17 col-span-8 mr-4 mt-4 border border-solid border-gray-200 dark:border-dark-200 rounded-md"
     >
       <v-chart ref="radarChart" :option="memberOption" autoresize />
     </div>

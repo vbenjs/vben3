@@ -83,7 +83,7 @@ export const treeColumns: VbenColumns = [
   {
     field: 'id',
     title: 'ID',
-    width: '100px',
+    width: '10%',
     type: 'checkbox',
     align: 'center',
     treeNode: true

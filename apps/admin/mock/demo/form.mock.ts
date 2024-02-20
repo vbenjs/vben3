@@ -1,4 +1,4 @@
-import { resultSuccess } from '../util'
+import { resultSuccess } from '../util.ts'
 import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 export default defineFakeRoute([
   // mock user login
@@ -241,7 +241,7 @@ function createRadioData() {
 
 function createCascaderOptions(depth = 3, iterator = 1, prefix = '') {
   const length = 12
-  const options = []
+  const options:any = []
   for (let i = 1; i <= length; ++i) {
     if (iterator === 1) {
       options.push({

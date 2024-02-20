@@ -9,7 +9,7 @@ const treeData = reactive<Data>({
     total: 0,
   },
 })
-const treeTable = ref(null)
+const treeTableRef = ref(null)
 
 getTreeTableData().then((res: any) => {
     console.log('treeData:', res)

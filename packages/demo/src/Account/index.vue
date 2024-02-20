@@ -1,17 +1,17 @@
 <!--
  * @Author       : ya2glu@163.com
  * @Date         : 2023-11-16 10:06:07
- * @LastEditTime : 2023-12-26 15:27:40
+ * @LastEditTime : 2024-02-20 11:24:20
  * @LastEditors  : ya2glu
  * @Description  : account modules
- * @FilePath     : \vben3\apps\admin\src\pages\demo\system\account\index.vue
+ * @FilePath     : \vben3\packages\demo\src\Account\index.vue
 -->
 <script lang="ts" setup>
 import { ref } from 'vue'
 
 import { useForm } from '@vben/vbencomponents'
 import { formSchema, userColumns } from './schemas'
-import { getDeptTree, getDeptUser } from '@/apis/sys/index'
+import { getDeptTree, getDeptUser } from '../apis/account'
 import AccountAddModal from './modules/accountAddModal.vue'
 const deptKeys = ref('')
 const bgGrid = ref({
@@ -129,11 +129,10 @@ function handleAccountAddModal() {
           max-height="700"
           min-height="700"
           :columns="userColumns"
-          :data="deptUserData"
           :options="{
-            api: getDeptUser,
             pagination: true,
             border: 'none',
+            api: getDeptUser
           }"
           :row-config="{ isHover: true }"
           stripe

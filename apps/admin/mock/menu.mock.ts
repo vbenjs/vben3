@@ -4,7 +4,7 @@ import {
   getRequestToken,
   requestParams,
   createFakeUserList,
-} from './util'
+} from './util.ts'
 import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 
 // single

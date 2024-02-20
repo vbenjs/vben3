@@ -459,18 +459,6 @@ setInterval(() => {
     })
 }, 2000)
 
-const operatorData = ref([])
-
-getOperatorData()
-  .then((res) => {
-    operatorData.value = res
-  })
-  .catch((err) => {
-    console.log('err->', err)
-  })
-  .finally(() => {
-    console.log('operatorData ->', operatorData.value)
-  })
 
 // 获得当前年份和月份
 function getYearMonth() {
@@ -623,13 +611,13 @@ const e6_option = ref({
           <div class="p-2 col-start-1 col-span-12 row-start-1 row-span-6">
             <VbenTable
               :columns="operatorColumns"
-              :data="operatorData"
               :options="{
                 border: 'none',
                 size: 'mini',
                 stripe: true,
                 round: true,
                 maxHeight: 200,
+                api: getOperatorData
               }"
             ></VbenTable>
           </div>

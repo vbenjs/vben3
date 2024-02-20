@@ -8,6 +8,7 @@ import { ref, provide } from 'vue'
 import { CountTo } from '@vben/components/index'
 import * as echarts from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
+import { useAppTheme } from '@vben/hooks'
 import {
   LineChart,
   GaugeChart,
@@ -32,6 +33,7 @@ import { operatorColumns } from './modules/schemas'
 import { getOperatorData } from '../apis/table'
 
 // provide(THEME_KEY, "dark")
+const { isDark } = useAppTheme();
 echarts.use([
   CanvasRenderer,
   LineChart,
@@ -473,7 +475,7 @@ const getVirtualData = () => {
   let firstDayOfMonth = new Date(curDate.getFullYear(), curDate.getMonth(), 1);
   let days = Math.ceil((curDate - firstDayOfMonth) / (1000 * 60 * 60 * 24));
   let data = [];
-  for (let i = 0; i<= days; i++) {
+  for (let i = 0; i <= days; i++) {
     let date = new Date(firstDayOfMonth)
     date.setDate(firstDayOfMonth.getDate() + i);
     let formatDate = date.toISOString().slice(0, 10);
@@ -482,11 +484,12 @@ const getVirtualData = () => {
       Math.floor(Math.random() * 10000)
     ])
   }
-    return data;
+  return data;
 }
 
 const e6_option = ref({
   tooltip: {},
+  backgroundColor: 'transparent',
   calendar: {
     top: 'middle',
     left: 'center',
@@ -506,6 +509,10 @@ const e6_option = ref({
       fontSize: 20,
       color: '#999999',
     },
+
+    itemStyle: {
+      color: 'transparent'
+    },
     range: getYearMonth(),
   },
   visualMap: {
@@ -514,7 +521,7 @@ const e6_option = ref({
     calculable: true,
     orient: 'horizontal',
     left: 'center',
-    bottom: '15%',
+    bottom: '10%',
   },
   series: [
     {
@@ -532,64 +539,36 @@ const e6_option = ref({
     <div class="w-3/4 flex flex-col gap-y-5">
       <div class="flex justify-evenly gap-x-3">
         <div
-          class="bg-white w-1/3 h-40 rounded-md p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
-        >
-          <p
-            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-500 m-auto"
-          >
+          class="bg-white w-1/3 h-40 rounded-md p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800">
+          <p class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-500 m-auto">
             访问量
           </p>
-          <div
-            class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"
-          >
-            <CountTo
-              class="text-3xl"
-              color="#595959"
-              :startVal="0"
-              :endVal="200"
-              :duration="1000"
-            />
+          <div class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center">
+            <CountTo class="text-3xl" color="#595959" :startVal="0" :endVal="200" :duration="1000" />
           </div>
           <div class="col-start-6 col-span-7 row-start-1 row-span-6">
             <v-chart ref="lineChart" :option="e1_option" autoresize />
           </div>
         </div>
         <div
-          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
-        >
-          <p
-            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
-          >
+          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800">
+          <p class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto">
             月收入
           </p>
-          <div
-            class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"
-          >
-            <CountTo
-              class="text-3xl"
-              color="#595959"
-              prefix="¥"
-              :startVal="0"
-              :endVal="5000"
-              :decimals="2"
-              :duration="1000"
-            />
+          <div class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center">
+            <CountTo class="text-3xl" color="#595959" prefix="¥" :startVal="0" :endVal="5000" :decimals="2"
+              :duration="1000" />
           </div>
           <div class="col-start-6 col-span-7 row-start-1 row-span-6">
             <v-chart ref="gaugeChart" :option="e2_option" autoresize />
           </div>
         </div>
         <div
-          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
-        >
-          <p
-            class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
-          >
+          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800">
+          <p class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto">
             收入来源
           </p>
-          <div
-            class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"
-          ></div>
+          <div class="col-start-2 col-span-3 row-start-4 row-span-2 flex items-center justify-center"></div>
           <div class="col-start-1 col-span-12 row-start-1 row-span-6">
             <v-chart ref="pieChart" :option="e3_option" autoresize />
           </div>
@@ -597,8 +576,7 @@ const e6_option = ref({
       </div>
       <div>
         <div
-          class="bg-white p-5 w-full h-96 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
-        >
+          class="bg-white p-5 w-full h-96 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800">
           <div class="col-start-1 col-span-12 row-start-1 row-span-6">
             <v-chart ref="lineCharts2" :option="e4_option" autoresize />
           </div>
@@ -606,37 +584,31 @@ const e6_option = ref({
       </div>
       <div>
         <div
-          class="bg-white w-full h-60 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-none"
-        >
+          class="bg-white w-full h-60 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-none">
           <div class="p-2 col-start-1 col-span-12 row-start-1 row-span-6">
-            <VbenTable
-              :columns="operatorColumns"
-              :options="{
-                border: 'none',
-                size: 'mini',
-                stripe: true,
-                round: true,
-                maxHeight: 200,
-                api: getOperatorData
-              }"
-            ></VbenTable>
+            <VbenTable :columns="operatorColumns" :options="{
+              border: 'none',
+              size: 'mini',
+              stripe: true,
+              round: true,
+              maxHeight: 200,
+              api: getOperatorData
+            }"></VbenTable>
           </div>
         </div>
       </div>
     </div>
     <div class="flex flex-col items-center gap-y-5 w-1/4">
       <div
-        class="bg-white w-11/12 h-1/2 rounded-md grid p-5 grid-cols-12 grid-rows-12 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
-      >
+        class="bg-white w-11/12 h-1/2 rounded-md grid p-5 grid-cols-12 grid-rows-12 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800">
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
           <v-chart ref="barChart" :option="e5_option" autoresize />
         </div>
       </div>
       <div
-        class="bg-white w-11/12 h-1/2 rounded-md grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
-      >
+        class="bg-white w-11/12 h-1/2 rounded-md grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800">
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
-          <v-chart ref="calendarChart" :option="e6_option" autoresize />
+          <v-chart ref="calendarChart" :theme="isDark ? 'dark' : 'light'" :option="e6_option" autoresize />
         </div>
       </div>
     </div>

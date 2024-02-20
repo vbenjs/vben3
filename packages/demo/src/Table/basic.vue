@@ -3,12 +3,18 @@ import { reactive, ref, computed } from 'vue'
 // import { VbenColumns } from '../../../vbenComponents/src/table'
 import { getTableData } from '../apis/table'
 import { Data, baseColumns } from './schemas'
+import { dataTool } from 'echarts';
 
 const border = ref(['none', 'outer', 'inner', 'full'])
 const index = ref(0)
 let loading = ref(false)
 const striped = ref(false)
 const round = ref(false)
+const pageConfig = reactive({
+  loading: false,
+  size: 'small',
+  background: true,
+})
 
 const data = reactive<Data>({
   table: {
@@ -16,16 +22,14 @@ const data = reactive<Data>({
     total: 0,
   },
 })
-getTableData()
-  .then((res) => {
-    loading.value = true
-    data.table.items = res
-  })
-  .catch((err) => {
-    console.log('err->', err)
-  }).finally(() => {
-    loading.value = false
-  })
+const params = ref({
+  i: "role",
+  a: "list"
+})
+
+const handlePageChange = () => {
+  console.log('page change');
+}
 
 const toggleBorder = () => {
   index.value++
@@ -55,9 +59,8 @@ function toggleRound() {
 <template>
   <div class="p-2 h-full">
     <VbenTable
-      :options="{ title: '基础演示', pagination: true, border: borderValue, loading: loading, stripe: striped, round: round, }"
-      :columns="baseColumns" :data="data.table.items" :column-config="{ resizable: true }"
-      :row-config="{ isHover: true }">
+      :options="{ title: '基础演示', pagination: pageConfig, border: borderValue, loading: loading, stripe: striped, round: round, api: getTableData }"
+      :columns="baseColumns" :column-config="{ resizable: true }" :row-config="{ isHover: true }">
       <template #toolbar>
         <div class="pb-2">
           <VbenButton type="primary" @click="toggleBorder">

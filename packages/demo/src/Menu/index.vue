@@ -66,8 +66,8 @@ function handleToggleTree() {
     <VbenGridItem :span="12">
       <VbenTable
         ref="menuTreeTable"
-        :data="menuData.table.items"
         :columns="menuColumns"
+        :data="menuData.table.items"
         :options="{ pagination: true, border: 'inner'}"
         :tree-config="{
           transform: true,

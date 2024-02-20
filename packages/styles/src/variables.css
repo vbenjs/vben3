@@ -76,7 +76,8 @@
   --component-background-color: rgb(24, 24, 28);
   --vxe-modal-header-background-color: #27355d;
   --vxe-form-background-color: #212b4b;
-  --vxe-table-body-background-color: #212b4b;
+  --vxe-table-body-background-color: #131516;
+  --vxe-table-row-striped-background-color: #1C1C1E;
   --vxe-grid-maximize-background-color: #212b4b;
   --vxe-textarea-background-color: #212b4b;
   --vxe-table-row-current-background-color: #334579;
@@ -102,7 +103,7 @@
   --vxe-table-border-color: #e2ebf6;
   --vxe-textarea-count-color: #e2ebf6;
   --vxe-table-header-font-color: #fff;
-  --vxe-table-header-background-color: #27355d;
+  --vxe-table-header-background-color: transparent;
   --vxe-select-option-hover-background-color: #27355d;
   --vxe-font-size: 14px;
   --vxe-font-color: #e2ebf6;

@@ -23,6 +23,7 @@ getTableData().then((res) => {
 const showDetails = ref<boolean>(false)
 let detailData = reactive<any[]>([])
 const cellClickEvent: VbenCellClick = ({ row }) => {
+  
   detailData = innerLabels.map((field) => {
     return { label: field, value: row[field] }
   })
@@ -38,9 +39,9 @@ const cellClickEvent: VbenCellClick = ({ row }) => {
         border: border,
         loading: loading,
         stripe: striped,
+        api: getTableData
       }"
       :columns="fixedColumns"
-      :data="data.table.items"
       :row-config="{isHover: true}"
       @cell-click="cellClickEvent"
     >
@@ -52,6 +53,9 @@ const cellClickEvent: VbenCellClick = ({ row }) => {
       <template #default>
         <VbenTable
           border="inner"
+          :options="{
+            api: null
+          }"
           :sync-resize="showDetails"
           :row-config="{ isHover: true }"
           :data="detailData"

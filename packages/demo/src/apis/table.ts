@@ -1,7 +1,7 @@
 import { request } from '@vben/request'
 
-export function getTableData() {
-  return request.post({ url: '/demo/table' })
+export function getTableData(params?: any) {
+  return request.post({ url: '/demo/table', params })
 }
 export function getUseTableData(params?: any) {
   return request.post({ url: '/demo/useTable', params })

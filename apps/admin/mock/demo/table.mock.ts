@@ -1,5 +1,6 @@
 import { defineFakeRoute } from 'vite-plugin-fake-server/client'
-import { resultError, resultPageSuccess, resultSuccess } from '../util'
+import { resultError, resultPageSuccess, resultSuccess } from '../util.ts'
+import Mock from 'mockjs';
 
 // export function createFakeTableData() {
 //   return {
@@ -46,78 +47,108 @@ import { resultError, resultPageSuccess, resultSuccess } from '../util'
 // }
 
 const fakeTableData = (() => {
-  const result: any[] = []
-  for (let i = 1; i <= 100; i++) {
-    result.push({
-      userId: `${i}`,
-      username: '@cname',
-      password: '@natural',
-      realname: '@name',
-      avatar: `https://i.pravatar.cc/50?img=${i}`,
-      desc: '@word',
-      accessToken: '@guid',
-      address: '@city',
-      startTime: `@datetime()`,
-      endTime: '@datetime',
-      'roles|1-2': [
-        {
-          name: 'Admin',
-          value: 'admin',
-        },
-        {
-          name: 'superAdmin',
-          value: 'superAdmin',
-        },
-        {
-          name: 'Tester',
-          value: 'test',
-        },
-      ],
-    })
-  }
-  return result
-})()
-
-const fakeTreeTableData = (() => {
-  const result: any[] = []
-  for (let i = 1; i <= 5; i++) {
-    result.push(
+  const syncData = Mock.mock({
+    'items|100': [
       {
-        id: `${i}`,
+        'userId|+1': 1,
+        username: '@cname',
+        realname: '@name',
+        password: '@natural',
+        address: '@city',
+        desc: '@word',
+        avatar: `https://i.pravatar.cc/50?img=@number`,
+        accessToken: '@guid',
+        startTime: `@datetime()`,
+        endTime: '@datetime',
+        'roles|1-2': [
+          {
+            name: 'Admin',
+            value: 'admin',
+          },
+          {
+            name: 'superAdmin',
+            value: 'superAdmin',
+          },
+          {
+            name: 'Tester',
+            value: 'test',
+          },
+        ],
+      }
+    ]
+  })
+  let items = syncData.items;
+  return items;
+})();
+
+// const fakeTreeTableData = (() => {
+//   const result: any[] = []
+//   for (let i = 1; i <= 5; i++) {
+//     result.push(
+//       {
+//         id: `${i}`,
+//         parentId: null,
+//         userName: '@cname',
+//         address: '@city',
+//         startTime: '@datetime()',
+//         endTime: '@datetime()',
+//         description: '@word',
+//       },
+//       {
+//         id: '@id',
+//         'parentId|1-5': 1,
+//         userName: '@cname',
+//         address: '@city',
+//         startTime: '@datetime()',
+//         endTime: '@datetime()',
+//         description: '@word',
+//       },
+//     )
+//   }
+
+//   return result
+// })()
+
+const mockTree = (() => {
+  const fakeData = Mock.mock({
+    'items|5-30': [
+      {
+        'id|+1': 1,
         parentId: null,
         userName: '@cname',
         address: '@city',
-        startTime: '@datetime()',
-        endTime: '@datetime()',
-        description: '@word',
+        startTime: '@datetime',
+        endTime: '@datetime',
+        description: '@word'
       },
       {
-        id: '@id',
-        'parentId|1-5': 1,
+        'id|+1': 50,
+        'parentId|1-30': 1,
         userName: '@cname',
         address: '@city',
-        startTime: '@datetime()',
-        endTime: '@datetime()',
-        description: '@word',
-      },
-    )
-  }
-
-  return result
+        startTime: '@datetime',
+        endTime: '@datetime',
+      }
+    ]
+  })
+  const result = fakeData.items;
+  return result;
 })()
 
 const mockOperatorData = (() => {
-  const result: any[] = []
-  for (let i = 1; i <= 50; i++) {
-    result.push({
-      userId: `${i}`,
-      operatorName: '@cname',
-      record: '@word(10)',
-      createTime: `@datetime()`,
-      updateTime: '@datetime',
-    })
-  }
-  return result
+  const fakeData = Mock.mock({
+    'items|50': [
+      {
+        'userId|+1': 1,
+        operatorName: '@cname',
+        record: '@word(10)',
+        createTime: `@datetime()`,
+        updateTime: '@datetime',
+      }
+    ]
+  })
+  const result = fakeData.items;
+  return result;
 })()
 
 export default defineFakeRoute([
@@ -127,7 +158,7 @@ export default defineFakeRoute([
     timeout: 200,
     method: 'post',
     response: ({ body }) => {
-      return resultSuccess(fakeTableData)
+      return resultPageSuccess(body.page, body.pageSize, fakeTableData)
     },
   },
   {
@@ -143,7 +174,7 @@ export default defineFakeRoute([
     timeout: 200,
     method: 'post',
     response: () => {
-      return resultSuccess(fakeTreeTableData)
+      return resultSuccess(mockTree)
     },
   },
   {

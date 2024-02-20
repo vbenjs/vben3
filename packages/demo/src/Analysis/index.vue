@@ -4,7 +4,7 @@
  * 若后期使用 usehooks 方式二次封装echarts相关组件，可重构这里的代码 *
  *                  代码仅供参考👀 2023-12-26                  *
  **************************************************************/
-import { ref } from 'vue'
+import { ref, provide } from 'vue'
 import { CountTo } from '@vben/components/index'
 import * as echarts from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
@@ -26,7 +26,7 @@ import {
   CalendarComponent,
   VisualMapComponent,
 } from 'echarts/components'
-import VChart from 'vue-echarts'
+import VChart, { THEME_KEY } from 'vue-echarts'
 
 import { operatorColumns } from './modules/schemas'
 import { getOperatorData } from '../apis/table'
@@ -459,33 +459,32 @@ setInterval(() => {
     })
 }, 2000)
 
-const operatorData = ref([])
 
-getOperatorData()
-  .then((res) => {
-    operatorData.value = res
-  })
-  .catch((err) => {
-    console.log('err->', err)
-  })
-  .finally(() => {
-    console.log('operatorData ->', operatorData.value)
-  })
+// 获得当前年份和月份
+function getYearMonth() {
+  let date = new Date();
+  return `${date.getFullYear()}-${date.getMonth() + 1}`
+}
 
-const getVirtualData = (year: any) => {
-  year = year || '2017'
-  let date = +echarts.number.parseDate(year + '-01-01')
-  let end = +echarts.number.parseDate(+year + 1 + '-01-01')
-  let dayTime = 3600 * 24 * 1000
-  let data = []
-  for (let time = date; time < end; time += dayTime) {
+// 获得最新一天数据
+// 数据格式：[['yyyy-mm-dd', 'value']]
+const getVirtualData = () => {
+  let curDate = new Date();
+  let firstDayOfMonth = new Date(curDate.getFullYear(), curDate.getMonth(), 1);
+  let days = Math.ceil((curDate - firstDayOfMonth) / (1000 * 60 * 60 * 24));
+  let data = [];
+  for (let i = 0; i<= days; i++) {
+    let date = new Date(firstDayOfMonth)
+    date.setDate(firstDayOfMonth.getDate() + i);
+    let formatDate = date.toISOString().slice(0, 10);
     data.push([
-      echarts.time.format(time, 'yyyy-MM-dd'),
-      Math.floor(Math.random() * 10000),
+      formatDate,
+      Math.floor(Math.random() * 10000)
     ])
   }
-  return data
+    return data;
 }
+
 const e6_option = ref({
   tooltip: {},
   calendar: {
@@ -507,7 +506,7 @@ const e6_option = ref({
       fontSize: 20,
       color: '#999999',
     },
-    range: '2023-08',
+    range: getYearMonth(),
   },
   visualMap: {
     min: 0,
@@ -522,17 +521,18 @@ const e6_option = ref({
       type: 'heatmap',
       coordinateSystem: 'calendar',
       calendarIndex: 0,
-      data: getVirtualData(2023),
+      data: getVirtualData(),
+      // data: [['2023-08-01',30]]
     },
   ],
 })
 </script>
 <template>
-  <div class="bg-light-400 p-5 mx-2 flex justify-between gap-x-2">
+  <div class="bg-light-400 p-5 mx-2 flex justify-between gap-x-2 dark:bg-dark-400">
     <div class="w-3/4 flex flex-col gap-y-5">
       <div class="flex justify-evenly gap-x-3">
         <div
-          class="bg-white w-1/3 h-40 rounded-md p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-1/3 h-40 rounded-md p-2 grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
         >
           <p
             class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-500 m-auto"
@@ -555,7 +555,7 @@ const e6_option = ref({
           </div>
         </div>
         <div
-          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
         >
           <p
             class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
@@ -580,7 +580,7 @@ const e6_option = ref({
           </div>
         </div>
         <div
-          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-1/3 h-40 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
         >
           <p
             class="col-start-1 col-span-5 row-start-2 row-span-2 text-lg text-gray-400 m-auto"
@@ -597,7 +597,7 @@ const e6_option = ref({
       </div>
       <div>
         <div
-          class="bg-white p-5 w-full h-96 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white p-5 w-full h-96 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
         >
           <div class="col-start-1 col-span-12 row-start-1 row-span-6">
             <v-chart ref="lineCharts2" :option="e4_option" autoresize />
@@ -606,18 +606,18 @@ const e6_option = ref({
       </div>
       <div>
         <div
-          class="bg-white w-full h-60 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600"
+          class="bg-white w-full h-60 rounded-md grid grid-cols-12 grid-rows-6 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-none"
         >
           <div class="p-2 col-start-1 col-span-12 row-start-1 row-span-6">
             <VbenTable
               :columns="operatorColumns"
-              :data="operatorData"
               :options="{
                 border: 'none',
                 size: 'mini',
                 stripe: true,
                 round: true,
                 maxHeight: 200,
+                api: getOperatorData
               }"
             ></VbenTable>
           </div>
@@ -626,14 +626,14 @@ const e6_option = ref({
     </div>
     <div class="flex flex-col items-center gap-y-5 w-1/4">
       <div
-        class="bg-white w-11/12 h-1/2 p-5 rounded-md grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
+        class="bg-white w-11/12 h-1/2 rounded-md grid p-5 grid-cols-12 grid-rows-12 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
       >
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
           <v-chart ref="barChart" :option="e5_option" autoresize />
         </div>
       </div>
       <div
-        class="bg-white w-11/12 h-1/2 rounded-md grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600"
+        class="bg-white w-11/12 h-1/2 rounded-md grid grid-cols-12 grid-rows-12 shadow-xl shadow-light-600 dark:bg-dark-600 dark:shadow-dark-800"
       >
         <div class="col-start-1 col-span-12 row-start-1 row-span-12">
           <v-chart ref="calendarChart" :option="e6_option" autoresize />

@@ -4,7 +4,8 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
-    "moduleResolution": "Node",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],

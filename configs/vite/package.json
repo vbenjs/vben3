@@ -5,7 +5,7 @@
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
+    "clean": "pnpm rimraf node_modules dist .turbo",
     "prepack": "pnpm unbuild --stub"
   },
   "type": "module",

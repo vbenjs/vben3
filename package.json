@@ -24,7 +24,7 @@
     "lint:eslint": "eslint . --cache --max-warnings 0 --fix",
     "lint:prettier": "prettier --write  \"{packages,apps,configs,scripts}/**/*.{js,json,ts,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --fix ",
-    "reinstall": "pnpm turbo run clean && rimraf pnpm-lock.yaml && rimraf node_modules && npm run bootstrap",
+    "reinstall": "pnpm turbo run clean && rimraf pnpm-lock.yaml node_modules && pnpm run bootstrap",
     "stub": "pnpm --filter @config/** prepack",
     "test": "vitest",
     "turbo:build": "turbo run build --parallel",

@@ -3,7 +3,7 @@
   "private": true,
   "bin": {},
   "scripts": {
-    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
+    "clean": "pnpm rimraf node_modules dist .turbo",
     "build": "pnpm esno ./src/build.ts",
     "dev": "pnpm esno ./src/dev.ts",
     "preview": "esno src/preview.ts"

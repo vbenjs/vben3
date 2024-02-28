@@ -5,7 +5,7 @@
   "module": "index.ts",
   "license": "MIT",
   "scripts": {
-    "clean": "pnpm rimraf pnpm rimraf dist && pnpm rimraf .turbo"
+    "clean": "pnpm rimraf dist .turbo"
   },
   "publishConfig": {
     "access": "public"

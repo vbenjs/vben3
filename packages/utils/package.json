@@ -6,12 +6,12 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+    "clean": "pnpm rimraf node_modules dist .turbo"
   },
   "publishConfig": {
     "access": "public"
   },
-    "dependencies": {
+  "dependencies": {
     "@ant-design/colors": "^7.0.2",
     "@formkit/auto-animate": "^0.8.1",
     "@vue/runtime-core": "3.3.6",

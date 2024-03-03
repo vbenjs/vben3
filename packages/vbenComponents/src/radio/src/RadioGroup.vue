@@ -22,18 +22,19 @@ watch(
 </script>
 <template>
   <!--  {{ $attrs }}-->
-  <RadioGroup v-bind="$attrs">
+  <RadioGroup v-bind="$attrs" :value="props.value">
     <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
     <template v-for="item in options" :key="`${item.value}`">
       <VbenRadioButton
         v-if="$attrs.type === 'button'"
-        v-model:value="item.value"
+        :value="item.value"
         v-bind="item"
+        :key="item.value"
         >{{ item.label }}</VbenRadioButton
       >
-      <VbenRadio v-else v-model:value="item.value" v-bind="item">{{
+      <VbenRadio v-else :value="item.value" v-bind="item" :key="item.value">{{
         item.label
       }}</VbenRadio>
     </template>

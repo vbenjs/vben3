@@ -94,7 +94,7 @@ const update = (v) => {
 }
 </script>
 <template>
-  <CheckboxGroup v-bind="$attrs" @update:value="update">
+  <CheckboxGroup v-bind="$attrs" :value="props.value" @update:value="update">
     <template v-for="item in options" :key="`${item.value}`">
       <VbenButtonGroup v-if="type === 'button'"
         ><VbenButton

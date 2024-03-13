@@ -15,6 +15,8 @@ export {
   isFunction,
   isBoolean,
   isNumber,
+  set as _set,
+  get as _get
 } from 'lodash-es'
 // @ts-ignore
 import Sortable from 'sortablejs'

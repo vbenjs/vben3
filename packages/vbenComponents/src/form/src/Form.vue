@@ -42,7 +42,7 @@ watch(
   () => fieldValue,
   (data) => {
     getFieldValue(data.value as object)
-    emit('update:model', data)
+    emit('update:model', data.value)
   },
   { deep: true },
 )

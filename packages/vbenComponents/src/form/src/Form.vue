@@ -3,7 +3,7 @@ defineOptions({ name: 'VbenForm' })
 import { maps } from '../../index'
 import { computed, onMounted, ref, unref, useAttrs, watch } from 'vue'
 import { GridItemProps, VbenFormProps } from './type'
-import { set } from '@vben/utils'
+import { _set } from '@vben/utils'
 // MEMO: 在Form中引用'../components'下的组件此处直接引用写死判断，未进行解耦判断
 import { StrengthMeter } from '../../../../components/index'
 const emit = defineEmits(['register', 'update:model'])
@@ -39,37 +39,20 @@ const setProps = (prop: Partial<VbenFormProps>) => {
 }
 const fieldValue = ref(attrs.model)
 watch(
-  () => attrs.model,
-  () => {
-    const m = JSON.parse(JSON.stringify(attrs.model))
-    sObject(m)
-  },
-  { deep: true, immediate: true },
-)
-watch(
   () => fieldValue,
-  () => {
-    emit('update:model', getFieldValue())
+  (data) => {
+    getFieldValue(data.value as object)
+    emit('update:model', data.value)
   },
   { deep: true },
 )
-function sObject(m, key?) {
-  Object.keys(m).forEach((k) => {
-    const tempKey = key ? key + '.' + k : k
-    if (typeof m[k] == 'object') {
-      sObject(m[k], tempKey)
-      return
-    }
-    // fieldValue.value[tempKey] = m[k]
-  })
-}
-function getFieldValue() {
-  const m = JSON.parse(JSON.stringify(fieldValue.value))
+function getFieldValue(data?: object) {
+  const m = !!data ? data : JSON.parse(JSON.stringify(fieldValue.value))
   Object.keys(m).forEach((k) => {
     if (k.indexOf('.') != -1) {
       const v = m[k]
       delete m[k]
-      set(m, k, v)
+      _set(m, k, v)
     }
   })
   return m

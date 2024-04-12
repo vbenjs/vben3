@@ -56,7 +56,7 @@ watch(
 
 <template>
   <div
-    class="dragbar absolute right-0 h-full w-1 hover:cursor-col-resize"
+    class="dragbar absolute right-0 h-full w-1 hover:cursor-col-resize z-200"
     @mousedown="mouseDown"
   ></div>
 </template>

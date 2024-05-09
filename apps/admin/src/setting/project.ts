@@ -37,6 +37,7 @@ export const projectSetting: DefineAppConfigOptions = {
   closeMixSidebarOnChange: false,
   openSettingDrawer: false,
   sidebar: {
+    bgColor: "#001529",
     theme: ThemeEnum.LIGHT,
     show: true,
     visible: true,
@@ -61,6 +62,7 @@ export const projectSetting: DefineAppConfigOptions = {
     subMenuWidth: 0,
   },
   header: {
+    bgColor: "#fff",
     theme: ThemeEnum.LIGHT,
     show: true,
     visible: true,

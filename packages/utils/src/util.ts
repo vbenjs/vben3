@@ -57,15 +57,4 @@ function isUrl(path: string): boolean {
     /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/
   return reg.test(path)
 }
-/**
- * 将给定的数值限制在指定的最小值和最大值之间。
- * @param num 需要限制的数值。
- * @param min 允许的最小值。
- * @param max 允许的最大值。
- * @returns 返回经过限制后的数值，确保它不会小于最小值或大于最大值。
- */
-export function clamp(num: number, min: number, max: number) {
-  // 使用Math.min和Math.max函数确保num值位于min和max之间
-  return Math.min(Math.max(num, min), max)
-}
 export { isUrl, deepMerge, appendUrlParams, openWindow, NOOP }

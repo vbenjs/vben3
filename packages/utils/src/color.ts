@@ -1,5 +1,5 @@
 import { generate } from '@ant-design/colors'
-import { clamp } from './util'
+import { clamp } from '@vueuse/core'
 function rgb(str: string) {
   const abbr = /^#([a-f0-9]{3,4})$/i
   const hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i

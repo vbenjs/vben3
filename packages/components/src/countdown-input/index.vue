@@ -38,7 +38,7 @@ const slotKeys = computed(() => {
 
 <template>
   <vben-input v-bind="attrs" :class="bem()" :size="size" :value="state">
-    <template #addonAfter>
+    <template #suffix> <!--NaiveUI的后缀slot写法不是addonAfter是suffx-->
       <CountButton
         :size="size"
         :count="count"
@@ -54,6 +54,9 @@ const slotKeys = computed(() => {
 
 <style lang="less">
 .count-down-input {
+  .n-input-wrapper{
+    padding-right:0px; //NaiveUI有Count-down按钮时不需要右边距
+  }
   .ant-input-group-addon {
     padding-right: 0;
     background-color: transparent;

@@ -7,6 +7,7 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     "allowJs": true,
     "strictFunctionTypes": false,
     "allowSyntheticDefaultImports": true,
@@ -23,8 +24,8 @@
     "removeComments": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "ESNext",
     "types": ["node", "vite/client"],
     "lib": ["dom", "esnext"]
   },

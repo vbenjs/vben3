@@ -1,11 +1,9 @@
 {
   "extends": "@config/tsconfig/base.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "ESNext",
     "jsx": "preserve",
-    "moduleResolution": "NodeNext",
-    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],

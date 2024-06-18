@@ -1,4 +1,77 @@
 import { generate } from '@ant-design/colors'
+import { clamp } from '@vueuse/core'
+function rgb(str: string) {
+  const abbr = /^#([a-f0-9]{3,4})$/i
+  const hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i
+  const rgba =
+    /^rgba?\(\s*([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/
+  const per =
+    /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/
+
+  const rgb = [0, 0, 0, 1]
+  let match: string | string[] | null
+  let i: number
+  let hexAlpha: string
+
+  if ((match = str.match(hex))) {
+    hexAlpha = match[2]
+    match = match[1]
+
+    for (i = 0; i < 3; i++) {
+      // https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19
+      const i2 = i * 2
+      rgb[i] = parseInt(match.slice(i2, i2 + 2), 16)
+    }
+
+    if (hexAlpha) {
+      rgb[3] = parseInt(hexAlpha, 16) / 255
+    }
+  } else if ((match = str.match(abbr))) {
+    match = match[1]
+    hexAlpha = match[3]
+
+    for (i = 0; i < 3; i++) {
+      rgb[i] = parseInt(match[i] + match[i], 16)
+    }
+
+    if (hexAlpha) {
+      rgb[3] = parseInt(hexAlpha + hexAlpha, 16) / 255
+    }
+  } else if ((match = str.match(rgba))) {
+    for (i = 0; i < 3; i++) {
+      rgb[i] = parseInt(match[i + 1], 0)
+    }
+
+    if (match[4]) {
+      if (match[5]) {
+        rgb[3] = parseFloat(match[4]) * 0.01
+      } else {
+        rgb[3] = parseFloat(match[4])
+      }
+    }
+  } else if ((match = str.match(per))) {
+    for (i = 0; i < 3; i++) {
+      rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55)
+    }
+
+    if (match[4]) {
+      if (match[5]) {
+        rgb[3] = parseFloat(match[4]) * 0.01
+      } else {
+        rgb[3] = parseFloat(match[4])
+      }
+    }
+  } else {
+    return null
+  }
+
+  for (i = 0; i < 3; i++) {
+    rgb[i] = clamp(rgb[i], 0, 255)
+  }
+  rgb[3] = clamp(rgb[3], 0, 1)
+
+  return rgb
+}
 
 /**
  * 判断是否 十六进制颜色值.
@@ -164,10 +237,9 @@ export function pickTextColorBasedOnBgColor(
   lightColor: string,
   darkColor: string,
 ) {
-  const color = bgColor.charAt(0) === '#' ? bgColor.substring(1, 7) : bgColor
-  const r = parseInt(color.substring(0, 2), 16) // hexToR
-  const g = parseInt(color.substring(2, 4), 16) // hexToG
-  const b = parseInt(color.substring(4, 6), 16) // hexToB
+  const [r, g, b] = rgb(bgColor)!
+  console.log(r, g, b)
+
   const uicolors = [r / 255, g / 255, b / 255]
   const c = uicolors.map((col) => {
     if (col <= 0.03928) {
